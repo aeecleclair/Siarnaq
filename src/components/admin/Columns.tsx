@@ -4,8 +4,31 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { DataTableRowActions } from "./DataTableRowActions";
+import { Checkbox } from "../ui/checkbox";
 
 export const columns: ColumnDef<any>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "name",
     header: ({ column }) => (
@@ -22,10 +45,7 @@ export const columns: ColumnDef<any>[] = [
     ),
     cell: ({ row }) => {
       const captain = row.getValue("captain");
-      return (
-        <div className="flex space-x-2">
-        </div>
-      );
+      return <div className="flex space-x-2"></div>;
     },
     enableSorting: false,
   },
@@ -37,8 +57,9 @@ export const columns: ColumnDef<any>[] = [
     cell: ({ row }) => {
       const second = row.getValue("second");
       return (
-        <div className={`flex space-x-2 ${second ?? "text-muted-foreground"}`}>
-        </div>
+        <div
+          className={`flex space-x-2 ${second ?? "text-muted-foreground"}`}
+        ></div>
       );
     },
     enableSorting: false,

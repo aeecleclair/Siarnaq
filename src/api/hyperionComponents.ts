@@ -9252,50 +9252,31 @@ export const useGetCdrUsersMeSellers = <TData = GetCdrUsersMeSellersResponse,>(
   });
 };
 
-export type GetCdrGroupsGroupIdSellersPathParams = {
-  /**
-   * @format uuid
-   */
-  groupId: string;
-};
+export type GetCdrOnlineSellersError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetCdrGroupsGroupIdSellersError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type GetCdrOnlineSellersResponse = Schemas.SellerComplete[];
 
-export type GetCdrGroupsGroupIdSellersResponse = Schemas.SellerComplete[];
+export type GetCdrOnlineSellersVariables = HyperionContext["fetcherOptions"];
 
-export type GetCdrGroupsGroupIdSellersVariables = {
-  pathParams: GetCdrGroupsGroupIdSellersPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrGroupsGroupIdSellers = (
-  variables: GetCdrGroupsGroupIdSellersVariables,
+export const fetchGetCdrOnlineSellers = (
+  variables: GetCdrOnlineSellersVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    GetCdrGroupsGroupIdSellersResponse,
-    GetCdrGroupsGroupIdSellersError,
+    GetCdrOnlineSellersResponse,
+    GetCdrOnlineSellersError,
     undefined,
     {},
     {},
-    GetCdrGroupsGroupIdSellersPathParams
-  >({
-    url: "/cdr/groups/{groupId}/sellers/",
-    method: "get",
-    ...variables,
-    signal,
-  });
+    {}
+  >({ url: "/cdr/online/sellers/", method: "get", ...variables, signal });
 
-export const useGetCdrGroupsGroupIdSellers = <
-  TData = GetCdrGroupsGroupIdSellersResponse,
->(
-  variables: GetCdrGroupsGroupIdSellersVariables,
+export const useGetCdrOnlineSellers = <TData = GetCdrOnlineSellersResponse,>(
+  variables: GetCdrOnlineSellersVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetCdrGroupsGroupIdSellersResponse,
-      GetCdrGroupsGroupIdSellersError,
+      GetCdrOnlineSellersResponse,
+      GetCdrOnlineSellersError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
@@ -9304,79 +9285,17 @@ export const useGetCdrGroupsGroupIdSellers = <
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetCdrGroupsGroupIdSellersResponse,
-    GetCdrGroupsGroupIdSellersError,
+    GetCdrOnlineSellersResponse,
+    GetCdrOnlineSellersError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/cdr/groups/{groupId}/sellers/",
-      operationId: "getCdrGroupsGroupIdSellers",
+      path: "/cdr/online/sellers/",
+      operationId: "getCdrOnlineSellers",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetCdrGroupsGroupIdSellers(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetCdrSellersSellerIdPathParams = {
-  /**
-   * @format uuid
-   */
-  sellerId: string;
-};
-
-export type GetCdrSellersSellerIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetCdrSellersSellerIdVariables = {
-  pathParams: GetCdrSellersSellerIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrSellersSellerId = (
-  variables: GetCdrSellersSellerIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.SellerComplete,
-    GetCdrSellersSellerIdError,
-    undefined,
-    {},
-    {},
-    GetCdrSellersSellerIdPathParams
-  >({ url: "/cdr/sellers/{sellerId}/", method: "get", ...variables, signal });
-
-export const useGetCdrSellersSellerId = <TData = Schemas.SellerComplete,>(
-  variables: GetCdrSellersSellerIdVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.SellerComplete,
-      GetCdrSellersSellerIdError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.SellerComplete,
-    GetCdrSellersSellerIdError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/sellers/{sellerId}/",
-      operationId: "getCdrSellersSellerId",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrSellersSellerId({ ...fetcherOptions, ...variables }, signal),
+      fetchGetCdrOnlineSellers({ ...fetcherOptions, ...variables }, signal),
     ...options,
     ...queryOptions,
   });
@@ -9490,100 +9409,6 @@ export const useDeleteCdrSellersSellerId = (
   });
 };
 
-export type GetCdrProductsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetCdrProductsResponse =
-  Schemas.AppModulesCdrSchemasCdrProductComplete[];
-
-export type GetCdrProductsVariables = HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrProducts = (
-  variables: GetCdrProductsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCdrProductsResponse,
-    GetCdrProductsError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/products/", method: "get", ...variables, signal });
-
-export const useGetCdrProducts = <TData = GetCdrProductsResponse,>(
-  variables: GetCdrProductsVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrProductsResponse,
-      GetCdrProductsError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrProductsResponse,
-    GetCdrProductsError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/products/",
-      operationId: "getCdrProducts",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrProducts({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type PostCdrProductsError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type PostCdrProductsVariables = {
-  body: Schemas.ProductBase;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPostCdrProducts = (
-  variables: PostCdrProductsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppModulesCdrSchemasCdrProductComplete,
-    PostCdrProductsError,
-    Schemas.ProductBase,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/products/", method: "post", ...variables, signal });
-
-export const usePostCdrProducts = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppModulesCdrSchemasCdrProductComplete,
-      PostCdrProductsError,
-      PostCdrProductsVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppModulesCdrSchemasCdrProductComplete,
-    PostCdrProductsError,
-    PostCdrProductsVariables
-  >({
-    mutationFn: (variables: PostCdrProductsVariables) =>
-      fetchPostCdrProducts({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
 export type GetCdrSellersSellerIdProductsPathParams = {
   /**
    * @format uuid
@@ -9656,41 +9481,108 @@ export const useGetCdrSellersSellerIdProducts = <
   });
 };
 
-export type GetCdrProductsAvailableOnlineError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostCdrSellersSellerIdProductsPathParams = {
+  /**
+   * @format uuid
+   */
+  sellerId: string;
+};
 
-export type GetCdrProductsAvailableOnlineResponse =
-  Schemas.AppModulesCdrSchemasCdrProductComplete[];
+export type PostCdrSellersSellerIdProductsError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
 
-export type GetCdrProductsAvailableOnlineVariables =
-  HyperionContext["fetcherOptions"];
+export type PostCdrSellersSellerIdProductsVariables = {
+  body: Schemas.ProductBase;
+  pathParams: PostCdrSellersSellerIdProductsPathParams;
+} & HyperionContext["fetcherOptions"];
 
-export const fetchGetCdrProductsAvailableOnline = (
-  variables: GetCdrProductsAvailableOnlineVariables,
+export const fetchPostCdrSellersSellerIdProducts = (
+  variables: PostCdrSellersSellerIdProductsVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    GetCdrProductsAvailableOnlineResponse,
-    GetCdrProductsAvailableOnlineError,
+    Schemas.AppModulesCdrSchemasCdrProductComplete,
+    PostCdrSellersSellerIdProductsError,
+    Schemas.ProductBase,
+    {},
+    {},
+    PostCdrSellersSellerIdProductsPathParams
+  >({
+    url: "/cdr/sellers/{sellerId}/products/",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export const usePostCdrSellersSellerIdProducts = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppModulesCdrSchemasCdrProductComplete,
+      PostCdrSellersSellerIdProductsError,
+      PostCdrSellersSellerIdProductsVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppModulesCdrSchemasCdrProductComplete,
+    PostCdrSellersSellerIdProductsError,
+    PostCdrSellersSellerIdProductsVariables
+  >({
+    mutationFn: (variables: PostCdrSellersSellerIdProductsVariables) =>
+      fetchPostCdrSellersSellerIdProducts({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type GetCdrOnlineSellersSellerIdProductsPathParams = {
+  /**
+   * @format uuid
+   */
+  sellerId: string;
+};
+
+export type GetCdrOnlineSellersSellerIdProductsError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetCdrOnlineSellersSellerIdProductsResponse =
+  Schemas.AppModulesCdrSchemasCdrProductComplete[];
+
+export type GetCdrOnlineSellersSellerIdProductsVariables = {
+  pathParams: GetCdrOnlineSellersSellerIdProductsPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchGetCdrOnlineSellersSellerIdProducts = (
+  variables: GetCdrOnlineSellersSellerIdProductsVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    GetCdrOnlineSellersSellerIdProductsResponse,
+    GetCdrOnlineSellersSellerIdProductsError,
     undefined,
     {},
     {},
-    {}
+    GetCdrOnlineSellersSellerIdProductsPathParams
   >({
-    url: "/cdr/products/available_online/",
+    url: "/cdr/online/sellers/{sellerId}/products/",
     method: "get",
     ...variables,
     signal,
   });
 
-export const useGetCdrProductsAvailableOnline = <
-  TData = GetCdrProductsAvailableOnlineResponse,
+export const useGetCdrOnlineSellersSellerIdProducts = <
+  TData = GetCdrOnlineSellersSellerIdProductsResponse,
 >(
-  variables: GetCdrProductsAvailableOnlineVariables,
+  variables: GetCdrOnlineSellersSellerIdProductsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetCdrProductsAvailableOnlineResponse,
-      GetCdrProductsAvailableOnlineError,
+      GetCdrOnlineSellersSellerIdProductsResponse,
+      GetCdrOnlineSellersSellerIdProductsError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
@@ -9699,17 +9591,17 @@ export const useGetCdrProductsAvailableOnline = <
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetCdrProductsAvailableOnlineResponse,
-    GetCdrProductsAvailableOnlineError,
+    GetCdrOnlineSellersSellerIdProductsResponse,
+    GetCdrOnlineSellersSellerIdProductsError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/cdr/products/available_online/",
-      operationId: "getCdrProductsAvailableOnline",
+      path: "/cdr/online/sellers/{sellerId}/products/",
+      operationId: "getCdrOnlineSellersSellerIdProducts",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetCdrProductsAvailableOnline(
+      fetchGetCdrOnlineSellersSellerIdProducts(
         { ...fetcherOptions, ...variables },
         signal,
       ),
@@ -9718,380 +9610,158 @@ export const useGetCdrProductsAvailableOnline = <
   });
 };
 
-export type GetCdrProductsProductIdPathParams = {
-  /**
-   * @format uuid
-   */
-  productId: string;
-};
-
-export type GetCdrProductsProductIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetCdrProductsProductIdVariables = {
-  pathParams: GetCdrProductsProductIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrProductsProductId = (
-  variables: GetCdrProductsProductIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppModulesCdrSchemasCdrProductComplete,
-    GetCdrProductsProductIdError,
-    undefined,
-    {},
-    {},
-    GetCdrProductsProductIdPathParams
-  >({ url: "/cdr/products/{productId}/", method: "get", ...variables, signal });
-
-export const useGetCdrProductsProductId = <
-  TData = Schemas.AppModulesCdrSchemasCdrProductComplete,
->(
-  variables: GetCdrProductsProductIdVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.AppModulesCdrSchemasCdrProductComplete,
-      GetCdrProductsProductIdError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.AppModulesCdrSchemasCdrProductComplete,
-    GetCdrProductsProductIdError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/products/{productId}/",
-      operationId: "getCdrProductsProductId",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrProductsProductId({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type PatchCdrProductsProductIdPathParams = {
-  /**
-   * @format uuid
-   */
-  productId: string;
-};
-
-export type PatchCdrProductsProductIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type PatchCdrProductsProductIdVariables = {
-  body?: Schemas.AppModulesCdrSchemasCdrProductEdit;
-  pathParams: PatchCdrProductsProductIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPatchCdrProductsProductId = (
-  variables: PatchCdrProductsProductIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    PatchCdrProductsProductIdError,
-    Schemas.AppModulesCdrSchemasCdrProductEdit,
-    {},
-    {},
-    PatchCdrProductsProductIdPathParams
-  >({
-    url: "/cdr/products/{productId}/",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-export const usePatchCdrProductsProductId = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      PatchCdrProductsProductIdError,
-      PatchCdrProductsProductIdVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    PatchCdrProductsProductIdError,
-    PatchCdrProductsProductIdVariables
-  >({
-    mutationFn: (variables: PatchCdrProductsProductIdVariables) =>
-      fetchPatchCdrProductsProductId({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type DeleteCdrProductsProductIdPathParams = {
-  /**
-   * @format uuid
-   */
-  productId: string;
-};
-
-export type DeleteCdrProductsProductIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type DeleteCdrProductsProductIdVariables = {
-  pathParams: DeleteCdrProductsProductIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchDeleteCdrProductsProductId = (
-  variables: DeleteCdrProductsProductIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteCdrProductsProductIdError,
-    undefined,
-    {},
-    {},
-    DeleteCdrProductsProductIdPathParams
-  >({
-    url: "/cdr/products/{productId}/",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-export const useDeleteCdrProductsProductId = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteCdrProductsProductIdError,
-      DeleteCdrProductsProductIdVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteCdrProductsProductIdError,
-    DeleteCdrProductsProductIdVariables
-  >({
-    mutationFn: (variables: DeleteCdrProductsProductIdVariables) =>
-      fetchDeleteCdrProductsProductId({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type PostCdrProductsProductIdDocumentConstraintDocumentIdPathParams = {
-  /**
-   * @format uuid
-   */
-  productId: string;
-  /**
-   * @format uuid
-   */
-  documentId: string;
-};
-
-export type PostCdrProductsProductIdDocumentConstraintDocumentIdError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type PostCdrProductsProductIdDocumentConstraintDocumentIdVariables = {
-  pathParams: PostCdrProductsProductIdDocumentConstraintDocumentIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPostCdrProductsProductIdDocumentConstraintDocumentId = (
-  variables: PostCdrProductsProductIdDocumentConstraintDocumentIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppModulesCdrSchemasCdrProductComplete,
-    PostCdrProductsProductIdDocumentConstraintDocumentIdError,
-    undefined,
-    {},
-    {},
-    PostCdrProductsProductIdDocumentConstraintDocumentIdPathParams
-  >({
-    url: "/cdr/products/{productId}/document_constraint/{documentId}",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export const usePostCdrProductsProductIdDocumentConstraintDocumentId = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppModulesCdrSchemasCdrProductComplete,
-      PostCdrProductsProductIdDocumentConstraintDocumentIdError,
-      PostCdrProductsProductIdDocumentConstraintDocumentIdVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppModulesCdrSchemasCdrProductComplete,
-    PostCdrProductsProductIdDocumentConstraintDocumentIdError,
-    PostCdrProductsProductIdDocumentConstraintDocumentIdVariables
-  >({
-    mutationFn: (
-      variables: PostCdrProductsProductIdDocumentConstraintDocumentIdVariables,
-    ) =>
-      fetchPostCdrProductsProductIdDocumentConstraintDocumentId({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteCdrProductsProductIdDocumentConstraintDocumentIdPathParams = {
-  /**
-   * @format uuid
-   */
-  productId: string;
-  /**
-   * @format uuid
-   */
-  documentId: string;
-};
-
-export type DeleteCdrProductsProductIdDocumentConstraintDocumentIdError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteCdrProductsProductIdDocumentConstraintDocumentIdVariables = {
-  pathParams: DeleteCdrProductsProductIdDocumentConstraintDocumentIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchDeleteCdrProductsProductIdDocumentConstraintDocumentId = (
-  variables: DeleteCdrProductsProductIdDocumentConstraintDocumentIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteCdrProductsProductIdDocumentConstraintDocumentIdError,
-    undefined,
-    {},
-    {},
-    DeleteCdrProductsProductIdDocumentConstraintDocumentIdPathParams
-  >({
-    url: "/cdr/products/{productId}/document_constraint/{documentId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-export const useDeleteCdrProductsProductIdDocumentConstraintDocumentId = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteCdrProductsProductIdDocumentConstraintDocumentIdError,
-      DeleteCdrProductsProductIdDocumentConstraintDocumentIdVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteCdrProductsProductIdDocumentConstraintDocumentIdError,
-    DeleteCdrProductsProductIdDocumentConstraintDocumentIdVariables
-  >({
-    mutationFn: (
-      variables: DeleteCdrProductsProductIdDocumentConstraintDocumentIdVariables,
-    ) =>
-      fetchDeleteCdrProductsProductIdDocumentConstraintDocumentId({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type PostCdrProductsProductIdProductConstraintConstraintIdPathParams = {
-  /**
-   * @format uuid
-   */
-  productId: string;
-  /**
-   * @format uuid
-   */
-  constraintId: string;
-};
-
-export type PostCdrProductsProductIdProductConstraintConstraintIdError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type PostCdrProductsProductIdProductConstraintConstraintIdVariables = {
-  pathParams: PostCdrProductsProductIdProductConstraintConstraintIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPostCdrProductsProductIdProductConstraintConstraintId = (
-  variables: PostCdrProductsProductIdProductConstraintConstraintIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppModulesCdrSchemasCdrProductComplete,
-    PostCdrProductsProductIdProductConstraintConstraintIdError,
-    undefined,
-    {},
-    {},
-    PostCdrProductsProductIdProductConstraintConstraintIdPathParams
-  >({
-    url: "/cdr/products/{productId}/product_constraint/{constraintId}",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export const usePostCdrProductsProductIdProductConstraintConstraintId = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppModulesCdrSchemasCdrProductComplete,
-      PostCdrProductsProductIdProductConstraintConstraintIdError,
-      PostCdrProductsProductIdProductConstraintConstraintIdVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppModulesCdrSchemasCdrProductComplete,
-    PostCdrProductsProductIdProductConstraintConstraintIdError,
-    PostCdrProductsProductIdProductConstraintConstraintIdVariables
-  >({
-    mutationFn: (
-      variables: PostCdrProductsProductIdProductConstraintConstraintIdVariables,
-    ) =>
-      fetchPostCdrProductsProductIdProductConstraintConstraintId({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteCdrProductsProductIdProductConstraintConstraintIdPathParams =
+export type PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdPathParams =
   {
+    /**
+     * @format uuid
+     */
+    sellerId: string;
+    /**
+     * @format uuid
+     */
+    productId: string;
+    /**
+     * @format uuid
+     */
+    documentId: string;
+  };
+
+export type PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables =
+  {
+    pathParams: PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdPathParams;
+  } & HyperionContext["fetcherOptions"];
+
+export const fetchPostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentId =
+  (
+    variables: PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    hyperionFetch<
+      Schemas.AppModulesCdrSchemasCdrProductComplete,
+      PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdError,
+      undefined,
+      {},
+      {},
+      PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdPathParams
+    >({
+      url: "/cdr/sellers/{sellerId}/products/{productId}/document_constraint/{documentId}",
+      method: "post",
+      ...variables,
+      signal,
+    });
+
+export const usePostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentId =
+  (
+    options?: Omit<
+      reactQuery.UseMutationOptions<
+        Schemas.AppModulesCdrSchemasCdrProductComplete,
+        PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdError,
+        PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables
+      >,
+      "mutationFn"
+    >,
+  ) => {
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      Schemas.AppModulesCdrSchemasCdrProductComplete,
+      PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdError,
+      PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables
+    >({
+      mutationFn: (
+        variables: PostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables,
+      ) =>
+        fetchPostCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentId(
+          { ...fetcherOptions, ...variables },
+        ),
+      ...options,
+    });
+  };
+
+export type DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdPathParams =
+  {
+    /**
+     * @format uuid
+     */
+    sellerId: string;
+    /**
+     * @format uuid
+     */
+    productId: string;
+    /**
+     * @format uuid
+     */
+    documentId: string;
+  };
+
+export type DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables =
+  {
+    pathParams: DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdPathParams;
+  } & HyperionContext["fetcherOptions"];
+
+export const fetchDeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentId =
+  (
+    variables: DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    hyperionFetch<
+      undefined,
+      DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdError,
+      undefined,
+      {},
+      {},
+      DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdPathParams
+    >({
+      url: "/cdr/sellers/{sellerId}/products/{productId}/document_constraint/{documentId}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
+
+export const useDeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentId =
+  (
+    options?: Omit<
+      reactQuery.UseMutationOptions<
+        undefined,
+        DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdError,
+        DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables
+      >,
+      "mutationFn"
+    >,
+  ) => {
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      undefined,
+      DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdError,
+      DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables
+    >({
+      mutationFn: (
+        variables: DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentIdVariables,
+      ) =>
+        fetchDeleteCdrSellersSellerIdProductsProductIdDocumentConstraintDocumentId(
+          { ...fetcherOptions, ...variables },
+        ),
+      ...options,
+    });
+  };
+
+export type PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdPathParams =
+  {
+    /**
+     * @format uuid
+     */
+    sellerId: string;
     /**
      * @format uuid
      */
@@ -10102,313 +9772,182 @@ export type DeleteCdrProductsProductIdProductConstraintConstraintIdPathParams =
     constraintId: string;
   };
 
-export type DeleteCdrProductsProductIdProductConstraintConstraintIdError =
+export type PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type DeleteCdrProductsProductIdProductConstraintConstraintIdVariables = {
-  pathParams: DeleteCdrProductsProductIdProductConstraintConstraintIdPathParams;
-} & HyperionContext["fetcherOptions"];
+export type PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables =
+  {
+    pathParams: PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdPathParams;
+  } & HyperionContext["fetcherOptions"];
 
-export const fetchDeleteCdrProductsProductIdProductConstraintConstraintId = (
-  variables: DeleteCdrProductsProductIdProductConstraintConstraintIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteCdrProductsProductIdProductConstraintConstraintIdError,
-    undefined,
-    {},
-    {},
-    DeleteCdrProductsProductIdProductConstraintConstraintIdPathParams
-  >({
-    url: "/cdr/products/{productId}/product_constraint/{constraintId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-export const useDeleteCdrProductsProductIdProductConstraintConstraintId = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
+export const fetchPostCdrSellersSellerIdProductsProductIdProductConstraintConstraintId =
+  (
+    variables: PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    hyperionFetch<
+      Schemas.AppModulesCdrSchemasCdrProductComplete,
+      PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdError,
       undefined,
-      DeleteCdrProductsProductIdProductConstraintConstraintIdError,
-      DeleteCdrProductsProductIdProductConstraintConstraintIdVariables
+      {},
+      {},
+      PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdPathParams
+    >({
+      url: "/cdr/sellers/{sellerId}/products/{productId}/product_constraint/{constraintId}",
+      method: "post",
+      ...variables,
+      signal,
+    });
+
+export const usePostCdrSellersSellerIdProductsProductIdProductConstraintConstraintId =
+  (
+    options?: Omit<
+      reactQuery.UseMutationOptions<
+        Schemas.AppModulesCdrSchemasCdrProductComplete,
+        PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdError,
+        PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables
+      >,
+      "mutationFn"
     >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteCdrProductsProductIdProductConstraintConstraintIdError,
-    DeleteCdrProductsProductIdProductConstraintConstraintIdVariables
-  >({
-    mutationFn: (
-      variables: DeleteCdrProductsProductIdProductConstraintConstraintIdVariables,
-    ) =>
-      fetchDeleteCdrProductsProductIdProductConstraintConstraintId({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
+  ) => {
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      Schemas.AppModulesCdrSchemasCdrProductComplete,
+      PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdError,
+      PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables
+    >({
+      mutationFn: (
+        variables: PostCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables,
+      ) =>
+        fetchPostCdrSellersSellerIdProductsProductIdProductConstraintConstraintId(
+          { ...fetcherOptions, ...variables },
+        ),
+      ...options,
+    });
+  };
 
-export type GetCdrProductsProductIdVariantsPathParams = {
-  /**
-   * @format uuid
-   */
-  productId: string;
-};
+export type DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdPathParams =
+  {
+    /**
+     * @format uuid
+     */
+    sellerId: string;
+    /**
+     * @format uuid
+     */
+    productId: string;
+    /**
+     * @format uuid
+     */
+    constraintId: string;
+  };
 
-export type GetCdrProductsProductIdVariantsError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetCdrProductsProductIdVariantsResponse =
-  Schemas.ProductVariantComplete[];
-
-export type GetCdrProductsProductIdVariantsVariables = {
-  pathParams: GetCdrProductsProductIdVariantsPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrProductsProductIdVariants = (
-  variables: GetCdrProductsProductIdVariantsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCdrProductsProductIdVariantsResponse,
-    GetCdrProductsProductIdVariantsError,
-    undefined,
-    {},
-    {},
-    GetCdrProductsProductIdVariantsPathParams
-  >({
-    url: "/cdr/products/{productId}/variants/",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export const useGetCdrProductsProductIdVariants = <
-  TData = GetCdrProductsProductIdVariantsResponse,
->(
-  variables: GetCdrProductsProductIdVariantsVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrProductsProductIdVariantsResponse,
-      GetCdrProductsProductIdVariantsError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrProductsProductIdVariantsResponse,
-    GetCdrProductsProductIdVariantsError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/products/{productId}/variants/",
-      operationId: "getCdrProductsProductIdVariants",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrProductsProductIdVariants(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type PostCdrProductsProductIdVariantsPathParams = {
-  /**
-   * @format uuid
-   */
-  productId: string;
-};
-
-export type PostCdrProductsProductIdVariantsError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type PostCdrProductsProductIdVariantsVariables = {
-  body: Schemas.ProductVariantBase;
-  pathParams: PostCdrProductsProductIdVariantsPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPostCdrProductsProductIdVariants = (
-  variables: PostCdrProductsProductIdVariantsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.ProductBase,
-    PostCdrProductsProductIdVariantsError,
-    Schemas.ProductVariantBase,
-    {},
-    {},
-    PostCdrProductsProductIdVariantsPathParams
-  >({
-    url: "/cdr/products/{productId}/variants/",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export const usePostCdrProductsProductIdVariants = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.ProductBase,
-      PostCdrProductsProductIdVariantsError,
-      PostCdrProductsProductIdVariantsVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.ProductBase,
-    PostCdrProductsProductIdVariantsError,
-    PostCdrProductsProductIdVariantsVariables
-  >({
-    mutationFn: (variables: PostCdrProductsProductIdVariantsVariables) =>
-      fetchPostCdrProductsProductIdVariants({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetCdrProductsProductIdVariantsVariantIdPathParams = {
-  /**
-   * @format uuid
-   */
-  productId: string;
-  /**
-   * @format uuid
-   */
-  variantId: string;
-};
-
-export type GetCdrProductsProductIdVariantsVariantIdError =
+export type DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type GetCdrProductsProductIdVariantsVariantIdVariables = {
-  pathParams: GetCdrProductsProductIdVariantsVariantIdPathParams;
-} & HyperionContext["fetcherOptions"];
+export type DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables =
+  {
+    pathParams: DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdPathParams;
+  } & HyperionContext["fetcherOptions"];
 
-export const fetchGetCdrProductsProductIdVariantsVariantId = (
-  variables: GetCdrProductsProductIdVariantsVariantIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.ProductVariantComplete,
-    GetCdrProductsProductIdVariantsVariantIdError,
-    undefined,
-    {},
-    {},
-    GetCdrProductsProductIdVariantsVariantIdPathParams
-  >({
-    url: "/cdr/products/{productId}/variants/{variantId}/",
-    method: "get",
-    ...variables,
-    signal,
-  });
+export const fetchDeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintId =
+  (
+    variables: DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    hyperionFetch<
+      undefined,
+      DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdError,
+      undefined,
+      {},
+      {},
+      DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdPathParams
+    >({
+      url: "/cdr/sellers/{sellerId}/products/{productId}/product_constraint/{constraintId}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
 
-export const useGetCdrProductsProductIdVariantsVariantId = <
-  TData = Schemas.ProductVariantComplete,
->(
-  variables: GetCdrProductsProductIdVariantsVariantIdVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.ProductVariantComplete,
-      GetCdrProductsProductIdVariantsVariantIdError,
-      TData
+export const useDeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintId =
+  (
+    options?: Omit<
+      reactQuery.UseMutationOptions<
+        undefined,
+        DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdError,
+        DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables
+      >,
+      "mutationFn"
     >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.ProductVariantComplete,
-    GetCdrProductsProductIdVariantsVariantIdError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/products/{productId}/variants/{variantId}/",
-      operationId: "getCdrProductsProductIdVariantsVariantId",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrProductsProductIdVariantsVariantId(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
+  ) => {
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      undefined,
+      DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdError,
+      DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables
+    >({
+      mutationFn: (
+        variables: DeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintIdVariables,
+      ) =>
+        fetchDeleteCdrSellersSellerIdProductsProductIdProductConstraintConstraintId(
+          { ...fetcherOptions, ...variables },
+        ),
+      ...options,
+    });
+  };
 
-export type PatchCdrProductsProductIdVariantsVariantIdPathParams = {
+export type PatchCdrSellersSellerIdProductsProductIdPathParams = {
+  /**
+   * @format uuid
+   */
+  sellerId: string;
   /**
    * @format uuid
    */
   productId: string;
-  /**
-   * @format uuid
-   */
-  variantId: string;
 };
 
-export type PatchCdrProductsProductIdVariantsVariantIdError =
+export type PatchCdrSellersSellerIdProductsProductIdError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type PatchCdrProductsProductIdVariantsVariantIdVariables = {
-  body?: Schemas.ProductVariantEdit;
-  pathParams: PatchCdrProductsProductIdVariantsVariantIdPathParams;
+export type PatchCdrSellersSellerIdProductsProductIdVariables = {
+  body?: Schemas.AppModulesCdrSchemasCdrProductEdit;
+  pathParams: PatchCdrSellersSellerIdProductsProductIdPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchPatchCdrProductsProductIdVariantsVariantId = (
-  variables: PatchCdrProductsProductIdVariantsVariantIdVariables,
+export const fetchPatchCdrSellersSellerIdProductsProductId = (
+  variables: PatchCdrSellersSellerIdProductsProductIdVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
-    PatchCdrProductsProductIdVariantsVariantIdError,
-    Schemas.ProductVariantEdit,
+    PatchCdrSellersSellerIdProductsProductIdError,
+    Schemas.AppModulesCdrSchemasCdrProductEdit,
     {},
     {},
-    PatchCdrProductsProductIdVariantsVariantIdPathParams
+    PatchCdrSellersSellerIdProductsProductIdPathParams
   >({
-    url: "/cdr/products/{productId}/variants/{variantId}/",
+    url: "/cdr/sellers/{sellerId}/products/{productId}/",
     method: "patch",
     ...variables,
     signal,
   });
 
-export const usePatchCdrProductsProductIdVariantsVariantId = (
+export const usePatchCdrSellersSellerIdProductsProductId = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      PatchCdrProductsProductIdVariantsVariantIdError,
-      PatchCdrProductsProductIdVariantsVariantIdVariables
+      PatchCdrSellersSellerIdProductsProductIdError,
+      PatchCdrSellersSellerIdProductsProductIdVariables
     >,
     "mutationFn"
   >,
@@ -10416,13 +9955,13 @@ export const usePatchCdrProductsProductIdVariantsVariantId = (
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    PatchCdrProductsProductIdVariantsVariantIdError,
-    PatchCdrProductsProductIdVariantsVariantIdVariables
+    PatchCdrSellersSellerIdProductsProductIdError,
+    PatchCdrSellersSellerIdProductsProductIdVariables
   >({
     mutationFn: (
-      variables: PatchCdrProductsProductIdVariantsVariantIdVariables,
+      variables: PatchCdrSellersSellerIdProductsProductIdVariables,
     ) =>
-      fetchPatchCdrProductsProductIdVariantsVariantId({
+      fetchPatchCdrSellersSellerIdProductsProductId({
         ...fetcherOptions,
         ...variables,
       }),
@@ -10430,51 +9969,51 @@ export const usePatchCdrProductsProductIdVariantsVariantId = (
   });
 };
 
-export type DeleteCdrProductsProductIdVariantsVariantIdPathParams = {
+export type DeleteCdrSellersSellerIdProductsProductIdPathParams = {
+  /**
+   * @format uuid
+   */
+  sellerId: string;
   /**
    * @format uuid
    */
   productId: string;
-  /**
-   * @format uuid
-   */
-  variantId: string;
 };
 
-export type DeleteCdrProductsProductIdVariantsVariantIdError =
+export type DeleteCdrSellersSellerIdProductsProductIdError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type DeleteCdrProductsProductIdVariantsVariantIdVariables = {
-  pathParams: DeleteCdrProductsProductIdVariantsVariantIdPathParams;
+export type DeleteCdrSellersSellerIdProductsProductIdVariables = {
+  pathParams: DeleteCdrSellersSellerIdProductsProductIdPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchDeleteCdrProductsProductIdVariantsVariantId = (
-  variables: DeleteCdrProductsProductIdVariantsVariantIdVariables,
+export const fetchDeleteCdrSellersSellerIdProductsProductId = (
+  variables: DeleteCdrSellersSellerIdProductsProductIdVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
-    DeleteCdrProductsProductIdVariantsVariantIdError,
+    DeleteCdrSellersSellerIdProductsProductIdError,
     undefined,
     {},
     {},
-    DeleteCdrProductsProductIdVariantsVariantIdPathParams
+    DeleteCdrSellersSellerIdProductsProductIdPathParams
   >({
-    url: "/cdr/products/{productId}/variants/{variantId}/",
+    url: "/cdr/sellers/{sellerId}/products/{productId}/",
     method: "delete",
     ...variables,
     signal,
   });
 
-export const useDeleteCdrProductsProductIdVariantsVariantId = (
+export const useDeleteCdrSellersSellerIdProductsProductId = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      DeleteCdrProductsProductIdVariantsVariantIdError,
-      DeleteCdrProductsProductIdVariantsVariantIdVariables
+      DeleteCdrSellersSellerIdProductsProductIdError,
+      DeleteCdrSellersSellerIdProductsProductIdVariables
     >,
     "mutationFn"
   >,
@@ -10482,13 +10021,13 @@ export const useDeleteCdrProductsProductIdVariantsVariantId = (
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    DeleteCdrProductsProductIdVariantsVariantIdError,
-    DeleteCdrProductsProductIdVariantsVariantIdVariables
+    DeleteCdrSellersSellerIdProductsProductIdError,
+    DeleteCdrSellersSellerIdProductsProductIdVariables
   >({
     mutationFn: (
-      variables: DeleteCdrProductsProductIdVariantsVariantIdVariables,
+      variables: DeleteCdrSellersSellerIdProductsProductIdVariables,
     ) =>
-      fetchDeleteCdrProductsProductIdVariantsVariantId({
+      fetchDeleteCdrSellersSellerIdProductsProductId({
         ...fetcherOptions,
         ...variables,
       }),
@@ -10496,278 +10035,197 @@ export const useDeleteCdrProductsProductIdVariantsVariantId = (
   });
 };
 
-export type GetCdrProductsProductIdVariantsEnabledPathParams = {
+export type PostCdrSellersSellerIdProductsProductIdVariantsPathParams = {
+  /**
+   * @format uuid
+   */
+  sellerId: string;
   /**
    * @format uuid
    */
   productId: string;
 };
 
-export type GetCdrProductsProductIdVariantsEnabledError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type PostCdrSellersSellerIdProductsProductIdVariantsError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export type GetCdrProductsProductIdVariantsEnabledResponse =
-  Schemas.ProductVariantComplete[];
-
-export type GetCdrProductsProductIdVariantsEnabledVariables = {
-  pathParams: GetCdrProductsProductIdVariantsEnabledPathParams;
+export type PostCdrSellersSellerIdProductsProductIdVariantsVariables = {
+  body: Schemas.ProductVariantBase;
+  pathParams: PostCdrSellersSellerIdProductsProductIdVariantsPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchGetCdrProductsProductIdVariantsEnabled = (
-  variables: GetCdrProductsProductIdVariantsEnabledVariables,
+export const fetchPostCdrSellersSellerIdProductsProductIdVariants = (
+  variables: PostCdrSellersSellerIdProductsProductIdVariantsVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    GetCdrProductsProductIdVariantsEnabledResponse,
-    GetCdrProductsProductIdVariantsEnabledError,
-    undefined,
+    Schemas.ProductVariantComplete,
+    PostCdrSellersSellerIdProductsProductIdVariantsError,
+    Schemas.ProductVariantBase,
     {},
     {},
-    GetCdrProductsProductIdVariantsEnabledPathParams
+    PostCdrSellersSellerIdProductsProductIdVariantsPathParams
   >({
-    url: "/cdr/products/{productId}/variants/enabled/",
-    method: "get",
+    url: "/cdr/sellers/{sellerId}/products/{productId}/variants/",
+    method: "post",
     ...variables,
     signal,
   });
 
-export const useGetCdrProductsProductIdVariantsEnabled = <
-  TData = GetCdrProductsProductIdVariantsEnabledResponse,
->(
-  variables: GetCdrProductsProductIdVariantsEnabledVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrProductsProductIdVariantsEnabledResponse,
-      GetCdrProductsProductIdVariantsEnabledError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrProductsProductIdVariantsEnabledResponse,
-    GetCdrProductsProductIdVariantsEnabledError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/products/{productId}/variants/enabled/",
-      operationId: "getCdrProductsProductIdVariantsEnabled",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrProductsProductIdVariantsEnabled(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetCdrDocumentsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetCdrDocumentsResponse = Schemas.DocumentComplete[];
-
-export type GetCdrDocumentsVariables = HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrDocuments = (
-  variables: GetCdrDocumentsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCdrDocumentsResponse,
-    GetCdrDocumentsError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/documents/", method: "get", ...variables, signal });
-
-export const useGetCdrDocuments = <TData = GetCdrDocumentsResponse,>(
-  variables: GetCdrDocumentsVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrDocumentsResponse,
-      GetCdrDocumentsError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrDocumentsResponse,
-    GetCdrDocumentsError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/documents/",
-      operationId: "getCdrDocuments",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrDocuments({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type PostCdrDocumentsError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type PostCdrDocumentsVariables = {
-  body: Schemas.DocumentBase;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPostCdrDocuments = (
-  variables: PostCdrDocumentsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.DocumentComplete,
-    PostCdrDocumentsError,
-    Schemas.DocumentBase,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/documents/", method: "post", ...variables, signal });
-
-export const usePostCdrDocuments = (
+export const usePostCdrSellersSellerIdProductsProductIdVariants = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      Schemas.DocumentComplete,
-      PostCdrDocumentsError,
-      PostCdrDocumentsVariables
+      Schemas.ProductVariantComplete,
+      PostCdrSellersSellerIdProductsProductIdVariantsError,
+      PostCdrSellersSellerIdProductsProductIdVariantsVariables
     >,
     "mutationFn"
   >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    Schemas.DocumentComplete,
-    PostCdrDocumentsError,
-    PostCdrDocumentsVariables
+    Schemas.ProductVariantComplete,
+    PostCdrSellersSellerIdProductsProductIdVariantsError,
+    PostCdrSellersSellerIdProductsProductIdVariantsVariables
   >({
-    mutationFn: (variables: PostCdrDocumentsVariables) =>
-      fetchPostCdrDocuments({ ...fetcherOptions, ...variables }),
+    mutationFn: (
+      variables: PostCdrSellersSellerIdProductsProductIdVariantsVariables,
+    ) =>
+      fetchPostCdrSellersSellerIdProductsProductIdVariants({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
   });
 };
 
-export type GetCdrDocumentsDocumentIdPathParams = {
-  /**
-   * @format uuid
-   */
-  documentId: string;
-};
+export type PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdPathParams =
+  {
+    /**
+     * @format uuid
+     */
+    sellerId: string;
+    /**
+     * @format uuid
+     */
+    productId: string;
+    /**
+     * @format uuid
+     */
+    variantId: string;
+  };
 
-export type GetCdrDocumentsDocumentIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export type GetCdrDocumentsDocumentIdVariables = {
-  pathParams: GetCdrDocumentsDocumentIdPathParams;
-} & HyperionContext["fetcherOptions"];
+export type PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables =
+  {
+    body?: Schemas.ProductVariantEdit;
+    pathParams: PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdPathParams;
+  } & HyperionContext["fetcherOptions"];
 
-export const fetchGetCdrDocumentsDocumentId = (
-  variables: GetCdrDocumentsDocumentIdVariables,
+export const fetchPatchCdrSellersSellerIdProductsProductIdVariantsVariantId = (
+  variables: PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    Schemas.DocumentComplete,
-    GetCdrDocumentsDocumentIdError,
     undefined,
+    PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
+    Schemas.ProductVariantEdit,
     {},
     {},
-    GetCdrDocumentsDocumentIdPathParams
+    PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdPathParams
   >({
-    url: "/cdr/documents/{documentId}/",
-    method: "get",
+    url: "/cdr/sellers/{sellerId}/products/{productId}/variants/{variantId}/",
+    method: "patch",
     ...variables,
     signal,
   });
 
-export const useGetCdrDocumentsDocumentId = <TData = Schemas.DocumentComplete,>(
-  variables: GetCdrDocumentsDocumentIdVariables,
+export const usePatchCdrSellersSellerIdProductsProductIdVariantsVariantId = (
   options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.DocumentComplete,
-      GetCdrDocumentsDocumentIdError,
-      TData
+    reactQuery.UseMutationOptions<
+      undefined,
+      PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
+      PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables
     >,
-    "queryKey" | "queryFn" | "initialData"
+    "mutationFn"
   >,
 ) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.DocumentComplete,
-    GetCdrDocumentsDocumentIdError,
-    TData
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
+    PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables
   >({
-    queryKey: queryKeyFn({
-      path: "/cdr/documents/{documentId}/",
-      operationId: "getCdrDocumentsDocumentId",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrDocumentsDocumentId(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
+    mutationFn: (
+      variables: PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables,
+    ) =>
+      fetchPatchCdrSellersSellerIdProductsProductIdVariantsVariantId({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
-    ...queryOptions,
   });
 };
 
-export type DeleteCdrDocumentsDocumentIdPathParams = {
-  /**
-   * @format uuid
-   */
-  documentId: string;
-};
+export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdPathParams =
+  {
+    /**
+     * @format uuid
+     */
+    sellerId: string;
+    /**
+     * @format uuid
+     */
+    productId: string;
+    /**
+     * @format uuid
+     */
+    variantId: string;
+  };
 
-export type DeleteCdrDocumentsDocumentIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export type DeleteCdrDocumentsDocumentIdVariables = {
-  pathParams: DeleteCdrDocumentsDocumentIdPathParams;
-} & HyperionContext["fetcherOptions"];
+export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables =
+  {
+    pathParams: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdPathParams;
+  } & HyperionContext["fetcherOptions"];
 
-export const fetchDeleteCdrDocumentsDocumentId = (
-  variables: DeleteCdrDocumentsDocumentIdVariables,
+export const fetchDeleteCdrSellersSellerIdProductsProductIdVariantsVariantId = (
+  variables: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
-    DeleteCdrDocumentsDocumentIdError,
+    DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
     undefined,
     {},
     {},
-    DeleteCdrDocumentsDocumentIdPathParams
+    DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdPathParams
   >({
-    url: "/cdr/documents/{documentId}/",
+    url: "/cdr/sellers/{sellerId}/products/{productId}/variants/{variantId}/",
     method: "delete",
     ...variables,
     signal,
   });
 
-export const useDeleteCdrDocumentsDocumentId = (
+export const useDeleteCdrSellersSellerIdProductsProductIdVariantsVariantId = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      DeleteCdrDocumentsDocumentIdError,
-      DeleteCdrDocumentsDocumentIdVariables
+      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
+      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables
     >,
     "mutationFn"
   >,
@@ -10775,40 +10233,224 @@ export const useDeleteCdrDocumentsDocumentId = (
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    DeleteCdrDocumentsDocumentIdError,
-    DeleteCdrDocumentsDocumentIdVariables
+    DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
+    DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables
   >({
-    mutationFn: (variables: DeleteCdrDocumentsDocumentIdVariables) =>
-      fetchDeleteCdrDocumentsDocumentId({ ...fetcherOptions, ...variables }),
+    mutationFn: (
+      variables: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdVariables,
+    ) =>
+      fetchDeleteCdrSellersSellerIdProductsProductIdVariantsVariantId({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
   });
 };
 
-export type GetCdrPurchasesError = Fetcher.ErrorWrapper<undefined>;
+export type PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdPathParams =
+  {
+    /**
+     * @format uuid
+     */
+    productId: string;
+    /**
+     * @format uuid
+     */
+    variantId: string;
+    /**
+     * @format uuid
+     */
+    curriculumId: string;
+  };
 
-export type GetCdrPurchasesResponse = Schemas.PurchaseComplete[];
+export type PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdQueryParams =
+  {
+    /**
+     * @format uuid
+     */
+    seller_id: string;
+  };
 
-export type GetCdrPurchasesVariables = HyperionContext["fetcherOptions"];
+export type PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export const fetchGetCdrPurchases = (
-  variables: GetCdrPurchasesVariables,
+export type PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables =
+  {
+    pathParams: PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdPathParams;
+    queryParams: PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdQueryParams;
+  } & HyperionContext["fetcherOptions"];
+
+export const fetchPostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumId =
+  (
+    variables: PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    hyperionFetch<
+      Schemas.ProductVariantComplete,
+      PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdError,
+      undefined,
+      {},
+      PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdQueryParams,
+      PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdPathParams
+    >({
+      url: "/cdr/products/{productId}/variants/{variantId}/curriculum/{curriculumId}",
+      method: "post",
+      ...variables,
+      signal,
+    });
+
+export const usePostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumId =
+  (
+    options?: Omit<
+      reactQuery.UseMutationOptions<
+        Schemas.ProductVariantComplete,
+        PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdError,
+        PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables
+      >,
+      "mutationFn"
+    >,
+  ) => {
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      Schemas.ProductVariantComplete,
+      PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdError,
+      PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables
+    >({
+      mutationFn: (
+        variables: PostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables,
+      ) =>
+        fetchPostCdrProductsProductIdVariantsVariantIdCurriculumCurriculumId({
+          ...fetcherOptions,
+          ...variables,
+        }),
+      ...options,
+    });
+  };
+
+export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdPathParams =
+  {
+    /**
+     * @format uuid
+     */
+    sellerId: string;
+    /**
+     * @format uuid
+     */
+    productId: string;
+    /**
+     * @format uuid
+     */
+    variantId: string;
+    /**
+     * @format uuid
+     */
+    curriculumId: string;
+  };
+
+export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables =
+  {
+    pathParams: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdPathParams;
+  } & HyperionContext["fetcherOptions"];
+
+export const fetchDeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumId =
+  (
+    variables: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables,
+    signal?: AbortSignal,
+  ) =>
+    hyperionFetch<
+      undefined,
+      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdError,
+      undefined,
+      {},
+      {},
+      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdPathParams
+    >({
+      url: "/cdr/sellers/{sellerId}//products/{productId}/variants/{variantId}/curriculum/{curriculumId}",
+      method: "delete",
+      ...variables,
+      signal,
+    });
+
+export const useDeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumId =
+  (
+    options?: Omit<
+      reactQuery.UseMutationOptions<
+        undefined,
+        DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdError,
+        DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables
+      >,
+      "mutationFn"
+    >,
+  ) => {
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      undefined,
+      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdError,
+      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables
+    >({
+      mutationFn: (
+        variables: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumIdVariables,
+      ) =>
+        fetchDeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumCurriculumId(
+          { ...fetcherOptions, ...variables },
+        ),
+      ...options,
+    });
+  };
+
+export type GetCdrSellersSellerIdDocumentsPathParams = {
+  /**
+   * @format uuid
+   */
+  sellerId: string;
+};
+
+export type GetCdrSellersSellerIdDocumentsError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetCdrSellersSellerIdDocumentsResponse = Schemas.DocumentComplete[];
+
+export type GetCdrSellersSellerIdDocumentsVariables = {
+  pathParams: GetCdrSellersSellerIdDocumentsPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchGetCdrSellersSellerIdDocuments = (
+  variables: GetCdrSellersSellerIdDocumentsVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    GetCdrPurchasesResponse,
-    GetCdrPurchasesError,
+    GetCdrSellersSellerIdDocumentsResponse,
+    GetCdrSellersSellerIdDocumentsError,
     undefined,
     {},
     {},
-    {}
-  >({ url: "/cdr/purchases/", method: "get", ...variables, signal });
+    GetCdrSellersSellerIdDocumentsPathParams
+  >({
+    url: "/cdr/sellers/{sellerId}/documents/",
+    method: "get",
+    ...variables,
+    signal,
+  });
 
-export const useGetCdrPurchases = <TData = GetCdrPurchasesResponse,>(
-  variables: GetCdrPurchasesVariables,
+export const useGetCdrSellersSellerIdDocuments = <
+  TData = GetCdrSellersSellerIdDocumentsResponse,
+>(
+  variables: GetCdrSellersSellerIdDocumentsVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetCdrPurchasesResponse,
-      GetCdrPurchasesError,
+      GetCdrSellersSellerIdDocumentsResponse,
+      GetCdrSellersSellerIdDocumentsError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
@@ -10817,62 +10459,144 @@ export const useGetCdrPurchases = <TData = GetCdrPurchasesResponse,>(
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetCdrPurchasesResponse,
-    GetCdrPurchasesError,
+    GetCdrSellersSellerIdDocumentsResponse,
+    GetCdrSellersSellerIdDocumentsError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/cdr/purchases/",
-      operationId: "getCdrPurchases",
+      path: "/cdr/sellers/{sellerId}/documents/",
+      operationId: "getCdrSellersSellerIdDocuments",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetCdrPurchases({ ...fetcherOptions, ...variables }, signal),
+      fetchGetCdrSellersSellerIdDocuments(
+        { ...fetcherOptions, ...variables },
+        signal,
+      ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type PostCdrPurchasesError = Fetcher.ErrorWrapper<{
+export type PostCdrSellersSellerIdDocumentsPathParams = {
+  /**
+   * @format uuid
+   */
+  sellerId: string;
+};
+
+export type PostCdrSellersSellerIdDocumentsError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type PostCdrPurchasesVariables = {
-  body: Schemas.PurchaseBase;
+export type PostCdrSellersSellerIdDocumentsVariables = {
+  body: Schemas.DocumentBase;
+  pathParams: PostCdrSellersSellerIdDocumentsPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchPostCdrPurchases = (
-  variables: PostCdrPurchasesVariables,
+export const fetchPostCdrSellersSellerIdDocuments = (
+  variables: PostCdrSellersSellerIdDocumentsVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    Schemas.PurchaseComplete,
-    PostCdrPurchasesError,
-    Schemas.PurchaseBase,
+    Schemas.DocumentComplete,
+    PostCdrSellersSellerIdDocumentsError,
+    Schemas.DocumentBase,
     {},
     {},
-    {}
-  >({ url: "/cdr/purchases/", method: "post", ...variables, signal });
+    PostCdrSellersSellerIdDocumentsPathParams
+  >({
+    url: "/cdr/sellers/{sellerId}/documents/",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
-export const usePostCdrPurchases = (
+export const usePostCdrSellersSellerIdDocuments = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      Schemas.PurchaseComplete,
-      PostCdrPurchasesError,
-      PostCdrPurchasesVariables
+      Schemas.DocumentComplete,
+      PostCdrSellersSellerIdDocumentsError,
+      PostCdrSellersSellerIdDocumentsVariables
     >,
     "mutationFn"
   >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    Schemas.PurchaseComplete,
-    PostCdrPurchasesError,
-    PostCdrPurchasesVariables
+    Schemas.DocumentComplete,
+    PostCdrSellersSellerIdDocumentsError,
+    PostCdrSellersSellerIdDocumentsVariables
   >({
-    mutationFn: (variables: PostCdrPurchasesVariables) =>
-      fetchPostCdrPurchases({ ...fetcherOptions, ...variables }),
+    mutationFn: (variables: PostCdrSellersSellerIdDocumentsVariables) =>
+      fetchPostCdrSellersSellerIdDocuments({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type DeleteCdrSellersSellerIdDocumentsDocumentIdPathParams = {
+  /**
+   * @format uuid
+   */
+  sellerId: string;
+  /**
+   * @format uuid
+   */
+  documentId: string;
+};
+
+export type DeleteCdrSellersSellerIdDocumentsDocumentIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteCdrSellersSellerIdDocumentsDocumentIdVariables = {
+  pathParams: DeleteCdrSellersSellerIdDocumentsDocumentIdPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchDeleteCdrSellersSellerIdDocumentsDocumentId = (
+  variables: DeleteCdrSellersSellerIdDocumentsDocumentIdVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteCdrSellersSellerIdDocumentsDocumentIdError,
+    undefined,
+    {},
+    {},
+    DeleteCdrSellersSellerIdDocumentsDocumentIdPathParams
+  >({
+    url: "/cdr/sellers/{sellerId}/documents/{documentId}/",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+export const useDeleteCdrSellersSellerIdDocumentsDocumentId = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteCdrSellersSellerIdDocumentsDocumentIdError,
+      DeleteCdrSellersSellerIdDocumentsDocumentIdVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteCdrSellersSellerIdDocumentsDocumentIdError,
+    DeleteCdrSellersSellerIdDocumentsDocumentIdVariables
+  >({
+    mutationFn: (
+      variables: DeleteCdrSellersSellerIdDocumentsDocumentIdVariables,
+    ) =>
+      fetchDeleteCdrSellersSellerIdDocumentsDocumentId({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
   });
 };
@@ -10948,114 +10672,119 @@ export const useGetCdrUsersUserIdPurchases = <
   });
 };
 
-export type GetCdrPurchasesPurchaseIdPathParams = {
+export type PostCdrUsersUserIdPurchasesProductVariantIdPathParams = {
   /**
    * @format uuid
    */
-  purchaseId: string;
+  userId: string;
+  /**
+   * @format uuid
+   */
+  productVariantId: string;
 };
 
-export type GetCdrPurchasesPurchaseIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type PostCdrUsersUserIdPurchasesProductVariantIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export type GetCdrPurchasesPurchaseIdVariables = {
-  pathParams: GetCdrPurchasesPurchaseIdPathParams;
+export type PostCdrUsersUserIdPurchasesProductVariantIdVariables = {
+  body: Schemas.PurchaseBase;
+  pathParams: PostCdrUsersUserIdPurchasesProductVariantIdPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchGetCdrPurchasesPurchaseId = (
-  variables: GetCdrPurchasesPurchaseIdVariables,
+export const fetchPostCdrUsersUserIdPurchasesProductVariantId = (
+  variables: PostCdrUsersUserIdPurchasesProductVariantIdVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.PurchaseComplete,
-    GetCdrPurchasesPurchaseIdError,
-    undefined,
+    PostCdrUsersUserIdPurchasesProductVariantIdError,
+    Schemas.PurchaseBase,
     {},
     {},
-    GetCdrPurchasesPurchaseIdPathParams
+    PostCdrUsersUserIdPurchasesProductVariantIdPathParams
   >({
-    url: "/cdr/purchases/{purchaseId}/",
-    method: "get",
+    url: "/cdr/users/{userId}/purchases/{productVariantId}",
+    method: "post",
     ...variables,
     signal,
   });
 
-export const useGetCdrPurchasesPurchaseId = <TData = Schemas.PurchaseComplete,>(
-  variables: GetCdrPurchasesPurchaseIdVariables,
+export const usePostCdrUsersUserIdPurchasesProductVariantId = (
   options?: Omit<
-    reactQuery.UseQueryOptions<
+    reactQuery.UseMutationOptions<
       Schemas.PurchaseComplete,
-      GetCdrPurchasesPurchaseIdError,
-      TData
+      PostCdrUsersUserIdPurchasesProductVariantIdError,
+      PostCdrUsersUserIdPurchasesProductVariantIdVariables
     >,
-    "queryKey" | "queryFn" | "initialData"
+    "mutationFn"
   >,
 ) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
     Schemas.PurchaseComplete,
-    GetCdrPurchasesPurchaseIdError,
-    TData
+    PostCdrUsersUserIdPurchasesProductVariantIdError,
+    PostCdrUsersUserIdPurchasesProductVariantIdVariables
   >({
-    queryKey: queryKeyFn({
-      path: "/cdr/purchases/{purchaseId}/",
-      operationId: "getCdrPurchasesPurchaseId",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrPurchasesPurchaseId(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
+    mutationFn: (
+      variables: PostCdrUsersUserIdPurchasesProductVariantIdVariables,
+    ) =>
+      fetchPostCdrUsersUserIdPurchasesProductVariantId({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
-    ...queryOptions,
   });
 };
 
-export type PatchCdrPurchasesPurchaseIdPathParams = {
+export type PatchCdrUsersUserIdPurchasesProductVariantIdPathParams = {
   /**
    * @format uuid
    */
-  purchaseId: string;
+  userId: string;
+  /**
+   * @format uuid
+   */
+  productVariantId: string;
 };
 
-export type PatchCdrPurchasesPurchaseIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type PatchCdrUsersUserIdPurchasesProductVariantIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export type PatchCdrPurchasesPurchaseIdVariables = {
+export type PatchCdrUsersUserIdPurchasesProductVariantIdVariables = {
   body?: Schemas.PurchaseEdit;
-  pathParams: PatchCdrPurchasesPurchaseIdPathParams;
+  pathParams: PatchCdrUsersUserIdPurchasesProductVariantIdPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchPatchCdrPurchasesPurchaseId = (
-  variables: PatchCdrPurchasesPurchaseIdVariables,
+export const fetchPatchCdrUsersUserIdPurchasesProductVariantId = (
+  variables: PatchCdrUsersUserIdPurchasesProductVariantIdVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
-    PatchCdrPurchasesPurchaseIdError,
+    PatchCdrUsersUserIdPurchasesProductVariantIdError,
     Schemas.PurchaseEdit,
     {},
     {},
-    PatchCdrPurchasesPurchaseIdPathParams
+    PatchCdrUsersUserIdPurchasesProductVariantIdPathParams
   >({
-    url: "/cdr/purchases/{purchaseId}/",
+    url: "/cdr/users/{userId}/purchases/{productVariantId}/",
     method: "patch",
     ...variables,
     signal,
   });
 
-export const usePatchCdrPurchasesPurchaseId = (
+export const usePatchCdrUsersUserIdPurchasesProductVariantId = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      PatchCdrPurchasesPurchaseIdError,
-      PatchCdrPurchasesPurchaseIdVariables
+      PatchCdrUsersUserIdPurchasesProductVariantIdError,
+      PatchCdrUsersUserIdPurchasesProductVariantIdVariables
     >,
     "mutationFn"
   >,
@@ -11063,55 +10792,65 @@ export const usePatchCdrPurchasesPurchaseId = (
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    PatchCdrPurchasesPurchaseIdError,
-    PatchCdrPurchasesPurchaseIdVariables
+    PatchCdrUsersUserIdPurchasesProductVariantIdError,
+    PatchCdrUsersUserIdPurchasesProductVariantIdVariables
   >({
-    mutationFn: (variables: PatchCdrPurchasesPurchaseIdVariables) =>
-      fetchPatchCdrPurchasesPurchaseId({ ...fetcherOptions, ...variables }),
+    mutationFn: (
+      variables: PatchCdrUsersUserIdPurchasesProductVariantIdVariables,
+    ) =>
+      fetchPatchCdrUsersUserIdPurchasesProductVariantId({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
   });
 };
 
-export type DeleteCdrPurchasesPurchaseIdPathParams = {
+export type DeleteCdrUsersUserIdPurchasesProductVariantIdPathParams = {
   /**
    * @format uuid
    */
-  purchaseId: string;
+  userId: string;
+  /**
+   * @format uuid
+   */
+  productVariantId: string;
 };
 
-export type DeleteCdrPurchasesPurchaseIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type DeleteCdrUsersUserIdPurchasesProductVariantIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export type DeleteCdrPurchasesPurchaseIdVariables = {
-  pathParams: DeleteCdrPurchasesPurchaseIdPathParams;
+export type DeleteCdrUsersUserIdPurchasesProductVariantIdVariables = {
+  pathParams: DeleteCdrUsersUserIdPurchasesProductVariantIdPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchDeleteCdrPurchasesPurchaseId = (
-  variables: DeleteCdrPurchasesPurchaseIdVariables,
+export const fetchDeleteCdrUsersUserIdPurchasesProductVariantId = (
+  variables: DeleteCdrUsersUserIdPurchasesProductVariantIdVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
-    DeleteCdrPurchasesPurchaseIdError,
+    DeleteCdrUsersUserIdPurchasesProductVariantIdError,
     undefined,
     {},
     {},
-    DeleteCdrPurchasesPurchaseIdPathParams
+    DeleteCdrUsersUserIdPurchasesProductVariantIdPathParams
   >({
-    url: "/cdr/purchases/{purchaseId}/",
+    url: "/cdr/users/{userId}/purchases/{productVariantId}/",
     method: "delete",
     ...variables,
     signal,
   });
 
-export const useDeleteCdrPurchasesPurchaseId = (
+export const useDeleteCdrUsersUserIdPurchasesProductVariantId = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      DeleteCdrPurchasesPurchaseIdError,
-      DeleteCdrPurchasesPurchaseIdVariables
+      DeleteCdrUsersUserIdPurchasesProductVariantIdError,
+      DeleteCdrUsersUserIdPurchasesProductVariantIdVariables
     >,
     "mutationFn"
   >,
@@ -11119,60 +10858,70 @@ export const useDeleteCdrPurchasesPurchaseId = (
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    DeleteCdrPurchasesPurchaseIdError,
-    DeleteCdrPurchasesPurchaseIdVariables
+    DeleteCdrUsersUserIdPurchasesProductVariantIdError,
+    DeleteCdrUsersUserIdPurchasesProductVariantIdVariables
   >({
-    mutationFn: (variables: DeleteCdrPurchasesPurchaseIdVariables) =>
-      fetchDeleteCdrPurchasesPurchaseId({ ...fetcherOptions, ...variables }),
+    mutationFn: (
+      variables: DeleteCdrUsersUserIdPurchasesProductVariantIdVariables,
+    ) =>
+      fetchDeleteCdrUsersUserIdPurchasesProductVariantId({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
   });
 };
 
-export type PatchCdrPurchasesPurchaseIdPaidPathParams = {
+export type PatchCdrUsersUserIdPurchasesProductVariantIdPaidPathParams = {
   /**
    * @format uuid
    */
-  purchaseId: string;
+  userId: string;
+  /**
+   * @format uuid
+   */
+  productVariantId: string;
 };
 
-export type PatchCdrPurchasesPurchaseIdPaidQueryParams = {
+export type PatchCdrUsersUserIdPurchasesProductVariantIdPaidQueryParams = {
   paid: boolean;
 };
 
-export type PatchCdrPurchasesPurchaseIdPaidError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type PatchCdrUsersUserIdPurchasesProductVariantIdPaidError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export type PatchCdrPurchasesPurchaseIdPaidVariables = {
-  pathParams: PatchCdrPurchasesPurchaseIdPaidPathParams;
-  queryParams: PatchCdrPurchasesPurchaseIdPaidQueryParams;
+export type PatchCdrUsersUserIdPurchasesProductVariantIdPaidVariables = {
+  pathParams: PatchCdrUsersUserIdPurchasesProductVariantIdPaidPathParams;
+  queryParams: PatchCdrUsersUserIdPurchasesProductVariantIdPaidQueryParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchPatchCdrPurchasesPurchaseIdPaid = (
-  variables: PatchCdrPurchasesPurchaseIdPaidVariables,
+export const fetchPatchCdrUsersUserIdPurchasesProductVariantIdPaid = (
+  variables: PatchCdrUsersUserIdPurchasesProductVariantIdPaidVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
-    PatchCdrPurchasesPurchaseIdPaidError,
+    PatchCdrUsersUserIdPurchasesProductVariantIdPaidError,
     undefined,
     {},
-    PatchCdrPurchasesPurchaseIdPaidQueryParams,
-    PatchCdrPurchasesPurchaseIdPaidPathParams
+    PatchCdrUsersUserIdPurchasesProductVariantIdPaidQueryParams,
+    PatchCdrUsersUserIdPurchasesProductVariantIdPaidPathParams
   >({
-    url: "/cdr/purchases/{purchaseId}/paid/",
+    url: "/cdr/users/{userId}/purchases/{productVariantId}/paid/",
     method: "patch",
     ...variables,
     signal,
   });
 
-export const usePatchCdrPurchasesPurchaseIdPaid = (
+export const usePatchCdrUsersUserIdPurchasesProductVariantIdPaid = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      PatchCdrPurchasesPurchaseIdPaidError,
-      PatchCdrPurchasesPurchaseIdPaidVariables
+      PatchCdrUsersUserIdPurchasesProductVariantIdPaidError,
+      PatchCdrUsersUserIdPurchasesProductVariantIdPaidVariables
     >,
     "mutationFn"
   >,
@@ -11180,104 +10929,16 @@ export const usePatchCdrPurchasesPurchaseIdPaid = (
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    PatchCdrPurchasesPurchaseIdPaidError,
-    PatchCdrPurchasesPurchaseIdPaidVariables
+    PatchCdrUsersUserIdPurchasesProductVariantIdPaidError,
+    PatchCdrUsersUserIdPurchasesProductVariantIdPaidVariables
   >({
-    mutationFn: (variables: PatchCdrPurchasesPurchaseIdPaidVariables) =>
-      fetchPatchCdrPurchasesPurchaseIdPaid({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type GetCdrSignaturesError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetCdrSignaturesResponse = Schemas.Signature[];
-
-export type GetCdrSignaturesVariables = HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrSignatures = (
-  variables: GetCdrSignaturesVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCdrSignaturesResponse,
-    GetCdrSignaturesError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/signatures/", method: "get", ...variables, signal });
-
-export const useGetCdrSignatures = <TData = GetCdrSignaturesResponse,>(
-  variables: GetCdrSignaturesVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrSignaturesResponse,
-      GetCdrSignaturesError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrSignaturesResponse,
-    GetCdrSignaturesError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/signatures/",
-      operationId: "getCdrSignatures",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrSignatures({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type PostCdrSignaturesError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type PostCdrSignaturesVariables = {
-  body: Schemas.Signature;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPostCdrSignatures = (
-  variables: PostCdrSignaturesVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.Signature,
-    PostCdrSignaturesError,
-    Schemas.Signature,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/signatures/", method: "post", ...variables, signal });
-
-export const usePostCdrSignatures = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.Signature,
-      PostCdrSignaturesError,
-      PostCdrSignaturesVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.Signature,
-    PostCdrSignaturesError,
-    PostCdrSignaturesVariables
-  >({
-    mutationFn: (variables: PostCdrSignaturesVariables) =>
-      fetchPostCdrSignatures({ ...fetcherOptions, ...variables }),
+    mutationFn: (
+      variables: PatchCdrUsersUserIdPurchasesProductVariantIdPaidVariables,
+    ) =>
+      fetchPatchCdrUsersUserIdPurchasesProductVariantIdPaid({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
   });
 };
@@ -11294,7 +10955,7 @@ export type GetCdrUsersUserIdSignaturesError = Fetcher.ErrorWrapper<{
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type GetCdrUsersUserIdSignaturesResponse = Schemas.Signature[];
+export type GetCdrUsersUserIdSignaturesResponse = Schemas.SignatureComplete[];
 
 export type GetCdrUsersUserIdSignaturesVariables = {
   pathParams: GetCdrUsersUserIdSignaturesPathParams;
@@ -11353,117 +11014,115 @@ export const useGetCdrUsersUserIdSignatures = <
   });
 };
 
-export type GetCdrDocumentsDocumentIdSignaturesPathParams = {
+export type PostCdrUsersUserIdSignaturesDocumentIdPathParams = {
+  /**
+   * @format uuid
+   */
+  userId: string;
   /**
    * @format uuid
    */
   documentId: string;
 };
 
-export type GetCdrDocumentsDocumentIdSignaturesError = Fetcher.ErrorWrapper<{
+export type PostCdrUsersUserIdSignaturesDocumentIdError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type GetCdrDocumentsDocumentIdSignaturesResponse = Schemas.Signature[];
-
-export type GetCdrDocumentsDocumentIdSignaturesVariables = {
-  pathParams: GetCdrDocumentsDocumentIdSignaturesPathParams;
+export type PostCdrUsersUserIdSignaturesDocumentIdVariables = {
+  body: Schemas.SignatureBase;
+  pathParams: PostCdrUsersUserIdSignaturesDocumentIdPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchGetCdrDocumentsDocumentIdSignatures = (
-  variables: GetCdrDocumentsDocumentIdSignaturesVariables,
+export const fetchPostCdrUsersUserIdSignaturesDocumentId = (
+  variables: PostCdrUsersUserIdSignaturesDocumentIdVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    GetCdrDocumentsDocumentIdSignaturesResponse,
-    GetCdrDocumentsDocumentIdSignaturesError,
-    undefined,
+    Schemas.SignatureComplete,
+    PostCdrUsersUserIdSignaturesDocumentIdError,
+    Schemas.SignatureBase,
     {},
     {},
-    GetCdrDocumentsDocumentIdSignaturesPathParams
+    PostCdrUsersUserIdSignaturesDocumentIdPathParams
   >({
-    url: "/cdr/documents/{documentId}/signatures/",
-    method: "get",
+    url: "/cdr/users/{userId}/signatures/{documentId}",
+    method: "post",
     ...variables,
     signal,
   });
 
-export const useGetCdrDocumentsDocumentIdSignatures = <
-  TData = GetCdrDocumentsDocumentIdSignaturesResponse,
->(
-  variables: GetCdrDocumentsDocumentIdSignaturesVariables,
+export const usePostCdrUsersUserIdSignaturesDocumentId = (
   options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrDocumentsDocumentIdSignaturesResponse,
-      GetCdrDocumentsDocumentIdSignaturesError,
-      TData
+    reactQuery.UseMutationOptions<
+      Schemas.SignatureComplete,
+      PostCdrUsersUserIdSignaturesDocumentIdError,
+      PostCdrUsersUserIdSignaturesDocumentIdVariables
     >,
-    "queryKey" | "queryFn" | "initialData"
+    "mutationFn"
   >,
 ) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrDocumentsDocumentIdSignaturesResponse,
-    GetCdrDocumentsDocumentIdSignaturesError,
-    TData
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.SignatureComplete,
+    PostCdrUsersUserIdSignaturesDocumentIdError,
+    PostCdrUsersUserIdSignaturesDocumentIdVariables
   >({
-    queryKey: queryKeyFn({
-      path: "/cdr/documents/{documentId}/signatures/",
-      operationId: "getCdrDocumentsDocumentIdSignatures",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrDocumentsDocumentIdSignatures(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
+    mutationFn: (variables: PostCdrUsersUserIdSignaturesDocumentIdVariables) =>
+      fetchPostCdrUsersUserIdSignaturesDocumentId({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
-    ...queryOptions,
   });
 };
 
-export type DeleteCdrSignaturesSignatureIdPathParams = {
+export type DeleteCdrUsersUserIdSignaturesDocumentIdPathParams = {
   /**
    * @format uuid
    */
-  signatureId: string;
+  userId: string;
+  /**
+   * @format uuid
+   */
+  documentId: string;
 };
 
-export type DeleteCdrSignaturesSignatureIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type DeleteCdrUsersUserIdSignaturesDocumentIdError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export type DeleteCdrSignaturesSignatureIdVariables = {
-  pathParams: DeleteCdrSignaturesSignatureIdPathParams;
+export type DeleteCdrUsersUserIdSignaturesDocumentIdVariables = {
+  pathParams: DeleteCdrUsersUserIdSignaturesDocumentIdPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchDeleteCdrSignaturesSignatureId = (
-  variables: DeleteCdrSignaturesSignatureIdVariables,
+export const fetchDeleteCdrUsersUserIdSignaturesDocumentId = (
+  variables: DeleteCdrUsersUserIdSignaturesDocumentIdVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
-    DeleteCdrSignaturesSignatureIdError,
+    DeleteCdrUsersUserIdSignaturesDocumentIdError,
     undefined,
     {},
     {},
-    DeleteCdrSignaturesSignatureIdPathParams
+    DeleteCdrUsersUserIdSignaturesDocumentIdPathParams
   >({
-    url: "/cdr/signatures/{signatureId}/",
+    url: "/cdr/users/{userId}/signatures/{documentId}/",
     method: "delete",
     ...variables,
     signal,
   });
 
-export const useDeleteCdrSignaturesSignatureId = (
+export const useDeleteCdrUsersUserIdSignaturesDocumentId = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      DeleteCdrSignaturesSignatureIdError,
-      DeleteCdrSignaturesSignatureIdVariables
+      DeleteCdrUsersUserIdSignaturesDocumentIdError,
+      DeleteCdrUsersUserIdSignaturesDocumentIdVariables
     >,
     "mutationFn"
   >,
@@ -11471,11 +11130,16 @@ export const useDeleteCdrSignaturesSignatureId = (
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    DeleteCdrSignaturesSignatureIdError,
-    DeleteCdrSignaturesSignatureIdVariables
+    DeleteCdrUsersUserIdSignaturesDocumentIdError,
+    DeleteCdrUsersUserIdSignaturesDocumentIdVariables
   >({
-    mutationFn: (variables: DeleteCdrSignaturesSignatureIdVariables) =>
-      fetchDeleteCdrSignaturesSignatureId({ ...fetcherOptions, ...variables }),
+    mutationFn: (
+      variables: DeleteCdrUsersUserIdSignaturesDocumentIdVariables,
+    ) =>
+      fetchDeleteCdrUsersUserIdSignaturesDocumentId({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
   });
 };
@@ -11573,193 +11237,6 @@ export const usePostCdrCurriculums = (
   });
 };
 
-export type GetCdrUsersUserIdCurriculumsPathParams = {
-  /**
-   * @format uuid
-   */
-  userId: string;
-};
-
-export type GetCdrUsersUserIdCurriculumsError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetCdrUsersUserIdCurriculumsResponse = Schemas.CurriculumComplete[];
-
-export type GetCdrUsersUserIdCurriculumsVariables = {
-  pathParams: GetCdrUsersUserIdCurriculumsPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrUsersUserIdCurriculums = (
-  variables: GetCdrUsersUserIdCurriculumsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCdrUsersUserIdCurriculumsResponse,
-    GetCdrUsersUserIdCurriculumsError,
-    undefined,
-    {},
-    {},
-    GetCdrUsersUserIdCurriculumsPathParams
-  >({
-    url: "/cdr/users/{userId}/curriculums/",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export const useGetCdrUsersUserIdCurriculums = <
-  TData = GetCdrUsersUserIdCurriculumsResponse,
->(
-  variables: GetCdrUsersUserIdCurriculumsVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrUsersUserIdCurriculumsResponse,
-      GetCdrUsersUserIdCurriculumsError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrUsersUserIdCurriculumsResponse,
-    GetCdrUsersUserIdCurriculumsError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/users/{userId}/curriculums/",
-      operationId: "getCdrUsersUserIdCurriculums",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrUsersUserIdCurriculums(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetCdrCurriculumsCurriculumIdError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetCdrCurriculumsCurriculumIdVariables =
-  HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrCurriculumsCurriculumId = (
-  variables: GetCdrCurriculumsCurriculumIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CurriculumComplete,
-    GetCdrCurriculumsCurriculumIdError,
-    undefined,
-    {},
-    {},
-    {}
-  >({
-    url: "/cdr/curriculums/{curriculumId}/",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export const useGetCdrCurriculumsCurriculumId = <
-  TData = Schemas.CurriculumComplete,
->(
-  variables: GetCdrCurriculumsCurriculumIdVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.CurriculumComplete,
-      GetCdrCurriculumsCurriculumIdError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.CurriculumComplete,
-    GetCdrCurriculumsCurriculumIdError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/curriculums/{curriculumId}/",
-      operationId: "getCdrCurriculumsCurriculumId",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrCurriculumsCurriculumId(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type PatchCdrCurriculumsCurriculumIdPathParams = {
-  /**
-   * @format uuid
-   */
-  curriculumId: string;
-};
-
-export type PatchCdrCurriculumsCurriculumIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type PatchCdrCurriculumsCurriculumIdVariables = {
-  body: Schemas.CurriculumBase;
-  pathParams: PatchCdrCurriculumsCurriculumIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPatchCdrCurriculumsCurriculumId = (
-  variables: PatchCdrCurriculumsCurriculumIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    PatchCdrCurriculumsCurriculumIdError,
-    Schemas.CurriculumBase,
-    {},
-    {},
-    PatchCdrCurriculumsCurriculumIdPathParams
-  >({
-    url: "/cdr/curriculums/{curriculumId}/",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-export const usePatchCdrCurriculumsCurriculumId = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      PatchCdrCurriculumsCurriculumIdError,
-      PatchCdrCurriculumsCurriculumIdVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    PatchCdrCurriculumsCurriculumIdError,
-    PatchCdrCurriculumsCurriculumIdVariables
-  >({
-    mutationFn: (variables: PatchCdrCurriculumsCurriculumIdVariables) =>
-      fetchPatchCdrCurriculumsCurriculumId({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
 export type DeleteCdrCurriculumsCurriculumIdPathParams = {
   /**
    * @format uuid
@@ -11812,72 +11289,6 @@ export const useDeleteCdrCurriculumsCurriculumId = (
   >({
     mutationFn: (variables: DeleteCdrCurriculumsCurriculumIdVariables) =>
       fetchDeleteCdrCurriculumsCurriculumId({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type PostCdrUsersUserIdCurriculumsCurriculumIdPathParams = {
-  /**
-   * @format uuid
-   */
-  userId: string;
-  /**
-   * @format uuid
-   */
-  curriculumId: string;
-};
-
-export type PostCdrUsersUserIdCurriculumsCurriculumIdError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type PostCdrUsersUserIdCurriculumsCurriculumIdVariables = {
-  pathParams: PostCdrUsersUserIdCurriculumsCurriculumIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPostCdrUsersUserIdCurriculumsCurriculumId = (
-  variables: PostCdrUsersUserIdCurriculumsCurriculumIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CurriculumComplete,
-    PostCdrUsersUserIdCurriculumsCurriculumIdError,
-    undefined,
-    {},
-    {},
-    PostCdrUsersUserIdCurriculumsCurriculumIdPathParams
-  >({
-    url: "/cdr/users/{userId}/curriculums/{curriculumId}/",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export const usePostCdrUsersUserIdCurriculumsCurriculumId = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.CurriculumComplete,
-      PostCdrUsersUserIdCurriculumsCurriculumIdError,
-      PostCdrUsersUserIdCurriculumsCurriculumIdVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.CurriculumComplete,
-    PostCdrUsersUserIdCurriculumsCurriculumIdError,
-    PostCdrUsersUserIdCurriculumsCurriculumIdVariables
-  >({
-    mutationFn: (
-      variables: PostCdrUsersUserIdCurriculumsCurriculumIdVariables,
-    ) =>
-      fetchPostCdrUsersUserIdCurriculumsCurriculumId({
         ...fetcherOptions,
         ...variables,
       }),
@@ -11947,99 +11358,6 @@ export const useDeleteCdrUsersUserIdCurriculumsCurriculumId = (
         ...fetcherOptions,
         ...variables,
       }),
-    ...options,
-  });
-};
-
-export type GetCdrPaymentsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetCdrPaymentsResponse = Schemas.PaymentComplete[];
-
-export type GetCdrPaymentsVariables = HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrPayments = (
-  variables: GetCdrPaymentsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCdrPaymentsResponse,
-    GetCdrPaymentsError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/payments/", method: "get", ...variables, signal });
-
-export const useGetCdrPayments = <TData = GetCdrPaymentsResponse,>(
-  variables: GetCdrPaymentsVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrPaymentsResponse,
-      GetCdrPaymentsError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrPaymentsResponse,
-    GetCdrPaymentsError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/payments/",
-      operationId: "getCdrPayments",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrPayments({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type PostCdrPaymentsError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type PostCdrPaymentsVariables = {
-  body: Schemas.PaymentBase;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPostCdrPayments = (
-  variables: PostCdrPaymentsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.PaymentComplete,
-    PostCdrPaymentsError,
-    Schemas.PaymentBase,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/payments/", method: "post", ...variables, signal });
-
-export const usePostCdrPayments = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.PaymentComplete,
-      PostCdrPaymentsError,
-      PostCdrPaymentsVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.PaymentComplete,
-    PostCdrPaymentsError,
-    PostCdrPaymentsVariables
-  >({
-    mutationFn: (variables: PostCdrPaymentsVariables) =>
-      fetchPostCdrPayments({ ...fetcherOptions, ...variables }),
     ...options,
   });
 };
@@ -12115,66 +11433,47 @@ export const useGetCdrUsersUserIdPayments = <
   });
 };
 
-export type GetCdrPaymentsPaymentIdPathParams = {
-  /**
-   * @format uuid
-   */
-  paymentId: string;
-};
-
-export type GetCdrPaymentsPaymentIdError = Fetcher.ErrorWrapper<{
+export type PostCdrPaymentsError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type GetCdrPaymentsPaymentIdResponse = Schemas.PaymentComplete[];
-
-export type GetCdrPaymentsPaymentIdVariables = {
-  pathParams: GetCdrPaymentsPaymentIdPathParams;
+export type PostCdrPaymentsVariables = {
+  body: Schemas.PaymentBase;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchGetCdrPaymentsPaymentId = (
-  variables: GetCdrPaymentsPaymentIdVariables,
+export const fetchPostCdrPayments = (
+  variables: PostCdrPaymentsVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    GetCdrPaymentsPaymentIdResponse,
-    GetCdrPaymentsPaymentIdError,
-    undefined,
+    Schemas.PaymentComplete,
+    PostCdrPaymentsError,
+    Schemas.PaymentBase,
     {},
     {},
-    GetCdrPaymentsPaymentIdPathParams
-  >({ url: "/cdr/payments/{paymentId}/", method: "get", ...variables, signal });
+    {}
+  >({ url: "/cdr/payments/", method: "post", ...variables, signal });
 
-export const useGetCdrPaymentsPaymentId = <
-  TData = GetCdrPaymentsPaymentIdResponse,
->(
-  variables: GetCdrPaymentsPaymentIdVariables,
+export const usePostCdrPayments = (
   options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrPaymentsPaymentIdResponse,
-      GetCdrPaymentsPaymentIdError,
-      TData
+    reactQuery.UseMutationOptions<
+      Schemas.PaymentComplete,
+      PostCdrPaymentsError,
+      PostCdrPaymentsVariables
     >,
-    "queryKey" | "queryFn" | "initialData"
+    "mutationFn"
   >,
 ) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrPaymentsPaymentIdResponse,
-    GetCdrPaymentsPaymentIdError,
-    TData
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.PaymentComplete,
+    PostCdrPaymentsError,
+    PostCdrPaymentsVariables
   >({
-    queryKey: queryKeyFn({
-      path: "/cdr/payments/{paymentId}/",
-      operationId: "getCdrPaymentsPaymentId",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrPaymentsPaymentId({ ...fetcherOptions, ...variables }, signal),
+    mutationFn: (variables: PostCdrPaymentsVariables) =>
+      fetchPostCdrPayments({ ...fetcherOptions, ...variables }),
     ...options,
-    ...queryOptions,
   });
 };
 
@@ -12231,169 +11530,6 @@ export const useDeleteCdrPaymentsPaymentId = (
     mutationFn: (variables: DeleteCdrPaymentsPaymentIdVariables) =>
       fetchDeleteCdrPaymentsPaymentId({ ...fetcherOptions, ...variables }),
     ...options,
-  });
-};
-
-export type GetCdrMembershipsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetCdrMembershipsResponse =
-  Schemas.AppModulesCdrSchemasCdrMembershipComplete[];
-
-export type GetCdrMembershipsVariables = HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrMemberships = (
-  variables: GetCdrMembershipsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCdrMembershipsResponse,
-    GetCdrMembershipsError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/memberships/", method: "get", ...variables, signal });
-
-export const useGetCdrMemberships = <TData = GetCdrMembershipsResponse,>(
-  variables: GetCdrMembershipsVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrMembershipsResponse,
-      GetCdrMembershipsError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrMembershipsResponse,
-    GetCdrMembershipsError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/memberships/",
-      operationId: "getCdrMemberships",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrMemberships({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type PostCdrMembershipsError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type PostCdrMembershipsVariables = {
-  body: Schemas.AppModulesCdrSchemasCdrMembershipBase;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPostCdrMemberships = (
-  variables: PostCdrMembershipsVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppModulesCdrSchemasCdrMembershipComplete,
-    PostCdrMembershipsError,
-    Schemas.AppModulesCdrSchemasCdrMembershipBase,
-    {},
-    {},
-    {}
-  >({ url: "/cdr/memberships/", method: "post", ...variables, signal });
-
-export const usePostCdrMemberships = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppModulesCdrSchemasCdrMembershipComplete,
-      PostCdrMembershipsError,
-      PostCdrMembershipsVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppModulesCdrSchemasCdrMembershipComplete,
-    PostCdrMembershipsError,
-    PostCdrMembershipsVariables
-  >({
-    mutationFn: (variables: PostCdrMembershipsVariables) =>
-      fetchPostCdrMemberships({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type GetCdrMembershipsTypeMembershipTypePathParams = {
-  membershipType: Schemas.AvailableMembership;
-};
-
-export type GetCdrMembershipsTypeMembershipTypeError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetCdrMembershipsTypeMembershipTypeResponse =
-  Schemas.AppModulesCdrSchemasCdrMembershipComplete[];
-
-export type GetCdrMembershipsTypeMembershipTypeVariables = {
-  pathParams: GetCdrMembershipsTypeMembershipTypePathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchGetCdrMembershipsTypeMembershipType = (
-  variables: GetCdrMembershipsTypeMembershipTypeVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCdrMembershipsTypeMembershipTypeResponse,
-    GetCdrMembershipsTypeMembershipTypeError,
-    undefined,
-    {},
-    {},
-    GetCdrMembershipsTypeMembershipTypePathParams
-  >({
-    url: "/cdr/memberships/type/{membershipType}/",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export const useGetCdrMembershipsTypeMembershipType = <
-  TData = GetCdrMembershipsTypeMembershipTypeResponse,
->(
-  variables: GetCdrMembershipsTypeMembershipTypeVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCdrMembershipsTypeMembershipTypeResponse,
-      GetCdrMembershipsTypeMembershipTypeError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCdrMembershipsTypeMembershipTypeResponse,
-    GetCdrMembershipsTypeMembershipTypeError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/memberships/type/{membershipType}/",
-      operationId: "getCdrMembershipsTypeMembershipType",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrMembershipsTypeMembershipType(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
   });
 };
 
@@ -12469,128 +11605,46 @@ export const useGetCdrUsersUserIdMemberships = <
   });
 };
 
-export type GetCdrMembershipsMembershipIdPathParams = {
-  /**
-   * @format uuid
-   */
-  membershipId: string;
-};
-
-export type GetCdrMembershipsMembershipIdError = Fetcher.ErrorWrapper<{
+export type PostCdrMembershipsError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type GetCdrMembershipsMembershipIdVariables = {
-  pathParams: GetCdrMembershipsMembershipIdPathParams;
+export type PostCdrMembershipsVariables = {
+  body: Schemas.AppModulesCdrSchemasCdrMembershipBase;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchGetCdrMembershipsMembershipId = (
-  variables: GetCdrMembershipsMembershipIdVariables,
+export const fetchPostCdrMemberships = (
+  variables: PostCdrMembershipsVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppModulesCdrSchemasCdrMembershipComplete,
-    GetCdrMembershipsMembershipIdError,
-    undefined,
+    PostCdrMembershipsError,
+    Schemas.AppModulesCdrSchemasCdrMembershipBase,
     {},
     {},
-    GetCdrMembershipsMembershipIdPathParams
-  >({
-    url: "/cdr/memberships/{membershipId}/",
-    method: "get",
-    ...variables,
-    signal,
-  });
+    {}
+  >({ url: "/cdr/memberships/", method: "post", ...variables, signal });
 
-export const useGetCdrMembershipsMembershipId = <
-  TData = Schemas.AppModulesCdrSchemasCdrMembershipComplete,
->(
-  variables: GetCdrMembershipsMembershipIdVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.AppModulesCdrSchemasCdrMembershipComplete,
-      GetCdrMembershipsMembershipIdError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.AppModulesCdrSchemasCdrMembershipComplete,
-    GetCdrMembershipsMembershipIdError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cdr/memberships/{membershipId}/",
-      operationId: "getCdrMembershipsMembershipId",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCdrMembershipsMembershipId(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type PatchCdrMembershipsMembershipIdPathParams = {
-  /**
-   * @format uuid
-   */
-  membershipId: string;
-};
-
-export type PatchCdrMembershipsMembershipIdError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type PatchCdrMembershipsMembershipIdVariables = {
-  body?: Schemas.AppModulesCdrSchemasCdrMembershipEdit;
-  pathParams: PatchCdrMembershipsMembershipIdPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchPatchCdrMembershipsMembershipId = (
-  variables: PatchCdrMembershipsMembershipIdVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    PatchCdrMembershipsMembershipIdError,
-    Schemas.AppModulesCdrSchemasCdrMembershipEdit,
-    {},
-    {},
-    PatchCdrMembershipsMembershipIdPathParams
-  >({
-    url: "/cdr/memberships/{membershipId}/",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-export const usePatchCdrMembershipsMembershipId = (
+export const usePostCdrMemberships = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      undefined,
-      PatchCdrMembershipsMembershipIdError,
-      PatchCdrMembershipsMembershipIdVariables
+      Schemas.AppModulesCdrSchemasCdrMembershipComplete,
+      PostCdrMembershipsError,
+      PostCdrMembershipsVariables
     >,
     "mutationFn"
   >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    undefined,
-    PatchCdrMembershipsMembershipIdError,
-    PatchCdrMembershipsMembershipIdVariables
+    Schemas.AppModulesCdrSchemasCdrMembershipComplete,
+    PostCdrMembershipsError,
+    PostCdrMembershipsVariables
   >({
-    mutationFn: (variables: PatchCdrMembershipsMembershipIdVariables) =>
-      fetchPatchCdrMembershipsMembershipId({ ...fetcherOptions, ...variables }),
+    mutationFn: (variables: PostCdrMembershipsVariables) =>
+      fetchPostCdrMemberships({ ...fetcherOptions, ...variables }),
     ...options,
   });
 };
@@ -14257,6 +13311,9 @@ export const usePostLoansLoanIdExtend = (
 };
 
 export type GetPhPaperIdPdfPathParams = {
+  /**
+   * @format uuid
+   */
   paperId: string;
 };
 
@@ -14305,6 +13362,9 @@ export const useGetPhPaperIdPdf = <TData = undefined,>(
 };
 
 export type PostPhPaperIdPdfPathParams = {
+  /**
+   * @format uuid
+   */
   paperId: string;
 };
 
@@ -14484,6 +13544,9 @@ export const useGetPhAdmin = <TData = GetPhAdminResponse,>(
 };
 
 export type GetPhPaperIdCoverPathParams = {
+  /**
+   * @format uuid
+   */
   paperId: string;
 };
 
@@ -14532,6 +13595,9 @@ export const useGetPhPaperIdCover = <TData = void,>(
 };
 
 export type PatchPhPaperIdPathParams = {
+  /**
+   * @format uuid
+   */
   paperId: string;
 };
 
@@ -14581,6 +13647,9 @@ export const usePatchPhPaperId = (
 };
 
 export type DeletePhPaperIdPathParams = {
+  /**
+   * @format uuid
+   */
   paperId: string;
 };
 
@@ -15294,7 +14363,7 @@ export type PatchPhonebookAssociationsMembershipsMembershipIdError =
   }>;
 
 export type PatchPhonebookAssociationsMembershipsMembershipIdVariables = {
-  body?: Schemas.AppModulesPhonebookSchemasPhonebookMembershipEdit;
+  body?: Schemas.MembershipEdit;
   pathParams: PatchPhonebookAssociationsMembershipsMembershipIdPathParams;
 } & HyperionContext["fetcherOptions"];
 
@@ -15310,7 +14379,7 @@ export const fetchPatchPhonebookAssociationsMembershipsMembershipId = (
   hyperionFetch<
     undefined,
     PatchPhonebookAssociationsMembershipsMembershipIdError,
-    Schemas.AppModulesPhonebookSchemasPhonebookMembershipEdit,
+    Schemas.MembershipEdit,
     {},
     {},
     PatchPhonebookAssociationsMembershipsMembershipIdPathParams
@@ -18331,19 +17400,9 @@ export type QueryOperation =
       variables: GetCdrUsersMeSellersVariables;
     }
   | {
-      path: "/cdr/groups/{groupId}/sellers/";
-      operationId: "getCdrGroupsGroupIdSellers";
-      variables: GetCdrGroupsGroupIdSellersVariables;
-    }
-  | {
-      path: "/cdr/sellers/{sellerId}/";
-      operationId: "getCdrSellersSellerId";
-      variables: GetCdrSellersSellerIdVariables;
-    }
-  | {
-      path: "/cdr/products/";
-      operationId: "getCdrProducts";
-      variables: GetCdrProductsVariables;
+      path: "/cdr/online/sellers/";
+      operationId: "getCdrOnlineSellers";
+      variables: GetCdrOnlineSellersVariables;
     }
   | {
       path: "/cdr/sellers/{sellerId}/products/";
@@ -18351,44 +17410,14 @@ export type QueryOperation =
       variables: GetCdrSellersSellerIdProductsVariables;
     }
   | {
-      path: "/cdr/products/available_online/";
-      operationId: "getCdrProductsAvailableOnline";
-      variables: GetCdrProductsAvailableOnlineVariables;
+      path: "/cdr/online/sellers/{sellerId}/products/";
+      operationId: "getCdrOnlineSellersSellerIdProducts";
+      variables: GetCdrOnlineSellersSellerIdProductsVariables;
     }
   | {
-      path: "/cdr/products/{productId}/";
-      operationId: "getCdrProductsProductId";
-      variables: GetCdrProductsProductIdVariables;
-    }
-  | {
-      path: "/cdr/products/{productId}/variants/";
-      operationId: "getCdrProductsProductIdVariants";
-      variables: GetCdrProductsProductIdVariantsVariables;
-    }
-  | {
-      path: "/cdr/products/{productId}/variants/{variantId}/";
-      operationId: "getCdrProductsProductIdVariantsVariantId";
-      variables: GetCdrProductsProductIdVariantsVariantIdVariables;
-    }
-  | {
-      path: "/cdr/products/{productId}/variants/enabled/";
-      operationId: "getCdrProductsProductIdVariantsEnabled";
-      variables: GetCdrProductsProductIdVariantsEnabledVariables;
-    }
-  | {
-      path: "/cdr/documents/";
-      operationId: "getCdrDocuments";
-      variables: GetCdrDocumentsVariables;
-    }
-  | {
-      path: "/cdr/documents/{documentId}/";
-      operationId: "getCdrDocumentsDocumentId";
-      variables: GetCdrDocumentsDocumentIdVariables;
-    }
-  | {
-      path: "/cdr/purchases/";
-      operationId: "getCdrPurchases";
-      variables: GetCdrPurchasesVariables;
+      path: "/cdr/sellers/{sellerId}/documents/";
+      operationId: "getCdrSellersSellerIdDocuments";
+      variables: GetCdrSellersSellerIdDocumentsVariables;
     }
   | {
       path: "/cdr/users/{userId}/purchases/";
@@ -18396,24 +17425,9 @@ export type QueryOperation =
       variables: GetCdrUsersUserIdPurchasesVariables;
     }
   | {
-      path: "/cdr/purchases/{purchaseId}/";
-      operationId: "getCdrPurchasesPurchaseId";
-      variables: GetCdrPurchasesPurchaseIdVariables;
-    }
-  | {
-      path: "/cdr/signatures/";
-      operationId: "getCdrSignatures";
-      variables: GetCdrSignaturesVariables;
-    }
-  | {
       path: "/cdr/users/{userId}/signatures/";
       operationId: "getCdrUsersUserIdSignatures";
       variables: GetCdrUsersUserIdSignaturesVariables;
-    }
-  | {
-      path: "/cdr/documents/{documentId}/signatures/";
-      operationId: "getCdrDocumentsDocumentIdSignatures";
-      variables: GetCdrDocumentsDocumentIdSignaturesVariables;
     }
   | {
       path: "/cdr/curriculums/";
@@ -18421,49 +17435,14 @@ export type QueryOperation =
       variables: GetCdrCurriculumsVariables;
     }
   | {
-      path: "/cdr/users/{userId}/curriculums/";
-      operationId: "getCdrUsersUserIdCurriculums";
-      variables: GetCdrUsersUserIdCurriculumsVariables;
-    }
-  | {
-      path: "/cdr/curriculums/{curriculumId}/";
-      operationId: "getCdrCurriculumsCurriculumId";
-      variables: GetCdrCurriculumsCurriculumIdVariables;
-    }
-  | {
-      path: "/cdr/payments/";
-      operationId: "getCdrPayments";
-      variables: GetCdrPaymentsVariables;
-    }
-  | {
       path: "/cdr/users/{userId}/payments/";
       operationId: "getCdrUsersUserIdPayments";
       variables: GetCdrUsersUserIdPaymentsVariables;
     }
   | {
-      path: "/cdr/payments/{paymentId}/";
-      operationId: "getCdrPaymentsPaymentId";
-      variables: GetCdrPaymentsPaymentIdVariables;
-    }
-  | {
-      path: "/cdr/memberships/";
-      operationId: "getCdrMemberships";
-      variables: GetCdrMembershipsVariables;
-    }
-  | {
-      path: "/cdr/memberships/type/{membershipType}/";
-      operationId: "getCdrMembershipsTypeMembershipType";
-      variables: GetCdrMembershipsTypeMembershipTypeVariables;
-    }
-  | {
       path: "/cdr/users/{userId}/memberships/";
       operationId: "getCdrUsersUserIdMemberships";
       variables: GetCdrUsersUserIdMembershipsVariables;
-    }
-  | {
-      path: "/cdr/memberships/{membershipId}/";
-      operationId: "getCdrMembershipsMembershipId";
-      variables: GetCdrMembershipsMembershipIdVariables;
     }
   | {
       path: "/cdr/status/";

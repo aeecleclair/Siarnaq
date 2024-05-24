@@ -623,9 +623,13 @@ export type DocumentComplete = {
    * @format uuid
    */
   id: string;
+  /**
+   * @format uuid
+   */
+  seller_id: string;
 };
 
-export type DocumentSignatureType = "physical" | "material";
+export type DocumentSignatureType = "material" | "numeric";
 
 export type EventApplicant = {
   name: string;
@@ -1030,6 +1034,11 @@ export type MemberComplete = {
   memberships: AppModulesPhonebookSchemasPhonebookMembershipComplete[];
 };
 
+export type MembershipEdit = {
+  role_name?: string | null;
+  role_tags?: string | null;
+};
+
 export type Message = {
   /**
    * A context represents a topic. There can only by one notification per context.
@@ -1133,6 +1142,9 @@ export type PaperComplete = {
    * @format date
    */
   release_date: string;
+  /**
+   * @format uuid
+   */
   id: string;
 };
 
@@ -1190,10 +1202,6 @@ export type PrizeSimple = {
 export type ProductBase = {
   name: string;
   description?: string | null;
-  /**
-   * @format uuid
-   */
-  seller_id: string;
   available_online: boolean;
   unique: boolean;
 };
@@ -1239,19 +1247,13 @@ export type ProductVariantEdit = {
 };
 
 export type PurchaseBase = {
-  /**
-   * @format uuid
-   */
-  user_id: string;
-  /**
-   * @format uuid
-   */
-  product_variant_id: string;
   quantity: number;
   paid: boolean;
 };
 
 export type PurchaseComplete = {
+  quantity: number;
+  paid: boolean;
   /**
    * @format uuid
    */
@@ -1260,12 +1262,6 @@ export type PurchaseComplete = {
    * @format uuid
    */
   product_variant_id: string;
-  quantity: number;
-  paid: boolean;
-  /**
-   * @format uuid
-   */
-  id: string;
 };
 
 export type PurchaseEdit = {
@@ -1394,7 +1390,14 @@ export type SellerEdit = {
   order?: number | null;
 };
 
-export type Signature = {
+export type SignatureBase = {
+  signature_type: DocumentSignatureType;
+  numeric_signature_id?: string | null;
+};
+
+export type SignatureComplete = {
+  signature_type: DocumentSignatureType;
+  numeric_signature_id?: string | null;
   /**
    * @format uuid
    */
@@ -1403,8 +1406,6 @@ export type Signature = {
    * @format uuid
    */
   document_id: string;
-  signature_type: DocumentSignatureType;
-  numeric_signature_id?: string | null;
 };
 
 export type Status = {
@@ -1563,23 +1564,19 @@ export type AppModulesCdrSchemasCdrMembershipComplete = {
   id: string;
 };
 
-export type AppModulesCdrSchemasCdrMembershipEdit = {
-  end_date?: string | null;
-};
-
 export type AppModulesCdrSchemasCdrProductComplete = {
   name: string;
   description?: string | null;
-  /**
-   * @format uuid
-   */
-  seller_id: string;
   available_online: boolean;
   unique: boolean;
   /**
    * @format uuid
    */
   id: string;
+  /**
+   * @format uuid
+   */
+  seller_id: string;
 };
 
 export type AppModulesCdrSchemasCdrProductEdit = {
@@ -1604,9 +1601,4 @@ export type AppModulesPhonebookSchemasPhonebookMembershipComplete = {
   role_name: string;
   role_tags?: string | null;
   id: string;
-};
-
-export type AppModulesPhonebookSchemasPhonebookMembershipEdit = {
-  role_name?: string | null;
-  role_tags?: string | null;
 };

@@ -24,12 +24,24 @@ export const ProductAccordion = ({ product }: ProductAccordionProps) => {
       </AccordionTrigger>
       <AccordionContent>
         <p className="text-sm text-gray-500">{product.description_en}</p>
-        {/* Take care to export all grid-cols-n */}
+        {/* Take care to export all grid-cols-n
+        Can't find a better way to do it for naw */}
+        <div className="hidden grid-cols-6" />
+        <div className="hidden grid-cols-5" />
+        <div className="hidden grid-cols-4" />
+        <div className="hidden grid-cols-3" />
+        <div className="hidden grid-cols-2" />
+        <div className="hidden grid-cols-1" />
         <div className={`grid grid-cols-${numberOfCard} gap-4 mt-4`}>
           {product.variants && (
             <>
               {product.variants.map((variant) => (
-                <VariantCard key={variant.id} variant={variant} />
+                <VariantCard
+                  key={variant.id}
+                  variant={variant}
+                  // FIXME: for test purpose
+                  selected={variant.enabled}
+                />
               ))}
             </>
           )}

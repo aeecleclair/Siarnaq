@@ -65,7 +65,7 @@ export const products: AppModulesCdrSchemasCdrProductComplete[] = [
         description_en:
           "Membership to the students association for the full curriculum",
         price: 50,
-        enabled: true,
+        enabled: false,
         unique: true,
         id: "2",
         product_id: "1",
@@ -89,7 +89,7 @@ export const products: AppModulesCdrSchemasCdrProductComplete[] = [
         description_fr: "Adhésion à l'association sportive pour 1 an",
         description_en: "Membership to the sport association for 1 year",
         price: 10,
-        enabled: true,
+        enabled: false,
         unique: true,
         id: "3",
         product_id: "2",

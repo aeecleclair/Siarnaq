@@ -5,7 +5,7 @@ export const SellerTabList = () => {
   return (
     <TabsList className={`"grid w-full grid-cols-${sellers.length}"`}>
       {sellers.map((seller) => (
-        <TabsTrigger key={seller.id} value={seller.id} className="w-full">
+        <TabsTrigger key={seller.id} value={seller.id} className="w-full min-w-18">
           {seller.name}
         </TabsTrigger>
       ))}

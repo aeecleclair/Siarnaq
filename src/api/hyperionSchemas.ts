@@ -1154,25 +1154,18 @@ export type PaperUpdate = {
 };
 
 export type PaymentBase = {
-  /**
-   * @format uuid
-   */
-  user_id: string;
   total: number;
   payment_type: PaymentType;
 };
 
 export type PaymentComplete = {
-  /**
-   * @format uuid
-   */
-  user_id: string;
   total: number;
   payment_type: PaymentType;
   /**
    * @format uuid
    */
   id: string;
+  user_id: string;
 };
 
 export type PaymentType = "cash" | "check" | "HelloAsso" | "card" | "archived";
@@ -1200,10 +1193,28 @@ export type PrizeSimple = {
 };
 
 export type ProductBase = {
-  name: string;
-  description?: string | null;
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
   available_online: boolean;
-  unique: boolean;
+};
+
+export type ProductCompleteNoConstraint = {
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
+  available_online: boolean;
+  /**
+   * @format uuid
+   */
+  id: string;
+  /**
+   * @format uuid
+   */
+  seller_id: string;
+  variants?: ProductVariantComplete[];
 };
 
 export type ProductQuantity = {
@@ -1218,17 +1229,23 @@ export type ProductSimple = {
 };
 
 export type ProductVariantBase = {
-  name: string;
-  description?: string | null;
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
   price: number;
   enabled: boolean;
+  unique: boolean;
 };
 
 export type ProductVariantComplete = {
-  name: string;
-  description?: string | null;
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
   price: number;
   enabled: boolean;
+  unique: boolean;
   /**
    * @format uuid
    */
@@ -1240,28 +1257,27 @@ export type ProductVariantComplete = {
 };
 
 export type ProductVariantEdit = {
-  name?: string | null;
-  description?: string | null;
+  name_fr?: string | null;
+  name_en?: string | null;
+  description_fr?: string | null;
+  description_en?: string | null;
   price?: number | null;
   enabled?: boolean | null;
+  unique?: boolean | null;
 };
 
 export type PurchaseBase = {
   quantity: number;
-  paid: boolean;
 };
 
 export type PurchaseComplete = {
   quantity: number;
-  paid: boolean;
-  /**
-   * @format uuid
-   */
   user_id: string;
   /**
    * @format uuid
    */
   product_variant_id: string;
+  validated: boolean;
 };
 
 export type PurchaseEdit = {
@@ -1363,25 +1379,18 @@ export type SectionComplete = {
 
 export type SellerBase = {
   name: string;
-  /**
-   * @format uuid
-   */
   group_id: string;
   order: number;
 };
 
 export type SellerComplete = {
   name: string;
-  /**
-   * @format uuid
-   */
   group_id: string;
   order: number;
   /**
    * @format uuid
    */
   id: string;
-  products?: AppModulesCdrSchemasCdrProductComplete[];
 };
 
 export type SellerEdit = {
@@ -1398,9 +1407,6 @@ export type SignatureBase = {
 export type SignatureComplete = {
   signature_type: DocumentSignatureType;
   numeric_signature_id?: string | null;
-  /**
-   * @format uuid
-   */
   user_id: string;
   /**
    * @format uuid
@@ -1529,9 +1535,6 @@ export type AppModulesCampaignSchemasCampaignResult = {
 };
 
 export type AppModulesCdrSchemasCdrMembershipBase = {
-  /**
-   * @format uuid
-   */
   user_id: string;
   membership: AvailableMembership;
   /**
@@ -1545,9 +1548,6 @@ export type AppModulesCdrSchemasCdrMembershipBase = {
 };
 
 export type AppModulesCdrSchemasCdrMembershipComplete = {
-  /**
-   * @format uuid
-   */
   user_id: string;
   membership: AvailableMembership;
   /**
@@ -1565,25 +1565,16 @@ export type AppModulesCdrSchemasCdrMembershipComplete = {
 };
 
 export type AppModulesCdrSchemasCdrProductComplete = {
-  name: string;
-  description?: string | null;
-  available_online: boolean;
-  unique: boolean;
-  /**
-   * @format uuid
-   */
-  id: string;
-  /**
-   * @format uuid
-   */
-  seller_id: string;
+  ProductVariantComplete;
 };
 
 export type AppModulesCdrSchemasCdrProductEdit = {
-  name?: string | null;
+  name_fr?: string | null;
+  name_en?: string | null;
+  description_fr?: string | null;
+  description_en?: string | null;
   description?: string | null;
   available_online?: boolean | null;
-  unique?: boolean | null;
 };
 
 export type AppModulesPhonebookSchemasPhonebookMembershipBase = {

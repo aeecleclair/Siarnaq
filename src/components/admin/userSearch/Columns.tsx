@@ -5,70 +5,67 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { DataTableRowActions } from "./DataTableRowActions";
 import { Checkbox } from "@/components/ui/checkbox";
+import { CoreUserSimple } from "@/api/hyperionSchemas";
+import { fuzzySort } from "./searchFunction";
 
-export const columns: ColumnDef<any>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
+export const columns: ColumnDef<CoreUserSimple>[] = [
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   {
     accessorKey: "name",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Equipe" />
+      <DataTableColumnHeader column={column} title="Nom" />
     ),
     cell: ({ row }) => <div>{row.getValue("name")}</div>,
     enableSorting: false,
-    enableHiding: false,
+    filterFn: "fuzzy", //using our custom fuzzy filter function
+    // filterFn: fuzzyFilter, //or just define with the function
+    sortingFn: fuzzySort, //sort by fuzzy rank (falls back to alphanumeric)
   },
   {
-    accessorKey: "captain",
+    accessorKey: "firstname",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Capitaine" />
+      <DataTableColumnHeader column={column} title="Prénom" />
     ),
-    cell: ({ row }) => {
-      const captain = row.getValue("captain");
-      return <div className="flex space-x-2"></div>;
-    },
+    cell: ({ row }) => <div>{row.getValue("firstname")}</div>,
     enableSorting: false,
+    filterFn: "fuzzy", //using our custom fuzzy filter function
+    // filterFn: fuzzyFilter, //or just define with the function
+    sortingFn: fuzzySort, //sort by fuzzy rank (falls back to alphanumeric)
   },
   {
-    accessorKey: "second",
+    accessorKey: "nickname",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Coéquiper" />
+      <DataTableColumnHeader column={column} title="Surnom" />
     ),
-    cell: ({ row }) => {
-      const second = row.getValue("second");
-      return (
-        <div
-          className={`flex space-x-2 ${second ?? "text-muted-foreground"}`}
-        ></div>
-      );
-    },
+    cell: ({ row }) => <div>{row.getValue("nickname")}</div>,
     enableSorting: false,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
+    filterFn: "fuzzy", //using our custom fuzzy filter function
+    // filterFn: fuzzyFilter, //or just define with the function
+    sortingFn: fuzzySort, //sort by fuzzy rank (falls back to alphanumeric)
   },
-  {
-    id: "actions",
-    cell: ({ row }) => <DataTableRowActions row={row} />,
-  },
+  // {
+  //   id: "actions",
+  //   cell: ({ row }) => <DataTableRowActions row={row} />,
+  // },
 ];

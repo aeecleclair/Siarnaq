@@ -1565,7 +1565,22 @@ export type AppModulesCdrSchemasCdrMembershipComplete = {
 };
 
 export type AppModulesCdrSchemasCdrProductComplete = {
-  ProductVariantComplete;
+  name_fr: string;
+  name_en: string;
+  description_fr?: string | null;
+  description_en?: string | null;
+  available_online: boolean;
+  /**
+   * @format uuid
+   */
+  id: string;
+  /**
+   * @format uuid
+   */
+  seller_id: string;
+  variants?: ProductVariantComplete[];
+  product_constraints?: ProductCompleteNoConstraint[];
+  document_constraints?: DocumentComplete[];
 };
 
 export type AppModulesCdrSchemasCdrProductEdit = {

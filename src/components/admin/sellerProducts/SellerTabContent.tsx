@@ -12,7 +12,7 @@ export const SellerTabContent = ({ seller }: SellerTabContentProps) => {
   return (
     <TabsContent value={seller.id} className="min-w-96">
       {products ? (
-        <Accordion type="single" collapsible>
+        <Accordion type="multiple">
           {products.map((product) => (
             <ProductAccordion key={product.id} product={product} />
           ))}

@@ -3,15 +3,24 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../ui/accordion";
+} from "../../ui/accordion";
 import { VariantCard } from "./VariantCard";
-import { useSizeStore } from "../admin/sellerProducts/useSize";
+import { useSizeStore } from "../../admin/sellerProducts/useSize";
+import { AddingVariantCard } from "./AddingVariantCard";
 
 interface ProductAccordionProps {
   product: AppModulesCdrSchemasCdrProductComplete;
+  canAdd?: boolean;
+  canEdit?: boolean;
+  canRemove?: boolean;
 }
 
-export const ProductAccordion = ({ product }: ProductAccordionProps) => {
+export const ProductAccordion = ({
+  product,
+  canAdd,
+  canEdit,
+  canRemove,
+}: ProductAccordionProps) => {
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
 
@@ -34,12 +43,15 @@ export const ProductAccordion = ({ product }: ProductAccordionProps) => {
         <div className={`grid grid-cols-${numberOfCard} gap-4`}>
           {product.variants && (
             <>
+              {canAdd && <AddingVariantCard />}
               {product.variants.map((variant) => (
                 <VariantCard
                   key={variant.id}
                   variant={variant}
                   // This is a dummy value, it should be managed by the parent component
                   numberSelected={0}
+                  canEdit={canEdit}
+                  canRemove={canRemove}
                 />
               ))}
             </>

@@ -2,7 +2,7 @@ import { SellerComplete } from "@/api/hyperionSchemas";
 import { TabsContent } from "@/components/ui/tabs";
 import { products } from "./sellers";
 import { Accordion } from "@/components/ui/accordion";
-import { ProductAccordion } from "@/components/custom/ProductAccordion";
+import { ProductAccordion } from "@/components/custom/productAccordion/ProductAccordion";
 
 interface SellerTabContentProps {
   seller: SellerComplete;
@@ -14,7 +14,7 @@ export const SellerTabContent = ({ seller }: SellerTabContentProps) => {
       {products ? (
         <Accordion type="multiple">
           {products.map((product) => (
-            <ProductAccordion key={product.id} product={product} />
+            <ProductAccordion key={product.id} product={product} canAdd canEdit canRemove/>
           ))}
         </Accordion>
       ) : (

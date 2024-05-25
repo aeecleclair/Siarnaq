@@ -3,6 +3,7 @@ import { TabsContent } from "@/components/ui/tabs";
 import { products } from "./sellers";
 import { Accordion } from "@/components/ui/accordion";
 import { ProductAccordion } from "@/components/custom/productAccordion/ProductAccordion";
+import { AddProductAccordionItem } from "./AddProductAccordionItem";
 
 interface SellerTabContentProps {
   seller: SellerComplete;
@@ -11,10 +12,17 @@ interface SellerTabContentProps {
 export const SellerTabContent = ({ seller }: SellerTabContentProps) => {
   return (
     <TabsContent value={seller.id} className="min-w-96">
+      <AddProductAccordionItem seller={seller} />
       {products ? (
         <Accordion type="multiple">
           {products.map((product) => (
-            <ProductAccordion key={product.id} product={product} canAdd canEdit canRemove/>
+            <ProductAccordion
+              key={product.id}
+              product={product}
+              canAdd
+              canEdit
+              canRemove
+            />
           ))}
         </Accordion>
       ) : (

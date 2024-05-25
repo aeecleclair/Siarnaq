@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../../ui/accordion";
-import { VariantCard } from "./VariantCard";
+import { VariantCardWithOptions } from "./VariantCardWithOptions";
 import { useSizeStore } from "../../admin/sellerProducts/useSize";
 import { AddingVariantCard } from "./AddingVariantCard";
 
@@ -45,7 +45,7 @@ export const ProductAccordion = ({
             <>
               {canAdd && <AddingVariantCard />}
               {product.variants.map((variant) => (
-                <VariantCard
+                <VariantCardWithOptions
                   key={variant.id}
                   variant={variant}
                   // This is a dummy value, it should be managed by the parent component

@@ -16,7 +16,7 @@ export const AddingVariantCard = () => {
       validateLabel="Ajouter"
       callback={() => {}}
     >
-      <Card className={`min-w-40`}>
+      <Card className={`min-w-40 min-h-24`}>
         <CardContent className="flex flex-col items-center justify-center m-auto h-full p-0">
           <HiPlus className="w-8 h-8" />
         </CardContent>

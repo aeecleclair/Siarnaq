@@ -26,7 +26,6 @@ export const ProductAccordion = ({ product }: ProductAccordionProps) => {
         <p className="text-sm text-gray-500">{product.description_en}</p>
         {/* Take care to export all grid-cols-n
         Can't find a better way to do it for naw */}
-        <div className="hidden grid-cols-6" />
         <div className="hidden grid-cols-5" />
         <div className="hidden grid-cols-4" />
         <div className="hidden grid-cols-3" />
@@ -39,8 +38,8 @@ export const ProductAccordion = ({ product }: ProductAccordionProps) => {
                 <VariantCard
                   key={variant.id}
                   variant={variant}
-                  // FIXME: for test purpose
-                  selected={variant.enabled}
+                  // This is a dummy value, it should be managed by the parent component
+                  numberSelected={1}
                 />
               ))}
             </>

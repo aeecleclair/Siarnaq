@@ -11,17 +11,19 @@ interface VariantCardProps {
 export const VariantCard = ({ variant, numberSelected }: VariantCardProps) => {
   const selected = numberSelected > 0;
   return (
-    <Card className={`min-w-40 ${selected && "border-black shadow-lg"}`}>
+    <Card
+      className={`min-w-40 ${selected && "border-black shadow-lg"} ${!variant.enabled && "text-muted-foreground"}`}
+    >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-1">
         <CardTitle className="text-sm font-medium">
           <span>{variant.name_en}</span>
         </CardTitle>
         {!variant.unique && (
           <div className="flex items-center space-x-2">
-            <Button variant="outline" className="h-6 px-1">
+            <Button variant="outline" className="h-6 px-1" disabled={!selected}>
               <HiMinus className="w-4 h-4" />
             </Button>
-            <span className="text-xs text-muted-foreground">1</span>
+            <span className="text-xs text-muted-foreground">{numberSelected}</span>
             <Button variant="outline" className="h-6 px-1">
               <HiPlus className="w-4 h-4" />
             </Button>

@@ -20,11 +20,21 @@ export const VariantCard = ({ variant, numberSelected }: VariantCardProps) => {
         </CardTitle>
         {!variant.unique && (
           <div className="flex items-center space-x-2">
-            <Button variant="outline" className="h-6 px-1" disabled={!selected}>
+            <Button
+              variant="outline"
+              className="h-6 px-1"
+              disabled={!selected || !variant.enabled}
+            >
               <HiMinus className="w-4 h-4" />
             </Button>
-            <span className="text-xs text-muted-foreground">{numberSelected}</span>
-            <Button variant="outline" className="h-6 px-1">
+            <span className="text-xs text-muted-foreground">
+              {numberSelected}
+            </span>
+            <Button
+              variant="outline"
+              className="h-6 px-1"
+              disabled={!variant.enabled}
+            >
               <HiPlus className="w-4 h-4" />
             </Button>
           </div>

@@ -10,7 +10,7 @@ export const useSizeStore = create<SizeStore>()(
   devtools(
     persist(
       (set) => ({
-        size: 0,
+        size: 50,
         setSize: (size) => set({ size }),
       }),
       {

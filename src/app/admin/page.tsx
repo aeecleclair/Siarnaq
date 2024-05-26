@@ -1,7 +1,6 @@
 "use client";
 
 import { SellerTab } from "@/components/admin/sellerProducts/SellerTab";
-import { useSizeStore } from "@/components/admin/sellerProducts/useSize";
 import { UserSearch } from "@/components/admin/userSearch/UserSearch";
 import { Card } from "@/components/ui/card";
 import {
@@ -9,6 +8,7 @@ import {
   ResizablePanel,
   ResizableHandle,
 } from "@/components/ui/resizable";
+import { useSizeStore } from "@/stores/SizeStore";
 import { Suspense } from "react";
 
 const AdminPage = () => {

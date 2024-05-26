@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "../../ui/accordion";
 import { VariantCardWithOptions } from "./VariantCardWithOptions";
-import { useSizeStore } from "../../admin/sellerProducts/useSize";
+import { useSizeStore } from "@/stores/SizeStore";
 import { AddingVariantCard } from "./AddingVariantCard";
 
 interface ProductAccordionProps {

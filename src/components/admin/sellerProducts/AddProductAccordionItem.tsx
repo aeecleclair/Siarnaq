@@ -22,12 +22,9 @@ export const AddProductAccordionItem = ({
       setIsOpened={setIsAddDialogOpened}
       isLoading={false}
     >
-      <div className="flex flex-1 items-center justify-between py-4 font-medium border-b hover:underline">
-        <div className="flex flex-col items-start justify-between">
-          <h3 className="text-lg font-semibold">New Product</h3>
-          <p className="text-sm text-gray-500">{`Add a product to ${seller.name}`}</p>
-        </div>
-        <HiPlus className="w-4 h-4" />
+      <div className="flex flex-1 items-center justify-start py-4 font-medium border-b cursor-pointer">
+        <HiPlus className="w-4 h-4 mr-6" />
+        <h3 className="text-lg font-semibold">New Product</h3>
       </div>
     </CustomDialog>
   );

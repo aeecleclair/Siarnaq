@@ -16,7 +16,6 @@ export const useProductExpansionStore = create<productExpansionStore>()(
     persist(
       (set) => ({
         productExpansion: {},
-        loaded: true,
         setExpandedProducts: (sellerId: string, productIds: string[]) => {
           set((state) => ({
             productExpansion: {

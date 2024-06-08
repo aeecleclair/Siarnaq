@@ -9,10 +9,18 @@ import {
   ResizableHandle,
 } from "@/components/ui/resizable";
 import { useSizeStore } from "@/stores/SizeStore";
+import { useTokenStore } from "@/stores/token";
+import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 
 const AdminPage = () => {
   const { setSize } = useSizeStore();
+  const { token } = useTokenStore();
+  const router = useRouter();
+
+  if (token === null) {
+    router.replace("/login");
+  }
 
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 mt-8">

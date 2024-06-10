@@ -8,28 +8,24 @@ import {
   ResizablePanel,
   ResizableHandle,
 } from "@/components/ui/resizable";
+import { useToken } from "@/hooks/useToken";
 import { useSizeStore } from "@/stores/SizeStore";
-import { useTokenStore } from "@/stores/token";
 import { createClient } from "@hey-api/client-fetch";
-import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 
 const AdminPage = () => {
   const { setSize } = useSizeStore();
-  const { token } = useTokenStore();
-  const router = useRouter();
+  const { getToken } = useToken();
 
-  if (token === null) {
-    router.replace("/login");
-  }
-
-  createClient({
-    // set default base url for requests
-    baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
-    // set default headers for requests
-    headers: {
-      Authorization: "Bearer " + token,
-    },
+  getToken().then((token) => {
+    createClient({
+      // set default base url for requests
+      baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
+      // set default headers for requests
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
   });
 
   return (

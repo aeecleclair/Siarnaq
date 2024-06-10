@@ -1,17 +1,23 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useTokenStore } from "@/stores/token";
+import { useToken } from "@/hooks/useToken";
+import { createClient } from "@hey-api/client-fetch";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const { token } = useTokenStore();
-  const router = useRouter();
+  const { getToken } = useToken();
 
-  if (token === null) {
-    router.replace("/login");
-  }
+  getToken().then((token) => {
+    createClient({
+      // set default base url for requests
+      baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
+      // set default headers for requests
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+  });
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

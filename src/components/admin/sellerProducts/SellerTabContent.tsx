@@ -29,20 +29,18 @@ export const SellerTabContent = ({
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
 
-  const onGetCdrSellerProducts = async () => {
-    const { data, error } = await getCdrSellersSellerIdProducts({
-      path: { seller_id: seller.id },
-    });
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setProducts(data!);
-  };
-
   useEffect(() => {
-    if (seller.id == activeSellerId)
-      onGetCdrSellerProducts()
+    const onGetCdrSellerProducts = async () => {
+      const { data, error } = await getCdrSellersSellerIdProducts({
+        path: { seller_id: seller.id },
+      });
+      if (error) {
+        console.log(error);
+        return;
+      }
+      setProducts(data!);
+    };
+    if (seller.id == activeSellerId) onGetCdrSellerProducts();
   }, [seller.id, activeSellerId]);
 
   useEffect(() => {
@@ -56,7 +54,7 @@ export const SellerTabContent = ({
         products.map((product) => product.id),
       );
     }
-  }, [productExpansion, seller.id, setExpandedProducts]);
+  }, [productExpansion, seller.id, setExpandedProducts, products]);
 
   return (
     <TabsContent value={seller.id} className="min-w-96">

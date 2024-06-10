@@ -1,4 +1,4 @@
-import { AppModulesCdrSchemasCdrProductComplete } from "@/api/hyperionSchemas";
+import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 import {
   AccordionContent,
   AccordionItem,
@@ -9,7 +9,7 @@ import { useSizeStore } from "@/stores/SizeStore";
 import { AddingVariantCard } from "./AddingVariantCard";
 
 interface ProductAccordionProps {
-  product: AppModulesCdrSchemasCdrProductComplete;
+  product: app__modules__cdr__schemas_cdr__ProductComplete;
   canAdd?: boolean;
   canEdit?: boolean;
   canRemove?: boolean;

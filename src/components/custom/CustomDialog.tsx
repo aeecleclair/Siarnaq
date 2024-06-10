@@ -49,6 +49,7 @@ export const CustomDialog = ({
   function onValidate(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     if (callback) callback();
+    setIsOpened(false);
   }
 
   return (

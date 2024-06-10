@@ -1,4 +1,4 @@
-import { ProductVariantComplete } from "@/api/hyperionSchemas";
+import { ProductVariantComplete } from "@/api";
 import {
   ContextMenuShortcut,
   ContextMenuContent,

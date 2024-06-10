@@ -1,4 +1,4 @@
-import { CoreUserSimple } from "@/api/hyperionSchemas";
+import { CoreUserSimple } from "@/api";
 
 export const users: CoreUserSimple[] = [
   {

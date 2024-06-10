@@ -1,8 +1,8 @@
+import { SellerComplete } from "@/api";
 import { SellerTabContent } from "./SellerTabContent";
-import { sellers } from "./sellers";
 
-export const SellerTabContentList = () => {
-  return sellers.map((seller) => (
-    <SellerTabContent key={seller.id} seller={seller} />
+export const SellerTabContentList = (props:{sellers:SellerComplete[], setRefetchSellers:(arg0:boolean)=>void}) => {
+  return props.sellers.map((seller) => (
+    <SellerTabContent key={seller.id} seller={seller} setRefetchSellers={props.setRefetchSellers} />
   ));
 };

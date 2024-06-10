@@ -1,8 +1,8 @@
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { sellers } from "./sellers";
 import { useRouter } from "next/navigation";
+import { SellerComplete } from "@/api";
 
-export const SellerTabList = () => {
+export const SellerTabList = (props:{sellers:SellerComplete[]}) => {
   const router = useRouter();
 
   const handleClick = (sellerId: string) => {
@@ -10,8 +10,8 @@ export const SellerTabList = () => {
   };
 
   return (
-    <TabsList className={`"grid w-full grid-cols-${sellers.length}"`}>
-      {sellers.map((seller) => (
+    <TabsList className={`"grid w-full grid-cols-${props.sellers.length}"`}>
+      {props.sellers.map((seller) => (
         <TabsTrigger
           key={seller.id}
           value={seller.id}

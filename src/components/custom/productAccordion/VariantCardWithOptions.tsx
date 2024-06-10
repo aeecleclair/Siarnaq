@@ -1,4 +1,4 @@
-import { ProductVariantComplete } from "@/api/hyperionSchemas";
+import { ProductVariantComplete } from "@/api";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { VariantCardOptions } from "./VariantCardOptions";
 import { VariantCard } from "../VariantCard";

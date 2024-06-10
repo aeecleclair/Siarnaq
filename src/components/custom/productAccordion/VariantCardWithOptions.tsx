@@ -1,7 +1,7 @@
+import { VariantCard } from "../VariantCard";
+import { VariantCardOptions } from "./VariantCardOptions";
 import { ProductVariantComplete } from "@/api";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
-import { VariantCardOptions } from "./VariantCardOptions";
-import { VariantCard } from "../VariantCard";
 
 interface VariantCardWithOptionsProps {
   variant: ProductVariantComplete;

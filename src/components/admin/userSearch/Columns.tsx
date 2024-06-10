@@ -1,12 +1,11 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
-
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { DataTableRowActions } from "./DataTableRowActions";
-import { Checkbox } from "@/components/ui/checkbox";
-import { CoreUserSimple } from "@/api";
 import { fuzzySort } from "./searchFunction";
+import { CoreUserSimple } from "@/api";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<CoreUserSimple>[] = [
   // {

@@ -1,5 +1,5 @@
-import * as React from "react";
-
+import MyECLButton from "../../components/login/MyECLButton";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,9 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import MyECLButton from "../../components/login/MyECLButton";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import * as React from "react";
 
 const Login = () => {
   return (
@@ -41,6 +40,6 @@ const Login = () => {
       </Card>
     </div>
   );
-}
+};
 
 export default Login;

@@ -1,18 +1,18 @@
+import { CustomDialog } from "../CustomDialog";
+import { AddEditVariantForm } from "./AddEditVariantForm";
 import { ProductVariantComplete } from "@/api";
+import { Button } from "@/components/ui/button";
 import {
   ContextMenuShortcut,
   ContextMenuContent,
 } from "@/components/ui/context-menu";
-import { CustomDialog } from "../CustomDialog";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import {
   TrashIcon,
   PencilIcon,
   PlayIcon,
   StopIcon,
 } from "@heroicons/react/24/outline";
-import { AddEditVariantForm } from "./AddEditVariantForm";
+import { useState } from "react";
 
 interface VariantCardOptionsProps {
   variant: ProductVariantComplete;
@@ -35,7 +35,7 @@ export const VariantCardOptions = ({
           setIsOpened={setIsEditDialogOpened}
           isLoading={false}
           title="Modifer la variante"
-          description={<AddEditVariantForm variant={variant}/>}
+          description={<AddEditVariantForm variant={variant} />}
           validateLabel="Modifier"
           callback={() => {}}
         >

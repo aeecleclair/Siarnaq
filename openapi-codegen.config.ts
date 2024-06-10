@@ -1,8 +1,9 @@
+import { defineConfig } from "@openapi-codegen/cli";
 import {
   generateSchemaTypes,
   generateReactQueryComponents,
 } from "@openapi-codegen/typescript";
-import { defineConfig } from "@openapi-codegen/cli";
+
 export default defineConfig({
   hyperion: {
     from: {

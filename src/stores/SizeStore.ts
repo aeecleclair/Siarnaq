@@ -15,7 +15,7 @@ export const useSizeStore = create<SizeStore>()(
       }),
       {
         name: "size-store",
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

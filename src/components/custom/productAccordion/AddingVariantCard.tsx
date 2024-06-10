@@ -1,8 +1,8 @@
 import { Card, CardContent } from "../../ui/card";
-import { HiPlus } from "react-icons/hi";
 import { CustomDialog } from "../CustomDialog";
 import { AddEditVariantForm } from "./AddEditVariantForm";
 import { useState } from "react";
+import { HiPlus } from "react-icons/hi";
 
 export const AddingVariantCard = () => {
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);

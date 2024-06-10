@@ -6,7 +6,7 @@ interface PriceInputProps {
   onChange?: (
     value: string | undefined,
     name?: string | undefined,
-    values?: CurrencyInputOnChangeValues | undefined
+    values?: CurrencyInputOnChangeValues | undefined,
   ) => void;
   value: number | undefined;
   id?: string;

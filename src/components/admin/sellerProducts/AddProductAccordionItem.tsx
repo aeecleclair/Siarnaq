@@ -1,50 +1,58 @@
+import { AddEditProductForm } from "./AddEditProductForm";
 import { SellerComplete, postCdrSellersSellerIdProducts } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { useState } from "react";
 import { HiPlus } from "react-icons/hi";
-import { AddEditProductForm } from "./AddEditProductForm";
 
 interface AddProductAccordionItemProps {
-  seller: SellerComplete,
-  setRefetchSellers: (arg0: boolean) => void
+  seller: SellerComplete;
+  setRefetchSellers: (arg0: boolean) => void;
 }
 
 export const AddProductAccordionItem = ({
   seller,
-  setRefetchSellers
+  setRefetchSellers,
 }: AddProductAccordionItemProps) => {
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
 
-  const [nameEn, setNameEn] = useState('')
-  const [descriptionEn, setDescriptionEn] = useState('')
-  const [availableOnline, setAvailableOnline] = useState<string>("false")
+  const [nameEn, setNameEn] = useState("");
+  const [descriptionEn, setDescriptionEn] = useState("");
+  const [availableOnline, setAvailableOnline] = useState<string>("false");
 
   const onAddProduct = async () => {
-    console.log("add")
+    console.log("add");
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {
-        seller_id:seller.id,
+        seller_id: seller.id,
       },
       body: {
         name_fr: nameEn,
         name_en: nameEn,
         description_fr: descriptionEn,
         description_en: descriptionEn,
-        available_online: availableOnline==="true"
+        available_online: availableOnline === "true",
       },
     });
     if (error) {
       console.log(error);
       return;
     }
-    setRefetchSellers(true)
-  }
-  
+    setRefetchSellers(true);
+  };
 
   return (
     <CustomDialog
       title="New Product"
-      description={<AddEditProductForm nameEn={nameEn} setNameEn={setNameEn} descriptionEn={descriptionEn} setDescriptionEn={setDescriptionEn} availableOnline={availableOnline} setAvailableOnline={setAvailableOnline} />}
+      description={
+        <AddEditProductForm
+          nameEn={nameEn}
+          setNameEn={setNameEn}
+          descriptionEn={descriptionEn}
+          setDescriptionEn={setDescriptionEn}
+          availableOnline={availableOnline}
+          setAvailableOnline={setAvailableOnline}
+        />
+      }
       validateLabel="Add"
       callback={onAddProduct}
       isOpened={isAddDialogOpened}

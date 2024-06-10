@@ -1,5 +1,5 @@
-import { FilterFn, SortingFn, sortingFns } from "@tanstack/react-table";
 import { rankItem, compareItems } from "@tanstack/match-sorter-utils";
+import { FilterFn, SortingFn, sortingFns } from "@tanstack/react-table";
 
 // Define a custom fuzzy sort function that will sort by rank if the row has ranking information
 export const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
@@ -9,7 +9,7 @@ export const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
   if (rowA.columnFiltersMeta[columnId]) {
     dir = compareItems(
       rowA.columnFiltersMeta[columnId]?.itemRank!,
-      rowB.columnFiltersMeta[columnId]?.itemRank!
+      rowB.columnFiltersMeta[columnId]?.itemRank!,
     );
   }
 

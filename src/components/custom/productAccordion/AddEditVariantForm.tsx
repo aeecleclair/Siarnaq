@@ -1,11 +1,11 @@
+import { MultiSelect } from "../MultiSelect";
+import { PriceInput } from "../PriceInput";
 import { ProductVariantComplete } from "@/api";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { PriceInput } from "../PriceInput";
-import { MultiSelect } from "../MultiSelect";
-import { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 
 interface AddEditVariantFormProps {
   variant?: ProductVariantComplete;

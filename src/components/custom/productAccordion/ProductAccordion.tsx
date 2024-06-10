@@ -1,12 +1,12 @@
-import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "../../ui/accordion";
-import { VariantCardWithOptions } from "./VariantCardWithOptions";
-import { useSizeStore } from "@/stores/SizeStore";
 import { AddingVariantCard } from "./AddingVariantCard";
+import { VariantCardWithOptions } from "./VariantCardWithOptions";
+import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
+import { useSizeStore } from "@/stores/SizeStore";
 
 interface ProductAccordionProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;

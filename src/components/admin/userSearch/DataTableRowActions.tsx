@@ -1,8 +1,5 @@
 "use client";
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { Row } from "@tanstack/react-table";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,9 +9,10 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import { HiTrash, HiX } from "react-icons/hi";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { Row } from "@tanstack/react-table";
 import { MergeIcon, UserRoundMinusIcon } from "lucide-react";
+import { HiTrash, HiX } from "react-icons/hi";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;

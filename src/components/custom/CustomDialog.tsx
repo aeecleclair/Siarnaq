@@ -1,3 +1,4 @@
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogContent,
@@ -5,7 +6,6 @@ import {
   DialogTitle,
   DialogDescription,
 } from "../ui/dialog";
-import { Button } from "../ui/button";
 import { LoadingButton } from "./LoadingButton";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 

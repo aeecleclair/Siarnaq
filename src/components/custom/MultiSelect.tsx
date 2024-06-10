@@ -1,9 +1,5 @@
 // From https://github.com/dinogit, found at https://github.com/shadcn-ui/ui/issues/66
-
-import * as React from "react";
-import { cn } from "@/lib/utils";
-
-import { Check, X, ChevronsUpDown } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -17,7 +13,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+import { Check, X, ChevronsUpDown } from "lucide-react";
+import * as React from "react";
 
 export type OptionType = {
   label: string;
@@ -106,7 +104,7 @@ function MultiSelect({
                   onChange(
                     selected.includes(option.value)
                       ? selected.filter((item) => item !== option.value)
-                      : [...selected, option.value]
+                      : [...selected, option.value],
                   );
                   setOpen(true);
                 }}
@@ -116,7 +114,7 @@ function MultiSelect({
                     "mr-2 h-4 w-4",
                     selected.includes(option.value)
                       ? "opacity-100"
-                      : "opacity-0"
+                      : "opacity-0",
                   )}
                 />
                 {option.label}

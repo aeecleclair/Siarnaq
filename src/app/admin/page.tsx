@@ -28,7 +28,7 @@ const AdminPage = () => {
     baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
     // set default headers for requests
     headers: {
-      Authorization: 'Bearer '+token,
+      Authorization: "Bearer " + token,
     },
   });
 

@@ -1,8 +1,8 @@
+import { SellerComplete } from "@/api";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter } from "next/navigation";
-import { SellerComplete } from "@/api";
 
-export const SellerTabList = (props:{sellers:SellerComplete[]}) => {
+export const SellerTabList = (props: { sellers: SellerComplete[] }) => {
   const router = useRouter();
 
   const handleClick = (sellerId: string) => {

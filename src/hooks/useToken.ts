@@ -5,7 +5,9 @@ import { useState } from "react";
 
 export const useToken = () => {
   const router = useRouter();
-  const issuerUrl = new URL(process.env.NEXT_PUBLIC_BACKEND_URL ?? "");
+  const issuerUrl = new URL(
+    process.env.NEXT_PUBLIC_BACKEND_URL ?? "https://hyperion.myecl.fr",
+  );
   const client: auth.Client = {
     client_id: process.env.NEXT_PUBLIC_CLIENT_ID ?? "",
     token_endpoint_auth_method: "none",

@@ -13,7 +13,9 @@ const MyECLButton = () => {
   const { setCodeVerifier, codeVerifier } = useCodeVerifierStore();
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
-  const issuerUrl = new URL(process.env.NEXT_PUBLIC_BACKEND_URL ?? "");
+  const issuerUrl = new URL(
+    process.env.NEXT_PUBLIC_BACKEND_URL ?? "https://hyperion.myecl.fr",
+  );
   const { token, setToken, setRefreshToken } = useTokenStore();
 
   async function getIssuer() {

@@ -11,7 +11,8 @@ export default function Home() {
   getToken().then((token) => {
     createClient({
       // set default base url for requests
-      baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
+      baseUrl:
+        process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr",
       // set default headers for requests
       headers: {
         Authorization: "Bearer " + token,

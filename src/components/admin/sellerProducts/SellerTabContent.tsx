@@ -10,6 +10,7 @@ import { ProductAccordion } from "@/components/custom/productAccordion/ProductAc
 import { Accordion } from "@/components/ui/accordion";
 import { TabsContent } from "@/components/ui/tabs";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface SellerTabContentProps {
@@ -25,6 +26,8 @@ export const SellerTabContent = ({
   const [products, setProducts] = useState<
     app__modules__cdr__schemas_cdr__ProductComplete[]
   >([]);
+  const searchParams = useSearchParams();
+  const activeSellerId = searchParams.get("sellerId");
 
   const onGetCdrSellerProducts = async () => {
     const { data, error } = await getCdrSellersSellerIdProducts({
@@ -38,8 +41,9 @@ export const SellerTabContent = ({
   };
 
   useEffect(() => {
-    onGetCdrSellerProducts();
-  }, [seller, onGetCdrSellerProducts]);
+    if (seller.id == activeSellerId)
+      onGetCdrSellerProducts()
+  }, [seller.id, activeSellerId]);
 
   useEffect(() => {
     if (
@@ -52,7 +56,7 @@ export const SellerTabContent = ({
         products.map((product) => product.id),
       );
     }
-  }, [productExpansion, seller.id, setExpandedProducts, products]);
+  }, [productExpansion, seller.id, setExpandedProducts]);
 
   return (
     <TabsContent value={seller.id} className="min-w-96">

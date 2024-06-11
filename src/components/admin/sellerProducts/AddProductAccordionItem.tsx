@@ -28,8 +28,8 @@ export const AddProductAccordionItem = ({
       body: {
         name_fr: nameEn,
         name_en: nameEn,
-        description_fr: descriptionEn,
-        description_en: descriptionEn,
+        description_fr: descriptionEn ?? undefined,
+        description_en: descriptionEn ?? undefined,
         available_online: availableOnline === "true",
       },
     });

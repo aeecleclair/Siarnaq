@@ -10,6 +10,7 @@ import { useSizeStore } from "@/stores/SizeStore";
 
 interface ProductAccordionProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;
+  setRefetchSellers: (arg0: boolean) => void;
   canAdd?: boolean;
   canEdit?: boolean;
   canRemove?: boolean;
@@ -17,6 +18,7 @@ interface ProductAccordionProps {
 
 export const ProductAccordion = ({
   product,
+  setRefetchSellers,
   canAdd,
   canEdit,
   canRemove,
@@ -43,11 +45,18 @@ export const ProductAccordion = ({
         <div className={`grid grid-cols-${numberOfCard} gap-4`}>
           {product.variants && (
             <>
-              {canAdd && <AddingVariantCard />}
+              {canAdd && (
+                <AddingVariantCard
+                  product={product}
+                  setRefetchSellers={setRefetchSellers}
+                />
+              )}
               {product.variants.map((variant) => (
                 <VariantCardWithOptions
                   key={variant.id}
                   variant={variant}
+                  product={product}
+                  setRefetchSellers={setRefetchSellers}
                   // This is a dummy value, it should be managed by the parent component
                   numberSelected={0}
                   canEdit={canEdit}

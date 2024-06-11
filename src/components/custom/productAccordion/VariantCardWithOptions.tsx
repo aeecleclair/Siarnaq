@@ -1,10 +1,15 @@
 import { VariantCard } from "../VariantCard";
 import { VariantCardOptions } from "./VariantCardOptions";
-import { ProductVariantComplete } from "@/api";
+import {
+  ProductVariantComplete,
+  app__modules__cdr__schemas_cdr__ProductComplete,
+} from "@/api";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 
 interface VariantCardWithOptionsProps {
   variant: ProductVariantComplete;
+  product: app__modules__cdr__schemas_cdr__ProductComplete;
+  setRefetchSellers: (arg0: boolean) => void;
   numberSelected: number;
   canEdit?: boolean;
   canRemove?: boolean;
@@ -12,6 +17,8 @@ interface VariantCardWithOptionsProps {
 
 export const VariantCardWithOptions = ({
   variant,
+  product,
+  setRefetchSellers,
   numberSelected,
   canEdit,
   canRemove,
@@ -28,6 +35,8 @@ export const VariantCardWithOptions = ({
       </ContextMenuTrigger>
       <VariantCardOptions
         variant={variant}
+        product={product}
+        setRefetchSellers={setRefetchSellers}
         canEdit={canEdit}
         canRemove={canRemove}
       />

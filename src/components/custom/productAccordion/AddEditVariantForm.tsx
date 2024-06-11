@@ -1,78 +1,102 @@
 import { MultiSelect } from "../MultiSelect";
 import { PriceInput } from "../PriceInput";
-import { ProductVariantComplete } from "@/api";
+import {
+  CurriculumComplete,
+  ProductVariantComplete,
+  getCdrCurriculums,
+} from "@/api";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface AddEditVariantFormProps {
   variant?: ProductVariantComplete;
+  nameEn: string;
+  setNameEn: (arg0: string) => void;
+  descriptionEn: string;
+  setDescriptionEn: (arg0: string) => void;
+  price: number;
+  setPrice: (arg0: number) => void;
+  curriculum: string[];
+  setCurriculum: Dispatch<SetStateAction<string[]>>;
+  unique: string;
+  setUnique: (arg0: string) => void;
 }
 
-export const AddEditVariantForm = ({ variant }: AddEditVariantFormProps) => {
-  const [selected, setSelected] = useState<string[]>([]);
+export const AddEditVariantForm = ({
+  variant,
+  nameEn,
+  setNameEn,
+  descriptionEn,
+  setDescriptionEn,
+  price,
+  setPrice,
+  curriculum,
+  setCurriculum,
+  unique,
+  setUnique,
+}: AddEditVariantFormProps) => {
+  const [curriculums, setCurriculums] = useState<CurriculumComplete[]>([]);
+  useEffect(() => {
+    const onGetCdrCurriculums = async () => {
+      const { data, error } = await getCdrCurriculums({});
+      if (error) {
+        console.log(error);
+        return;
+      }
+      setCurriculums(data!);
+    };
+    onGetCdrCurriculums();
+  }, []);
+
   return (
     <div className="grid gap-6 mt-4">
       <div className="grid gap-2">
         <Label htmlFor="subject">Nom</Label>
-        <Input id="subject" placeholder={variant?.name_en} />
+        <Input
+          id="subject"
+          placeholder={variant?.name_en}
+          value={nameEn}
+          onChange={(e) => setNameEn(e.target.value)}
+        />
       </div>
       <div className="grid gap-2">
         <Label htmlFor="description">Description</Label>
         <Textarea
           id="description"
-          placeholder={variant?.description_en ?? undefined}
+          value={descriptionEn}
+          onChange={(e) => setDescriptionEn(e.target.value)}
         />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="grid gap-2">
           <Label htmlFor="price">Prix</Label>
-          <PriceInput id="price" value={variant?.price} />
+          <PriceInput
+            id="price"
+            value={price}
+            onChange={(e) => setPrice(Number(e))}
+          />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="curriculum">Cursus</Label>
           <MultiSelect
-            options={[
-              {
-                value: "next.js",
-                label: "Next.js",
-              },
-              {
-                value: "sveltekit",
-                label: "SvelteKit",
-              },
-              {
-                value: "nuxt.js",
-                label: "Nuxt.js",
-              },
-              {
-                value: "remix",
-                label: "Remix",
-              },
-              {
-                value: "astro",
-                label: "Astro",
-              },
-              {
-                value: "wordpress",
-                label: "WordPress",
-              },
-              {
-                value: "express.js",
-                label: "Express.js",
-              },
-            ]}
-            selected={selected}
-            onChange={setSelected}
+            options={curriculums.map((c) => {
+              return { value: c.id, label: c.name };
+            })}
+            selected={curriculum}
+            onChange={setCurriculum}
             className="w-64"
           />
         </div>
       </div>
       <div className="grid gap-2">
         <Label htmlFor="price">Achat</Label>
-        <RadioGroup defaultValue={variant?.unique ? "unique" : "multiple"}>
+        <RadioGroup
+          value={unique}
+          onChange={(e) => setUnique((e.target as HTMLInputElement).value)}
+        >
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="unique" id="unique" />
             <Label htmlFor="unique">

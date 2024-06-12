@@ -1,6 +1,5 @@
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 
-
 export const products: app__modules__cdr__schemas_cdr__ProductComplete[] = [
   {
     name_fr: "Produit 1",

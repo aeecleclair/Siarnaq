@@ -13,6 +13,7 @@ import {
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 export const ProductPanel = () => {
   const searchParams = useSearchParams();
@@ -24,6 +25,20 @@ export const ProductPanel = () => {
   );
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
   const router = useRouter();
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      !productExpansion[firstSellerId]?.products &&
+      productExpansion[firstSellerId]?.loaded
+    ) {
+      setExpandedProducts(
+        firstSellerId,
+        products.map((product) => product.id),
+      );
+    }
+  }, [productExpansion, firstSellerId, setExpandedProducts]);
+
   return (
     <div className="grid gap-6">
       <Card x-chunk="dashboard-04-chunk-1">

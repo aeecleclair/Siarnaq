@@ -1,5 +1,6 @@
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 
+
 export const products: app__modules__cdr__schemas_cdr__ProductComplete[] = [
   {
     name_fr: "Produit 1",
@@ -9,6 +10,35 @@ export const products: app__modules__cdr__schemas_cdr__ProductComplete[] = [
     available_online: true,
     id: "1",
     seller_id: "1",
+    variants: [
+      {
+        id: "1",
+        price: 10,
+        product_id: "1",
+        name_fr: "Variante 1",
+        name_en: "Variant 1",
+        enabled: false,
+        unique: false,
+      },
+      {
+        id: "2",
+        price: 20,
+        product_id: "1",
+        name_en: "Variant 2",
+        name_fr: "Variante 2",
+        enabled: true,
+        unique: false,
+      },
+      {
+        id: "3",
+        price: 30,
+        product_id: "1",
+        name_en: "Variant 3",
+        name_fr: "Variante 3",
+        enabled: true,
+        unique: false,
+      },
+    ],
   },
   {
     name_fr: "Produit 2",
@@ -18,6 +48,26 @@ export const products: app__modules__cdr__schemas_cdr__ProductComplete[] = [
     available_online: true,
     id: "2",
     seller_id: "1",
+    variants: [
+      {
+        id: "1",
+        price: 10,
+        product_id: "1",
+        name_fr: "Variante 1",
+        name_en: "Variant 1",
+        enabled: false,
+        unique: false,
+      },
+      {
+        id: "2",
+        price: 20,
+        product_id: "1",
+        name_en: "Variant 2",
+        name_fr: "Variante 2",
+        enabled: true,
+        unique: false,
+      },
+    ],
   },
   {
     name_fr: "Produit 3",
@@ -27,6 +77,35 @@ export const products: app__modules__cdr__schemas_cdr__ProductComplete[] = [
     available_online: true,
     id: "3",
     seller_id: "1",
+    variants: [
+      {
+        id: "1",
+        price: 10,
+        product_id: "1",
+        name_fr: "Variante 1",
+        name_en: "Variant 1",
+        enabled: false,
+        unique: false,
+      },
+      {
+        id: "2",
+        price: 20,
+        product_id: "1",
+        name_en: "Variant 2",
+        name_fr: "Variante 2",
+        enabled: true,
+        unique: false,
+      },
+      {
+        id: "3",
+        price: 30,
+        product_id: "1",
+        name_en: "Variant 3",
+        name_fr: "Variante 3",
+        enabled: true,
+        unique: false,
+      },
+    ],
   },
   {
     name_fr: "Produit 4",
@@ -36,6 +115,26 @@ export const products: app__modules__cdr__schemas_cdr__ProductComplete[] = [
     available_online: true,
     id: "4",
     seller_id: "1",
+    variants: [
+      {
+        id: "1",
+        price: 10,
+        product_id: "1",
+        name_fr: "Variante 1",
+        name_en: "Variant 1",
+        enabled: false,
+        unique: false,
+      },
+      {
+        id: "2",
+        price: 20,
+        product_id: "1",
+        name_en: "Variant 2",
+        name_fr: "Variante 2",
+        enabled: true,
+        unique: false,
+      },
+    ],
   },
   {
     name_fr: "Produit 5",
@@ -45,5 +144,34 @@ export const products: app__modules__cdr__schemas_cdr__ProductComplete[] = [
     available_online: true,
     id: "5",
     seller_id: "1",
+    variants: [
+      {
+        id: "1",
+        price: 10,
+        product_id: "1",
+        name_fr: "Variante 1",
+        name_en: "Variant 1",
+        enabled: false,
+        unique: false,
+      },
+      {
+        id: "2",
+        price: 20,
+        product_id: "1",
+        name_en: "Variant 2",
+        name_fr: "Variante 2",
+        enabled: true,
+        unique: false,
+      },
+      {
+        id: "3",
+        price: 30,
+        product_id: "1",
+        name_en: "Variant 3",
+        name_fr: "Variante 3",
+        enabled: true,
+        unique: false,
+      },
+    ],
   },
 ];

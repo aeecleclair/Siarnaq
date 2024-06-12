@@ -79,7 +79,7 @@ export const ProductPanel = () => {
               <span className="sr-only">Go to previous page</span>
               <ChevronLeftIcon className="h-4 w-4" />
             </Button>
-            <span className="text-sm font-medium text-muted-foreground px-4">
+            <span className="text-sm font-medium text-muted-foreground w-14 flex justify-center">
               {sellerIndex + 1} / {sellers.length}
             </span>
             <Button

@@ -1,18 +1,23 @@
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
 import { HiMinus, HiPlus } from "react-icons/hi";
 
 interface VariantCardProps {
   variant: any;
-  numberSelected: number;
-  selected: boolean;
+  sellerId: string;
+  productId: string;
 }
 
 export const VariantCard = ({
   variant,
-  numberSelected,
-  selected,
+  sellerId,
+  productId,
 }: VariantCardProps) => {
+  const { variantQuantity, setVariantQuantity } = useVariantQuantityStore();
+  const numberSelectedVariant =
+    variantQuantity[sellerId]?.products[productId]?.[variant.id] || 0;
+  const selected = numberSelectedVariant > 0;
   return (
     <Card
       className={`min-w-40 ${selected && "border-black shadow-lg"} ${!variant.enabled && "text-muted-foreground"}`}
@@ -27,16 +32,32 @@ export const VariantCard = ({
               variant="outline"
               className="h-6 px-1"
               disabled={!selected || !variant.enabled}
+              onClick={() =>
+                setVariantQuantity(
+                  sellerId,
+                  productId,
+                  variant.id,
+                  numberSelectedVariant - 1,
+                )
+              }
             >
               <HiMinus className="w-4 h-4" />
             </Button>
-            <span className="text-xs text-muted-foreground">
-              {numberSelected}
+            <span className="text-xs text-muted-foreground w-3 justify-center flex">
+              {numberSelectedVariant}
             </span>
             <Button
               variant="outline"
               className="h-6 px-1"
               disabled={!variant.enabled}
+              onClick={() =>
+                setVariantQuantity(
+                  sellerId,
+                  productId,
+                  variant.id,
+                  numberSelectedVariant + 1,
+                )
+              }
             >
               <HiPlus className="w-4 h-4" />
             </Button>

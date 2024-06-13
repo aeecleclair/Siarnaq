@@ -72,6 +72,7 @@ export const SellerTabContent = ({
             <ProductAccordion
               key={product.id}
               product={product}
+              sellerId={seller.id}
               canAdd
               canEdit
               canRemove

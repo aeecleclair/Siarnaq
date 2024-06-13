@@ -14,6 +14,7 @@ interface ProductAccordionProps {
   canEdit?: boolean;
   canRemove?: boolean;
   canDisable?: boolean;
+  sellerId: string;
 }
 
 export const ProductAccordion = ({
@@ -22,6 +23,7 @@ export const ProductAccordion = ({
   canEdit,
   canRemove,
   canDisable,
+  sellerId,
 }: ProductAccordionProps) => {
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
@@ -50,8 +52,8 @@ export const ProductAccordion = ({
                 <VariantCardWithOptions
                   key={variant.id}
                   variant={variant}
-                  // This is a dummy value, it should be managed by the parent component
-                  numberSelected={0}
+                  productId={product.id}
+                  sellerId={sellerId}
                   canEdit={canEdit}
                   canRemove={canRemove}
                   canDisable={canDisable}

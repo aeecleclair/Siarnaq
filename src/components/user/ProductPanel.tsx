@@ -55,7 +55,11 @@ export const ProductPanel = () => {
               }
             >
               {products.map((product) => (
-                <ProductAccordion key={product.id} product={product} />
+                <ProductAccordion
+                  key={product.id}
+                  product={product}
+                  sellerId={seller?.id || ""}
+                />
               ))}
             </Accordion>
           ) : (

@@ -2,7 +2,7 @@ import { SellerComplete } from "@/api";
 
 export const sellers: SellerComplete[] = [
   {
-    name: "Seller 1",
+    name: "AEECL",
     group_id: "1",
     order: 1,
     id: "1",

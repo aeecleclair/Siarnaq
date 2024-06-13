@@ -1,6 +1,7 @@
 import { sellers } from "./sellers";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { HiCheck, HiOutlineShoppingCart } from "react-icons/hi";
 
 export const AssociationPanel = () => {
   const searchParams = useSearchParams();
@@ -19,7 +20,12 @@ export const AssociationPanel = () => {
               seller.id === firstSellerId ? "font-semibold text-primary" : ""
             }`}
           >
-            {seller.name}
+            <div className="flex flex-row items-center">
+              {parseInt(seller.id) % 2 === 0 ? <HiCheck className="h-4 w-4 mr-2" /> : <HiOutlineShoppingCart className="h-4 w-4 mr-2"/>}
+              {seller.name}
+              <span className="ml-2">·</span>
+              <span className="ml-2">1</span>
+            </div>
           </Link>
         ))}
       </nav>

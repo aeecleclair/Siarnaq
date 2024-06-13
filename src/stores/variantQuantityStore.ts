@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-interface ExpansionList {
+export interface ProductVariant {
   products: Record<string, Record<string, number>>;
   loaded: boolean;
 }
 
 interface variantQuantityStore {
-  variantQuantity: Record<string, ExpansionList>;
+  variantQuantity: Record<string, ProductVariant>;
   setVariantQuantity: (
     sellerId: string,
     productId: string,

@@ -1,7 +1,11 @@
 import { sellers } from "./sellers";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { HiCheck, HiOutlineShoppingCart } from "react-icons/hi";
+import {
+  HiCheck,
+  HiOutlineClipboardList,
+  HiOutlineShoppingCart,
+} from "react-icons/hi";
 
 export const AssociationPanel = () => {
   const searchParams = useSearchParams();
@@ -21,13 +25,30 @@ export const AssociationPanel = () => {
             }`}
           >
             <div className="flex flex-row items-center">
-              {parseInt(seller.id) % 2 === 0 ? <HiCheck className="h-4 w-4 mr-2" /> : <HiOutlineShoppingCart className="h-4 w-4 mr-2"/>}
+              {parseInt(seller.id) % 2 === 0 ? (
+                <HiCheck className="h-4 w-4 mr-2" />
+              ) : (
+                <HiOutlineShoppingCart className="h-4 w-4 mr-2" />
+              )}
               {seller.name}
               <span className="ml-2">·</span>
               <span className="ml-2">1</span>
             </div>
           </Link>
         ))}
+        <Link
+          href="/?sellerId=recap"
+          className={`hover:text-primary ${
+            firstSellerId === "recap" ? "font-semibold text-primary" : ""
+          }`}
+        >
+          <div className="flex flex-row items-center">
+            <HiOutlineClipboardList className="h-4 w-4 mr-2" />
+            Récapitulatif
+            <span className="ml-2">·</span>
+            <span className="ml-2">10</span>
+          </div>
+        </Link>
       </nav>
     </div>
   );

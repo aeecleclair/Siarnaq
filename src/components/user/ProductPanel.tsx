@@ -41,7 +41,7 @@ export const ProductPanel = () => {
 
   return (
     <div className="grid gap-6">
-      <Card x-chunk="dashboard-04-chunk-1">
+      <Card>
         <CardHeader>
           <CardTitle>{seller ? seller.name : "No seller found"}</CardTitle>
         </CardHeader>

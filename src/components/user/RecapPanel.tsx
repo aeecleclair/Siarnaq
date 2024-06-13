@@ -6,6 +6,7 @@ import {
   CardFooter,
 } from "../ui/card";
 import { Separator } from "../ui/separator";
+import { PaymentButton } from "./PaymentButton";
 import { products } from "./products";
 import { sellers } from "./sellers";
 import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
@@ -64,7 +65,9 @@ export const RecapPanel = () => {
             <div>Aucun produit</div>
           )}
         </CardContent>
-        <CardFooter className="px-6 py-4">Payer</CardFooter>
+        <CardFooter className="px-6 py-4">
+            <PaymentButton />
+        </CardFooter>
       </Card>
     </div>
   );

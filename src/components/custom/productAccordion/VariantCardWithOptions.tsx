@@ -8,6 +8,7 @@ interface VariantCardWithOptionsProps {
   numberSelected: number;
   canEdit?: boolean;
   canRemove?: boolean;
+  canDisable?: boolean;
 }
 
 export const VariantCardWithOptions = ({
@@ -15,6 +16,7 @@ export const VariantCardWithOptions = ({
   numberSelected,
   canEdit,
   canRemove,
+  canDisable,
 }: VariantCardWithOptionsProps) => {
   const selected = numberSelected > 0;
   return (
@@ -30,6 +32,7 @@ export const VariantCardWithOptions = ({
         variant={variant}
         canEdit={canEdit}
         canRemove={canRemove}
+        canDisable={canDisable}
       />
     </ContextMenu>
   );

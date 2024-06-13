@@ -13,6 +13,7 @@ interface ProductAccordionProps {
   canAdd?: boolean;
   canEdit?: boolean;
   canRemove?: boolean;
+  canDisable?: boolean;
 }
 
 export const ProductAccordion = ({
@@ -20,6 +21,7 @@ export const ProductAccordion = ({
   canAdd,
   canEdit,
   canRemove,
+  canDisable,
 }: ProductAccordionProps) => {
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
@@ -52,6 +54,7 @@ export const ProductAccordion = ({
                   numberSelected={0}
                   canEdit={canEdit}
                   canRemove={canRemove}
+                  canDisable={canDisable}
                 />
               ))}
             </>

@@ -1,18 +1,21 @@
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { ProductVariantComplete } from "@/api/types.gen";
 import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
 import { HiMinus, HiPlus } from "react-icons/hi";
 
 interface VariantCardProps {
-  variant: any;
+  variant: ProductVariantComplete;
   sellerId: string;
   productId: string;
+  showDescription: boolean;
 }
 
 export const VariantCard = ({
   variant,
   sellerId,
   productId,
+  showDescription,
 }: VariantCardProps) => {
   const { variantQuantity, setVariantQuantity } = useVariantQuantityStore();
   const numberSelectedVariant =
@@ -21,6 +24,16 @@ export const VariantCard = ({
   return (
     <Card
       className={`min-w-40 ${selected && "border-black shadow-lg"} ${!variant.enabled && "text-muted-foreground"}`}
+      onClick={() => {
+        if (variant.enabled && variant.unique) {
+          setVariantQuantity(
+            sellerId,
+            productId,
+            variant.id,
+            1 - numberSelectedVariant,
+          );
+        }
+      }}
     >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-1">
         <CardTitle className="text-sm font-medium">
@@ -32,14 +45,15 @@ export const VariantCard = ({
               variant="outline"
               className="h-6 px-1"
               disabled={!selected || !variant.enabled}
-              onClick={() =>
+              onClick={(e) => {
+                e.stopPropagation();
                 setVariantQuantity(
                   sellerId,
                   productId,
                   variant.id,
                   numberSelectedVariant - 1,
-                )
-              }
+                );
+              }}
             >
               <HiMinus className="w-4 h-4" />
             </Button>
@@ -50,14 +64,15 @@ export const VariantCard = ({
               variant="outline"
               className="h-6 px-1"
               disabled={!variant.enabled}
-              onClick={() =>
+              onClick={(e) => {
+                e.stopPropagation();
                 setVariantQuantity(
                   sellerId,
                   productId,
                   variant.id,
                   numberSelectedVariant + 1,
-                )
-              }
+                );
+              }}
             >
               <HiPlus className="w-4 h-4" />
             </Button>
@@ -68,9 +83,11 @@ export const VariantCard = ({
         <div className="text-2xl font-bold">
           <span>{variant.price} €</span>
         </div>
-        <p className="text-xs text-muted-foreground">
-          {variant.description_en}
-        </p>
+        {showDescription && (
+          <p className="text-xs text-muted-foreground">
+            {variant.description_en}
+          </p>
+        )}
       </CardContent>
     </Card>
   );

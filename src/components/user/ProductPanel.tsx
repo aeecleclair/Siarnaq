@@ -59,6 +59,7 @@ export const ProductPanel = () => {
                   key={product.id}
                   product={product}
                   sellerId={seller?.id || ""}
+                  showDescription
                 />
               ))}
             </Accordion>

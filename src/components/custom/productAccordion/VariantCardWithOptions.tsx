@@ -10,6 +10,7 @@ interface VariantCardWithOptionsProps {
   canDisable?: boolean;
   productId: string;
   sellerId: string;
+  showDescription: boolean;
 }
 
 export const VariantCardWithOptions = ({
@@ -19,6 +20,7 @@ export const VariantCardWithOptions = ({
   canDisable,
   productId,
   sellerId,
+  showDescription,
 }: VariantCardWithOptionsProps) => {
   return (
     <ContextMenu>
@@ -27,6 +29,7 @@ export const VariantCardWithOptions = ({
           variant={variant}
           productId={productId}
           sellerId={sellerId}
+          showDescription={showDescription}
         />
       </ContextMenuTrigger>
       <VariantCardOptions

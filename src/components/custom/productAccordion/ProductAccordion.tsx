@@ -15,6 +15,7 @@ interface ProductAccordionProps {
   canRemove?: boolean;
   canDisable?: boolean;
   sellerId: string;
+  showDescription: boolean;
 }
 
 export const ProductAccordion = ({
@@ -24,6 +25,7 @@ export const ProductAccordion = ({
   canRemove,
   canDisable,
   sellerId,
+  showDescription = false,
 }: ProductAccordionProps) => {
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
@@ -44,7 +46,9 @@ export const ProductAccordion = ({
         <div className="hidden grid-cols-3" />
         <div className="hidden grid-cols-2" />
         <div className="hidden grid-cols-1" />
-        <div className={`grid grid-cols-${numberOfCard} gap-4`}>
+        <div
+          className={`grid ${showDescription ? "grid-row" : "grid-cols-" + numberOfCard} gap-4`}
+        >
           {product.variants && (
             <>
               {canAdd && <AddingVariantCard />}
@@ -57,6 +61,7 @@ export const ProductAccordion = ({
                   canEdit={canEdit}
                   canRemove={canRemove}
                   canDisable={canDisable}
+                  showDescription={showDescription}
                 />
               ))}
             </>

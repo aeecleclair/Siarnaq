@@ -13,7 +13,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   client.interceptors.request.use(async (request) => {
     const token = await getToken();
-    console.log(token);
     request.headers.set("Authorization", `Bearer ${token}`);
     return request;
   });

@@ -2,23 +2,8 @@
 
 import { AssociationPanel } from "@/components/user/AssociationPanel";
 import { ProductPanel } from "@/components/user/ProductPanel";
-import { useToken } from "@/hooks/useToken";
-import { createClient } from "@hey-api/client-fetch";
 
 export default function Home() {
-  const { getToken } = useToken();
-
-  getToken().then((token) => {
-    createClient({
-      // set default base url for requests
-      baseUrl:
-        process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr",
-      // set default headers for requests
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-  });
 
   return (
     <div className="flex min-h-screen w-full flex-col">

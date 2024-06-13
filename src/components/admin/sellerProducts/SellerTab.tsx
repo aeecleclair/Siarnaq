@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 
 export const SellerTab = () => {
   const searchParams = useSearchParams();
-  const { getToken } = useToken();
 
   const [sellers, setSellers] = useState<SellerComplete[]>([]);
   const firstSellerId = searchParams.get("sellerId") || sellers?.at(0)?.id;
@@ -25,7 +24,7 @@ export const SellerTab = () => {
 
   useEffect(() => {
     if (refetchSellers) {
-      getToken().then(()=>onGetCdrSellers());
+      onGetCdrSellers();
       setRefetchSellers(false);
     }
   }, [refetchSellers]);

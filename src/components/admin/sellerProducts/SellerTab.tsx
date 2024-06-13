@@ -2,11 +2,13 @@ import { SellerTabContentList } from "./SellerTabContentList";
 import { SellerTabList } from "./SellerTabList";
 import { SellerComplete, getCdrSellers } from "@/api";
 import { Tabs } from "@/components/ui/tabs";
+import { useToken } from "@/hooks/useToken";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const SellerTab = () => {
   const searchParams = useSearchParams();
+  const { getToken } = useToken();
 
   const [sellers, setSellers] = useState<SellerComplete[]>([]);
   const firstSellerId = searchParams.get("sellerId") || sellers?.at(0)?.id;
@@ -23,7 +25,7 @@ export const SellerTab = () => {
 
   useEffect(() => {
     if (refetchSellers) {
-      onGetCdrSellers();
+      getToken().then(()=>onGetCdrSellers());
       setRefetchSellers(false);
     }
   }, [refetchSellers]);

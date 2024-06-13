@@ -77,6 +77,7 @@ export const SellerTabContent = ({
               canEdit
               canRemove
               canDisable
+              showDisabled
             />
           ))}
         </Accordion>

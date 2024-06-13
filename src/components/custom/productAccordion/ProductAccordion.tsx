@@ -15,7 +15,8 @@ interface ProductAccordionProps {
   canRemove?: boolean;
   canDisable?: boolean;
   sellerId: string;
-  showDescription: boolean;
+  showDescription?: boolean;
+  showDisabled?: boolean;
 }
 
 export const ProductAccordion = ({
@@ -26,9 +27,13 @@ export const ProductAccordion = ({
   canDisable,
   sellerId,
   showDescription = false,
+  showDisabled = false,
 }: ProductAccordionProps) => {
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
+  const variantToDisplay = showDisabled
+    ? product.variants
+    : product.variants?.filter((variant) => variant.enabled);
 
   return (
     <AccordionItem value={product.id}>
@@ -49,10 +54,10 @@ export const ProductAccordion = ({
         <div
           className={`grid ${showDescription ? "grid-row" : "grid-cols-" + numberOfCard} gap-4`}
         >
-          {product.variants && (
+          {variantToDisplay && (
             <>
               {canAdd && <AddingVariantCard />}
-              {product.variants.map((variant) => (
+              {variantToDisplay.map((variant) => (
                 <VariantCardWithOptions
                   key={variant.id}
                   variant={variant}

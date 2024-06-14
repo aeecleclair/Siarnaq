@@ -28,6 +28,16 @@ export const SellerTabContent = ({
   >([]);
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
+  const onGetCdrSellerProducts = async () => {
+    const { data, error } = await getCdrSellersSellerIdProducts({
+      path: { seller_id: seller.id },
+    });
+    if (error) {
+      console.log(error);
+      return;
+    }
+    setProducts(data!);
+  };
 
   useEffect(() => {
     const onGetCdrSellerProducts = async () => {
@@ -60,7 +70,7 @@ export const SellerTabContent = ({
     <TabsContent value={seller.id} className="min-w-96">
       <AddProductAccordionItem
         seller={seller}
-        setRefetchSellers={setRefetchSellers}
+        refreshProduct={onGetCdrSellerProducts}
       />
       {products ? (
         <Accordion

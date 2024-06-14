@@ -8,14 +8,15 @@ import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi";
 import { z } from "zod";
 
+
 interface AddProductAccordionItemProps {
   seller: SellerComplete;
-  setRefetchSellers: (arg0: boolean) => void;
+  refreshProduct: () => void;
 }
 
 export const AddProductAccordionItem = ({
   seller,
-  setRefetchSellers,
+  refreshProduct,
 }: AddProductAccordionItemProps) => {
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +56,7 @@ export const AddProductAccordionItem = ({
       setIsAddDialogOpened(false);
       return;
     }
-    setRefetchSellers(true);
+    refreshProduct();
     setIsAddDialogOpened(false);
     setIsLoading(false);
     form.reset();

@@ -67,7 +67,7 @@ const MyECLButton = () => {
       throw new Error(); // Handle OAuth 2.0 response body error
     }
     setToken(result.access_token);
-    setRefreshToken(result.refresh_token ?? "");
+    setRefreshToken(result.refresh_token ?? null);
     setIsLoading(false);
   }
 

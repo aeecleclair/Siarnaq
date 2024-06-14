@@ -39,6 +39,7 @@ export const RecapPanel = () => {
                     const variant = product?.variants?.find(
                       (variant) => variant.id === variantId,
                     );
+                    if (variants[variantId] === 0) return null;
                     total += variants[variantId] * (variant?.price ?? 0);
                     return (
                       <div className="flex flex-row w-full" key={variantId}>
@@ -55,7 +56,7 @@ export const RecapPanel = () => {
                   });
                 });
               })}
-              <Separator className="my-2"/>
+              <Separator className="my-2" />
               <div className="flex flex-row w-full">
                 <span className="font-bold w-1/6">Total</span>
                 <span className="ml-auto font-semibold">{total} €</span>
@@ -66,7 +67,7 @@ export const RecapPanel = () => {
           )}
         </CardContent>
         <CardFooter className="px-6 py-4">
-            <PaymentButton />
+          <PaymentButton />
         </CardFooter>
       </Card>
     </div>

@@ -5,20 +5,20 @@ import {
   FormMessage,
   FormControl,
 } from "../ui/form";
-import { Input } from "../ui/input";
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 interface StyledFormFieldProps {
   label: string;
   id: string;
-  placeholder?: string;
   form: any;
+  input: (field: ControllerRenderProps<FieldValues, string>) => React.ReactNode;
 }
 
 export const StyledFormField = ({
   form,
   label,
   id,
-  placeholder,
+  input,
 }: StyledFormFieldProps) => {
   return (
     <FormField
@@ -28,9 +28,7 @@ export const StyledFormField = ({
         <FormItem className="w-full">
           <div className="grid gap-2">
             <FormLabel>{label}</FormLabel>
-            <FormControl>
-              <Input placeholder={placeholder} {...field} />
-            </FormControl>
+            <FormControl>{input(field)}</FormControl>
             <FormMessage />
           </div>
         </FormItem>

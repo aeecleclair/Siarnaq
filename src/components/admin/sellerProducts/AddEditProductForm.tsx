@@ -8,12 +8,13 @@ import {
   FormControl,
   FormLabel,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
 
 interface AddEditProductFormProps {
   form: any;
-  validateLabel?: string;
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
 }
@@ -21,7 +22,6 @@ interface AddEditProductFormProps {
 export const AddEditProductForm = ({
   form,
   isLoading,
-  validateLabel,
   setIsOpened,
 }: AddEditProductFormProps) => {
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
@@ -32,50 +32,55 @@ export const AddEditProductForm = ({
   return (
     <div className="grid gap-6 mt-4">
       <div className="flex flex-row gap-2 w-full">
-        <StyledFormField form={form} label="Nom (français)" id="name_fr" />
-        <StyledFormField form={form} label="Nom (anglais)" id="name_en" />
+        <StyledFormField
+          form={form}
+          label="Nom (français)"
+          id="name_fr"
+          input={(field) => <Input {...field} />}
+        />
+        <StyledFormField
+          form={form}
+          label="Nom (anglais)"
+          id="name_en"
+          input={(field) => <Input {...field} />}
+        />
       </div>
       <div className="flex flex-row gap-2">
         <StyledFormField
           form={form}
           label="Description (français)"
           id="description_fr"
+          input={(field) => <Textarea {...field} />}
         />
         <StyledFormField
           form={form}
           label="Description (anglais)"
           id="description_en"
+          input={(field) => <Textarea {...field} />}
         />
       </div>
       <div className="grid gap-2">
-        <FormField
-          control={form.control}
-          name="available_online"
-          render={({ field }) => (
-            <FormItem>
-              <div className="grid gap-2 w-full">
-                <FormLabel className="font-semibold">Disponibilité</FormLabel>
-                <FormControl>
-                  <RadioGroup {...field}>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="true" id="available_online" />
-                      <Label htmlFor="available_online">
-                        {"Est disponible lors de la chaîne de rentrée en ligne"}
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="false" id="onsite" />
-                      <Label htmlFor="onsite">
-                        {
-                          "Ne sera disponible que lors de la chaîne de rentrée en physique"
-                        }
-                      </Label>
-                    </div>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
+        <StyledFormField
+          form={form}
+          label="Description (anglais)"
+          id="available_online"
+          input={(field) => (
+            <RadioGroup {...field}>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="true" id="available_online" />
+                <Label htmlFor="available_online">
+                  {"Est disponible lors de la chaîne de rentrée en ligne"}
+                </Label>
               </div>
-            </FormItem>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="false" id="onsite" />
+                <Label htmlFor="onsite">
+                  {
+                    "Ne sera disponible que lors de la chaîne de rentrée en physique"
+                  }
+                </Label>
+              </div>
+            </RadioGroup>
           )}
         />
       </div>
@@ -90,7 +95,7 @@ export const AddEditProductForm = ({
         </Button>
         <LoadingButton
           isLoading={isLoading}
-          label={validateLabel}
+          label="Ajouter"
           className="w-[100px]"
           type="submit"
         />

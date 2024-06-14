@@ -2,7 +2,6 @@
 
 import { AssociationPanel } from "@/components/user/AssociationPanel";
 import { CentralPanel } from "@/components/user/CentralPanel";
-import { ProductPanel } from "@/components/user/ProductPanel";
 
 export default function Home() {
 

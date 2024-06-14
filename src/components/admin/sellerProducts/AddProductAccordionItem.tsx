@@ -20,7 +20,7 @@ export const AddProductAccordionItem = ({
   const [availableOnline, setAvailableOnline] = useState<string>("false");
 
   const onAddProduct = async () => {
-    console.log("add");
+
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {
         seller_id: seller.id,

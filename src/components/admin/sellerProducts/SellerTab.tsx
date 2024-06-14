@@ -13,16 +13,16 @@ export const SellerTab = () => {
   const firstSellerId = searchParams.get("sellerId") || sellers?.at(0)?.id;
   const [refetchSellers, setRefetchSellers] = useState<boolean>(true);
 
-  const onGetCdrSellers = async () => {
-    const { data, error } = await getCdrSellers({});
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setSellers(data!);
-  };
-
   useEffect(() => {
+    const onGetCdrSellers = async () => {
+      const { data, error } = await getCdrSellers({});
+      if (error) {
+        console.log(error);
+        return;
+      }
+      setSellers(data!);
+    };
+
     if (refetchSellers) {
       onGetCdrSellers();
       setRefetchSellers(false);
@@ -31,9 +31,7 @@ export const SellerTab = () => {
 
   return (
     <div
-      className="flex items-center justify-center p-6 min-w-96"
-      onLoad={onGetCdrSellers}
-    >
+      className="flex items-center justify-center p-6 min-w-96">
       <Tabs defaultValue={firstSellerId} className="w-full">
         <SellerTabList sellers={sellers} />
         <SellerTabContentList

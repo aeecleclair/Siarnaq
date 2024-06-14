@@ -8,7 +8,7 @@ export const UserSearch = () => {
   const [users, setUsers] = useState<CoreUserSimple[]>([]);
   const [refetchUsers, setRefetchUsers] = useState<boolean>(true);
 
-  const onGetCdrSellers = async () => {
+  const onGetUsers = async () => {
     const { data, error } = await getUsers({});
     if (error) {
       console.log(error);
@@ -19,14 +19,14 @@ export const UserSearch = () => {
   
   useEffect(() => {
     if (refetchUsers) {
-      onGetCdrSellers();
+      onGetUsers();
       setRefetchUsers(false);
     }
   }, [refetchUsers]);
 
   return (
     <div className="flex items-center justify-center p-6 min-w-96">
-      <DataTable columns={columns} data={users} />
+      <DataTable columns={columns} data={users} setRefetchData={setRefetchUsers} />
     </div>
   );
 };

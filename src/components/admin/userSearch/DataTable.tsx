@@ -42,11 +42,13 @@ declare module "@tanstack/react-table" {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  setRefetchData: (value: React.SetStateAction<boolean>) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  setRefetchData,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -91,6 +93,7 @@ export function DataTable<TData, TValue>({
         table={table}
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}
+        setRefetchData={setRefetchData}
       />
       <div className="rounded-md border">
         <Table>

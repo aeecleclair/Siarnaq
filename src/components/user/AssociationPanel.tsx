@@ -1,6 +1,8 @@
-import { sellers } from "./sellers";
+import { SellerComplete, getCdrOnlineSellers } from "@/api";
+import { useToken } from "@/hooks/useToken";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import {
   HiCheck,
   HiOutlineClipboardList,
@@ -8,8 +10,30 @@ import {
 } from "react-icons/hi";
 
 export const AssociationPanel = () => {
+  const { getToken } = useToken();
   const searchParams = useSearchParams();
+
+  const [sellers, setSellers] = useState<SellerComplete[]>([]);
   const firstSellerId = searchParams.get("sellerId") || sellers?.at(0)?.id;
+  const [refetchOnlineSellers, setRefetchOnlineSellers] = useState<boolean>(true);
+
+
+  useEffect(() => {
+    const onGetCdrOnlineSellers = async () => {
+        const { data, error } = await getCdrOnlineSellers({});
+        if (error) {
+          console.log(error);
+          return;
+        }
+        setSellers(data!);
+      };
+
+    if (refetchOnlineSellers) {
+      getToken().then(()=>onGetCdrOnlineSellers());
+      setRefetchOnlineSellers(false);
+    }
+  }, [refetchOnlineSellers]);
+  
   return (
     <div>
       <div className="mx-auto grid w-full max-w-6xl gap-2 mb-6">

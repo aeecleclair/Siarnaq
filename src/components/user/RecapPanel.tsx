@@ -40,7 +40,9 @@ export const RecapPanel = () => {
                       (variant) => variant.id === variantId,
                     );
                     if (variants[variantId] === 0) return null;
-                    total += variants[variantId] * (variant?.price ?? 0);
+                    const variantPrice =
+                      variants[variantId] * (variant?.price ?? 0);
+                    total += variantPrice;
                     return (
                       <div className="flex flex-row w-full" key={variantId}>
                         <span className="font-bold w-1/6">
@@ -49,7 +51,7 @@ export const RecapPanel = () => {
                         <span className="w-1/6">{product?.name_en}</span>
                         <span className="w-1/6">{variant?.name_en}</span>
                         <span className="ml-auto font-semibold">
-                          {variants[variantId] * (variant?.price ?? 0)} €
+                          {variantPrice} €
                         </span>
                       </div>
                     );

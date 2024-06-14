@@ -58,7 +58,10 @@ export const AddEditProductForm = ({
           label="Description (anglais)"
           id="available_online"
           input={(field) => (
-            <RadioGroup {...field}>
+            <RadioGroup
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+            >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="true" id="available_online" />
                 <Label htmlFor="available_online">

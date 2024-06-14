@@ -98,11 +98,6 @@ export const AddEditVariantForm = ({
               ]}
               selected={field.value}
               {...field}
-              // selected={field.value}
-              // onChange={(value) => {
-              //   field.onChange(value);
-              //   setSelected(value);
-              // }}
               className="w-64"
             />
           )}
@@ -114,7 +109,10 @@ export const AddEditVariantForm = ({
           label="Achat"
           id="unique"
           input={(field) => (
-            <RadioGroup {...field}>
+            <RadioGroup
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+            >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="unique" id="unique" />
                 <Label htmlFor="unique">

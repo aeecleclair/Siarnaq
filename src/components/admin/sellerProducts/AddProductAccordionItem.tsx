@@ -1,8 +1,12 @@
 import { AddEditProductForm } from "./AddEditProductForm";
 import { SellerComplete, postCdrSellersSellerIdProducts } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
+import { Form } from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi";
+import { z } from "zod";
 
 interface AddProductAccordionItemProps {
   seller: SellerComplete;
@@ -14,50 +18,66 @@ export const AddProductAccordionItem = ({
   setRefetchSellers,
 }: AddProductAccordionItemProps) => {
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const formSchema = z.object({
+    name_fr: z.string({
+      required_error: "Veuillez renseigner le nom du produit",
+    }),
+    name_en: z.string({
+      required_error: "Veuillez renseigner le nom du produit",
+    }),
+    description_fr: z.string().optional(),
+    description_en: z.string().optional(),
+    available_online: z.enum(["true", "false"], {
+      required_error: "Veuillez renseigner la disponibilité du produit",
+    }),
+  });
 
-  const [nameEn, setNameEn] = useState("");
-  const [descriptionEn, setDescriptionEn] = useState("");
-  const [availableOnline, setAvailableOnline] = useState<string>("false");
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    mode: "onBlur",
+  });
 
-  const onAddProduct = async () => {
-    console.log("add");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {
         seller_id: seller.id,
       },
       body: {
-        name_fr: nameEn,
-        name_en: nameEn,
-        description_fr: descriptionEn,
-        description_en: descriptionEn,
-        available_online: availableOnline === "true",
+        ...values,
+        available_online: values.available_online === "true",
       },
     });
     if (error) {
       console.log(error);
+      setIsLoading(false);
+      setIsAddDialogOpened(false);
       return;
     }
     setRefetchSellers(true);
-  };
+    setIsAddDialogOpened(false);
+    setIsLoading(false);
+    form.reset();
+  }
 
   return (
     <CustomDialog
-      title="New Product"
+      title="Nouveau produit"
       description={
-        <AddEditProductForm
-          nameEn={nameEn}
-          setNameEn={setNameEn}
-          descriptionEn={descriptionEn}
-          setDescriptionEn={setDescriptionEn}
-          availableOnline={availableOnline}
-          setAvailableOnline={setAvailableOnline}
-        />
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <AddEditProductForm
+              form={form}
+              validateLabel="Add"
+              setIsOpened={setIsAddDialogOpened}
+              isLoading={isLoading}
+            />
+          </form>
+        </Form>
       }
-      validateLabel="Add"
-      callback={onAddProduct}
       isOpened={isAddDialogOpened}
       setIsOpened={setIsAddDialogOpened}
-      isLoading={false}
     >
       <div className="flex flex-1 items-center justify-start py-4 font-medium border-b cursor-pointer">
         <HiPlus className="w-4 h-4 mr-6" />

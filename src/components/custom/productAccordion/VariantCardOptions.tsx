@@ -36,11 +36,11 @@ export const VariantCardOptions = ({
           <CustomDialog
             isOpened={isEditDialogOpened}
             setIsOpened={setIsEditDialogOpened}
-            isLoading={false}
+            // isLoading={false}
             title="Modifer la variante"
             description={<AddEditVariantForm variant={variant} />}
-            validateLabel="Modifier"
-            callback={() => {}}
+            // validateLabel="Modifier"
+            // callback={() => {}}
           >
             <Button className="w-full" variant="ghost">
               Modifier
@@ -70,12 +70,12 @@ export const VariantCardOptions = ({
           <CustomDialog
             isOpened={isRemoveDialogOpened}
             setIsOpened={setIsRemoveDialogOpened}
-            isLoading={false}
+            // isLoading={false}
             title="Supprimer la variante"
             description="Êtes-vous sûr de vouloir supprimer cette variante ?"
-            validateLabel="Supprimer"
-            callback={() => {}}
-            variant="destructive"
+            // validateLabel="Supprimer"
+            // callback={() => {}}
+            // variant="destructive"
           >
             <Button
               className="w-full text-destructive hover:text-destructive"

@@ -304,7 +304,7 @@ export type CineSessionBase = {
   start: string;
   duration: number;
   name: string;
-  overview?: string | null;
+  overview: string;
   genre?: string | null;
   tagline?: string | null;
 };
@@ -313,7 +313,7 @@ export type CineSessionComplete = {
   start: string;
   duration: number;
   name: string;
-  overview?: string | null;
+  overview: string;
   genre?: string | null;
   tagline?: string | null;
   id: string;
@@ -1088,6 +1088,7 @@ export type ProductVariantComplete = {
   unique: boolean;
   id: string;
   product_id: string;
+  allowed_curriculum?: Array<CurriculumComplete>;
 };
 
 export type ProductVariantEdit = {
@@ -1246,6 +1247,17 @@ export type StatusType =
   | "closed"
   | "counting"
   | "published";
+
+export type TheMovieDB = {
+  genres: Array<{
+    [key: string]: number | string;
+  }>;
+  overview: string;
+  poster_path: string;
+  title: string;
+  runtime: number;
+  tagline: string;
+};
 
 export type TicketComplete = {
   pack_id: string;
@@ -1441,13 +1453,13 @@ export type GetOidcAuthorizationFlowJwksUriResponse = unknown;
 
 export type GetOidcAuthorizationFlowJwksUriError = unknown;
 
-export type GetWellKnownOpenidConfigurationResponse = unknown;
-
-export type GetWellKnownOpenidConfigurationError = unknown;
-
 export type GetWellKnownOauthAuthorizationServerResponse = unknown;
 
 export type GetWellKnownOauthAuthorizationServerError = unknown;
+
+export type GetWellKnownOpenidConfigurationResponse = unknown;
+
+export type GetWellKnownOpenidConfigurationError = unknown;
 
 export type GetInformationResponse = CoreInformation;
 
@@ -3068,6 +3080,16 @@ export type PatchCdrStatusResponse = void;
 
 export type PatchCdrStatusError = unknown;
 
+export type GetCinemaThemoviedbThemoviedbIdData = {
+  path: {
+    themoviedb_id: string;
+  };
+};
+
+export type GetCinemaThemoviedbThemoviedbIdResponse = TheMovieDB;
+
+export type GetCinemaThemoviedbThemoviedbIdError = unknown;
+
 export type GetCinemaSessionsResponse = Array<CineSessionComplete>;
 
 export type GetCinemaSessionsError = unknown;
@@ -3925,7 +3947,7 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/.well-known/openid-configuration": {
+  "/.well-known/oauth-authorization-server": {
     get: {
       res: {
         /**
@@ -3935,7 +3957,7 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/.well-known/oauth-authorization-server": {
+  "/.well-known/openid-configuration": {
     get: {
       res: {
         /**
@@ -6393,6 +6415,21 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cinema/themoviedb/{themoviedb_id}": {
+    get: {
+      req: GetCinemaThemoviedbThemoviedbIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": TheMovieDB;
         /**
          * Validation Error
          */

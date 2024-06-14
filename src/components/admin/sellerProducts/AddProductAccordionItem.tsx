@@ -1,5 +1,5 @@
 import { AddEditProductForm } from "./AddEditProductForm";
-import { SellerComplete, postCdrSellersSellerIdProducts } from "@/api";
+import { ProductBase, SellerComplete, postCdrSellersSellerIdProducts } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,9 +23,13 @@ export const AddProductAccordionItem = ({
   const formSchema = z.object({
     name_fr: z.string({
       required_error: "Veuillez renseigner le nom du produit",
+    }).min(1, {
+      message: "Veuillez renseigner le nom du produit",
     }),
     name_en: z.string({
       required_error: "Veuillez renseigner le nom du produit",
+    }).min(1, {
+      message: "Veuillez renseigner le nom du produit",
     }),
     description_fr: z.string().optional(),
     description_en: z.string().optional(),
@@ -41,14 +45,15 @@ export const AddProductAccordionItem = ({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
+    const body: ProductBase = {
+      ...values,
+      available_online: values.available_online === "true",
+    };
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {
         seller_id: seller.id,
       },
-      body: {
-        ...values,
-        available_online: values.available_online === "true",
-      },
+      body: body,
     });
     if (error) {
       console.log(error);
@@ -70,7 +75,6 @@ export const AddProductAccordionItem = ({
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <AddEditProductForm
               form={form}
-              validateLabel="Add"
               setIsOpened={setIsAddDialogOpened}
               isLoading={isLoading}
             />

@@ -20,7 +20,6 @@ interface SellerTabContentProps {
 
 export const SellerTabContent = ({
   seller,
-  setRefetchSellers,
 }: SellerTabContentProps) => {
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
   const [products, setProducts] = useState<
@@ -88,6 +87,7 @@ export const SellerTabContent = ({
               canRemove
               canDisable
               showDisabled
+              refreshProduct={onGetCdrSellerProducts}
             />
           ))}
         </Accordion>

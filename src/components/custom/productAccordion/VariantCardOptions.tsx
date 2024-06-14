@@ -38,7 +38,7 @@ export const VariantCardOptions = ({
             setIsOpened={setIsEditDialogOpened}
             // isLoading={false}
             title="Modifer la variante"
-            description={<AddEditVariantForm variant={variant} />}
+            description={<></>}
             // validateLabel="Modifier"
             // callback={() => {}}
           >

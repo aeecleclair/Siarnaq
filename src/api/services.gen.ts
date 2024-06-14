@@ -17,10 +17,10 @@ import type {
   GetAuthUserinfoResponse,
   GetOidcAuthorizationFlowJwksUriError,
   GetOidcAuthorizationFlowJwksUriResponse,
-  GetWellKnownOpenidConfigurationError,
-  GetWellKnownOpenidConfigurationResponse,
   GetWellKnownOauthAuthorizationServerError,
   GetWellKnownOauthAuthorizationServerResponse,
+  GetWellKnownOpenidConfigurationError,
+  GetWellKnownOpenidConfigurationResponse,
   GetInformationError,
   GetInformationResponse,
   GetPrivacyError,
@@ -536,6 +536,9 @@ import type {
   PatchCdrStatusData,
   PatchCdrStatusError,
   PatchCdrStatusResponse,
+  GetCinemaThemoviedbThemoviedbIdData,
+  GetCinemaThemoviedbThemoviedbIdError,
+  GetCinemaThemoviedbThemoviedbIdResponse,
   GetCinemaSessionsError,
   GetCinemaSessionsResponse,
   PostCinemaSessionsData,
@@ -959,6 +962,19 @@ export const getOidcAuthorizationFlowJwksUri = (options?: Options) => {
 };
 
 /**
+ * Oauth Configuration
+ */
+export const getWellKnownOauthAuthorizationServer = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetWellKnownOauthAuthorizationServerResponse,
+    GetWellKnownOauthAuthorizationServerError
+  >({
+    ...options,
+    url: "/.well-known/oauth-authorization-server",
+  });
+};
+
+/**
  * Oidc Configuration
  */
 export const getWellKnownOpenidConfiguration = (options?: Options) => {
@@ -968,19 +984,6 @@ export const getWellKnownOpenidConfiguration = (options?: Options) => {
   >({
     ...options,
     url: "/.well-known/openid-configuration",
-  });
-};
-
-/**
- * Oauth Authorization Server
- */
-export const getWellKnownOauthAuthorizationServer = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetWellKnownOauthAuthorizationServerResponse,
-    GetWellKnownOauthAuthorizationServerError
-  >({
-    ...options,
-    url: "/.well-known/oauth-authorization-server",
   });
 };
 
@@ -4212,6 +4215,25 @@ export const patchCdrStatus = (options: Options<PatchCdrStatusData>) => {
   >({
     ...options,
     url: "/cdr/status/",
+  });
+};
+
+/**
+ * Get Movie
+ * Makes a HTTP request to The Movie Database (TMDB)
+ * using an API key and returns a TheMovieDB object
+ * * https://developer.themoviedb.org/reference/movie-details
+ * * https://developer.themoviedb.org/docs/errors
+ */
+export const getCinemaThemoviedbThemoviedbId = (
+  options: Options<GetCinemaThemoviedbThemoviedbIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCinemaThemoviedbThemoviedbIdResponse,
+    GetCinemaThemoviedbThemoviedbIdError
+  >({
+    ...options,
+    url: "/cinema/themoviedb/{themoviedb_id}",
   });
 };
 

@@ -60,6 +60,7 @@ export const ProductPanel = () => {
                   product={product}
                   sellerId={seller?.id || ""}
                   showDescription
+                  isSelectable
                   refreshProduct={() => {}}
                 />
               ))}

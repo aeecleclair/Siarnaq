@@ -9,6 +9,7 @@ interface VariantCardProps {
   sellerId: string;
   productId: string;
   showDescription: boolean;
+  isSelectable: boolean;
 }
 
 export const VariantCard = ({
@@ -16,6 +17,7 @@ export const VariantCard = ({
   sellerId,
   productId,
   showDescription,
+  isSelectable,
 }: VariantCardProps) => {
   const { variantQuantity, setVariantQuantity } = useVariantQuantityStore();
   const numberSelectedVariant =
@@ -25,7 +27,7 @@ export const VariantCard = ({
     <Card
       className={`min-w-40 ${selected && "border-black shadow-lg"} ${!variant.enabled && "text-muted-foreground"}`}
       onClick={() => {
-        if (variant.enabled && variant.unique) {
+        if (isSelectable && variant.enabled && variant.unique) {
           setVariantQuantity(
             sellerId,
             productId,
@@ -46,6 +48,7 @@ export const VariantCard = ({
               className="h-6 px-1"
               disabled={!selected || !variant.enabled}
               onClick={(e) => {
+                if (!isSelectable) return;
                 e.stopPropagation();
                 setVariantQuantity(
                   sellerId,
@@ -65,6 +68,7 @@ export const VariantCard = ({
               className="h-6 px-1"
               disabled={!variant.enabled}
               onClick={(e) => {
+                if (!isSelectable) return;
                 e.stopPropagation();
                 setVariantQuantity(
                   sellerId,

@@ -1,9 +1,12 @@
-import { AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../../ui/accordion";
 import { AddingVariantCard } from "./AddingVariantCard";
 import { VariantCardWithOptions } from "./VariantCardWithOptions";
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 import { useSizeStore } from "@/stores/SizeStore";
-
 
 interface ProductAccordionProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;
@@ -14,7 +17,7 @@ interface ProductAccordionProps {
   sellerId: string;
   showDescription?: boolean;
   showDisabled?: boolean;
-  refreshProduct?: () => void;
+  refreshProduct: () => void;
 }
 
 export const ProductAccordion = ({
@@ -55,8 +58,12 @@ export const ProductAccordion = ({
         >
           {variantToDisplay && (
             <>
-              {canAdd && refreshProduct && (
-                <AddingVariantCard sellerId={sellerId} productId={product.id} refreshProduct={refreshProduct} />
+              {canAdd && (
+                <AddingVariantCard
+                  sellerId={sellerId}
+                  productId={product.id}
+                  refreshProduct={refreshProduct}
+                />
               )}
               {variantToDisplay.map((variant) => (
                 <VariantCardWithOptions
@@ -68,6 +75,7 @@ export const ProductAccordion = ({
                   canRemove={canRemove}
                   canDisable={canDisable}
                   showDescription={showDescription}
+                  refreshProduct={refreshProduct}
                 />
               ))}
             </>

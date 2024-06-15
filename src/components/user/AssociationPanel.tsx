@@ -9,38 +9,22 @@ import {
   HiOutlineShoppingCart,
 } from "react-icons/hi";
 
-export const AssociationPanel = () => {
-  const { getToken } = useToken();
+export const AssociationPanel = ({
+  onlineSellers,
+}: {
+  onlineSellers: SellerComplete[];
+}) => {
   const searchParams = useSearchParams();
+  const firstSellerId =
+    searchParams.get("sellerId") || onlineSellers?.at(0)?.id;
 
-  const [sellers, setSellers] = useState<SellerComplete[]>([]);
-  const firstSellerId = searchParams.get("sellerId") || sellers?.at(0)?.id;
-  const [refetchOnlineSellers, setRefetchOnlineSellers] = useState<boolean>(true);
-
-
-  useEffect(() => {
-    const onGetCdrOnlineSellers = async () => {
-        const { data, error } = await getCdrOnlineSellers({});
-        if (error) {
-          console.log(error);
-          return;
-        }
-        setSellers(data!);
-      };
-
-    if (refetchOnlineSellers) {
-      getToken().then(()=>onGetCdrOnlineSellers());
-      setRefetchOnlineSellers(false);
-    }
-  }, [refetchOnlineSellers]);
-  
   return (
     <div>
       <div className="mx-auto grid w-full max-w-6xl gap-2 mb-6">
         <h1 className="text-3xl font-semibold">Associations</h1>
       </div>
       <nav className="grid gap-4 text-sm text-muted-foreground">
-        {sellers.map((seller) => (
+        {onlineSellers.map((seller) => (
           <Link
             key={seller.id}
             href={`/?sellerId=${seller.id}`}

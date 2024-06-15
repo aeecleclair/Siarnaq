@@ -7,15 +7,47 @@ import {
 } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { PaymentButton } from "./PaymentButton";
-import { products } from "./products";
-import { sellers } from "./sellers";
+import {
+  SellerComplete,
+  app__modules__cdr__schemas_cdr__ProductComplete,
+  getCdrOnlineProducts,
+  getCdrOnlineSellersSellerIdProducts,
+} from "@/api";
+import { useToken } from "@/hooks/useToken";
+import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
+import { useState, useEffect } from "react";
 
-// import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
-
-export const RecapPanel = () => {
-  // const { variantQuantity } = useVariantQuantityStore();
-  // const sellerIds = Object.keys(variantQuantity) as Array<string>;
+export const RecapPanel = ({
+  onlineSellers,
+}: {
+  onlineSellers: SellerComplete[];
+}) => {
+  const { variantQuantity } = useVariantQuantityStore();
+  const sellerIds = Object.keys(variantQuantity) as Array<string>;
   var total = 0;
+
+  const [onlineProducts, setOnlineProducts] = useState<
+    app__modules__cdr__schemas_cdr__ProductComplete[]
+  >([]);
+  const [refetchOnlineProducts, setRefetchOnlineProducts] =
+    useState<boolean>(true);
+
+  useEffect(() => {
+    const onGetCdrOnlineProducts = async () => {
+      const { data, error } = await getCdrOnlineProducts({});
+      if (error) {
+        console.log(error);
+        return;
+      }
+      setOnlineProducts(data!);
+    };
+
+    if (refetchOnlineProducts) {
+      onGetCdrOnlineProducts();
+      setRefetchOnlineProducts(false);
+    }
+  }, [refetchOnlineProducts]);
+
   return (
     <div className="grid gap-6">
       <Card>
@@ -34,7 +66,7 @@ export const RecapPanel = () => {
                   const variants = sellerProducts.products[productId];
                   const variantIds = Object.keys(variants) as Array<string>;
                   return variantIds.map((variantId) => {
-                    const product = products.find(
+                    const product = onlineProducts.find(
                       (product) => product.id === productId,
                     );
                     const variant = product?.variants?.find(
@@ -47,7 +79,10 @@ export const RecapPanel = () => {
                     return (
                       <div className="flex flex-row w-full" key={variantId}>
                         <span className="font-bold w-1/6">
-                          {sellers.find((seller) => seller.id === id)?.name}
+                          {
+                            onlineSellers.find((seller) => seller.id === id)
+                              ?.name
+                          }
                         </span>
                         <span className="w-1/6">{product?.name_en}</span>
                         <span className="w-1/6">{variant?.name_en}</span>

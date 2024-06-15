@@ -27,7 +27,7 @@ export function DataTableToolbar<TData>({
           placeholder="Filtrer"
           value={globalFilter}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          onClick={()=>setRefetchData(true)}
+          onClick={() => setRefetchData(true)}
           className="h-8 w-[150px] lg:w-[250px]"
         />
         {table.getColumn("curriculum") && (

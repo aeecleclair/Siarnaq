@@ -142,7 +142,9 @@ export const AddEditVariantForm = ({
           isLoading={isLoading}
           className="w-[100px]"
           type="submit"
-        >Ajouter</LoadingButton>
+        >
+          Ajouter
+        </LoadingButton>
       </div>
     </div>
   );

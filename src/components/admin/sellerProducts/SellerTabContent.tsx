@@ -18,9 +18,7 @@ interface SellerTabContentProps {
   setRefetchSellers: (arg0: boolean) => void;
 }
 
-export const SellerTabContent = ({
-  seller,
-}: SellerTabContentProps) => {
+export const SellerTabContent = ({ seller }: SellerTabContentProps) => {
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
   const [products, setProducts] = useState<
     app__modules__cdr__schemas_cdr__ProductComplete[]

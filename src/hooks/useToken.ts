@@ -28,7 +28,7 @@ export const useToken = () => {
     if (access_token_expires - 60 > now) {
       return token;
     }
-    console.log(isRefreshing, refreshToken)
+    console.log(isRefreshing, refreshToken);
     if (isRefreshing) {
       return;
     }

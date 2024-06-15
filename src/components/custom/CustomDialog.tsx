@@ -24,7 +24,6 @@ export const CustomDialog = ({
   description,
   children,
 }: CustomDialogProps) => {
-
   return (
     <Dialog open={isOpened} onOpenChange={setIsOpened}>
       <DialogTrigger asChild className="w-full">

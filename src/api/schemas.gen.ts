@@ -4619,14 +4619,39 @@ export const $ProductVariantBase = {
       type: "boolean",
       title: "Unique",
     },
+    allowed_curriculum: {
+      items: {
+        type: "string",
+        format: "uuid",
+      },
+      type: "array",
+      title: "Allowed Curriculum",
+    },
   },
   type: "object",
-  required: ["name_fr", "name_en", "price", "enabled", "unique"],
+  required: [
+    "name_fr",
+    "name_en",
+    "price",
+    "enabled",
+    "unique",
+    "allowed_curriculum",
+  ],
   title: "ProductVariantBase",
 } as const;
 
 export const $ProductVariantComplete = {
   properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    product_id: {
+      type: "string",
+      format: "uuid",
+      title: "Product Id",
+    },
     name_fr: {
       type: "string",
       title: "Name Fr",
@@ -4669,16 +4694,6 @@ export const $ProductVariantComplete = {
       type: "boolean",
       title: "Unique",
     },
-    id: {
-      type: "string",
-      format: "uuid",
-      title: "Id",
-    },
-    product_id: {
-      type: "string",
-      format: "uuid",
-      title: "Product Id",
-    },
     allowed_curriculum: {
       items: {
         $ref: "#/components/schemas/CurriculumComplete",
@@ -4690,13 +4705,13 @@ export const $ProductVariantComplete = {
   },
   type: "object",
   required: [
+    "id",
+    "product_id",
     "name_fr",
     "name_en",
     "price",
     "enabled",
     "unique",
-    "id",
-    "product_id",
   ],
   title: "ProductVariantComplete",
 } as const;
@@ -4779,6 +4794,21 @@ export const $ProductVariantEdit = {
         },
       ],
       title: "Unique",
+    },
+    allowed_curriculum: {
+      anyOf: [
+        {
+          items: {
+            type: "string",
+            format: "uuid",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Allowed Curriculum",
     },
   },
   type: "object",

@@ -454,12 +454,6 @@ import type {
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdData,
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdResponse,
-  PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData,
-  PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError,
-  PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
-  DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData,
-  DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError,
-  DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
   GetCdrSellersSellerIdDocumentsData,
   GetCdrSellersSellerIdDocumentsError,
   GetCdrSellersSellerIdDocumentsResponse,
@@ -3732,44 +3726,6 @@ export const deleteCdrSellersSellerIdProductsProductIdVariantsVariantId = (
     url: "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/",
   });
 };
-
-/**
- * Create Allowed Curriculum
- * Add a curriculum in a product variant's allowed curriculums.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const postCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumId =
-  (
-    options: Options<PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData>,
-  ) => {
-    return (options?.client ?? client).post<
-      PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
-      PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/curriculums/{curriculum_id}/",
-    });
-  };
-
-/**
- * Delete Allowed Curriculum
- * Remove a curriculum from a product variant's allowed curriculums.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const deleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumId =
-  (
-    options: Options<DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData>,
-  ) => {
-    return (options?.client ?? client).delete<
-      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
-      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/curriculums/{curriculum_id}/",
-    });
-  };
 
 /**
  * Get Documents

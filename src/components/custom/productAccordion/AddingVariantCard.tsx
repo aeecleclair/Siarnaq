@@ -1,7 +1,10 @@
 import { Card, CardContent } from "../../ui/card";
 import { CustomDialog } from "../CustomDialog";
 import { AddEditVariantForm } from "./AddEditVariantForm";
-import { ProductVariantBase, postCdrSellersSellerIdProductsProductIdVariants } from "@/api";
+import {
+  ProductVariantBase,
+  postCdrSellersSellerIdProductsProductIdVariants,
+} from "@/api";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -15,9 +18,11 @@ interface AddingVariantCardProps {
   refreshProduct: () => void;
 }
 
-export const AddingVariantCard = (
-  { sellerId, productId, refreshProduct }: AddingVariantCardProps
-) => {
+export const AddingVariantCard = ({
+  sellerId,
+  productId,
+  refreshProduct,
+}: AddingVariantCardProps) => {
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const formSchema = z.object({

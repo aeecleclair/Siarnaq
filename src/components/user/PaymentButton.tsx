@@ -1,8 +1,7 @@
-
-import { useState } from "react";
-import { WarningDialog } from "../custom/WarningDialog";
 import { HelloAssoButton } from "../custom/HelloAssoButton";
+import { WarningDialog } from "../custom/WarningDialog";
 import { Button } from "../ui/button";
+import { useState } from "react";
 
 export const PaymentButton = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -28,9 +27,7 @@ export const PaymentButton = () => {
             </p>
           </div>
         }
-        customButton={
-          <HelloAssoButton isLoading={isLoading} />
-        }
+        customButton={<HelloAssoButton isLoading={isLoading} />}
       />
       <Button
         className="col-span-4 ml-auto w-[100px]"

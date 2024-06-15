@@ -1076,9 +1076,12 @@ export type ProductVariantBase = {
   price: number;
   enabled: boolean;
   unique: boolean;
+  allowed_curriculum: Array<string>;
 };
 
 export type ProductVariantComplete = {
+  id: string;
+  product_id: string;
   name_fr: string;
   name_en: string;
   description_fr?: string | null;
@@ -1086,8 +1089,6 @@ export type ProductVariantComplete = {
   price: number;
   enabled: boolean;
   unique: boolean;
-  id: string;
-  product_id: string;
   allowed_curriculum?: Array<CurriculumComplete>;
 };
 
@@ -1099,6 +1100,7 @@ export type ProductVariantEdit = {
   price?: number | null;
   enabled?: boolean | null;
   unique?: boolean | null;
+  allowed_curriculum?: Array<string> | null;
 };
 
 export type PurchaseBase = {
@@ -2773,38 +2775,6 @@ export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdResponse =
   void;
 
 export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError =
-  unknown;
-
-export type PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData =
-  {
-    path: {
-      curriculum_id: string;
-      product_id: string;
-      seller_id: string;
-      variant_id: string;
-    };
-  };
-
-export type PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse =
-  ProductVariantComplete;
-
-export type PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError =
-  unknown;
-
-export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData =
-  {
-    path: {
-      curriculum_id: string;
-      product_id: string;
-      seller_id: string;
-      variant_id: string;
-    };
-  };
-
-export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse =
-  void;
-
-export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError =
   unknown;
 
 export type GetCdrSellersSellerIdDocumentsData = {
@@ -6020,34 +5990,6 @@ export type $OpenApiTs = {
     };
     delete: {
       req: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/curriculums/{curriculum_id}/": {
-    post: {
-      req: PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": ProductVariantComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData;
       res: {
         /**
          * Successful Response

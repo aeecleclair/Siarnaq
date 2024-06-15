@@ -3,7 +3,6 @@ import { DataTable } from "./DataTable";
 import { CoreUserSimple, getUsers } from "@/api";
 import { useEffect, useState } from "react";
 
-
 export const UserSearch = () => {
   const [users, setUsers] = useState<CoreUserSimple[]>([]);
   const [refetchUsers, setRefetchUsers] = useState<boolean>(true);
@@ -16,7 +15,7 @@ export const UserSearch = () => {
     }
     setUsers(data!);
   };
-  
+
   useEffect(() => {
     if (refetchUsers) {
       onGetCdrSellers();

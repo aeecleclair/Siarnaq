@@ -1,7 +1,7 @@
-import { DialogDescription } from "@radix-ui/react-dialog";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { LoadingButton } from "./LoadingButton";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 interface WarningDialogProps {
   isOpened: boolean;

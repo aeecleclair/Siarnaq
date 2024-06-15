@@ -1404,14 +1404,7 @@ export const $CineSessionBase = {
       title: "Name",
     },
     overview: {
-      anyOf: [
-        {
-          type: "string",
-        },
-        {
-          type: "null",
-        },
-      ],
+      type: "string",
       title: "Overview",
     },
     genre: {
@@ -1438,7 +1431,7 @@ export const $CineSessionBase = {
     },
   },
   type: "object",
-  required: ["start", "duration", "name"],
+  required: ["start", "duration", "name", "overview"],
   title: "CineSessionBase",
 } as const;
 
@@ -1458,14 +1451,7 @@ export const $CineSessionComplete = {
       title: "Name",
     },
     overview: {
-      anyOf: [
-        {
-          type: "string",
-        },
-        {
-          type: "null",
-        },
-      ],
+      type: "string",
       title: "Overview",
     },
     genre: {
@@ -1496,7 +1482,7 @@ export const $CineSessionComplete = {
     },
   },
   type: "object",
-  required: ["start", "duration", "name", "id"],
+  required: ["start", "duration", "name", "overview", "id"],
   title: "CineSessionComplete",
 } as const;
 
@@ -4633,14 +4619,39 @@ export const $ProductVariantBase = {
       type: "boolean",
       title: "Unique",
     },
+    allowed_curriculum: {
+      items: {
+        type: "string",
+        format: "uuid",
+      },
+      type: "array",
+      title: "Allowed Curriculum",
+    },
   },
   type: "object",
-  required: ["name_fr", "name_en", "price", "enabled", "unique"],
+  required: [
+    "name_fr",
+    "name_en",
+    "price",
+    "enabled",
+    "unique",
+    "allowed_curriculum",
+  ],
   title: "ProductVariantBase",
 } as const;
 
 export const $ProductVariantComplete = {
   properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    product_id: {
+      type: "string",
+      format: "uuid",
+      title: "Product Id",
+    },
     name_fr: {
       type: "string",
       title: "Name Fr",
@@ -4683,26 +4694,24 @@ export const $ProductVariantComplete = {
       type: "boolean",
       title: "Unique",
     },
-    id: {
-      type: "string",
-      format: "uuid",
-      title: "Id",
-    },
-    product_id: {
-      type: "string",
-      format: "uuid",
-      title: "Product Id",
+    allowed_curriculum: {
+      items: {
+        $ref: "#/components/schemas/CurriculumComplete",
+      },
+      type: "array",
+      title: "Allowed Curriculum",
+      default: [],
     },
   },
   type: "object",
   required: [
+    "id",
+    "product_id",
     "name_fr",
     "name_en",
     "price",
     "enabled",
     "unique",
-    "id",
-    "product_id",
   ],
   title: "ProductVariantComplete",
 } as const;
@@ -4785,6 +4794,21 @@ export const $ProductVariantEdit = {
         },
       ],
       title: "Unique",
+    },
+    allowed_curriculum: {
+      anyOf: [
+        {
+          items: {
+            type: "string",
+            format: "uuid",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Allowed Curriculum",
     },
   },
   type: "object",
@@ -5361,6 +5385,58 @@ export const $StatusType = {
   enum: ["waiting", "open", "closed", "counting", "published"],
   title: "StatusType",
   description: "Status of the voting",
+} as const;
+
+export const $TheMovieDB = {
+  properties: {
+    genres: {
+      items: {
+        additionalProperties: {
+          anyOf: [
+            {
+              type: "integer",
+            },
+            {
+              type: "string",
+            },
+          ],
+        },
+        type: "object",
+      },
+      type: "array",
+      title: "Genres",
+    },
+    overview: {
+      type: "string",
+      title: "Overview",
+    },
+    poster_path: {
+      type: "string",
+      title: "Poster Path",
+    },
+    title: {
+      type: "string",
+      title: "Title",
+    },
+    runtime: {
+      type: "integer",
+      title: "Runtime",
+    },
+    tagline: {
+      type: "string",
+      title: "Tagline",
+    },
+  },
+  type: "object",
+  required: [
+    "genres",
+    "overview",
+    "poster_path",
+    "title",
+    "runtime",
+    "tagline",
+  ],
+  title: "TheMovieDB",
 } as const;
 
 export const $TicketComplete = {

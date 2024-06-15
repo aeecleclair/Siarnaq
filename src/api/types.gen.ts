@@ -304,7 +304,7 @@ export type CineSessionBase = {
   start: string;
   duration: number;
   name: string;
-  overview?: string | null;
+  overview: string;
   genre?: string | null;
   tagline?: string | null;
 };
@@ -313,7 +313,7 @@ export type CineSessionComplete = {
   start: string;
   duration: number;
   name: string;
-  overview?: string | null;
+  overview: string;
   genre?: string | null;
   tagline?: string | null;
   id: string;
@@ -1076,9 +1076,12 @@ export type ProductVariantBase = {
   price: number;
   enabled: boolean;
   unique: boolean;
+  allowed_curriculum: Array<string>;
 };
 
 export type ProductVariantComplete = {
+  id: string;
+  product_id: string;
   name_fr: string;
   name_en: string;
   description_fr?: string | null;
@@ -1086,8 +1089,7 @@ export type ProductVariantComplete = {
   price: number;
   enabled: boolean;
   unique: boolean;
-  id: string;
-  product_id: string;
+  allowed_curriculum?: Array<CurriculumComplete>;
 };
 
 export type ProductVariantEdit = {
@@ -1098,6 +1100,7 @@ export type ProductVariantEdit = {
   price?: number | null;
   enabled?: boolean | null;
   unique?: boolean | null;
+  allowed_curriculum?: Array<string> | null;
 };
 
 export type PurchaseBase = {
@@ -1246,6 +1249,17 @@ export type StatusType =
   | "closed"
   | "counting"
   | "published";
+
+export type TheMovieDB = {
+  genres: Array<{
+    [key: string]: number | string;
+  }>;
+  overview: string;
+  poster_path: string;
+  title: string;
+  runtime: number;
+  tagline: string;
+};
 
 export type TicketComplete = {
   pack_id: string;
@@ -1441,13 +1455,13 @@ export type GetOidcAuthorizationFlowJwksUriResponse = unknown;
 
 export type GetOidcAuthorizationFlowJwksUriError = unknown;
 
-export type GetWellKnownOpenidConfigurationResponse = unknown;
-
-export type GetWellKnownOpenidConfigurationError = unknown;
-
 export type GetWellKnownOauthAuthorizationServerResponse = unknown;
 
 export type GetWellKnownOauthAuthorizationServerError = unknown;
+
+export type GetWellKnownOpenidConfigurationResponse = unknown;
+
+export type GetWellKnownOpenidConfigurationError = unknown;
 
 export type GetInformationResponse = CoreInformation;
 
@@ -2583,6 +2597,11 @@ export type GetCdrOnlineSellersResponse = Array<SellerComplete>;
 
 export type GetCdrOnlineSellersError = unknown;
 
+export type GetCdrOnlineProductsResponse =
+  Array<app__modules__cdr__schemas_cdr__ProductComplete>;
+
+export type GetCdrOnlineProductsError = unknown;
+
 export type PatchCdrSellersSellerIdData = {
   body: SellerEdit;
   path: {
@@ -2761,38 +2780,6 @@ export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdResponse =
   void;
 
 export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError =
-  unknown;
-
-export type PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData =
-  {
-    path: {
-      curriculum_id: string;
-      product_id: string;
-      seller_id: string;
-      variant_id: string;
-    };
-  };
-
-export type PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse =
-  ProductVariantComplete;
-
-export type PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError =
-  unknown;
-
-export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData =
-  {
-    path: {
-      curriculum_id: string;
-      product_id: string;
-      seller_id: string;
-      variant_id: string;
-    };
-  };
-
-export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse =
-  void;
-
-export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError =
   unknown;
 
 export type GetCdrSellersSellerIdDocumentsData = {
@@ -3067,6 +3054,16 @@ export type PatchCdrStatusData = {
 export type PatchCdrStatusResponse = void;
 
 export type PatchCdrStatusError = unknown;
+
+export type GetCinemaThemoviedbThemoviedbIdData = {
+  path: {
+    themoviedb_id: string;
+  };
+};
+
+export type GetCinemaThemoviedbThemoviedbIdResponse = TheMovieDB;
+
+export type GetCinemaThemoviedbThemoviedbIdError = unknown;
 
 export type GetCinemaSessionsResponse = Array<CineSessionComplete>;
 
@@ -3925,7 +3922,7 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/.well-known/openid-configuration": {
+  "/.well-known/oauth-authorization-server": {
     get: {
       res: {
         /**
@@ -3935,7 +3932,7 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/.well-known/oauth-authorization-server": {
+  "/.well-known/openid-configuration": {
     get: {
       res: {
         /**
@@ -5812,6 +5809,16 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/cdr/online/products/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<app__modules__cdr__schemas_cdr__ProductComplete>;
+      };
+    };
+  };
   "/cdr/sellers/{seller_id}/": {
     patch: {
       req: PatchCdrSellersSellerIdData;
@@ -5998,34 +6005,6 @@ export type $OpenApiTs = {
     };
     delete: {
       req: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/curriculums/{curriculum_id}/": {
-    post: {
-      req: PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": ProductVariantComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData;
       res: {
         /**
          * Successful Response
@@ -6393,6 +6372,21 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cinema/themoviedb/{themoviedb_id}": {
+    get: {
+      req: GetCinemaThemoviedbThemoviedbIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": TheMovieDB;
         /**
          * Validation Error
          */

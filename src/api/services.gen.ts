@@ -17,10 +17,10 @@ import type {
   GetAuthUserinfoResponse,
   GetOidcAuthorizationFlowJwksUriError,
   GetOidcAuthorizationFlowJwksUriResponse,
-  GetWellKnownOpenidConfigurationError,
-  GetWellKnownOpenidConfigurationResponse,
   GetWellKnownOauthAuthorizationServerError,
   GetWellKnownOauthAuthorizationServerResponse,
+  GetWellKnownOpenidConfigurationError,
+  GetWellKnownOpenidConfigurationResponse,
   GetInformationError,
   GetInformationResponse,
   GetPrivacyError,
@@ -412,6 +412,8 @@ import type {
   GetCdrUsersMeSellersResponse,
   GetCdrOnlineSellersError,
   GetCdrOnlineSellersResponse,
+  GetCdrOnlineProductsError,
+  GetCdrOnlineProductsResponse,
   PatchCdrSellersSellerIdData,
   PatchCdrSellersSellerIdError,
   PatchCdrSellersSellerIdResponse,
@@ -454,12 +456,6 @@ import type {
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdData,
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdResponse,
-  PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData,
-  PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError,
-  PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
-  DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData,
-  DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError,
-  DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
   GetCdrSellersSellerIdDocumentsData,
   GetCdrSellersSellerIdDocumentsError,
   GetCdrSellersSellerIdDocumentsResponse,
@@ -536,6 +532,9 @@ import type {
   PatchCdrStatusData,
   PatchCdrStatusError,
   PatchCdrStatusResponse,
+  GetCinemaThemoviedbThemoviedbIdData,
+  GetCinemaThemoviedbThemoviedbIdError,
+  GetCinemaThemoviedbThemoviedbIdResponse,
   GetCinemaSessionsError,
   GetCinemaSessionsResponse,
   PostCinemaSessionsData,
@@ -959,6 +958,19 @@ export const getOidcAuthorizationFlowJwksUri = (options?: Options) => {
 };
 
 /**
+ * Oauth Configuration
+ */
+export const getWellKnownOauthAuthorizationServer = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetWellKnownOauthAuthorizationServerResponse,
+    GetWellKnownOauthAuthorizationServerError
+  >({
+    ...options,
+    url: "/.well-known/oauth-authorization-server",
+  });
+};
+
+/**
  * Oidc Configuration
  */
 export const getWellKnownOpenidConfiguration = (options?: Options) => {
@@ -968,19 +980,6 @@ export const getWellKnownOpenidConfiguration = (options?: Options) => {
   >({
     ...options,
     url: "/.well-known/openid-configuration",
-  });
-};
-
-/**
- * Oauth Authorization Server
- */
-export const getWellKnownOauthAuthorizationServer = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetWellKnownOauthAuthorizationServerResponse,
-    GetWellKnownOauthAuthorizationServerError
-  >({
-    ...options,
-    url: "/.well-known/oauth-authorization-server",
   });
 };
 
@@ -3475,6 +3474,22 @@ export const getCdrOnlineSellers = (options?: Options) => {
 };
 
 /**
+ * Get All Available Online Products
+ * Get a seller's online available products.
+ *
+ * **User must be authenticated to use this endpoint**
+ */
+export const getCdrOnlineProducts = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCdrOnlineProductsResponse,
+    GetCdrOnlineProductsError
+  >({
+    ...options,
+    url: "/cdr/online/products/",
+  });
+};
+
+/**
  * Update Seller
  * Update a seller.
  *
@@ -3729,44 +3744,6 @@ export const deleteCdrSellersSellerIdProductsProductIdVariantsVariantId = (
     url: "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/",
   });
 };
-
-/**
- * Create Allowed Curriculum
- * Add a curriculum in a product variant's allowed curriculums.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const postCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumId =
-  (
-    options: Options<PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData>,
-  ) => {
-    return (options?.client ?? client).post<
-      PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
-      PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/curriculums/{curriculum_id}/",
-    });
-  };
-
-/**
- * Delete Allowed Curriculum
- * Remove a curriculum from a product variant's allowed curriculums.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const deleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumId =
-  (
-    options: Options<DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData>,
-  ) => {
-    return (options?.client ?? client).delete<
-      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
-      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/curriculums/{curriculum_id}/",
-    });
-  };
 
 /**
  * Get Documents
@@ -4212,6 +4189,25 @@ export const patchCdrStatus = (options: Options<PatchCdrStatusData>) => {
   >({
     ...options,
     url: "/cdr/status/",
+  });
+};
+
+/**
+ * Get Movie
+ * Makes a HTTP request to The Movie Database (TMDB)
+ * using an API key and returns a TheMovieDB object
+ * * https://developer.themoviedb.org/reference/movie-details
+ * * https://developer.themoviedb.org/docs/errors
+ */
+export const getCinemaThemoviedbThemoviedbId = (
+  options: Options<GetCinemaThemoviedbThemoviedbIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCinemaThemoviedbThemoviedbIdResponse,
+    GetCinemaThemoviedbThemoviedbIdError
+  >({
+    ...options,
+    url: "/cinema/themoviedb/{themoviedb_id}",
   });
 };
 

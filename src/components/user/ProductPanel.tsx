@@ -1,7 +1,10 @@
 import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
 import { Accordion } from "../ui/accordion";
-import { products } from "./products";
-import { sellers } from "./sellers";
+import {
+  SellerComplete,
+  app__modules__cdr__schemas_cdr__ProductComplete,
+  getCdrOnlineSellersSellerIdProducts,
+} from "@/api";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,21 +13,52 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useToken } from "@/hooks/useToken";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export const ProductPanel = () => {
+export const ProductPanel = ({
+  onlineSellers,
+}: {
+  onlineSellers: SellerComplete[];
+}) => {
   const searchParams = useSearchParams();
   const firstSellerId =
-    searchParams.get("sellerId") || sellers?.at(0)?.id || "";
-  const seller = sellers.find((seller) => seller.id === firstSellerId);
-  const sellerIndex = sellers.findIndex(
+    searchParams.get("sellerId") || onlineSellers?.at(0)?.id || "";
+  const seller = onlineSellers.find((seller) => seller.id === firstSellerId);
+  const sellerIndex = onlineSellers.findIndex(
     (seller) => seller.id === firstSellerId,
   );
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
   const router = useRouter();
+
+  const [onlineProducts, setOnlineProducts] = useState<
+    app__modules__cdr__schemas_cdr__ProductComplete[]
+  >([]);
+  const [refetchOnlineProducts, setRefetchOnlineProducts] =
+    useState<boolean>(true);
+
+  useEffect(() => {
+    const onGetCdrOnlineProducts = async () => {
+      const { data, error } = await getCdrOnlineSellersSellerIdProducts({
+        path: {
+          seller_id: firstSellerId,
+        },
+      });
+      if (error) {
+        console.log(error);
+        return;
+      }
+      setOnlineProducts(data!);
+    };
+
+    if (refetchOnlineProducts) {
+      onGetCdrOnlineProducts();
+      setRefetchOnlineProducts(false);
+    }
+  }, [refetchOnlineProducts, firstSellerId]);
 
   useEffect(() => {
     if (
@@ -34,10 +68,10 @@ export const ProductPanel = () => {
     ) {
       setExpandedProducts(
         firstSellerId,
-        products.map((product) => product.id),
+        onlineProducts.map((product) => product.id),
       );
     }
-  }, [productExpansion, firstSellerId, setExpandedProducts]);
+  }, [productExpansion, firstSellerId, setExpandedProducts, onlineProducts]);
 
   return (
     <div className="grid gap-6">
@@ -46,7 +80,7 @@ export const ProductPanel = () => {
           <CardTitle>{seller ? seller.name : "No seller found"}</CardTitle>
         </CardHeader>
         <CardContent>
-          {products ? (
+          {onlineProducts ? (
             <Accordion
               type="multiple"
               value={productExpansion[firstSellerId]?.products}
@@ -54,7 +88,7 @@ export const ProductPanel = () => {
                 setExpandedProducts(firstSellerId, value)
               }
             >
-              {products.map((product) => (
+              {onlineProducts.map((product) => (
                 <ProductAccordion
                   key={product.id}
                   product={product}
@@ -76,7 +110,7 @@ export const ProductPanel = () => {
               className="h-8 w-8 p-0"
               onClick={() =>
                 router.replace(
-                  `/?sellerId=${sellers[sellerIndex - 1]?.id || ""}`,
+                  `/?sellerId=${onlineSellers[sellerIndex - 1]?.id || ""}`,
                 )
               }
               disabled={sellerIndex === 0}
@@ -85,17 +119,17 @@ export const ProductPanel = () => {
               <ChevronLeftIcon className="h-4 w-4" />
             </Button>
             <span className="text-sm font-medium text-muted-foreground w-14 flex justify-center">
-              {sellerIndex + 1} / {sellers.length}
+              {sellerIndex + 1} / {onlineSellers.length}
             </span>
             <Button
               variant="outline"
               className="h-8 w-8 p-0"
               onClick={() =>
                 router.replace(
-                  `/?sellerId=${sellers[sellerIndex + 1]?.id || ""}`,
+                  `/?sellerId=${onlineSellers[sellerIndex + 1]?.id || ""}`,
                 )
               }
-              disabled={sellerIndex === sellers.length - 1}
+              disabled={sellerIndex === onlineSellers.length - 1}
             >
               <span className="sr-only">Go to next page</span>
               <ChevronRightIcon className="h-4 w-4" />

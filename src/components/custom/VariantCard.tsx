@@ -1,6 +1,7 @@
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { ProductVariantComplete } from "@/api/types.gen";
+import { useTokenStore } from "@/stores/token";
 import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
 import { HiMinus, HiPlus } from "react-icons/hi";
 
@@ -18,6 +19,7 @@ export const VariantCard = ({
   showDescription,
 }: VariantCardProps) => {
   const { variantQuantity, setVariantQuantity } = useVariantQuantityStore();
+  const { userId } = useTokenStore();
   const numberSelectedVariant =
     variantQuantity[sellerId]?.products[productId]?.[variant.id] || 0;
   const selected = numberSelectedVariant > 0;
@@ -27,6 +29,7 @@ export const VariantCard = ({
       onClick={() => {
         if (variant.enabled && variant.unique) {
           setVariantQuantity(
+            userId!,
             sellerId,
             productId,
             variant.id,
@@ -48,6 +51,7 @@ export const VariantCard = ({
               onClick={(e) => {
                 e.stopPropagation();
                 setVariantQuantity(
+                  userId!,
                   sellerId,
                   productId,
                   variant.id,
@@ -67,6 +71,7 @@ export const VariantCard = ({
               onClick={(e) => {
                 e.stopPropagation();
                 setVariantQuantity(
+                  userId!,
                   sellerId,
                   productId,
                   variant.id,

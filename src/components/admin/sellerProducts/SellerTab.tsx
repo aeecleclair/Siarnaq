@@ -30,8 +30,7 @@ export const SellerTab = () => {
   }, [refetchSellers]);
 
   return (
-    <div
-      className="flex items-center justify-center p-6 min-w-96">
+    <div className="flex items-center justify-center p-6 min-w-96">
       <Tabs defaultValue={firstSellerId} className="w-full">
         <SellerTabList sellers={sellers} />
         <SellerTabContentList

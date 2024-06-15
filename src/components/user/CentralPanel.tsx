@@ -1,16 +1,27 @@
-import { useSearchParams } from "next/navigation";
 import { ProductPanel } from "./ProductPanel";
-import { sellers } from "./sellers";
 import { RecapPanel } from "./RecapPanel";
+import {
+  SellerComplete,
+  app__modules__cdr__schemas_cdr__ProductComplete,
+  getCdrOnlineSellersSellerIdProducts,
+} from "@/api";
+import { useSearchParams } from "next/navigation";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-export const CentralPanel = () => {
+export const CentralPanel = ({
+  onlineSellers,
+  setRefetchOnlineSellers,
+}: {
+  onlineSellers: SellerComplete[];
+  setRefetchOnlineSellers: Dispatch<SetStateAction<boolean>>;
+}) => {
   const searchParams = useSearchParams();
   const firstSellerId =
-    searchParams.get("sellerId") || sellers?.at(0)?.id || "";
+    searchParams.get("sellerId") || onlineSellers?.at(0)?.id || "";
 
   return firstSellerId === "recap" ? (
-    <RecapPanel />
+    <RecapPanel onlineSellers={onlineSellers} />
   ) : (
-    <ProductPanel />
+    <ProductPanel onlineSellers={onlineSellers} />
   );
 };

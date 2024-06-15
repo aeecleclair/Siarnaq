@@ -4,13 +4,13 @@ import { AddEditVariantForm } from "./AddEditVariantForm";
 import {
   ProductVariantComplete,
   ProductVariantEdit,
+  deleteCdrSellersSellerIdProductsProductIdVariantsVariantId,
   patchCdrSellersSellerIdProductsProductIdVariantsVariantId,
 } from "@/api";
 import { Button } from "@/components/ui/button";
 import {
   ContextMenuShortcut,
   ContextMenuContent,
-  ContextMenuItem,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import {
@@ -138,6 +138,32 @@ export const VariantCardOptions = ({
     setIsLoading(false);
   }
 
+  function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+    setIsRemoveDialogOpened(false);
+  }
+
+  async function removeVariant() {
+    setIsLoading(true);
+    const { data, error } =
+      await deleteCdrSellersSellerIdProductsProductIdVariantsVariantId({
+        path: {
+          variant_id: variant.id,
+          seller_id: sellerId,
+          product_id: productId,
+        },
+      });
+    if (error) {
+      console.log(error);
+      setIsLoading(false);
+      setIsRemoveDialogOpened(false);
+      return;
+    }
+    refreshProduct();
+    setIsRemoveDialogOpened(false);
+    setIsLoading(false);
+  }
+
   return (
     (canEdit || canRemove || canDisable) && (
       <ContextMenuContent className="w-40">
@@ -196,12 +222,30 @@ export const VariantCardOptions = ({
           <CustomDialog
             isOpened={isRemoveDialogOpened}
             setIsOpened={setIsRemoveDialogOpened}
-            // isLoading={false}
             title="Supprimer la variante"
-            description="Êtes-vous sûr de vouloir supprimer cette variante ?"
-            // validateLabel="Supprimer"
-            // callback={() => {}}
-            // variant="destructive"
+            description={
+              <>
+                <div>Êtes-vous sûr de vouloir supprimer cette variante ?</div>
+                <div className="flex justify-end mt-2 space-x-4">
+                  <Button
+                    variant="outline"
+                    onClick={closeDialog}
+                    disabled={isLoading}
+                    className="w-[100px]"
+                  >
+                    Annuler
+                  </Button>
+                  <LoadingButton
+                    isLoading={isLoading}
+                    className="w-[100px]"
+                    variant="destructive"
+                    onClick={removeVariant}
+                  >
+                    Supprimer
+                  </LoadingButton>
+                </div>
+              </>
+            }
           >
             <Button
               className="w-full text-destructive hover:text-destructive"

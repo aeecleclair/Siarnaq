@@ -2,7 +2,6 @@ import { SellerTabContentList } from "./SellerTabContentList";
 import { SellerTabList } from "./SellerTabList";
 import { SellerComplete, getCdrSellers } from "@/api";
 import { Tabs } from "@/components/ui/tabs";
-import { useToken } from "@/hooks/useToken";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

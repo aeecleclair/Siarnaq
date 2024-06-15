@@ -21,6 +21,14 @@ export const SellerTabList = (props: { sellers: SellerComplete[] }) => {
           {seller.name}
         </TabsTrigger>
       ))}
+      <TabsTrigger
+        key="cdradmin"
+        value="cdradmin"
+        className="w-full min-w-18"
+        onClick={() => handleClick("cdradmin")}
+      >
+        Admin
+      </TabsTrigger>
     </TabsList>
   );
 };

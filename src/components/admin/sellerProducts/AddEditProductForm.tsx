@@ -91,10 +91,11 @@ export const AddEditProductForm = ({
         </Button>
         <LoadingButton
           isLoading={isLoading}
-          label="Ajouter"
           className="w-[100px]"
           type="submit"
-        />
+        >
+          Ajouter
+        </LoadingButton>
       </div>
     </div>
   );

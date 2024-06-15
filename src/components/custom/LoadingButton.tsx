@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
+
 interface LoadingButtonProps {
   variant?:
     | "link"
@@ -14,7 +15,7 @@ interface LoadingButtonProps {
   isLoading: boolean;
   type?: "submit" | "button" | "reset";
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  label: React.ReactNode;
+  children: React.ReactNode;
   className?: string;
   disabled?: boolean;
 }
@@ -23,7 +24,7 @@ export const LoadingButton = ({
   isLoading,
   type,
   onClick,
-  label,
+  children,
   className,
   disabled,
   variant = "default",
@@ -36,7 +37,7 @@ export const LoadingButton = ({
       className={className}
       disabled={isLoading || disabled}
     >
-      {isLoading ? <ReloadIcon className="h-4 w-4 animate-spin" /> : label}
+      {isLoading ? <ReloadIcon className="h-4 w-4 animate-spin" /> : children}
     </Button>
   );
 };

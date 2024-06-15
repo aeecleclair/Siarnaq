@@ -59,9 +59,10 @@ export const WarningDialog = ({
             <LoadingButton
               isLoading={isLoading}
               onClick={onValidate}
-              label={validateLabel}
               className={width}
-            />
+            >
+              {validateLabel}
+            </LoadingButton>
           )}
         </div>
       </DialogContent>

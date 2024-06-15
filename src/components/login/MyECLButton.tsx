@@ -105,11 +105,9 @@ const MyECLButton = () => {
   }
 
   return (
-    <LoadingButton
-      isLoading={isLoading}
-      onClick={openSSO}
-      label="Se connecter"
-    />
+    <LoadingButton isLoading={isLoading} onClick={openSSO}>
+      Se connecter
+    </LoadingButton>
   );
 };
 

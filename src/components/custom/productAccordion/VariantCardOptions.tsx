@@ -1,4 +1,5 @@
 import { CustomDialog } from "../CustomDialog";
+import { LoadingButton } from "../LoadingButton";
 import { AddEditVariantForm } from "./AddEditVariantForm";
 import {
   ProductVariantComplete,
@@ -9,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import {
   ContextMenuShortcut,
   ContextMenuContent,
+  ContextMenuItem,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import {
@@ -92,14 +94,7 @@ export const VariantCardOptions = ({
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    const body: ProductVariantEdit = {
-      ...values,
-      price: parseFloat(values.price),
-      unique: values.unique === "unique",
-      enabled: true,
-    };
+  async function patchVariant(body: ProductVariantEdit) {
     const { data, error } =
       await patchCdrSellersSellerIdProductsProductIdVariantsVariantId({
         path: {
@@ -115,10 +110,32 @@ export const VariantCardOptions = ({
       setIsEditDialogOpened(false);
       return;
     }
+  }
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    const body: ProductVariantEdit = {
+      ...values,
+      price: parseFloat(values.price),
+      unique: values.unique === "unique",
+      enabled: true,
+    };
+    await patchVariant(body);
     refreshProduct();
     setIsEditDialogOpened(false);
     setIsLoading(false);
     form.reset(values);
+  }
+
+  async function toggleEnabled() {
+    console.log("toggleEnabled");
+    setIsLoading(true);
+    const body: ProductVariantEdit = {
+      enabled: !variant.enabled,
+    };
+    await patchVariant(body);
+    refreshProduct();
+    setIsLoading(false);
   }
 
   return (
@@ -150,20 +167,30 @@ export const VariantCardOptions = ({
           </CustomDialog>
         )}
         {variant.enabled && canDisable && (
-          <Button className="w-full" variant="ghost">
+          <LoadingButton
+            className="w-full"
+            variant="ghost"
+            onClick={toggleEnabled}
+            isLoading={isLoading}
+          >
             Désactiver
             <ContextMenuShortcut>
               <StopIcon className="w-4 h-4" />
             </ContextMenuShortcut>
-          </Button>
+          </LoadingButton>
         )}
         {!variant.enabled && canDisable && (
-          <Button className="w-full" variant="ghost">
+          <LoadingButton
+            className="w-full"
+            variant="ghost"
+            onClick={toggleEnabled}
+            isLoading={isLoading}
+          >
             Activer
             <ContextMenuShortcut>
               <PlayIcon className="w-4 h-4" />
             </ContextMenuShortcut>
-          </Button>
+          </LoadingButton>
         )}
         {canRemove && (
           <CustomDialog

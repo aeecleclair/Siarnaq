@@ -1,4 +1,4 @@
-import { AdminPanel } from "./AdminPanel";
+import { AdminPanel } from "../adminPanel/AdminPanel";
 import { SellerTabContent } from "./SellerTabContent";
 import { SellerComplete } from "@/api";
 import { useSearchParams } from "next/navigation";

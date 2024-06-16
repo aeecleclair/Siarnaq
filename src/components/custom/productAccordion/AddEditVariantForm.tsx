@@ -2,11 +2,13 @@ import { LoadingButton } from "../LoadingButton";
 import { MultiSelect } from "../MultiSelect";
 import { PriceInput } from "../PriceInput";
 import { StyledFormField } from "../StyledFormField";
+import { CurriculumComplete, getCdrCurriculums } from "@/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
+import { useState, useEffect } from "react";
 
 interface AddEditVariantFormProps {
   form: any;
@@ -19,6 +21,24 @@ export const AddEditVariantForm = ({
   isLoading,
   setIsOpened,
 }: AddEditVariantFormProps) => {
+  const [curriculum, setCurriculum] = useState<CurriculumComplete[]>([]);
+  const [refetchCurriculum, setRefetchCurriculum] = useState<boolean>(true);
+
+  const onGetCurriculum = async () => {
+    const { data, error } = await getCdrCurriculums({});
+    if (error) {
+      console.log(error);
+      return;
+    }
+    setCurriculum(data!);
+  };
+
+  useEffect(() => {
+    if (refetchCurriculum) {
+      onGetCurriculum();
+      setRefetchCurriculum(false);
+    }
+  }, [refetchCurriculum]);
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setIsOpened(false);
@@ -66,36 +86,10 @@ export const AddEditVariantForm = ({
           id="allowed_curriculum"
           input={(field) => (
             <MultiSelect
-              options={[
-                {
-                  value: "next.js",
-                  label: "Next.js",
-                },
-                {
-                  value: "sveltekit",
-                  label: "SvelteKit",
-                },
-                {
-                  value: "nuxt.js",
-                  label: "Nuxt.js",
-                },
-                {
-                  value: "remix",
-                  label: "Remix",
-                },
-                {
-                  value: "astro",
-                  label: "Astro",
-                },
-                {
-                  value: "wordpress",
-                  label: "WordPress",
-                },
-                {
-                  value: "express.js",
-                  label: "Express.js",
-                },
-              ]}
+              options={curriculum.map((curriculum) => ({
+                label: curriculum.name,
+                value: curriculum.id,
+              }))}
               selected={field.value}
               {...field}
               className="w-64"

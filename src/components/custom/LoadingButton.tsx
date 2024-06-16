@@ -17,6 +17,7 @@ interface LoadingButtonProps {
   children: React.ReactNode;
   className?: string;
   disabled?: boolean;
+  size?: "default" | "sm" | "lg" | "icon";
 }
 
 export const LoadingButton = ({
@@ -27,6 +28,7 @@ export const LoadingButton = ({
   className,
   disabled,
   variant = "default",
+  size = "default",
 }: LoadingButtonProps) => {
   return (
     <Button
@@ -35,6 +37,7 @@ export const LoadingButton = ({
       onClick={onClick}
       className={className}
       disabled={isLoading || disabled}
+      size={size}
     >
       {isLoading ? <ReloadIcon className="h-4 w-4 animate-spin" /> : children}
     </Button>

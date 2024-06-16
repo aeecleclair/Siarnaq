@@ -3,20 +3,26 @@ import { SellerTabContent } from "./SellerTabContent";
 import { SellerComplete } from "@/api";
 import { useSearchParams } from "next/navigation";
 
-export const SellerTabContentList = (props: {
+interface SellerTabContentListProps {
   sellers: SellerComplete[];
   setRefetchSellers: (arg0: boolean) => void;
-}) => {
+}
+
+export const SellerTabContentList = ({
+  sellers,
+  setRefetchSellers,
+}: SellerTabContentListProps) => {
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
   if (activeSellerId === "cdradmin") {
-    return <AdminPanel />;
+    return <AdminPanel sellers={sellers}
+      setRefetchSellers={setRefetchSellers} />;
   }
-  return props.sellers.map((seller) => (
+  return sellers.map((seller) => (
     <SellerTabContent
       key={seller.id}
       seller={seller}
-      setRefetchSellers={props.setRefetchSellers}
+      setRefetchSellers={setRefetchSellers}
     />
   ));
 };

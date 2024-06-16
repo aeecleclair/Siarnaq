@@ -4,7 +4,7 @@ import { useToken } from "@/hooks/useToken";
 import { client, createClient } from "@hey-api/client-fetch";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const { getToken } = useToken()
+  const { getToken } = useToken();
   createClient({
     // set default base url for requests
     baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr",

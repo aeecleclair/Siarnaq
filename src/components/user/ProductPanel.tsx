@@ -37,8 +37,6 @@ export const ProductPanel = ({
   const [onlineProducts, setOnlineProducts] = useState<
     app__modules__cdr__schemas_cdr__ProductComplete[]
   >([]);
-  const [refetchOnlineProducts, setRefetchOnlineProducts] =
-    useState<boolean>(true);
 
   useEffect(() => {
     const onGetCdrOnlineProducts = async () => {
@@ -53,12 +51,8 @@ export const ProductPanel = ({
       }
       setOnlineProducts(data!);
     };
-
-    if (refetchOnlineProducts) {
-      onGetCdrOnlineProducts();
-      setRefetchOnlineProducts(false);
-    }
-  }, [refetchOnlineProducts, firstSellerId]);
+    onGetCdrOnlineProducts();
+  }, [firstSellerId, onlineSellers]);
 
   useEffect(() => {
     if (

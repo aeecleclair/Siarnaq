@@ -1,4 +1,5 @@
 import {
+  deleteCdrUsersUserIdPurchasesProductVariantId,
   getCdrOnlineSellersSellerIdProducts,
   patchCdrUsersUserIdPurchasesProductVariantId,
   postCdrUsersUserIdPurchasesProductVariantId,
@@ -34,9 +35,26 @@ export const useVariantQuantityStore = create<variantQuantityStore>()(
           variantId: string,
           quantity: number,
         ) => {
-          const onPurchase = async () => {
+          const onAddPurchase = async () => {
+            const { error } = await postCdrUsersUserIdPurchasesProductVariantId(
+              {
+                path: {
+                  user_id: userId,
+                  product_variant_id: variantId,
+                },
+                body: {
+                  quantity: quantity,
+                },
+              },
+            );
+            if (error) {
+              console.log(error);
+              return;
+            }
+          };
+          const onDeletePurchase = async () => {
             const { error } =
-              await patchCdrUsersUserIdPurchasesProductVariantId({
+              await deleteCdrUsersUserIdPurchasesProductVariantId({
                 path: {
                   user_id: userId,
                   product_variant_id: variantId,
@@ -50,7 +68,11 @@ export const useVariantQuantityStore = create<variantQuantityStore>()(
               return;
             }
           };
-          onPurchase();
+          if (quantity === 0) {
+            onDeletePurchase();
+          } else {
+            onAddPurchase();
+          }
           set((state) => {
             return {
               variantQuantity: {

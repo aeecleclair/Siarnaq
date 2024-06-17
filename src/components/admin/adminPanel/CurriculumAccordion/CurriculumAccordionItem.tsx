@@ -1,4 +1,5 @@
 import { AddCurriculumButton } from "./AddCurriculumButton";
+import { CurriculumItem } from "./CurriculumItem";
 import { CurriculumComplete, getCdrCurriculums } from "@/api";
 import {
   AccordionContent,
@@ -6,7 +7,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useState, useEffect } from "react";
-import { CurriculumItem } from "./CurriculumItem";
 
 export const CurriculumAccordionItem = () => {
   const [curriculum, setCurriculum] = useState<CurriculumComplete[]>([]);

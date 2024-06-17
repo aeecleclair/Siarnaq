@@ -15,8 +15,9 @@ export const SellerTabContentList = ({
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
   if (activeSellerId === "cdradmin") {
-    return <AdminPanel sellers={sellers}
-      setRefetchSellers={setRefetchSellers} />;
+    return (
+      <AdminPanel sellers={sellers} setRefetchSellers={setRefetchSellers} />
+    );
   }
   return sellers.map((seller) => (
     <SellerTabContent

@@ -65,7 +65,12 @@ export const AddCurriculumButton = ({
               </FormItem>
             )}
           />
-          <LoadingButton variant="outline" type="submit" isLoading={isLoading} className="w-[100px]">
+          <LoadingButton
+            variant="outline"
+            type="submit"
+            isLoading={isLoading}
+            className="w-[100px]"
+          >
             Ajouter
           </LoadingButton>
         </div>

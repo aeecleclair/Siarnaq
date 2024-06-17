@@ -10,12 +10,14 @@ interface AddEditProductFormProps {
   form: any;
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
+  isEdit?: boolean;
 }
 
 export const AddEditProductForm = ({
   form,
   isLoading,
   setIsOpened,
+  isEdit = false,
 }: AddEditProductFormProps) => {
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
@@ -94,7 +96,7 @@ export const AddEditProductForm = ({
           className="w-[100px]"
           type="submit"
         >
-          Ajouter
+          {isEdit ? "Modifier" : "Ajouter"}
         </LoadingButton>
       </div>
     </div>

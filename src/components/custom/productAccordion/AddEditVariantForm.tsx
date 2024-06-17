@@ -14,12 +14,14 @@ interface AddEditVariantFormProps {
   form: any;
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
+  isEdit?: boolean;
 }
 
 export const AddEditVariantForm = ({
   form,
   isLoading,
   setIsOpened,
+  isEdit = false,
 }: AddEditVariantFormProps) => {
   const [curriculum, setCurriculum] = useState<CurriculumComplete[]>([]);
   const [refetchCurriculum, setRefetchCurriculum] = useState<boolean>(true);
@@ -137,7 +139,7 @@ export const AddEditVariantForm = ({
           className="w-[100px]"
           type="submit"
         >
-          Ajouter
+          {isEdit ? "Modifier" : "Ajouter"}
         </LoadingButton>
       </div>
     </div>

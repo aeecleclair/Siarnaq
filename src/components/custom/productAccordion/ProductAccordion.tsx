@@ -4,8 +4,10 @@ import {
   AccordionTrigger,
 } from "../../ui/accordion";
 import { AddingVariantCard } from "./AddingVariantCard";
+import { ProductAccordionOptions } from "./ProductAccordionOptions";
 import { VariantCardWithOptions } from "./VariantCardWithOptions";
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
+import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { useSizeStore } from "@/stores/SizeStore";
 
 interface ProductAccordionProps {
@@ -41,12 +43,23 @@ export const ProductAccordion = ({
 
   return (
     <AccordionItem value={product.id}>
-      <AccordionTrigger>
-        <div className="flex flex-col items-start justify-between">
-          <h3 className="text-lg font-semibold">{product.name_en}</h3>
-          <p className="text-sm text-gray-500">{product.description_en}</p>
-        </div>
-      </AccordionTrigger>
+      <ContextMenu>
+        <ContextMenuTrigger>
+          <AccordionTrigger>
+            <div className="flex flex-col items-start justify-between">
+              <h3 className="text-lg font-semibold">{product.name_en}</h3>
+              <p className="text-sm text-gray-500">{product.description_en}</p>
+            </div>
+          </AccordionTrigger>
+        </ContextMenuTrigger>
+        <ProductAccordionOptions
+          product={product}
+          sellerId={sellerId}
+          refreshProduct={refreshProduct}
+          canEdit
+          canRemove
+        />
+      </ContextMenu>
       <AccordionContent>
         {/* Take care to export all grid-cols-n
         Can't find a better way to do it for naw */}

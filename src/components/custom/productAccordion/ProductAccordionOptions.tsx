@@ -1,48 +1,39 @@
 import { CustomDialog } from "../CustomDialog";
 import { LoadingButton } from "../LoadingButton";
-import { AddEditVariantForm } from "./AddEditVariantForm";
 import {
-  ProductVariantComplete,
-  ProductVariantEdit,
-  deleteCdrSellersSellerIdProductsProductIdVariantsVariantId,
-  patchCdrSellersSellerIdProductsProductIdVariantsVariantId,
+  app__modules__cdr__schemas_cdr__ProductComplete,
+  app__modules__cdr__schemas_cdr__ProductEdit,
+  deleteCdrSellersSellerIdProductsProductId,
+  patchCdrSellersSellerIdProductsProductId,
 } from "@/api";
+import { AddEditProductForm } from "@/components/admin/sellerProducts/AddEditProductForm";
 import { Button } from "@/components/ui/button";
 import {
-  ContextMenuShortcut,
   ContextMenuContent,
+  ContextMenuShortcut,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
-import {
-  TrashIcon,
-  PencilIcon,
-  PlayIcon,
-  StopIcon,
-} from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { PencilIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-interface VariantCardOptionsProps {
-  variant: ProductVariantComplete;
-  canEdit?: boolean;
-  canRemove?: boolean;
-  canDisable?: boolean;
+interface ProductAccordionOptionsProps {
+  product: app__modules__cdr__schemas_cdr__ProductComplete;
   sellerId: string;
-  productId: string;
   refreshProduct: () => void;
+  canEdit: boolean;
+  canRemove: boolean;
 }
 
-export const VariantCardOptions = ({
-  variant,
+export const ProductAccordionOptions = ({
+  product,
+  sellerId,
+  refreshProduct,
   canEdit,
   canRemove,
-  canDisable,
-  sellerId,
-  productId,
-  refreshProduct,
-}: VariantCardOptionsProps) => {
+}: ProductAccordionOptionsProps) => {
   const [isEditDialogOpened, setIsEditDialogOpened] = useState(false);
   const [isRemoveDialogOpened, setIsRemoveDialogOpened] = useState(false);
 
@@ -50,32 +41,22 @@ export const VariantCardOptions = ({
   const formSchema = z.object({
     name_fr: z
       .string({
-        required_error: "Veuillez renseigner le nom de la variante",
+        required_error: "Veuillez renseigner le nom du produit",
       })
       .min(1, {
-        message: "Veuillez renseigner le nom de la variante",
+        message: "Veuillez renseigner le nom du produit",
       }),
     name_en: z
       .string({
-        required_error: "Veuillez renseigner le nom de la variante",
+        required_error: "Veuillez renseigner le nom du produit",
       })
       .min(1, {
-        message: "Veuillez renseigner le nom de la variante",
+        message: "Veuillez renseigner le nom du produit",
       }),
     description_fr: z.string().optional(),
     description_en: z.string().optional(),
-    price: z
-      .string({
-        required_error: "Veuillez renseigner le prix du produit",
-      })
-      .min(0, {
-        message: "Veuillez renseigner le prix du produit",
-      }),
-    unique: z.enum(["unique", "multiple"], {
-      required_error: "Veuillez renseigner la quantité du produit",
-    }),
-    allowed_curriculum: z.array(z.string(), {
-      required_error: "Veuillez renseigner les cursus autorisés",
+    available_online: z.enum(["true", "false"], {
+      required_error: "Veuillez renseigner la disponibilité du produit",
     }),
   });
 
@@ -83,27 +64,24 @@ export const VariantCardOptions = ({
     resolver: zodResolver(formSchema),
     mode: "onBlur",
     defaultValues: {
-      name_en: variant.name_en,
-      name_fr: variant.name_fr,
-      description_en: variant?.description_en || undefined,
-      description_fr: variant?.description_fr || undefined,
-      price: variant.price.toString(),
-      unique: variant.unique ? "unique" : "multiple",
-      allowed_curriculum:
-        variant.allowed_curriculum?.map((curriculum) => curriculum.id) || [],
+      name_fr: product.name_fr,
+      name_en: product.name_en,
+      description_fr: product.description_fr || undefined,
+      description_en: product.description_en || undefined,
+      available_online: product.available_online ? "true" : "false",
     },
   });
 
-  async function patchVariant(body: ProductVariantEdit) {
-    const { data, error } =
-      await patchCdrSellersSellerIdProductsProductIdVariantsVariantId({
-        path: {
-          variant_id: variant.id,
-          seller_id: sellerId,
-          product_id: productId,
-        },
-        body: body,
-      });
+  async function patchProduct(
+    body: app__modules__cdr__schemas_cdr__ProductEdit,
+  ) {
+    const { data, error } = await patchCdrSellersSellerIdProductsProductId({
+      path: {
+        product_id: product.id,
+        seller_id: sellerId,
+      },
+      body: body,
+    });
     if (error) {
       console.log(error);
       setIsLoading(false);
@@ -114,28 +92,15 @@ export const VariantCardOptions = ({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
-    const body: ProductVariantEdit = {
+    const body: app__modules__cdr__schemas_cdr__ProductEdit = {
       ...values,
-      price: parseFloat(values.price),
-      unique: values.unique === "unique",
-      enabled: true,
+      available_online: values.available_online === "true",
     };
-    await patchVariant(body);
+    await patchProduct(body);
     refreshProduct();
     setIsEditDialogOpened(false);
     setIsLoading(false);
     form.reset(values);
-  }
-
-  async function toggleEnabled() {
-    console.log("toggleEnabled");
-    setIsLoading(true);
-    const body: ProductVariantEdit = {
-      enabled: !variant.enabled,
-    };
-    await patchVariant(body);
-    refreshProduct();
-    setIsLoading(false);
   }
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
@@ -143,16 +108,14 @@ export const VariantCardOptions = ({
     setIsRemoveDialogOpened(false);
   }
 
-  async function removeVariant() {
+  async function removeProduct() {
     setIsLoading(true);
-    const { data, error } =
-      await deleteCdrSellersSellerIdProductsProductIdVariantsVariantId({
-        path: {
-          variant_id: variant.id,
-          seller_id: sellerId,
-          product_id: productId,
-        },
-      });
+    const { data, error } = await deleteCdrSellersSellerIdProductsProductId({
+      path: {
+        product_id: product.id,
+        seller_id: sellerId,
+      },
+    });
     if (error) {
       console.log(error);
       setIsLoading(false);
@@ -163,19 +126,18 @@ export const VariantCardOptions = ({
     setIsRemoveDialogOpened(false);
     setIsLoading(false);
   }
-
   return (
-    (canEdit || canRemove || canDisable) && (
+    (canEdit || canRemove) && (
       <ContextMenuContent className="w-40">
         {canEdit && (
           <CustomDialog
             isOpened={isEditDialogOpened}
             setIsOpened={setIsEditDialogOpened}
-            title="Modifer la variante"
+            title="Modifer le produit"
             description={
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                  <AddEditVariantForm
+                  <AddEditProductForm
                     form={form}
                     setIsOpened={setIsEditDialogOpened}
                     isLoading={isLoading}
@@ -193,40 +155,14 @@ export const VariantCardOptions = ({
             </Button>
           </CustomDialog>
         )}
-        {variant.enabled && canDisable && (
-          <LoadingButton
-            className="w-full"
-            variant="ghost"
-            onClick={toggleEnabled}
-            isLoading={isLoading}
-          >
-            Désactiver
-            <ContextMenuShortcut>
-              <StopIcon className="w-4 h-4" />
-            </ContextMenuShortcut>
-          </LoadingButton>
-        )}
-        {!variant.enabled && canDisable && (
-          <LoadingButton
-            className="w-full"
-            variant="ghost"
-            onClick={toggleEnabled}
-            isLoading={isLoading}
-          >
-            Activer
-            <ContextMenuShortcut>
-              <PlayIcon className="w-4 h-4" />
-            </ContextMenuShortcut>
-          </LoadingButton>
-        )}
         {canRemove && (
           <CustomDialog
             isOpened={isRemoveDialogOpened}
             setIsOpened={setIsRemoveDialogOpened}
-            title="Supprimer la variante"
+            title="Supprimer la producte"
             description={
               <>
-                <div>Êtes-vous sûr de vouloir supprimer cette variante ?</div>
+                <div>Êtes-vous sûr de vouloir supprimer cette producte ?</div>
                 <div className="flex justify-end mt-2 space-x-4">
                   <Button
                     variant="outline"
@@ -240,7 +176,7 @@ export const VariantCardOptions = ({
                     isLoading={isLoading}
                     className="w-[100px]"
                     variant="destructive"
-                    onClick={removeVariant}
+                    onClick={removeProduct}
                   >
                     Supprimer
                   </LoadingButton>

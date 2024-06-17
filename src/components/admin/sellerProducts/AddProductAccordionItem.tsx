@@ -6,6 +6,7 @@ import {
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
+import { productFormSchema } from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -23,34 +24,13 @@ export const AddProductAccordionItem = ({
 }: AddProductAccordionItemProps) => {
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const formSchema = z.object({
-    name_fr: z
-      .string({
-        required_error: "Veuillez renseigner le nom du produit",
-      })
-      .min(1, {
-        message: "Veuillez renseigner le nom du produit",
-      }),
-    name_en: z
-      .string({
-        required_error: "Veuillez renseigner le nom du produit",
-      })
-      .min(1, {
-        message: "Veuillez renseigner le nom du produit",
-      }),
-    description_fr: z.string().optional(),
-    description_en: z.string().optional(),
-    available_online: z.enum(["true", "false"], {
-      required_error: "Veuillez renseigner la disponibilité du produit",
-    }),
-  });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof productFormSchema>>({
+    resolver: zodResolver(productFormSchema),
     mode: "onBlur",
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
     const body: ProductBase = {
       ...values,

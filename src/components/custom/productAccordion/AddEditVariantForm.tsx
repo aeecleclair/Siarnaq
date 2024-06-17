@@ -8,10 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
+import { variantFormSchema } from "@/forms/variantFormSchema";
 import { useState, useEffect } from "react";
+import { UseFormReturn } from "react-hook-form";
+import { z } from "zod";
 
 interface AddEditVariantFormProps {
-  form: any;
+  form: UseFormReturn<z.infer<typeof variantFormSchema>>;
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
   isEdit?: boolean;

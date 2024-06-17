@@ -7,9 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
+import { productFormSchema } from "@/forms/productFormSchema";
+import { UseFormReturn } from "react-hook-form";
+import { z } from "zod";
 
 interface AddEditProductFormProps {
-  form: any;
+  form: UseFormReturn<z.infer<typeof productFormSchema>>;
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
   isEdit?: boolean;
@@ -105,12 +108,13 @@ export const AddEditProductForm = ({
           id="allowed_curriculum"
           input={(field) => (
             <MultiSelect
-              options={[]
-              //   curriculum.map((curriculum) => ({
-              //   label: curriculum.name,
-              //   value: curriculum.id,
-              // }))
-            }
+              options={
+                []
+                //   curriculum.map((curriculum) => ({
+                //   label: curriculum.name,
+                //   value: curriculum.id,
+                // }))
+              }
               selected={[]}
               {...field}
               className="w-64"

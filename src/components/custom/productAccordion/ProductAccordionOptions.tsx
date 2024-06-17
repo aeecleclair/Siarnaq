@@ -13,6 +13,7 @@ import {
   ContextMenuShortcut,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
+import { productFormSchema } from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
@@ -38,30 +39,9 @@ export const ProductAccordionOptions = ({
   const [isRemoveDialogOpened, setIsRemoveDialogOpened] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-  const formSchema = z.object({
-    name_fr: z
-      .string({
-        required_error: "Veuillez renseigner le nom du produit",
-      })
-      .min(1, {
-        message: "Veuillez renseigner le nom du produit",
-      }),
-    name_en: z
-      .string({
-        required_error: "Veuillez renseigner le nom du produit",
-      })
-      .min(1, {
-        message: "Veuillez renseigner le nom du produit",
-      }),
-    description_fr: z.string().optional(),
-    description_en: z.string().optional(),
-    available_online: z.enum(["true", "false"], {
-      required_error: "Veuillez renseigner la disponibilité du produit",
-    }),
-  });
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  
+  const form = useForm<z.infer<typeof productFormSchema>>({
+    resolver: zodResolver(productFormSchema),
     mode: "onBlur",
     defaultValues: {
       name_fr: product.name_fr,
@@ -90,7 +70,7 @@ export const ProductAccordionOptions = ({
     }
   }
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
     const body: app__modules__cdr__schemas_cdr__ProductEdit = {
       ...values,

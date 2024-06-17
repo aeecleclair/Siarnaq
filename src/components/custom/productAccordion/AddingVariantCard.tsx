@@ -6,6 +6,7 @@ import {
   postCdrSellersSellerIdProductsProductIdVariants,
 } from "@/api";
 import { Form } from "@/components/ui/form";
+import { variantFormSchema } from "@/forms/variantFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,47 +26,17 @@ export const AddingVariantCard = ({
 }: AddingVariantCardProps) => {
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const formSchema = z.object({
-    name_fr: z
-      .string({
-        required_error: "Veuillez renseigner le nom de la variante",
-      })
-      .min(1, {
-        message: "Veuillez renseigner le nom de la variante",
-      }),
-    name_en: z
-      .string({
-        required_error: "Veuillez renseigner le nom de la variante",
-      })
-      .min(1, {
-        message: "Veuillez renseigner le nom de la variante",
-      }),
-    description_fr: z.string().optional(),
-    description_en: z.string().optional(),
-    price: z
-      .string({
-        required_error: "Veuillez renseigner le prix du produit",
-      })
-      .min(0, {
-        message: "Veuillez renseigner le prix du produit",
-      }),
-    unique: z.enum(["unique", "multiple"], {
-      required_error: "Veuillez renseigner la quantité du produit",
-    }),
-    allowed_curriculum: z.array(z.string(), {
-      required_error: "Veuillez renseigner les cursus autorisés",
-    }),
-  });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+
+  const form = useForm<z.infer<typeof variantFormSchema>>({
+    resolver: zodResolver(variantFormSchema),
     mode: "onBlur",
     defaultValues: {
       allowed_curriculum: [],
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof variantFormSchema>) {
     setIsLoading(true);
     const body: ProductVariantBase = {
       ...values,

@@ -2,6 +2,7 @@ import { CurriculumBase, postCdrCurriculums } from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { curriculumFormSchema } from "@/forms/curriculumFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -15,23 +16,14 @@ export const AddCurriculumButton = ({
   setRefetchCurriculum,
 }: AddCurriculumButtonProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const formSchema = z.object({
-    name: z
-      .string({
-        required_error: "Veuillez renseigner le nom de la variante",
-      })
-      .min(1, {
-        message: "Veuillez renseigner le nom de la variante",
-      }),
-  });
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof curriculumFormSchema>>({
+    resolver: zodResolver(curriculumFormSchema),
     mode: "onBlur",
     defaultValues: {},
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof curriculumFormSchema>) {
     setIsLoading(true);
     const body: CurriculumBase = {
       ...values,

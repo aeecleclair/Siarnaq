@@ -1,5 +1,7 @@
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { MultiSelect } from "@/components/custom/MultiSelect";
 import { StyledFormField } from "@/components/custom/StyledFormField";
+import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -79,6 +81,40 @@ export const AddEditProductForm = ({
                 </Label>
               </div>
             </RadioGroup>
+          )}
+        />
+      </div>
+      <TextSeparator text="Conditions" />
+      <div className="flex flex-row gap-2 w-full">
+        <StyledFormField
+          form={form}
+          label="Contraintes"
+          id="allowed_curriculum"
+          input={(field) => (
+            <MultiSelect
+              options={[]}
+              selected={[]}
+              {...field}
+              className="w-64"
+            />
+          )}
+        />
+        <StyledFormField
+          form={form}
+          label="Signatures"
+          id="allowed_curriculum"
+          input={(field) => (
+            <MultiSelect
+              options={[]
+              //   curriculum.map((curriculum) => ({
+              //   label: curriculum.name,
+              //   value: curriculum.id,
+              // }))
+            }
+              selected={[]}
+              {...field}
+              className="w-64"
+            />
           )}
         />
       </div>

@@ -13,6 +13,7 @@ import {
   ContextMenuShortcut,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
+import { toast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
@@ -44,11 +45,16 @@ export const ProductAccordionOptions = ({
     resolver: zodResolver(productFormSchema),
     mode: "onBlur",
     defaultValues: {
+      id: product.id,
       name_fr: product.name_fr,
       name_en: product.name_en,
       description_fr: product.description_fr || undefined,
       description_en: product.description_en || undefined,
       available_online: product.available_online ? "true" : "false",
+      product_constraints:
+        product.product_constraints?.map((constraint) => constraint.id) || [],
+      document_constraints:
+        product.document_constraints?.map((constraint) => constraint.id) || [],
     },
   });
 
@@ -100,6 +106,10 @@ export const ProductAccordionOptions = ({
       console.log(error);
       setIsLoading(false);
       setIsRemoveDialogOpened(false);
+      toast({
+        title: "Suppression impossible",
+        description: error.toString()
+      })
       return;
     }
     refreshProduct();

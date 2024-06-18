@@ -28,6 +28,10 @@ export const AddProductAccordionItem = ({
   const form = useForm<z.infer<typeof productFormSchema>>({
     resolver: zodResolver(productFormSchema),
     mode: "onBlur",
+    defaultValues: {
+      product_constraints: [],
+      document_constraints: [],
+    },
   });
 
   async function onSubmit(values: z.infer<typeof productFormSchema>) {

@@ -1,3 +1,7 @@
+import {
+  app__modules__cdr__schemas_cdr__ProductComplete,
+  getCdrProducts,
+} from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { MultiSelect } from "@/components/custom/MultiSelect";
 import { StyledFormField } from "@/components/custom/StyledFormField";
@@ -8,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { productFormSchema } from "@/forms/productFormSchema";
+import { useEffect, useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
@@ -24,6 +29,27 @@ export const AddEditProductForm = ({
   setIsOpened,
   isEdit = false,
 }: AddEditProductFormProps) => {
+  const [constraint, setConstraint] = useState<
+    app__modules__cdr__schemas_cdr__ProductComplete[]
+  >([]);
+  const [refetchConstraint, setRefetchConstraint] = useState<boolean>(true);
+
+  const onGetConstraint = async () => {
+    const { data, error } = await getCdrProducts({});
+    if (error) {
+      console.log(error);
+      return;
+    }
+    setConstraint(data!);
+  };
+
+  useEffect(() => {
+    if (refetchConstraint) {
+      onGetConstraint();
+      setRefetchConstraint(false);
+    }
+  }, [refetchConstraint]);
+
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setIsOpened(false);
@@ -92,11 +118,16 @@ export const AddEditProductForm = ({
         <StyledFormField
           form={form}
           label="Contraintes"
-          id="allowed_curriculum"
+          id="product_constraints"
           input={(field) => (
             <MultiSelect
-              options={[]}
-              selected={[]}
+              options={constraint
+                .filter((constraint) => constraint.id !== form.watch("id"))
+                .map((constraint) => ({
+                  label: constraint.name_fr,
+                  value: constraint.id,
+                }))}
+              selected={field.value}
               {...field}
               className="w-64"
             />
@@ -105,14 +136,14 @@ export const AddEditProductForm = ({
         <StyledFormField
           form={form}
           label="Signatures"
-          id="allowed_curriculum"
+          id="document_constraints"
           input={(field) => (
             <MultiSelect
               options={
                 []
-                //   curriculum.map((curriculum) => ({
-                //   label: curriculum.name,
-                //   value: curriculum.id,
+                //   constraint.map((constraint) => ({
+                //   label: constraint.name,
+                //   value: constraint.id,
                 // }))
               }
               selected={[]}

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const productFormSchema = z.object({
+  id: z.string().optional(),
   name_fr: z
     .string({
       required_error: "Veuillez renseigner le nom du produit",
@@ -20,4 +21,6 @@ export const productFormSchema = z.object({
   available_online: z.enum(["true", "false"], {
     required_error: "Veuillez renseigner la disponibilité du produit",
   }),
+  product_constraints: z.array(z.string()),
+  document_constraints: z.array(z.string()),
 });

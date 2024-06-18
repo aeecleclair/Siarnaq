@@ -27,7 +27,6 @@ export const AddingVariantCard = ({
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-
   const form = useForm<z.infer<typeof variantFormSchema>>({
     resolver: zodResolver(variantFormSchema),
     mode: "onBlur",

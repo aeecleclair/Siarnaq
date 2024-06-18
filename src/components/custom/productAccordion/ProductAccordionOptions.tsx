@@ -39,7 +39,7 @@ export const ProductAccordionOptions = ({
   const [isRemoveDialogOpened, setIsRemoveDialogOpened] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const form = useForm<z.infer<typeof productFormSchema>>({
     resolver: zodResolver(productFormSchema),
     mode: "onBlur",

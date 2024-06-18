@@ -1043,6 +1043,8 @@ export type ProductBase = {
   description_fr?: string | null;
   description_en?: string | null;
   available_online: boolean;
+  product_constraints: Array<string>;
+  document_constraints: Array<string>;
 };
 
 export type ProductCompleteNoConstraint = {
@@ -1112,10 +1114,6 @@ export type PurchaseComplete = {
   user_id: string;
   product_variant_id: string;
   validated: boolean;
-};
-
-export type PurchaseEdit = {
-  quantity?: number | null;
 };
 
 /**
@@ -1375,6 +1373,7 @@ export type app__modules__cdr__schemas_cdr__ProductComplete = {
   id: string;
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
+  related_membership?: string | null;
   product_constraints?: Array<ProductCompleteNoConstraint>;
   document_constraints?: Array<DocumentComplete>;
 };
@@ -1387,6 +1386,8 @@ export type app__modules__cdr__schemas_cdr__ProductEdit = {
   description?: string | null;
   available_online?: boolean | null;
   related_membership?: string | null;
+  product_constraints?: Array<string> | null;
+  document_constraints?: Array<string> | null;
 };
 
 export type app__modules__phonebook__schemas_phonebook__MembershipBase = {
@@ -2597,6 +2598,16 @@ export type GetCdrOnlineSellersResponse = Array<SellerComplete>;
 
 export type GetCdrOnlineSellersError = unknown;
 
+export type GetCdrOnlineProductsResponse =
+  Array<app__modules__cdr__schemas_cdr__ProductComplete>;
+
+export type GetCdrOnlineProductsError = unknown;
+
+export type GetCdrProductsResponse =
+  Array<app__modules__cdr__schemas_cdr__ProductComplete>;
+
+export type GetCdrProductsError = unknown;
+
 export type PatchCdrSellersSellerIdData = {
   body: SellerEdit;
   path: {
@@ -2651,66 +2662,6 @@ export type GetCdrOnlineSellersSellerIdProductsResponse =
   Array<app__modules__cdr__schemas_cdr__ProductComplete>;
 
 export type GetCdrOnlineSellersSellerIdProductsError = unknown;
-
-export type PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData =
-  {
-    path: {
-      document_id: string;
-      product_id: string;
-      seller_id: string;
-    };
-  };
-
-export type PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse =
-  app__modules__cdr__schemas_cdr__ProductComplete;
-
-export type PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError =
-  unknown;
-
-export type DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData =
-  {
-    path: {
-      document_id: string;
-      product_id: string;
-      seller_id: string;
-    };
-  };
-
-export type DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse =
-  void;
-
-export type DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError =
-  unknown;
-
-export type PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData =
-  {
-    path: {
-      constraint_id: string;
-      product_id: string;
-      seller_id: string;
-    };
-  };
-
-export type PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse =
-  app__modules__cdr__schemas_cdr__ProductComplete;
-
-export type PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError =
-  unknown;
-
-export type DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData =
-  {
-    path: {
-      constraint_id: string;
-      product_id: string;
-      seller_id: string;
-    };
-  };
-
-export type DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse =
-  void;
-
-export type DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError =
-  unknown;
 
 export type PatchCdrSellersSellerIdProductsProductIdData = {
   body: app__modules__cdr__schemas_cdr__ProductEdit;
@@ -2843,18 +2794,6 @@ export type PostCdrUsersUserIdPurchasesProductVariantIdResponse =
   PurchaseComplete;
 
 export type PostCdrUsersUserIdPurchasesProductVariantIdError = unknown;
-
-export type PatchCdrUsersUserIdPurchasesProductVariantIdData = {
-  body: PurchaseEdit;
-  path: {
-    product_variant_id: string;
-    user_id: string;
-  };
-};
-
-export type PatchCdrUsersUserIdPurchasesProductVariantIdResponse = void;
-
-export type PatchCdrUsersUserIdPurchasesProductVariantIdError = unknown;
 
 export type DeleteCdrUsersUserIdPurchasesProductVariantIdData = {
   path: {
@@ -5804,6 +5743,26 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/cdr/online/products/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<app__modules__cdr__schemas_cdr__ProductComplete>;
+      };
+    };
+  };
+  "/cdr/products/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<app__modules__cdr__schemas_cdr__ProductComplete>;
+      };
+    };
+  };
   "/cdr/sellers/{seller_id}/": {
     patch: {
       req: PatchCdrSellersSellerIdData;
@@ -5868,62 +5827,6 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "200": Array<app__modules__cdr__schemas_cdr__ProductComplete>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/cdr/sellers/{seller_id}/products/{product_id}/document_constraints/{document_id}/": {
-    post: {
-      req: PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__modules__cdr__schemas_cdr__ProductComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/cdr/sellers/{seller_id}/products/{product_id}/product_constraints/{constraint_id}/": {
-    post: {
-      req: PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__modules__cdr__schemas_cdr__ProductComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
         /**
          * Validation Error
          */
@@ -6083,19 +5986,6 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "201": PurchaseComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    patch: {
-      req: PatchCdrUsersUserIdPurchasesProductVariantIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
         /**
          * Validation Error
          */

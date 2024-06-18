@@ -4463,9 +4463,31 @@ export const $ProductBase = {
       type: "boolean",
       title: "Available Online",
     },
+    product_constraints: {
+      items: {
+        type: "string",
+        format: "uuid",
+      },
+      type: "array",
+      title: "Product Constraints",
+    },
+    document_constraints: {
+      items: {
+        type: "string",
+        format: "uuid",
+      },
+      type: "array",
+      title: "Document Constraints",
+    },
   },
   type: "object",
-  required: ["name_fr", "name_en", "available_online"],
+  required: [
+    "name_fr",
+    "name_en",
+    "available_online",
+    "product_constraints",
+    "document_constraints",
+  ],
   title: "ProductBase",
 } as const;
 
@@ -4850,24 +4872,6 @@ export const $PurchaseComplete = {
   type: "object",
   required: ["quantity", "user_id", "product_variant_id", "validated"],
   title: "PurchaseComplete",
-} as const;
-
-export const $PurchaseEdit = {
-  properties: {
-    quantity: {
-      anyOf: [
-        {
-          type: "integer",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Quantity",
-    },
-  },
-  type: "object",
-  title: "PurchaseEdit",
 } as const;
 
 export const $RaffleBase = {
@@ -5857,6 +5861,17 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
       title: "Variants",
       default: [],
     },
+    related_membership: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership",
+    },
     product_constraints: {
       items: {
         $ref: "#/components/schemas/ProductCompleteNoConstraint",
@@ -5957,6 +5972,36 @@ export const $app__modules__cdr__schemas_cdr__ProductEdit = {
         },
       ],
       title: "Related Membership",
+    },
+    product_constraints: {
+      anyOf: [
+        {
+          items: {
+            type: "string",
+            format: "uuid",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Product Constraints",
+    },
+    document_constraints: {
+      anyOf: [
+        {
+          items: {
+            type: "string",
+            format: "uuid",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Document Constraints",
     },
   },
   type: "object",

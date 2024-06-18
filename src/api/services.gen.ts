@@ -412,6 +412,10 @@ import type {
   GetCdrUsersMeSellersResponse,
   GetCdrOnlineSellersError,
   GetCdrOnlineSellersResponse,
+  GetCdrOnlineProductsError,
+  GetCdrOnlineProductsResponse,
+  GetCdrProductsError,
+  GetCdrProductsResponse,
   PatchCdrSellersSellerIdData,
   PatchCdrSellersSellerIdError,
   PatchCdrSellersSellerIdResponse,
@@ -427,18 +431,6 @@ import type {
   GetCdrOnlineSellersSellerIdProductsData,
   GetCdrOnlineSellersSellerIdProductsError,
   GetCdrOnlineSellersSellerIdProductsResponse,
-  PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData,
-  PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError,
-  PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse,
-  DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData,
-  DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError,
-  DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse,
-  PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData,
-  PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError,
-  PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse,
-  DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData,
-  DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError,
-  DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse,
   PatchCdrSellersSellerIdProductsProductIdData,
   PatchCdrSellersSellerIdProductsProductIdError,
   PatchCdrSellersSellerIdProductsProductIdResponse,
@@ -472,9 +464,6 @@ import type {
   PostCdrUsersUserIdPurchasesProductVariantIdData,
   PostCdrUsersUserIdPurchasesProductVariantIdError,
   PostCdrUsersUserIdPurchasesProductVariantIdResponse,
-  PatchCdrUsersUserIdPurchasesProductVariantIdData,
-  PatchCdrUsersUserIdPurchasesProductVariantIdError,
-  PatchCdrUsersUserIdPurchasesProductVariantIdResponse,
   DeleteCdrUsersUserIdPurchasesProductVariantIdData,
   DeleteCdrUsersUserIdPurchasesProductVariantIdError,
   DeleteCdrUsersUserIdPurchasesProductVariantIdResponse,
@@ -3472,6 +3461,38 @@ export const getCdrOnlineSellers = (options?: Options) => {
 };
 
 /**
+ * Get All Available Online Products
+ * Get a seller's online available products.
+ *
+ * **User must be authenticated to use this endpoint**
+ */
+export const getCdrOnlineProducts = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCdrOnlineProductsResponse,
+    GetCdrOnlineProductsError
+  >({
+    ...options,
+    url: "/cdr/online/products/",
+  });
+};
+
+/**
+ * Get All Products
+ * Get a seller's online available products.
+ *
+ * **User must be authenticated to use this endpoint**
+ */
+export const getCdrProducts = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCdrProductsResponse,
+    GetCdrProductsError
+  >({
+    ...options,
+    url: "/cdr/products/",
+  });
+};
+
+/**
  * Update Seller
  * Update a seller.
  *
@@ -3560,82 +3581,6 @@ export const getCdrOnlineSellersSellerIdProducts = (
     url: "/cdr/online/sellers/{seller_id}/products/",
   });
 };
-
-/**
- * Create Document Constraint
- * Add a document in a product's document constraints.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const postCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentId =
-  (
-    options: Options<PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData>,
-  ) => {
-    return (options?.client ?? client).post<
-      PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse,
-      PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/document_constraints/{document_id}/",
-    });
-  };
-
-/**
- * Delete Document Constraint
- * Remove a document from a product's document constraints.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const deleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentId =
-  (
-    options: Options<DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData>,
-  ) => {
-    return (options?.client ?? client).delete<
-      DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse,
-      DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/document_constraints/{document_id}/",
-    });
-  };
-
-/**
- * Create Product Constraint
- * Add a product in a product's product constraints.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const postCdrSellersSellerIdProductsProductIdProductConstraintsConstraintId =
-  (
-    options: Options<PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData>,
-  ) => {
-    return (options?.client ?? client).post<
-      PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse,
-      PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/product_constraints/{constraint_id}/",
-    });
-  };
-
-/**
- * Delete Product Constraint
- * Remove a product from a product's document constraints.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const deleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintId =
-  (
-    options: Options<DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData>,
-  ) => {
-    return (options?.client ?? client).delete<
-      DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse,
-      DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/product_constraints/{constraint_id}/",
-    });
-  };
 
 /**
  * Update Product
@@ -3829,24 +3774,6 @@ export const postCdrUsersUserIdPurchasesProductVariantId = (
   return (options?.client ?? client).post<
     PostCdrUsersUserIdPurchasesProductVariantIdResponse,
     PostCdrUsersUserIdPurchasesProductVariantIdError
-  >({
-    ...options,
-    url: "/cdr/users/{user_id}/purchases/{product_variant_id}/",
-  });
-};
-
-/**
- * Update Purchase
- * Edit a purchase.
- *
- * **User must create a purchase for themself and for an online available product or be part of the seller's group to use this endpoint**
- */
-export const patchCdrUsersUserIdPurchasesProductVariantId = (
-  options: Options<PatchCdrUsersUserIdPurchasesProductVariantIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchCdrUsersUserIdPurchasesProductVariantIdResponse,
-    PatchCdrUsersUserIdPurchasesProductVariantIdError
   >({
     ...options,
     url: "/cdr/users/{user_id}/purchases/{product_variant_id}/",

@@ -7,6 +7,7 @@ import {
   HiCheck,
   HiOutlineClipboardList,
   HiOutlineShoppingCart,
+  HiOutlineSparkles,
 } from "react-icons/hi";
 
 export const AssociationPanel = ({
@@ -24,6 +25,17 @@ export const AssociationPanel = ({
         <h1 className="text-3xl font-semibold">Associations</h1>
       </div>
       <nav className="grid gap-4 text-sm text-muted-foreground">
+        <Link
+          href="/?sellerId=intro"
+          className={`hover:text-primary ${
+            firstSellerId === "intro" ? "font-semibold text-primary" : ""
+          }`}
+        >
+          <div className="flex flex-row items-center">
+            <HiOutlineSparkles className="h-4 w-4 mr-2" />
+            Présentation
+          </div>
+        </Link>
         {onlineSellers.map((seller) => (
           <Link
             key={seller.id}

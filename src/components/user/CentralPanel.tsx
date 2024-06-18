@@ -1,16 +1,12 @@
+import { IntroPanel } from "./IntroPanel";
 import { ProductPanel } from "./ProductPanel";
 import { RecapPanel } from "./RecapPanel";
-import {
-  SellerComplete,
-  app__modules__cdr__schemas_cdr__ProductComplete,
-  getCdrOnlineSellersSellerIdProducts,
-} from "@/api";
+import { SellerComplete } from "@/api";
 import { useSearchParams } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 export const CentralPanel = ({
   onlineSellers,
-  setRefetchOnlineSellers,
 }: {
   onlineSellers: SellerComplete[];
   setRefetchOnlineSellers: Dispatch<SetStateAction<boolean>>;
@@ -19,9 +15,11 @@ export const CentralPanel = ({
   const firstSellerId =
     searchParams.get("sellerId") || onlineSellers?.at(0)?.id || "";
 
-  return firstSellerId === "recap" ? (
-    <RecapPanel onlineSellers={onlineSellers} />
-  ) : (
-    <ProductPanel onlineSellers={onlineSellers} />
-  );
+  if (firstSellerId === "intro") {
+    return <IntroPanel />;
+  }
+  if (firstSellerId === "recap") {
+    return <RecapPanel onlineSellers={onlineSellers} />;
+  }
+  return <ProductPanel onlineSellers={onlineSellers} />;
 };

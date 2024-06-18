@@ -51,7 +51,7 @@ export const ProductPanel = ({
       }
       setOnlineProducts(data!);
     };
-    onGetCdrOnlineProducts();
+    if (firstSellerId !== "") onGetCdrOnlineProducts();
   }, [firstSellerId, onlineSellers]);
 
   useEffect(() => {

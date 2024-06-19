@@ -3,6 +3,7 @@
 import { DataTablePagination } from "./DataTablePagination";
 import { DataTableToolbar } from "./DataTableToolbar";
 import { fuzzyFilter } from "./searchFunction";
+import { CoreUserSimple } from "@/api";
 import {
   Table,
   TableBody,
@@ -16,6 +17,7 @@ import {
   ColumnDef,
   ColumnFiltersState,
   FilterFn,
+  Row,
   SortingState,
   VisibilityState,
   flexRender,
@@ -27,6 +29,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 
 // Extend the FilterFns and FilterMeta interfaces to include our custom filter function and meta
@@ -48,6 +51,8 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -85,6 +90,14 @@ export function DataTable<TData, TValue>({
     onGlobalFilterChange: setGlobalFilter,
   });
 
+  function onUserSelect(row: Row<TData>) {
+    const id = (row.original as CoreUserSimple).id;
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    current.set("userId", id);
+    const query = current.toString();
+    router.push(`/admin?${query}`);
+  }
+
   return (
     <div className="space-y-4 w-full">
       <DataTableToolbar
@@ -118,6 +131,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => onUserSelect(row)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

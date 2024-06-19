@@ -14,8 +14,11 @@ export const SellerTab = () => {
   const [refetchSellers, setRefetchSellers] = useState<boolean>(true);
 
   useEffect(() => {
-    if (!searchParams.get("sellerId") && sellers.length > 0) {
-      router.replace(`admin/?sellerId=${firstSellerId}`);
+    if (!searchParams.get("sellerId") && sellers.length > 0 && firstSellerId) {
+      const current = new URLSearchParams(Array.from(searchParams.entries()));
+      current.set("sellerId", firstSellerId);
+      const query = current.toString();
+      router.replace(`admin?${query}`);
     }
   }, [firstSellerId, router, searchParams, sellers]);
 

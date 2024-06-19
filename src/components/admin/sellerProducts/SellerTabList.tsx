@@ -1,12 +1,16 @@
 import { SellerComplete } from "@/api";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const SellerTabList = (props: { sellers: SellerComplete[] }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleClick = (sellerId: string) => {
-    router.push(`/admin/?sellerId=${sellerId}`);
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    current.set("sellerId", sellerId);
+    const query = current.toString();
+    router.push(`admin?${query}`);
   };
 
   return (

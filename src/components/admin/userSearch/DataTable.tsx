@@ -96,6 +96,8 @@ export function DataTable<TData, TValue>({
     current.set("userId", id);
     const query = current.toString();
     router.push(`/admin?${query}`);
+    table.toggleAllRowsSelected(false);
+    row.toggleSelected(true);
   }
 
   return (

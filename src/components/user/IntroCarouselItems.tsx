@@ -1,5 +1,15 @@
+import { TextSeparator } from "../custom/TextSeparator";
 import { Button } from "../ui/button";
 import { CarouselContent, CarouselItem, useCarousel } from "../ui/carousel";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
@@ -7,8 +17,19 @@ export const IntroCarouselItems = () => {
   const { scrollNext, canScrollNext } = useCarousel();
   const [page, setPage] = useState(0);
   const buttonLabels = ["On commence ?", "Valider", "Terminer"];
+  const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() - index);
+    return date.getFullYear().toString();
+  });
+
+  const [selectedPromo, setSelectedPromo] = useState<string | undefined>(
+    undefined,
+  );
+
+  const canGoNext = page === 0 || (page === 1 && selectedPromo);
   const content: React.ReactNode[] = [
-    <div key="intro">
+    <div key="intro" className="flex flex-col gap-2">
       <p>
         Consequat sint incididunt laborum ipsum. Nostrud enim culpa consequat
         laborum eiusmod minim consectetur deserunt sunt proident adipisicing.
@@ -25,25 +46,40 @@ export const IntroCarouselItems = () => {
         nostrud. Enim tempor commodo ad magna.
       </p>
     </div>,
-    <div key="curriculum">
-      <h1 className="text-3xl font-semibold">Présentation</h1>
-      <p>
-        Nous sommes une association qui a pour but de vous aider à trouver les
-        produits que vous cherchez.
-      </p>
+    <div key="curriculum" className="h-full gap-4 flex flex-col">
+      <span>Pour commencer, veuillez sélectionner votre promo :</span>
+      <Select value={selectedPromo} onValueChange={setSelectedPromo}>
+        <SelectTrigger className="w-[300px] m-auto">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {possiblePromos.map((promo) => (
+              <SelectItem key={promo} value={promo}>
+                Promo {promo}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </div>,
-    <div key="login">
-      <h1 className="text-3xl font-semibold">Connexion</h1>
-      <p>
-        Pour accéder à nos services, vous devez vous connecter avec votre
-        compte.
-      </p>
+    <div key="login" className="flex flex-col gap-4">
+      <span className="m-auto">Vous avez déjà un compte ?</span>
+      <Button size="lg" className="w-[220px] m-auto mb-2">
+        Se connecter avec MyECL
+      </Button>
+      <TextSeparator text="Sinon" />
+      <Button variant="outline" size="lg" className="w-[220px] m-auto mt-2">
+        {"S'inscrire"}
+      </Button>
     </div>,
   ];
 
   function onNextStep() {
-    scrollNext();
-    setPage((prev) => prev + 1);
+    if (canGoNext) {
+      setPage(page + 1);
+      scrollNext();
+    }
   }
 
   return (
@@ -53,25 +89,27 @@ export const IntroCarouselItems = () => {
           <CarouselItem key={index}>{item}</CarouselItem>
         ))}
       </CarouselContent>
-      <div className="pb-6 pt-10 flex justify-center">
-        <Button
-          size="lg"
-          className="w-[160px]"
-          onClick={onNextStep}
-          disabled={!canScrollNext}
-        >
-          <AnimatePresence initial={false} mode="wait">
-            <motion.div
-              key={page}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              {buttonLabels[page]}
-            </motion.div>
-          </AnimatePresence>
-        </Button>
-      </div>
+      {page !== 2 && (
+        <div className="pb-6 pt-10 flex justify-center">
+          <Button
+            size="lg"
+            className="w-[160px]"
+            onClick={onNextStep}
+            disabled={!canScrollNext || !canGoNext}
+          >
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div
+                key={page}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                {buttonLabels[page]}
+              </motion.div>
+            </AnimatePresence>
+          </Button>
+        </div>
+      )}
     </>
   );
 };

@@ -1,14 +1,18 @@
 import { AdminPanel } from "../adminPanel/AdminPanel";
 import { SellerTabContent } from "./SellerTabContent";
-import { SellerComplete } from "@/api";
+import { SellerComplete, Status } from "@/api";
 import { useSearchParams } from "next/navigation";
 
 interface SellerTabContentListProps {
+  status: Status;
+  setRefetchStatus: (arg0: boolean) => void;
   sellers: SellerComplete[];
   setRefetchSellers: (arg0: boolean) => void;
 }
 
 export const SellerTabContentList = ({
+  status,
+  setRefetchStatus,
   sellers,
   setRefetchSellers,
 }: SellerTabContentListProps) => {
@@ -16,13 +20,19 @@ export const SellerTabContentList = ({
   const activeSellerId = searchParams.get("sellerId");
   if (activeSellerId === "cdradmin") {
     return (
-      <AdminPanel sellers={sellers} setRefetchSellers={setRefetchSellers} />
+      <AdminPanel
+        sellers={sellers}
+        setRefetchSellers={setRefetchSellers}
+        status={status}
+        setRefetchStatus={setRefetchStatus}
+      />
     );
   }
   return sellers.map((seller) => (
     <SellerTabContent
       key={seller.id}
       seller={seller}
+      status={status}
       setRefetchSellers={setRefetchSellers}
     />
   ));

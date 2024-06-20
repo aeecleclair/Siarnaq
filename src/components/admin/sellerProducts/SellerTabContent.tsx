@@ -3,6 +3,7 @@
 import { AddProductAccordionItem } from "./AddProductAccordionItem";
 import {
   SellerComplete,
+  Status,
   app__modules__cdr__schemas_cdr__ProductComplete,
 } from "@/api";
 import { getCdrSellersSellerIdProducts } from "@/api";
@@ -14,11 +15,12 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface SellerTabContentProps {
+  status: Status;
   seller: SellerComplete;
   setRefetchSellers: (arg0: boolean) => void;
 }
 
-export const SellerTabContent = ({ seller }: SellerTabContentProps) => {
+export const SellerTabContent = ({ status, seller }: SellerTabContentProps) => {
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
   const [products, setProducts] = useState<
     app__modules__cdr__schemas_cdr__ProductComplete[]
@@ -80,12 +82,13 @@ export const SellerTabContent = ({ seller }: SellerTabContentProps) => {
               key={product.id}
               product={product}
               sellerId={seller.id}
-              canAdd
-              canEdit
-              canRemove
-              canDisable
+              canAdd={status.status !== "closed"}
+              canEdit={status.status === "pending"}
+              canRemove={status.status === "pending"}
+              canDisable={status.status !== "closed"}
               showDisabled
               refreshProduct={onGetCdrSellerProducts}
+              isSelectable={status.status === "onsite"}
             />
           ))}
         </Accordion>

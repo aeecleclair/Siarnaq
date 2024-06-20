@@ -1,32 +1,22 @@
-import { CdrStatus, Status, getCdrStatus, patchCdrStatus } from "@/api";
+import { CdrStatus, Status, patchCdrStatus } from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export const StatusAccordionItem = () => {
-  const [status, setStatus] = useState<Status>({} as Status);
-  const [refetchStatus, setRefetchStatus] = useState<boolean>(true);
+interface SellerTabProps {
+  status: Status;
+  setRefetchStatus: (arg0: boolean) => void;
+}
+
+export const StatusAccordionItem = ({
+  status,
+  setRefetchStatus,
+}: SellerTabProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const onGetStatus = async () => {
-    const { data, error } = await getCdrStatus({});
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setStatus(data!);
-  };
-
-  useEffect(() => {
-    if (refetchStatus) {
-      onGetStatus();
-      setRefetchStatus(false);
-    }
-  }, [refetchStatus]);
 
   const updateStatus = async (status: CdrStatus) => {
     setIsLoading(true);
@@ -81,9 +71,7 @@ export const StatusAccordionItem = () => {
             </span>
             <LoadingButton
               onClick={() =>
-                updateStatus(
-                  nextStep[status.status as keyof typeof nextStep],
-                )
+                updateStatus(nextStep[status.status as keyof typeof nextStep])
               }
               isLoading={isLoading}
               className="w-[130px]"

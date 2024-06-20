@@ -1,11 +1,16 @@
 import { SellerTabContentList } from "./SellerTabContentList";
 import { SellerTabList } from "./SellerTabList";
-import { SellerComplete, getCdrSellers } from "@/api";
+import { SellerComplete, Status, getCdrSellers } from "@/api";
 import { Tabs } from "@/components/ui/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const SellerTab = () => {
+interface SellerTabProps {
+  status: Status;
+  setRefetchStatus: (arg0: boolean) => void;
+}
+
+export const SellerTab = ({ status, setRefetchStatus }: SellerTabProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -47,6 +52,8 @@ export const SellerTab = () => {
         <Tabs defaultValue={firstSellerId} className="w-full">
           <SellerTabList sellers={sellers} />
           <SellerTabContentList
+            status={status}
+            setRefetchStatus={setRefetchStatus}
             sellers={sellers}
             setRefetchSellers={setRefetchSellers}
           />

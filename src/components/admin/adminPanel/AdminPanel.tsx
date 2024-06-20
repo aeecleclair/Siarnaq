@@ -1,15 +1,22 @@
 import { CurriculumAccordionItem } from "./CurriculumAccordion/CurriculumAccordionItem";
 import { SellerAccordionItem } from "./SellerAccordion.tsx/SellerAccordionItem";
-import { SellerComplete } from "@/api";
-import { Accordion } from "@/components/ui/accordion";
 import { StatusAccordionItem } from "./StatusPanel/StatusPanel";
+import { SellerComplete, Status } from "@/api";
+import { Accordion } from "@/components/ui/accordion";
 
 interface AdminPanelProps {
+  status: Status;
+  setRefetchStatus: (arg0: boolean) => void;
   sellers: SellerComplete[];
   setRefetchSellers: (arg0: boolean) => void;
 }
 
-export const AdminPanel = ({ sellers, setRefetchSellers }: AdminPanelProps) => {
+export const AdminPanel = ({
+  sellers,
+  setRefetchSellers,
+  status,
+  setRefetchStatus,
+}: AdminPanelProps) => {
   return (
     <Accordion type="multiple">
       <SellerAccordionItem
@@ -17,7 +24,10 @@ export const AdminPanel = ({ sellers, setRefetchSellers }: AdminPanelProps) => {
         setRefetchSellers={setRefetchSellers}
       />
       <CurriculumAccordionItem />
-      <StatusAccordionItem />
+      <StatusAccordionItem
+        status={status}
+        setRefetchStatus={setRefetchStatus}
+      />
     </Accordion>
   );
 };

@@ -17,29 +17,25 @@ const AdminPage = () => {
   const [status, setStatus] = useState<Status>({} as Status);
   const [refetchStatus, setRefetchStatus] = useState<boolean>(true);
 
-  const onGetStatus = async () => {
-    const { data, error } = await getCdrStatus({});
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setStatus(data!);
-  };
-
   useEffect(() => {
+    const onGetStatus = async () => {
+      const { data, error } = await getCdrStatus({});
+      if (error) {
+        console.log(error);
+        return;
+      }
+      if (data?.status === "onsite") {
+        setSize(50);
+      } else {
+        setSize(100);
+      }
+      setStatus(data!);
+    };
     if (refetchStatus) {
       onGetStatus();
       setRefetchStatus(false);
     }
-  }, [refetchStatus]);
-
-  useEffect(() => {
-    if (status.status === "onsite") {
-      setSize(50);
-    } else {
-      setSize(100);
-    }
-  }, [setSize, status]);
+  }, [refetchStatus, setSize, status.status]);
 
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 mt-8">

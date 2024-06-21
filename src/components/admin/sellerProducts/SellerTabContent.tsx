@@ -49,7 +49,7 @@ export const SellerTabContent = ({ status, seller }: SellerTabContentProps) => {
       }
       setProducts(data!);
     };
-    if (seller.id == activeSellerId) onGetCdrSellerProducts();
+    if (seller.id === activeSellerId) onGetCdrSellerProducts();
   }, [seller.id, activeSellerId]);
 
   useEffect(() => {

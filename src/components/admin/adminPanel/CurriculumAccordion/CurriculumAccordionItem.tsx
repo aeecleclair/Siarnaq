@@ -23,8 +23,10 @@ export const CurriculumAccordionItem = () => {
 
   useEffect(() => {
     if (refetchCurriculum) {
-      onGetCurriculum();
-      setRefetchCurriculum(false);
+      setRefetchCurriculum((_) => {
+        onGetCurriculum();
+        return false;
+      });
     }
   }, [refetchCurriculum]);
   return (

@@ -18,8 +18,10 @@ export const UserSearch = () => {
 
   useEffect(() => {
     if (refetchUsers) {
-      onGetCdrSellers();
-      setRefetchUsers(false);
+      setRefetchUsers((_) => {
+        onGetCdrSellers();
+        return false;
+      });
     }
   }, [refetchUsers]);
 

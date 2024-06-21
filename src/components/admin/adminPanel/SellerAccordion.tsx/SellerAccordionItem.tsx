@@ -30,8 +30,10 @@ export const SellerAccordionItem = ({
 
   useEffect(() => {
     if (refetchGroups) {
-      onGetGroups();
-      setRefetchGroups(false);
+      setRefetchGroups((_) => {
+        onGetGroups();
+        return false;
+      });
     }
   }, [refetchGroups]);
   return (

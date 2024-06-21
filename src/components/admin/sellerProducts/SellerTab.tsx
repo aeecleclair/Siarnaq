@@ -38,8 +38,10 @@ export const SellerTab = ({ status, setRefetchStatus }: SellerTabProps) => {
 
   useEffect(() => {
     if (refetchSellers) {
-      onGetCdrSellers();
-      setRefetchSellers(false);
+      setRefetchSellers((_) => {
+        onGetCdrSellers();
+        return false;
+      });
     }
   }, [refetchSellers]);
 

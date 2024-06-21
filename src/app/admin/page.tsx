@@ -32,8 +32,10 @@ const AdminPage = () => {
       setStatus(data!);
     };
     if (refetchStatus) {
-      onGetStatus();
-      setRefetchStatus(false);
+      setRefetchStatus((_) => {
+        onGetStatus();
+        return false;
+      });
     }
   }, [refetchStatus, setSize, status.status]);
 

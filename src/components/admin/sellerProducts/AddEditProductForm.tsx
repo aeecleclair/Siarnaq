@@ -45,8 +45,10 @@ export const AddEditProductForm = ({
 
   useEffect(() => {
     if (refetchConstraint) {
-      onGetConstraint();
-      setRefetchConstraint(false);
+      setRefetchConstraint((_) => {
+        onGetConstraint();
+        return false;
+      });
     }
   }, [refetchConstraint]);
 

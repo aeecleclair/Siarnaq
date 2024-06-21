@@ -40,8 +40,10 @@ export const AddEditVariantForm = ({
 
   useEffect(() => {
     if (refetchCurriculum) {
-      onGetCurriculum();
-      setRefetchCurriculum(false);
+      setRefetchCurriculum((_) => {
+        onGetCurriculum();
+        return false;
+      });
     }
   }, [refetchCurriculum]);
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {

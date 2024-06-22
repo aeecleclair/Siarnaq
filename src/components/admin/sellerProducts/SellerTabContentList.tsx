@@ -2,6 +2,7 @@ import { AdminPanel } from "../adminPanel/AdminPanel";
 import { RecapPanel } from "../adminPanel/RecapPanel/RecapPanel";
 import { SellerTabContent } from "./SellerTabContent";
 import { SellerComplete, Status } from "@/api";
+import { useUser } from "@/hooks/useUser";
 import { useSearchParams } from "next/navigation";
 
 interface SellerTabContentListProps {
@@ -19,6 +20,9 @@ export const SellerTabContentList = ({
 }: SellerTabContentListProps) => {
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
+  const userId = searchParams.get("userId");
+  const { user } = useUser(userId ?? "");
+
   if (activeSellerId === "cdradmin") {
     return (
       <AdminPanel
@@ -30,7 +34,7 @@ export const SellerTabContentList = ({
     );
   }
   if (activeSellerId === "cdrrecap") {
-    return <RecapPanel />;
+    return user && <RecapPanel user={user} />;
   }
   return sellers.map((seller) => (
     <SellerTabContent

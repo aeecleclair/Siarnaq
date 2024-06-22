@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useUser } from "@/hooks/useUser";
 import { RankingInfo } from "@tanstack/match-sorter-utils";
 import {
   ColumnDef,
@@ -62,6 +63,9 @@ export function DataTable<TData, TValue>({
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
+  const userId = searchParams.get("userId");
+  const { refetch } = useUser(userId ?? "");
+
   const table = useReactTable({
     data,
     columns,
@@ -98,6 +102,7 @@ export function DataTable<TData, TValue>({
     router.push(`/admin?${query}`);
     table.toggleAllRowsSelected(false);
     row.toggleSelected(true);
+    refetch();
   }
 
   return (

@@ -52,8 +52,7 @@ export const SellerTab = ({ status, setRefetchStatus }: SellerTabProps) => {
     >
       {firstSellerId && (
         <Tabs defaultValue={firstSellerId} className="w-full">
-          <SellerTabList 
-            status={status} sellers={sellers} />
+          <SellerTabList status={status} sellers={sellers} />
           <SellerTabContentList
             status={status}
             setRefetchStatus={setRefetchStatus}

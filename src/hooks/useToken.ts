@@ -44,7 +44,6 @@ export const useToken = () => {
       router.replace("/login");
       return;
     }
-    setIsRefreshing(true);
     const hyperionIssuer = await getIssuer();
     const response = await auth.refreshTokenGrantRequest(
       hyperionIssuer,
@@ -60,7 +59,6 @@ export const useToken = () => {
       setToken(null);
       setRefreshToken(null);
       router.replace("/login");
-      setIsRefreshing(false);
       return;
     }
 
@@ -74,22 +72,25 @@ export const useToken = () => {
       setToken(null);
       setRefreshToken(null);
       router.replace("/login");
-      setIsRefreshing(false);
       return;
     }
 
     console.log("Access Token Response", result);
     setToken(result.access_token);
     setRefreshToken(result.refresh_token ?? null);
-    setIsRefreshing(false);
     return result.access_token;
   }
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["token"],
-    queryFn: getToken,
+    queryFn: () => {
+      setIsRefreshing(true);
+      getToken().then((_) => {
+        setIsRefreshing(false);
+      });
+    },
     enabled: !isTokenExpired() && !isRefreshing,
   });
 
-  return { token: data, isLoading, error, getToken};
+  return { token: data, isLoading, error, getToken };
 };

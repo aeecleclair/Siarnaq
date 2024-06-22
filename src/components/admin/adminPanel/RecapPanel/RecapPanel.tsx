@@ -1,11 +1,16 @@
 import { payements } from "../payements";
 import { PaymentItem } from "./PaymentItem";
 import { SellerItem } from "./SellerItem";
+import { CoreUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
 
-export const RecapPanel = () => {
+interface RecapPanelProps {
+  user: CoreUser;
+}
+
+export const RecapPanel = ({ user }: RecapPanelProps) => {
   const { variantQuantity } = useVariantQuantityStore();
   const sellerIds = Object.keys(variantQuantity) as Array<string>;
   const totalToPay = 100;
@@ -14,6 +19,11 @@ export const RecapPanel = () => {
 
   return (
     <div className="grid gap-12 pt-8">
+      <div>
+        <CardTitle>
+          {user.firstname} {user.name}
+        </CardTitle>
+      </div>
       <div className="grid gap-6">
         <div>
           <CardTitle>Récapitulatif</CardTitle>
@@ -48,9 +58,7 @@ export const RecapPanel = () => {
               <Separator className="my-2" />
               <div className="flex flex-row w-full">
                 <span className="font-bold w-1/6">Total</span>
-                <span className="ml-auto font-semibold">
-                  {payements.reduce((acc, payment) => acc + payment.total, 0)} €
-                </span>
+                <span className="ml-auto font-semibold">{totalPaid} €</span>
               </div>
             </>
           ) : (

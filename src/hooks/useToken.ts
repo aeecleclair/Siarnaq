@@ -32,7 +32,6 @@ export const useToken = () => {
   };
 
   async function getToken() {
-    console.log("Get Token", isTokenExpired());
     if (!isTokenExpired()) {
       return token;
     }
@@ -92,5 +91,5 @@ export const useToken = () => {
     enabled: !isTokenExpired() && !isRefreshing,
   });
 
-  return { token: data, isLoading, error};
+  return { token: data, isLoading, error, getToken};
 };

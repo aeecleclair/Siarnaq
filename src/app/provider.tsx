@@ -4,7 +4,7 @@ import { useToken } from "@/hooks/useToken";
 import { client, createClient } from "@hey-api/client-fetch";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
-  const { token, isLoading } = useToken();
+  const { getToken } = useToken();
 
   createClient({
     // set default base url for requests
@@ -12,7 +12,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   });
 
   client.interceptors.request.use(async (request) => {
-    if (!token || isLoading) {
+    const token = await getToken();
+    if (!token) {
       return request;
     }
     request.headers.set("Authorization", `Bearer ${token}`);

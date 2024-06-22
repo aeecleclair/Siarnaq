@@ -24,10 +24,12 @@ const AdminPage = () => {
         console.log(error);
         return;
       }
-      if (data?.status === "onsite") {
-        setSize(50);
-      } else {
-        setSize(100);
+      if (data?.status) {
+        if (data.status === "onsite") {
+          setSize(50);
+        } else {
+          setSize(100);
+        }
       }
       setStatus(data!);
     };

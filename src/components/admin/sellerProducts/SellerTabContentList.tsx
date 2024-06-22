@@ -1,5 +1,5 @@
 import { AdminPanel } from "../adminPanel/AdminPanel";
-import { RecapPanel } from "../adminPanel/RecapPanel";
+import { RecapPanel } from "../adminPanel/RecapPanel/RecapPanel";
 import { SellerTabContent } from "./SellerTabContent";
 import { SellerComplete, Status } from "@/api";
 import { useSearchParams } from "next/navigation";

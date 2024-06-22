@@ -1,8 +1,13 @@
-import { SellerComplete } from "@/api";
+import { SellerComplete, Status } from "@/api";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export const SellerTabList = (props: { sellers: SellerComplete[] }) => {
+interface SellerTabListProps {
+  status: Status;
+  sellers: SellerComplete[];
+}
+
+export const SellerTabList = ({ status, sellers }: SellerTabListProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -14,8 +19,10 @@ export const SellerTabList = (props: { sellers: SellerComplete[] }) => {
   };
 
   return (
-    <TabsList className={`"grid w-full grid-cols-${props.sellers.length}"`}>
-      {props.sellers.map((seller) => (
+    <TabsList
+      className={`"grid w-full grid-cols-${sellers.length + 1 + (status.status === "onsite" ? 1 : 0)}"`}
+    >
+      {sellers.map((seller) => (
         <TabsTrigger
           key={seller.id}
           value={seller.id}
@@ -33,6 +40,16 @@ export const SellerTabList = (props: { sellers: SellerComplete[] }) => {
       >
         Admin
       </TabsTrigger>
+      {status.status === "onsite" && (
+        <TabsTrigger
+          key="cdrrecap"
+          value="cdrrecap"
+          className="w-full min-w-18"
+          onClick={() => handleClick("cdrrecap")}
+        >
+          Récaputilatif
+        </TabsTrigger>
+      )}
     </TabsList>
   );
 };

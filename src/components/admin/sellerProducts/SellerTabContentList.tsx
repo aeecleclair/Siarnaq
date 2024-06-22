@@ -1,4 +1,5 @@
 import { AdminPanel } from "../adminPanel/AdminPanel";
+import { RecapPanel } from "../adminPanel/RecapPanel";
 import { SellerTabContent } from "./SellerTabContent";
 import { SellerComplete, Status } from "@/api";
 import { useSearchParams } from "next/navigation";
@@ -27,6 +28,9 @@ export const SellerTabContentList = ({
         setRefetchStatus={setRefetchStatus}
       />
     );
+  }
+  if (activeSellerId === "cdrrecap") {
+    return <RecapPanel />;
   }
   return sellers.map((seller) => (
     <SellerTabContent

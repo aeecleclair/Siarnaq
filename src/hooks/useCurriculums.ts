@@ -5,10 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 export const useCurriculums = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["curriculums"],
-    queryFn: () => {
-      return getCdrCurriculums({
-      });
-    },
+    queryFn: getCdrCurriculums,
+    retry: 1,
   });
 
   return {

@@ -5,6 +5,7 @@ export const useUsers = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: getCdrUsers,
+    retry: 1,
   });
 
   return {

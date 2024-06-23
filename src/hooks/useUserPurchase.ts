@@ -1,6 +1,7 @@
 import { getCdrUsersUserIdPurchases } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
+
 export const useUserPurchases = (userId: string) => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["userPurchase", userId],
@@ -9,6 +10,7 @@ export const useUserPurchases = (userId: string) => {
         path: { user_id: userId },
       });
     },
+    retry: 1,
   });
 
   return {

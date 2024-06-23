@@ -1,6 +1,7 @@
 import { getCdrUsersUserIdPayments, PaymentComplete } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
+
 export const useUserPayment = (userId: string) => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["userPayment", userId],
@@ -9,6 +10,7 @@ export const useUserPayment = (userId: string) => {
         path: { user_id: userId },
       });
     },
+    retry: 1,
   });
 
   return {

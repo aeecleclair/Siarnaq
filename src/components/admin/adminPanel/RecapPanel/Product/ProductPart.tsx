@@ -2,6 +2,8 @@ import { PurchaseItem } from "./PurchaseItem";
 import { CoreUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { products } from "@/components/user/products";
+import { useProducts } from "@/hooks/useProducts";
 import { useUserPurchases } from "@/hooks/useUserPurchase";
 
 interface ProductPartProps {
@@ -10,6 +12,11 @@ interface ProductPartProps {
 
 export const ProductPart = ({ user }: ProductPartProps) => {
   const { purchases, total: totalToPay } = useUserPurchases(user.id);
+  const { products: allProducts } = useProducts();
+  const allConstraint = allProducts
+    ?.map((product) => product?.product_constraints)
+    .flat();
+  const allConstraintIds = allConstraint?.map((constraint) => constraint?.id);
   return (
     <div className="grid gap-6">
       <div>
@@ -21,6 +28,9 @@ export const ProductPart = ({ user }: ProductPartProps) => {
             {purchases.map((purchase) => (
               <PurchaseItem
                 key={purchase.product_variant_id}
+                allProducts={allProducts}
+                allConstraintIds={allConstraintIds}
+                allPurchasesIds={purchases.map((purchase) => purchase.product.id)}
                 purchase={purchase}
               />
             ))}

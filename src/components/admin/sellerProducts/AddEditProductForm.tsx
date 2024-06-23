@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { productFormSchema } from "@/forms/productFormSchema";
-import { useEffect, useState } from "react";
+import { useProducts } from "@/hooks/useProducts";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
@@ -29,28 +29,7 @@ export const AddEditProductForm = ({
   setIsOpened,
   isEdit = false,
 }: AddEditProductFormProps) => {
-  const [constraint, setConstraint] = useState<
-    app__modules__cdr__schemas_cdr__ProductComplete[]
-  >([]);
-  const [refetchConstraint, setRefetchConstraint] = useState<boolean>(true);
-
-  const onGetConstraint = async () => {
-    const { data, error } = await getCdrProducts({});
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setConstraint(data!);
-  };
-
-  useEffect(() => {
-    if (refetchConstraint) {
-      setRefetchConstraint((_) => {
-        onGetConstraint();
-        return false;
-      });
-    }
-  }, [refetchConstraint]);
+  const { products: constraint } = useProducts();
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
@@ -123,12 +102,14 @@ export const AddEditProductForm = ({
           id="product_constraints"
           input={(field) => (
             <MultiSelect
-              options={constraint
-                .filter((constraint) => constraint.id !== form.watch("id"))
-                .map((constraint) => ({
-                  label: constraint.name_fr,
-                  value: constraint.id,
-                }))}
+              options={
+                constraint
+                  ?.filter((constraint) => constraint.id !== form.watch("id"))
+                  .map((constraint) => ({
+                    label: constraint.name_fr,
+                    value: constraint.id,
+                  })) ?? []
+              }
               selected={field.value}
               {...field}
               className="w-64"

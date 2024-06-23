@@ -20,7 +20,7 @@ export const useToken = () => {
   }
   const { token, setToken, refreshToken, setRefreshToken } = useTokenStore();
   const [isRefreshing, setIsRefreshing] = useState(false);
-
+  
   const isTokenExpired = () => {
     if (!token) {
       return true;
@@ -31,7 +31,7 @@ export const useToken = () => {
     return access_token_expires - 60 < now;
   };
 
-  async function getToken() {
+  async function getToken(): Promise<string | undefined | null> {
     if (!isTokenExpired()) {
       return token;
     }
@@ -44,6 +44,7 @@ export const useToken = () => {
       router.replace("/login");
       return;
     }
+    setIsRefreshing(true);
     const hyperionIssuer = await getIssuer();
     const response = await auth.refreshTokenGrantRequest(
       hyperionIssuer,
@@ -81,16 +82,16 @@ export const useToken = () => {
     return result.access_token;
   }
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["token"],
-    queryFn: () => {
-      setIsRefreshing(true);
-      getToken().then((_) => {
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ["token", token, isTokenExpired()],
+    queryFn: async () => {
+      return getToken().then((token) => {
         setIsRefreshing(false);
+        return token;
       });
     },
-    enabled: !isTokenExpired() && !isRefreshing,
+    enabled: isTokenExpired(),
   });
 
-  return { token: data, isLoading, error, getToken };
+  return { token: data, isLoading, error, getToken, refetch };
 };

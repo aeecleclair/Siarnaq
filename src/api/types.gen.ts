@@ -299,7 +299,7 @@ export type CdrUser = {
   firstname: string;
   nickname?: string | null;
   id: string;
-  curriculum: Array<CurriculumComplete>;
+  curriculum: CurriculumComplete;
 };
 
 export type ChangePasswordRequest = {

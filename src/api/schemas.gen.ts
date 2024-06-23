@@ -1394,11 +1394,7 @@ export const $CdrUser = {
       title: "Id",
     },
     curriculum: {
-      items: {
-        $ref: "#/components/schemas/CurriculumComplete",
-      },
-      type: "array",
-      title: "Curriculum",
+      $ref: "#/components/schemas/CurriculumComplete",
     },
   },
   type: "object",

@@ -403,6 +403,8 @@ import type {
   GetCampaignListsListIdLogoData,
   GetCampaignListsListIdLogoError,
   GetCampaignListsListIdLogoResponse,
+  GetCdrUsersError,
+  GetCdrUsersResponse,
   GetCdrSellersError,
   GetCdrSellersResponse,
   PostCdrSellersData,
@@ -3394,6 +3396,21 @@ export const getCampaignListsListIdLogo = (
     ...options,
     url: "/campaign/lists/{list_id}/logo",
   });
+};
+
+/**
+ * Get Cdr Users
+ * Get all sellers.
+ *
+ * **User must be part of a seller group to use this endpoint**
+ */
+export const getCdrUsers = (options?: Options) => {
+  return (options?.client ?? client).get<GetCdrUsersResponse, GetCdrUsersError>(
+    {
+      ...options,
+      url: "/cdr/users/",
+    },
+  );
 };
 
 /**

@@ -396,10 +396,10 @@ export const $AssociationEdit = {
   title: "AssociationEdit",
 } as const;
 
-export const $AvailableMembership = {
+export const $AvailableAssociationMembership = {
   type: "string",
   enum: ["AEECL", "USEECL"],
-  title: "AvailableMembership",
+  title: "AvailableAssociationMembership",
 } as const;
 
 export const $BatchResult = {
@@ -1366,6 +1366,44 @@ export const $CdrStatus = {
   type: "string",
   enum: ["pending", "online", "onsite", "closed"],
   title: "CdrStatus",
+} as const;
+
+export const $CdrUser = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    firstname: {
+      type: "string",
+      title: "Firstname",
+    },
+    nickname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nickname",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+    curriculum: {
+      items: {
+        $ref: "#/components/schemas/CurriculumComplete",
+      },
+      type: "array",
+      title: "Curriculum",
+    },
+  },
+  type: "object",
+  required: ["name", "firstname", "id", "curriculum"],
+  title: "CdrUser",
 } as const;
 
 export const $ChangePasswordRequest = {
@@ -4463,6 +4501,17 @@ export const $ProductBase = {
       type: "boolean",
       title: "Available Online",
     },
+    related_membership: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership",
+    },
     product_constraints: {
       items: {
         type: "string",
@@ -4649,6 +4698,18 @@ export const $ProductVariantBase = {
       type: "array",
       title: "Allowed Curriculum",
     },
+    related_membership_added_duration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "duration",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership Added Duration",
+    },
   },
   type: "object",
   required: [
@@ -4723,6 +4784,18 @@ export const $ProductVariantComplete = {
       type: "array",
       title: "Allowed Curriculum",
       default: [],
+    },
+    related_membership_added_duration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "duration",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership Added Duration",
     },
   },
   type: "object",
@@ -4831,6 +4904,18 @@ export const $ProductVariantEdit = {
         },
       ],
       title: "Allowed Curriculum",
+    },
+    related_membership_added_duration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "duration",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership Added Duration",
     },
   },
   type: "object",
@@ -5759,7 +5844,7 @@ export const $app__modules__campaign__schemas_campaign__Result = {
 export const $app__modules__cdr__schemas_cdr__MembershipBase = {
   properties: {
     membership: {
-      $ref: "#/components/schemas/AvailableMembership",
+      $ref: "#/components/schemas/AvailableAssociationMembership",
     },
     start_date: {
       type: "string",
@@ -5780,7 +5865,7 @@ export const $app__modules__cdr__schemas_cdr__MembershipBase = {
 export const $app__modules__cdr__schemas_cdr__MembershipComplete = {
   properties: {
     membership: {
-      $ref: "#/components/schemas/AvailableMembership",
+      $ref: "#/components/schemas/AvailableAssociationMembership",
     },
     start_date: {
       type: "string",

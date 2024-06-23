@@ -96,7 +96,7 @@ export type AssociationEdit = {
   mandate_year?: number | null;
 };
 
-export type AvailableMembership = "AEECL" | "USEECL";
+export type AvailableAssociationMembership = "AEECL" | "USEECL";
 
 /**
  * Return a dictionary of {key: error message} indicating which element of failed.
@@ -293,6 +293,14 @@ export type CashEdit = {
 };
 
 export type CdrStatus = "pending" | "online" | "onsite" | "closed";
+
+export type CdrUser = {
+  name: string;
+  firstname: string;
+  nickname?: string | null;
+  id: string;
+  curriculum: Array<CurriculumComplete>;
+};
 
 export type ChangePasswordRequest = {
   email: string;
@@ -1043,6 +1051,7 @@ export type ProductBase = {
   description_fr?: string | null;
   description_en?: string | null;
   available_online: boolean;
+  related_membership?: string | null;
   product_constraints: Array<string>;
   document_constraints: Array<string>;
 };
@@ -1079,6 +1088,7 @@ export type ProductVariantBase = {
   enabled: boolean;
   unique: boolean;
   allowed_curriculum: Array<string>;
+  related_membership_added_duration?: string | null;
 };
 
 export type ProductVariantComplete = {
@@ -1092,6 +1102,7 @@ export type ProductVariantComplete = {
   enabled: boolean;
   unique: boolean;
   allowed_curriculum?: Array<CurriculumComplete>;
+  related_membership_added_duration?: string | null;
 };
 
 export type ProductVariantEdit = {
@@ -1103,6 +1114,7 @@ export type ProductVariantEdit = {
   enabled?: boolean | null;
   unique?: boolean | null;
   allowed_curriculum?: Array<string> | null;
+  related_membership_added_duration?: string | null;
 };
 
 export type PurchaseBase = {
@@ -1351,13 +1363,13 @@ export type app__modules__campaign__schemas_campaign__Result = {
 };
 
 export type app__modules__cdr__schemas_cdr__MembershipBase = {
-  membership: AvailableMembership;
+  membership: AvailableAssociationMembership;
   start_date: string;
   end_date: string;
 };
 
 export type app__modules__cdr__schemas_cdr__MembershipComplete = {
-  membership: AvailableMembership;
+  membership: AvailableAssociationMembership;
   start_date: string;
   end_date: string;
   id: string;
@@ -2577,6 +2589,10 @@ export type GetCampaignListsListIdLogoData = {
 export type GetCampaignListsListIdLogoResponse = unknown;
 
 export type GetCampaignListsListIdLogoError = unknown;
+
+export type GetCdrUsersResponse = Array<CdrUser>;
+
+export type GetCdrUsersError = unknown;
 
 export type GetCdrSellersResponse = Array<SellerComplete>;
 
@@ -5697,6 +5713,16 @@ export type $OpenApiTs = {
          * Validation Error
          */
         "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/users/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<CdrUser>;
       };
     };
   };

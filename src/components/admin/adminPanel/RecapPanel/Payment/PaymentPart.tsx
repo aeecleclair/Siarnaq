@@ -1,4 +1,3 @@
-import { payements } from "../../payements";
 import { PaymentItem } from "./PaymentItem";
 import { CoreUser, PaymentBase, PaymentType, postCdrUsersUserIdPayments } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { paymentFormSchema } from "@/forms/paymentFormSchema";
+import { useUserPayment } from "@/hooks/useUserPayment";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -33,7 +33,7 @@ interface PaymentPartProps {
 }
 
 export const PaymentPart = ({ user }: PaymentPartProps) => {
-  const totalPaid = payements.reduce((acc, payment) => acc + payment.total, 0);
+  const { payments, total: totalPaid, refetch } = useUserPayment(user.id);
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const paymentTypes: PaymentType[] = [
@@ -82,7 +82,7 @@ export const PaymentPart = ({ user }: PaymentPartProps) => {
       setIsOpened(false);
       return;
     }
-    // refreshProduct();
+    refetch();
     setIsOpened(false);
     setIsLoading(false);
     form.reset();
@@ -167,9 +167,9 @@ export const PaymentPart = ({ user }: PaymentPartProps) => {
         </CardTitle>
       </div>
       <div className="space-y-2">
-        {payements.length > 0 ? (
+        {(payments?.length ?? 0) > 0 ? (
           <>
-            {payements.map((payment) => (
+            {payments?.map((payment) => (
               <PaymentItem key={payment.id} payment={payment} />
             ))}
             <Separator className="my-2" />
@@ -179,7 +179,7 @@ export const PaymentPart = ({ user }: PaymentPartProps) => {
             </div>
           </>
         ) : (
-          <div>Aucun produit</div>
+          <div>Aucun paiement</div>
         )}
       </div>
     </div>

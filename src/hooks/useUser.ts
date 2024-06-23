@@ -6,7 +6,7 @@ export const useUser = (userId: string) => {
     queryKey: ["user", userId],
     queryFn: () => {
       return getUsersUserId({
-        path: { user_id: userId! },
+        path: { user_id: userId },
       });
     },
   });

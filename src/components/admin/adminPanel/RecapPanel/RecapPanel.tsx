@@ -1,10 +1,9 @@
-import { payements } from "../payements";
-import { PaymentItem } from "./Payment/PaymentItem";
 import { PaymentPart } from "./Payment/PaymentPart";
 import { SellerItem } from "./SellerItem";
 import { CoreUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useUserPayment } from "@/hooks/useUserPayment";
 import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
 
 interface RecapPanelProps {
@@ -13,10 +12,10 @@ interface RecapPanelProps {
 
 export const RecapPanel = ({ user }: RecapPanelProps) => {
   const { variantQuantity } = useVariantQuantityStore();
+  const { total: totalPaid } = useUserPayment(user.id);
   const sellerIds = Object.keys(variantQuantity) as Array<string>;
   const totalToPay = 100;
-  const totalPaid = payements.reduce((acc, payment) => acc + payment.total, 0);
-  const remainingToPay = totalToPay - totalPaid;
+  const remainingToPay = totalToPay - (totalPaid ?? 0);
 
   return (
     <div className="grid gap-12 pt-8">

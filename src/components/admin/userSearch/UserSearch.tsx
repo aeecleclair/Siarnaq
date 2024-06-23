@@ -1,33 +1,13 @@
 import { columns } from "./Columns";
 import { DataTable } from "./DataTable";
-import { CoreUserSimple, getUsers } from "@/api";
-import { useEffect, useState } from "react";
+import { useUsers } from "@/hooks/useUsers";
 
 export const UserSearch = () => {
-  const [users, setUsers] = useState<CoreUserSimple[]>([]);
-  const [refetchUsers, setRefetchUsers] = useState<boolean>(true);
-
-  const onGetCdrSellers = async () => {
-    const { data, error } = await getUsers({});
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setUsers(data!);
-  };
-
-  useEffect(() => {
-    if (refetchUsers) {
-      setRefetchUsers((_) => {
-        onGetCdrSellers();
-        return false;
-      });
-    }
-  }, [refetchUsers]);
+  const { users } = useUsers();
 
   return (
     <div className="flex items-center justify-center p-6 min-w-96">
-      <DataTable columns={columns} data={users} />
+      {users && <DataTable columns={columns} data={users} />}
     </div>
   );
 };

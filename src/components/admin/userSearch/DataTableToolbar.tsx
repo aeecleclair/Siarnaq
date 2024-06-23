@@ -1,11 +1,9 @@
 "use client";
 
 import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
-import { DataTableFilterCheckBox } from "./DataTableFilterCheckBox";
 import { DataTableViewOptions } from "./DataTableViewOptions";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { useCurriculums } from "@/hooks/useCurriculums";
 import { Table } from "@tanstack/react-table";
 
 interface DataTableToolbarProps<TData> {
@@ -19,6 +17,7 @@ export function DataTableToolbar<TData>({
   globalFilter,
   setGlobalFilter,
 }: DataTableToolbarProps<TData>) {
+  const { curriculums } = useCurriculums();
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
@@ -28,6 +27,18 @@ export function DataTableToolbar<TData>({
           onChange={(event) => setGlobalFilter(event.target.value)}
           className="h-8 w-[150px] lg:w-[250px]"
         />
+        {table.getColumn("curriculum") && (
+          <DataTableFacetedFilter
+            column={table.getColumn("curriculum")}
+            title="Cursus"
+            options={
+              curriculums?.map((curriculum) => ({
+                value: curriculum.id,
+                label: curriculum.name,
+              })) || []
+            }
+          />
+        )}
       </div>
       <DataTableViewOptions table={table} />
     </div>

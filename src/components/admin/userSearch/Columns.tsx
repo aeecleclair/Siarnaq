@@ -1,13 +1,12 @@
 "use client";
 
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
-import { DataTableRowActions } from "./DataTableRowActions";
 import { fuzzySort } from "./searchFunction";
-import { CoreUserSimple } from "@/api";
-import { Checkbox } from "@/components/ui/checkbox";
+import { CdrUser, CurriculumComplete } from "@/api";
+import { Badge } from "@/components/ui/badge";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const columns: ColumnDef<CoreUserSimple>[] = [
+export const columns: ColumnDef<CdrUser>[] = [
   // {
   //   id: "select",
   //   header: ({ table }) => (
@@ -62,6 +61,27 @@ export const columns: ColumnDef<CoreUserSimple>[] = [
     filterFn: "fuzzy", //using our custom fuzzy filter function
     // filterFn: fuzzyFilter, //or just define with the function
     sortingFn: fuzzySort, //sort by fuzzy rank (falls back to alphanumeric)
+  },
+  {
+    accessorKey: "curriculum",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Cursus" />
+    ),
+    cell: ({ row }) => {
+      const curriculum = row.getValue("curriculum") as CurriculumComplete[];
+      return (
+        <div className="flex space-x-2">
+          <Badge variant="outline">
+            {curriculum.length > 0
+              ? curriculum.map((curriculum) => curriculum.name).join(", ")
+              : "Aucun cursus"}
+          </Badge>
+        </div>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
   },
   // {
   //   id: "actions",

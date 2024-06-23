@@ -30,7 +30,9 @@ export const ProductPart = ({ user }: ProductPartProps) => {
                 key={purchase.product_variant_id}
                 allProducts={allProducts}
                 allConstraintIds={allConstraintIds}
-                allPurchasesIds={purchases.map((purchase) => purchase.product.id)}
+                allPurchasesIds={purchases.map(
+                  (purchase) => purchase.product.id,
+                )}
                 purchase={purchase}
               />
             ))}

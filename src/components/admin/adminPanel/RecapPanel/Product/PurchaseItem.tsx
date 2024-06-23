@@ -30,7 +30,9 @@ export const PurchaseItem = ({
   );
 
   const displayWarning =
-    missingConstraintProduct && missingConstraintProduct.length > 0 && notTakenConstraintProduct?.length !== 0;
+    missingConstraintProduct &&
+    missingConstraintProduct.length > 0 &&
+    notTakenConstraintProduct?.length !== 0;
 
   return (
     <div>

@@ -67,18 +67,15 @@ export const columns: ColumnDef<CdrUser>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Cursus" />
     ),
-    cell: ({ row }) => {
-      const curriculum = row.getValue("curriculum") as CurriculumComplete[];
-      return (
-        <div className="flex space-x-2">
-          <Badge variant="outline">
-            {curriculum.length > 0
-              ? curriculum.map((curriculum) => curriculum.name).join(", ")
-              : "Aucun cursus"}
-          </Badge>
-        </div>
-      );
-    },
+    cell: ({ row }) => (
+      <div className="flex space-x-2">
+        <Badge variant="outline">
+          {(row.getValue("curriculum") as any).length > 0
+            ? (row.getValue("curriculum") as CurriculumComplete).name
+            : "Aucun cursus"}
+        </Badge>
+      </div>
+    ),
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
     },

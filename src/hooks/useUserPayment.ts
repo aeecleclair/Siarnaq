@@ -1,7 +1,6 @@
 import { getCdrUsersUserIdPayments, PaymentComplete } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
-
 export const useUserPayment = (userId: string) => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["userPayment", userId],

@@ -1128,6 +1128,16 @@ export type PurchaseComplete = {
   validated: boolean;
 };
 
+export type PurchaseReturn = {
+  quantity: number;
+  user_id: string;
+  product_variant_id: string;
+  validated: boolean;
+  price: number;
+  product: ProductCompleteNoConstraint;
+  seller: SellerComplete;
+};
+
 /**
  * Base schema for raffles
  */
@@ -2782,7 +2792,7 @@ export type GetCdrUsersUserIdPurchasesData = {
   };
 };
 
-export type GetCdrUsersUserIdPurchasesResponse = Array<PurchaseComplete>;
+export type GetCdrUsersUserIdPurchasesResponse = Array<PurchaseReturn>;
 
 export type GetCdrUsersUserIdPurchasesError = unknown;
 
@@ -2794,7 +2804,7 @@ export type GetCdrSellersSellerIdUsersUserIdPurchasesData = {
 };
 
 export type GetCdrSellersSellerIdUsersUserIdPurchasesResponse =
-  Array<PurchaseComplete>;
+  Array<PurchaseReturn>;
 
 export type GetCdrSellersSellerIdUsersUserIdPurchasesError = unknown;
 
@@ -5981,7 +5991,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "200": Array<PurchaseComplete>;
+        "200": Array<PurchaseReturn>;
         /**
          * Validation Error
          */
@@ -5996,7 +6006,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "200": Array<PurchaseComplete>;
+        "200": Array<PurchaseReturn>;
         /**
          * Validation Error
          */

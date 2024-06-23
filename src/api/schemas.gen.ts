@@ -4959,6 +4959,49 @@ export const $PurchaseComplete = {
   title: "PurchaseComplete",
 } as const;
 
+export const $PurchaseReturn = {
+  properties: {
+    quantity: {
+      type: "integer",
+      title: "Quantity",
+    },
+    user_id: {
+      type: "string",
+      title: "User Id",
+    },
+    product_variant_id: {
+      type: "string",
+      format: "uuid",
+      title: "Product Variant Id",
+    },
+    validated: {
+      type: "boolean",
+      title: "Validated",
+    },
+    price: {
+      type: "integer",
+      title: "Price",
+    },
+    product: {
+      $ref: "#/components/schemas/ProductCompleteNoConstraint",
+    },
+    seller: {
+      $ref: "#/components/schemas/SellerComplete",
+    },
+  },
+  type: "object",
+  required: [
+    "quantity",
+    "user_id",
+    "product_variant_id",
+    "validated",
+    "price",
+    "product",
+    "seller",
+  ],
+  title: "PurchaseReturn",
+} as const;
+
 export const $RaffleBase = {
   properties: {
     name: {

@@ -1,5 +1,6 @@
 import { payements } from "../payements";
-import { PaymentItem } from "./PaymentItem";
+import { PaymentItem } from "./Payment/PaymentItem";
+import { PaymentPart } from "./Payment/PaymentPart";
 import { SellerItem } from "./SellerItem";
 import { CoreUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
@@ -45,27 +46,7 @@ export const RecapPanel = ({ user }: RecapPanelProps) => {
           )}
         </div>
       </div>
-      <div className="grid gap-6">
-        <div>
-          <CardTitle>Paiements</CardTitle>
-        </div>
-        <div className="space-y-2">
-          {payements.length > 0 ? (
-            <>
-              {payements.map((payment) => (
-                <PaymentItem key={payment.id} payment={payment} />
-              ))}
-              <Separator className="my-2" />
-              <div className="flex flex-row w-full">
-                <span className="font-bold w-1/6">Total</span>
-                <span className="ml-auto font-semibold">{totalPaid} €</span>
-              </div>
-            </>
-          ) : (
-            <div>Aucun produit</div>
-          )}
-        </div>
-      </div>
+      <PaymentPart user={user} />
       <div className="grid gap-6">
         <CardTitle className="flex flex-row w-full">
           <span className="font-bold">Reste à payer</span>

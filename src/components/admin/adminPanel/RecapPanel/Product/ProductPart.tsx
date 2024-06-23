@@ -1,15 +1,15 @@
+import { PurchaseItem } from "./PurchaseItem";
 import { CoreUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { useUserPurchases } from "@/hooks/useUserPurchase";
-import { Separator } from "@radix-ui/react-context-menu";
 
 interface ProductPartProps {
   user: CoreUser;
 }
 
 export const ProductPart = ({ user }: ProductPartProps) => {
-  const { purchases } = useUserPurchases(user.id);
-  const totalToPay = 100;
+  const { purchases, total: totalToPay } = useUserPurchases(user.id);
   return (
     <div className="grid gap-6">
       <div>
@@ -19,12 +19,10 @@ export const ProductPart = ({ user }: ProductPartProps) => {
         {purchases && purchases?.length > 0 ? (
           <>
             {purchases.map((purchase) => (
-              <div key={purchase.product_variant_id}>
-                <span>
-                  {purchase.product_variant_id} - {purchase.quantity}
-                </span>
-              </div>
-              //   <SellerItem key={purchase.product_variant_id} id={id} />
+              <PurchaseItem
+                key={purchase.product_variant_id}
+                purchase={purchase}
+              />
             ))}
             <Separator className="my-2" />
             <div className="flex flex-row w-full">

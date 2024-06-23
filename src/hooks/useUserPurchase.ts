@@ -14,6 +14,10 @@ export const useUserPurchases = (userId: string) => {
 
   return {
     purchases: data?.data,
+    total: data?.data?.reduce<number>(
+      (acc, purchase) => acc + purchase.quantity * purchase.price,
+      0,
+    ),
     isLoading,
     refetch,
   };

@@ -25,8 +25,8 @@ interface ProductAccordionOptionsProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;
   sellerId: string;
   refreshProduct: () => void;
-  canEdit: boolean;
-  canRemove: boolean;
+  canEdit?: boolean;
+  canRemove?: boolean;
 }
 
 export const ProductAccordionOptions = ({

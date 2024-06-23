@@ -58,8 +58,8 @@ export const ProductAccordion = ({
           product={product}
           sellerId={sellerId}
           refreshProduct={refreshProduct}
-          canEdit
-          canRemove={product.variants?.length === 0}
+          canEdit={canEdit}
+          canRemove={product.variants?.length === 0 && canRemove}
         />
       </ContextMenu>
       <AccordionContent>

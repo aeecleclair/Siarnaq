@@ -4,33 +4,12 @@ import { DataTablePagination } from "./DataTablePagination";
 import { DataTableToolbar } from "./DataTableToolbar";
 import { fuzzyFilter } from "./searchFunction";
 import { CoreUserSimple } from "@/api";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { RankingInfo } from "@tanstack/match-sorter-utils";
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  FilterFn,
-  Row,
-  SortingState,
-  VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import { ColumnDef, ColumnFiltersState, FilterFn, Row, SortingState, VisibilityState, flexRender, getCoreRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
+
 
 // Extend the FilterFns and FilterMeta interfaces to include our custom filter function and meta
 declare module "@tanstack/react-table" {
@@ -62,6 +41,8 @@ export function DataTable<TData, TValue>({
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
+  const userId = searchParams.get("userId");
+
   const table = useReactTable({
     data,
     columns,
@@ -89,6 +70,17 @@ export function DataTable<TData, TValue>({
     globalFilterFn: "fuzzy",
     onGlobalFilterChange: setGlobalFilter,
   });
+  React.useEffect(() => {
+    if (userId && table.getRowModel().rows.length > 0) {
+      const row = table
+        .getRowModel()
+        .rows.find((row) => (row.original as CoreUserSimple).id === userId);
+      if (row && !row.getIsSelected()) {
+        row.toggleSelected(true);
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [table.getRowModel().rows, userId]);
 
   function onUserSelect(row: Row<TData>) {
     const id = (row.original as CoreUserSimple).id;

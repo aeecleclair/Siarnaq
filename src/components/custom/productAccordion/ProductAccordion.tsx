@@ -8,7 +8,9 @@ import { ProductAccordionOptions } from "./ProductAccordionOptions";
 import { VariantCardWithOptions } from "./VariantCardWithOptions";
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
+import { useUserPurchases } from "@/hooks/useUserPurchase";
 import { useSizeStore } from "@/stores/SizeStore";
+import { useSearchParams } from "next/navigation";
 
 interface ProductAccordionProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;
@@ -39,9 +41,29 @@ export const ProductAccordion = ({
 }: ProductAccordionProps) => {
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+  const { purchases: userPurchases } = useUserPurchases(userId ?? "");
   const variantToDisplay = showDisabled
     ? product.variants
     : product.variants?.filter((variant) => variant.enabled);
+  const purchasedProductIds = userPurchases?.map(
+    (purchase) => purchase.product.id,
+  );
+  const purchasedVariantIds = userPurchases?.map(
+    (purchase) => purchase.product_variant_id,
+  );
+  const missingConstraintProducts = product.product_constraints?.filter(
+    (constraint) => !purchasedProductIds?.includes(constraint.id),
+  );
+
+  const isMissingConstraint =
+    missingConstraintProducts && missingConstraintProducts?.length > 0;
+  const isOneVariantTaken = product.variants?.some((variant) =>
+    purchasedVariantIds?.includes(variant.id),
+  );
+
+  const displayWarning = isMissingConstraint && isOneVariantTaken;
 
   return (
     <AccordionItem value={product.id}>
@@ -70,6 +92,13 @@ export const ProductAccordion = ({
         <div className="hidden grid-cols-3" />
         <div className="hidden grid-cols-2" />
         <div className="hidden grid-cols-1" />
+        {displayWarning && (
+          <p className="text-red-500 font-semibold mb-2">{`Vous devez acheter ${
+            missingConstraintProducts
+              ?.map((product) => product.name_en)
+              .join(", ") ?? ""
+          }`}</p>
+        )}
         <div
           className={`grid ${showDescription ? "grid-row" : "grid-cols-" + numberOfCard} gap-4`}
         >
@@ -86,7 +115,7 @@ export const ProductAccordion = ({
                 <VariantCardWithOptions
                   key={variant.id}
                   variant={variant}
-                  productId={product.id}
+                  product={product}
                   sellerId={sellerId}
                   canEdit={canEdit}
                   canRemove={canRemove}
@@ -95,6 +124,7 @@ export const ProductAccordion = ({
                   refreshProduct={refreshProduct}
                   isSelectable={isSelectable}
                   isAdmin={isAdmin}
+                  displayWarning={displayWarning}
                 />
               ))}
             </>

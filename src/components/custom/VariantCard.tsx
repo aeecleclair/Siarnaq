@@ -5,6 +5,7 @@ import {
   postCdrUsersUserIdPurchasesProductVariantId,
 } from "@/api";
 import { ProductVariantComplete, PurchaseBase } from "@/api/types.gen";
+import { useUserPurchases } from "@/hooks/useUserPurchase";
 import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
 import { useTokenStore } from "@/stores/token";
 import { ReloadIcon } from "@radix-ui/react-icons";
@@ -18,6 +19,7 @@ interface VariantCardProps {
   showDescription: boolean;
   isSelectable: boolean;
   isAdmin: boolean;
+  displayWarning?: boolean;
 }
 
 export const VariantCard = ({
@@ -26,6 +28,7 @@ export const VariantCard = ({
   showDescription,
   isSelectable,
   isAdmin,
+  displayWarning,
 }: VariantCardProps) => {
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
@@ -34,6 +37,7 @@ export const VariantCard = ({
     isAdmin ? userId ?? "" : myUserId ?? "",
     sellerId,
   );
+  const { refetch: refetchUserPurchases } = useUserPurchases(userId ?? "");
   const numberSelectedVariant =
     purchases?.find((purchase) => purchase.product_variant_id === variant.id)
       ?.quantity || 0;
@@ -59,6 +63,7 @@ export const VariantCard = ({
     }
     setIsLoading(false);
     refetch();
+    refetchUserPurchases();
   };
 
   const cancelPurchase = async () => {
@@ -78,11 +83,12 @@ export const VariantCard = ({
     }
     setIsLoading(false);
     refetch();
+    refetchUserPurchases();
   };
 
   return (
     <Card
-      className={`min-w-40 h-[95px] ${selected && "border-black shadow-lg"} ${!variant.enabled && "text-muted-foreground"} ${isSelectable && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
+      className={`min-w-40 h-[95px] ${selected && "shadow-lg"} ${selected && (displayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${isSelectable && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
       onClick={() => {
         if (isSelectable && variant.enabled && variant.unique && !isLoading) {
           if (selected) {
@@ -113,6 +119,11 @@ export const VariantCard = ({
               onClick={(e) => {
                 if (!isSelectable) return;
                 e.stopPropagation();
+                const newQuantity = numberSelectedVariant - 1;
+                if (newQuantity === 0) {
+                  cancelPurchase();
+                  return;
+                }
                 purchaseVariant(numberSelectedVariant - 1);
               }}
               isLoading={isLoading}

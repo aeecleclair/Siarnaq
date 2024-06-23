@@ -89,6 +89,7 @@ export const SellerTabContent = ({ status, seller }: SellerTabContentProps) => {
               showDisabled
               refreshProduct={onGetCdrSellerProducts}
               isSelectable={status.status === "onsite"}
+              isAdmin
             />
           ))}
         </Accordion>

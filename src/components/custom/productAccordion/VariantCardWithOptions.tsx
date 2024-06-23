@@ -13,6 +13,7 @@ interface VariantCardWithOptionsProps {
   showDescription: boolean;
   refreshProduct: () => void;
   isSelectable: boolean;
+  isAdmin: boolean;
 }
 
 export const VariantCardWithOptions = ({
@@ -25,16 +26,17 @@ export const VariantCardWithOptions = ({
   showDescription,
   refreshProduct,
   isSelectable,
+  isAdmin,
 }: VariantCardWithOptionsProps) => {
   return (
     <ContextMenu>
       <ContextMenuTrigger>
         <VariantCard
           variant={variant}
-          productId={productId}
           sellerId={sellerId}
           showDescription={showDescription}
           isSelectable={isSelectable}
+          isAdmin={isAdmin}
         />
       </ContextMenuTrigger>
       <VariantCardOptions

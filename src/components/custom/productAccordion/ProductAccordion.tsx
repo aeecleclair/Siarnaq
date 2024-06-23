@@ -21,6 +21,7 @@ interface ProductAccordionProps {
   showDisabled?: boolean;
   refreshProduct: () => void;
   isSelectable?: boolean;
+  isAdmin?: boolean;
 }
 
 export const ProductAccordion = ({
@@ -34,6 +35,7 @@ export const ProductAccordion = ({
   showDisabled = false,
   refreshProduct,
   isSelectable = false,
+  isAdmin = false,
 }: ProductAccordionProps) => {
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
@@ -92,6 +94,7 @@ export const ProductAccordion = ({
                   showDescription={showDescription}
                   refreshProduct={refreshProduct}
                   isSelectable={isSelectable}
+                  isAdmin={isAdmin}
                 />
               ))}
             </>

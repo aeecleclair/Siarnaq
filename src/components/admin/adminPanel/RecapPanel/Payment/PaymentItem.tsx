@@ -31,7 +31,9 @@ export const PaymentItem = ({ payment }: PaymentItemProps) => {
         {paymentIcon(payment.payment_type)}
         {payment.payment_type}
       </span>
-      <span className="ml-auto font-semibold w-20 flex justify-end">{payment.total} €</span>
+      <span className="ml-auto font-semibold w-20 flex justify-end">
+        {payment.total} €
+      </span>
     </div>
   );
 };

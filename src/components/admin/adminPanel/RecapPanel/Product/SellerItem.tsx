@@ -6,7 +6,7 @@ interface SellerItemProps {
   id: string;
 }
 
-export const SellerItem = ({ id, }: SellerItemProps) => {
+export const SellerItem = ({ id }: SellerItemProps) => {
   const { variantQuantity } = useVariantQuantityStore();
   const sellerProducts = variantQuantity[id];
   const productIds = Object.keys(sellerProducts.products) as Array<string>;

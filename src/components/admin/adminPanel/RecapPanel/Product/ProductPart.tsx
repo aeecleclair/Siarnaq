@@ -1,4 +1,3 @@
-import { SellerItem } from "./SellerItem";
 import { CoreUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
 import { useUserPurchases } from "@/hooks/useUserPurchase";
@@ -21,7 +20,9 @@ export const ProductPart = ({ user }: ProductPartProps) => {
           <>
             {purchases.map((purchase) => (
               <div key={purchase.product_variant_id}>
-                <span>{purchase.product_variant_id} - {purchase.quantity}</span>
+                <span>
+                  {purchase.product_variant_id} - {purchase.quantity}
+                </span>
               </div>
               //   <SellerItem key={purchase.product_variant_id} id={id} />
             ))}

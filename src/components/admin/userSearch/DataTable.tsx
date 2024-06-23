@@ -4,12 +4,33 @@ import { DataTablePagination } from "./DataTablePagination";
 import { DataTableToolbar } from "./DataTableToolbar";
 import { fuzzyFilter } from "./searchFunction";
 import { CoreUserSimple } from "@/api";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { RankingInfo } from "@tanstack/match-sorter-utils";
-import { ColumnDef, ColumnFiltersState, FilterFn, Row, SortingState, VisibilityState, flexRender, getCoreRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  FilterFn,
+  Row,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
-
 
 // Extend the FilterFns and FilterMeta interfaces to include our custom filter function and meta
 declare module "@tanstack/react-table" {
@@ -79,7 +100,7 @@ export function DataTable<TData, TValue>({
         row.toggleSelected(true);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [table.getRowModel().rows, userId]);
 
   function onUserSelect(row: Row<TData>) {

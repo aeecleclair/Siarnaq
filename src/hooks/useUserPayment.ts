@@ -1,4 +1,4 @@
-import { getCdrUsersUserIdPayments,PaymentComplete } from "@/api";
+import { getCdrUsersUserIdPayments, PaymentComplete } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
 export const useUserPayment = (userId: string) => {

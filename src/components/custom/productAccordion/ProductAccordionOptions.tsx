@@ -108,8 +108,8 @@ export const ProductAccordionOptions = ({
       setIsRemoveDialogOpened(false);
       toast({
         title: "Suppression impossible",
-        description: error.toString()
-      })
+        description: error.toString(),
+      });
       return;
     }
     refreshProduct();

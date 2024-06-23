@@ -20,7 +20,7 @@ export const useToken = () => {
   }
   const { token, setToken, refreshToken, setRefreshToken } = useTokenStore();
   const [isRefreshing, setIsRefreshing] = useState(false);
-  
+
   const isTokenExpired = () => {
     if (!token) {
       return true;

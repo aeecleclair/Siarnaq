@@ -1,5 +1,10 @@
 import { PaymentItem } from "./PaymentItem";
-import { CoreUser, PaymentBase, PaymentType, postCdrUsersUserIdPayments } from "@/api";
+import {
+  CoreUser,
+  PaymentBase,
+  PaymentType,
+  postCdrUsersUserIdPayments,
+} from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PriceInput } from "@/components/custom/PriceInput";

@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "npx prettier . --write",
-    "generate": "openapi-ts"
+    "generate": "openapi-ts & yarn format"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",
@@ -40,7 +40,7 @@
     "react": "^18",
     "react-currency-input-field": "^3.8.0",
     "react-dom": "^18",
-    "react-hook-form": "^7.51.5",
+    "react-hook-form": "^7.52.0",
     "react-icons": "^5.0.1",
     "react-resizable-panels": "^2.0.19",
     "shadcn-ui": "^0.8.0",

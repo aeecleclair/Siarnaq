@@ -6,6 +6,7 @@ import { CdrUser, CurriculumComplete } from "@/api";
 import { Badge } from "@/components/ui/badge";
 import { ColumnDef } from "@tanstack/react-table";
 
+
 export const columns: ColumnDef<CdrUser>[] = [
   // {
   //   id: "select",
@@ -70,14 +71,15 @@ export const columns: ColumnDef<CdrUser>[] = [
     cell: ({ row }) => (
       <div className="flex space-x-2">
         <Badge variant="outline">
-          {row.getValue("curriculum") 
+          {row.getValue("curriculum")
             ? (row.getValue("curriculum") as CurriculumComplete).name
             : "Aucun cursus"}
         </Badge>
       </div>
     ),
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
+      if (!row.getValue(id)) return false;
+      return value.includes((row.getValue(id) as CurriculumComplete).id);
     },
   },
   // {

@@ -6,7 +6,6 @@ import { CdrUser, CurriculumComplete } from "@/api";
 import { Badge } from "@/components/ui/badge";
 import { ColumnDef } from "@tanstack/react-table";
 
-
 export const columns: ColumnDef<CdrUser>[] = [
   // {
   //   id: "select",

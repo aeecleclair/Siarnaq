@@ -1,5 +1,5 @@
 import { PurchaseItem } from "./PurchaseItem";
-import { CoreUser } from "@/api";
+import { CdrUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { products } from "@/components/user/products";
@@ -7,7 +7,7 @@ import { useProducts } from "@/hooks/useProducts";
 import { useUserPurchases } from "@/hooks/useUserPurchase";
 
 interface ProductPartProps {
-  user: CoreUser;
+  user: CdrUser;
 }
 
 export const ProductPart = ({ user }: ProductPartProps) => {

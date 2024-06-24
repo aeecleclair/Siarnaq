@@ -1,6 +1,6 @@
 import { PaymentItem } from "./PaymentItem";
 import {
-  CoreUser,
+  CdrUser,
   PaymentBase,
   PaymentType,
   postCdrUsersUserIdPayments,
@@ -34,7 +34,7 @@ import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
 import { z } from "zod";
 
 interface PaymentPartProps {
-  user: CoreUser;
+  user: CdrUser;
 }
 
 export const PaymentPart = ({ user }: PaymentPartProps) => {

@@ -1,8 +1,7 @@
 import { PaymentPart } from "./Payment/PaymentPart";
 import { ProductPart } from "./Product/ProductPart";
 import {
-  CoreUser,
-  CurriculumComplete,
+  CdrUser,
   postCdrUsersUserIdCurriculumsCurriculumId,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
@@ -17,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "@/components/ui/use-toast";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useUser } from "@/hooks/useUser";
 import { useUserPayment } from "@/hooks/useUserPayment";
@@ -26,14 +26,12 @@ import { useEffect, useState } from "react";
 import { HiOutlinePencil } from "react-icons/hi";
 
 interface RecapPanelProps {
-  user: CoreUser;
-  userCurriculum?: CurriculumComplete;
+  user: CdrUser;
   refetch: () => void;
 }
 
 export const RecapPanel = ({
   user,
-  userCurriculum,
   refetch,
 }: RecapPanelProps) => {
   const { total: totalPaid } = useUserPayment(user.id);
@@ -43,11 +41,8 @@ export const RecapPanel = ({
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCurriculum, setSelectedCurriculum] = useState(
-    userCurriculum?.id,
+    user.curriculum?.id,
   );
-  useEffect(() => {
-    setSelectedCurriculum(userCurriculum?.id);
-  }, [userCurriculum]);
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setIsOpened(false);
@@ -94,9 +89,9 @@ export const RecapPanel = ({
           </div>
           <div className="flex gap-4 items-center">
             <span className="font-semibold text-base">
-              {userCurriculum?.name ?? "Pas de cursus"}
+              {user.curriculum?.name ?? "Pas de cursus"}
             </span>
-            {!userCurriculum && (
+            {!user?.curriculum && (
               <CustomDialog
                 isOpened={isOpened}
                 setIsOpened={setIsOpened}

@@ -23,8 +23,6 @@ export const SellerTabContentList = ({
   const activeSellerId = searchParams.get("sellerId");
   const userId = searchParams.get("userId");
   const { user, refetch } = useUser(userId ?? "");
-  const { users } = useUsers();
-  const userCurriculum = users?.find((u) => u.id === user?.id)?.curriculum;
 
   if (activeSellerId === "cdradmin") {
     return (
@@ -41,7 +39,6 @@ export const SellerTabContentList = ({
       user && (
         <RecapPanel
           user={user}
-          userCurriculum={userCurriculum}
           refetch={refetch}
         />
       )

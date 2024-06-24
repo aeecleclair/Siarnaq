@@ -8,6 +8,7 @@ import { ProductAccordionOptions } from "./ProductAccordionOptions";
 import { VariantCardWithOptions } from "./VariantCardWithOptions";
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
+import { useUser } from "@/hooks/useUser";
 import { useUserPurchases } from "@/hooks/useUserPurchase";
 import { useSizeStore } from "@/stores/SizeStore";
 import { useSearchParams } from "next/navigation";
@@ -44,6 +45,7 @@ export const ProductAccordion = ({
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
   const { purchases: userPurchases } = useUserPurchases(userId ?? "");
+  const { user } = useUser(userId ?? "");
   const variantToDisplay = showDisabled
     ? product.variants
     : product.variants?.filter((variant) => variant.enabled);

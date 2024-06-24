@@ -2,7 +2,7 @@ import {
   PaymentType,
   PaymentComplete,
   deleteCdrUsersUserIdPaymentsPaymentId,
-  CoreUser,
+  CdrUser,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
@@ -19,7 +19,7 @@ import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
 interface PaymentItemProps {
   payment: PaymentComplete;
   refetch: () => void;
-  user: CoreUser;
+  user: CdrUser;
 }
 
 export const PaymentItem = ({ payment, refetch, user }: PaymentItemProps) => {

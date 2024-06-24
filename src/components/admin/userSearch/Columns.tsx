@@ -70,7 +70,7 @@ export const columns: ColumnDef<CdrUser>[] = [
     cell: ({ row }) => (
       <div className="flex space-x-2">
         <Badge variant="outline">
-          {(row.getValue("curriculum") as any).length > 0
+          {row.getValue("curriculum") 
             ? (row.getValue("curriculum") as CurriculumComplete).name
             : "Aucun cursus"}
         </Badge>

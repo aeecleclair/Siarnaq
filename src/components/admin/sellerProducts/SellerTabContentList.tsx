@@ -3,6 +3,7 @@ import { RecapPanel } from "../adminPanel/RecapPanel/RecapPanel";
 import { SellerTabContent } from "./SellerTabContent";
 import { SellerComplete, Status } from "@/api";
 import { useUser } from "@/hooks/useUser";
+import { useUsers } from "@/hooks/useUsers";
 import { useSearchParams } from "next/navigation";
 
 interface SellerTabContentListProps {
@@ -21,7 +22,9 @@ export const SellerTabContentList = ({
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
   const userId = searchParams.get("userId");
-  const { user } = useUser(userId ?? "");
+  const { user, refetch } = useUser(userId ?? "");
+  const { users } = useUsers();
+  const userCurriculum = users?.find((u) => u.id === user?.id)?.curriculum;
 
   if (activeSellerId === "cdradmin") {
     return (
@@ -34,7 +37,15 @@ export const SellerTabContentList = ({
     );
   }
   if (activeSellerId === "cdrrecap") {
-    return user && <RecapPanel user={user} />;
+    return (
+      user && (
+        <RecapPanel
+          user={user}
+          userCurriculum={userCurriculum}
+          refetch={refetch}
+        />
+      )
+    );
   }
   return sellers.map((seller) => (
     <SellerTabContent

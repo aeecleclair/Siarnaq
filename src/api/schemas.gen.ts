@@ -1394,11 +1394,18 @@ export const $CdrUser = {
       title: "Id",
     },
     curriculum: {
-      $ref: "#/components/schemas/CurriculumComplete",
+      anyOf: [
+        {
+          $ref: "#/components/schemas/CurriculumComplete",
+        },
+        {
+          type: "null",
+        },
+      ],
     },
   },
   type: "object",
-  required: ["name", "firstname", "id", "curriculum"],
+  required: ["name", "firstname", "id"],
   title: "CdrUser",
 } as const;
 
@@ -2852,7 +2859,7 @@ export const $FlappyBirdScoreCompleteFeedBack = {
   type: "object",
   required: ["value", "user", "creation_time", "position"],
   title: "FlappyBirdScoreCompleteFeedBack",
-  description: "A score, with it's position in the best players leaderboard",
+  description: "A score with its position in the best players leaderboard",
 } as const;
 
 export const $FlappyBirdScoreInDB = {

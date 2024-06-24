@@ -405,6 +405,9 @@ import type {
   GetCampaignListsListIdLogoResponse,
   GetCdrUsersError,
   GetCdrUsersResponse,
+  GetCdrUsersUserIdData,
+  GetCdrUsersUserIdError,
+  GetCdrUsersUserIdResponse,
   GetCdrSellersError,
   GetCdrSellersResponse,
   PostCdrSellersData,
@@ -541,7 +544,6 @@ import type {
   GetCinemaSessionsSessionIdPosterData,
   GetCinemaSessionsSessionIdPosterError,
   GetCinemaSessionsSessionIdPosterResponse,
-  GetFlappybirdScoresData,
   GetFlappybirdScoresError,
   GetFlappybirdScoresResponse,
   PostFlappybirdScoresData,
@@ -770,7 +772,7 @@ import {
 
 /**
  * Login For Access Token
- * Ask for a JWT acc   ess token using oauth password flow.
+ * Ask for a JWT access token using oauth password flow.
  *
  * *username* and *password* must be provided
  *
@@ -3414,6 +3416,22 @@ export const getCdrUsers = (options?: Options) => {
 };
 
 /**
+ * Get Cdr User
+ * Get a user.
+ *
+ * **User must be part of a seller group to use this endpoint**
+ */
+export const getCdrUsersUserId = (options: Options<GetCdrUsersUserIdData>) => {
+  return (options?.client ?? client).get<
+    GetCdrUsersUserIdResponse,
+    GetCdrUsersUserIdError
+  >({
+    ...options,
+    url: "/cdr/users/{user_id}/",
+  });
+};
+
+/**
  * Get Sellers
  * Get all sellers.
  *
@@ -4228,11 +4246,9 @@ export const getCinemaSessionsSessionIdPoster = (
 
 /**
  * Get Flappybird Score
- * Return the leaderboard score of the skip...limit
+ * Return the leaderboard
  */
-export const getFlappybirdScores = (
-  options?: Options<GetFlappybirdScoresData>,
-) => {
+export const getFlappybirdScores = (options?: Options) => {
   return (options?.client ?? client).get<
     GetFlappybirdScoresResponse,
     GetFlappybirdScoresError

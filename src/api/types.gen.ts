@@ -299,7 +299,7 @@ export type CdrUser = {
   firstname: string;
   nickname?: string | null;
   id: string;
-  curriculum: CurriculumComplete;
+  curriculum?: CurriculumComplete | null;
 };
 
 export type ChangePasswordRequest = {
@@ -625,7 +625,7 @@ export type FlappyBirdScoreBase = {
 };
 
 /**
- * A score, with it's position in the best players leaderboard
+ * A score with its position in the best players leaderboard
  */
 export type FlappyBirdScoreCompleteFeedBack = {
   value: number;
@@ -2604,6 +2604,16 @@ export type GetCdrUsersResponse = Array<CdrUser>;
 
 export type GetCdrUsersError = unknown;
 
+export type GetCdrUsersUserIdData = {
+  path: {
+    user_id: string;
+  };
+};
+
+export type GetCdrUsersUserIdResponse = CdrUser;
+
+export type GetCdrUsersUserIdError = unknown;
+
 export type GetCdrSellersResponse = Array<SellerComplete>;
 
 export type GetCdrSellersError = unknown;
@@ -3078,13 +3088,6 @@ export type GetCinemaSessionsSessionIdPosterData = {
 export type GetCinemaSessionsSessionIdPosterResponse = unknown;
 
 export type GetCinemaSessionsSessionIdPosterError = unknown;
-
-export type GetFlappybirdScoresData = {
-  query?: {
-    limit?: number;
-    skip?: number;
-  };
-};
 
 export type GetFlappybirdScoresResponse = Array<FlappyBirdScoreInDB>;
 
@@ -5736,6 +5739,21 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/cdr/users/{user_id}/": {
+    get: {
+      req: GetCdrUsersUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": CdrUser;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
   "/cdr/sellers/": {
     get: {
       res: {
@@ -6386,16 +6404,11 @@ export type $OpenApiTs = {
   };
   "/flappybird/scores": {
     get: {
-      req: GetFlappybirdScoresData;
       res: {
         /**
          * Successful Response
          */
         "200": Array<FlappyBirdScoreInDB>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
       };
     };
     post: {

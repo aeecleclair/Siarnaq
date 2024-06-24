@@ -124,7 +124,13 @@ export const ProductAccordion = ({
                   canDisable={canDisable}
                   showDescription={showDescription}
                   refreshProduct={refreshProduct}
-                  isSelectable={isSelectable}
+                  isSelectable={
+                    isSelectable &&
+                    (variant.allowed_curriculum
+                      ?.map((curriculum) => curriculum.id)
+                      .includes(user?.curriculum?.id ?? "") ||
+                      false)
+                  }
                   isAdmin={isAdmin}
                   displayWarning={displayWarning}
                 />

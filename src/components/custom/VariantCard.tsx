@@ -43,6 +43,7 @@ export const VariantCard = ({
       ?.quantity || 0;
   const selected = numberSelectedVariant > 0;
   const [isLoading, setIsLoading] = useState(false);
+  const shouldDisplayWarning = displayWarning || (selected && !isSelectable);
 
   const purchaseVariant = async (quantity: number) => {
     setIsLoading(true);
@@ -88,7 +89,7 @@ export const VariantCard = ({
 
   return (
     <Card
-      className={`min-w-40 h-[95px] ${selected && "shadow-lg"} ${selected && (displayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${isSelectable && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
+      className={`min-w-40 h-[95px] ${selected && "shadow-lg"} ${selected && (shouldDisplayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${isSelectable && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
       onClick={() => {
         if (isSelectable && variant.enabled && variant.unique && !isLoading) {
           if (selected) {
@@ -107,7 +108,7 @@ export const VariantCard = ({
         </div>
       )}
       <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-1">
-        <CardTitle className="text-sm font-medium">
+        <CardTitle className={`text-sm font-medium ${!isSelectable && "text-muted-foreground"}`}>
           <span>{variant.name_en}</span>
         </CardTitle>
         {!variant.unique && (
@@ -115,7 +116,7 @@ export const VariantCard = ({
             <LoadingButton
               variant="outline"
               className="h-6 px-1"
-              disabled={!selected || !variant.enabled}
+              disabled={!selected || !variant.enabled || !isSelectable}
               onClick={(e) => {
                 if (!isSelectable) return;
                 e.stopPropagation();
@@ -136,7 +137,7 @@ export const VariantCard = ({
             <LoadingButton
               variant="outline"
               className="h-6 px-1"
-              disabled={!variant.enabled}
+              disabled={!variant.enabled || !isSelectable}
               onClick={(e) => {
                 if (!isSelectable) return;
                 e.stopPropagation();
@@ -150,7 +151,7 @@ export const VariantCard = ({
         )}
       </CardHeader>
       <CardContent className="p-4 pt-0">
-        <div className="text-2xl font-bold">
+        <div className={`text-2xl font-bold ${!isSelectable && "text-muted-foreground"}`}>
           <span>{variant.price} €</span>
         </div>
         {showDescription && (

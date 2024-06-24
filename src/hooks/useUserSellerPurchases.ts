@@ -1,7 +1,9 @@
+import { useToken } from "./useToken";
 import { getCdrSellersSellerIdUsersUserIdPurchases } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
 export const useUserSellerPurchases = (userId: string, sellerId: string) => {
+  const { isTokenExpired } = useToken();
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["userSellerPurchase", userId],
     queryFn: () => {
@@ -9,7 +11,8 @@ export const useUserSellerPurchases = (userId: string, sellerId: string) => {
         path: { user_id: userId, seller_id: sellerId },
       });
     },
-    retry: 1,
+    retry: 3,
+    enabled: !isTokenExpired(),
   });
 
   return {

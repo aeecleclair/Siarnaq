@@ -93,5 +93,5 @@ export const useToken = () => {
     enabled: isTokenExpired(),
   });
 
-  return { token: data, isLoading, error, getToken, refetch };
+  return { token: data, isLoading, error, getToken, refetch, isTokenExpired };
 };

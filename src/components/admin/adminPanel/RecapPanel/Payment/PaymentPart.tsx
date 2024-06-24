@@ -175,7 +175,7 @@ export const PaymentPart = ({ user }: PaymentPartProps) => {
         {(payments?.length ?? 0) > 0 ? (
           <>
             {payments?.map((payment) => (
-              <PaymentItem key={payment.id} payment={payment} />
+              <PaymentItem key={payment.id} payment={payment} refetch={refetch} user={user}/>
             ))}
             <Separator className="my-2" />
             <div className="flex flex-row w-full">

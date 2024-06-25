@@ -9,11 +9,11 @@ import { Separator } from "../ui/separator";
 import { PaymentButton } from "./PaymentButton";
 import { products } from "./products";
 import { sellers } from "./sellers";
-import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
+// import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
 
 export const RecapPanel = () => {
-  const { variantQuantity } = useVariantQuantityStore();
-  const sellerIds = Object.keys(variantQuantity) as Array<string>;
+  // const { variantQuantity } = useVariantQuantityStore();
+  // const sellerIds = Object.keys(variantQuantity) as Array<string>;
   var total = 0;
   return (
     <div className="grid gap-6">
@@ -22,7 +22,7 @@ export const RecapPanel = () => {
           <CardTitle>Récapitulatif</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
-          {sellerIds.length > 0 ? (
+          {/* {sellerIds.length > 0 ? (
             <>
               {sellerIds.map((id) => {
                 const sellerProducts = variantQuantity[id];
@@ -66,7 +66,7 @@ export const RecapPanel = () => {
             </>
           ) : (
             <div>Aucun produit</div>
-          )}
+          )} */}
         </CardContent>
         <CardFooter className="px-6 py-4">
           <PaymentButton />

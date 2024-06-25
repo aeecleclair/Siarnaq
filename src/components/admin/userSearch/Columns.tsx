@@ -77,7 +77,7 @@ export const columns: ColumnDef<CdrUser>[] = [
       </div>
     ),
     filterFn: (row, id, value) => {
-      if (!row.getValue(id)) return false;
+      if (!row.getValue(id)) return value.includes("");
       return value.includes((row.getValue(id) as CurriculumComplete).id);
     },
   },

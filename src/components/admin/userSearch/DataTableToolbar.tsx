@@ -32,10 +32,13 @@ export function DataTableToolbar<TData>({
             column={table.getColumn("curriculum")}
             title="Cursus"
             options={
-              curriculums?.map((curriculum) => ({
+              (curriculums?.map((curriculum) => ({
                 value: curriculum.id,
                 label: curriculum.name,
-              })) || []
+              })) || []).concat({
+                value: "",
+                label: "Aucun cursus"
+              })
             }
           />
         )}

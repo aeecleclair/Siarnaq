@@ -34,10 +34,10 @@ export const VariantCard = ({
   const userId = searchParams.get("userId");
   const { userId: myUserId } = useTokenStore();
   const { purchases, refetch } = useUserSellerPurchases(
-    isAdmin ? userId ?? "" : myUserId ?? "",
+    isAdmin ? userId : myUserId,
     sellerId,
   );
-  const { refetch: refetchUserPurchases } = useUserPurchases(userId ?? "");
+  const { refetch: refetchUserPurchases } = useUserPurchases(userId);
   const numberSelectedVariant =
     purchases?.find((purchase) => purchase.product_variant_id === variant.id)
       ?.quantity || 0;

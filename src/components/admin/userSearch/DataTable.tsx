@@ -104,6 +104,7 @@ export function DataTable<TData, TValue>({
   }, [table.getRowModel().rows, userId]);
 
   function onUserSelect(row: Row<TData>) {
+    console.log("ok");
     const id = (row.original as CoreUserSimple).id;
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     current.set("userId", id);

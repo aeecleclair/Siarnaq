@@ -21,11 +21,10 @@ export const SellerTabContentList = ({
 }: SellerTabContentListProps) => {
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
-  const { products, refetch: refetchProducts } = useSellerProducts(
-    activeSellerId ?? "",
-  );
+  const { products, refetch: refetchProducts } =
+    useSellerProducts(activeSellerId);
   const userId = searchParams.get("userId");
-  const { user, refetch } = useUser(userId ?? "");
+  const { user, refetch } = useUser(userId);
 
   if (activeSellerId === "cdradmin") {
     return (

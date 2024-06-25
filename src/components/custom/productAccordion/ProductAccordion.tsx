@@ -44,8 +44,8 @@ export const ProductAccordion = ({
   const numberOfCard = Math.round(size / 20);
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
-  const { purchases: userPurchases } = useUserPurchases(userId ?? "");
-  const { user } = useUser(userId ?? "");
+  const { purchases: userPurchases } = useUserPurchases(userId);
+  const { user } = useUser(userId);
   const variantToDisplay = showDisabled
     ? product.variants
     : product.variants?.filter((variant) => variant.enabled);

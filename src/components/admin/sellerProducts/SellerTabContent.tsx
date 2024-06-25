@@ -6,11 +6,9 @@ import {
   Status,
   app__modules__cdr__schemas_cdr__ProductComplete,
 } from "@/api";
-import { getCdrSellersSellerIdProducts } from "@/api";
 import { ProductAccordion } from "@/components/custom/productAccordion/ProductAccordion";
 import { Accordion } from "@/components/ui/accordion";
 import { TabsContent } from "@/components/ui/tabs";
-import { useSellerProducts } from "@/hooks/useSellerProducts";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

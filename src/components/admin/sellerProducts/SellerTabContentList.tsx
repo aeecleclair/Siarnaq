@@ -2,8 +2,8 @@ import { AdminPanel } from "../adminPanel/AdminPanel";
 import { RecapPanel } from "../adminPanel/RecapPanel/RecapPanel";
 import { SellerTabContent } from "./SellerTabContent";
 import { SellerComplete, Status } from "@/api";
+import { useSellerProducts } from "@/hooks/useSellerProducts";
 import { useUser } from "@/hooks/useUser";
-import { useUsers } from "@/hooks/useUsers";
 import { useSearchParams } from "next/navigation";
 
 interface SellerTabContentListProps {
@@ -21,6 +21,9 @@ export const SellerTabContentList = ({
 }: SellerTabContentListProps) => {
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
+  const { products, refetch: refetchProducts } = useSellerProducts(
+    activeSellerId ?? "",
+  );
   const userId = searchParams.get("userId");
   const { user, refetch } = useUser(userId ?? "");
 
@@ -42,7 +45,8 @@ export const SellerTabContentList = ({
       key={seller.id}
       seller={seller}
       status={status}
-      setRefetchSellers={setRefetchSellers}
+      products={products}
+      refetchProducts={refetchProducts}
     />
   ));
 };

@@ -6,11 +6,10 @@ export const useUserPayment = (userId: string) => {
   const { isTokenExpired } = useToken();
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["userPayment", userId],
-    queryFn: () => {
-      return getCdrUsersUserIdPayments({
+    queryFn: () =>
+      getCdrUsersUserIdPayments({
         path: { user_id: userId },
-      });
-    },
+      }),
     retry: 3,
     enabled: !isTokenExpired(),
   });

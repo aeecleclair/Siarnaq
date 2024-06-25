@@ -6,11 +6,10 @@ export const useUserSellerPurchases = (userId: string, sellerId: string) => {
   const { isTokenExpired } = useToken();
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["userSellerPurchase", userId],
-    queryFn: () => {
-      return getCdrSellersSellerIdUsersUserIdPurchases({
+    queryFn: () =>
+      getCdrSellersSellerIdUsersUserIdPurchases({
         path: { user_id: userId, seller_id: sellerId },
-      });
-    },
+      }),
     retry: 3,
     enabled: !isTokenExpired(),
   });

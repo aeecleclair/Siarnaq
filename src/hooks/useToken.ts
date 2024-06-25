@@ -27,7 +27,6 @@ export const useToken = () => {
     }
     const access_token_expires = JSON.parse(atob(token.split(".")[1])).exp;
     const now = Math.floor(Date.now() / 1000);
-    console.log("Token Expires", access_token_expires - now - 60);
     return access_token_expires - 60 < now;
   };
 

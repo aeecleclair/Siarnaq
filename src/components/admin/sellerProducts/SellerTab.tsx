@@ -5,6 +5,7 @@ import { Tabs } from "@/components/ui/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+
 interface SellerTabProps {
   status: Status;
   setRefetchStatus: (arg0: boolean) => void;
@@ -15,7 +16,8 @@ export const SellerTab = ({ status, setRefetchStatus }: SellerTabProps) => {
   const router = useRouter();
 
   const [sellers, setSellers] = useState<SellerComplete[]>([]);
-  const firstSellerId = searchParams.get("sellerId") || sellers.at(0)?.id;
+  const firstSellerId =
+    searchParams.get("sellerId") || sellers.at(0)?.id || "cdradmin";
   const [refetchSellers, setRefetchSellers] = useState<boolean>(true);
 
   useEffect(() => {

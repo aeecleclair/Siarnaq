@@ -13,13 +13,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { toast } from "@/components/ui/use-toast";
+import { Separator } from "@/components/ui/separator";
 import { useCurriculums } from "@/hooks/useCurriculums";
-import { useUser } from "@/hooks/useUser";
 import { useUserPayment } from "@/hooks/useUserPayment";
 import { useUserPurchases } from "@/hooks/useUserPurchase";
-import { useUsers } from "@/hooks/useUsers";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiOutlinePencil } from "react-icons/hi";
 
 interface RecapPanelProps {
@@ -68,8 +66,8 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
 
   return (
     <div className="grid gap-12 pt-8">
-      <div>
-        <CardTitle className="flex flex-row justify-between  items-center">
+      <div className="space-y-8">
+        <CardTitle className="flex flex-row justify-between items-center">
           <div>
             {user.nickname ? (
               <span className="font-bold">
@@ -143,6 +141,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
             )}
           </div>
         </CardTitle>
+        <Separator />
       </div>
       <ProductPart user={user} />
       <PaymentPart user={user} />

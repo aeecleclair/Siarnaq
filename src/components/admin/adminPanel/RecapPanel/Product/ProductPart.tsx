@@ -2,7 +2,6 @@ import { PurchaseItem } from "./PurchaseItem";
 import { CdrUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { products } from "@/components/user/products";
 import { useProducts } from "@/hooks/useProducts";
 import { useUserPurchases } from "@/hooks/useUserPurchase";
 
@@ -18,7 +17,7 @@ export const ProductPart = ({ user }: ProductPartProps) => {
     .flat();
   const allConstraintIds = allConstraint?.map((constraint) => constraint?.id);
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6 -mt-4">
       <div>
         <CardTitle>Récapitulatif</CardTitle>
       </div>

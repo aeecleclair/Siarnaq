@@ -105,7 +105,13 @@ const MyECLButton = () => {
   }
 
   return (
-    <LoadingButton isLoading={isLoading} onClick={openSSO}>
+    <LoadingButton
+      isLoading={isLoading}
+      onClick={(e) => {
+        e.preventDefault();
+        openSSO();
+      }}
+    >
       Se connecter
     </LoadingButton>
   );

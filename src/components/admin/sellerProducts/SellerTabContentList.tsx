@@ -6,6 +6,7 @@ import { useSellerProducts } from "@/hooks/useSellerProducts";
 import { useUser } from "@/hooks/useUser";
 import { useSearchParams } from "next/navigation";
 
+
 interface SellerTabContentListProps {
   status: Status;
   setRefetchStatus: (arg0: boolean) => void;
@@ -21,8 +22,10 @@ export const SellerTabContentList = ({
 }: SellerTabContentListProps) => {
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
-  const { products, refetch: refetchProducts } =
-    useSellerProducts(activeSellerId);
+  const isSeller = !["cdradmin", "cdrrecap"].includes(activeSellerId ?? "");
+  const { products, refetch: refetchProducts } = useSellerProducts(
+    isSeller ? activeSellerId : null,
+  );
   const userId = searchParams.get("userId");
   const { user, refetch } = useUser(userId);
 

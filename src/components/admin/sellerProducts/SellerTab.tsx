@@ -5,7 +5,6 @@ import { Tabs } from "@/components/ui/tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-
 interface SellerTabProps {
   status: Status;
   setRefetchStatus: (arg0: boolean) => void;

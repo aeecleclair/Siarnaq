@@ -1,9 +1,6 @@
 import { PaymentPart } from "./Payment/PaymentPart";
 import { ProductPart } from "./Product/ProductPart";
-import {
-  CdrUser,
-  postCdrUsersUserIdCurriculumsCurriculumId,
-} from "@/api";
+import { CdrUser, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
@@ -30,10 +27,7 @@ interface RecapPanelProps {
   refetch: () => void;
 }
 
-export const RecapPanel = ({
-  user,
-  refetch,
-}: RecapPanelProps) => {
+export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
   const { total: totalPaid } = useUserPayment(user.id);
   const { total: totalToPay } = useUserPurchases(user.id);
   const { curriculums } = useCurriculums();

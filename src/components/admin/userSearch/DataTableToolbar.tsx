@@ -31,15 +31,15 @@ export function DataTableToolbar<TData>({
           <DataTableFacetedFilter
             column={table.getColumn("curriculum")}
             title="Cursus"
-            options={
-              (curriculums?.map((curriculum) => ({
+            options={(
+              curriculums?.map((curriculum) => ({
                 value: curriculum.id,
                 label: curriculum.name,
-              })) || []).concat({
-                value: "",
-                label: "Aucun cursus"
-              })
-            }
+              })) || []
+            ).concat({
+              value: "",
+              label: "Aucun cursus",
+            })}
           />
         )}
       </div>

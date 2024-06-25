@@ -9,6 +9,7 @@ import { Separator } from "../ui/separator";
 import { PaymentButton } from "./PaymentButton";
 import { products } from "./products";
 import { sellers } from "./sellers";
+
 // import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
 
 export const RecapPanel = () => {

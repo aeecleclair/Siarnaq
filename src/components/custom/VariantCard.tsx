@@ -108,7 +108,9 @@ export const VariantCard = ({
         </div>
       )}
       <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-1">
-        <CardTitle className={`text-sm font-medium ${!isSelectable && "text-muted-foreground"}`}>
+        <CardTitle
+          className={`text-sm font-medium ${!isSelectable && "text-muted-foreground"}`}
+        >
           <span>{variant.name_en}</span>
         </CardTitle>
         {!variant.unique && (
@@ -151,7 +153,9 @@ export const VariantCard = ({
         )}
       </CardHeader>
       <CardContent className="p-4 pt-0">
-        <div className={`text-2xl font-bold ${!isSelectable && "text-muted-foreground"}`}>
+        <div
+          className={`text-2xl font-bold ${!isSelectable && "text-muted-foreground"}`}
+        >
           <span>{variant.price} €</span>
         </div>
         {showDescription && (

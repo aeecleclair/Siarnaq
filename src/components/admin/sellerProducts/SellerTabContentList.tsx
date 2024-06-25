@@ -35,14 +35,7 @@ export const SellerTabContentList = ({
     );
   }
   if (activeSellerId === "cdrrecap") {
-    return (
-      user && (
-        <RecapPanel
-          user={user}
-          refetch={refetch}
-        />
-      )
-    );
+    return user && <RecapPanel user={user} refetch={refetch} />;
   }
   return sellers.map((seller) => (
     <SellerTabContent

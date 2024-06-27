@@ -89,7 +89,7 @@ export const VariantCard = ({
 
   return (
     <Card
-      className={`min-w-40 h-[95px] ${selected && "shadow-lg"} ${selected && (shouldDisplayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${isSelectable && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
+      className={`min-w-40 h-[95px] ${selected && "shadow-lg"} ${selected && (shouldDisplayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${(isSelectable || (!isSelectable && selected)) && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
       onClick={() => {
         if (isSelectable && variant.enabled && variant.unique && !isLoading) {
           if (selected) {
@@ -97,6 +97,9 @@ export const VariantCard = ({
           } else {
             purchaseVariant(1);
           }
+        }
+        if (selected && !isSelectable) {
+          cancelPurchase();
         }
       }}
     >
@@ -120,7 +123,12 @@ export const VariantCard = ({
               className="h-6 px-1"
               disabled={!selected || !variant.enabled || !isSelectable}
               onClick={(e) => {
-                if (!isSelectable) return;
+                if (!isSelectable) {
+                  if (selected) {
+                    cancelPurchase();
+                  }
+                  return;
+                };
                 e.stopPropagation();
                 const newQuantity = numberSelectedVariant - 1;
                 if (newQuantity === 0) {

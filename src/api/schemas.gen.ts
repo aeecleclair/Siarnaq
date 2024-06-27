@@ -4365,6 +4365,18 @@ export const $PaymentType = {
   title: "PaymentType",
 } as const;
 
+export const $PaymentUrl = {
+  properties: {
+    url: {
+      type: "string",
+      title: "Url",
+    },
+  },
+  type: "object",
+  required: ["url"],
+  title: "PaymentUrl",
+} as const;
+
 export const $PrizeBase = {
   properties: {
     name: {

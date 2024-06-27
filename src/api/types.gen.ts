@@ -1023,6 +1023,10 @@ export type PaymentComplete = {
 
 export type PaymentType = "cash" | "check" | "HelloAsso" | "card" | "archived";
 
+export type PaymentUrl = {
+  url: string;
+};
+
 export type PrizeBase = {
   name: string;
   description: string;
@@ -1706,6 +1710,10 @@ export type PostNotificationSendError = unknown;
 export type PostNotificationSendFutureResponse = unknown;
 
 export type PostNotificationSendFutureError = unknown;
+
+export type PostPaymentHelloassoWebhookResponse = void;
+
+export type PostPaymentHelloassoWebhookError = unknown;
 
 export type GetUsersResponse = Array<CoreUserSimple>;
 
@@ -2936,6 +2944,17 @@ export type PostCdrUsersUserIdCurriculumsCurriculumIdResponse = unknown;
 
 export type PostCdrUsersUserIdCurriculumsCurriculumIdError = unknown;
 
+export type PatchCdrUsersUserIdCurriculumsCurriculumIdData = {
+  path: {
+    curriculum_id: string;
+    user_id: string;
+  };
+};
+
+export type PatchCdrUsersUserIdCurriculumsCurriculumIdResponse = void;
+
+export type PatchCdrUsersUserIdCurriculumsCurriculumIdError = unknown;
+
 export type DeleteCdrUsersUserIdCurriculumsCurriculumIdData = {
   path: {
     curriculum_id: string;
@@ -2978,6 +2997,16 @@ export type DeleteCdrUsersUserIdPaymentsPaymentIdData = {
 export type DeleteCdrUsersUserIdPaymentsPaymentIdResponse = void;
 
 export type DeleteCdrUsersUserIdPaymentsPaymentIdError = unknown;
+
+export type GetCdrPayAmountData = {
+  path: {
+    amount: number;
+  };
+};
+
+export type GetCdrPayAmountResponse = PaymentUrl;
+
+export type GetCdrPayAmountError = unknown;
 
 export type GetCdrUsersUserIdMembershipsData = {
   path: {
@@ -4293,6 +4322,16 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "201": unknown;
+      };
+    };
+  };
+  "/payment/helloasso/webhook": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
       };
     };
   };
@@ -6185,6 +6224,19 @@ export type $OpenApiTs = {
         "422": HTTPValidationError;
       };
     };
+    patch: {
+      req: PatchCdrUsersUserIdCurriculumsCurriculumIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
     delete: {
       req: DeleteCdrUsersUserIdCurriculumsCurriculumIdData;
       res: {
@@ -6235,6 +6287,21 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/pay/{amount}": {
+    get: {
+      req: GetCdrPayAmountData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": PaymentUrl;
         /**
          * Validation Error
          */

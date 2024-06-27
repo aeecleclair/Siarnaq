@@ -102,6 +102,8 @@ import type {
   PostNotificationSendResponse,
   PostNotificationSendFutureError,
   PostNotificationSendFutureResponse,
+  PostPaymentHelloassoWebhookError,
+  PostPaymentHelloassoWebhookResponse,
   GetUsersError,
   GetUsersResponse,
   GetUsersCountError,
@@ -498,6 +500,9 @@ import type {
   PostCdrUsersUserIdCurriculumsCurriculumIdData,
   PostCdrUsersUserIdCurriculumsCurriculumIdError,
   PostCdrUsersUserIdCurriculumsCurriculumIdResponse,
+  PatchCdrUsersUserIdCurriculumsCurriculumIdData,
+  PatchCdrUsersUserIdCurriculumsCurriculumIdError,
+  PatchCdrUsersUserIdCurriculumsCurriculumIdResponse,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdData,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdError,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdResponse,
@@ -510,6 +515,9 @@ import type {
   DeleteCdrUsersUserIdPaymentsPaymentIdData,
   DeleteCdrUsersUserIdPaymentsPaymentIdError,
   DeleteCdrUsersUserIdPaymentsPaymentIdResponse,
+  GetCdrPayAmountData,
+  GetCdrPayAmountError,
+  GetCdrPayAmountResponse,
   GetCdrUsersUserIdMembershipsData,
   GetCdrUsersUserIdMembershipsError,
   GetCdrUsersUserIdMembershipsResponse,
@@ -1482,6 +1490,19 @@ export const postNotificationSendFuture = (options?: Options) => {
   >({
     ...options,
     url: "/notification/send/future",
+  });
+};
+
+/**
+ * Webhook
+ */
+export const postPaymentHelloassoWebhook = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostPaymentHelloassoWebhookResponse,
+    PostPaymentHelloassoWebhookError
+  >({
+    ...options,
+    url: "/payment/helloasso/webhook",
   });
 };
 
@@ -3994,6 +4015,24 @@ export const postCdrUsersUserIdCurriculumsCurriculumId = (
 };
 
 /**
+ * Update Curriculum Membership
+ * Update a curriculum membership.
+ *
+ * **User must add a curriculum to themself or be CDR Admin to use this endpoint**
+ */
+export const patchCdrUsersUserIdCurriculumsCurriculumId = (
+  options: Options<PatchCdrUsersUserIdCurriculumsCurriculumIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchCdrUsersUserIdCurriculumsCurriculumIdResponse,
+    PatchCdrUsersUserIdCurriculumsCurriculumIdError
+  >({
+    ...options,
+    url: "/cdr/users/{user_id}/curriculums/{curriculum_id}/",
+  });
+};
+
+/**
  * Delete Curriculum Membership
  * Remove a curriculum from a user.
  *
@@ -4062,6 +4101,20 @@ export const deleteCdrUsersUserIdPaymentsPaymentId = (
   >({
     ...options,
     url: "/cdr/users/{user_id}/payments/{payment_id}/",
+  });
+};
+
+/**
+ * Get Payment Url
+ * Get payment url
+ */
+export const getCdrPayAmount = (options: Options<GetCdrPayAmountData>) => {
+  return (options?.client ?? client).get<
+    GetCdrPayAmountResponse,
+    GetCdrPayAmountError
+  >({
+    ...options,
+    url: "/cdr/pay/{amount}",
   });
 };
 

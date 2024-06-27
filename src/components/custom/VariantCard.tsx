@@ -128,7 +128,7 @@ export const VariantCard = ({
                     cancelPurchase();
                   }
                   return;
-                };
+                }
                 e.stopPropagation();
                 const newQuantity = numberSelectedVariant - 1;
                 if (newQuantity === 0) {

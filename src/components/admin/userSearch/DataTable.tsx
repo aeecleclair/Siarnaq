@@ -3,6 +3,7 @@
 import { DataTablePagination } from "./DataTablePagination";
 import { DataTableToolbar } from "./DataTableToolbar";
 import { fuzzyFilter } from "./searchFunction";
+import { CoreUserSimple } from "@/api";
 import {
   Table,
   TableBody,
@@ -16,6 +17,7 @@ import {
   ColumnDef,
   ColumnFiltersState,
   FilterFn,
+  Row,
   SortingState,
   VisibilityState,
   flexRender,
@@ -27,6 +29,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 
 // Extend the FilterFns and FilterMeta interfaces to include our custom filter function and meta
@@ -48,6 +51,8 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -56,6 +61,8 @@ export function DataTable<TData, TValue>({
   );
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  const userId = searchParams.get("userId");
 
   const table = useReactTable({
     data,
@@ -84,6 +91,28 @@ export function DataTable<TData, TValue>({
     globalFilterFn: "fuzzy",
     onGlobalFilterChange: setGlobalFilter,
   });
+  React.useEffect(() => {
+    if (userId && table.getRowModel().rows.length > 0) {
+      const row = table
+        .getRowModel()
+        .rows.find((row) => (row.original as CoreUserSimple).id === userId);
+      if (row && !row.getIsSelected()) {
+        row.toggleSelected(true);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [table.getRowModel().rows, userId]);
+
+  function onUserSelect(row: Row<TData>) {
+    console.log("ok");
+    const id = (row.original as CoreUserSimple).id;
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    current.set("userId", id);
+    const query = current.toString();
+    router.push(`/admin?${query}`);
+    table.toggleAllRowsSelected(false);
+    row.toggleSelected(true);
+  }
 
   return (
     <div className="space-y-4 w-full">
@@ -114,21 +143,43 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
+              <>
+                {table
+                  .getSelectedRowModel()
+                  .rows.filter((row) => !table.getRowModel().rows.includes(row))
+                  .map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={"selected"}
+                      onClick={() => onUserSelect(row)}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
                   ))}
-                </TableRow>
-              ))
+                {table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    onClick={() => onUserSelect(row)}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </>
             ) : (
               <TableRow>
                 <TableCell

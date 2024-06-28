@@ -396,10 +396,10 @@ export const $AssociationEdit = {
   title: "AssociationEdit",
 } as const;
 
-export const $AvailableMembership = {
+export const $AvailableAssociationMembership = {
   type: "string",
   enum: ["AEECL", "USEECL"],
-  title: "AvailableMembership",
+  title: "AvailableAssociationMembership",
 } as const;
 
 export const $BatchResult = {
@@ -1368,6 +1368,47 @@ export const $CdrStatus = {
   title: "CdrStatus",
 } as const;
 
+export const $CdrUser = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    firstname: {
+      type: "string",
+      title: "Firstname",
+    },
+    nickname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nickname",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+    curriculum: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/CurriculumComplete",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  required: ["name", "firstname", "id"],
+  title: "CdrUser",
+} as const;
+
 export const $ChangePasswordRequest = {
   properties: {
     email: {
@@ -1404,14 +1445,7 @@ export const $CineSessionBase = {
       title: "Name",
     },
     overview: {
-      anyOf: [
-        {
-          type: "string",
-        },
-        {
-          type: "null",
-        },
-      ],
+      type: "string",
       title: "Overview",
     },
     genre: {
@@ -1438,7 +1472,7 @@ export const $CineSessionBase = {
     },
   },
   type: "object",
-  required: ["start", "duration", "name"],
+  required: ["start", "duration", "name", "overview"],
   title: "CineSessionBase",
 } as const;
 
@@ -1458,14 +1492,7 @@ export const $CineSessionComplete = {
       title: "Name",
     },
     overview: {
-      anyOf: [
-        {
-          type: "string",
-        },
-        {
-          type: "null",
-        },
-      ],
+      type: "string",
       title: "Overview",
     },
     genre: {
@@ -1496,7 +1523,7 @@ export const $CineSessionComplete = {
     },
   },
   type: "object",
-  required: ["start", "duration", "name", "id"],
+  required: ["start", "duration", "name", "overview", "id"],
   title: "CineSessionComplete",
 } as const;
 
@@ -2832,7 +2859,7 @@ export const $FlappyBirdScoreCompleteFeedBack = {
   type: "object",
   required: ["value", "user", "creation_time", "position"],
   title: "FlappyBirdScoreCompleteFeedBack",
-  description: "A score, with it's position in the best players leaderboard",
+  description: "A score with its position in the best players leaderboard",
 } as const;
 
 export const $FlappyBirdScoreInDB = {
@@ -4338,6 +4365,18 @@ export const $PaymentType = {
   title: "PaymentType",
 } as const;
 
+export const $PaymentUrl = {
+  properties: {
+    url: {
+      type: "string",
+      title: "Url",
+    },
+  },
+  type: "object",
+  required: ["url"],
+  title: "PaymentUrl",
+} as const;
+
 export const $PrizeBase = {
   properties: {
     name: {
@@ -4477,9 +4516,42 @@ export const $ProductBase = {
       type: "boolean",
       title: "Available Online",
     },
+    related_membership: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership",
+    },
+    product_constraints: {
+      items: {
+        type: "string",
+        format: "uuid",
+      },
+      type: "array",
+      title: "Product Constraints",
+    },
+    document_constraints: {
+      items: {
+        type: "string",
+        format: "uuid",
+      },
+      type: "array",
+      title: "Document Constraints",
+    },
   },
   type: "object",
-  required: ["name_fr", "name_en", "available_online"],
+  required: [
+    "name_fr",
+    "name_en",
+    "available_online",
+    "product_constraints",
+    "document_constraints",
+  ],
   title: "ProductBase",
 } as const;
 
@@ -4633,14 +4705,51 @@ export const $ProductVariantBase = {
       type: "boolean",
       title: "Unique",
     },
+    allowed_curriculum: {
+      items: {
+        type: "string",
+        format: "uuid",
+      },
+      type: "array",
+      title: "Allowed Curriculum",
+    },
+    related_membership_added_duration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "duration",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership Added Duration",
+    },
   },
   type: "object",
-  required: ["name_fr", "name_en", "price", "enabled", "unique"],
+  required: [
+    "name_fr",
+    "name_en",
+    "price",
+    "enabled",
+    "unique",
+    "allowed_curriculum",
+  ],
   title: "ProductVariantBase",
 } as const;
 
 export const $ProductVariantComplete = {
   properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    product_id: {
+      type: "string",
+      format: "uuid",
+      title: "Product Id",
+    },
     name_fr: {
       type: "string",
       title: "Name Fr",
@@ -4683,26 +4792,36 @@ export const $ProductVariantComplete = {
       type: "boolean",
       title: "Unique",
     },
-    id: {
-      type: "string",
-      format: "uuid",
-      title: "Id",
+    allowed_curriculum: {
+      items: {
+        $ref: "#/components/schemas/CurriculumComplete",
+      },
+      type: "array",
+      title: "Allowed Curriculum",
+      default: [],
     },
-    product_id: {
-      type: "string",
-      format: "uuid",
-      title: "Product Id",
+    related_membership_added_duration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "duration",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership Added Duration",
     },
   },
   type: "object",
   required: [
+    "id",
+    "product_id",
     "name_fr",
     "name_en",
     "price",
     "enabled",
     "unique",
-    "id",
-    "product_id",
   ],
   title: "ProductVariantComplete",
 } as const;
@@ -4786,6 +4905,33 @@ export const $ProductVariantEdit = {
       ],
       title: "Unique",
     },
+    allowed_curriculum: {
+      anyOf: [
+        {
+          items: {
+            type: "string",
+            format: "uuid",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Allowed Curriculum",
+    },
+    related_membership_added_duration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "duration",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership Added Duration",
+    },
   },
   type: "object",
   title: "ProductVariantEdit",
@@ -4828,22 +4974,47 @@ export const $PurchaseComplete = {
   title: "PurchaseComplete",
 } as const;
 
-export const $PurchaseEdit = {
+export const $PurchaseReturn = {
   properties: {
     quantity: {
-      anyOf: [
-        {
-          type: "integer",
-        },
-        {
-          type: "null",
-        },
-      ],
+      type: "integer",
       title: "Quantity",
+    },
+    user_id: {
+      type: "string",
+      title: "User Id",
+    },
+    product_variant_id: {
+      type: "string",
+      format: "uuid",
+      title: "Product Variant Id",
+    },
+    validated: {
+      type: "boolean",
+      title: "Validated",
+    },
+    price: {
+      type: "integer",
+      title: "Price",
+    },
+    product: {
+      $ref: "#/components/schemas/ProductCompleteNoConstraint",
+    },
+    seller: {
+      $ref: "#/components/schemas/SellerComplete",
     },
   },
   type: "object",
-  title: "PurchaseEdit",
+  required: [
+    "quantity",
+    "user_id",
+    "product_variant_id",
+    "validated",
+    "price",
+    "product",
+    "seller",
+  ],
+  title: "PurchaseReturn",
 } as const;
 
 export const $RaffleBase = {
@@ -5363,6 +5534,58 @@ export const $StatusType = {
   description: "Status of the voting",
 } as const;
 
+export const $TheMovieDB = {
+  properties: {
+    genres: {
+      items: {
+        additionalProperties: {
+          anyOf: [
+            {
+              type: "integer",
+            },
+            {
+              type: "string",
+            },
+          ],
+        },
+        type: "object",
+      },
+      type: "array",
+      title: "Genres",
+    },
+    overview: {
+      type: "string",
+      title: "Overview",
+    },
+    poster_path: {
+      type: "string",
+      title: "Poster Path",
+    },
+    title: {
+      type: "string",
+      title: "Title",
+    },
+    runtime: {
+      type: "integer",
+      title: "Runtime",
+    },
+    tagline: {
+      type: "string",
+      title: "Tagline",
+    },
+  },
+  type: "object",
+  required: [
+    "genres",
+    "overview",
+    "poster_path",
+    "title",
+    "runtime",
+    "tagline",
+  ],
+  title: "TheMovieDB",
+} as const;
+
 export const $TicketComplete = {
   properties: {
     pack_id: {
@@ -5679,7 +5902,7 @@ export const $app__modules__campaign__schemas_campaign__Result = {
 export const $app__modules__cdr__schemas_cdr__MembershipBase = {
   properties: {
     membership: {
-      $ref: "#/components/schemas/AvailableMembership",
+      $ref: "#/components/schemas/AvailableAssociationMembership",
     },
     start_date: {
       type: "string",
@@ -5700,7 +5923,7 @@ export const $app__modules__cdr__schemas_cdr__MembershipBase = {
 export const $app__modules__cdr__schemas_cdr__MembershipComplete = {
   properties: {
     membership: {
-      $ref: "#/components/schemas/AvailableMembership",
+      $ref: "#/components/schemas/AvailableAssociationMembership",
     },
     start_date: {
       type: "string",
@@ -5780,6 +6003,17 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
       type: "array",
       title: "Variants",
       default: [],
+    },
+    related_membership: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Related Membership",
     },
     product_constraints: {
       items: {
@@ -5881,6 +6115,36 @@ export const $app__modules__cdr__schemas_cdr__ProductEdit = {
         },
       ],
       title: "Related Membership",
+    },
+    product_constraints: {
+      anyOf: [
+        {
+          items: {
+            type: "string",
+            format: "uuid",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Product Constraints",
+    },
+    document_constraints: {
+      anyOf: [
+        {
+          items: {
+            type: "string",
+            format: "uuid",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Document Constraints",
     },
   },
   type: "object",

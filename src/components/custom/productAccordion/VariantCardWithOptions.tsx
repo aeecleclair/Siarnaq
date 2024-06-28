@@ -1,35 +1,58 @@
 import { VariantCard } from "../VariantCard";
 import { VariantCardOptions } from "./VariantCardOptions";
-import { ProductVariantComplete } from "@/api";
+import {
+  ProductVariantComplete,
+  app__modules__cdr__schemas_cdr__ProductComplete,
+} from "@/api";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 
 interface VariantCardWithOptionsProps {
   variant: ProductVariantComplete;
-  numberSelected: number;
   canEdit?: boolean;
   canRemove?: boolean;
+  canDisable?: boolean;
+  product: app__modules__cdr__schemas_cdr__ProductComplete;
+  sellerId: string;
+  showDescription: boolean;
+  refreshProduct: () => void;
+  isSelectable: boolean;
+  isAdmin: boolean;
+  displayWarning?: boolean;
 }
 
 export const VariantCardWithOptions = ({
   variant,
-  numberSelected,
   canEdit,
   canRemove,
+  canDisable,
+  product,
+  sellerId,
+  showDescription,
+  refreshProduct,
+  isSelectable,
+  isAdmin,
+  displayWarning,
 }: VariantCardWithOptionsProps) => {
-  const selected = numberSelected > 0;
   return (
     <ContextMenu>
       <ContextMenuTrigger>
         <VariantCard
           variant={variant}
-          numberSelected={numberSelected}
-          selected={selected}
+          sellerId={sellerId}
+          showDescription={showDescription}
+          isSelectable={isSelectable}
+          isAdmin={isAdmin}
+          displayWarning={displayWarning}
         />
       </ContextMenuTrigger>
       <VariantCardOptions
         variant={variant}
         canEdit={canEdit}
         canRemove={canRemove}
+        canDisable={canDisable}
+        sellerId={sellerId}
+        productId={product.id}
+        refreshProduct={refreshProduct}
       />
     </ContextMenu>
   );

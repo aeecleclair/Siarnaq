@@ -17,10 +17,10 @@ import type {
   GetAuthUserinfoResponse,
   GetOidcAuthorizationFlowJwksUriError,
   GetOidcAuthorizationFlowJwksUriResponse,
-  GetWellKnownOpenidConfigurationError,
-  GetWellKnownOpenidConfigurationResponse,
   GetWellKnownOauthAuthorizationServerError,
   GetWellKnownOauthAuthorizationServerResponse,
+  GetWellKnownOpenidConfigurationError,
+  GetWellKnownOpenidConfigurationResponse,
   GetInformationError,
   GetInformationResponse,
   GetPrivacyError,
@@ -102,6 +102,8 @@ import type {
   PostNotificationSendResponse,
   PostNotificationSendFutureError,
   PostNotificationSendFutureResponse,
+  PostPaymentHelloassoWebhookError,
+  PostPaymentHelloassoWebhookResponse,
   GetUsersError,
   GetUsersResponse,
   GetUsersCountError,
@@ -403,6 +405,11 @@ import type {
   GetCampaignListsListIdLogoData,
   GetCampaignListsListIdLogoError,
   GetCampaignListsListIdLogoResponse,
+  GetCdrUsersError,
+  GetCdrUsersResponse,
+  GetCdrUsersUserIdData,
+  GetCdrUsersUserIdError,
+  GetCdrUsersUserIdResponse,
   GetCdrSellersError,
   GetCdrSellersResponse,
   PostCdrSellersData,
@@ -412,6 +419,10 @@ import type {
   GetCdrUsersMeSellersResponse,
   GetCdrOnlineSellersError,
   GetCdrOnlineSellersResponse,
+  GetCdrOnlineProductsError,
+  GetCdrOnlineProductsResponse,
+  GetCdrProductsError,
+  GetCdrProductsResponse,
   PatchCdrSellersSellerIdData,
   PatchCdrSellersSellerIdError,
   PatchCdrSellersSellerIdResponse,
@@ -427,18 +438,6 @@ import type {
   GetCdrOnlineSellersSellerIdProductsData,
   GetCdrOnlineSellersSellerIdProductsError,
   GetCdrOnlineSellersSellerIdProductsResponse,
-  PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData,
-  PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError,
-  PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse,
-  DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData,
-  DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError,
-  DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse,
-  PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData,
-  PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError,
-  PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse,
-  DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData,
-  DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError,
-  DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse,
   PatchCdrSellersSellerIdProductsProductIdData,
   PatchCdrSellersSellerIdProductsProductIdError,
   PatchCdrSellersSellerIdProductsProductIdResponse,
@@ -454,12 +453,6 @@ import type {
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdData,
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdResponse,
-  PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData,
-  PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError,
-  PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
-  DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData,
-  DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError,
-  DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
   GetCdrSellersSellerIdDocumentsData,
   GetCdrSellersSellerIdDocumentsError,
   GetCdrSellersSellerIdDocumentsResponse,
@@ -478,9 +471,6 @@ import type {
   PostCdrUsersUserIdPurchasesProductVariantIdData,
   PostCdrUsersUserIdPurchasesProductVariantIdError,
   PostCdrUsersUserIdPurchasesProductVariantIdResponse,
-  PatchCdrUsersUserIdPurchasesProductVariantIdData,
-  PatchCdrUsersUserIdPurchasesProductVariantIdError,
-  PatchCdrUsersUserIdPurchasesProductVariantIdResponse,
   DeleteCdrUsersUserIdPurchasesProductVariantIdData,
   DeleteCdrUsersUserIdPurchasesProductVariantIdError,
   DeleteCdrUsersUserIdPurchasesProductVariantIdResponse,
@@ -510,6 +500,9 @@ import type {
   PostCdrUsersUserIdCurriculumsCurriculumIdData,
   PostCdrUsersUserIdCurriculumsCurriculumIdError,
   PostCdrUsersUserIdCurriculumsCurriculumIdResponse,
+  PatchCdrUsersUserIdCurriculumsCurriculumIdData,
+  PatchCdrUsersUserIdCurriculumsCurriculumIdError,
+  PatchCdrUsersUserIdCurriculumsCurriculumIdResponse,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdData,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdError,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdResponse,
@@ -522,6 +515,9 @@ import type {
   DeleteCdrUsersUserIdPaymentsPaymentIdData,
   DeleteCdrUsersUserIdPaymentsPaymentIdError,
   DeleteCdrUsersUserIdPaymentsPaymentIdResponse,
+  GetCdrPayAmountData,
+  GetCdrPayAmountError,
+  GetCdrPayAmountResponse,
   GetCdrUsersUserIdMembershipsData,
   GetCdrUsersUserIdMembershipsError,
   GetCdrUsersUserIdMembershipsResponse,
@@ -536,6 +532,9 @@ import type {
   PatchCdrStatusData,
   PatchCdrStatusError,
   PatchCdrStatusResponse,
+  GetCinemaThemoviedbThemoviedbIdData,
+  GetCinemaThemoviedbThemoviedbIdError,
+  GetCinemaThemoviedbThemoviedbIdResponse,
   GetCinemaSessionsError,
   GetCinemaSessionsResponse,
   PostCinemaSessionsData,
@@ -553,7 +552,6 @@ import type {
   GetCinemaSessionsSessionIdPosterData,
   GetCinemaSessionsSessionIdPosterError,
   GetCinemaSessionsSessionIdPosterResponse,
-  GetFlappybirdScoresData,
   GetFlappybirdScoresError,
   GetFlappybirdScoresResponse,
   PostFlappybirdScoresData,
@@ -782,7 +780,7 @@ import {
 
 /**
  * Login For Access Token
- * Ask for a JWT acc   ess token using oauth password flow.
+ * Ask for a JWT access token using oauth password flow.
  *
  * *username* and *password* must be provided
  *
@@ -959,6 +957,19 @@ export const getOidcAuthorizationFlowJwksUri = (options?: Options) => {
 };
 
 /**
+ * Oauth Configuration
+ */
+export const getWellKnownOauthAuthorizationServer = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetWellKnownOauthAuthorizationServerResponse,
+    GetWellKnownOauthAuthorizationServerError
+  >({
+    ...options,
+    url: "/.well-known/oauth-authorization-server",
+  });
+};
+
+/**
  * Oidc Configuration
  */
 export const getWellKnownOpenidConfiguration = (options?: Options) => {
@@ -968,19 +979,6 @@ export const getWellKnownOpenidConfiguration = (options?: Options) => {
   >({
     ...options,
     url: "/.well-known/openid-configuration",
-  });
-};
-
-/**
- * Oauth Authorization Server
- */
-export const getWellKnownOauthAuthorizationServer = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetWellKnownOauthAuthorizationServerResponse,
-    GetWellKnownOauthAuthorizationServerError
-  >({
-    ...options,
-    url: "/.well-known/oauth-authorization-server",
   });
 };
 
@@ -1492,6 +1490,19 @@ export const postNotificationSendFuture = (options?: Options) => {
   >({
     ...options,
     url: "/notification/send/future",
+  });
+};
+
+/**
+ * Webhook
+ */
+export const postPaymentHelloassoWebhook = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostPaymentHelloassoWebhookResponse,
+    PostPaymentHelloassoWebhookError
+  >({
+    ...options,
+    url: "/payment/helloasso/webhook",
   });
 };
 
@@ -3411,6 +3422,37 @@ export const getCampaignListsListIdLogo = (
 };
 
 /**
+ * Get Cdr Users
+ * Get all sellers.
+ *
+ * **User must be part of a seller group to use this endpoint**
+ */
+export const getCdrUsers = (options?: Options) => {
+  return (options?.client ?? client).get<GetCdrUsersResponse, GetCdrUsersError>(
+    {
+      ...options,
+      url: "/cdr/users/",
+    },
+  );
+};
+
+/**
+ * Get Cdr User
+ * Get a user.
+ *
+ * **User must be part of a seller group to use this endpoint**
+ */
+export const getCdrUsersUserId = (options: Options<GetCdrUsersUserIdData>) => {
+  return (options?.client ?? client).get<
+    GetCdrUsersUserIdResponse,
+    GetCdrUsersUserIdError
+  >({
+    ...options,
+    url: "/cdr/users/{user_id}/",
+  });
+};
+
+/**
  * Get Sellers
  * Get all sellers.
  *
@@ -3471,6 +3513,38 @@ export const getCdrOnlineSellers = (options?: Options) => {
   >({
     ...options,
     url: "/cdr/online/sellers/",
+  });
+};
+
+/**
+ * Get All Available Online Products
+ * Get a seller's online available products.
+ *
+ * **User must be authenticated to use this endpoint**
+ */
+export const getCdrOnlineProducts = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCdrOnlineProductsResponse,
+    GetCdrOnlineProductsError
+  >({
+    ...options,
+    url: "/cdr/online/products/",
+  });
+};
+
+/**
+ * Get All Products
+ * Get a seller's online available products.
+ *
+ * **User must be authenticated to use this endpoint**
+ */
+export const getCdrProducts = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCdrProductsResponse,
+    GetCdrProductsError
+  >({
+    ...options,
+    url: "/cdr/products/",
   });
 };
 
@@ -3565,82 +3639,6 @@ export const getCdrOnlineSellersSellerIdProducts = (
 };
 
 /**
- * Create Document Constraint
- * Add a document in a product's document constraints.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const postCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentId =
-  (
-    options: Options<PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData>,
-  ) => {
-    return (options?.client ?? client).post<
-      PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse,
-      PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/document_constraints/{document_id}/",
-    });
-  };
-
-/**
- * Delete Document Constraint
- * Remove a document from a product's document constraints.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const deleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentId =
-  (
-    options: Options<DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData>,
-  ) => {
-    return (options?.client ?? client).delete<
-      DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse,
-      DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/document_constraints/{document_id}/",
-    });
-  };
-
-/**
- * Create Product Constraint
- * Add a product in a product's product constraints.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const postCdrSellersSellerIdProductsProductIdProductConstraintsConstraintId =
-  (
-    options: Options<PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData>,
-  ) => {
-    return (options?.client ?? client).post<
-      PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse,
-      PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/product_constraints/{constraint_id}/",
-    });
-  };
-
-/**
- * Delete Product Constraint
- * Remove a product from a product's document constraints.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const deleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintId =
-  (
-    options: Options<DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData>,
-  ) => {
-    return (options?.client ?? client).delete<
-      DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse,
-      DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/product_constraints/{constraint_id}/",
-    });
-  };
-
-/**
  * Update Product
  * Edit a product.
  *
@@ -3729,44 +3727,6 @@ export const deleteCdrSellersSellerIdProductsProductIdVariantsVariantId = (
     url: "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/",
   });
 };
-
-/**
- * Create Allowed Curriculum
- * Add a curriculum in a product variant's allowed curriculums.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const postCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumId =
-  (
-    options: Options<PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData>,
-  ) => {
-    return (options?.client ?? client).post<
-      PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
-      PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/curriculums/{curriculum_id}/",
-    });
-  };
-
-/**
- * Delete Allowed Curriculum
- * Remove a curriculum from a product variant's allowed curriculums.
- *
- * **User must be part of the seller's group to use this endpoint**
- */
-export const deleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumId =
-  (
-    options: Options<DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData>,
-  ) => {
-    return (options?.client ?? client).delete<
-      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse,
-      DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError
-    >({
-      ...options,
-      url: "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/curriculums/{curriculum_id}/",
-    });
-  };
 
 /**
  * Get Documents
@@ -3870,24 +3830,6 @@ export const postCdrUsersUserIdPurchasesProductVariantId = (
   return (options?.client ?? client).post<
     PostCdrUsersUserIdPurchasesProductVariantIdResponse,
     PostCdrUsersUserIdPurchasesProductVariantIdError
-  >({
-    ...options,
-    url: "/cdr/users/{user_id}/purchases/{product_variant_id}/",
-  });
-};
-
-/**
- * Update Purchase
- * Edit a purchase.
- *
- * **User must create a purchase for themself and for an online available product or be part of the seller's group to use this endpoint**
- */
-export const patchCdrUsersUserIdPurchasesProductVariantId = (
-  options: Options<PatchCdrUsersUserIdPurchasesProductVariantIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchCdrUsersUserIdPurchasesProductVariantIdResponse,
-    PatchCdrUsersUserIdPurchasesProductVariantIdError
   >({
     ...options,
     url: "/cdr/users/{user_id}/purchases/{product_variant_id}/",
@@ -4073,6 +4015,24 @@ export const postCdrUsersUserIdCurriculumsCurriculumId = (
 };
 
 /**
+ * Update Curriculum Membership
+ * Update a curriculum membership.
+ *
+ * **User must add a curriculum to themself or be CDR Admin to use this endpoint**
+ */
+export const patchCdrUsersUserIdCurriculumsCurriculumId = (
+  options: Options<PatchCdrUsersUserIdCurriculumsCurriculumIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchCdrUsersUserIdCurriculumsCurriculumIdResponse,
+    PatchCdrUsersUserIdCurriculumsCurriculumIdError
+  >({
+    ...options,
+    url: "/cdr/users/{user_id}/curriculums/{curriculum_id}/",
+  });
+};
+
+/**
  * Delete Curriculum Membership
  * Remove a curriculum from a user.
  *
@@ -4145,6 +4105,20 @@ export const deleteCdrUsersUserIdPaymentsPaymentId = (
 };
 
 /**
+ * Get Payment Url
+ * Get payment url
+ */
+export const getCdrPayAmount = (options: Options<GetCdrPayAmountData>) => {
+  return (options?.client ?? client).get<
+    GetCdrPayAmountResponse,
+    GetCdrPayAmountError
+  >({
+    ...options,
+    url: "/cdr/pay/{amount}",
+  });
+};
+
+/**
  * Get Memberships By User Id
  */
 export const getCdrUsersUserIdMemberships = (
@@ -4212,6 +4186,25 @@ export const patchCdrStatus = (options: Options<PatchCdrStatusData>) => {
   >({
     ...options,
     url: "/cdr/status/",
+  });
+};
+
+/**
+ * Get Movie
+ * Makes a HTTP request to The Movie Database (TMDB)
+ * using an API key and returns a TheMovieDB object
+ * * https://developer.themoviedb.org/reference/movie-details
+ * * https://developer.themoviedb.org/docs/errors
+ */
+export const getCinemaThemoviedbThemoviedbId = (
+  options: Options<GetCinemaThemoviedbThemoviedbIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCinemaThemoviedbThemoviedbIdResponse,
+    GetCinemaThemoviedbThemoviedbIdError
+  >({
+    ...options,
+    url: "/cinema/themoviedb/{themoviedb_id}",
   });
 };
 
@@ -4306,11 +4299,9 @@ export const getCinemaSessionsSessionIdPoster = (
 
 /**
  * Get Flappybird Score
- * Return the leaderboard score of the skip...limit
+ * Return the leaderboard
  */
-export const getFlappybirdScores = (
-  options?: Options<GetFlappybirdScoresData>,
-) => {
+export const getFlappybirdScores = (options?: Options) => {
   return (options?.client ?? client).get<
     GetFlappybirdScoresResponse,
     GetFlappybirdScoresError

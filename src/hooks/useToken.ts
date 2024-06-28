@@ -1,4 +1,5 @@
 import { useTokenStore } from "@/stores/token";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import * as auth from "oauth4webapi";
 import { useState } from "react";
@@ -20,14 +21,20 @@ export const useToken = () => {
   const { token, setToken, refreshToken, setRefreshToken } = useTokenStore();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  async function getToken() {
-    const access_token_expires = token
-      ? JSON.parse(atob(token.split(".")[1])).exp
-      : 0;
+  const isTokenExpired = () => {
+    if (!token) {
+      return true;
+    }
+    const access_token_expires = JSON.parse(atob(token.split(".")[1])).exp;
     const now = Math.floor(Date.now() / 1000);
-    if (access_token_expires - 60 > now) {
+    return access_token_expires - 60 < now;
+  };
+
+  async function getToken(): Promise<string | undefined | null> {
+    if (!isTokenExpired()) {
       return token;
     }
+    console.log(isRefreshing, refreshToken);
     if (isRefreshing) {
       return;
     }
@@ -52,7 +59,6 @@ export const useToken = () => {
       setToken(null);
       setRefreshToken(null);
       router.replace("/login");
-      setIsRefreshing(false);
       return;
     }
 
@@ -66,16 +72,25 @@ export const useToken = () => {
       setToken(null);
       setRefreshToken(null);
       router.replace("/login");
-      setIsRefreshing(false);
       return;
     }
 
     console.log("Access Token Response", result);
     setToken(result.access_token);
     setRefreshToken(result.refresh_token ?? null);
-    setIsRefreshing(false);
     return result.access_token;
   }
 
-  return { getToken };
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ["token", token, isTokenExpired()],
+    queryFn: async () => {
+      return getToken().then((token) => {
+        setIsRefreshing(false);
+        return token;
+      });
+    },
+    enabled: isTokenExpired(),
+  });
+
+  return { token: data, isLoading, error, getToken, refetch, isTokenExpired };
 };

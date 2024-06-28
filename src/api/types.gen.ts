@@ -96,7 +96,7 @@ export type AssociationEdit = {
   mandate_year?: number | null;
 };
 
-export type AvailableMembership = "AEECL" | "USEECL";
+export type AvailableAssociationMembership = "AEECL" | "USEECL";
 
 /**
  * Return a dictionary of {key: error message} indicating which element of failed.
@@ -294,6 +294,14 @@ export type CashEdit = {
 
 export type CdrStatus = "pending" | "online" | "onsite" | "closed";
 
+export type CdrUser = {
+  name: string;
+  firstname: string;
+  nickname?: string | null;
+  id: string;
+  curriculum?: CurriculumComplete | null;
+};
+
 export type ChangePasswordRequest = {
   email: string;
   old_password: string;
@@ -304,7 +312,7 @@ export type CineSessionBase = {
   start: string;
   duration: number;
   name: string;
-  overview?: string | null;
+  overview: string;
   genre?: string | null;
   tagline?: string | null;
 };
@@ -313,7 +321,7 @@ export type CineSessionComplete = {
   start: string;
   duration: number;
   name: string;
-  overview?: string | null;
+  overview: string;
   genre?: string | null;
   tagline?: string | null;
   id: string;
@@ -617,7 +625,7 @@ export type FlappyBirdScoreBase = {
 };
 
 /**
- * A score, with it's position in the best players leaderboard
+ * A score with its position in the best players leaderboard
  */
 export type FlappyBirdScoreCompleteFeedBack = {
   value: number;
@@ -1015,6 +1023,10 @@ export type PaymentComplete = {
 
 export type PaymentType = "cash" | "check" | "HelloAsso" | "card" | "archived";
 
+export type PaymentUrl = {
+  url: string;
+};
+
 export type PrizeBase = {
   name: string;
   description: string;
@@ -1043,6 +1055,9 @@ export type ProductBase = {
   description_fr?: string | null;
   description_en?: string | null;
   available_online: boolean;
+  related_membership?: string | null;
+  product_constraints: Array<string>;
+  document_constraints: Array<string>;
 };
 
 export type ProductCompleteNoConstraint = {
@@ -1076,9 +1091,13 @@ export type ProductVariantBase = {
   price: number;
   enabled: boolean;
   unique: boolean;
+  allowed_curriculum: Array<string>;
+  related_membership_added_duration?: string | null;
 };
 
 export type ProductVariantComplete = {
+  id: string;
+  product_id: string;
   name_fr: string;
   name_en: string;
   description_fr?: string | null;
@@ -1086,8 +1105,8 @@ export type ProductVariantComplete = {
   price: number;
   enabled: boolean;
   unique: boolean;
-  id: string;
-  product_id: string;
+  allowed_curriculum?: Array<CurriculumComplete>;
+  related_membership_added_duration?: string | null;
 };
 
 export type ProductVariantEdit = {
@@ -1098,6 +1117,8 @@ export type ProductVariantEdit = {
   price?: number | null;
   enabled?: boolean | null;
   unique?: boolean | null;
+  allowed_curriculum?: Array<string> | null;
+  related_membership_added_duration?: string | null;
 };
 
 export type PurchaseBase = {
@@ -1111,8 +1132,14 @@ export type PurchaseComplete = {
   validated: boolean;
 };
 
-export type PurchaseEdit = {
-  quantity?: number | null;
+export type PurchaseReturn = {
+  quantity: number;
+  user_id: string;
+  product_variant_id: string;
+  validated: boolean;
+  price: number;
+  product: ProductCompleteNoConstraint;
+  seller: SellerComplete;
 };
 
 /**
@@ -1247,6 +1274,17 @@ export type StatusType =
   | "counting"
   | "published";
 
+export type TheMovieDB = {
+  genres: Array<{
+    [key: string]: number | string;
+  }>;
+  overview: string;
+  poster_path: string;
+  title: string;
+  runtime: number;
+  tagline: string;
+};
+
 export type TicketComplete = {
   pack_id: string;
   user_id: string;
@@ -1339,13 +1377,13 @@ export type app__modules__campaign__schemas_campaign__Result = {
 };
 
 export type app__modules__cdr__schemas_cdr__MembershipBase = {
-  membership: AvailableMembership;
+  membership: AvailableAssociationMembership;
   start_date: string;
   end_date: string;
 };
 
 export type app__modules__cdr__schemas_cdr__MembershipComplete = {
-  membership: AvailableMembership;
+  membership: AvailableAssociationMembership;
   start_date: string;
   end_date: string;
   id: string;
@@ -1361,6 +1399,7 @@ export type app__modules__cdr__schemas_cdr__ProductComplete = {
   id: string;
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
+  related_membership?: string | null;
   product_constraints?: Array<ProductCompleteNoConstraint>;
   document_constraints?: Array<DocumentComplete>;
 };
@@ -1373,6 +1412,8 @@ export type app__modules__cdr__schemas_cdr__ProductEdit = {
   description?: string | null;
   available_online?: boolean | null;
   related_membership?: string | null;
+  product_constraints?: Array<string> | null;
+  document_constraints?: Array<string> | null;
 };
 
 export type app__modules__phonebook__schemas_phonebook__MembershipBase = {
@@ -1441,13 +1482,13 @@ export type GetOidcAuthorizationFlowJwksUriResponse = unknown;
 
 export type GetOidcAuthorizationFlowJwksUriError = unknown;
 
-export type GetWellKnownOpenidConfigurationResponse = unknown;
-
-export type GetWellKnownOpenidConfigurationError = unknown;
-
 export type GetWellKnownOauthAuthorizationServerResponse = unknown;
 
 export type GetWellKnownOauthAuthorizationServerError = unknown;
+
+export type GetWellKnownOpenidConfigurationResponse = unknown;
+
+export type GetWellKnownOpenidConfigurationError = unknown;
 
 export type GetInformationResponse = CoreInformation;
 
@@ -1669,6 +1710,10 @@ export type PostNotificationSendError = unknown;
 export type PostNotificationSendFutureResponse = unknown;
 
 export type PostNotificationSendFutureError = unknown;
+
+export type PostPaymentHelloassoWebhookResponse = void;
+
+export type PostPaymentHelloassoWebhookError = unknown;
 
 export type GetUsersResponse = Array<CoreUserSimple>;
 
@@ -2563,6 +2608,20 @@ export type GetCampaignListsListIdLogoResponse = unknown;
 
 export type GetCampaignListsListIdLogoError = unknown;
 
+export type GetCdrUsersResponse = Array<CdrUser>;
+
+export type GetCdrUsersError = unknown;
+
+export type GetCdrUsersUserIdData = {
+  path: {
+    user_id: string;
+  };
+};
+
+export type GetCdrUsersUserIdResponse = CdrUser;
+
+export type GetCdrUsersUserIdError = unknown;
+
 export type GetCdrSellersResponse = Array<SellerComplete>;
 
 export type GetCdrSellersError = unknown;
@@ -2582,6 +2641,16 @@ export type GetCdrUsersMeSellersError = unknown;
 export type GetCdrOnlineSellersResponse = Array<SellerComplete>;
 
 export type GetCdrOnlineSellersError = unknown;
+
+export type GetCdrOnlineProductsResponse =
+  Array<app__modules__cdr__schemas_cdr__ProductComplete>;
+
+export type GetCdrOnlineProductsError = unknown;
+
+export type GetCdrProductsResponse =
+  Array<app__modules__cdr__schemas_cdr__ProductComplete>;
+
+export type GetCdrProductsError = unknown;
 
 export type PatchCdrSellersSellerIdData = {
   body: SellerEdit;
@@ -2637,66 +2706,6 @@ export type GetCdrOnlineSellersSellerIdProductsResponse =
   Array<app__modules__cdr__schemas_cdr__ProductComplete>;
 
 export type GetCdrOnlineSellersSellerIdProductsError = unknown;
-
-export type PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData =
-  {
-    path: {
-      document_id: string;
-      product_id: string;
-      seller_id: string;
-    };
-  };
-
-export type PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse =
-  app__modules__cdr__schemas_cdr__ProductComplete;
-
-export type PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError =
-  unknown;
-
-export type DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData =
-  {
-    path: {
-      document_id: string;
-      product_id: string;
-      seller_id: string;
-    };
-  };
-
-export type DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdResponse =
-  void;
-
-export type DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdError =
-  unknown;
-
-export type PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData =
-  {
-    path: {
-      constraint_id: string;
-      product_id: string;
-      seller_id: string;
-    };
-  };
-
-export type PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse =
-  app__modules__cdr__schemas_cdr__ProductComplete;
-
-export type PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError =
-  unknown;
-
-export type DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData =
-  {
-    path: {
-      constraint_id: string;
-      product_id: string;
-      seller_id: string;
-    };
-  };
-
-export type DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdResponse =
-  void;
-
-export type DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdError =
-  unknown;
 
 export type PatchCdrSellersSellerIdProductsProductIdData = {
   body: app__modules__cdr__schemas_cdr__ProductEdit;
@@ -2763,38 +2772,6 @@ export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdResponse =
 export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError =
   unknown;
 
-export type PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData =
-  {
-    path: {
-      curriculum_id: string;
-      product_id: string;
-      seller_id: string;
-      variant_id: string;
-    };
-  };
-
-export type PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse =
-  ProductVariantComplete;
-
-export type PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError =
-  unknown;
-
-export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData =
-  {
-    path: {
-      curriculum_id: string;
-      product_id: string;
-      seller_id: string;
-      variant_id: string;
-    };
-  };
-
-export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdResponse =
-  void;
-
-export type DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdError =
-  unknown;
-
 export type GetCdrSellersSellerIdDocumentsData = {
   path: {
     seller_id: string;
@@ -2833,7 +2810,7 @@ export type GetCdrUsersUserIdPurchasesData = {
   };
 };
 
-export type GetCdrUsersUserIdPurchasesResponse = Array<PurchaseComplete>;
+export type GetCdrUsersUserIdPurchasesResponse = Array<PurchaseReturn>;
 
 export type GetCdrUsersUserIdPurchasesError = unknown;
 
@@ -2845,7 +2822,7 @@ export type GetCdrSellersSellerIdUsersUserIdPurchasesData = {
 };
 
 export type GetCdrSellersSellerIdUsersUserIdPurchasesResponse =
-  Array<PurchaseComplete>;
+  Array<PurchaseReturn>;
 
 export type GetCdrSellersSellerIdUsersUserIdPurchasesError = unknown;
 
@@ -2861,18 +2838,6 @@ export type PostCdrUsersUserIdPurchasesProductVariantIdResponse =
   PurchaseComplete;
 
 export type PostCdrUsersUserIdPurchasesProductVariantIdError = unknown;
-
-export type PatchCdrUsersUserIdPurchasesProductVariantIdData = {
-  body: PurchaseEdit;
-  path: {
-    product_variant_id: string;
-    user_id: string;
-  };
-};
-
-export type PatchCdrUsersUserIdPurchasesProductVariantIdResponse = void;
-
-export type PatchCdrUsersUserIdPurchasesProductVariantIdError = unknown;
 
 export type DeleteCdrUsersUserIdPurchasesProductVariantIdData = {
   path: {
@@ -2979,6 +2944,17 @@ export type PostCdrUsersUserIdCurriculumsCurriculumIdResponse = unknown;
 
 export type PostCdrUsersUserIdCurriculumsCurriculumIdError = unknown;
 
+export type PatchCdrUsersUserIdCurriculumsCurriculumIdData = {
+  path: {
+    curriculum_id: string;
+    user_id: string;
+  };
+};
+
+export type PatchCdrUsersUserIdCurriculumsCurriculumIdResponse = void;
+
+export type PatchCdrUsersUserIdCurriculumsCurriculumIdError = unknown;
+
 export type DeleteCdrUsersUserIdCurriculumsCurriculumIdData = {
   path: {
     curriculum_id: string;
@@ -3021,6 +2997,16 @@ export type DeleteCdrUsersUserIdPaymentsPaymentIdData = {
 export type DeleteCdrUsersUserIdPaymentsPaymentIdResponse = void;
 
 export type DeleteCdrUsersUserIdPaymentsPaymentIdError = unknown;
+
+export type GetCdrPayAmountData = {
+  path: {
+    amount: number;
+  };
+};
+
+export type GetCdrPayAmountResponse = PaymentUrl;
+
+export type GetCdrPayAmountError = unknown;
 
 export type GetCdrUsersUserIdMembershipsData = {
   path: {
@@ -3067,6 +3053,16 @@ export type PatchCdrStatusData = {
 export type PatchCdrStatusResponse = void;
 
 export type PatchCdrStatusError = unknown;
+
+export type GetCinemaThemoviedbThemoviedbIdData = {
+  path: {
+    themoviedb_id: string;
+  };
+};
+
+export type GetCinemaThemoviedbThemoviedbIdResponse = TheMovieDB;
+
+export type GetCinemaThemoviedbThemoviedbIdError = unknown;
 
 export type GetCinemaSessionsResponse = Array<CineSessionComplete>;
 
@@ -3121,13 +3117,6 @@ export type GetCinemaSessionsSessionIdPosterData = {
 export type GetCinemaSessionsSessionIdPosterResponse = unknown;
 
 export type GetCinemaSessionsSessionIdPosterError = unknown;
-
-export type GetFlappybirdScoresData = {
-  query?: {
-    limit?: number;
-    skip?: number;
-  };
-};
 
 export type GetFlappybirdScoresResponse = Array<FlappyBirdScoreInDB>;
 
@@ -3925,7 +3914,7 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/.well-known/openid-configuration": {
+  "/.well-known/oauth-authorization-server": {
     get: {
       res: {
         /**
@@ -3935,7 +3924,7 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/.well-known/oauth-authorization-server": {
+  "/.well-known/openid-configuration": {
     get: {
       res: {
         /**
@@ -4333,6 +4322,16 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "201": unknown;
+      };
+    };
+  };
+  "/payment/helloasso/webhook": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
       };
     };
   };
@@ -5769,6 +5768,31 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/cdr/users/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<CdrUser>;
+      };
+    };
+  };
+  "/cdr/users/{user_id}/": {
+    get: {
+      req: GetCdrUsersUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": CdrUser;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
   "/cdr/sellers/": {
     get: {
       res: {
@@ -5809,6 +5833,26 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "200": Array<SellerComplete>;
+      };
+    };
+  };
+  "/cdr/online/products/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<app__modules__cdr__schemas_cdr__ProductComplete>;
+      };
+    };
+  };
+  "/cdr/products/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<app__modules__cdr__schemas_cdr__ProductComplete>;
       };
     };
   };
@@ -5876,62 +5920,6 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "200": Array<app__modules__cdr__schemas_cdr__ProductComplete>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/cdr/sellers/{seller_id}/products/{product_id}/document_constraints/{document_id}/": {
-    post: {
-      req: PostCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__modules__cdr__schemas_cdr__ProductComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteCdrSellersSellerIdProductsProductIdDocumentConstraintsDocumentIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/cdr/sellers/{seller_id}/products/{product_id}/product_constraints/{constraint_id}/": {
-    post: {
-      req: PostCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__modules__cdr__schemas_cdr__ProductComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteCdrSellersSellerIdProductsProductIdProductConstraintsConstraintIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
         /**
          * Validation Error
          */
@@ -6010,34 +5998,6 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/cdr/sellers/{seller_id}/products/{product_id}/variants/{variant_id}/curriculums/{curriculum_id}/": {
-    post: {
-      req: PostCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": ProductVariantComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdCurriculumsCurriculumIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
   "/cdr/sellers/{seller_id}/documents/": {
     get: {
       req: GetCdrSellersSellerIdDocumentsData;
@@ -6088,7 +6048,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "200": Array<PurchaseComplete>;
+        "200": Array<PurchaseReturn>;
         /**
          * Validation Error
          */
@@ -6103,7 +6063,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "200": Array<PurchaseComplete>;
+        "200": Array<PurchaseReturn>;
         /**
          * Validation Error
          */
@@ -6119,19 +6079,6 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "201": PurchaseComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    patch: {
-      req: PatchCdrUsersUserIdPurchasesProductVariantIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
         /**
          * Validation Error
          */
@@ -6277,6 +6224,19 @@ export type $OpenApiTs = {
         "422": HTTPValidationError;
       };
     };
+    patch: {
+      req: PatchCdrUsersUserIdCurriculumsCurriculumIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
     delete: {
       req: DeleteCdrUsersUserIdCurriculumsCurriculumIdData;
       res: {
@@ -6327,6 +6287,21 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/pay/{amount}": {
+    get: {
+      req: GetCdrPayAmountData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": PaymentUrl;
         /**
          * Validation Error
          */
@@ -6393,6 +6368,21 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cinema/themoviedb/{themoviedb_id}": {
+    get: {
+      req: GetCinemaThemoviedbThemoviedbIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": TheMovieDB;
         /**
          * Validation Error
          */
@@ -6481,16 +6471,11 @@ export type $OpenApiTs = {
   };
   "/flappybird/scores": {
     get: {
-      req: GetFlappybirdScoresData;
       res: {
         /**
          * Successful Response
          */
         "200": Array<FlappyBirdScoreInDB>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
       };
     };
     post: {

@@ -1,8 +1,6 @@
-import { SellerComplete, getCdrOnlineSellers } from "@/api";
-import { useToken } from "@/hooks/useToken";
+import { useOnlineSeller } from "@/hooks/useOnlineSellers";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
 import {
   HiCheck,
   HiOutlineClipboardList,
@@ -10,11 +8,8 @@ import {
   HiOutlineSparkles,
 } from "react-icons/hi";
 
-export const AssociationPanel = ({
-  onlineSellers,
-}: {
-  onlineSellers: SellerComplete[];
-}) => {
+export const AssociationPanel = () => {
+  const { onlineSellers } = useOnlineSeller();
   const searchParams = useSearchParams();
   const firstSellerId =
     searchParams.get("sellerId") || onlineSellers?.at(0)?.id;
@@ -36,7 +31,7 @@ export const AssociationPanel = ({
             Présentation
           </div>
         </Link>
-        {onlineSellers.map((seller) => (
+        {onlineSellers?.map((seller) => (
           <Link
             key={seller.id}
             href={`/?sellerId=${seller.id}`}

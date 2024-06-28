@@ -1,3 +1,4 @@
+import { useOnlineSeller } from "@/hooks/useOnlineSellers";
 import {
   Card,
   CardHeader,
@@ -5,25 +6,17 @@ import {
   CardContent,
   CardFooter,
 } from "../ui/card";
-import { Separator } from "../ui/separator";
 import { PaymentButton } from "./PaymentButton";
 import {
-  SellerComplete,
   app__modules__cdr__schemas_cdr__ProductComplete,
   getCdrOnlineProducts,
-  getCdrOnlineSellersSellerIdProducts,
 } from "@/api";
-import { useToken } from "@/hooks/useToken";
-import { useVariantQuantityStore } from "@/stores/variantQuantityStore";
 import { useState, useEffect } from "react";
 
-export const RecapPanel = ({
-  onlineSellers,
-}: {
-  onlineSellers: SellerComplete[];
-}) => {
-  const { variantQuantity } = useVariantQuantityStore();
-  const sellerIds = Object.keys(variantQuantity) as Array<string>;
+export const RecapPanel = () => {
+  const { onlineSellers } = useOnlineSeller();
+  // const { variantQuantity } = useVariantQuantityStore();
+  // const sellerIds = Object.keys(variantQuantity) as Array<string>;
   var total = 0;
 
   const [onlineProducts, setOnlineProducts] = useState<
@@ -54,7 +47,7 @@ export const RecapPanel = ({
         <CardTitle>Récapitulatif</CardTitle>
       </CardHeader>
       <CardContent className="space-y-2">
-        {sellerIds.length > 0 ? (
+        {/* {sellerIds.length > 0 ? (
           <>
             {sellerIds.map((id) => {
               const sellerProducts = variantQuantity[id];
@@ -98,7 +91,7 @@ export const RecapPanel = ({
           </>
         ) : (
           <div>Aucun produit</div>
-        )}
+        )} */}
       </CardContent>
       <CardFooter className="px-6 py-4">
         <PaymentButton />

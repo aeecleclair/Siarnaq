@@ -29,8 +29,7 @@ export const ProductPanel = () => {
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
-      !productExpansion[firstSellerId]?.products &&
-      productExpansion[firstSellerId]?.loaded
+      productExpansion[firstSellerId] !== undefined
     ) {
       setExpandedProducts(
         firstSellerId,
@@ -49,7 +48,7 @@ export const ProductPanel = () => {
           {products ? (
             <Accordion
               type="multiple"
-              value={productExpansion[firstSellerId]?.products}
+              value={productExpansion[firstSellerId]}
               onValueChange={(value) =>
                 setExpandedProducts(firstSellerId, value)
               }

@@ -1,6 +1,10 @@
 import { PaymentPart } from "./Payment/PaymentPart";
 import { ProductPart } from "./Product/ProductPart";
-import { CdrUser, patchCdrUsersUserIdCurriculumsCurriculumId, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
+import {
+  CdrUser,
+  patchCdrUsersUserIdCurriculumsCurriculumId,
+  postCdrUsersUserIdCurriculumsCurriculumId,
+} from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
@@ -50,21 +54,23 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
     }
     var data, error;
     if (hasUserCurriculum) {
-      const { data: patchData, error: patchError } = await patchCdrUsersUserIdCurriculumsCurriculumId({
-        path: {
-          user_id: user.id,
-          curriculum_id: selectedCurriculum,
-        },
-      });
+      const { data: patchData, error: patchError } =
+        await patchCdrUsersUserIdCurriculumsCurriculumId({
+          path: {
+            user_id: user.id,
+            curriculum_id: selectedCurriculum,
+          },
+        });
       data = patchData;
       error = patchError;
     } else {
-      const { data: postData, error: postError } = await postCdrUsersUserIdCurriculumsCurriculumId({
-        path: {
-          user_id: user.id,
-          curriculum_id: selectedCurriculum,
-        },
-      });
+      const { data: postData, error: postError } =
+        await postCdrUsersUserIdCurriculumsCurriculumId({
+          path: {
+            user_id: user.id,
+            curriculum_id: selectedCurriculum,
+          },
+        });
       data = postData;
       error = postError;
     }

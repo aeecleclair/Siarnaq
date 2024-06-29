@@ -63,9 +63,7 @@ const Login = () => {
             </div>
           </form>
           <TextSeparator text="Sinon" />
-          <span className="m-auto">
-            Veuillez sélectionner votre promo :
-          </span>
+          <span className="m-auto">Veuillez sélectionner votre promo :</span>
           <div key="curriculum" className="h-full gap-4 flex flex-col">
             <Select value={selectedPromo} onValueChange={setSelectedPromo}>
               <SelectTrigger className="w-full m-auto">

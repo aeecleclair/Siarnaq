@@ -62,7 +62,13 @@ export const ProductPanel = () => {
         onlineProducts.map((product) => product.id),
       );
     }
-  }, [productExpansion, firstSellerId, setExpandedProducts, onlineProducts, seller?.id]);
+  }, [
+    productExpansion,
+    firstSellerId,
+    setExpandedProducts,
+    onlineProducts,
+    seller?.id,
+  ]);
 
   return (
     <div className="grid gap-6">

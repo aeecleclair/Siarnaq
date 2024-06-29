@@ -1,4 +1,3 @@
-import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import {
   Card,
   CardHeader,
@@ -11,6 +10,7 @@ import {
   app__modules__cdr__schemas_cdr__ProductComplete,
   getCdrOnlineProducts,
 } from "@/api";
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useState, useEffect } from "react";
 
 export const RecapPanel = () => {

@@ -24,7 +24,7 @@ const AdminPage = () => {
   const [refetchStatus, setRefetchStatus] = useState<boolean>(true);
   const userGroups = user?.groups?.map((group) => group.id);
   const isUserInASellerGroup = userGroups?.some((group) =>
-    sellers?.some((seller) => seller.group_id === group)
+    sellers?.some((seller) => seller.group_id === group),
   );
 
   if (!isAdmin || !isUserInASellerGroup) {

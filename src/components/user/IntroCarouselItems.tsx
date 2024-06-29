@@ -1,33 +1,39 @@
-import { TextSeparator } from "../custom/TextSeparator";
-import { Button } from "../ui/button";
+import { LoadingButton } from "../custom/LoadingButton";
+import { Badge } from "../ui/badge";
 import { CarouselContent, CarouselItem, useCarousel } from "../ui/carousel";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
+import { useCurriculums } from "@/hooks/useCurriculums";
+import { useOnlineSeller } from "@/hooks/useOnlineSellers";
+import { useUser } from "@/hooks/useUser";
+import { useTokenStore } from "@/stores/token";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const IntroCarouselItems = () => {
   const { scrollNext, canScrollNext } = useCarousel();
+  const { curriculums } = useCurriculums();
+  const { onlineSellers } = useOnlineSeller();
+  const router = useRouter();
+  const { userId } = useTokenStore();
+  const { user, refetch } = useUser(userId);
+  const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
-  const buttonLabels = ["On commence ?", "Valider", "Terminer"];
-  const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
-    const date = new Date();
-    date.setFullYear(date.getFullYear() - index);
-    return date.getFullYear().toString();
-  });
+  const buttonLabels = ["On commence ?", "Valider"];
 
-  const [selectedPromo, setSelectedPromo] = useState<string | undefined>(
-    undefined,
-  );
+  const [selectedCurriculum, setSelectedCurriculum] = useState<
+    string | undefined
+  >(undefined);
 
-  const canGoNext = page === 0 || (page === 1 && selectedPromo);
+  const canGoNext = page === 0 || (page === 1 && selectedCurriculum);
   const content: React.ReactNode[] = [
     <div key="intro" className="flex flex-col gap-2">
       <p>
@@ -47,36 +53,54 @@ export const IntroCarouselItems = () => {
       </p>
     </div>,
     <div key="curriculum" className="h-full gap-4 flex flex-col">
-      <span>Pour commencer, veuillez sélectionner votre promo :</span>
-      <Select value={selectedPromo} onValueChange={setSelectedPromo}>
+      <span>Pour commencer, veuillez sélectionner votre cursus :</span>
+      <Select value={selectedCurriculum} onValueChange={setSelectedCurriculum}>
         <SelectTrigger className="w-[300px] m-auto">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {possiblePromos.map((promo) => (
-              <SelectItem key={promo} value={promo}>
-                Promo {promo}
+            {curriculums?.map((curriculum) => (
+              <SelectItem key={curriculum.id} value={curriculum.id}>
+                <Badge variant="secondary">{curriculum.name}</Badge>
               </SelectItem>
             ))}
           </SelectGroup>
         </SelectContent>
       </Select>
     </div>,
-    <div key="login" className="flex flex-col gap-4">
-      <span className="m-auto">Vous avez déjà un compte ?</span>
-      <Button size="lg" className="w-[220px] m-auto mb-2">
-        Se connecter avec MyECL
-      </Button>
-      <TextSeparator text="Sinon" />
-      <Button variant="outline" size="lg" className="w-[220px] m-auto mt-2">
-        {"S'inscrire"}
-      </Button>
-    </div>,
   ];
 
-  function onNextStep() {
+  async function setCurriculum() {
+    setIsLoading(true);
+    if (!selectedCurriculum) {
+      setIsLoading(false);
+      return;
+    }
+    const { data, error } = await postCdrUsersUserIdCurriculumsCurriculumId({
+      path: {
+        user_id: user!.id,
+        curriculum_id: selectedCurriculum,
+      },
+    });
+    if (error) {
+      console.log(error);
+      setIsLoading(false);
+      return;
+    }
+    refetch();
+    setIsLoading(false);
+  }
+
+  async function onNextStep() {
     if (canGoNext) {
+      if (page === 1) {
+        await setCurriculum();
+        const firstSeller = onlineSellers ? onlineSellers[0] : undefined;
+        if (firstSeller) {
+          router.push(`?sellerId=${firstSeller.id}`);
+        }
+      }
       setPage(page + 1);
       scrollNext();
     }
@@ -89,27 +113,26 @@ export const IntroCarouselItems = () => {
           <CarouselItem key={index}>{item}</CarouselItem>
         ))}
       </CarouselContent>
-      {page !== 2 && (
-        <div className="pb-6 pt-10 flex justify-center">
-          <Button
-            size="lg"
-            className="w-[160px]"
-            onClick={onNextStep}
-            disabled={!canScrollNext || !canGoNext}
-          >
-            <AnimatePresence initial={false} mode="wait">
-              <motion.div
-                key={page}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                {buttonLabels[page]}
-              </motion.div>
-            </AnimatePresence>
-          </Button>
-        </div>
-      )}
+      <div className="pb-6 pt-10 flex justify-center">
+        <LoadingButton
+          size="lg"
+          className="w-[160px]"
+          onClick={onNextStep}
+          disabled={!canScrollNext || !canGoNext}
+          isLoading={isLoading}
+        >
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              key={page}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {buttonLabels[page]}
+            </motion.div>
+          </AnimatePresence>
+        </LoadingButton>
+      </div>
     </>
   );
 };

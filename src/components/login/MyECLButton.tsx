@@ -112,7 +112,7 @@ const MyECLButton = () => {
         openSSO();
       }}
     >
-      Se connecter
+      Se connecter avec MyECL
     </LoadingButton>
   );
 };

@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { paymentFormSchema } from "@/forms/paymentFormSchema";
-import { useUserPayment } from "@/hooks/useUserPayment";
+import { useUserPayments } from "@/hooks/useUserPayments";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -38,7 +38,7 @@ interface PaymentPartProps {
 }
 
 export const PaymentPart = ({ user }: PaymentPartProps) => {
-  const { payments, total: totalPaid, refetch } = useUserPayment(user.id);
+  const { payments, total: totalPaid, refetch } = useUserPayments(user.id);
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const paymentTypes: PaymentType[] = [

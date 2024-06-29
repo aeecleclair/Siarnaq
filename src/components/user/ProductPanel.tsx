@@ -12,14 +12,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useOnlineSeller } from "@/hooks/useOnlineSellers";
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const ProductPanel = () => {
-  const { onlineSellers } = useOnlineSeller();
+  const { onlineSellers } = useOnlineSellers();
   const searchParams = useSearchParams();
   const firstSellerId =
     searchParams.get("sellerId") || onlineSellers?.at(0)?.id || "";

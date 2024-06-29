@@ -2,7 +2,7 @@ import { useToken } from "./useToken";
 import { getCdrUsersUserIdPayments, PaymentComplete } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
-export const useUserPayment = (userId: string | null) => {
+export const useUserPayments = (userId: string | null) => {
   const { isTokenExpired } = useToken();
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["userPayment", userId ?? ""],

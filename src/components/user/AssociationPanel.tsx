@@ -1,4 +1,4 @@
-import { useOnlineSeller } from "@/hooks/useOnlineSellers";
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -9,7 +9,7 @@ import {
 } from "react-icons/hi";
 
 export const AssociationPanel = () => {
-  const { onlineSellers } = useOnlineSeller();
+  const { onlineSellers } = useOnlineSellers();
   const searchParams = useSearchParams();
   const firstSellerId =
     searchParams.get("sellerId") || onlineSellers?.at(0)?.id;

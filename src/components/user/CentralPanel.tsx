@@ -1,11 +1,11 @@
 import { IntroPanel } from "./IntroPanel";
 import { ProductPanel } from "./ProductPanel";
 import { RecapPanel } from "./RecapPanel";
-import { useOnlineSeller } from "@/hooks/useOnlineSellers";
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useSearchParams } from "next/navigation";
 
 export const CentralPanel = () => {
-  const { onlineSellers } = useOnlineSeller();
+  const { onlineSellers } = useOnlineSellers();
   const searchParams = useSearchParams();
   const firstSellerId =
     searchParams.get("sellerId") || onlineSellers?.at(0)?.id || "";

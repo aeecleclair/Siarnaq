@@ -1,4 +1,4 @@
-import { useOnlineSeller } from "@/hooks/useOnlineSellers";
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import {
   Card,
   CardHeader,
@@ -14,7 +14,7 @@ import {
 import { useState, useEffect } from "react";
 
 export const RecapPanel = () => {
-  const { onlineSellers } = useOnlineSeller();
+  const { onlineSellers } = useOnlineSellers();
   // const { variantQuantity } = useVariantQuantityStore();
   // const sellerIds = Object.keys(variantQuantity) as Array<string>;
   var total = 0;

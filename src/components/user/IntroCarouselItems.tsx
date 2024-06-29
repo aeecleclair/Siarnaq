@@ -11,7 +11,7 @@ import {
 } from "../ui/select";
 import { postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
 import { useCurriculums } from "@/hooks/useCurriculums";
-import { useOnlineSeller } from "@/hooks/useOnlineSellers";
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useTokenStore } from "@/stores/token";
 import { AnimatePresence, motion } from "framer-motion";
@@ -21,7 +21,7 @@ import { useState } from "react";
 export const IntroCarouselItems = () => {
   const { scrollNext, canScrollNext } = useCarousel();
   const { curriculums } = useCurriculums();
-  const { onlineSellers } = useOnlineSeller();
+  const { onlineSellers } = useOnlineSellers();
   const router = useRouter();
   const { userId } = useTokenStore();
   const { user, refetch } = useUser(userId);

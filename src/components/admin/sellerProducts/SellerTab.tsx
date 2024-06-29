@@ -3,7 +3,6 @@ import { SellerTabList } from "./SellerTabList";
 import { SellerComplete, Status, getCdrSellers } from "@/api";
 import { Tabs } from "@/components/ui/tabs";
 import { useCoreUser } from "@/hooks/useCoreUser";
-import { useTokenStore } from "@/stores/token";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -13,8 +12,7 @@ interface SellerTabProps {
 }
 
 export const SellerTab = ({ status, setRefetchStatus }: SellerTabProps) => {
-  const { userId } = useTokenStore();
-  const { isAdmin } = useCoreUser(userId);
+  const { isAdmin } = useCoreUser();
   const searchParams = useSearchParams();
   const router = useRouter();
 

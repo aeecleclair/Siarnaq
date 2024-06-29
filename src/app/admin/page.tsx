@@ -10,17 +10,15 @@ import {
   ResizableHandle,
 } from "@/components/ui/resizable";
 import { useCoreUser } from "@/hooks/useCoreUser";
-import { useSeller } from "@/hooks/useSellers";
+import { useSellers } from "@/hooks/useSellers";
 import { useSizeStore } from "@/stores/SizeStore";
-import { useTokenStore } from "@/stores/token";
 import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 const AdminPage = () => {
   const { setSize, size } = useSizeStore();
-  const { userId } = useTokenStore();
-  const { user, isAdmin } = useCoreUser(userId);
-  const { sellers } = useSeller();
+  const { user, isAdmin } = useCoreUser();
+  const { sellers } = useSellers();
   const router = useRouter();
   const [status, setStatus] = useState<Status>({} as Status);
   const [refetchStatus, setRefetchStatus] = useState<boolean>(true);

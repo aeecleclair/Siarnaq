@@ -5,7 +5,7 @@ import {
   postCdrUsersUserIdPurchasesProductVariantId,
 } from "@/api";
 import { ProductVariantComplete, PurchaseBase } from "@/api/types.gen";
-import { useUserPurchases } from "@/hooks/useUserPurchase";
+import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
 import { useTokenStore } from "@/stores/token";
 import { ReloadIcon } from "@radix-ui/react-icons";

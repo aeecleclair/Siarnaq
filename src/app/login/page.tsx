@@ -23,10 +23,9 @@ import { useState } from "react";
 
 const Login = () => {
   const router = useRouter();
+  const year = new Date().getFullYear();
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
-    const date = new Date();
-    date.setFullYear(date.getFullYear() - index);
-    return date.getFullYear().toString();
+    return (year - index).toString();
   });
 
   const [selectedPromo, setSelectedPromo] = useState<string | undefined>(
@@ -36,7 +35,7 @@ const Login = () => {
     <div className="flex [&>div]:w-full h-screen">
       <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
         <CardHeader>
-          <CardTitle>{`Chaîne de rentrée ${new Date().getFullYear()}`}</CardTitle>
+          <CardTitle>{`Chaîne de rentrée ${year}`}</CardTitle>
           <CardDescription className="flex flex-col gap-2">
             <p>
               Consequat sint incididunt laborum ipsum. Nostrud enim culpa
@@ -65,7 +64,7 @@ const Login = () => {
           </form>
           <TextSeparator text="Sinon" />
           <span className="m-auto">
-            Pour commencer, veuillez sélectionner votre promo :
+            Veuillez sélectionner votre promo :
           </span>
           <div key="curriculum" className="h-full gap-4 flex flex-col">
             <Select value={selectedPromo} onValueChange={setSelectedPromo}>

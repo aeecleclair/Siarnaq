@@ -9,13 +9,29 @@ import {
   ResizablePanel,
   ResizableHandle,
 } from "@/components/ui/resizable";
+import { useCoreUser } from "@/hooks/useCoreUser";
+import { useSeller } from "@/hooks/useSellers";
 import { useSizeStore } from "@/stores/SizeStore";
+import { useTokenStore } from "@/stores/token";
+import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 const AdminPage = () => {
   const { setSize, size } = useSizeStore();
+  const { userId } = useTokenStore();
+  const { user, isAdmin } = useCoreUser(userId);
+  const { sellers } = useSeller();
+  const router = useRouter();
   const [status, setStatus] = useState<Status>({} as Status);
   const [refetchStatus, setRefetchStatus] = useState<boolean>(true);
+  const userGroups = user?.groups?.map((group) => group.id);
+  const isUserInASellerGroup = userGroups?.some((group) =>
+    sellers?.some((seller) => seller.group_id === group)
+  );
+
+  if (!isAdmin || !isUserInASellerGroup) {
+    router.push("/");
+  }
 
   useEffect(() => {
     const onGetStatus = async () => {

@@ -1,4 +1,6 @@
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
+import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
+import { useTokenStore } from "@/stores/token";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -10,9 +12,14 @@ import {
 
 export const AssociationPanel = () => {
   const { onlineSellers } = useOnlineSellers();
+  const { userId } = useTokenStore();
   const searchParams = useSearchParams();
   const firstSellerId =
     searchParams.get("sellerId") || onlineSellers?.at(0)?.id;
+  const { purchases } = useUserSellerPurchases(userId, firstSellerId ?? null);
+  const totalPurchases =
+    purchases?.reduce<number>((acc, purchase) => acc + purchase.quantity, 0) ??
+    0;
 
   return (
     <div>
@@ -31,26 +38,35 @@ export const AssociationPanel = () => {
             Présentation
           </div>
         </Link>
-        {onlineSellers?.map((seller) => (
-          <Link
-            key={seller.id}
-            href={`/?sellerId=${seller.id}`}
-            className={`hover:text-primary ${
-              seller.id === firstSellerId ? "font-semibold text-primary" : ""
-            }`}
-          >
-            <div className="flex flex-row items-center">
-              {parseInt(seller.id) % 2 === 0 ? (
-                <HiCheck className="h-4 w-4 mr-2" />
-              ) : (
-                <HiOutlineShoppingCart className="h-4 w-4 mr-2" />
-              )}
-              {seller.name}
-              <span className="ml-2">·</span>
-              <span className="ml-2">1</span>
-            </div>
-          </Link>
-        ))}
+        {onlineSellers?.map((seller) => {
+          const purchasesCount =
+            purchases?.filter((purchase) => purchase.seller.id === seller.id)
+              .length ?? 0;
+          return (
+            <Link
+              key={seller.id}
+              href={`/?sellerId=${seller.id}`}
+              className={`hover:text-primary ${
+                seller.id === firstSellerId ? "font-semibold text-primary" : ""
+              }`}
+            >
+              <div className="flex flex-row items-center">
+                {purchasesCount > 0 ? (
+                  <HiOutlineShoppingCart className="h-4 w-4 mr-2" />
+                ) : (
+                  <div className="w-4 mr-2"></div>
+                )}
+                {seller.name}
+                {purchasesCount > 0 && (
+                  <>
+                    <span className="ml-2">·</span>
+                    <span className="ml-2">{purchasesCount}</span>
+                  </>
+                )}
+              </div>
+            </Link>
+          );
+        })}
         <Link
           href="/?sellerId=recap"
           className={`hover:text-primary ${
@@ -60,8 +76,12 @@ export const AssociationPanel = () => {
           <div className="flex flex-row items-center">
             <HiOutlineClipboardList className="h-4 w-4 mr-2" />
             Récapitulatif
-            <span className="ml-2">·</span>
-            <span className="ml-2">10</span>
+            {totalPurchases > 0 && (
+              <>
+                <span className="ml-2">·</span>
+                <span className="ml-2">{totalPurchases}</span>
+              </>
+            )}
           </div>
         </Link>
       </nav>

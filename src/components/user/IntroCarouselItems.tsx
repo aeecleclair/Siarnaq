@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const IntroCarouselItems = () => {
-  const { scrollNext, canScrollNext } = useCarousel();
+  const { scrollNext } = useCarousel();
   const { curriculums } = useCurriculums();
   const { onlineSellers } = useOnlineSellers();
   const router = useRouter();
@@ -31,7 +31,7 @@ export const IntroCarouselItems = () => {
 
   const [selectedCurriculum, setSelectedCurriculum] = useState<
     string | undefined
-  >(undefined);
+  >(user?.curriculum?.id);
 
   const canGoNext = page === 0 || (page === 1 && selectedCurriculum);
   const content: React.ReactNode[] = [
@@ -118,7 +118,6 @@ export const IntroCarouselItems = () => {
           size="lg"
           className="w-[160px]"
           onClick={onNextStep}
-          disabled={!canScrollNext || !canGoNext}
           isLoading={isLoading}
         >
           <AnimatePresence initial={false} mode="wait">

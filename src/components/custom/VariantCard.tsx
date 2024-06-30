@@ -104,7 +104,7 @@ export const VariantCard = ({
     >
       {isSelectable && variant.enabled && variant.unique && isLoading && (
         <div className="w-full h-0 relative">
-          <div className={`flex m-auto h-[${showDescription ? "109" : "94"}px] w-full bg-white rounded-md bg-opacity-50`}>
+          <div className={`flex m-auto ${showDescription ? "h-[109px]" : "h-[93px]"} w-full bg-white rounded-md bg-opacity-50`}>
             <ReloadIcon className="flex h-6 w-6 animate-spin m-auto" />
           </div>
         </div>

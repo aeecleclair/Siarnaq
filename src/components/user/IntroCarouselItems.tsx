@@ -9,31 +9,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
+import { CdrUser, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
-import { useUser } from "@/hooks/useUser";
-import { useTokenStore } from "@/stores/token";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export const IntroCarouselItems = () => {
+interface IntroCarouselItemsProps {
+  user: CdrUser;
+  refetch: () => void;
+}
+
+export const IntroCarouselItems = ({
+  user,
+  refetch,
+}: IntroCarouselItemsProps) => {
   const { scrollNext } = useCarousel();
   const { curriculums } = useCurriculums();
   const { onlineSellers } = useOnlineSellers();
   const router = useRouter();
-  const { userId } = useTokenStore();
-  const { user, refetch } = useUser(userId);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
   const buttonLabels = ["On commence ?", "Valider"];
 
   const [selectedCurriculum, setSelectedCurriculum] = useState<
     string | undefined
-  >(user?.curriculum?.id);
+  >(user.curriculum?.id);
 
-  const canGoNext = page === 0 || (page === 1 && selectedCurriculum);
+  const canGoNext =
+    page === 0 ||
+    (page === 1 &&
+      selectedCurriculum &&
+      selectedCurriculum !== user.curriculum?.id);
   const content: React.ReactNode[] = [
     <div key="intro" className="flex flex-col gap-2">
       <p>
@@ -101,8 +109,15 @@ export const IntroCarouselItems = () => {
           router.push(`?sellerId=${firstSeller.id}`);
         }
       }
-      setPage(page + 1);
-      scrollNext();
+      if (page === 0 && !user.curriculum?.id) {
+        setPage(page + 1);
+        scrollNext();
+      } else {
+        const firstSeller = onlineSellers ? onlineSellers[0] : undefined;
+        if (firstSeller) {
+          router.push(`?sellerId=${firstSeller.id}`);
+        }
+      }
     }
   }
 

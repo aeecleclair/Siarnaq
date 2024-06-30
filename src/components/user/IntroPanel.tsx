@@ -1,8 +1,12 @@
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Carousel } from "../ui/carousel";
 import { IntroCarouselItems } from "./IntroCarouselItems";
+import { useUser } from "@/hooks/useUser";
+import { useTokenStore } from "@/stores/token";
 
 export const IntroPanel = () => {
+  const { userId } = useTokenStore();
+  const { user, refetch } = useUser(userId);
   return (
     <Card>
       <CardHeader>
@@ -14,7 +18,7 @@ export const IntroPanel = () => {
             watchDrag: false,
           }}
         >
-          <IntroCarouselItems />
+          {user && <IntroCarouselItems user={user} refetch={refetch} />}
         </Carousel>
       </CardContent>
     </Card>

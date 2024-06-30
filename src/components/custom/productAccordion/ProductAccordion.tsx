@@ -20,8 +20,8 @@ interface ProductAccordionProps {
   canRemove?: boolean;
   canDisable?: boolean;
   sellerId: string;
+  userId: string;
   showDescription?: boolean;
-  showDisabled?: boolean;
   refreshProduct: () => void;
   isSelectable?: boolean;
   isAdmin?: boolean;
@@ -34,21 +34,25 @@ export const ProductAccordion = ({
   canRemove,
   canDisable,
   sellerId,
+  userId,
   showDescription = false,
-  showDisabled = false,
   refreshProduct,
   isSelectable = false,
   isAdmin = false,
 }: ProductAccordionProps) => {
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
-  const searchParams = useSearchParams();
-  const userId = searchParams.get("userId");
   const { purchases: userPurchases } = useUserPurchases(userId);
   const { user } = useUser(userId);
-  const variantToDisplay = showDisabled
+  const variantToDisplay = isAdmin
     ? product.variants
-    : product.variants?.filter((variant) => variant.enabled);
+    : product.variants
+        ?.filter((variant) => variant.enabled)
+        .filter((variant) =>
+          variant.allowed_curriculum
+            ?.map((curriculum) => curriculum.id)
+            ?.includes(user?.curriculum?.id ?? ""),
+        );
   const purchasedProductIds = userPurchases?.map(
     (purchase) => purchase.product.id,
   );
@@ -68,77 +72,82 @@ export const ProductAccordion = ({
   const displayWarning = isMissingConstraint && isOneVariantTaken;
 
   return (
-    <AccordionItem value={product.id}>
-      <ContextMenu>
-        <ContextMenuTrigger>
-          <AccordionTrigger>
-            <div className="flex flex-col items-start justify-between">
-              <h3 className="text-lg font-semibold">{product.name_en}</h3>
-              <p className="text-sm text-gray-500">{product.description_en}</p>
-            </div>
-          </AccordionTrigger>
-        </ContextMenuTrigger>
-        <ProductAccordionOptions
-          product={product}
-          sellerId={sellerId}
-          refreshProduct={refreshProduct}
-          canEdit={canEdit}
-          canRemove={product.variants?.length === 0 && canRemove}
-        />
-      </ContextMenu>
-      <AccordionContent>
-        {/* Take care to export all grid-cols-n
+    (variantToDisplay?.length ?? 0) > 0 && (
+      <AccordionItem value={product.id}>
+        <ContextMenu>
+          <ContextMenuTrigger>
+            <AccordionTrigger>
+              <div className="flex flex-col items-start justify-between">
+                <h3 className="text-lg font-semibold">{product.name_en}</h3>
+                <p className="text-sm text-gray-500">
+                  {product.description_en}
+                </p>
+              </div>
+            </AccordionTrigger>
+          </ContextMenuTrigger>
+          <ProductAccordionOptions
+            product={product}
+            sellerId={sellerId}
+            refreshProduct={refreshProduct}
+            canEdit={canEdit}
+            canRemove={product.variants?.length === 0 && canRemove}
+          />
+        </ContextMenu>
+        <AccordionContent>
+          {/* Take care to export all grid-cols-n
         Can't find a better way to do it for naw */}
-        <div className="hidden grid-cols-5" />
-        <div className="hidden grid-cols-4" />
-        <div className="hidden grid-cols-3" />
-        <div className="hidden grid-cols-2" />
-        <div className="hidden grid-cols-1" />
-        {displayWarning && (
-          <p className="text-red-500 font-semibold mb-2">{`Vous devez acheter ${
-            missingConstraintProducts
-              ?.map((product) => product.name_en)
-              .join(", ") ?? ""
-          }`}</p>
-        )}
-        <div
-          className={`grid ${showDescription ? "grid-row" : "grid-cols-" + numberOfCard} gap-4`}
-        >
-          {variantToDisplay && (
-            <>
-              {canAdd && (
-                <AddingVariantCard
-                  sellerId={sellerId}
-                  productId={product.id}
-                  refreshProduct={refreshProduct}
-                />
-              )}
-              {variantToDisplay.map((variant) => (
-                <VariantCardWithOptions
-                  key={variant.id}
-                  variant={variant}
-                  product={product}
-                  sellerId={sellerId}
-                  canEdit={canEdit}
-                  canRemove={canRemove}
-                  canDisable={canDisable}
-                  showDescription={showDescription}
-                  refreshProduct={refreshProduct}
-                  isSelectable={
-                    isSelectable &&
-                    (variant.allowed_curriculum
-                      ?.map((curriculum) => curriculum.id)
-                      .includes(user?.curriculum?.id ?? "") ||
-                      false)
-                  }
-                  isAdmin={isAdmin}
-                  displayWarning={displayWarning}
-                />
-              ))}
-            </>
+          <div className="hidden grid-cols-5" />
+          <div className="hidden grid-cols-4" />
+          <div className="hidden grid-cols-3" />
+          <div className="hidden grid-cols-2" />
+          <div className="hidden grid-cols-1" />
+          {displayWarning && (
+            <p className="text-red-500 font-semibold mb-2">{`Vous devez acheter ${
+              missingConstraintProducts
+                ?.map((product) => product.name_en)
+                .join(", ") ?? ""
+            }`}</p>
           )}
-        </div>
-      </AccordionContent>
-    </AccordionItem>
+          <div
+            className={`grid ${showDescription ? "grid-row" : "grid-cols-" + numberOfCard} gap-4`}
+          >
+            {variantToDisplay && (
+              <>
+                {canAdd && (
+                  <AddingVariantCard
+                    sellerId={sellerId}
+                    productId={product.id}
+                    refreshProduct={refreshProduct}
+                  />
+                )}
+                {variantToDisplay.map((variant) => (
+                  <VariantCardWithOptions
+                    key={variant.id}
+                    variant={variant}
+                    product={product}
+                    sellerId={sellerId}
+                    userId={userId}
+                    canEdit={canEdit}
+                    canRemove={canRemove}
+                    canDisable={canDisable}
+                    showDescription={showDescription}
+                    refreshProduct={refreshProduct}
+                    isSelectable={
+                      isSelectable &&
+                      (variant.allowed_curriculum
+                        ?.map((curriculum) => curriculum.id)
+                        .includes(user?.curriculum?.id ?? "") ||
+                        false)
+                    }
+                    isAdmin={isAdmin}
+                    displayWarning={displayWarning}
+                  />
+                ))}
+              </>
+            )}
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+    )
   );
 };

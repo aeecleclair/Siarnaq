@@ -9,13 +9,13 @@ import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
 import { useTokenStore } from "@/stores/token";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi";
 
 interface VariantCardProps {
   variant: ProductVariantComplete;
   sellerId: string;
+  userId: string;
   showDescription: boolean;
   isSelectable: boolean;
   isAdmin: boolean;
@@ -25,13 +25,12 @@ interface VariantCardProps {
 export const VariantCard = ({
   variant,
   sellerId,
+  userId,
   showDescription,
   isSelectable,
   isAdmin,
   displayWarning,
 }: VariantCardProps) => {
-  const searchParams = useSearchParams();
-  const userId = searchParams.get("userId");
   const { userId: myUserId } = useTokenStore();
   const { purchases, refetch } = useUserSellerPurchases(
     isAdmin ? userId : myUserId,

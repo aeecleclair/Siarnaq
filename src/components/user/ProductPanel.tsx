@@ -13,7 +13,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
+import { useUser } from "@/hooks/useUser";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
+import { useTokenStore } from "@/stores/token";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -29,6 +31,8 @@ export const ProductPanel = () => {
   );
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
   const router = useRouter();
+  const { userId } = useTokenStore();
+  const { user } = useUser(userId);
 
   const [onlineProducts, setOnlineProducts] = useState<
     app__modules__cdr__schemas_cdr__ProductComplete[]
@@ -70,6 +74,16 @@ export const ProductPanel = () => {
     seller?.id,
   ]);
 
+  const availableProducts = onlineProducts?.filter(
+    (product) =>
+      product?.variants?.filter(
+        (variant) =>
+          variant.allowed_curriculum?.filter(
+            (curriculum) => curriculum.id === user?.curriculum?.id,
+          )?.length ?? 0 > 0,
+      )?.length ?? 0 > 0,
+  );
+
   return (
     <div className="grid gap-6">
       <Card>
@@ -77,7 +91,7 @@ export const ProductPanel = () => {
           <CardTitle>{seller ? seller.name : "No seller found"}</CardTitle>
         </CardHeader>
         <CardContent>
-          {onlineProducts ? (
+          {availableProducts.length > 0 ? (
             <Accordion
               type="multiple"
               value={productExpansion[firstSellerId]}
@@ -85,11 +99,12 @@ export const ProductPanel = () => {
                 setExpandedProducts(firstSellerId, value)
               }
             >
-              {onlineProducts.map((product) => (
+              {availableProducts.map((product) => (
                 <ProductAccordion
                   key={product.id}
                   product={product}
                   sellerId={seller?.id || ""}
+                  userId={userId!}
                   showDescription
                   isSelectable
                   refreshProduct={() => {}}
@@ -97,9 +112,7 @@ export const ProductPanel = () => {
               ))}
             </Accordion>
           ) : (
-            <div className="p-4 border border-gray-200 rounded-md">
-              <h3 className="text-lg font-semibold">No products found</h3>
-            </div>
+            <h3 className="text-lg font-semibold">Aucun produit trouvé</h3>
           )}
         </CardContent>
         <CardFooter className="px-6 py-4">
@@ -108,7 +121,7 @@ export const ProductPanel = () => {
               variant="outline"
               className="h-8 w-8 p-0"
               onClick={() => {
-                if (!onlineSellers || !sellerIndex) {
+                if (!onlineSellers || sellerIndex === undefined) {
                   return;
                 }
                 router.replace(
@@ -120,7 +133,7 @@ export const ProductPanel = () => {
               <span className="sr-only">Go to previous page</span>
               <ChevronLeftIcon className="h-4 w-4" />
             </Button>
-            {onlineSellers && sellerIndex && (
+            {onlineSellers && sellerIndex !== undefined && (
               <span className="text-sm font-medium text-muted-foreground w-14 flex justify-center">
                 {sellerIndex + 1} / {onlineSellers.length}
               </span>
@@ -129,7 +142,7 @@ export const ProductPanel = () => {
               variant="outline"
               className="h-8 w-8 p-0"
               onClick={() => {
-                if (!onlineSellers || !sellerIndex) {
+                if (!onlineSellers || sellerIndex === undefined) {
                   return;
                 }
                 router.replace(

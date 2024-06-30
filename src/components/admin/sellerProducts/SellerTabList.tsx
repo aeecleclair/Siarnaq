@@ -5,9 +5,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 interface SellerTabListProps {
   status: Status;
   sellers: SellerComplete[];
+  isAdmin?: boolean;
 }
 
-export const SellerTabList = ({ status, sellers }: SellerTabListProps) => {
+export const SellerTabList = ({
+  status,
+  sellers,
+  isAdmin,
+}: SellerTabListProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -20,7 +25,7 @@ export const SellerTabList = ({ status, sellers }: SellerTabListProps) => {
 
   return (
     <TabsList
-      className={`"grid w-full grid-cols-${sellers.length + 1 + (status.status === "onsite" ? 1 : 0)}"`}
+      className={`"grid w-full grid-cols-${sellers.length + (isAdmin ? 1 : 0) + (status.status === "onsite" && isAdmin ? 1 : 0)}"`}
     >
       {sellers.map((seller) => (
         <TabsTrigger
@@ -32,23 +37,27 @@ export const SellerTabList = ({ status, sellers }: SellerTabListProps) => {
           {seller.name}
         </TabsTrigger>
       ))}
-      <TabsTrigger
-        key="cdradmin"
-        value="cdradmin"
-        className="w-full min-w-18"
-        onClick={() => handleClick("cdradmin")}
-      >
-        Admin
-      </TabsTrigger>
-      {status.status === "onsite" && (
-        <TabsTrigger
-          key="cdrrecap"
-          value="cdrrecap"
-          className="w-full min-w-18"
-          onClick={() => handleClick("cdrrecap")}
-        >
-          Récaputilatif
-        </TabsTrigger>
+      {isAdmin && (
+        <>
+          <TabsTrigger
+            key="cdradmin"
+            value="cdradmin"
+            className="w-full min-w-18"
+            onClick={() => handleClick("cdradmin")}
+          >
+            Admin
+          </TabsTrigger>
+          {status.status === "onsite" && (
+            <TabsTrigger
+              key="cdrrecap"
+              value="cdrrecap"
+              className="w-full min-w-18"
+              onClick={() => handleClick("cdrrecap")}
+            >
+              Récaputilatif
+            </TabsTrigger>
+          )}
+        </>
       )}
     </TabsList>
   );

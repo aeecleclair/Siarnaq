@@ -28,6 +28,7 @@ export const SellerTabContent = ({
 }: SellerTabContentProps) => {
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
+  const userId = searchParams.get("userId");
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
 
   useEffect(() => {
@@ -67,11 +68,11 @@ export const SellerTabContent = ({
               key={product.id}
               product={product}
               sellerId={seller.id}
+              userId={userId!}
               canAdd={status.status !== "closed"}
               canEdit={status.status === "pending"}
               canRemove={status.status === "pending"}
               canDisable={status.status !== "closed"}
-              showDisabled
               refreshProduct={refetchProducts}
               isSelectable={status.status === "onsite"}
               isAdmin

@@ -2,6 +2,7 @@ import { SellerTabContentList } from "./SellerTabContentList";
 import { SellerTabList } from "./SellerTabList";
 import { SellerComplete, Status, getCdrSellers } from "@/api";
 import { Tabs } from "@/components/ui/tabs";
+import { useCoreUser } from "@/hooks/useCoreUser";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -11,12 +12,15 @@ interface SellerTabProps {
 }
 
 export const SellerTab = ({ status, setRefetchStatus }: SellerTabProps) => {
+  const { isAdmin } = useCoreUser();
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const [sellers, setSellers] = useState<SellerComplete[]>([]);
   const firstSellerId =
-    searchParams.get("sellerId") || sellers.at(0)?.id || "cdradmin";
+    searchParams.get("sellerId") ||
+    sellers.at(0)?.id ||
+    (isAdmin ? "cdradmin" : "");
   const [refetchSellers, setRefetchSellers] = useState<boolean>(true);
 
   useEffect(() => {
@@ -53,12 +57,13 @@ export const SellerTab = ({ status, setRefetchStatus }: SellerTabProps) => {
     >
       {firstSellerId && (
         <Tabs defaultValue={firstSellerId} className="w-full">
-          <SellerTabList status={status} sellers={sellers} />
+          <SellerTabList status={status} sellers={sellers} isAdmin={isAdmin} />
           <SellerTabContentList
             status={status}
             setRefetchStatus={setRefetchStatus}
             sellers={sellers}
             setRefetchSellers={setRefetchSellers}
+            isAdmin={isAdmin}
           />
         </Tabs>
       )}

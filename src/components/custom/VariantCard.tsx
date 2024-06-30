@@ -5,17 +5,17 @@ import {
   postCdrUsersUserIdPurchasesProductVariantId,
 } from "@/api";
 import { ProductVariantComplete, PurchaseBase } from "@/api/types.gen";
-import { useUserPurchases } from "@/hooks/useUserPurchase";
+import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
 import { useTokenStore } from "@/stores/token";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi";
 
 interface VariantCardProps {
   variant: ProductVariantComplete;
   sellerId: string;
+  userId: string;
   showDescription: boolean;
   isSelectable: boolean;
   isAdmin: boolean;
@@ -25,13 +25,12 @@ interface VariantCardProps {
 export const VariantCard = ({
   variant,
   sellerId,
+  userId,
   showDescription,
   isSelectable,
   isAdmin,
   displayWarning,
 }: VariantCardProps) => {
-  const searchParams = useSearchParams();
-  const userId = searchParams.get("userId");
   const { userId: myUserId } = useTokenStore();
   const { purchases, refetch } = useUserSellerPurchases(
     isAdmin ? userId : myUserId,
@@ -89,7 +88,7 @@ export const VariantCard = ({
 
   return (
     <Card
-      className={`min-w-40 h-[95px] ${selected && "shadow-lg"} ${selected && (shouldDisplayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${(isSelectable || (!isSelectable && selected)) && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
+      className={`min-w-40 h-[${showDescription ? "110" : "95"}px] ${selected && "shadow-lg"} ${selected && (shouldDisplayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${(isSelectable || (!isSelectable && selected)) && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
       onClick={() => {
         if (isSelectable && variant.enabled && variant.unique && !isLoading) {
           if (selected) {
@@ -105,7 +104,7 @@ export const VariantCard = ({
     >
       {isSelectable && variant.enabled && variant.unique && isLoading && (
         <div className="w-full h-0 relative">
-          <div className="flex m-auto h-[94px] w-full bg-white rounded-md bg-opacity-50">
+          <div className={`flex m-auto ${showDescription ? "h-[109px]" : "h-[93px]"} w-full bg-white rounded-md bg-opacity-50`}>
             <ReloadIcon className="flex h-6 w-6 animate-spin m-auto" />
           </div>
         </div>

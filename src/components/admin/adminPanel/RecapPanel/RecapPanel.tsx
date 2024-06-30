@@ -1,5 +1,5 @@
+import { ProductPart } from "../../../custom/Product/ProductPart";
 import { PaymentPart } from "./Payment/PaymentPart";
-import { ProductPart } from "./Product/ProductPart";
 import {
   CdrUser,
   patchCdrUsersUserIdCurriculumsCurriculumId,

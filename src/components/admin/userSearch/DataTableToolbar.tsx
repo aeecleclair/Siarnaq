@@ -10,14 +10,12 @@ interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   globalFilter: string;
   setGlobalFilter: (value: string) => void;
-  setRefetchData: (value: boolean) => void;
 }
 
 export function DataTableToolbar<TData>({
   table,
   globalFilter,
   setGlobalFilter,
-  setRefetchData,
 }: DataTableToolbarProps<TData>) {
   const { curriculums } = useCurriculums();
   return (
@@ -27,7 +25,6 @@ export function DataTableToolbar<TData>({
           placeholder="Filtrer"
           value={globalFilter}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          onClick={() => setRefetchData(true)}
           className="h-8 w-[150px] lg:w-[250px]"
         />
         {table.getColumn("curriculum") && (

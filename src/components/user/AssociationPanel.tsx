@@ -1,5 +1,5 @@
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
-import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
+import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTokenStore } from "@/stores/token";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -16,7 +16,7 @@ export const AssociationPanel = () => {
   const searchParams = useSearchParams();
   const firstSellerId =
     searchParams.get("sellerId") || onlineSellers?.at(0)?.id;
-  const { purchases } = useUserSellerPurchases(userId, firstSellerId ?? null);
+  const { purchases } = useUserPurchases(userId);
   const totalPurchases =
     purchases?.reduce<number>((acc, purchase) => acc + purchase.quantity, 0) ??
     0;

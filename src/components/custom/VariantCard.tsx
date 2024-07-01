@@ -8,6 +8,7 @@ import { ProductVariantComplete, PurchaseBase } from "@/api/types.gen";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
 import { useTokenStore } from "@/stores/token";
+import { useTranslation } from "@/translations/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi";
@@ -31,6 +32,7 @@ export const VariantCard = ({
   isAdmin,
   displayWarning,
 }: VariantCardProps) => {
+  const { selectTranslation } = useTranslation();
   const { userId: myUserId } = useTokenStore();
   const { purchases, refetch } = useUserSellerPurchases(
     isAdmin ? userId : myUserId,
@@ -104,7 +106,9 @@ export const VariantCard = ({
     >
       {isSelectable && variant.enabled && variant.unique && isLoading && (
         <div className="w-full h-0 relative">
-          <div className={`flex m-auto ${showDescription ? "h-[109px]" : "h-[93px]"} w-full bg-white rounded-md bg-opacity-50`}>
+          <div
+            className={`flex m-auto ${showDescription ? "h-[109px]" : "h-[93px]"} w-full bg-white rounded-md bg-opacity-50`}
+          >
             <ReloadIcon className="flex h-6 w-6 animate-spin m-auto" />
           </div>
         </div>
@@ -113,7 +117,7 @@ export const VariantCard = ({
         <CardTitle
           className={`text-sm font-medium ${!isSelectable && "text-muted-foreground"}`}
         >
-          <span>{variant.name_en}</span>
+          <span>{selectTranslation(variant.name_en, variant.name_fr)}</span>
         </CardTitle>
         {!variant.unique && (
           <div className="flex items-center space-x-2">
@@ -167,7 +171,7 @@ export const VariantCard = ({
         </div>
         {showDescription && (
           <p className="text-xs text-muted-foreground">
-            {variant.description_en}
+            {selectTranslation(variant.description_en, variant.description_fr)}
           </p>
         )}
       </CardContent>

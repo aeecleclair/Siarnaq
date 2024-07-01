@@ -11,6 +11,7 @@ import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { useUser } from "@/hooks/useUser";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useSizeStore } from "@/stores/SizeStore";
+import { useTranslation } from "@/translations/utils";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 
@@ -42,6 +43,7 @@ export const ProductAccordion = ({
   isAdmin = false,
 }: ProductAccordionProps) => {
   const t = useTranslations("ProductAccordion");
+  const { selectTranslation } = useTranslation();
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
   const { purchases: userPurchases } = useUserPurchases(userId);
@@ -80,9 +82,14 @@ export const ProductAccordion = ({
           <ContextMenuTrigger>
             <AccordionTrigger>
               <div className="flex flex-col items-start justify-between">
-                <h3 className="text-lg font-semibold">{product.name_en}</h3>
+                <h3 className="text-lg font-semibold">
+                  {selectTranslation(product.name_en, product.name_fr)}
+                </h3>
                 <p className="text-sm text-gray-500">
-                  {product.description_en}
+                  {selectTranslation(
+                    product.description_en,
+                    product.description_fr,
+                  )}
                 </p>
               </div>
             </AccordionTrigger>
@@ -108,7 +115,9 @@ export const ProductAccordion = ({
               {t("mustBuy", {
                 products:
                   missingConstraintProducts
-                    ?.map((product) => product.name_en)
+                    ?.map((product) =>
+                      selectTranslation(product.name_en, product.name_fr),
+                    )
                     .join(", ") ?? "",
               })}
             </p>

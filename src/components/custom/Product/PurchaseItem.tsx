@@ -2,6 +2,7 @@ import {
   app__modules__cdr__schemas_cdr__ProductComplete,
   PurchaseReturn,
 } from "@/api";
+import { useTranslation } from "@/translations/utils";
 import { useTranslations } from "next-intl";
 import { HiOutlineExclamation } from "react-icons/hi";
 
@@ -19,6 +20,7 @@ export const PurchaseItem = ({
   allPurchasesIds,
 }: PurchaseItemProps) => {
   const t = useTranslations("PurchaseItem");
+  const { selectTranslation } = useTranslation();
   const purchaseCompleteProduct = allProducts?.find(
     (product) => product.id === purchase.product.id,
   );
@@ -36,6 +38,10 @@ export const PurchaseItem = ({
     missingConstraintProduct.length > 0 &&
     notTakenConstraintProduct?.length !== 0;
 
+  const variant = purchase.product.variants?.find(
+    (variant) => variant.id === purchase.product_variant_id,
+  );
+
   return (
     <div>
       <div className="flex flex-row w-full items-center">
@@ -44,13 +50,14 @@ export const PurchaseItem = ({
         )}
 
         <span className="font-bold w-1/6">{purchase.seller.name}</span>
-        <span className="w-1/6">{purchase.product.name_en}</span>
         <span className="w-1/6">
-          {
-            purchase.product.variants?.find(
-              (variant) => variant.id === purchase.product_variant_id,
-            )?.name_en
-          }
+          {selectTranslation(
+            purchase.product.name_en,
+            purchase.product.name_fr,
+          )}
+        </span>
+        <span className="w-1/6">
+          {selectTranslation(variant?.name_en, variant?.name_fr)}
         </span>
         <span className="ml-auto font-semibold">
           {purchase.quantity * purchase.price} €
@@ -61,7 +68,9 @@ export const PurchaseItem = ({
           <span className="text-red-500 font-semibold">
             {t("missing", {
               products: missingConstraintProduct
-                .map((product) => product.name_en)
+                .map((product) =>
+                  selectTranslation(product.name_en, product.name_fr),
+                )
                 .join(", "),
             })}
           </span>

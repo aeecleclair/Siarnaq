@@ -24,9 +24,12 @@
   "ProductAccordion": {
     "mustBuy": "You must buy {products}"
   },
-    "ProductPart": {
-        "summary": "Summary",
-        "total": "Total",
-        "noProduct": "No product"
-    }
+  "ProductPart": {
+    "summary": "Summary",
+    "total": "Total",
+    "noProduct": "No product"
+  },
+  "PurchaseItem": {
+    "missing": "Missing {products}"
+  }
 }

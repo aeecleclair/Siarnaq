@@ -28,5 +28,8 @@
     "summary": "Récapitulatif",
     "total": "Total",
     "noProduct": "Aucun produit"
+  }, 
+  "PurchaseItem": {
+    "missing": "Il manque {products}"
   }
 }

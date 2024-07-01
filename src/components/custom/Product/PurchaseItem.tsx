@@ -2,6 +2,7 @@ import {
   app__modules__cdr__schemas_cdr__ProductComplete,
   PurchaseReturn,
 } from "@/api";
+import { useTranslations } from "next-intl";
 import { HiOutlineExclamation } from "react-icons/hi";
 
 interface PurchaseItemProps {
@@ -17,6 +18,7 @@ export const PurchaseItem = ({
   allConstraintIds,
   allPurchasesIds,
 }: PurchaseItemProps) => {
+  const t = useTranslations("PurchaseItem");
   const purchaseCompleteProduct = allProducts?.find(
     (product) => product.id === purchase.product.id,
   );
@@ -57,9 +59,11 @@ export const PurchaseItem = ({
       {displayWarning && (
         <div className="mt-1">
           <span className="text-red-500 font-semibold">
-            {`Il manque ${missingConstraintProduct
-              .map((product) => product.name_en)
-              .join(", ")}`}
+            {t("missing", {
+              products: missingConstraintProduct
+                .map((product) => product.name_en)
+                .join(", "),
+            })}
           </span>
         </div>
       )}

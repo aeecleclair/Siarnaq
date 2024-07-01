@@ -1,7 +1,7 @@
-import { useTranslations } from "next-intl";
 import { HelloAssoButton } from "../custom/HelloAssoButton";
 import { WarningDialog } from "../custom/WarningDialog";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export const PaymentButton = () => {

@@ -11,6 +11,7 @@ interface SellerTabContentListProps {
   setRefetchStatus: (arg0: boolean) => void;
   sellers: SellerComplete[];
   setRefetchSellers: (arg0: boolean) => void;
+  isAdmin?: boolean;
 }
 
 export const SellerTabContentList = ({
@@ -18,6 +19,7 @@ export const SellerTabContentList = ({
   setRefetchStatus,
   sellers,
   setRefetchSellers,
+  isAdmin,
 }: SellerTabContentListProps) => {
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
@@ -28,7 +30,7 @@ export const SellerTabContentList = ({
   const userId = searchParams.get("userId");
   const { user, refetch } = useUser(userId);
 
-  if (activeSellerId === "cdradmin") {
+  if (activeSellerId === "cdradmin" && isAdmin) {
     return (
       <AdminPanel
         sellers={sellers}
@@ -38,7 +40,7 @@ export const SellerTabContentList = ({
       />
     );
   }
-  if (activeSellerId === "cdrrecap") {
+  if (activeSellerId === "cdrrecap" && isAdmin) {
     return user && <RecapPanel user={user} refetch={refetch} />;
   }
   return sellers.map((seller) => (

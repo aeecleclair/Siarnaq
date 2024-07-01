@@ -13,6 +13,7 @@ interface VariantCardWithOptionsProps {
   canDisable?: boolean;
   product: app__modules__cdr__schemas_cdr__ProductComplete;
   sellerId: string;
+  userId: string;
   showDescription: boolean;
   refreshProduct: () => void;
   isSelectable: boolean;
@@ -27,6 +28,7 @@ export const VariantCardWithOptions = ({
   canDisable,
   product,
   sellerId,
+  userId,
   showDescription,
   refreshProduct,
   isSelectable,
@@ -39,6 +41,7 @@ export const VariantCardWithOptions = ({
         <VariantCard
           variant={variant}
           sellerId={sellerId}
+          userId={userId}
           showDescription={showDescription}
           isSelectable={isSelectable}
           isAdmin={isAdmin}

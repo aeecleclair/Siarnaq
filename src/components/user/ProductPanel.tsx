@@ -1,26 +1,20 @@
 import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
 import { Accordion } from "../ui/accordion";
-import {
-  app__modules__cdr__schemas_cdr__ProductComplete,
-  getCdrOnlineSellersSellerIdProducts,
-} from "@/api";
+import { app__modules__cdr__schemas_cdr__ProductComplete, getCdrOnlineSellersSellerIdProducts } from "@/api";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
 import { useTokenStore } from "@/stores/token";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+
 export const ProductPanel = () => {
+  const t = useTranslations("ProductPanel");
   const { onlineSellers } = useOnlineSellers();
   const searchParams = useSearchParams();
   const firstSellerId =
@@ -112,7 +106,7 @@ export const ProductPanel = () => {
               ))}
             </Accordion>
           ) : (
-            <h3 className="text-lg font-semibold">Aucun produit trouvé</h3>
+            <h3 className="text-lg font-semibold">{t('noProductFound')}</h3>
           )}
         </CardContent>
         <CardFooter className="px-6 py-4">

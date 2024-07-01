@@ -13,6 +13,7 @@ import { CdrUser, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -25,13 +26,14 @@ export const IntroCarouselItems = ({
   user,
   refetch,
 }: IntroCarouselItemsProps) => {
+  const t = useTranslations("IntroCarouselItem");
   const { scrollNext } = useCarousel();
   const { curriculums } = useCurriculums();
   const { onlineSellers } = useOnlineSellers();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
-  const buttonLabels = ["On commence ?", "Valider"];
+  const buttonLabels = [t("begin"), t("validate")];
 
   const [selectedCurriculum, setSelectedCurriculum] = useState<
     string | undefined
@@ -44,24 +46,10 @@ export const IntroCarouselItems = ({
       selectedCurriculum !== user.curriculum?.id);
   const content: React.ReactNode[] = [
     <div key="intro" className="flex flex-col gap-2">
-      <p>
-        Consequat sint incididunt laborum ipsum. Nostrud enim culpa consequat
-        laborum eiusmod minim consectetur deserunt sunt proident adipisicing.
-        Adipisicing quis magna ea magna sint minim nostrud do ullamco non
-        commodo adipisicing. Nisi elit veniam nostrud esse fugiat culpa.
-        Excepteur ex minim sint cillum ipsum et ex pariatur nostrud. Laborum
-        eiusmod tempor dolor sunt. In aute ad dolor non laborum ea nulla fugiat.
-      </p>
-      <p>
-        Anim consectetur qui excepteur aute exercitation deserunt do nulla
-        eiusmod magna tempor qui. Sunt velit commodo enim occaecat incididunt
-        non nostrud dolor velit. Consequat non laborum aliquip incididunt eu.
-        Ullamco exercitation magna in non nostrud elit cupidatat ad minim
-        nostrud. Enim tempor commodo ad magna.
-      </p>
+      <span>{t("description")}</span>
     </div>,
     <div key="curriculum" className="h-full gap-4 flex flex-col">
-      <span>Pour commencer, veuillez sélectionner votre cursus :</span>
+      <span>{t("selectCurriculum")}</span>
       <Select value={selectedCurriculum} onValueChange={setSelectedCurriculum}>
         <SelectTrigger className="w-[300px] m-auto">
           <SelectValue />

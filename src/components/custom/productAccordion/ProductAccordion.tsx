@@ -11,6 +11,7 @@ import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { useUser } from "@/hooks/useUser";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useSizeStore } from "@/stores/SizeStore";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 
 interface ProductAccordionProps {
@@ -40,6 +41,7 @@ export const ProductAccordion = ({
   isSelectable = false,
   isAdmin = false,
 }: ProductAccordionProps) => {
+  const t = useTranslations("ProductAccordion");
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
   const { purchases: userPurchases } = useUserPurchases(userId);
@@ -102,11 +104,14 @@ export const ProductAccordion = ({
           <div className="hidden grid-cols-2" />
           <div className="hidden grid-cols-1" />
           {displayWarning && (
-            <p className="text-red-500 font-semibold mb-2">{`Vous devez acheter ${
-              missingConstraintProducts
-                ?.map((product) => product.name_en)
-                .join(", ") ?? ""
-            }`}</p>
+            <p className="text-red-500 font-semibold mb-2">
+              {t("mustBuy", {
+                products:
+                  missingConstraintProducts
+                    ?.map((product) => product.name_en)
+                    .join(", ") ?? "",
+              })}
+            </p>
           )}
           <div
             className={`grid ${showDescription ? "grid-row" : "grid-cols-" + numberOfCard} gap-4`}

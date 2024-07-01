@@ -5,7 +5,6 @@ import { useUser } from "@/hooks/useUser";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
 
-
 export const IntroPanel = () => {
   const t = useTranslations("IntroPanel");
   const { userId } = useTokenStore();
@@ -13,7 +12,7 @@ export const IntroPanel = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t('presentation')}</CardTitle>
+        <CardTitle>{t("presentation")}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-2">
         <Carousel

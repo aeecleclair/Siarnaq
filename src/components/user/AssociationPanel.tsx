@@ -1,6 +1,7 @@
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTokenStore } from "@/stores/token";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -11,6 +12,7 @@ import {
 } from "react-icons/hi";
 
 export const AssociationPanel = () => {
+  const t = useTranslations("AssociationPanel");
   const { onlineSellers } = useOnlineSellers();
   const { userId } = useTokenStore();
   const searchParams = useSearchParams();
@@ -24,7 +26,7 @@ export const AssociationPanel = () => {
   return (
     <div>
       <div className="mx-auto grid w-full max-w-6xl gap-2 mb-6">
-        <h1 className="text-3xl font-semibold">Associations</h1>
+        <h1 className="text-3xl font-semibold">{t("associations")}</h1>
       </div>
       <nav className="grid gap-4 text-sm text-muted-foreground">
         <Link
@@ -35,7 +37,7 @@ export const AssociationPanel = () => {
         >
           <div className="flex flex-row items-center">
             <HiOutlineSparkles className="h-4 w-4 mr-2" />
-            Présentation
+            {t("presentation")}
           </div>
         </Link>
         {onlineSellers?.map((seller) => {
@@ -75,7 +77,7 @@ export const AssociationPanel = () => {
         >
           <div className="flex flex-row items-center">
             <HiOutlineClipboardList className="h-4 w-4 mr-2" />
-            Récapitulatif
+            {t("summary")}
             {totalPurchases > 0 && (
               <>
                 <span className="ml-2">·</span>

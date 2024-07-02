@@ -23,6 +23,7 @@ import { Separator } from "@/components/ui/separator";
 import { paymentFormSchema } from "@/forms/paymentFormSchema";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -39,6 +40,7 @@ interface PaymentPartProps {
 }
 
 export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
+  const t = useTranslations("PaymentPart");
   const { payments, total: totalPaid, refetch } = useUserPayments(user.id);
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -101,7 +103,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
     <div className="grid gap-2">
       <div>
         <CardTitle className="flex flex-row justify-between">
-          <span>Paiements</span>
+          <span>{t("payments")}</span>
           {isAdmin && (
             <CustomDialog
               isOpened={isOpened}
@@ -190,12 +192,12 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
             ))}
             <Separator className="my-2" />
             <div className="flex flex-row w-full">
-              <span className="font-bold w-1/6">Total</span>
+              <span className="font-bold w-1/6">{t("total")}</span>
               <span className="ml-auto font-semibold">{totalPaid} €</span>
             </div>
           </>
         ) : (
-          <div>Aucun paiement</div>
+          <div>{t("noPayment")}</div>
         )}
       </div>
     </div>

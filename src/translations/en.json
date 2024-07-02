@@ -31,5 +31,10 @@
   },
   "PurchaseItem": {
     "missing": "Missing {products}"
+  },
+  "PaymentPart": {
+    "payments": "Payments",
+    "total": "Total",
+    "noPayment": "No payment"
   }
 }

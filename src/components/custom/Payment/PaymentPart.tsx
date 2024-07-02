@@ -185,6 +185,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
                 payment={payment}
                 refetch={refetch}
                 user={user}
+                isAdmin={isAdmin}
               />
             ))}
             <Separator className="my-2" />

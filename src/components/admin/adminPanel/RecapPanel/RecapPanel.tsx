@@ -1,5 +1,5 @@
+import { PaymentPart } from "../../../custom/Payment/PaymentPart";
 import { ProductPart } from "../../../custom/Product/ProductPart";
-import { PaymentPart } from "./Payment/PaymentPart";
 import {
   CdrUser,
   patchCdrUsersUserIdCurriculumsCurriculumId,
@@ -160,7 +160,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
         <Separator />
       </div>
       <ProductPart user={user} />
-      <PaymentPart user={user} />
+      <PaymentPart user={user} isAdmin />
       <div className="grid gap-6">
         <CardTitle className="flex flex-row w-full">
           <span className="font-bold">Reste à payer</span>

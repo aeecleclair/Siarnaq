@@ -1,3 +1,4 @@
+import { PaymentPart } from "../custom/Payment/PaymentPart";
 import { ProductPart } from "../custom/Product/ProductPart";
 import { Card, CardHeader, CardContent, CardFooter } from "../ui/card";
 import { PaymentButton } from "./PaymentButton";
@@ -12,7 +13,12 @@ export const RecapPanel = () => {
     <Card>
       <CardHeader></CardHeader>
       <CardContent className="space-y-2">
-        {user && <ProductPart user={user} />}
+        {user && (
+          <div className="flex flex-col gap-8">
+            <ProductPart user={user} />
+            <PaymentPart user={user} />
+          </div>
+        )}
       </CardContent>
       <CardFooter className="px-6 py-4">
         <PaymentButton />

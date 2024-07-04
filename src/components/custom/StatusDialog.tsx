@@ -1,6 +1,6 @@
-import { DialogDescription } from "@radix-ui/react-dialog";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
 import { HiCheck, HiX } from "react-icons/hi";
 
 const DialogStatus = {

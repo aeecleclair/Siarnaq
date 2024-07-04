@@ -3,6 +3,7 @@ import { CdrUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useProducts } from "@/hooks/useProducts";
+import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslations } from "next-intl";
 
@@ -12,12 +13,16 @@ interface ProductPartProps {
 
 export const ProductPart = ({ user }: ProductPartProps) => {
   const t = useTranslations("ProductPart");
+  const { memberships } = useUserMemberships(user.id);
   const { purchases, total: totalToPay } = useUserPurchases(user.id);
   const { products: allProducts } = useProducts();
   const allConstraint = allProducts
     ?.map((product) => product?.product_constraints)
     .flat();
   const allConstraintIds = allConstraint?.map((constraint) => constraint?.id);
+  const membershipsValues = memberships?.map(
+    (membership) => membership.membership,
+  );
   return (
     <div className="grid gap-6 -mt-4">
       <div>
@@ -35,6 +40,7 @@ export const ProductPart = ({ user }: ProductPartProps) => {
                   (purchase) => purchase.product.id,
                 )}
                 purchase={purchase}
+                memberships={membershipsValues}
               />
             ))}
             <Separator className="my-2" />

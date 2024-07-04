@@ -18,10 +18,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Login = () => {
+  const t = useTranslations("Login");
   const router = useRouter();
   const year = new Date().getFullYear();
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
@@ -35,35 +37,20 @@ const Login = () => {
     <div className="flex [&>div]:w-full h-screen">
       <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
         <CardHeader>
-          <CardTitle>{`Chaîne de rentrée ${year}`}</CardTitle>
+          <CardTitle>{t("title", { year: year })}</CardTitle>
           <CardDescription className="flex flex-col gap-2">
-            <p>
-              Consequat sint incididunt laborum ipsum. Nostrud enim culpa
-              consequat laborum eiusmod minim consectetur deserunt sunt proident
-              adipisicing. Adipisicing quis magna ea magna sint minim nostrud do
-              ullamco non commodo adipisicing. Nisi elit veniam nostrud esse
-              fugiat culpa. Excepteur ex minim sint cillum ipsum et ex pariatur
-              nostrud. Laborum eiusmod tempor dolor sunt. In aute ad dolor non
-              laborum ea nulla fugiat.
-            </p>
-            <p>
-              Anim consectetur qui excepteur aute exercitation deserunt do nulla
-              eiusmod magna tempor qui. Sunt velit commodo enim occaecat
-              incididunt non nostrud dolor velit. Consequat non laborum aliquip
-              incididunt eu. Ullamco exercitation magna in non nostrud elit
-              cupidatat ad minim nostrud. Enim tempor commodo ad magna.
-            </p>
+            <span>{t("description")}</span>
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
-          <span className="m-auto">Vous avez déjà un compte MyECL ?</span>
+          <span className="m-auto">{t("alreadyHaveMyECLAccount")}</span>
           <form>
             <div className="grid w-full items-center gap-4">
               <MyECLButton />
             </div>
           </form>
-          <TextSeparator text="Sinon" />
-          <span className="m-auto">Veuillez sélectionner votre promo :</span>
+          <TextSeparator text={t("or")} />
+          <span className="m-auto">{t("selectPromotion")}</span>
           <div key="curriculum" className="h-full gap-4 flex flex-col">
             <Select value={selectedPromo} onValueChange={setSelectedPromo}>
               <SelectTrigger className="w-full m-auto">
@@ -73,7 +60,7 @@ const Login = () => {
                 <SelectGroup>
                   {possiblePromos.map((promo) => (
                     <SelectItem key={promo} value={promo}>
-                      Promo {promo}
+                      {t("promotion", { year: year })}
                     </SelectItem>
                   ))}
                 </SelectGroup>
@@ -94,7 +81,7 @@ const Login = () => {
                 router.push(redirectUri);
               }}
             >
-              {"S'inscrire"}
+              {t("register")}
             </Button>
           )}
         </CardContent>

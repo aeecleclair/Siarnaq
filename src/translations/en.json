@@ -15,7 +15,7 @@
   },
   "PaymentButton": {
     "title": "Information about the payment provider",
-    "description": "You will be redirected to HelloAsso to proceed with the payment of your registration. This service does not take any fees on payments, it relies solely on donations. By default, HelloAsso offers you to make a donation. If you choose to do so, only HelloAsso will benefit from it.",
+    "description": "You will be redirected to HelloAsso to proceed with the payment of your registration. This service does not take any fees on payments, it relies solely on donations. By default, HelloAsso offers you to make a donation, which you can refuse without compromising the payment. If you choose to do so, only HelloAsso will benefit from it.",
     "pay": "Pay"
   },
   "ProductPanel": {
@@ -36,5 +36,14 @@
     "payments": "Payments",
     "total": "Total",
     "noPayment": "No payment"
+  },
+  "Login": {
+    "title": "Back to school {year}",
+    "description": "Consequat sint incididunt laborum ipsum. Nostrud enim culpa consequat laborum eiusmod minim consectetur deserunt sunt proident adipisicing. Adipisicing quis magna ea magna sint minim nostrud do ullamco non commodo adipisicing. Nisi elit veniam nostrud esse fugiat culpa. Excepteur ex minim sint cillum ipsum et ex pariatur nostrud. Laborum eiusmod tempor dolor sunt. In aute ad dolor non laborum ea nulla fugiat. Anim consectetur qui excepteur aute exercitation deserunt do nulla eiusmod magna tempor qui. Sunt velit commodo enim occaecat incididunt non nostrud dolor velit. Consequat non laborum aliquip incididunt eu. Ullamco exercitation magna in non nostrud elit cupidatat ad minim nostrud. Enim tempor commodo ad magna.",
+    "alreadyHaveMyECLAccount": "Already have a MyECL account?",
+    "or": "Or",
+    "selectPromotion": "Please select your promotion:",
+    "promotion": "Promotion {year}",
+    "register": "Register"
   }
 }

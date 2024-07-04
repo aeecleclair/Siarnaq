@@ -7,7 +7,6 @@ import { useTranslation } from "@/translations/utils";
 import { useTranslations } from "next-intl";
 import { HiOutlineExclamation } from "react-icons/hi";
 
-
 interface PurchaseItemProps {
   purchase: PurchaseReturn;
   allProducts?: app__modules__cdr__schemas_cdr__ProductComplete[];

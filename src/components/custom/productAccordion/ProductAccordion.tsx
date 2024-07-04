@@ -76,7 +76,8 @@ export const ProductAccordion = ({
     (membership) => membership.membership === product.related_membership,
   );
 
-  const displayWarning = isMissingConstraint && isOneVariantTaken && !isMembershipAlreadyTaken;
+  const displayWarning =
+    isMissingConstraint && isOneVariantTaken && !isMembershipAlreadyTaken;
 
   return (
     (variantToDisplay?.length ?? 0) > 0 && (

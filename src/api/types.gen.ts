@@ -110,7 +110,7 @@ export type BatchResult = {
 export type Body_authorize_validation_auth_authorization_flow_authorize_validation_post =
   {
     client_id: string;
-    redirect_uri?: string;
+    redirect_uri?: string | null;
     response_type: string;
     scope?: string | null;
     state?: string | null;
@@ -161,6 +161,13 @@ export type Body_create_recommendation_image_recommendation_recommendations__rec
   {
     image: Blob | File;
   };
+
+export type Body_introspect_auth_introspect_post = {
+  token: string;
+  token_type_hint?: string | null;
+  client_id?: string | null;
+  client_secret?: string | null;
+};
 
 export type Body_login_for_access_token_auth_simple_token_post = {
   grant_type?: string | null;
@@ -684,6 +691,10 @@ export type InformationEdit = {
   description?: string | null;
 };
 
+export type IntrospectTokenResponse = {
+  active: boolean;
+};
+
 export type Item = {
   name: string;
   suggested_caution: number;
@@ -1055,7 +1066,7 @@ export type ProductBase = {
   description_fr?: string | null;
   description_en?: string | null;
   available_online: boolean;
-  related_membership?: string | null;
+  related_membership?: AvailableAssociationMembership | null;
   product_constraints: Array<string>;
   document_constraints: Array<string>;
 };
@@ -1069,7 +1080,7 @@ export type ProductCompleteNoConstraint = {
   id: string;
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
-  related_membership?: string | null;
+  related_membership?: AvailableAssociationMembership | null;
 };
 
 export type ProductQuantity = {
@@ -1399,7 +1410,7 @@ export type app__modules__cdr__schemas_cdr__ProductComplete = {
   id: string;
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
-  related_membership?: string | null;
+  related_membership?: AvailableAssociationMembership | null;
   product_constraints?: Array<ProductCompleteNoConstraint>;
   document_constraints?: Array<DocumentComplete>;
 };
@@ -1411,7 +1422,7 @@ export type app__modules__cdr__schemas_cdr__ProductEdit = {
   description_en?: string | null;
   description?: string | null;
   available_online?: boolean | null;
-  related_membership?: string | null;
+  related_membership?: AvailableAssociationMembership | null;
   product_constraints?: Array<string> | null;
   document_constraints?: Array<string> | null;
 };
@@ -1473,6 +1484,16 @@ export type PostAuthTokenData = {
 export type PostAuthTokenResponse = TokenResponse;
 
 export type PostAuthTokenError = unknown;
+
+export type PostAuthIntrospectData = {
+  headers?: {
+    authorization?: string | null;
+  };
+};
+
+export type PostAuthIntrospectResponse = IntrospectTokenResponse;
+
+export type PostAuthIntrospectError = unknown;
 
 export type GetAuthUserinfoResponse = unknown;
 
@@ -1762,16 +1783,6 @@ export type PostUsersBatchCreationData = {
 export type PostUsersBatchCreationResponse = BatchResult;
 
 export type PostUsersBatchCreationError = unknown;
-
-export type GetUsersActivateData = {
-  query: {
-    activation_token: string;
-  };
-};
-
-export type GetUsersActivateResponse = string;
-
-export type GetUsersActivateError = unknown;
 
 export type PostUsersActivateData = {
   body: CoreUserActivateRequest;
@@ -3894,6 +3905,21 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/auth/introspect": {
+    post: {
+      req: PostAuthIntrospectData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": IntrospectTokenResponse;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
   "/auth/userinfo": {
     get: {
       res: {
@@ -4424,19 +4450,6 @@ export type $OpenApiTs = {
     };
   };
   "/users/activate": {
-    get: {
-      req: GetUsersActivateData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": string;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
     post: {
       req: PostUsersActivateData;
       res: {

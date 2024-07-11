@@ -20,9 +20,15 @@ interface PaymentItemProps {
   payment: PaymentComplete;
   refetch: () => void;
   user: CdrUser;
+  isAdmin?: boolean;
 }
 
-export const PaymentItem = ({ payment, refetch, user }: PaymentItemProps) => {
+export const PaymentItem = ({
+  payment,
+  refetch,
+  user,
+  isAdmin,
+}: PaymentItemProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
   const paymentIcon = (paymentType: PaymentType) => {
@@ -71,55 +77,57 @@ export const PaymentItem = ({ payment, refetch, user }: PaymentItemProps) => {
       <span className="ml-auto font-semibold w-20 flex justify-end">
         {payment.total} €
       </span>
-      <CustomDialog
-        isOpened={isOpened}
-        setIsOpened={setIsOpened}
-        title="Supprimer le paiement"
-        description={
-          <div className="grid gap-3">
-            <span>
-              Êtes-vous sûr de vouloir supprimer le paiement de{" "}
-              <span className="font-bold">
-                {user.nickname ? (
-                  <span className="font-bold">
-                    {user.nickname} ({user.firstname} {user.name})
-                  </span>
-                ) : (
-                  <span className="font-bold">
-                    {user.firstname} {user.name}
-                  </span>
-                )}
+      {isAdmin && (
+        <CustomDialog
+          isOpened={isOpened}
+          setIsOpened={setIsOpened}
+          title="Supprimer le paiement"
+          description={
+            <div className="grid gap-3">
+              <span>
+                Êtes-vous sûr de vouloir supprimer le paiement de{" "}
+                <span className="font-bold">
+                  {user.nickname ? (
+                    <span className="font-bold">
+                      {user.nickname} ({user.firstname} {user.name})
+                    </span>
+                  ) : (
+                    <span className="font-bold">
+                      {user.firstname} {user.name}
+                    </span>
+                  )}
+                </span>
+                {" d'un montant de "}
+                <span className="font-bold">{payment.total} €</span> effectué
+                par <span className="font-bold">{payment.payment_type}</span> ?
               </span>
-              {" d'un montant de "}
-              <span className="font-bold">{payment.total} €</span> effectué par{" "}
-              <span className="font-bold">{payment.payment_type}</span> ?
-            </span>
-            <div className="flex justify-end mt-2 space-x-4">
-              <Button
-                variant="outline"
-                onClick={closeDialog}
-                disabled={isLoading}
-                className="w-[100px]"
-              >
-                Annuler
-              </Button>
-              <LoadingButton
-                isLoading={isLoading}
-                className="w-[100px]"
-                type="button"
-                variant="destructive"
-                onClick={onDelete}
-              >
-                {"Supprimer"}
-              </LoadingButton>
+              <div className="flex justify-end mt-2 space-x-4">
+                <Button
+                  variant="outline"
+                  onClick={closeDialog}
+                  disabled={isLoading}
+                  className="w-[100px]"
+                >
+                  Annuler
+                </Button>
+                <LoadingButton
+                  isLoading={isLoading}
+                  className="w-[100px]"
+                  type="button"
+                  variant="destructive"
+                  onClick={onDelete}
+                >
+                  {"Supprimer"}
+                </LoadingButton>
+              </div>
             </div>
-          </div>
-        }
-      >
-        <Button size="icon" variant="destructive" className="ml-4 h-8 w-9">
-          <HiTrash className="w-5 h-5" />
-        </Button>
-      </CustomDialog>
+          }
+        >
+          <Button size="icon" variant="destructive" className="ml-4 h-8 w-9">
+            <HiTrash className="w-5 h-5" />
+          </Button>
+        </CustomDialog>
+      )}
     </div>
   );
 };

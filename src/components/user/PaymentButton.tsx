@@ -1,9 +1,11 @@
 import { HelloAssoButton } from "../custom/HelloAssoButton";
 import { WarningDialog } from "../custom/WarningDialog";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export const PaymentButton = () => {
+  const t = useTranslations("PaymentButton");
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   return (
@@ -15,16 +17,8 @@ export const PaymentButton = () => {
         title="Payer"
         description={
           <div>
-            <div className="my-2 font-semibold">
-              Information sur le prestataire de paiement
-            </div>
-            <p>
-              Vous allez être redirigé vers HelloAsso pour procéder au paiement
-              de votre inscription. Ce service ne prend aucun frais sur les
-              paiements, il se repose uniquement sur les dons. Par défaut,
-              HelloAsso vous propose de faire un don. Si vous choississez de le
-              faire, seul HelloAsso en bénéficiera.
-            </p>
+            <div className="my-2 font-semibold">{t("title")}</div>
+            <p>{t("description")}</p>
           </div>
         }
         customButton={<HelloAssoButton isLoading={isLoading} />}
@@ -35,7 +29,7 @@ export const PaymentButton = () => {
           setIsOpened(true);
         }}
       >
-        Payer
+        {t("pay")}
       </Button>
     </>
   );

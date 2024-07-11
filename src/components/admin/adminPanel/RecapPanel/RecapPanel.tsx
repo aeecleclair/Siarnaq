@@ -1,5 +1,5 @@
-import { PaymentPart } from "./Payment/PaymentPart";
-import { ProductPart } from "./Product/ProductPart";
+import { PaymentPart } from "../../../custom/Payment/PaymentPart";
+import { ProductPart } from "../../../custom/Product/ProductPart";
 import {
   CdrUser,
   patchCdrUsersUserIdCurriculumsCurriculumId,
@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useCurriculums } from "@/hooks/useCurriculums";
-import { useUserPayment } from "@/hooks/useUserPayment";
-import { useUserPurchases } from "@/hooks/useUserPurchase";
+import { useUserPayments } from "@/hooks/useUserPayments";
+import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useState } from "react";
 import { HiOutlinePencil } from "react-icons/hi";
 
@@ -30,7 +30,7 @@ interface RecapPanelProps {
 }
 
 export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
-  const { total: totalPaid } = useUserPayment(user.id);
+  const { total: totalPaid } = useUserPayments(user.id);
   const { total: totalToPay } = useUserPurchases(user.id);
   const { curriculums } = useCurriculums();
   const remainingToPay = (totalToPay ?? 0) - (totalPaid ?? 0);
@@ -160,7 +160,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
         <Separator />
       </div>
       <ProductPart user={user} />
-      <PaymentPart user={user} />
+      <PaymentPart user={user} isAdmin />
       <div className="grid gap-6">
         <CardTitle className="flex flex-row w-full">
           <span className="font-bold">Reste à payer</span>

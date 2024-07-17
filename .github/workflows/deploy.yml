@@ -22,15 +22,10 @@ jobs:
 
       - name: Configure Dotenv
         run: |
-          echo NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL} >> .env
-          echo NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL} >> .env
-          echo NEXT_PUBLIC_REDIRECT_URL=${NEXT_PUBLIC_REDIRECT_URL} >> .env
-          echo NEXT_PUBLIC_CLIENT_ID=${NEXT_PUBLIC_CLIENT_ID} >> .env
-        env:
-          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
-          NEXT_PUBLIC_FRONTEND_URL: ${{ secrets.NEXT_PUBLIC_FRONTEND_URL }}
-          NEXT_PUBLIC_REDIRECT_URL: ${{ secrets.NEXT_PUBLIC_REDIRECT_URL }}
-          NEXT_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_CLIENT_ID }}
+          echo NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL >> .env
+          echo NEXT_PUBLIC_FRONTEND_URL=$NEXT_PUBLIC_FRONTEND_URL >> .env
+          echo NEXT_PUBLIC_REDIRECT_URL=$NEXT_PUBLIC_REDIRECT_URL >> .env
+          echo NEXT_PUBLIC_CLIENT_ID=$NEXT_PUBLIC_CLIENT_ID >> .env
 
       # Cache build during CI: https://nextjs.org/docs/pages/building-your-application/deploying/ci-build-caching#github-actions
       - name: Cache Next build

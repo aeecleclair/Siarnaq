@@ -5,7 +5,7 @@
     "summary": "Récapitulatif"
   },
   "IntroCarouselItem": {
-    "description": "Consequat sint incididunt laborum ipsum. Nostrud enim culpa consequat laborum eiusmod minim consectetur deserunt sunt proident adipisicing Adipisicing quis magna ea magna sint minim nostrud do ullamco non commodo adipisicing. Nisi elit veniam nostrud esse fugiat culpa. Excepteur ex minim sint cillum ipsum et ex pariatur nostrud. Laborum eiusmod tempor dolor sunt. In aute ad dolor non laborum ea nulla fugiat.  Anim consectetur qui excepteur aute exercitation deserunt do nulla eiusmod magna tempor qui. Sunt velit commodo enim occaecat incididuntnon nostrud dolor velit. Consequat non laborum aliquip incididunt eu. Ullamco exercitation magna in non nostrud elit cupidatat ad minim nostrud. Enim tempor commodo ad magna.",
+    "description": "Bienvenu sur le site de chaîne de rentrée associative de l'École Centrale de Lyon. Sur ce site, vous pouvez adhérer aux associations du campus, souscrire à certains services et prendre des places pour les événements de la rentrée. Nous vous demanderons quelques informations administratives. À la fin du parcours, vous pourrez payer en ligne par carte bancaire.",
     "selectCurriculum": "Pour commencer, veuillez sélectionner votre cursus :",
     "begin": "On commence ?",
     "validate": "Valider"
@@ -46,8 +46,9 @@
     "archived": "Archivé"
   },
   "Login": {
-    "title": "Chaîne de rentrée {year}",
-    "description": "Consequat sint incididunt laborum ipsum. Nostrud enim culpa consequat laborum eiusmod minim consectetur deserunt sunt proident adipisicing. Adipisicing quis magna ea magna sint minim nostrud do ullamco non commodo adipisicing. Nisi elit veniam nostrud esse fugiat culpa. Excepteur ex minim sint cillum ipsum et ex pariatur nostrud. Laborum eiusmod tempor dolor sunt. In aute ad dolor non laborum ea nulla fugiat. Anim consectetur qui excepteur aute exercitation deserunt do nulla eiusmod magna tempor qui. Sunt velit commodo enim occaecat incididunt non nostrud dolor velit. Consequat non laborum aliquip incididunt eu. Ullamco exercitation magna in non nostrud elit cupidatat ad minim nostrud. Enim tempor commodo ad magna.",
+    "title": "Chaîne de rentrée associative {year}",
+    "description": "Bienvenu sur le site de chaîne de rentrée associative de l'École Centrale de Lyon. Ce site permet à tous les élèves de l'école de s'inscrire aux associations et services associatifs de l'école, il est a destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure.",
+    "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves à l'adresse suivante :",
     "alreadyHaveMyECLAccount": "Vous avez déjà un compte MyECL ?",
     "or": "Sinon",
     "selectPromotion": "Veuillez sélectionner votre promo :",

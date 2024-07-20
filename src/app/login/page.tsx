@@ -61,7 +61,7 @@ const Login = () => {
                 <SelectGroup>
                   {possiblePromos.map((promo) => (
                     <SelectItem key={promo} value={promo}>
-                      {t("promotion", { year: year })}
+                      {t("promotion", { year: promo })}
                     </SelectItem>
                   ))}
                 </SelectGroup>
@@ -75,7 +75,7 @@ const Login = () => {
               className="w-full m-auto"
               onClick={() => {
                 let redirectUri =
-                  process.env.NEXT_PUBLIC_BACKEND_URL + "/calypsso/register";
+                  process.env.NEXT_PUBLIC_BACKEND_URL + "calypsso/register";
                 if (selectedPromo === possiblePromos[0]) {
                   redirectUri += "?external=true";
                 }

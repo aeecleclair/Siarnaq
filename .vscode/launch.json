@@ -20,6 +20,10 @@
       "webRoot": "${workspaceFolder}/",
       "pathMappings": [
         {
+          "url": "webpack://_n_e/src/hooks",
+          "path": "${workspaceFolder}/src/hooks"
+        },
+        {
           "url": "webpack://_n_e/src/app",
           "path": "${workspaceFolder}/src/app"
         }

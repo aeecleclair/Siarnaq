@@ -438,10 +438,10 @@
   resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.1.3.tgz#78a2a7f504a7370283d07eabcddc7fec04f503db"
   integrity sha512-fEcPfo4oN345SoqdlCDdSa4ivjaKbk0jTd+oubcgNxnNgAfzysfwWfQUr+51wigiWHQQRiZNd1Ao0M5Y3M2EGg==
 
-"@hey-api/client-fetch@^0.1.3":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@hey-api/client-fetch/-/client-fetch-0.1.4.tgz#70c41d2789af9fef8839b691474cde4f23206b74"
-  integrity sha512-aVNM060GjT1xK12tzAnq7VSb5q3r+K0BYIbCwfnP4W+WczJArdCTIcAfn9Grfb2XK14GqqxssLip/UqbUpvhmg==
+"@hey-api/client-fetch@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@hey-api/client-fetch/-/client-fetch-0.2.0.tgz#482d45ef230915a6864cad95a24aa4cc511ff793"
+  integrity sha512-BEGwrUcy6zOkeZJ8cJhTlW10e8ESjGJvZ1Yj1QEZKbrkCwKCxBvTRiwXhB/uPDT0QTLjLuyAEmMkUo+LvKvlIA==
 
 "@hey-api/openapi-ts@^0.46.3":
   version "0.46.3"

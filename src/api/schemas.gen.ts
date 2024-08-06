@@ -427,7 +427,14 @@ export const $Body_authorize_validation_auth_authorization_flow_authorize_valida
         title: "Client Id",
       },
       redirect_uri: {
-        type: "string",
+        anyOf: [
+          {
+            type: "string",
+          },
+          {
+            type: "null",
+          },
+        ],
         title: "Redirect Uri",
       },
       response_type: {
@@ -632,6 +639,51 @@ export const $Body_create_recommendation_image_recommendation_recommendations__r
     title:
       "Body_create_recommendation_image_recommendation_recommendations__recommendation_id__picture_post",
   } as const;
+
+export const $Body_introspect_auth_introspect_post = {
+  properties: {
+    token: {
+      type: "string",
+      title: "Token",
+    },
+    token_type_hint: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Token Type Hint",
+    },
+    client_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Client Id",
+    },
+    client_secret: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Client Secret",
+    },
+  },
+  type: "object",
+  required: ["token"],
+  title: "Body_introspect_auth_introspect_post",
+} as const;
 
 export const $Body_login_for_access_token_auth_simple_token_post = {
   properties: {
@@ -2996,6 +3048,18 @@ export const $InformationEdit = {
   title: "InformationEdit",
 } as const;
 
+export const $IntrospectTokenResponse = {
+  properties: {
+    active: {
+      type: "boolean",
+      title: "Active",
+    },
+  },
+  type: "object",
+  required: ["active"],
+  title: "IntrospectTokenResponse",
+} as const;
+
 export const $Item = {
   properties: {
     name: {
@@ -4519,13 +4583,12 @@ export const $ProductBase = {
     related_membership: {
       anyOf: [
         {
-          type: "string",
+          $ref: "#/components/schemas/AvailableAssociationMembership",
         },
         {
           type: "null",
         },
       ],
-      title: "Related Membership",
     },
     product_constraints: {
       items: {
@@ -4612,13 +4675,12 @@ export const $ProductCompleteNoConstraint = {
     related_membership: {
       anyOf: [
         {
-          type: "string",
+          $ref: "#/components/schemas/AvailableAssociationMembership",
         },
         {
           type: "null",
         },
       ],
-      title: "Related Membership",
     },
   },
   type: "object",
@@ -6007,13 +6069,12 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
     related_membership: {
       anyOf: [
         {
-          type: "string",
+          $ref: "#/components/schemas/AvailableAssociationMembership",
         },
         {
           type: "null",
         },
       ],
-      title: "Related Membership",
     },
     product_constraints: {
       items: {
@@ -6108,13 +6169,12 @@ export const $app__modules__cdr__schemas_cdr__ProductEdit = {
     related_membership: {
       anyOf: [
         {
-          type: "string",
+          $ref: "#/components/schemas/AvailableAssociationMembership",
         },
         {
           type: "null",
         },
       ],
-      title: "Related Membership",
     },
     product_constraints: {
       anyOf: [

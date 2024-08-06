@@ -9,11 +9,11 @@ import { VariantCardWithOptions } from "./VariantCardWithOptions";
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { useUser } from "@/hooks/useUser";
+import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useSizeStore } from "@/stores/SizeStore";
 import { useTranslation } from "@/translations/utils";
 import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
 
 interface ProductAccordionProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;
@@ -48,6 +48,7 @@ export const ProductAccordion = ({
   const numberOfCard = Math.round(size / 20);
   const { purchases: userPurchases } = useUserPurchases(userId);
   const { user } = useUser(userId);
+  const { memberships } = useUserMemberships(userId);
   const variantToDisplay = isAdmin
     ? product.variants
     : product.variants
@@ -66,14 +67,17 @@ export const ProductAccordion = ({
   const missingConstraintProducts = product.product_constraints?.filter(
     (constraint) => !purchasedProductIds?.includes(constraint.id),
   );
-
   const isMissingConstraint =
     missingConstraintProducts && missingConstraintProducts?.length > 0;
   const isOneVariantTaken = product.variants?.some((variant) =>
     purchasedVariantIds?.includes(variant.id),
   );
+  const isMembershipAlreadyTaken = memberships?.some(
+    (membership) => membership.membership === product.related_membership,
+  );
 
-  const displayWarning = isMissingConstraint && isOneVariantTaken;
+  const displayWarning =
+    isMissingConstraint && isOneVariantTaken && !isMembershipAlreadyTaken;
 
   return (
     (variantToDisplay?.length ?? 0) > 0 && (

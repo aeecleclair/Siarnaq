@@ -1,4 +1,5 @@
 import {
+  AvailableAssociationMembership,
   app__modules__cdr__schemas_cdr__ProductComplete,
   PurchaseReturn,
 } from "@/api";
@@ -11,6 +12,7 @@ interface PurchaseItemProps {
   allProducts?: app__modules__cdr__schemas_cdr__ProductComplete[];
   allConstraintIds?: (string | undefined)[];
   allPurchasesIds?: string[];
+  memberships?: AvailableAssociationMembership[];
 }
 
 export const PurchaseItem = ({
@@ -18,6 +20,7 @@ export const PurchaseItem = ({
   allProducts,
   allConstraintIds,
   allPurchasesIds,
+  memberships,
 }: PurchaseItemProps) => {
   const t = useTranslations("PurchaseItem");
   const { selectTranslation } = useTranslation();
@@ -28,15 +31,18 @@ export const PurchaseItem = ({
     purchaseCompleteProduct?.product_constraints?.filter((constraint) =>
       allConstraintIds?.includes(constraint.id),
     );
-
   const notTakenConstraintProduct = missingConstraintProduct?.filter(
     (product) => !allPurchasesIds?.includes(product.id),
+  );
+  const isMembershipAlreadyTaken = memberships?.some(
+    (membership) => membership === purchase.product.related_membership,
   );
 
   const displayWarning =
     missingConstraintProduct &&
     missingConstraintProduct.length > 0 &&
-    notTakenConstraintProduct?.length !== 0;
+    notTakenConstraintProduct?.length !== 0 &&
+    !isMembershipAlreadyTaken;
 
   const variant = purchase.product.variants?.find(
     (variant) => variant.id === purchase.product_variant_id,

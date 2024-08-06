@@ -27,9 +27,12 @@ const AdminPage = () => {
     sellers?.some((seller) => seller.group_id === group),
   );
 
-  if (!isAdmin || !isUserInASellerGroup) {
-    router.push("/");
-  }
+  useEffect(() => {
+    if (!user) return;
+    if (!isAdmin && !isUserInASellerGroup) {
+      router.push("/");
+    }
+  }, [isAdmin, isUserInASellerGroup, router, user]);
 
   useEffect(() => {
     const onGetStatus = async () => {

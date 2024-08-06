@@ -13,6 +13,9 @@ import type {
   PostAuthTokenData,
   PostAuthTokenError,
   PostAuthTokenResponse,
+  PostAuthIntrospectData,
+  PostAuthIntrospectError,
+  PostAuthIntrospectResponse,
   GetAuthUserinfoError,
   GetAuthUserinfoResponse,
   GetOidcAuthorizationFlowJwksUriError,
@@ -122,9 +125,6 @@ import type {
   PostUsersBatchCreationData,
   PostUsersBatchCreationError,
   PostUsersBatchCreationResponse,
-  GetUsersActivateData,
-  GetUsersActivateError,
-  GetUsersActivateResponse,
   PostUsersActivateData,
   PostUsersActivateError,
   PostUsersActivateResponse,
@@ -919,6 +919,35 @@ export const postAuthToken = (options: Options<PostAuthTokenData>) => {
 };
 
 /**
+ * Introspect
+ * Some clients requires an endpoint to check if an access token or a refresh token is valid.
+ * This endpoint should not be publicly accessible, and is thus restricted to some AuthClient.
+ *
+ * * parameters:
+ * * `token`: the token to introspect
+ * * `token_type_hint`: may be `access_token` or `refresh_token`, we currently do not use this hint as we are able to differentiate access and refresh tokens
+ *
+ * * Client credentials
+ * The client must send either:
+ * the client id and secret in the authorization header or with client_id and client_secret parameters
+ *
+ * Reference:
+ * https://www.oauth.com/oauth2-servers/token-introspection-endpoint/
+ * https://datatracker.ietf.org/doc/html/rfc7662
+ */
+export const postAuthIntrospect = (
+  options: Options<PostAuthIntrospectData>,
+) => {
+  return (options?.client ?? client).post<
+    PostAuthIntrospectResponse,
+    PostAuthIntrospectError
+  >({
+    ...options,
+    url: "/auth/introspect",
+  });
+};
+
+/**
  * Auth Get Userinfo
  * Openid connect specify an endpoint the client can use to get information about the user.
  * The oidc client will provide the access_token it got previously in the request.
@@ -1622,22 +1651,6 @@ export const postUsersBatchCreation = (
   >({
     ...options,
     url: "/users/batch-creation",
-  });
-};
-
-/**
- * Get User Activation Page
- * Return a HTML page to activate an account. The activation token is passed as a query string.
- *
- * **This endpoint is an UI endpoint which send and html page response.
- */
-export const getUsersActivate = (options: Options<GetUsersActivateData>) => {
-  return (options?.client ?? client).get<
-    GetUsersActivateResponse,
-    GetUsersActivateError
-  >({
-    ...options,
-    url: "/users/activate",
   });
 };
 

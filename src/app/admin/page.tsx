@@ -4,13 +4,16 @@ import { Status, getCdrStatus } from "@/api";
 import { SellerTab } from "@/components/admin/sellerProducts/SellerTab";
 import { UserSearch } from "@/components/admin/userSearch/UserSearch";
 import { Card } from "@/components/ui/card";
-import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
+import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "@/components/ui/resizable";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useSellers } from "@/hooks/useSellers";
 import { useSizeStore } from "@/stores/SizeStore";
 import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-
 
 const AdminPage = () => {
   const { setSize, size } = useSizeStore();
@@ -23,7 +26,6 @@ const AdminPage = () => {
   const isUserInASellerGroup = userGroups?.some((group) =>
     sellers?.some((seller) => seller.group_id === group),
   );
-
 
   useEffect(() => {
     if (!user) return;

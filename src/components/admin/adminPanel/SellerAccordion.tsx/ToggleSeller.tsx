@@ -59,8 +59,7 @@ export const ToggleSeller = ({
     setIsLoading(false);
   }
   return (
-    <div key={group.id} className="flex flex-row justify-between">
-      <span>{group.name}</span>
+    <div key={group.id} className="flex flex-row items-center">
       {sellerIds.includes(group.id) ? (
         <LoadingButton
           size="icon"
@@ -86,6 +85,7 @@ export const ToggleSeller = ({
           <HiPlus className="w-5 h-5" />
         </LoadingButton>
       )}
+      <span className="ml-4">{group.name}</span>
     </div>
   );
 };

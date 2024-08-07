@@ -29,8 +29,7 @@ export const CurriculumItem = ({
     setIsLoading(false);
   }
   return (
-    <div key={curriculum.id} className="flex flex-row justify-between">
-      <span>{curriculum.name}</span>
+    <div key={curriculum.id} className="flex flex-row items-center">
       <LoadingButton
         size="icon"
         variant="destructive"
@@ -40,6 +39,7 @@ export const CurriculumItem = ({
       >
         <HiTrash className="w-5 h-5" />
       </LoadingButton>
+      <span className="ml-4">{curriculum.name}</span>
     </div>
   );
 };

@@ -80,7 +80,7 @@ export const ProductAccordion = ({
     isMissingConstraint && isOneVariantTaken && !isMembershipAlreadyTaken;
 
   return (
-    (variantToDisplay?.length ?? 0) > 0 && (
+    (isAdmin || (variantToDisplay?.length ?? 0) > 0) && (
       <AccordionItem value={product.id}>
         <ContextMenu>
           <ContextMenuTrigger>

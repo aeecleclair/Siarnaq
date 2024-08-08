@@ -2,7 +2,6 @@ import { useToken } from "./useToken";
 import { getGroups } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
-
 export const useGroups = () => {
   const { isTokenExpired } = useToken();
   const { data, isLoading, refetch } = useQuery({

@@ -1,11 +1,11 @@
 import { useToken } from "./useToken";
-import { getCdrOnlineSellersSellerIdProducts, getCdrSellersSellerIdUsersUserIdPurchases } from "@/api";
+import {
+  getCdrOnlineSellersSellerIdProducts,
+  getCdrSellersSellerIdUsersUserIdPurchases,
+} from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
-
-export const useOnlineSellerProducts = (
-  sellerId: string | null,
-) => {
+export const useOnlineSellerProducts = (sellerId: string | null) => {
   const { isTokenExpired } = useToken();
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["onlineSellerProducts", sellerId ?? ""],

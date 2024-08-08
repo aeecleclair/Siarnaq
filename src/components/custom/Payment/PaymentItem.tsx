@@ -1,12 +1,21 @@
-import { PaymentType, PaymentComplete, deleteCdrUsersUserIdPaymentsPaymentId, CdrUser } from "@/api";
+import {
+  PaymentType,
+  PaymentComplete,
+  deleteCdrUsersUserIdPaymentsPaymentId,
+  CdrUser,
+} from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
-import { HiOutlineArchive, HiOutlineAtSymbol, HiOutlineCreditCard, HiTrash } from "react-icons/hi";
+import {
+  HiOutlineArchive,
+  HiOutlineAtSymbol,
+  HiOutlineCreditCard,
+  HiTrash,
+} from "react-icons/hi";
 import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
-
 
 interface PaymentItemProps {
   payment: PaymentComplete;

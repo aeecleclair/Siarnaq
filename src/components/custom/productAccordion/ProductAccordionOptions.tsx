@@ -1,9 +1,17 @@
 import { CustomDialog } from "../CustomDialog";
 import { LoadingButton } from "../LoadingButton";
-import { app__modules__cdr__schemas_cdr__ProductComplete, app__modules__cdr__schemas_cdr__ProductEdit, deleteCdrSellersSellerIdProductsProductId, patchCdrSellersSellerIdProductsProductId } from "@/api";
+import {
+  app__modules__cdr__schemas_cdr__ProductComplete,
+  app__modules__cdr__schemas_cdr__ProductEdit,
+  deleteCdrSellersSellerIdProductsProductId,
+  patchCdrSellersSellerIdProductsProductId,
+} from "@/api";
 import { AddEditProductForm } from "@/components/admin/sellerProducts/AddEditProductForm";
 import { Button } from "@/components/ui/button";
-import { ContextMenuContent, ContextMenuShortcut } from "@/components/ui/context-menu";
+import {
+  ContextMenuContent,
+  ContextMenuShortcut,
+} from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import { toast, useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
@@ -12,7 +20,6 @@ import { PencilIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 
 interface ProductAccordionOptionsProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;

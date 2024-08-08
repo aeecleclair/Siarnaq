@@ -1,4 +1,10 @@
-import { CoreGroupSimple, SellerBase, SellerComplete, deleteCdrSellersSellerId, postCdrSellers } from "@/api";
+import {
+  CoreGroupSimple,
+  SellerBase,
+  SellerComplete,
+  deleteCdrSellersSellerId,
+  postCdrSellers,
+} from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { useToast } from "@/components/ui/use-toast";
 import { useGroups } from "@/hooks/useGroups";
@@ -6,16 +12,12 @@ import { useSellers } from "@/hooks/useSellers";
 import { useState } from "react";
 import { HiPlus, HiTrash } from "react-icons/hi";
 
-
 interface ToggleSellerProps {
   group: CoreGroupSimple;
   sellers: SellerComplete[];
 }
 
-export const ToggleSeller = ({
-  group,
-  sellers,
-}: ToggleSellerProps) => {
+export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
   const { toast } = useToast();
   const { refetch: refetchGroups } = useGroups();
   const { refetch: refetchSellers } = useSellers();

@@ -32,9 +32,7 @@ export const SellerTab = ({ status }: SellerTabProps) => {
   }, [firstSellerId, router, searchParams, sellers]);
 
   return (
-    <div
-      className="flex items-center justify-center p-6 min-w-96"
-    >
+    <div className="flex items-center justify-center p-6 min-w-96">
       {firstSellerId && (
         <Tabs defaultValue={firstSellerId} className="w-full">
           <SellerTabList status={status} sellers={sellers} isAdmin={isAdmin} />

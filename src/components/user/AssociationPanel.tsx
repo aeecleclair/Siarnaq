@@ -15,8 +15,7 @@ export const AssociationPanel = () => {
   const { onlineSellers } = useOnlineSellers();
   const { userId } = useTokenStore();
   const searchParams = useSearchParams();
-  const firstSellerId =
-    searchParams.get("sellerId") || onlineSellers.at(0)?.id;
+  const firstSellerId = searchParams.get("sellerId") || onlineSellers.at(0)?.id;
   const { purchases } = useUserPurchases(userId);
   const totalPurchases =
     purchases?.reduce<number>((acc, purchase) => acc + purchase.quantity, 0) ??

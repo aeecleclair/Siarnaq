@@ -1,7 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useToast } from "../ui/use-toast";
 import { LoadingButton } from "./LoadingButton";
-import { deleteCdrUsersUserIdPurchasesProductVariantId, postCdrUsersUserIdPurchasesProductVariantId } from "@/api";
+import {
+  deleteCdrUsersUserIdPurchasesProductVariantId,
+  postCdrUsersUserIdPurchasesProductVariantId,
+} from "@/api";
 import { ProductVariantComplete, PurchaseBase } from "@/api/types.gen";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
@@ -10,7 +13,6 @@ import { useTranslation } from "@/translations/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi";
-
 
 interface VariantCardProps {
   variant: ProductVariantComplete;

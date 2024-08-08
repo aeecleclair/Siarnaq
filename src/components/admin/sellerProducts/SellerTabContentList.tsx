@@ -27,12 +27,7 @@ export const SellerTabContentList = ({
   const { user, refetch } = useUser(userId);
 
   if (activeSellerId === "cdradmin" && isAdmin) {
-    return (
-      <AdminPanel
-        sellers={sellers}
-        status={status}
-      />
-    );
+    return <AdminPanel sellers={sellers} status={status} />;
   }
   if (activeSellerId === "cdrrecap" && isAdmin) {
     return user && <RecapPanel user={user} refetch={refetch} />;

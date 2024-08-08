@@ -1,8 +1,19 @@
 import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
 import { Accordion } from "../ui/accordion";
-import { app__modules__cdr__schemas_cdr__ProductComplete, getCdrOnlineSellersSellerIdProducts } from "@/api";
+import { useToast } from "../ui/use-toast";
+import {
+  app__modules__cdr__schemas_cdr__ProductComplete,
+  getCdrOnlineSellersSellerIdProducts,
+} from "@/api";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useOnlineSellerProducts } from "@/hooks/useOnlineSellerProducts";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
@@ -11,9 +22,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useToast } from "../ui/use-toast";
-import { useOnlineSellerProducts } from "@/hooks/useOnlineSellerProducts";
-
 
 export const ProductPanel = () => {
   const t = useTranslations("ProductPanel");
@@ -30,7 +38,6 @@ export const ProductPanel = () => {
   const router = useRouter();
   const { userId } = useTokenStore();
   const { user } = useUser(userId);
-
 
   useEffect(() => {
     if (

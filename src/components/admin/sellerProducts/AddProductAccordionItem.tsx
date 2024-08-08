@@ -1,5 +1,9 @@
 import { AddEditProductForm } from "./AddEditProductForm";
-import { ProductBase, SellerComplete, postCdrSellersSellerIdProducts } from "@/api";
+import {
+  ProductBase,
+  SellerComplete,
+  postCdrSellersSellerIdProducts,
+} from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
@@ -9,7 +13,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi";
 import { z } from "zod";
-
 
 interface AddProductAccordionItemProps {
   seller: SellerComplete;

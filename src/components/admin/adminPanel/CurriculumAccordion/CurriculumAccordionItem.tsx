@@ -1,4 +1,3 @@
-import { useCurriculums } from "@/hooks/useCurriculums";
 import { AddCurriculumButton } from "./AddCurriculumButton";
 import { CurriculumItem } from "./CurriculumItem";
 import {
@@ -6,10 +5,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useCurriculums } from "@/hooks/useCurriculums";
 
 export const CurriculumAccordionItem = () => {
   const { curriculums } = useCurriculums();
-  
+
   return (
     <AccordionItem value="curriculum">
       <AccordionTrigger>
@@ -20,10 +20,7 @@ export const CurriculumAccordionItem = () => {
       <AccordionContent className="space-y-2">
         <AddCurriculumButton />
         {curriculums.map((curriculum) => (
-          <CurriculumItem
-            key={curriculum.id}
-            curriculum={curriculum}
-          />
+          <CurriculumItem key={curriculum.id} curriculum={curriculum} />
         ))}
       </AccordionContent>
     </AccordionItem>

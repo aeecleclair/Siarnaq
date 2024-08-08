@@ -10,7 +10,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-
 export const AddCurriculumButton = () => {
   const { toast } = useToast();
   const { refetch: refetchCurriculums } = useCurriculums();

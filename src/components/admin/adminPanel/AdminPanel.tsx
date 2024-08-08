@@ -9,19 +9,12 @@ interface AdminPanelProps {
   sellers: SellerComplete[];
 }
 
-export const AdminPanel = ({
-  sellers,
-  status,
-}: AdminPanelProps) => {
+export const AdminPanel = ({ sellers, status }: AdminPanelProps) => {
   return (
     <Accordion type="multiple">
-      <SellerAccordionItem
-        sellers={sellers}
-      />
+      <SellerAccordionItem sellers={sellers} />
       <CurriculumAccordionItem />
-      <StatusAccordionItem
-        status={status}
-      />
+      <StatusAccordionItem status={status} />
     </Accordion>
   );
 };

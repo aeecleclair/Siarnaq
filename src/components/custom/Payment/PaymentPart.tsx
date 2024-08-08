@@ -1,5 +1,10 @@
 import { PaymentItem } from "./PaymentItem";
-import { CdrUser, PaymentBase, PaymentType, postCdrUsersUserIdPayments } from "@/api";
+import {
+  CdrUser,
+  PaymentBase,
+  PaymentType,
+  postCdrUsersUserIdPayments,
+} from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { PriceInput } from "@/components/custom/PriceInput";
@@ -7,7 +12,13 @@ import { StyledFormField } from "@/components/custom/StyledFormField";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import { paymentFormSchema } from "@/forms/paymentFormSchema";
@@ -16,10 +27,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { HiOutlineArchive, HiOutlineAtSymbol, HiOutlineCreditCard } from "react-icons/hi";
+import {
+  HiOutlineArchive,
+  HiOutlineAtSymbol,
+  HiOutlineCreditCard,
+} from "react-icons/hi";
 import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
 import { z } from "zod";
-
 
 interface PaymentPartProps {
   user: CdrUser;

@@ -1,20 +1,21 @@
 import { CdrStatus, Status, patchCdrStatus } from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
-import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { useToast } from "@/components/ui/use-toast";
 import { useStatus } from "@/hooks/useStatus";
 import { useState } from "react";
-
 
 interface SellerTabProps {
   status: Status;
 }
 
-export const StatusAccordionItem = ({
-  status,
-}: SellerTabProps) => {
+export const StatusAccordionItem = ({ status }: SellerTabProps) => {
   const { toast } = useToast();
-  const { refetch: refetchStatus} = useStatus();
+  const { refetch: refetchStatus } = useStatus();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const updateStatus = async (status: CdrStatus) => {

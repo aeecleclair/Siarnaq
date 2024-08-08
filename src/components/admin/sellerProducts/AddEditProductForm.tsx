@@ -69,7 +69,7 @@ export const AddEditProductForm = ({
       <div className="grid gap-2">
         <StyledFormField
           form={form}
-          label="Description (anglais)"
+          label="Disponibilité"
           id="available_online"
           input={(field) => (
             <RadioGroup

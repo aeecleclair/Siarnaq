@@ -6,22 +6,21 @@ import {
   postCdrSellers,
 } from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { useToast } from "@/components/ui/use-toast";
+import { useGroups } from "@/hooks/useGroups";
+import { useSellers } from "@/hooks/useSellers";
 import { useState } from "react";
 import { HiPlus, HiTrash } from "react-icons/hi";
 
 interface ToggleSellerProps {
   group: CoreGroupSimple;
   sellers: SellerComplete[];
-  setRefetchGroups: (arg0: boolean) => void;
-  setRefetchSellers: (arg0: boolean) => void;
 }
 
-export const ToggleSeller = ({
-  group,
-  sellers,
-  setRefetchGroups,
-  setRefetchSellers,
-}: ToggleSellerProps) => {
+export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
+  const { toast } = useToast();
+  const { refetch: refetchGroups } = useGroups();
+  const { refetch: refetchSellers } = useSellers();
   const [isLoading, setIsLoading] = useState(false);
   const sellerIds = sellers.map((seller) => seller.group_id);
   async function createSeller(group: CoreGroupSimple) {
@@ -35,12 +34,16 @@ export const ToggleSeller = ({
       body: body,
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
-    setRefetchGroups(true);
-    setRefetchSellers(true);
+    refetchGroups();
+    refetchSellers();
     setIsLoading(false);
   }
 
@@ -50,12 +53,16 @@ export const ToggleSeller = ({
       path: { seller_id: groupId },
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
-    setRefetchGroups(true);
-    setRefetchSellers(true);
+    refetchGroups();
+    refetchSellers();
     setIsLoading(false);
   }
   return (

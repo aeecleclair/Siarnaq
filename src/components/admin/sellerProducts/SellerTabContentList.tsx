@@ -8,17 +8,13 @@ import { useSearchParams } from "next/navigation";
 
 interface SellerTabContentListProps {
   status: Status;
-  setRefetchStatus: (arg0: boolean) => void;
   sellers: SellerComplete[];
-  setRefetchSellers: (arg0: boolean) => void;
   isAdmin?: boolean;
 }
 
 export const SellerTabContentList = ({
   status,
-  setRefetchStatus,
   sellers,
-  setRefetchSellers,
   isAdmin,
 }: SellerTabContentListProps) => {
   const searchParams = useSearchParams();
@@ -31,14 +27,7 @@ export const SellerTabContentList = ({
   const { user, refetch } = useUser(userId);
 
   if (activeSellerId === "cdradmin" && isAdmin) {
-    return (
-      <AdminPanel
-        sellers={sellers}
-        setRefetchSellers={setRefetchSellers}
-        status={status}
-        setRefetchStatus={setRefetchStatus}
-      />
-    );
+    return <AdminPanel sellers={sellers} status={status} />;
   }
   if (activeSellerId === "cdrrecap" && isAdmin) {
     return user && <RecapPanel user={user} refetch={refetch} />;

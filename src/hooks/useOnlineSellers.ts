@@ -12,7 +12,7 @@ export const useOnlineSellers = () => {
   });
 
   return {
-    onlineSellers: data?.data,
+    onlineSellers: data?.data || [],
     isLoading,
     refetch,
   };

@@ -8,7 +8,7 @@ export const CentralPanel = () => {
   const { onlineSellers } = useOnlineSellers();
   const searchParams = useSearchParams();
   const firstSellerId =
-    searchParams.get("sellerId") || onlineSellers?.at(0)?.id || "";
+    searchParams.get("sellerId") || onlineSellers.at(0)?.id || "";
 
   if (firstSellerId === "intro") {
     return <IntroPanel />;

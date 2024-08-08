@@ -17,10 +17,10 @@ export const ProductPart = ({ user }: ProductPartProps) => {
   const { purchases, total: totalToPay } = useUserPurchases(user.id);
   const { products: allProducts } = useProducts();
   const allConstraint = allProducts
-    ?.map((product) => product?.product_constraints)
+    .map((product) => product?.product_constraints)
     .flat();
   const allConstraintIds = allConstraint?.map((constraint) => constraint?.id);
-  const membershipsValues = memberships?.map(
+  const membershipsValues = memberships.map(
     (membership) => membership.membership,
   );
   return (
@@ -29,7 +29,7 @@ export const ProductPart = ({ user }: ProductPartProps) => {
         <CardTitle>{t("summary")}</CardTitle>
       </div>
       <div className="space-y-2">
-        {purchases && purchases?.length > 0 ? (
+        {purchases?.length > 0 ? (
           <>
             {purchases.map((purchase) => (
               <PurchaseItem

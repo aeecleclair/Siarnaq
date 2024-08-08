@@ -18,7 +18,7 @@ export const useUserSellerPurchases = (
   });
 
   return {
-    purchases: data?.data,
+    purchases: data?.data || [],
     isLoading,
     refetch,
   };

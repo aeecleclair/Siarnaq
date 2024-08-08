@@ -58,21 +58,21 @@ export const ProductAccordion = ({
             ?.map((curriculum) => curriculum.id)
             ?.includes(user?.curriculum?.id ?? ""),
         );
-  const purchasedProductIds = userPurchases?.map(
+  const purchasedProductIds = userPurchases.map(
     (purchase) => purchase.product.id,
   );
-  const purchasedVariantIds = userPurchases?.map(
+  const purchasedVariantIds = userPurchases.map(
     (purchase) => purchase.product_variant_id,
   );
   const missingConstraintProducts = product.product_constraints?.filter(
-    (constraint) => !purchasedProductIds?.includes(constraint.id),
+    (constraint) => !purchasedProductIds.includes(constraint.id),
   );
   const isMissingConstraint =
     missingConstraintProducts && missingConstraintProducts?.length > 0;
   const isOneVariantTaken = product.variants?.some((variant) =>
-    purchasedVariantIds?.includes(variant.id),
+    purchasedVariantIds.includes(variant.id),
   );
-  const isMembershipAlreadyTaken = memberships?.some(
+  const isMembershipAlreadyTaken = memberships.some(
     (membership) => membership.membership === product.related_membership,
   );
 

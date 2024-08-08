@@ -1,34 +1,15 @@
 import { AddCurriculumButton } from "./AddCurriculumButton";
 import { CurriculumItem } from "./CurriculumItem";
-import { CurriculumComplete, getCdrCurriculums } from "@/api";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useState, useEffect } from "react";
+import { useCurriculums } from "@/hooks/useCurriculums";
 
 export const CurriculumAccordionItem = () => {
-  const [curriculum, setCurriculum] = useState<CurriculumComplete[]>([]);
-  const [refetchCurriculum, setRefetchCurriculum] = useState<boolean>(true);
+  const { curriculums } = useCurriculums();
 
-  const onGetCurriculum = async () => {
-    const { data, error } = await getCdrCurriculums({});
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setCurriculum(data!);
-  };
-
-  useEffect(() => {
-    if (refetchCurriculum) {
-      setRefetchCurriculum((_) => {
-        onGetCurriculum();
-        return false;
-      });
-    }
-  }, [refetchCurriculum]);
   return (
     <AccordionItem value="curriculum">
       <AccordionTrigger>
@@ -37,13 +18,9 @@ export const CurriculumAccordionItem = () => {
         </div>
       </AccordionTrigger>
       <AccordionContent className="space-y-2">
-        <AddCurriculumButton setRefetchCurriculum={setRefetchCurriculum} />
-        {curriculum.map((curriculum) => (
-          <CurriculumItem
-            key={curriculum.id}
-            curriculum={curriculum}
-            setRefetchCurriculum={setRefetchCurriculum}
-          />
+        <AddCurriculumButton />
+        {curriculums.map((curriculum) => (
+          <CurriculumItem key={curriculum.id} curriculum={curriculum} />
         ))}
       </AccordionContent>
     </AccordionItem>

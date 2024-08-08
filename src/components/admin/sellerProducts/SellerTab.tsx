@@ -3,25 +3,24 @@ import { SellerTabList } from "./SellerTabList";
 import { SellerComplete, Status, getCdrSellers } from "@/api";
 import { Tabs } from "@/components/ui/tabs";
 import { useCoreUser } from "@/hooks/useCoreUser";
+import { useSellers } from "@/hooks/useSellers";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface SellerTabProps {
   status: Status;
-  setRefetchStatus: (arg0: boolean) => void;
 }
 
-export const SellerTab = ({ status, setRefetchStatus }: SellerTabProps) => {
+export const SellerTab = ({ status }: SellerTabProps) => {
   const { isAdmin } = useCoreUser();
+  const { sellers } = useSellers();
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [sellers, setSellers] = useState<SellerComplete[]>([]);
   const firstSellerId =
     searchParams.get("sellerId") ||
     sellers.at(0)?.id ||
     (isAdmin ? "cdradmin" : "");
-  const [refetchSellers, setRefetchSellers] = useState<boolean>(true);
 
   useEffect(() => {
     if (!searchParams.get("sellerId") && sellers.length > 0 && firstSellerId) {
@@ -32,37 +31,14 @@ export const SellerTab = ({ status, setRefetchStatus }: SellerTabProps) => {
     }
   }, [firstSellerId, router, searchParams, sellers]);
 
-  const onGetCdrSellers = async () => {
-    const { data, error } = await getCdrSellers({});
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setSellers(data!);
-  };
-
-  useEffect(() => {
-    if (refetchSellers) {
-      setRefetchSellers((_) => {
-        onGetCdrSellers();
-        return false;
-      });
-    }
-  }, [refetchSellers]);
-
   return (
-    <div
-      className="flex items-center justify-center p-6 min-w-96"
-      onLoad={onGetCdrSellers}
-    >
+    <div className="flex items-center justify-center p-6 min-w-96">
       {firstSellerId && (
         <Tabs defaultValue={firstSellerId} className="w-full">
           <SellerTabList status={status} sellers={sellers} isAdmin={isAdmin} />
           <SellerTabContentList
             status={status}
-            setRefetchStatus={setRefetchStatus}
             sellers={sellers}
-            setRefetchSellers={setRefetchSellers}
             isAdmin={isAdmin}
           />
         </Tabs>

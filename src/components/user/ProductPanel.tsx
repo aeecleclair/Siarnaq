@@ -1,5 +1,6 @@
 import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
 import { Accordion } from "../ui/accordion";
+import { useToast } from "../ui/use-toast";
 import {
   app__modules__cdr__schemas_cdr__ProductComplete,
   getCdrOnlineSellersSellerIdProducts,
@@ -12,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useOnlineSellerProducts } from "@/hooks/useOnlineSellerProducts";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
@@ -27,6 +29,7 @@ export const ProductPanel = () => {
   const searchParams = useSearchParams();
   const firstSellerId =
     searchParams.get("sellerId") || onlineSellers?.at(0)?.id || "";
+  const { onlineProducts } = useOnlineSellerProducts(firstSellerId);
   const seller = onlineSellers?.find((seller) => seller.id === firstSellerId);
   const sellerIndex = onlineSellers?.findIndex(
     (seller) => seller.id === firstSellerId,
@@ -35,26 +38,6 @@ export const ProductPanel = () => {
   const router = useRouter();
   const { userId } = useTokenStore();
   const { user } = useUser(userId);
-
-  const [onlineProducts, setOnlineProducts] = useState<
-    app__modules__cdr__schemas_cdr__ProductComplete[]
-  >([]);
-
-  useEffect(() => {
-    const onGetCdrOnlineProducts = async () => {
-      const { data, error } = await getCdrOnlineSellersSellerIdProducts({
-        path: {
-          seller_id: firstSellerId,
-        },
-      });
-      if (error) {
-        console.log(error);
-        return;
-      }
-      setOnlineProducts(data!);
-    };
-    if (firstSellerId !== "") onGetCdrOnlineProducts();
-  }, [firstSellerId, onlineSellers]);
 
   useEffect(() => {
     if (
@@ -76,7 +59,7 @@ export const ProductPanel = () => {
     seller?.id,
   ]);
 
-  const availableProducts = onlineProducts?.filter(
+  const availableProducts = onlineProducts.filter(
     (product) =>
       product?.variants?.filter(
         (variant) =>

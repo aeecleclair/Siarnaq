@@ -2,14 +2,14 @@ import { LoadingButton } from "../LoadingButton";
 import { MultiSelect } from "../MultiSelect";
 import { PriceInput } from "../PriceInput";
 import { StyledFormField } from "../StyledFormField";
-import { CurriculumComplete, getCdrCurriculums } from "@/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import { variantFormSchema } from "@/forms/variantFormSchema";
-import { useState, useEffect } from "react";
+import { useCurriculums } from "@/hooks/useCurriculums";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
@@ -26,26 +26,8 @@ export const AddEditVariantForm = ({
   setIsOpened,
   isEdit = false,
 }: AddEditVariantFormProps) => {
-  const [curriculum, setCurriculum] = useState<CurriculumComplete[]>([]);
-  const [refetchCurriculum, setRefetchCurriculum] = useState<boolean>(true);
+  const { curriculums } = useCurriculums();
 
-  const onGetCurriculum = async () => {
-    const { data, error } = await getCdrCurriculums({});
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setCurriculum(data!);
-  };
-
-  useEffect(() => {
-    if (refetchCurriculum) {
-      setRefetchCurriculum((_) => {
-        onGetCurriculum();
-        return false;
-      });
-    }
-  }, [refetchCurriculum]);
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setIsOpened(false);
@@ -93,7 +75,7 @@ export const AddEditVariantForm = ({
           id="allowed_curriculum"
           input={(field) => (
             <MultiSelect
-              options={curriculum.map((curriculum) => ({
+              options={curriculums.map((curriculum) => ({
                 label: curriculum.name,
                 value: curriculum.id,
               }))}

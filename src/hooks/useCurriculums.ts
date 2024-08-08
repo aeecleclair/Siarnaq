@@ -12,7 +12,7 @@ export const useCurriculums = () => {
   });
 
   return {
-    curriculums: data?.data,
+    curriculums: data?.data || [],
     isLoading,
     refetch,
   };

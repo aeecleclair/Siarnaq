@@ -13,6 +13,7 @@ import {
   ContextMenuContent,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 import { variantFormSchema } from "@/forms/variantFormSchema";
 import {
   TrashIcon,
@@ -44,6 +45,7 @@ export const VariantCardOptions = ({
   productId,
   refreshProduct,
 }: VariantCardOptionsProps) => {
+  const { toast } = useToast();
   const [isEditDialogOpened, setIsEditDialogOpened] = useState(false);
   const [isRemoveDialogOpened, setIsRemoveDialogOpened] = useState(false);
 
@@ -75,7 +77,11 @@ export const VariantCardOptions = ({
         body: body,
       });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsEditDialogOpened(false);
       return;
@@ -124,7 +130,11 @@ export const VariantCardOptions = ({
         },
       });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsRemoveDialogOpened(false);
       return;

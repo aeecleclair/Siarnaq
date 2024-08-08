@@ -1,17 +1,15 @@
 import { AddEditProductForm } from "./AddEditProductForm";
-import {
-  ProductBase,
-  SellerComplete,
-  postCdrSellersSellerIdProducts,
-} from "@/api";
+import { ProductBase, SellerComplete, postCdrSellersSellerIdProducts } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi";
 import { z } from "zod";
+
 
 interface AddProductAccordionItemProps {
   seller: SellerComplete;
@@ -22,6 +20,7 @@ export const AddProductAccordionItem = ({
   seller,
   refreshProduct,
 }: AddProductAccordionItemProps) => {
+  const { toast } = useToast();
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -47,7 +46,11 @@ export const AddProductAccordionItem = ({
       body: body,
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsAddDialogOpened(false);
       return;

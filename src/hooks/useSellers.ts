@@ -12,7 +12,7 @@ export const useSellers = () => {
   });
 
   return {
-    sellers: data?.data,
+    sellers: data?.data || [],
     isLoading,
     refetch,
   };

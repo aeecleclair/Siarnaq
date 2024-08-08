@@ -1,29 +1,18 @@
 import { CustomDialog } from "../CustomDialog";
 import { LoadingButton } from "../LoadingButton";
 import { AddEditVariantForm } from "./AddEditVariantForm";
-import {
-  ProductVariantComplete,
-  ProductVariantEdit,
-  deleteCdrSellersSellerIdProductsProductIdVariantsVariantId,
-  patchCdrSellersSellerIdProductsProductIdVariantsVariantId,
-} from "@/api";
+import { ProductVariantComplete, ProductVariantEdit, deleteCdrSellersSellerIdProductsProductIdVariantsVariantId, patchCdrSellersSellerIdProductsProductIdVariantsVariantId } from "@/api";
 import { Button } from "@/components/ui/button";
-import {
-  ContextMenuShortcut,
-  ContextMenuContent,
-} from "@/components/ui/context-menu";
+import { ContextMenuShortcut, ContextMenuContent } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 import { variantFormSchema } from "@/forms/variantFormSchema";
-import {
-  TrashIcon,
-  PencilIcon,
-  PlayIcon,
-  StopIcon,
-} from "@heroicons/react/24/outline";
+import { TrashIcon, PencilIcon, PlayIcon, StopIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
 
 interface VariantCardOptionsProps {
   variant: ProductVariantComplete;
@@ -44,6 +33,7 @@ export const VariantCardOptions = ({
   productId,
   refreshProduct,
 }: VariantCardOptionsProps) => {
+  const { toast } = useToast();
   const [isEditDialogOpened, setIsEditDialogOpened] = useState(false);
   const [isRemoveDialogOpened, setIsRemoveDialogOpened] = useState(false);
 
@@ -75,7 +65,11 @@ export const VariantCardOptions = ({
         body: body,
       });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsEditDialogOpened(false);
       return;
@@ -124,7 +118,11 @@ export const VariantCardOptions = ({
         },
       });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsRemoveDialogOpened(false);
       return;

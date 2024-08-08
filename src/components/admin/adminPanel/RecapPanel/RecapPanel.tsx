@@ -1,28 +1,20 @@
 import { PaymentPart } from "../../../custom/Payment/PaymentPart";
 import { ProductPart } from "../../../custom/Product/ProductPart";
-import {
-  CdrUser,
-  patchCdrUsersUserIdCurriculumsCurriculumId,
-  postCdrUsersUserIdCurriculumsCurriculumId,
-} from "@/api";
+import { CdrUser, patchCdrUsersUserIdCurriculumsCurriculumId, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/components/ui/use-toast";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useState } from "react";
 import { HiOutlinePencil } from "react-icons/hi";
+
 
 interface RecapPanelProps {
   user: CdrUser;
@@ -30,6 +22,7 @@ interface RecapPanelProps {
 }
 
 export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
+  const { toast } = useToast();
   const { total: totalPaid } = useUserPayments(user.id);
   const { total: totalToPay } = useUserPurchases(user.id);
   const { curriculums } = useCurriculums();
@@ -75,7 +68,11 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       error = postError;
     }
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsOpened(false);
       return;
@@ -120,7 +117,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent side="top">
-                        {curriculums?.map((curriculum) => (
+                        {curriculums.map((curriculum) => (
                           <SelectItem key={curriculum.id} value={curriculum.id}>
                             <div className="flex items-center flex-row gap-2">
                               {curriculum.name}

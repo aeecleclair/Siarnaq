@@ -1,9 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { useToast } from "../ui/use-toast";
 import { LoadingButton } from "./LoadingButton";
-import {
-  deleteCdrUsersUserIdPurchasesProductVariantId,
-  postCdrUsersUserIdPurchasesProductVariantId,
-} from "@/api";
+import { deleteCdrUsersUserIdPurchasesProductVariantId, postCdrUsersUserIdPurchasesProductVariantId } from "@/api";
 import { ProductVariantComplete, PurchaseBase } from "@/api/types.gen";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
@@ -12,6 +10,7 @@ import { useTranslation } from "@/translations/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi";
+
 
 interface VariantCardProps {
   variant: ProductVariantComplete;
@@ -32,6 +31,7 @@ export const VariantCard = ({
   isAdmin,
   displayWarning,
 }: VariantCardProps) => {
+  const { toast } = useToast();
   const { selectTranslation } = useTranslation();
   const { userId: myUserId } = useTokenStore();
   const { purchases, refetch } = useUserSellerPurchases(
@@ -40,7 +40,7 @@ export const VariantCard = ({
   );
   const { refetch: refetchUserPurchases } = useUserPurchases(userId);
   const numberSelectedVariant =
-    purchases?.find((purchase) => purchase.product_variant_id === variant.id)
+    purchases.find((purchase) => purchase.product_variant_id === variant.id)
       ?.quantity || 0;
   const selected = numberSelectedVariant > 0;
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +59,11 @@ export const VariantCard = ({
       body: body,
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
@@ -79,7 +83,11 @@ export const VariantCard = ({
       },
     );
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }

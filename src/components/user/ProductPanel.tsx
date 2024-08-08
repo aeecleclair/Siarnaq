@@ -1,17 +1,8 @@
 import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
 import { Accordion } from "../ui/accordion";
-import {
-  app__modules__cdr__schemas_cdr__ProductComplete,
-  getCdrOnlineSellersSellerIdProducts,
-} from "@/api";
+import { app__modules__cdr__schemas_cdr__ProductComplete, getCdrOnlineSellersSellerIdProducts } from "@/api";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
@@ -20,6 +11,9 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useToast } from "../ui/use-toast";
+import { useOnlineSellerProducts } from "@/hooks/useOnlineSellerProducts";
+
 
 export const ProductPanel = () => {
   const t = useTranslations("ProductPanel");
@@ -27,6 +21,7 @@ export const ProductPanel = () => {
   const searchParams = useSearchParams();
   const firstSellerId =
     searchParams.get("sellerId") || onlineSellers?.at(0)?.id || "";
+  const { onlineProducts } = useOnlineSellerProducts(firstSellerId);
   const seller = onlineSellers?.find((seller) => seller.id === firstSellerId);
   const sellerIndex = onlineSellers?.findIndex(
     (seller) => seller.id === firstSellerId,
@@ -36,25 +31,6 @@ export const ProductPanel = () => {
   const { userId } = useTokenStore();
   const { user } = useUser(userId);
 
-  const [onlineProducts, setOnlineProducts] = useState<
-    app__modules__cdr__schemas_cdr__ProductComplete[]
-  >([]);
-
-  useEffect(() => {
-    const onGetCdrOnlineProducts = async () => {
-      const { data, error } = await getCdrOnlineSellersSellerIdProducts({
-        path: {
-          seller_id: firstSellerId,
-        },
-      });
-      if (error) {
-        console.log(error);
-        return;
-      }
-      setOnlineProducts(data!);
-    };
-    if (firstSellerId !== "") onGetCdrOnlineProducts();
-  }, [firstSellerId, onlineSellers]);
 
   useEffect(() => {
     if (
@@ -76,7 +52,7 @@ export const ProductPanel = () => {
     seller?.id,
   ]);
 
-  const availableProducts = onlineProducts?.filter(
+  const availableProducts = onlineProducts.filter(
     (product) =>
       product?.variants?.filter(
         (variant) =>

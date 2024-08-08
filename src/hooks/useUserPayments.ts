@@ -1,5 +1,5 @@
 import { useToken } from "./useToken";
-import { getCdrUsersUserIdPayments, PaymentComplete } from "@/api";
+import { getCdrUsersUserIdPayments } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
 export const useUserPayments = (userId: string | null) => {
@@ -15,7 +15,7 @@ export const useUserPayments = (userId: string | null) => {
   });
 
   return {
-    payments: data?.data as PaymentComplete[] | undefined,
+    payments: data?.data || [],
     total: data?.data?.reduce((acc, payment) => acc + payment.total, 0),
     isLoading,
     refetch,

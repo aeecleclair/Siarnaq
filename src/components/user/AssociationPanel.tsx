@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
-  HiCheck,
   HiOutlineClipboardList,
   HiOutlineShoppingCart,
   HiOutlineSparkles,
@@ -17,7 +16,7 @@ export const AssociationPanel = () => {
   const { userId } = useTokenStore();
   const searchParams = useSearchParams();
   const firstSellerId =
-    searchParams.get("sellerId") || onlineSellers?.at(0)?.id;
+    searchParams.get("sellerId") || onlineSellers.at(0)?.id;
   const { purchases } = useUserPurchases(userId);
   const totalPurchases =
     purchases?.reduce<number>((acc, purchase) => acc + purchase.quantity, 0) ??
@@ -40,9 +39,9 @@ export const AssociationPanel = () => {
             {t("presentation")}
           </div>
         </Link>
-        {onlineSellers?.map((seller) => {
+        {onlineSellers.map((seller) => {
           const purchasesCount =
-            purchases?.filter((purchase) => purchase.seller.id === seller.id)
+            purchases.filter((purchase) => purchase.seller.id === seller.id)
               .length ?? 0;
           return (
             <Link

@@ -1,25 +1,18 @@
 import { CustomDialog } from "../CustomDialog";
 import { LoadingButton } from "../LoadingButton";
-import {
-  app__modules__cdr__schemas_cdr__ProductComplete,
-  app__modules__cdr__schemas_cdr__ProductEdit,
-  deleteCdrSellersSellerIdProductsProductId,
-  patchCdrSellersSellerIdProductsProductId,
-} from "@/api";
+import { app__modules__cdr__schemas_cdr__ProductComplete, app__modules__cdr__schemas_cdr__ProductEdit, deleteCdrSellersSellerIdProductsProductId, patchCdrSellersSellerIdProductsProductId } from "@/api";
 import { AddEditProductForm } from "@/components/admin/sellerProducts/AddEditProductForm";
 import { Button } from "@/components/ui/button";
-import {
-  ContextMenuContent,
-  ContextMenuShortcut,
-} from "@/components/ui/context-menu";
+import { ContextMenuContent, ContextMenuShortcut } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
-import { toast } from "@/components/ui/use-toast";
+import { toast, useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
 
 interface ProductAccordionOptionsProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;
@@ -36,6 +29,7 @@ export const ProductAccordionOptions = ({
   canEdit,
   canRemove,
 }: ProductAccordionOptionsProps) => {
+  const { toast } = useToast();
   const [isEditDialogOpened, setIsEditDialogOpened] = useState(false);
   const [isRemoveDialogOpened, setIsRemoveDialogOpened] = useState(false);
 
@@ -69,7 +63,11 @@ export const ProductAccordionOptions = ({
       body: body,
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsEditDialogOpened(false);
       return;
@@ -103,7 +101,11 @@ export const ProductAccordionOptions = ({
       },
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsRemoveDialogOpened(false);
       toast({

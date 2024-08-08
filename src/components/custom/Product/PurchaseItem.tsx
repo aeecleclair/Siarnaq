@@ -9,7 +9,7 @@ import { HiOutlineExclamation } from "react-icons/hi";
 
 interface PurchaseItemProps {
   purchase: PurchaseReturn;
-  allProducts?: app__modules__cdr__schemas_cdr__ProductComplete[];
+  allProducts: app__modules__cdr__schemas_cdr__ProductComplete[];
   allConstraintIds?: (string | undefined)[];
   allPurchasesIds?: string[];
   memberships?: AvailableAssociationMembership[];
@@ -24,7 +24,7 @@ export const PurchaseItem = ({
 }: PurchaseItemProps) => {
   const t = useTranslations("PurchaseItem");
   const { selectTranslation } = useTranslation();
-  const purchaseCompleteProduct = allProducts?.find(
+  const purchaseCompleteProduct = allProducts.find(
     (product) => product.id === purchase.product.id,
   );
   const missingConstraintProduct =

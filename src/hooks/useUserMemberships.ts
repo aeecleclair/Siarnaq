@@ -15,7 +15,7 @@ export const useUserMemberships = (userId: string | null) => {
   });
 
   return {
-    memberships: data?.data,
+    memberships: data?.data || [],
     isLoading,
     refetch,
   };

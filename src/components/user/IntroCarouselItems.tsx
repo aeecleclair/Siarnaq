@@ -1,14 +1,8 @@
 import { LoadingButton } from "../custom/LoadingButton";
 import { Badge } from "../ui/badge";
 import { CarouselContent, CarouselItem, useCarousel } from "../ui/carousel";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { useToast } from "../ui/use-toast";
 import { CdrUser, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
@@ -16,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 
 interface IntroCarouselItemsProps {
   user: CdrUser;
@@ -26,6 +21,7 @@ export const IntroCarouselItems = ({
   user,
   refetch,
 }: IntroCarouselItemsProps) => {
+  const { toast } = useToast();
   const t = useTranslations("IntroCarouselItem");
   const { scrollNext } = useCarousel();
   const { curriculums } = useCurriculums();
@@ -56,7 +52,7 @@ export const IntroCarouselItems = ({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {curriculums?.map((curriculum) => (
+            {curriculums.map((curriculum) => (
               <SelectItem key={curriculum.id} value={curriculum.id}>
                 <Badge variant="secondary">{curriculum.name}</Badge>
               </SelectItem>
@@ -80,7 +76,11 @@ export const IntroCarouselItems = ({
       },
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
@@ -92,7 +92,7 @@ export const IntroCarouselItems = ({
     if (canGoNext) {
       if (page === 1) {
         await setCurriculum();
-        const firstSeller = onlineSellers ? onlineSellers[0] : undefined;
+        const firstSeller = onlineSellers.length > 0 ? onlineSellers[0] : undefined;
         if (firstSeller) {
           router.push(`?sellerId=${firstSeller.id}`);
         }
@@ -101,7 +101,8 @@ export const IntroCarouselItems = ({
         setPage(page + 1);
         scrollNext();
       } else {
-        const firstSeller = onlineSellers ? onlineSellers[0] : undefined;
+        const firstSeller =
+          onlineSellers.length > 0 ? onlineSellers[0] : undefined;
         if (firstSeller) {
           router.push(`?sellerId=${firstSeller.id}`);
         }

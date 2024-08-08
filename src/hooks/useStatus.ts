@@ -1,18 +1,19 @@
 import { useToken } from "./useToken";
-import { getCdrProducts } from "@/api";
+import { getCdrStatus } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
-export const useProducts = () => {
+
+export const useStatus = () => {
   const { isTokenExpired } = useToken();
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["products"],
-    queryFn: getCdrProducts,
+    queryKey: ["status"],
+    queryFn: getCdrStatus,
     retry: 3,
     enabled: !isTokenExpired(),
   });
 
   return {
-    products: data?.data || [],
+    status: data?.data,
     isLoading,
     refetch,
   };

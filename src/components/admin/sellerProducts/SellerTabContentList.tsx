@@ -8,17 +8,13 @@ import { useSearchParams } from "next/navigation";
 
 interface SellerTabContentListProps {
   status: Status;
-  setRefetchStatus: (arg0: boolean) => void;
   sellers: SellerComplete[];
-  setRefetchSellers: (arg0: boolean) => void;
   isAdmin?: boolean;
 }
 
 export const SellerTabContentList = ({
   status,
-  setRefetchStatus,
   sellers,
-  setRefetchSellers,
   isAdmin,
 }: SellerTabContentListProps) => {
   const searchParams = useSearchParams();
@@ -34,9 +30,7 @@ export const SellerTabContentList = ({
     return (
       <AdminPanel
         sellers={sellers}
-        setRefetchSellers={setRefetchSellers}
         status={status}
-        setRefetchStatus={setRefetchStatus}
       />
     );
   }

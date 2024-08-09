@@ -7,6 +7,7 @@ import {
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
   HiOutlineArchive,
@@ -29,6 +30,7 @@ export const PaymentItem = ({
   user,
   isAdmin,
 }: PaymentItemProps) => {
+  const t = useTranslations("PaymentPart");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
   const paymentIcon = (paymentType: PaymentType) => {
@@ -72,7 +74,7 @@ export const PaymentItem = ({
     <div className="flex flex-row w-full items-center" key={payment.id}>
       <span className="font-bold w-full flex items-center">
         {paymentIcon(payment.payment_type)}
-        {payment.payment_type}
+        {t(payment.payment_type)}
       </span>
       <span className="ml-auto font-semibold w-20 flex justify-end">
         {payment.total} €

@@ -35,7 +35,12 @@
   "PaymentPart": {
     "payments": "Paiements",
     "total": "Total",
-    "noPayment": "Aucun paiement"
+    "noPayment": "Aucun paiement",
+    "cash": "Espèces",
+    "check": "Chèque",
+    "HelloAsso": "HelloAsso",
+    "card": "Carte",
+    "archived": "Archivé"
   },
   "Login": {
     "title": "Chaîne de rentrée {year}",

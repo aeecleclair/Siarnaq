@@ -35,7 +35,12 @@
   "PaymentPart": {
     "payments": "Payments",
     "total": "Total",
-    "noPayment": "No payment"
+    "noPayment": "No payment",
+    "cash": "Cash",
+    "check": "Check",
+    "HelloAsso": "HelloAsso",
+    "card": "Card",
+    "archived": "Archived"
   },
   "Login": {
     "title": "Back to school {year}",

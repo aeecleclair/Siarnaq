@@ -142,7 +142,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
                                   >
                                     <div className="flex items-center flex-row gap-2">
                                       {paymentIcon(paymentType)}
-                                      {paymentType}
+                                      {t(paymentType)}
                                     </div>
                                   </SelectItem>
                                 ))}

@@ -9,6 +9,7 @@ export const useUsers = () => {
     queryFn: getCdrUsers,
     retry: 3,
     enabled: !isTokenExpired(),
+    staleTime: Infinity,
   });
 
   return {

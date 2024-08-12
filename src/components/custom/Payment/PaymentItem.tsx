@@ -7,8 +7,8 @@ import {
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
 import { useToast } from "@/components/ui/use-toast";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
   HiOutlineArchive,

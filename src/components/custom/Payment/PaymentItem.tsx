@@ -7,6 +7,7 @@ import {
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import {
   HiOutlineArchive,
@@ -29,6 +30,7 @@ export const PaymentItem = ({
   user,
   isAdmin,
 }: PaymentItemProps) => {
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
   const paymentIcon = (paymentType: PaymentType) => {
@@ -59,7 +61,11 @@ export const PaymentItem = ({
       },
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }

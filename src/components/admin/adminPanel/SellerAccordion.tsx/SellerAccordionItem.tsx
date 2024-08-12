@@ -1,41 +1,19 @@
 import { ToggleSeller } from "./ToggleSeller";
-import { CoreGroupSimple, SellerComplete, getGroups } from "@/api";
+import { SellerComplete } from "@/api";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useState, useEffect } from "react";
+import { useGroups } from "@/hooks/useGroups";
 
 interface SellerAccordionItemProps {
   sellers: SellerComplete[];
-  setRefetchSellers: (arg0: boolean) => void;
 }
 
-export const SellerAccordionItem = ({
-  sellers,
-  setRefetchSellers,
-}: SellerAccordionItemProps) => {
-  const [groups, setGroups] = useState<CoreGroupSimple[]>([]);
-  const [refetchGroups, setRefetchGroups] = useState<boolean>(true);
+export const SellerAccordionItem = ({ sellers }: SellerAccordionItemProps) => {
+  const { groups } = useGroups();
 
-  const onGetGroups = async () => {
-    const { data, error } = await getGroups({});
-    if (error) {
-      console.log(error);
-      return;
-    }
-    setGroups(data!);
-  };
-
-  useEffect(() => {
-    if (refetchGroups) {
-      setRefetchGroups((_) => {
-        onGetGroups();
-        return false;
-      });
-    }
-  }, [refetchGroups]);
   return (
     <AccordionItem value="association">
       <AccordionTrigger>
@@ -45,13 +23,7 @@ export const SellerAccordionItem = ({
       </AccordionTrigger>
       <AccordionContent className="space-y-2">
         {groups.map((group) => (
-          <ToggleSeller
-            key={group.id}
-            group={group}
-            sellers={sellers}
-            setRefetchGroups={setRefetchGroups}
-            setRefetchSellers={setRefetchSellers}
-          />
+          <ToggleSeller key={group.id} group={group} sellers={sellers} />
         ))}
       </AccordionContent>
     </AccordionItem>

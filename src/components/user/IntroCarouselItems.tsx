@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useToast } from "../ui/use-toast";
 import { CdrUser, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
@@ -26,6 +27,7 @@ export const IntroCarouselItems = ({
   user,
   refetch,
 }: IntroCarouselItemsProps) => {
+  const { toast } = useToast();
   const t = useTranslations("IntroCarouselItem");
   const { scrollNext } = useCarousel();
   const { curriculums } = useCurriculums();
@@ -56,7 +58,7 @@ export const IntroCarouselItems = ({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {curriculums?.map((curriculum) => (
+            {curriculums.map((curriculum) => (
               <SelectItem key={curriculum.id} value={curriculum.id}>
                 <Badge variant="secondary">{curriculum.name}</Badge>
               </SelectItem>
@@ -80,7 +82,11 @@ export const IntroCarouselItems = ({
       },
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
@@ -92,7 +98,8 @@ export const IntroCarouselItems = ({
     if (canGoNext) {
       if (page === 1) {
         await setCurriculum();
-        const firstSeller = onlineSellers ? onlineSellers[0] : undefined;
+        const firstSeller =
+          onlineSellers.length > 0 ? onlineSellers[0] : undefined;
         if (firstSeller) {
           router.push(`?sellerId=${firstSeller.id}`);
         }
@@ -101,7 +108,8 @@ export const IntroCarouselItems = ({
         setPage(page + 1);
         scrollNext();
       } else {
-        const firstSeller = onlineSellers ? onlineSellers[0] : undefined;
+        const firstSeller =
+          onlineSellers.length > 0 ? onlineSellers[0] : undefined;
         if (firstSeller) {
           router.push(`?sellerId=${firstSeller.id}`);
         }

@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { useToast } from "../ui/use-toast";
 import { LoadingButton } from "./LoadingButton";
 import {
   deleteCdrUsersUserIdPurchasesProductVariantId,
@@ -32,6 +33,7 @@ export const VariantCard = ({
   isAdmin,
   displayWarning,
 }: VariantCardProps) => {
+  const { toast } = useToast();
   const { selectTranslation } = useTranslation();
   const { userId: myUserId } = useTokenStore();
   const { purchases, refetch } = useUserSellerPurchases(
@@ -40,7 +42,7 @@ export const VariantCard = ({
   );
   const { refetch: refetchUserPurchases } = useUserPurchases(userId);
   const numberSelectedVariant =
-    purchases?.find((purchase) => purchase.product_variant_id === variant.id)
+    purchases.find((purchase) => purchase.product_variant_id === variant.id)
       ?.quantity || 0;
   const selected = numberSelectedVariant > 0;
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +61,11 @@ export const VariantCard = ({
       body: body,
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
@@ -79,7 +85,11 @@ export const VariantCard = ({
       },
     );
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }

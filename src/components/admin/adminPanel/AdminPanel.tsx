@@ -6,28 +6,15 @@ import { Accordion } from "@/components/ui/accordion";
 
 interface AdminPanelProps {
   status: Status;
-  setRefetchStatus: (arg0: boolean) => void;
   sellers: SellerComplete[];
-  setRefetchSellers: (arg0: boolean) => void;
 }
 
-export const AdminPanel = ({
-  sellers,
-  setRefetchSellers,
-  status,
-  setRefetchStatus,
-}: AdminPanelProps) => {
+export const AdminPanel = ({ sellers, status }: AdminPanelProps) => {
   return (
     <Accordion type="multiple">
-      <SellerAccordionItem
-        sellers={sellers}
-        setRefetchSellers={setRefetchSellers}
-      />
+      <SellerAccordionItem sellers={sellers} />
       <CurriculumAccordionItem />
-      <StatusAccordionItem
-        status={status}
-        setRefetchStatus={setRefetchStatus}
-      />
+      <StatusAccordionItem status={status} />
     </Accordion>
   );
 };

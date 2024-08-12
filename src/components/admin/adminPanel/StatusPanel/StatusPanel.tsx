@@ -5,17 +5,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useToast } from "@/components/ui/use-toast";
+import { useStatus } from "@/hooks/useStatus";
 import { useState } from "react";
 
 interface SellerTabProps {
   status: Status;
-  setRefetchStatus: (arg0: boolean) => void;
 }
 
-export const StatusAccordionItem = ({
-  status,
-  setRefetchStatus,
-}: SellerTabProps) => {
+export const StatusAccordionItem = ({ status }: SellerTabProps) => {
+  const { toast } = useToast();
+  const { refetch: refetchStatus } = useStatus();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const updateStatus = async (status: CdrStatus) => {
@@ -27,11 +27,15 @@ export const StatusAccordionItem = ({
       body: body,
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
-    setRefetchStatus(true);
+    refetchStatus();
     setIsLoading(false);
   };
 

@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 interface SellerTabContentProps {
   status: Status;
   seller: SellerComplete;
-  products?: app__modules__cdr__schemas_cdr__ProductComplete[];
+  products: app__modules__cdr__schemas_cdr__ProductComplete[];
   refetchProducts: () => void;
 }
 
@@ -57,7 +57,7 @@ export const SellerTabContent = ({
         seller={seller}
         refreshProduct={refetchProducts}
       />
-      {products ? (
+      {products.length > 0 ? (
         <Accordion
           type="multiple"
           value={productExpansion[seller.id]}

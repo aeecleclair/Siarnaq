@@ -1,17 +1,17 @@
 import { CurriculumComplete, deleteCdrCurriculumsCurriculumId } from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { useToast } from "@/components/ui/use-toast";
+import { useCurriculums } from "@/hooks/useCurriculums";
 import { useState } from "react";
 import { HiTrash } from "react-icons/hi";
 
 interface CurriculumItemProps {
   curriculum: CurriculumComplete;
-  setRefetchCurriculum: (arg0: boolean) => void;
 }
 
-export const CurriculumItem = ({
-  curriculum,
-  setRefetchCurriculum,
-}: CurriculumItemProps) => {
+export const CurriculumItem = ({ curriculum }: CurriculumItemProps) => {
+  const { toast } = useToast();
+  const { refetch: refetchCurriculums } = useCurriculums();
   const [isLoading, setIsLoading] = useState(false);
   async function deleteCurriculum(curriculumId: string) {
     setIsLoading(true);
@@ -21,11 +21,15 @@ export const CurriculumItem = ({
       },
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
-    setRefetchCurriculum(true);
+    refetchCurriculums();
     setIsLoading(false);
   }
   return (

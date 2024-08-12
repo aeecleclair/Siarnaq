@@ -13,7 +13,7 @@ import {
   ContextMenuShortcut,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
-import { toast } from "@/components/ui/use-toast";
+import { toast, useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
@@ -36,6 +36,7 @@ export const ProductAccordionOptions = ({
   canEdit,
   canRemove,
 }: ProductAccordionOptionsProps) => {
+  const { toast } = useToast();
   const [isEditDialogOpened, setIsEditDialogOpened] = useState(false);
   const [isRemoveDialogOpened, setIsRemoveDialogOpened] = useState(false);
 
@@ -69,7 +70,11 @@ export const ProductAccordionOptions = ({
       body: body,
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsEditDialogOpened(false);
       return;
@@ -103,7 +108,11 @@ export const ProductAccordionOptions = ({
       },
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsRemoveDialogOpened(false);
       toast({

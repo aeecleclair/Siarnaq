@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/components/ui/use-toast";
 import { paymentFormSchema } from "@/forms/paymentFormSchema";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,6 +41,7 @@ interface PaymentPartProps {
 }
 
 export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
+  const { toast } = useToast();
   const t = useTranslations("PaymentPart");
   const { payments, total: totalPaid, refetch } = useUserPayments(user.id);
   const [isOpened, setIsOpened] = useState(false);
@@ -85,7 +87,11 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
       body: body,
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsOpened(false);
       return;
@@ -179,7 +185,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
         </CardTitle>
       </div>
       <div className="space-y-2">
-        {(payments?.length ?? 0) > 0 ? (
+        {payments.length > 0 ? (
           <>
             {payments?.map((payment) => (
               <PaymentItem

@@ -2,19 +2,17 @@ import { CurriculumBase, postCdrCurriculums } from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import { curriculumFormSchema } from "@/forms/curriculumFormSchema";
+import { useCurriculums } from "@/hooks/useCurriculums";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-interface AddCurriculumButtonProps {
-  setRefetchCurriculum: (arg0: boolean) => void;
-}
-
-export const AddCurriculumButton = ({
-  setRefetchCurriculum,
-}: AddCurriculumButtonProps) => {
+export const AddCurriculumButton = () => {
+  const { toast } = useToast();
+  const { refetch: refetchCurriculums } = useCurriculums();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof curriculumFormSchema>>({
@@ -32,11 +30,15 @@ export const AddCurriculumButton = ({
       body: body,
     });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       return;
     }
-    setRefetchCurriculum(true);
+    refetchCurriculums();
     setIsLoading(false);
     form.reset({
       name: "",

@@ -1,6 +1,7 @@
 import "./globals.css";
 import Provider from "./provider";
 import { QueryProvider } from "./queryProvider";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
@@ -33,6 +34,7 @@ export default async function RootLayout({
             <Provider>
               <NextIntlClientProvider messages={messages}>
                 {children}
+                <Toaster />
               </NextIntlClientProvider>
             </Provider>
           </QueryProvider>

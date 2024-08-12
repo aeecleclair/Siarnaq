@@ -6,6 +6,7 @@ import {
   postCdrSellersSellerIdProductsProductIdVariants,
 } from "@/api";
 import { Form } from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 import { variantFormSchema } from "@/forms/variantFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -24,6 +25,7 @@ export const AddingVariantCard = ({
   productId,
   refreshProduct,
 }: AddingVariantCardProps) => {
+  const { toast } = useToast();
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,7 +54,11 @@ export const AddingVariantCard = ({
         body: body,
       });
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsAddDialogOpened(false);
       return;

@@ -102,14 +102,12 @@ export const AddEditProductForm = ({
           id="product_constraints"
           input={(field) => (
             <MultiSelect
-              options={
-                constraint
-                  ?.filter((constraint) => constraint.id !== form.watch("id"))
-                  .map((constraint) => ({
-                    label: constraint.name_fr,
-                    value: constraint.id,
-                  })) ?? []
-              }
+              options={constraint
+                .filter((constraint) => constraint.id !== form.watch("id"))
+                .map((constraint) => ({
+                  label: constraint.name_fr,
+                  value: constraint.id,
+                }))}
               selected={field.value}
               {...field}
               className="w-64"

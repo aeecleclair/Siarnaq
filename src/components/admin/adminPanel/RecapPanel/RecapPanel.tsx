@@ -1,14 +1,19 @@
 import { PaymentPart } from "../../../custom/Payment/PaymentPart";
 import { ProductPart } from "../../../custom/Product/ProductPart";
+import { MigrateUserForm } from "./MigrateUserForm";
 import {
   CdrUser,
   patchCdrUsersUserIdCurriculumsCurriculumId,
+  postCdrSellersSellerIdProducts,
   postCdrUsersUserIdCurriculumsCurriculumId,
+  ProductBase,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
+import { Form } from "@/components/ui/form";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -18,11 +23,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/components/ui/use-toast";
+import { migrateUserFormSchema } from "@/forms/migrateUserFormSchema";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { HiOutlinePencil } from "react-icons/hi";
+import { z } from "zod";
 
 interface RecapPanelProps {
   user: CdrUser;
@@ -30,6 +40,7 @@ interface RecapPanelProps {
 }
 
 export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
+  const { toast } = useToast();
   const { total: totalPaid } = useUserPayments(user.id);
   const { total: totalToPay } = useUserPurchases(user.id);
   const { curriculums } = useCurriculums();
@@ -44,8 +55,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
     event.stopPropagation();
     setIsOpened(false);
   }
-
-  async function onSubmit() {
+  async function onCurriculumSubmit() {
     setIsLoading(true);
     if (!selectedCurriculum) {
       setIsLoading(false);
@@ -75,7 +85,11 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       error = postError;
     }
     if (error) {
-      console.log(error);
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
       setIsLoading(false);
       setIsOpened(false);
       return;
@@ -83,6 +97,40 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
     refetch();
     setIsOpened(false);
     setIsLoading(false);
+  }
+
+  const form = useForm<z.infer<typeof migrateUserFormSchema>>({
+    resolver: zodResolver(migrateUserFormSchema),
+    mode: "onBlur",
+  });
+
+  async function onSubmit(values: z.infer<typeof migrateUserFormSchema>) {
+    setIsLoading(true);
+    // Waiting for API call
+    // const body: ProductBase = {
+    //   ...values,
+    //   available_online: values.available_online === "true",
+    // };
+    // const { data, error } = await postCdrSellersSellerIdProducts({
+    //   path: {
+    //     seller_id: seller.id,
+    //   },
+    //   body: body,
+    // });
+    // if (error) {
+    //   toast({
+    //     title: "Error",
+    //     description: (error as { detail: String }).detail,
+    //     variant: "destructive",
+    //   });
+    //   setIsLoading(false);
+    //   setIsAddDialogOpened(false);
+    //   return;
+    // }
+    // refreshProduct();
+    // setIsAddDialogOpened(false);
+    setIsLoading(false);
+    form.reset();
   }
 
   return (
@@ -120,7 +168,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent side="top">
-                        {curriculums?.map((curriculum) => (
+                        {curriculums.map((curriculum) => (
                           <SelectItem key={curriculum.id} value={curriculum.id}>
                             <div className="flex items-center flex-row gap-2">
                               {curriculum.name}
@@ -143,11 +191,22 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
                       isLoading={isLoading}
                       className="w-[100px]"
                       type="button"
-                      onClick={onSubmit}
+                      onClick={onCurriculumSubmit}
                     >
                       {"Modifier"}
                     </LoadingButton>
                   </div>
+                  <TextSeparator text="Modifier l'utilisateur" />
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                      <MigrateUserForm
+                        form={form}
+                        setIsOpened={setIsOpened}
+                        isLoading={isLoading}
+                        closeDialog={closeDialog}
+                      />
+                    </form>
+                  </Form>
                 </div>
               }
             >

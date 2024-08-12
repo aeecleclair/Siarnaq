@@ -410,7 +410,6 @@ export type CoreInformation = {
   ready: boolean;
   version: string;
   minimal_titan_version_code: number;
-  minimal_titan_version: string;
 };
 
 /**
@@ -552,6 +551,12 @@ export type DocumentComplete = {
   seller_id: string;
 };
 
+export type DocumentModel = {
+  id?: number | null;
+  fileName?: string | null;
+  publicUrl?: string | null;
+};
+
 export type DocumentSignatureType = "material" | "numeric";
 
 export type EventApplicant = {
@@ -619,6 +624,17 @@ export type EventReturn = {
   applicant: EventApplicant;
 };
 
+export type FieldType =
+  | "Date"
+  | "TextInput"
+  | "FreeText"
+  | "ChoiceList"
+  | "File"
+  | "YesNo"
+  | "Phone"
+  | "Zipcode"
+  | "Number";
+
 export type FirebaseDevice = {
   /**
    * The Hyperion user id
@@ -675,6 +691,63 @@ export type FloorsType =
   | "X5"
   | "X6";
 
+export type FormNotificationResultContent = {
+  eventType: "Form";
+  data: FormPublicModel;
+  metadata?: {
+    [key: string]: unknown;
+  } | null;
+};
+
+export type eventType = "Form";
+
+export type FormPublicModel = {
+  organizationLogo?: string | null;
+  organizationName?: string | null;
+  tiers?: Array<TierPublicModel> | null;
+  activityType?: string | null;
+  activityTypeId?: number | null;
+  place?: PlaceModel | null;
+  saleEndDate?: string | null;
+  saleStartDate?: string | null;
+  validityType?: MembershipValidityType | null;
+  banner?: DocumentModel | null;
+  currency?: string | null;
+  description?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  logo?: DocumentModel | null;
+  meta?: MetaModel | null;
+  state?: FormState | null;
+  title?: string | null;
+  privateTitle?: string | null;
+  widgetButtonUrl?: string | null;
+  widgetFullUrl?: string | null;
+  widgetVignetteHorizontalUrl?: string | null;
+  widgetVignetteVerticalUrl?: string | null;
+  widgetCounterUrl?: string | null;
+  formSlug?: string | null;
+  formType?: FormType | null;
+  url?: string | null;
+  organizationSlug?: string | null;
+};
+
+export type FormState = "Public" | "Private" | "Draft" | "Disabled";
+
+export type FormType =
+  | "CrowdFunding"
+  | "Membership"
+  | "Event"
+  | "Donation"
+  | "PaymentForm"
+  | "Checkout"
+  | "Shop";
+
+export type GeoLocation = {
+  latitude?: number | null;
+  longitude?: number | null;
+};
+
 export type HTTPValidationError = {
   detail?: Array<ValidationError>;
 };
@@ -729,6 +802,27 @@ export type ItemBorrowed = {
   quantity: number;
 };
 
+export type ItemCustomField = {
+  id?: number | null;
+  name?: string | null;
+  type?: FieldType | null;
+  answer?: string | null;
+};
+
+export type ItemDiscount = {
+  code?: string | null;
+  amount?: number | null;
+};
+
+export type ItemOption = {
+  name?: string | null;
+  amount?: number | null;
+  priceCategory?: PriceCategory | null;
+  isRequired?: boolean | null;
+  customFields?: Array<ItemCustomField> | null;
+  optionId?: number | null;
+};
+
 /**
  * A schema used to represent Item in a loan with its quantity in a response to the client
  */
@@ -742,6 +836,8 @@ export type ItemSimple = {
   name: string;
   loaner_id: string;
 };
+
+export type ItemState = "Processed" | "Registered" | "Unknown" | "Canceled";
 
 export type ItemUpdate = {
   name?: string | null;
@@ -924,6 +1020,8 @@ export type MembershipEdit = {
   role_tags?: string | null;
 };
 
+export type MembershipValidityType = "MovingYear" | "Custom" | "Illimited";
+
 export type Message = {
   /**
    * A context represents a topic. There can only by one notification per context.
@@ -947,6 +1045,11 @@ export type Message = {
   expire_on: string;
 };
 
+export type MetaModel = {
+  createdAt?: string | null;
+  updatedAt?: string | null;
+};
+
 export type ModuleVisibility = {
   root: string;
   allowed_group_ids: Array<string>;
@@ -957,6 +1060,20 @@ export type ModuleVisibilityCreate = {
   allowed_group_id: string;
 };
 
+export type OperationState =
+  | "UNKNOWN"
+  | "INIT"
+  | "PROCESSING"
+  | "PROCESSED"
+  | "ERROR"
+  | "INTERNAL_ERROR";
+
+export type OrderAmountModel = {
+  total?: number | null;
+  vat?: number | null;
+  discount?: number | null;
+};
+
 export type OrderBase = {
   user_id: string;
   delivery_id: string;
@@ -965,10 +1082,95 @@ export type OrderBase = {
   products_quantity: Array<number>;
 };
 
+export type OrderDetail = {
+  payer?: Payer | null;
+  items?: Array<OrderItem> | null;
+  payments?: Array<OrderPayment> | null;
+  amount?: OrderAmountModel | null;
+  id?: number | null;
+  date?: string | null;
+  formSlug?: string | null;
+  formType?: FormType | null;
+  organizationName?: string | null;
+  organizationSlug?: string | null;
+  organizationType?: OrganizationType | null;
+  organizationIsUnderColucheLaw?: boolean | null;
+  checkoutIntentId?: number | null;
+  meta?: MetaModel | null;
+};
+
 export type OrderEdit = {
   products_ids?: Array<string> | null;
   collection_slot?: AmapSlotType | null;
   products_quantity?: Array<number> | null;
+};
+
+export type OrderItem = {
+  payments?: Array<SharePayment> | null;
+  name?: string | null;
+  user?: User | null;
+  priceCategory?: PriceCategory | null;
+  minAmount?: number | null;
+  discount?: ItemDiscount | null;
+  customFields?: Array<ItemCustomField> | null;
+  options?: Array<ItemOption> | null;
+  ticketUrl?: string | null;
+  qrCode?: string | null;
+  membershipCardUrl?: string | null;
+  dayOfLevy?: number | null;
+  tierDescription?: string | null;
+  tierId?: number | null;
+  comment?: string | null;
+  id?: number | null;
+  amount?: number | null;
+  type?: TierType | null;
+  initialAmount?: number | null;
+  state?: ItemState | null;
+};
+
+export type OrderLight = {
+  id?: number | null;
+  date?: string | null;
+  formSlug?: string | null;
+  formType?: FormType | null;
+  organizationName?: string | null;
+  organizationSlug?: string | null;
+  organizationType?: OrganizationType | null;
+  organizationIsUnderColucheLaw?: boolean | null;
+  checkoutIntentId?: number | null;
+  meta?: MetaModel | null;
+};
+
+/**
+ * metadata should contain the metadata sent while creating the checkout intent in `InitCheckoutBody`
+ */
+export type OrderNotificationResultContent = {
+  eventType: "Order";
+  data: OrderDetail;
+  metadata?: {
+    [key: string]: unknown;
+  } | null;
+};
+
+export type eventType2 = "Order";
+
+export type OrderPayment = {
+  items?: Array<ShareItem> | null;
+  cashOutDate?: string | null;
+  cashOutState?: PaymentCashOutState | null;
+  paymentReceiptUrl?: string | null;
+  fiscalReceiptUrl?: string | null;
+  id?: number | null;
+  amount?: number | null;
+  amountTip?: number | null;
+  date?: string | null;
+  paymentMeans?: PaymentMeans | null;
+  installmentNumber?: number | null;
+  state?: PaymentState | null;
+  type?: helloasso_api_wrapper__models__enums__PaymentType | null;
+  meta?: MetaModel | null;
+  paymentOffLineMean?: PaymentMeans | null;
+  refundOperations?: Array<RefundOperationLightModel> | null;
 };
 
 export type OrderReturn = {
@@ -981,6 +1183,39 @@ export type OrderReturn = {
   ordering_date: string;
   delivery_date: string;
 };
+
+export type OrganizationNotificationResultContent = {
+  eventType: "Organization";
+  data: OrganizationNotificationResultData;
+  metadata?: null;
+};
+
+export type eventType3 = "Organization";
+
+export type OrganizationNotificationResultData = {
+  old_slug_organization: string;
+  new_slug_organization: string;
+};
+
+export type OrganizationType =
+  | "Association1901Rig"
+  | "Association1901Rup"
+  | "Association1901"
+  | "FondationRup"
+  | "FondDotation"
+  | "FondationSousEgide"
+  | "FondationScientifique"
+  | "FondationPartenariale"
+  | "FondationUniversitaire"
+  | "FondationHospitaliere"
+  | "Association1905"
+  | "Association1905Rup"
+  | "Entreprise"
+  | "Cooperative"
+  | "Etablissement"
+  | "Association1908"
+  | "Association1908Rig"
+  | "Association1908Rup";
 
 export type PackTicketBase = {
   price: number;
@@ -1020,23 +1255,129 @@ export type PaperUpdate = {
   release_date?: string | null;
 };
 
+/**
+ * metadata should contain the metadata sent while creating the checkout intent in `InitCheckoutBody`
+ */
+export type PayementNotificationResultContent = {
+  eventType: "Payment";
+  data: PaymentDetail;
+  metadata?: {
+    [key: string]: unknown;
+  } | null;
+};
+
+export type eventType4 = "Payment";
+
+export type Payer = {
+  email?: string | null;
+  address?: string | null;
+  city?: string | null;
+  zipCode?: string | null;
+  country?: string | null;
+  company?: string | null;
+  dateOfBirth?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+};
+
 export type PaymentBase = {
   total: number;
-  payment_type: PaymentType;
+  payment_type: app__modules__cdr__types_cdr__PaymentType;
 };
+
+export type PaymentCashOutState =
+  | "MoneyIn"
+  | "CantTransferReceiverFull"
+  | "Transfered"
+  | "Refunded"
+  | "Refunding"
+  | "WaitingForCashOutConfirmation"
+  | "CashedOut"
+  | "Unknown"
+  | "Contested"
+  | "TransferInProgress";
 
 export type PaymentComplete = {
   total: number;
-  payment_type: PaymentType;
+  payment_type: PaymentType_Output;
   id: string;
   user_id: string;
 };
 
-export type PaymentType = "cash" | "check" | "HelloAsso" | "card" | "archived";
+export type PaymentDetail = {
+  order?: OrderLight | null;
+  payer?: Payer | null;
+  items?: Array<PaymentItem> | null;
+  cashOutDate?: string | null;
+  cashOutState?: PaymentCashOutState | null;
+  paymentReceiptUrl?: string | null;
+  fiscalReceiptUrl?: string | null;
+  id: number;
+  amount: number;
+  amountTip?: number | null;
+  date?: string | null;
+  paymentMeans?: PaymentMeans | null;
+  installmentNumber?: number | null;
+  state?: PaymentState | null;
+  type?: helloasso_api_wrapper__models__enums__PaymentType | null;
+  meta?: MetaModel | null;
+  paymentOffLineMean?: PaymentMeans | null;
+  refundOperations?: Array<RefundOperationLightModel> | null;
+};
+
+export type PaymentFrequencyType = "Single" | "Installment" | "Monthly";
+
+export type PaymentItem = {
+  shareAmount?: number | null;
+  shareItemAmount?: number | null;
+  shareOptionsAmount?: number | null;
+  id?: number | null;
+  amount?: number | null;
+  type?: TierType | null;
+  initialAmount?: number | null;
+  state?: ItemState | null;
+  name?: string | null;
+};
+
+export type PaymentMeans =
+  | "None"
+  | "Card"
+  | "Check"
+  | "Cash"
+  | "BankTransfer"
+  | "Other";
+
+export type PaymentState =
+  | "Pending"
+  | "Authorized"
+  | "Refused"
+  | "Unknown"
+  | "Registered"
+  | "Refunded"
+  | "Refunding"
+  | "Contested";
+
+export type PaymentType_Output =
+  | "cash"
+  | "check"
+  | "HelloAsso"
+  | "card"
+  | "archived";
 
 export type PaymentUrl = {
   url: string;
 };
+
+export type PlaceModel = {
+  address?: string | null;
+  name?: string | null;
+  city?: string | null;
+  zipCode?: string | null;
+  country?: string | null;
+  geoLocation?: GeoLocation | null;
+};
+
+export type PriceCategory = "Fixed" | "Pwyw" | "Free";
 
 export type PrizeBase = {
   name: string;
@@ -1067,6 +1408,9 @@ export type ProductBase = {
   description_en?: string | null;
   available_online: boolean;
   related_membership?: AvailableAssociationMembership | null;
+  generate_ticket: boolean;
+  ticket_max_use?: number | null;
+  ticket_expiration?: string | null;
   product_constraints: Array<string>;
   document_constraints: Array<string>;
 };
@@ -1081,6 +1425,9 @@ export type ProductCompleteNoConstraint = {
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
   related_membership?: AvailableAssociationMembership | null;
+  generate_ticket: boolean;
+  ticket_max_use?: number | null;
+  ticket_expiration?: string | null;
 };
 
 export type ProductQuantity = {
@@ -1141,6 +1488,7 @@ export type PurchaseComplete = {
   user_id: string;
   product_variant_id: string;
   validated: boolean;
+  purchased_on: string;
 };
 
 export type PurchaseReturn = {
@@ -1148,6 +1496,7 @@ export type PurchaseReturn = {
   user_id: string;
   product_variant_id: string;
   validated: boolean;
+  purchased_on: string;
   price: number;
   product: ProductCompleteNoConstraint;
   seller: SellerComplete;
@@ -1206,6 +1555,14 @@ export type RecommendationEdit = {
   description?: string | null;
 };
 
+export type RefundOperationLightModel = {
+  id?: number | null;
+  amount?: number | null;
+  amountTip?: number | null;
+  status?: OperationState | null;
+  meta?: MetaModel | null;
+};
+
 export type ResetPasswordRequest = {
   reset_token: string;
   new_password: string;
@@ -1259,6 +1616,18 @@ export type SellerEdit = {
   order?: number | null;
 };
 
+export type ShareItem = {
+  id?: number | null;
+  shareAmount?: number | null;
+  shareItemAmount?: number | null;
+  shareOptionsAmount?: number | null;
+};
+
+export type SharePayment = {
+  id?: number | null;
+  shareAmount?: number | null;
+};
+
 export type SignatureBase = {
   signature_type: DocumentSignatureType;
   numeric_signature_id?: string | null;
@@ -1285,6 +1654,11 @@ export type StatusType =
   | "counting"
   | "published";
 
+export type TermModel = {
+  date?: string | null;
+  amount?: number | null;
+};
+
 export type TheMovieDB = {
   genres: Array<{
     [key: string]: number | string;
@@ -1294,6 +1668,15 @@ export type TheMovieDB = {
   title: string;
   runtime: number;
   tagline: string;
+};
+
+export type Ticket = {
+  id: string;
+  product_variant: ProductVariantComplete;
+  user: UserTicket;
+  scan: number;
+  tags: string;
+  expiration: string;
 };
 
 export type TicketComplete = {
@@ -1306,12 +1689,50 @@ export type TicketComplete = {
   user: CoreUserSimple;
 };
 
+export type TicketScan = {
+  tag: string;
+};
+
+export type TicketSecret = {
+  qr_code_secret: string;
+};
+
 export type TicketSimple = {
   pack_id: string;
   user_id: string;
   winning_prize?: string | null;
   id: string;
 };
+
+export type TierPublicModel = {
+  id?: number | null;
+  label?: string | null;
+  description?: string | null;
+  tierType?: TierType | null;
+  price?: number | null;
+  vatRate?: number | null;
+  minAmount?: number | null;
+  paymentFrequency?: PaymentFrequencyType | null;
+  maxPerUser?: number | null;
+  meta?: MetaModel | null;
+  saleStartDate?: string | null;
+  saleEndDate?: string | null;
+  isEligibleTaxReceipt?: boolean | null;
+  terms?: Array<TermModel> | null;
+  picture?: DocumentModel | null;
+};
+
+export type TierType =
+  | "Donation"
+  | "Payment"
+  | "Registration"
+  | "Membership"
+  | "MonthlyDonation"
+  | "MonthlyPayment"
+  | "OfflineDonation"
+  | "Contribution"
+  | "Bonus"
+  | "Product";
 
 export type TokenResponse = {
   access_token: string;
@@ -1335,6 +1756,21 @@ export type Topic =
   | "raffle"
   | "vote"
   | "ph";
+
+export type User = {
+  firstName?: string | null;
+  lastName?: string | null;
+};
+
+export type UserTicket = {
+  name: string;
+  firstname: string;
+  nickname?: string | null;
+  id: string;
+  promo?: number | null;
+  floor?: FloorsType | null;
+  created_on?: string | null;
+};
 
 export type ValidationError = {
   loc: Array<string | number>;
@@ -1411,6 +1847,9 @@ export type app__modules__cdr__schemas_cdr__ProductComplete = {
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
   related_membership?: AvailableAssociationMembership | null;
+  generate_ticket: boolean;
+  ticket_max_use?: number | null;
+  ticket_expiration?: string | null;
   product_constraints?: Array<ProductCompleteNoConstraint>;
   document_constraints?: Array<DocumentComplete>;
 };
@@ -1423,9 +1862,19 @@ export type app__modules__cdr__schemas_cdr__ProductEdit = {
   description?: string | null;
   available_online?: boolean | null;
   related_membership?: AvailableAssociationMembership | null;
+  generate_ticket?: boolean | null;
+  ticket_max_use?: number | null;
+  ticket_expiration?: string | null;
   product_constraints?: Array<string> | null;
   document_constraints?: Array<string> | null;
 };
+
+export type app__modules__cdr__types_cdr__PaymentType =
+  | "cash"
+  | "check"
+  | "HelloAsso"
+  | "card"
+  | "archived";
 
 export type app__modules__phonebook__schemas_phonebook__MembershipBase = {
   user_id: string;
@@ -1443,6 +1892,11 @@ export type app__modules__phonebook__schemas_phonebook__MembershipComplete = {
   role_tags?: string | null;
   id: string;
 };
+
+export type helloasso_api_wrapper__models__enums__PaymentType =
+  | "Offline"
+  | "Credit"
+  | "Debit";
 
 export type PostAuthSimpleTokenData = unknown;
 
@@ -1731,6 +2185,14 @@ export type PostNotificationSendError = unknown;
 export type PostNotificationSendFutureResponse = unknown;
 
 export type PostNotificationSendFutureError = unknown;
+
+export type PostPaymentHelloassoWebhookData = {
+  body:
+    | OrganizationNotificationResultContent
+    | OrderNotificationResultContent
+    | PayementNotificationResultContent
+    | FormNotificationResultContent;
+};
 
 export type PostPaymentHelloassoWebhookResponse = void;
 
@@ -2825,6 +3287,10 @@ export type GetCdrUsersUserIdPurchasesResponse = Array<PurchaseReturn>;
 
 export type GetCdrUsersUserIdPurchasesError = unknown;
 
+export type GetCdrMePurchasesResponse = Array<PurchaseReturn>;
+
+export type GetCdrMePurchasesError = unknown;
+
 export type GetCdrSellersSellerIdUsersUserIdPurchasesData = {
   path: {
     seller_id: string;
@@ -3064,6 +3530,53 @@ export type PatchCdrStatusData = {
 export type PatchCdrStatusResponse = void;
 
 export type PatchCdrStatusError = unknown;
+
+export type GetCdrUsersUserIdTicketsData = {
+  path: {
+    user_id: string;
+  };
+};
+
+export type GetCdrUsersUserIdTicketsResponse = Array<Ticket>;
+
+export type GetCdrUsersUserIdTicketsError = unknown;
+
+export type GetCdrUsersMeTicketsTicketIdSecretData = {
+  path: {
+    ticket_id: string;
+  };
+};
+
+export type GetCdrUsersMeTicketsTicketIdSecretResponse = TicketSecret;
+
+export type GetCdrUsersMeTicketsTicketIdSecretError = unknown;
+
+export type GetCdrProductsProductIdTicketsSecretData = {
+  path: {
+    product_id: string;
+    secret: string;
+  };
+};
+
+export type GetCdrProductsProductIdTicketsSecretResponse = Array<Ticket>;
+
+export type GetCdrProductsProductIdTicketsSecretError = unknown;
+
+export type PatchCdrProductsProductIdTicketsSecretData = {
+  body: TicketScan;
+  path: {
+    product_id: string;
+    secret: string;
+  };
+};
+
+export type PatchCdrProductsProductIdTicketsSecretResponse = void;
+
+export type PatchCdrProductsProductIdTicketsSecretError = unknown;
+
+export type GetCdrWsSendResponse = unknown;
+
+export type GetCdrWsSendError = unknown;
 
 export type GetCinemaThemoviedbThemoviedbIdData = {
   path: {
@@ -4353,11 +4866,16 @@ export type $OpenApiTs = {
   };
   "/payment/helloasso/webhook": {
     post: {
+      req: PostPaymentHelloassoWebhookData;
       res: {
         /**
          * Successful Response
          */
         "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
       };
     };
   };
@@ -6069,6 +6587,16 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/cdr/me/purchases/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<PurchaseReturn>;
+      };
+    };
+  };
   "/cdr/sellers/{seller_id}/users/{user_id}/purchases/": {
     get: {
       req: GetCdrSellersSellerIdUsersUserIdPurchasesData;
@@ -6385,6 +6913,74 @@ export type $OpenApiTs = {
          * Validation Error
          */
         "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/users/{user_id}/tickets/": {
+    get: {
+      req: GetCdrUsersUserIdTicketsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Ticket>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/users/me/tickets/{ticket_id}/secret/": {
+    get: {
+      req: GetCdrUsersMeTicketsTicketIdSecretData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": TicketSecret;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/products/{product_id}/tickets/{secret}/": {
+    get: {
+      req: GetCdrProductsProductIdTicketsSecretData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Ticket>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    patch: {
+      req: PatchCdrProductsProductIdTicketsSecretData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/ws/send/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
       };
     };
   };

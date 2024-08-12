@@ -105,6 +105,7 @@ import type {
   PostNotificationSendResponse,
   PostNotificationSendFutureError,
   PostNotificationSendFutureResponse,
+  PostPaymentHelloassoWebhookData,
   PostPaymentHelloassoWebhookError,
   PostPaymentHelloassoWebhookResponse,
   GetUsersError,
@@ -465,6 +466,8 @@ import type {
   GetCdrUsersUserIdPurchasesData,
   GetCdrUsersUserIdPurchasesError,
   GetCdrUsersUserIdPurchasesResponse,
+  GetCdrMePurchasesError,
+  GetCdrMePurchasesResponse,
   GetCdrSellersSellerIdUsersUserIdPurchasesData,
   GetCdrSellersSellerIdUsersUserIdPurchasesError,
   GetCdrSellersSellerIdUsersUserIdPurchasesResponse,
@@ -532,6 +535,20 @@ import type {
   PatchCdrStatusData,
   PatchCdrStatusError,
   PatchCdrStatusResponse,
+  GetCdrUsersUserIdTicketsData,
+  GetCdrUsersUserIdTicketsError,
+  GetCdrUsersUserIdTicketsResponse,
+  GetCdrUsersMeTicketsTicketIdSecretData,
+  GetCdrUsersMeTicketsTicketIdSecretError,
+  GetCdrUsersMeTicketsTicketIdSecretResponse,
+  GetCdrProductsProductIdTicketsSecretData,
+  GetCdrProductsProductIdTicketsSecretError,
+  GetCdrProductsProductIdTicketsSecretResponse,
+  PatchCdrProductsProductIdTicketsSecretData,
+  PatchCdrProductsProductIdTicketsSecretError,
+  PatchCdrProductsProductIdTicketsSecretResponse,
+  GetCdrWsSendError,
+  GetCdrWsSendResponse,
   GetCinemaThemoviedbThemoviedbIdData,
   GetCinemaThemoviedbThemoviedbIdError,
   GetCinemaThemoviedbThemoviedbIdResponse,
@@ -1525,7 +1542,9 @@ export const postNotificationSendFuture = (options?: Options) => {
 /**
  * Webhook
  */
-export const postPaymentHelloassoWebhook = (options?: Options) => {
+export const postPaymentHelloassoWebhook = (
+  options: Options<PostPaymentHelloassoWebhookData>,
+) => {
   return (options?.client ?? client).post<
     PostPaymentHelloassoWebhookResponse,
     PostPaymentHelloassoWebhookError
@@ -1566,7 +1585,7 @@ export const getUsersCount = (options?: Options) => {
 
 /**
  * Search Users
- * Search for a user using Fuzzy String Matching
+ * Search for a user using Jaro_Winkler distance algorithm. The
  *
  * `query` will be compared against users name, firstname and nickname
  *
@@ -3814,6 +3833,19 @@ export const getCdrUsersUserIdPurchases = (
 };
 
 /**
+ * Get My Purchases
+ */
+export const getCdrMePurchases = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCdrMePurchasesResponse,
+    GetCdrMePurchasesError
+  >({
+    ...options,
+    url: "/cdr/me/purchases/",
+  });
+};
+
+/**
  * Get Purchases By User Id By Seller Id
  * Get a user's purchases.
  *
@@ -4199,6 +4231,79 @@ export const patchCdrStatus = (options: Options<PatchCdrStatusData>) => {
   >({
     ...options,
     url: "/cdr/status/",
+  });
+};
+
+/**
+ * Get Tickets Of User
+ */
+export const getCdrUsersUserIdTickets = (
+  options: Options<GetCdrUsersUserIdTicketsData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCdrUsersUserIdTicketsResponse,
+    GetCdrUsersUserIdTicketsError
+  >({
+    ...options,
+    url: "/cdr/users/{user_id}/tickets/",
+  });
+};
+
+/**
+ * Get Ticket Secret
+ */
+export const getCdrUsersMeTicketsTicketIdSecret = (
+  options: Options<GetCdrUsersMeTicketsTicketIdSecretData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCdrUsersMeTicketsTicketIdSecretResponse,
+    GetCdrUsersMeTicketsTicketIdSecretError
+  >({
+    ...options,
+    url: "/cdr/users/me/tickets/{ticket_id}/secret/",
+  });
+};
+
+/**
+ * Get Ticket By Secret
+ */
+export const getCdrProductsProductIdTicketsSecret = (
+  options: Options<GetCdrProductsProductIdTicketsSecretData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCdrProductsProductIdTicketsSecretResponse,
+    GetCdrProductsProductIdTicketsSecretError
+  >({
+    ...options,
+    url: "/cdr/products/{product_id}/tickets/{secret}/",
+  });
+};
+
+/**
+ * Scan Ticket
+ */
+export const patchCdrProductsProductIdTicketsSecret = (
+  options: Options<PatchCdrProductsProductIdTicketsSecretData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchCdrProductsProductIdTicketsSecretResponse,
+    PatchCdrProductsProductIdTicketsSecretError
+  >({
+    ...options,
+    url: "/cdr/products/{product_id}/tickets/{secret}/",
+  });
+};
+
+/**
+ * Send Ws Message
+ */
+export const getCdrWsSend = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCdrWsSendResponse,
+    GetCdrWsSendError
+  >({
+    ...options,
+    url: "/cdr/ws/send/",
   });
 };
 

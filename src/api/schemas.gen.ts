@@ -6641,7 +6641,7 @@ export const $ProductBase = {
       anyOf: [
         {
           type: "string",
-          format: "duration",
+          format: "date-time",
         },
         {
           type: "null",
@@ -6761,7 +6761,7 @@ export const $ProductCompleteNoConstraint = {
       anyOf: [
         {
           type: "string",
-          format: "duration",
+          format: "date-time",
         },
         {
           type: "null",
@@ -7952,7 +7952,7 @@ export const $Ticket = {
     },
     expiration: {
       type: "string",
-      format: "date",
+      format: "date-time",
       title: "Expiration",
     },
   },
@@ -8716,7 +8716,7 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
       anyOf: [
         {
           type: "string",
-          format: "duration",
+          format: "date-time",
         },
         {
           type: "null",
@@ -8857,7 +8857,7 @@ export const $app__modules__cdr__schemas_cdr__ProductEdit = {
       anyOf: [
         {
           type: "string",
-          format: "duration",
+          format: "date-time",
         },
         {
           type: "null",

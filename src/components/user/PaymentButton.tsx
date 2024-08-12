@@ -1,13 +1,23 @@
 import { HelloAssoButton } from "../custom/HelloAssoButton";
 import { WarningDialog } from "../custom/WarningDialog";
 import { Button } from "../ui/button";
+import { usePaymentUrl } from "@/hooks/usePaymentUrl";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export const PaymentButton = () => {
+interface PaymentButtonProps {
+  amount: number;
+}
+
+export const PaymentButton = ({ amount }: PaymentButtonProps) => {
   const t = useTranslations("PaymentButton");
   const [isOpened, setIsOpened] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { paymentUrl, isLoading, refetch } = usePaymentUrl(amount);
+  const router = useRouter();
+  if (!isLoading && !!paymentUrl) {
+    router.push(paymentUrl.url);
+  }
   return (
     <>
       <WarningDialog
@@ -21,7 +31,9 @@ export const PaymentButton = () => {
             <p>{t("description")}</p>
           </div>
         }
-        customButton={<HelloAssoButton isLoading={isLoading} />}
+        customButton={
+          <HelloAssoButton isLoading={isLoading} onClick={() => refetch()} />
+        }
       />
       <Button
         className="col-span-4 ml-auto w-[100px]"

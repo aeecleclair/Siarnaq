@@ -8,6 +8,7 @@ import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
+import { apiFormatDate } from "@/lib/date_conversion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -33,6 +34,8 @@ export const AddProductAccordionItem = ({
     defaultValues: {
       product_constraints: [],
       document_constraints: [],
+      ticket_max_use: "1",
+      generate_ticket: false,
     },
   });
 
@@ -41,6 +44,10 @@ export const AddProductAccordionItem = ({
     const body: ProductBase = {
       ...values,
       available_online: values.available_online === "true",
+      ticket_max_use: values.ticket_max_use
+        ? parseInt(values.ticket_max_use)
+        : null,
+      ticket_expiration: apiFormatDate(values.ticket_expiration),
     };
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {

@@ -2,7 +2,7 @@ import { PaymentItem } from "./PaymentItem";
 import {
   CdrUser,
   PaymentBase,
-  PaymentType,
+  PaymentType_Output,
   postCdrUsersUserIdPayments,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
@@ -46,7 +46,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
   const { payments, total: totalPaid, refetch } = useUserPayments(user.id);
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const paymentTypes: PaymentType[] = [
+  const paymentType_Outputs: PaymentType_Output[] = [
     "cash",
     "check",
     "HelloAsso",
@@ -54,8 +54,8 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
     "archived",
   ];
 
-  const paymentIcon = (paymentType: PaymentType) => {
-    switch (paymentType) {
+  const paymentIcon = (paymentType_Output: PaymentType_Output) => {
+    switch (paymentType_Output) {
       case "cash":
         return <HiOutlineBanknotes className="w-5 h-5 mr-2" />;
       case "check":
@@ -141,17 +141,19 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
                                 <SelectValue />
                               </SelectTrigger>
                               <SelectContent side="top">
-                                {paymentTypes.map((paymentType) => (
-                                  <SelectItem
-                                    key={paymentType}
-                                    value={`${paymentType}`}
-                                  >
-                                    <div className="flex items-center flex-row gap-2">
-                                      {paymentIcon(paymentType)}
-                                      {t(paymentType)}
-                                    </div>
-                                  </SelectItem>
-                                ))}
+                                {paymentType_Outputs.map(
+                                  (paymentType_Output) => (
+                                    <SelectItem
+                                      key={paymentType_Output}
+                                      value={`${paymentType_Output}`}
+                                    >
+                                      <div className="flex items-center flex-row gap-2">
+                                        {paymentIcon(paymentType_Output)}
+                                        {t(paymentType_Output)}
+                                      </div>
+                                    </SelectItem>
+                                  ),
+                                )}
                               </SelectContent>
                             </Select>
                           )}

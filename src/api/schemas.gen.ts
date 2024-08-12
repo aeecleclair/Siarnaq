@@ -1855,18 +1855,9 @@ export const $CoreInformation = {
       type: "integer",
       title: "Minimal Titan Version Code",
     },
-    minimal_titan_version: {
-      type: "string",
-      title: "Minimal Titan Version",
-    },
   },
   type: "object",
-  required: [
-    "ready",
-    "version",
-    "minimal_titan_version_code",
-    "minimal_titan_version",
-  ],
+  required: ["ready", "version", "minimal_titan_version_code"],
   title: "CoreInformation",
   description: "Information about Hyperion",
 } as const;
@@ -2474,6 +2465,46 @@ export const $DocumentComplete = {
   title: "DocumentComplete",
 } as const;
 
+export const $DocumentModel = {
+  properties: {
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    fileName: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Filename",
+    },
+    publicUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Publicurl",
+    },
+  },
+  type: "object",
+  title: "DocumentModel",
+} as const;
+
 export const $DocumentSignatureType = {
   type: "string",
   enum: ["material", "numeric"],
@@ -2859,6 +2890,22 @@ export const $EventReturn = {
   title: "EventReturn",
 } as const;
 
+export const $FieldType = {
+  type: "string",
+  enum: [
+    "Date",
+    "TextInput",
+    "FreeText",
+    "ChoiceList",
+    "File",
+    "YesNo",
+    "Phone",
+    "Zipcode",
+    "Number",
+  ],
+  title: "FieldType",
+} as const;
+
 export const $FirebaseDevice = {
   properties: {
     user_id: {
@@ -2972,6 +3019,398 @@ export const $FloorsType = {
     "X6",
   ],
   title: "FloorsType",
+} as const;
+
+export const $FormNotificationResultContent = {
+  properties: {
+    eventType: {
+      type: "string",
+      enum: ["Form"],
+      const: "Form",
+      title: "Eventtype",
+    },
+    data: {
+      $ref: "#/components/schemas/FormPublicModel",
+    },
+    metadata: {
+      anyOf: [
+        {
+          type: "object",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Metadata",
+    },
+  },
+  type: "object",
+  required: ["eventType", "data"],
+  title: "FormNotificationResultContent",
+} as const;
+
+export const $FormPublicModel = {
+  properties: {
+    organizationLogo: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Organizationlogo",
+    },
+    organizationName: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Organizationname",
+    },
+    tiers: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/TierPublicModel",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Tiers",
+    },
+    activityType: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Activitytype",
+    },
+    activityTypeId: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Activitytypeid",
+    },
+    place: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PlaceModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    saleEndDate: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Saleenddate",
+    },
+    saleStartDate: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Salestartdate",
+    },
+    validityType: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MembershipValidityType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    banner: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/DocumentModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    currency: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Currency",
+    },
+    description: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Description",
+    },
+    startDate: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Startdate",
+    },
+    endDate: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Enddate",
+    },
+    logo: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/DocumentModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    meta: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MetaModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    state: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/FormState",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    title: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Title",
+    },
+    privateTitle: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Privatetitle",
+    },
+    widgetButtonUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Widgetbuttonurl",
+    },
+    widgetFullUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Widgetfullurl",
+    },
+    widgetVignetteHorizontalUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Widgetvignettehorizontalurl",
+    },
+    widgetVignetteVerticalUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Widgetvignetteverticalurl",
+    },
+    widgetCounterUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Widgetcounterurl",
+    },
+    formSlug: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Formslug",
+    },
+    formType: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/FormType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    url: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Url",
+    },
+    organizationSlug: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Organizationslug",
+    },
+  },
+  type: "object",
+  title: "FormPublicModel",
+} as const;
+
+export const $FormState = {
+  type: "string",
+  enum: ["Public", "Private", "Draft", "Disabled"],
+  title: "FormState",
+} as const;
+
+export const $FormType = {
+  type: "string",
+  enum: [
+    "CrowdFunding",
+    "Membership",
+    "Event",
+    "Donation",
+    "PaymentForm",
+    "Checkout",
+    "Shop",
+  ],
+  title: "FormType",
+} as const;
+
+export const $GeoLocation = {
+  properties: {
+    latitude: {
+      anyOf: [
+        {
+          type: "number",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Latitude",
+    },
+    longitude: {
+      anyOf: [
+        {
+          type: "number",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Longitude",
+    },
+  },
+  type: "object",
+  title: "GeoLocation",
 } as const;
 
 export const $HTTPValidationError = {
@@ -3154,6 +3593,160 @@ export const $ItemBorrowed = {
     "A schema used to represent Item in a loan with its quantity in a request by the client",
 } as const;
 
+export const $ItemCustomField = {
+  properties: {
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    type: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/FieldType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    answer: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Answer",
+    },
+  },
+  type: "object",
+  title: "ItemCustomField",
+} as const;
+
+export const $ItemDiscount = {
+  properties: {
+    code: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Code",
+    },
+    amount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amount",
+    },
+  },
+  type: "object",
+  title: "ItemDiscount",
+} as const;
+
+export const $ItemOption = {
+  properties: {
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    amount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amount",
+    },
+    priceCategory: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PriceCategory",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    isRequired: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Isrequired",
+    },
+    customFields: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/ItemCustomField",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Customfields",
+    },
+    optionId: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Optionid",
+    },
+  },
+  type: "object",
+  title: "ItemOption",
+} as const;
+
 export const $ItemQuantity = {
   properties: {
     quantity: {
@@ -3189,6 +3782,12 @@ export const $ItemSimple = {
   type: "object",
   required: ["id", "name", "loaner_id"],
   title: "ItemSimple",
+} as const;
+
+export const $ItemState = {
+  type: "string",
+  enum: ["Processed", "Registered", "Unknown", "Canceled"],
+  title: "ItemState",
 } as const;
 
 export const $ItemUpdate = {
@@ -3975,6 +4574,12 @@ export const $MembershipEdit = {
   title: "MembershipEdit",
 } as const;
 
+export const $MembershipValidityType = {
+  type: "string",
+  enum: ["MovingYear", "Custom", "Illimited"],
+  title: "MembershipValidityType",
+} as const;
+
 export const $Message = {
   properties: {
     context: {
@@ -4059,6 +4664,37 @@ export const $Message = {
   title: "Message",
 } as const;
 
+export const $MetaModel = {
+  properties: {
+    createdAt: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Createdat",
+    },
+    updatedAt: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Updatedat",
+    },
+  },
+  type: "object",
+  title: "MetaModel",
+} as const;
+
 export const $ModuleVisibility = {
   properties: {
     root: {
@@ -4092,6 +4728,59 @@ export const $ModuleVisibilityCreate = {
   type: "object",
   required: ["root", "allowed_group_id"],
   title: "ModuleVisibilityCreate",
+} as const;
+
+export const $OperationState = {
+  type: "string",
+  enum: [
+    "UNKNOWN",
+    "INIT",
+    "PROCESSING",
+    "PROCESSED",
+    "ERROR",
+    "INTERNAL_ERROR",
+  ],
+  title: "OperationState",
+} as const;
+
+export const $OrderAmountModel = {
+  properties: {
+    total: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Total",
+    },
+    vat: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Vat",
+    },
+    discount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Discount",
+    },
+  },
+  type: "object",
+  title: "OrderAmountModel",
 } as const;
 
 export const $OrderBase = {
@@ -4131,6 +4820,169 @@ export const $OrderBase = {
     "products_quantity",
   ],
   title: "OrderBase",
+} as const;
+
+export const $OrderDetail = {
+  properties: {
+    payer: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Payer",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    items: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/OrderItem",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Items",
+    },
+    payments: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/OrderPayment",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Payments",
+    },
+    amount: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/OrderAmountModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Date",
+    },
+    formSlug: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Formslug",
+    },
+    formType: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/FormType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    organizationName: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Organizationname",
+    },
+    organizationSlug: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Organizationslug",
+    },
+    organizationType: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/OrganizationType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    organizationIsUnderColucheLaw: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Organizationisundercoluchelaw",
+    },
+    checkoutIntentId: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Checkoutintentid",
+    },
+    meta: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MetaModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  title: "OrderDetail",
 } as const;
 
 export const $OrderEdit = {
@@ -4176,6 +5028,567 @@ export const $OrderEdit = {
   },
   type: "object",
   title: "OrderEdit",
+} as const;
+
+export const $OrderItem = {
+  properties: {
+    payments: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/SharePayment",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Payments",
+    },
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    user: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/User",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    priceCategory: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PriceCategory",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    minAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Minamount",
+    },
+    discount: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/ItemDiscount",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    customFields: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/ItemCustomField",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Customfields",
+    },
+    options: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/ItemOption",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Options",
+    },
+    ticketUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ticketurl",
+    },
+    qrCode: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Qrcode",
+    },
+    membershipCardUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Membershipcardurl",
+    },
+    dayOfLevy: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Dayoflevy",
+    },
+    tierDescription: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Tierdescription",
+    },
+    tierId: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Tierid",
+    },
+    comment: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Comment",
+    },
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    amount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amount",
+    },
+    type: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/TierType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    initialAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Initialamount",
+    },
+    state: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/ItemState",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  title: "OrderItem",
+} as const;
+
+export const $OrderLight = {
+  properties: {
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Date",
+    },
+    formSlug: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Formslug",
+    },
+    formType: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/FormType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    organizationName: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Organizationname",
+    },
+    organizationSlug: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Organizationslug",
+    },
+    organizationType: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/OrganizationType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    organizationIsUnderColucheLaw: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Organizationisundercoluchelaw",
+    },
+    checkoutIntentId: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Checkoutintentid",
+    },
+    meta: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MetaModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  title: "OrderLight",
+} as const;
+
+export const $OrderNotificationResultContent = {
+  properties: {
+    eventType: {
+      type: "string",
+      enum: ["Order"],
+      const: "Order",
+      title: "Eventtype",
+    },
+    data: {
+      $ref: "#/components/schemas/OrderDetail",
+    },
+    metadata: {
+      anyOf: [
+        {
+          type: "object",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Metadata",
+    },
+  },
+  type: "object",
+  required: ["eventType", "data"],
+  title: "OrderNotificationResultContent",
+  description:
+    "metadata should contain the metadata sent while creating the checkout intent in `InitCheckoutBody`",
+} as const;
+
+export const $OrderPayment = {
+  properties: {
+    items: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/ShareItem",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Items",
+    },
+    cashOutDate: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Cashoutdate",
+    },
+    cashOutState: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PaymentCashOutState",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    paymentReceiptUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Paymentreceipturl",
+    },
+    fiscalReceiptUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Fiscalreceipturl",
+    },
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    amount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amount",
+    },
+    amountTip: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amounttip",
+    },
+    date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Date",
+    },
+    paymentMeans: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PaymentMeans",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    installmentNumber: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Installmentnumber",
+    },
+    state: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PaymentState",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    type: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/helloasso_api_wrapper__models__enums__PaymentType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    meta: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MetaModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    paymentOffLineMean: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PaymentMeans",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    refundOperations: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/RefundOperationLightModel",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Refundoperations",
+    },
+  },
+  type: "object",
+  title: "OrderPayment",
 } as const;
 
 export const $OrderReturn = {
@@ -4228,6 +5641,68 @@ export const $OrderReturn = {
     "delivery_date",
   ],
   title: "OrderReturn",
+} as const;
+
+export const $OrganizationNotificationResultContent = {
+  properties: {
+    eventType: {
+      type: "string",
+      enum: ["Organization"],
+      const: "Organization",
+      title: "Eventtype",
+    },
+    data: {
+      $ref: "#/components/schemas/OrganizationNotificationResultData",
+    },
+    metadata: {
+      type: "null",
+      title: "Metadata",
+    },
+  },
+  type: "object",
+  required: ["eventType", "data"],
+  title: "OrganizationNotificationResultContent",
+} as const;
+
+export const $OrganizationNotificationResultData = {
+  properties: {
+    old_slug_organization: {
+      type: "string",
+      title: "Old Slug Organization",
+    },
+    new_slug_organization: {
+      type: "string",
+      title: "New Slug Organization",
+    },
+  },
+  type: "object",
+  required: ["old_slug_organization", "new_slug_organization"],
+  title: "OrganizationNotificationResultData",
+} as const;
+
+export const $OrganizationType = {
+  type: "string",
+  enum: [
+    "Association1901Rig",
+    "Association1901Rup",
+    "Association1901",
+    "FondationRup",
+    "FondDotation",
+    "FondationSousEgide",
+    "FondationScientifique",
+    "FondationPartenariale",
+    "FondationUniversitaire",
+    "FondationHospitaliere",
+    "Association1905",
+    "Association1905Rup",
+    "Entreprise",
+    "Cooperative",
+    "Etablissement",
+    "Association1908",
+    "Association1908Rig",
+    "Association1908Rup",
+  ],
+  title: "OrganizationType",
 } as const;
 
 export const $PackTicketBase = {
@@ -4384,6 +5859,143 @@ export const $PaperUpdate = {
   title: "PaperUpdate",
 } as const;
 
+export const $PayementNotificationResultContent = {
+  properties: {
+    eventType: {
+      type: "string",
+      enum: ["Payment"],
+      const: "Payment",
+      title: "Eventtype",
+    },
+    data: {
+      $ref: "#/components/schemas/PaymentDetail",
+    },
+    metadata: {
+      anyOf: [
+        {
+          type: "object",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Metadata",
+    },
+  },
+  type: "object",
+  required: ["eventType", "data"],
+  title: "PayementNotificationResultContent",
+  description:
+    "metadata should contain the metadata sent while creating the checkout intent in `InitCheckoutBody`",
+} as const;
+
+export const $Payer = {
+  properties: {
+    email: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Email",
+    },
+    address: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Address",
+    },
+    city: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "City",
+    },
+    zipCode: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Zipcode",
+    },
+    country: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Country",
+    },
+    company: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Company",
+    },
+    dateOfBirth: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Dateofbirth",
+    },
+    firstName: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Firstname",
+    },
+    lastName: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Lastname",
+    },
+  },
+  type: "object",
+  title: "Payer",
+} as const;
+
 export const $PaymentBase = {
   properties: {
     total: {
@@ -4391,12 +6003,29 @@ export const $PaymentBase = {
       title: "Total",
     },
     payment_type: {
-      $ref: "#/components/schemas/PaymentType",
+      $ref: "#/components/schemas/app__modules__cdr__types_cdr__PaymentType",
     },
   },
   type: "object",
   required: ["total", "payment_type"],
   title: "PaymentBase",
+} as const;
+
+export const $PaymentCashOutState = {
+  type: "string",
+  enum: [
+    "MoneyIn",
+    "CantTransferReceiverFull",
+    "Transfered",
+    "Refunded",
+    "Refunding",
+    "WaitingForCashOutConfirmation",
+    "CashedOut",
+    "Unknown",
+    "Contested",
+    "TransferInProgress",
+  ],
+  title: "PaymentCashOutState",
 } as const;
 
 export const $PaymentComplete = {
@@ -4406,7 +6035,7 @@ export const $PaymentComplete = {
       title: "Total",
     },
     payment_type: {
-      $ref: "#/components/schemas/PaymentType",
+      $ref: "#/components/schemas/PaymentType-Output",
     },
     id: {
       type: "string",
@@ -4423,7 +6052,330 @@ export const $PaymentComplete = {
   title: "PaymentComplete",
 } as const;
 
-export const $PaymentType = {
+export const $PaymentDetail = {
+  properties: {
+    order: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/OrderLight",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    payer: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Payer",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    items: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/PaymentItem",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Items",
+    },
+    cashOutDate: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Cashoutdate",
+    },
+    cashOutState: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PaymentCashOutState",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    paymentReceiptUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Paymentreceipturl",
+    },
+    fiscalReceiptUrl: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Fiscalreceipturl",
+    },
+    id: {
+      type: "integer",
+      title: "Id",
+    },
+    amount: {
+      type: "integer",
+      title: "Amount",
+    },
+    amountTip: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amounttip",
+    },
+    date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Date",
+    },
+    paymentMeans: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PaymentMeans",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    installmentNumber: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Installmentnumber",
+    },
+    state: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PaymentState",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    type: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/helloasso_api_wrapper__models__enums__PaymentType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    meta: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MetaModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    paymentOffLineMean: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PaymentMeans",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    refundOperations: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/RefundOperationLightModel",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Refundoperations",
+    },
+  },
+  type: "object",
+  required: ["id", "amount"],
+  title: "PaymentDetail",
+} as const;
+
+export const $PaymentFrequencyType = {
+  type: "string",
+  enum: ["Single", "Installment", "Monthly"],
+  title: "PaymentFrequencyType",
+} as const;
+
+export const $PaymentItem = {
+  properties: {
+    shareAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Shareamount",
+    },
+    shareItemAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Shareitemamount",
+    },
+    shareOptionsAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Shareoptionsamount",
+    },
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    amount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amount",
+    },
+    type: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/TierType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    initialAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Initialamount",
+    },
+    state: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/ItemState",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+  },
+  type: "object",
+  title: "PaymentItem",
+} as const;
+
+export const $PaymentMeans = {
+  type: "string",
+  enum: ["None", "Card", "Check", "Cash", "BankTransfer", "Other"],
+  title: "PaymentMeans",
+} as const;
+
+export const $PaymentState = {
+  type: "string",
+  enum: [
+    "Pending",
+    "Authorized",
+    "Refused",
+    "Unknown",
+    "Registered",
+    "Refunded",
+    "Refunding",
+    "Contested",
+  ],
+  title: "PaymentState",
+} as const;
+
+export const $PaymentType_Output = {
   type: "string",
   enum: ["cash", "check", "HelloAsso", "card", "archived"],
   title: "PaymentType",
@@ -4439,6 +6391,86 @@ export const $PaymentUrl = {
   type: "object",
   required: ["url"],
   title: "PaymentUrl",
+} as const;
+
+export const $PlaceModel = {
+  properties: {
+    address: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Address",
+    },
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    city: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "City",
+    },
+    zipCode: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Zipcode",
+    },
+    country: {
+      anyOf: [
+        {
+          type: "string",
+          maxLength: 3,
+          minLength: 3,
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Country",
+    },
+    geoLocation: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/GeoLocation",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  title: "PlaceModel",
+} as const;
+
+export const $PriceCategory = {
+  type: "string",
+  enum: ["Fixed", "Pwyw", "Free"],
+  title: "PriceCategory",
 } as const;
 
 export const $PrizeBase = {
@@ -4590,6 +6622,33 @@ export const $ProductBase = {
         },
       ],
     },
+    generate_ticket: {
+      type: "boolean",
+      title: "Generate Ticket",
+    },
+    ticket_max_use: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ticket Max Use",
+    },
+    ticket_expiration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ticket Expiration",
+    },
     product_constraints: {
       items: {
         type: "string",
@@ -4612,6 +6671,7 @@ export const $ProductBase = {
     "name_fr",
     "name_en",
     "available_online",
+    "generate_ticket",
     "product_constraints",
     "document_constraints",
   ],
@@ -4682,9 +6742,43 @@ export const $ProductCompleteNoConstraint = {
         },
       ],
     },
+    generate_ticket: {
+      type: "boolean",
+      title: "Generate Ticket",
+    },
+    ticket_max_use: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ticket Max Use",
+    },
+    ticket_expiration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ticket Expiration",
+    },
   },
   type: "object",
-  required: ["name_fr", "name_en", "available_online", "id", "seller_id"],
+  required: [
+    "name_fr",
+    "name_en",
+    "available_online",
+    "id",
+    "seller_id",
+    "generate_ticket",
+  ],
   title: "ProductCompleteNoConstraint",
 } as const;
 
@@ -5030,9 +7124,20 @@ export const $PurchaseComplete = {
       type: "boolean",
       title: "Validated",
     },
+    purchased_on: {
+      type: "string",
+      format: "date-time",
+      title: "Purchased On",
+    },
   },
   type: "object",
-  required: ["quantity", "user_id", "product_variant_id", "validated"],
+  required: [
+    "quantity",
+    "user_id",
+    "product_variant_id",
+    "validated",
+    "purchased_on",
+  ],
   title: "PurchaseComplete",
 } as const;
 
@@ -5055,6 +7160,11 @@ export const $PurchaseReturn = {
       type: "boolean",
       title: "Validated",
     },
+    purchased_on: {
+      type: "string",
+      format: "date-time",
+      title: "Purchased On",
+    },
     price: {
       type: "integer",
       title: "Price",
@@ -5072,6 +7182,7 @@ export const $PurchaseReturn = {
     "user_id",
     "product_variant_id",
     "validated",
+    "purchased_on",
     "price",
     "product",
     "seller",
@@ -5332,6 +7443,66 @@ export const $RecommendationEdit = {
   title: "RecommendationEdit",
 } as const;
 
+export const $RefundOperationLightModel = {
+  properties: {
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    amount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amount",
+    },
+    amountTip: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amounttip",
+    },
+    status: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/OperationState",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    meta: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MetaModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  title: "RefundOperationLightModel",
+} as const;
+
 export const $ResetPasswordRequest = {
   properties: {
     reset_token: {
@@ -5521,6 +7692,86 @@ export const $SellerEdit = {
   title: "SellerEdit",
 } as const;
 
+export const $ShareItem = {
+  properties: {
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    shareAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Shareamount",
+    },
+    shareItemAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Shareitemamount",
+    },
+    shareOptionsAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Shareoptionsamount",
+    },
+  },
+  type: "object",
+  title: "ShareItem",
+} as const;
+
+export const $SharePayment = {
+  properties: {
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    shareAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Shareamount",
+    },
+  },
+  type: "object",
+  title: "SharePayment",
+} as const;
+
 export const $SignatureBase = {
   properties: {
     signature_type: {
@@ -5596,6 +7847,36 @@ export const $StatusType = {
   description: "Status of the voting",
 } as const;
 
+export const $TermModel = {
+  properties: {
+    date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Date",
+    },
+    amount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amount",
+    },
+  },
+  type: "object",
+  title: "TermModel",
+} as const;
+
 export const $TheMovieDB = {
   properties: {
     genres: {
@@ -5648,6 +7929,38 @@ export const $TheMovieDB = {
   title: "TheMovieDB",
 } as const;
 
+export const $Ticket = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    product_variant: {
+      $ref: "#/components/schemas/ProductVariantComplete",
+    },
+    user: {
+      $ref: "#/components/schemas/UserTicket",
+    },
+    scan: {
+      type: "integer",
+      title: "Scan",
+    },
+    tags: {
+      type: "string",
+      title: "Tags",
+    },
+    expiration: {
+      type: "string",
+      format: "date-time",
+      title: "Expiration",
+    },
+  },
+  type: "object",
+  required: ["id", "product_variant", "user", "scan", "tags", "expiration"],
+  title: "Ticket",
+} as const;
+
 export const $TicketComplete = {
   properties: {
     pack_id: {
@@ -5695,6 +8008,31 @@ export const $TicketComplete = {
   title: "TicketComplete",
 } as const;
 
+export const $TicketScan = {
+  properties: {
+    tag: {
+      type: "string",
+      title: "Tag",
+    },
+  },
+  type: "object",
+  required: ["tag"],
+  title: "TicketScan",
+} as const;
+
+export const $TicketSecret = {
+  properties: {
+    qr_code_secret: {
+      type: "string",
+      format: "uuid",
+      title: "Qr Code Secret",
+    },
+  },
+  type: "object",
+  required: ["qr_code_secret"],
+  title: "TicketSecret",
+} as const;
+
 export const $TicketSimple = {
   properties: {
     pack_id: {
@@ -5724,6 +8062,196 @@ export const $TicketSimple = {
   type: "object",
   required: ["pack_id", "user_id", "id"],
   title: "TicketSimple",
+} as const;
+
+export const $TierPublicModel = {
+  properties: {
+    id: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id",
+    },
+    label: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Label",
+    },
+    description: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Description",
+    },
+    tierType: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/TierType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    price: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Price",
+    },
+    vatRate: {
+      anyOf: [
+        {
+          type: "number",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Vatrate",
+    },
+    minAmount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Minamount",
+    },
+    paymentFrequency: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PaymentFrequencyType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    maxPerUser: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Maxperuser",
+    },
+    meta: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MetaModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    saleStartDate: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Salestartdate",
+    },
+    saleEndDate: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Saleenddate",
+    },
+    isEligibleTaxReceipt: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Iseligibletaxreceipt",
+    },
+    terms: {
+      anyOf: [
+        {
+          items: {
+            $ref: "#/components/schemas/TermModel",
+          },
+          type: "array",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Terms",
+    },
+    picture: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/DocumentModel",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  title: "TierPublicModel",
+} as const;
+
+export const $TierType = {
+  type: "string",
+  enum: [
+    "Donation",
+    "Payment",
+    "Registration",
+    "Membership",
+    "MonthlyDonation",
+    "MonthlyPayment",
+    "OfflineDonation",
+    "Contribution",
+    "Bonus",
+    "Product",
+  ],
+  title: "TierType",
 } as const;
 
 export const $TokenResponse = {
@@ -5784,6 +8312,99 @@ export const $Topic = {
   title: "Topic",
   description:
     "A list of topics. An user can suscribe to a topic to receive notifications about it.",
+} as const;
+
+export const $User = {
+  properties: {
+    firstName: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Firstname",
+    },
+    lastName: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Lastname",
+    },
+  },
+  type: "object",
+  title: "User",
+} as const;
+
+export const $UserTicket = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    firstname: {
+      type: "string",
+      title: "Firstname",
+    },
+    nickname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nickname",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+    promo: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Promo",
+    },
+    floor: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/FloorsType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    created_on: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Created On",
+    },
+  },
+  type: "object",
+  required: ["name", "firstname", "id"],
+  title: "UserTicket",
 } as const;
 
 export const $ValidationError = {
@@ -6076,6 +8697,33 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
         },
       ],
     },
+    generate_ticket: {
+      type: "boolean",
+      title: "Generate Ticket",
+    },
+    ticket_max_use: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ticket Max Use",
+    },
+    ticket_expiration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ticket Expiration",
+    },
     product_constraints: {
       items: {
         $ref: "#/components/schemas/ProductCompleteNoConstraint",
@@ -6094,7 +8742,14 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
     },
   },
   type: "object",
-  required: ["name_fr", "name_en", "available_online", "id", "seller_id"],
+  required: [
+    "name_fr",
+    "name_en",
+    "available_online",
+    "id",
+    "seller_id",
+    "generate_ticket",
+  ],
   title: "ProductComplete",
 } as const;
 
@@ -6176,6 +8831,40 @@ export const $app__modules__cdr__schemas_cdr__ProductEdit = {
         },
       ],
     },
+    generate_ticket: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Generate Ticket",
+    },
+    ticket_max_use: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ticket Max Use",
+    },
+    ticket_expiration: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date-time",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ticket Expiration",
+    },
     product_constraints: {
       anyOf: [
         {
@@ -6209,6 +8898,12 @@ export const $app__modules__cdr__schemas_cdr__ProductEdit = {
   },
   type: "object",
   title: "ProductEdit",
+} as const;
+
+export const $app__modules__cdr__types_cdr__PaymentType = {
+  type: "string",
+  enum: ["cash", "check", "HelloAsso", "card", "archived"],
+  title: "PaymentType",
 } as const;
 
 export const $app__modules__phonebook__schemas_phonebook__MembershipBase = {
@@ -6283,4 +8978,10 @@ export const $app__modules__phonebook__schemas_phonebook__MembershipComplete = {
   type: "object",
   required: ["user_id", "association_id", "mandate_year", "role_name", "id"],
   title: "MembershipComplete",
+} as const;
+
+export const $helloasso_api_wrapper__models__enums__PaymentType = {
+  type: "string",
+  enum: ["Offline", "Credit", "Debit"],
+  title: "PaymentType",
 } as const;

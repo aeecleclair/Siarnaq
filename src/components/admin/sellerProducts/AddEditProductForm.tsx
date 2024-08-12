@@ -1,15 +1,14 @@
-import {
-  app__modules__cdr__schemas_cdr__ProductComplete,
-  getCdrProducts,
-} from "@/api";
+import { DatePicker } from "@/components/custom/DatePicker";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { MultiSelect } from "@/components/custom/MultiSelect";
 import { StyledFormField } from "@/components/custom/StyledFormField";
 import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Button } from "@/components/ui/button";
+import { FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
@@ -91,6 +90,56 @@ export const AddEditProductForm = ({
                 </Label>
               </div>
             </RadioGroup>
+          )}
+        />
+      </div>
+      <TextSeparator text="Tickets" />
+      <FormField
+        control={form.control}
+        name="generate_ticket"
+        render={({ field }) => (
+          <FormItem className="w-full">
+            <div className="grid gap-2">
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="generate_ticket"
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+                <Label htmlFor="generate_ticket">
+                  {"Générer un ticket pour ce produit"}
+                </Label>
+              </div>
+              <FormMessage />
+            </div>
+          </FormItem>
+        )}
+      />
+      <div className="flex flex-row gap-2">
+        <StyledFormField
+          form={form}
+          label="Nombre d'utilisations maximum"
+          id="ticket_max_use"
+          input={(field) => (
+            <Input
+              {...field}
+              type="number"
+              disabled={!form.watch("generate_ticket")}
+            />
+          )}
+        />
+        <StyledFormField
+          form={form}
+          label="Date d'expiration"
+          id="ticket_expiration"
+          input={(field) => (
+            <DatePicker
+              date={field.value}
+              setDate={field.onChange}
+              fromDate={new Date()}
+              defaultDate={field.value || new Date()}
+              disabled={!form.watch("generate_ticket")}
+            />
           )}
         />
       </div>

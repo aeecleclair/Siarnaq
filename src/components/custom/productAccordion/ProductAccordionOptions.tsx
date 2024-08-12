@@ -15,6 +15,7 @@ import {
 import { Form } from "@/components/ui/form";
 import { toast, useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
+import { apiFormatDate } from "@/lib/date_conversion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
@@ -56,6 +57,11 @@ export const ProductAccordionOptions = ({
         product.product_constraints?.map((constraint) => constraint.id) || [],
       document_constraints:
         product.document_constraints?.map((constraint) => constraint.id) || [],
+      generate_ticket: product.generate_ticket,
+      ticket_max_use: product.ticket_max_use?.toString() || "1",
+      ticket_expiration: product.ticket_expiration
+        ? new Date(product.ticket_expiration)
+        : undefined,
     },
   });
 
@@ -86,6 +92,10 @@ export const ProductAccordionOptions = ({
     const body: app__modules__cdr__schemas_cdr__ProductEdit = {
       ...values,
       available_online: values.available_online === "true",
+      ticket_max_use: values.ticket_max_use
+        ? parseInt(values.ticket_max_use)
+        : null,
+      ticket_expiration: apiFormatDate(values.ticket_expiration),
     };
     await patchProduct(body);
     refreshProduct();
@@ -161,7 +171,7 @@ export const ProductAccordionOptions = ({
             title="Supprimer la producte"
             description={
               <>
-                <div>Êtes-vous sûr de vouloir supprimer cette producte ?</div>
+                <div>Êtes-vous sûr de vouloir supprimer ce produit ?</div>
                 <div className="flex justify-end mt-2 space-x-4">
                   <Button
                     variant="outline"

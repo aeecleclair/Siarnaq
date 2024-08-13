@@ -21,7 +21,7 @@ export const RecapPanel = () => {
         )}
       </CardContent>
       <CardFooter className="px-6 py-4">
-        <PaymentButton amount={10000} />
+        <PaymentButton />
       </CardFooter>
     </Card>
   );

@@ -518,9 +518,8 @@ import type {
   DeleteCdrUsersUserIdPaymentsPaymentIdData,
   DeleteCdrUsersUserIdPaymentsPaymentIdError,
   DeleteCdrUsersUserIdPaymentsPaymentIdResponse,
-  GetCdrPayAmountData,
-  GetCdrPayAmountError,
-  GetCdrPayAmountResponse,
+  GetCdrPayError,
+  GetCdrPayResponse,
   GetCdrUsersUserIdMembershipsData,
   GetCdrUsersUserIdMembershipsError,
   GetCdrUsersUserIdMembershipsResponse,
@@ -4153,13 +4152,10 @@ export const deleteCdrUsersUserIdPaymentsPaymentId = (
  * Get Payment Url
  * Get payment url
  */
-export const getCdrPayAmount = (options: Options<GetCdrPayAmountData>) => {
-  return (options?.client ?? client).get<
-    GetCdrPayAmountResponse,
-    GetCdrPayAmountError
-  >({
+export const getCdrPay = (options?: Options) => {
+  return (options?.client ?? client).get<GetCdrPayResponse, GetCdrPayError>({
     ...options,
-    url: "/cdr/pay/{amount}",
+    url: "/cdr/pay/",
   });
 };
 

@@ -1,15 +1,11 @@
-import { getCdrPayAmount } from "@/api";
+import { getCdrPay } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
-export const usePaymentUrl = (amount: number | null) => {
+export const usePaymentUrl = () => {
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["paymentUrl", amount],
-    queryFn: () =>
-      getCdrPayAmount({
-        path: {
-          amount: amount!,
-        },
-      }),
+    queryKey: ["paymentUrl"],
+    queryFn: 
+      getCdrPay,
     retry: 3,
     enabled: false,
   });

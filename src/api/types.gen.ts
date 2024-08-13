@@ -3475,15 +3475,9 @@ export type DeleteCdrUsersUserIdPaymentsPaymentIdResponse = void;
 
 export type DeleteCdrUsersUserIdPaymentsPaymentIdError = unknown;
 
-export type GetCdrPayAmountData = {
-  path: {
-    amount: number;
-  };
-};
+export type GetCdrPayResponse = PaymentUrl;
 
-export type GetCdrPayAmountResponse = PaymentUrl;
-
-export type GetCdrPayAmountError = unknown;
+export type GetCdrPayError = unknown;
 
 export type GetCdrUsersUserIdMembershipsData = {
   path: {
@@ -6835,18 +6829,13 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/cdr/pay/{amount}": {
+  "/cdr/pay/": {
     get: {
-      req: GetCdrPayAmountData;
       res: {
         /**
          * Successful Response
          */
         "201": PaymentUrl;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
       };
     };
   };

@@ -6,14 +6,10 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-interface PaymentButtonProps {
-  amount: number;
-}
-
-export const PaymentButton = ({ amount }: PaymentButtonProps) => {
+export const PaymentButton = () => {
   const t = useTranslations("PaymentButton");
   const [isOpened, setIsOpened] = useState(false);
-  const { paymentUrl, isLoading, refetch } = usePaymentUrl(amount);
+  const { paymentUrl, isLoading, refetch } = usePaymentUrl();
   const router = useRouter();
   if (!isLoading && !!paymentUrl) {
     router.push(paymentUrl.url);

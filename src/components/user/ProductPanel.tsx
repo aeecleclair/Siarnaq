@@ -112,6 +112,7 @@ export const ProductPanel = () => {
                 router.replace(
                   `/?sellerId=${onlineSellers[sellerIndex - 1]?.id || ""}`,
                 );
+                router.refresh();
               }}
               disabled={sellerIndex === 0}
             >

@@ -30,6 +30,7 @@ const AdminPage = () => {
     if (!user) return;
     if (!isAdmin && !isUserInASellerGroup) {
       router.push("/");
+      router.refresh();
     }
   }, [isAdmin, isUserInASellerGroup, router, user]);
 

@@ -41,6 +41,7 @@ export const useToken = () => {
     if (!refreshToken) {
       setToken(null);
       router.replace("/login");
+      router.refresh();
       return;
     }
     setIsRefreshing(true);
@@ -59,6 +60,7 @@ export const useToken = () => {
       setToken(null);
       setRefreshToken(null);
       router.replace("/login");
+      router.refresh();
       return;
     }
 
@@ -72,6 +74,7 @@ export const useToken = () => {
       setToken(null);
       setRefreshToken(null);
       router.replace("/login");
+      router.refresh();
       return;
     }
 

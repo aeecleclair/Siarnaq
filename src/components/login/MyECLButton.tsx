@@ -32,6 +32,7 @@ const MyECLButton = () => {
   if (code && !isLoading && typeof window !== "undefined" && codeVerifier) {
     login(new URL(window.location.href));
     router.replace("/login");
+    router.refresh();
   }
 
   async function login(url: URL) {
@@ -102,6 +103,7 @@ const MyECLButton = () => {
 
   if (token !== null) {
     router.replace("/");
+    router.refresh();
   }
 
   return (

@@ -15,6 +15,7 @@ export default function Home() {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
   const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       {code === "succeeded" && (

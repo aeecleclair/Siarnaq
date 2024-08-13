@@ -29,6 +29,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { set } from "date-fns";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 
@@ -104,13 +105,14 @@ export function DataTable<TData, TValue>({
   }, [table.getRowModel().rows, userId]);
 
   function onUserSelect(row: Row<TData>) {
-    console.log("ok");
+    if (table.getSelectedRowModel().rows.length) {
+      setRowSelection({});
+    }
     const id = (row.original as CoreUserSimple).id;
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     current.set("userId", id);
     const query = current.toString();
     router.push(`/admin?${query}`);
-    table.toggleAllRowsSelected(false);
     row.toggleSelected(true);
   }
 

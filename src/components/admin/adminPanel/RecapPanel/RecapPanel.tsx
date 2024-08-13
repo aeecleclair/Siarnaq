@@ -218,7 +218,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
         </CardTitle>
         <Separator />
       </div>
-      <ProductPart user={user} />
+      <ProductPart user={user} isAdmin />
       <PaymentPart user={user} isAdmin />
       <div className="grid gap-6">
         <CardTitle className="flex flex-row w-full">

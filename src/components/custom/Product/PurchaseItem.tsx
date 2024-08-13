@@ -1,11 +1,18 @@
+import { LoadingButton } from "../LoadingButton";
 import {
   AvailableAssociationMembership,
   app__modules__cdr__schemas_cdr__ProductComplete,
   PurchaseReturn,
+  CdrUser,
+  patchCdrUsersUserIdPurchasesProductVariantIdValidated,
 } from "@/api";
+import { useToast } from "@/components/ui/use-toast";
+import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslation } from "@/translations/utils";
 import { useTranslations } from "next-intl";
-import { HiOutlineExclamation } from "react-icons/hi";
+import { useState } from "react";
+import { HiCheck, HiOutlineExclamation, HiX } from "react-icons/hi";
+import { HiOutlineCheckBadge } from "react-icons/hi2";
 
 interface PurchaseItemProps {
   purchase: PurchaseReturn;
@@ -13,6 +20,8 @@ interface PurchaseItemProps {
   allConstraintIds?: (string | undefined)[];
   allPurchasesIds?: string[];
   memberships?: AvailableAssociationMembership[];
+  user: CdrUser;
+  isAdmin?: boolean;
 }
 
 export const PurchaseItem = ({
@@ -21,9 +30,14 @@ export const PurchaseItem = ({
   allConstraintIds,
   allPurchasesIds,
   memberships,
+  user,
+  isAdmin,
 }: PurchaseItemProps) => {
   const t = useTranslations("PurchaseItem");
+  const { toast } = useToast();
+  const { refetch } = useUserPurchases(user.id);
   const { selectTranslation } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
   const purchaseCompleteProduct = allProducts.find(
     (product) => product.id === purchase.product.id,
   );
@@ -48,11 +62,40 @@ export const PurchaseItem = ({
     (variant) => variant.id === purchase.product_variant_id,
   );
 
+  async function onValidate() {
+    setIsLoading(true);
+    const { data, error } =
+      await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
+        path: {
+          product_variant_id: purchase.product_variant_id,
+          user_id: user.id,
+        },
+        query: {
+          validated: !purchase.validated,
+        },
+      });
+    if (error) {
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(false);
+    refetch();
+  }
+
   return (
     <div>
       <div className="flex flex-row w-full items-center">
         {displayWarning && (
           <HiOutlineExclamation className="inline-block mr-2 h-5 w-5 text-destructive" />
+        )}
+
+        {purchase.validated && (
+          <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
         )}
 
         <span className="font-bold w-1/6">{purchase.seller.name}</span>
@@ -68,6 +111,21 @@ export const PurchaseItem = ({
         <span className="ml-auto font-semibold">
           {purchase.quantity * purchase.price} €
         </span>
+        {isAdmin && (
+          <LoadingButton
+            size="icon"
+            variant="outline"
+            className="ml-4 h-8 w-8"
+            isLoading={isLoading}
+            onClick={onValidate}
+          >
+            {purchase.validated ? (
+              <HiX className="w-5 h-5" />
+            ) : (
+              <HiCheck className="w-5 h-5" />
+            )}
+          </LoadingButton>
+        )}
       </div>
       {displayWarning && (
         <div className="mt-1">

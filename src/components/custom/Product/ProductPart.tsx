@@ -9,9 +9,10 @@ import { useTranslations } from "next-intl";
 
 interface ProductPartProps {
   user: CdrUser;
+  isAdmin?: boolean;
 }
 
-export const ProductPart = ({ user }: ProductPartProps) => {
+export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   const t = useTranslations("ProductPart");
   const { memberships } = useUserMemberships(user.id);
   const { purchases, total: totalToPay } = useUserPurchases(user.id);
@@ -41,6 +42,8 @@ export const ProductPart = ({ user }: ProductPartProps) => {
                 )}
                 purchase={purchase}
                 memberships={membershipsValues}
+                user={user}
+                isAdmin={isAdmin}
               />
             ))}
             <Separator className="my-2" />

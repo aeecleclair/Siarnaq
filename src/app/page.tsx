@@ -3,6 +3,7 @@
 import { StatusDialog } from "@/components/custom/StatusDialog";
 import { AssociationPanel } from "@/components/user/AssociationPanel";
 import { CentralPanel } from "@/components/user/CentralPanel";
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useTokenStore } from "@/stores/token";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,10 +11,11 @@ import { useState } from "react";
 
 export default function Home() {
   const { userId } = useTokenStore();
-  const { refetch } = useUser(userId);
+  const { user, refetch } = useUser(userId);
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
+  const { onlineSellers } = useOnlineSellers();
   const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
 
   return (
@@ -46,10 +48,12 @@ export default function Home() {
         />
       )}
       <main className="flex min-h-[calc(100vh_-_theme(spacing.32))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
-        <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
-          <AssociationPanel />
-          <CentralPanel />
-        </div>
+        {onlineSellers && (
+          <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
+            <AssociationPanel canClick={!!user?.curriculum} onlineSellers={onlineSellers} />
+            {user && <CentralPanel user={user} onlineSellers={onlineSellers} />}
+          </div>
+        )}
       </main>
       <footer className="py-6 md:px-8 md:py-0 border-t-2">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">

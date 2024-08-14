@@ -16,9 +16,10 @@ interface AssociationPanelProps {
   canClick?: boolean;
 }
 
-export const AssociationPanel = (
-  { onlineSellers, canClick }: AssociationPanelProps
-) => {
+export const AssociationPanel = ({
+  onlineSellers,
+  canClick,
+}: AssociationPanelProps) => {
   const t = useTranslations("AssociationPanel");
   const { userId } = useTokenStore();
   const searchParams = useSearchParams();

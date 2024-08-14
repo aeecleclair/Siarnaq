@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,6 +30,13 @@ export default async function RootLayout({
   return (
     <Suspense>
       <html lang={locale}>
+        <Script
+          defer
+          data-domain="rentree.myecl.fr"
+          src="https://plausible.eclair.ec-lyon.fr/js/script.js"
+          strategy="lazyOnload"
+        />
+
         <body className={inter.className}>
           <QueryProvider>
             <Provider>

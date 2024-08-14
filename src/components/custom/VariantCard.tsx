@@ -177,7 +177,7 @@ export const VariantCard = ({
         <div
           className={`text-2xl font-bold ${!isSelectable && "text-muted-foreground"}`}
         >
-          <span>{variant.price} €</span>
+          <span>{variant.price / 100} €</span>
         </div>
         {showDescription && (
           <p className="text-xs text-muted-foreground">

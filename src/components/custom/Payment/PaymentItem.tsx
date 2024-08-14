@@ -83,7 +83,7 @@ export const PaymentItem = ({
         {t(payment.payment_type)}
       </span>
       <span className="ml-auto font-semibold w-20 flex justify-end">
-        {payment.total} €
+        {payment.total.toFixed(2)} €
       </span>
       {isAdmin && (
         <CustomDialog
@@ -106,8 +106,8 @@ export const PaymentItem = ({
                   )}
                 </span>
                 {" d'un montant de "}
-                <span className="font-bold">{payment.total} €</span> effectué
-                par <span className="font-bold">{payment.payment_type}</span> ?
+                <span className="font-bold">{payment.total.toFixed(2)} €</span> effectué
+                par <span className="font-bold">{t(payment.payment_type)}</span> ?
               </span>
               <div className="flex justify-end mt-2 space-x-4">
                 <Button

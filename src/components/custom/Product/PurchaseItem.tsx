@@ -109,7 +109,7 @@ export const PurchaseItem = ({
           {selectTranslation(variant?.name_en, variant?.name_fr)}
         </span>
         <span className="ml-auto font-semibold">
-          {purchase.quantity * purchase.price} €
+          {(purchase.quantity * purchase.price / 100).toFixed(2)} €
         </span>
         {isAdmin && (
           <LoadingButton

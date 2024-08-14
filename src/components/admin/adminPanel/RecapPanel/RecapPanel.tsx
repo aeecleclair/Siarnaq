@@ -223,7 +223,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       <div className="grid gap-6">
         <CardTitle className="flex flex-row w-full">
           <span className="font-bold">Reste à payer</span>
-          <span className="ml-auto font-semibold">{remainingToPay} €</span>
+          <span className="ml-auto font-semibold">{remainingToPay.toFixed(2)} €</span>
         </CardTitle>
       </div>
     </div>

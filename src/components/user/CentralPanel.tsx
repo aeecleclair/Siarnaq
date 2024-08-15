@@ -13,7 +13,7 @@ export const CentralPanel = ({ user, onlineSellers }: CentralPanelProps) => {
   const searchParams = useSearchParams();
   const firstSellerId =
     searchParams.get("sellerId") || user?.curriculum
-      ? onlineSellers.at(0)?.id ?? "intro"
+      ? (onlineSellers.at(0)?.id ?? "intro")
       : "intro";
 
   if (firstSellerId === "intro") {

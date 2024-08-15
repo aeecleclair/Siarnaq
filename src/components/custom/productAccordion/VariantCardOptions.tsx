@@ -59,7 +59,7 @@ export const VariantCardOptions = ({
       name_fr: variant.name_fr,
       description_en: variant?.description_en || undefined,
       description_fr: variant?.description_fr || undefined,
-      price: variant.price.toString(),
+      price: (variant.price / 100).toString(),
       unique: variant.unique ? "unique" : "multiple",
       allowed_curriculum:
         variant.allowed_curriculum?.map((curriculum) => curriculum.id) || [],
@@ -92,7 +92,7 @@ export const VariantCardOptions = ({
     setIsLoading(true);
     const body: ProductVariantEdit = {
       ...values,
-      price: parseFloat(values.price),
+      price: parseFloat(values.price) * 100,
       unique: values.unique === "unique",
       enabled: true,
     };

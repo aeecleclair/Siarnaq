@@ -201,7 +201,9 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
             <Separator className="my-2" />
             <div className="flex flex-row w-full">
               <span className="font-bold w-1/6">{t("total")}</span>
-              <span className="ml-auto font-semibold">{totalPaid} €</span>
+              <span className="ml-auto font-semibold">
+                {totalPaid?.toFixed(2)} €
+              </span>
             </div>
           </>
         ) : (

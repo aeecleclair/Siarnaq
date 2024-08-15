@@ -1,3 +1,4 @@
+import { GetCdrOnlineSellersResponse, SellerComplete } from "@/api";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTokenStore } from "@/stores/token";
@@ -10,9 +11,16 @@ import {
   HiOutlineSparkles,
 } from "react-icons/hi";
 
-export const AssociationPanel = () => {
+interface AssociationPanelProps {
+  onlineSellers: SellerComplete[];
+  canClick?: boolean;
+}
+
+export const AssociationPanel = ({
+  onlineSellers,
+  canClick,
+}: AssociationPanelProps) => {
   const t = useTranslations("AssociationPanel");
-  const { onlineSellers } = useOnlineSellers();
   const { userId } = useTokenStore();
   const searchParams = useSearchParams();
   const firstSellerId = searchParams.get("sellerId") || onlineSellers.at(0)?.id;
@@ -45,10 +53,10 @@ export const AssociationPanel = () => {
           return (
             <Link
               key={seller.id}
-              href={`/?sellerId=${seller.id}`}
+              href={canClick ? `/?sellerId=${seller.id}` : "#"}
               className={`hover:text-primary ${
                 seller.id === firstSellerId ? "font-semibold text-primary" : ""
-              }`}
+              } ${!canClick ? "cursor-not-allowed" : ""}`}
             >
               <div className="flex flex-row items-center">
                 {purchasesCount > 0 ? (
@@ -68,10 +76,10 @@ export const AssociationPanel = () => {
           );
         })}
         <Link
-          href="/?sellerId=recap"
+          href={canClick ? `/?sellerId=recap` : "#"}
           className={`hover:text-primary ${
             firstSellerId === "recap" ? "font-semibold text-primary" : ""
-          }`}
+          } ${!canClick ? "cursor-not-allowed" : ""}`}
         >
           <div className="flex flex-row items-center">
             <HiOutlineClipboardList className="h-4 w-4 mr-2" />

@@ -1,14 +1,19 @@
 import { IntroPanel } from "./IntroPanel";
 import { ProductPanel } from "./ProductPanel";
 import { RecapPanel } from "./RecapPanel";
-import { useOnlineSellers } from "@/hooks/useOnlineSellers";
+import { CdrUser, SellerComplete } from "@/api";
 import { useSearchParams } from "next/navigation";
 
-export const CentralPanel = () => {
-  const { onlineSellers } = useOnlineSellers();
+interface CentralPanelProps {
+  user: CdrUser;
+  onlineSellers: SellerComplete[];
+}
+
+export const CentralPanel = ({ user, onlineSellers }: CentralPanelProps) => {
   const searchParams = useSearchParams();
   const firstSellerId =
-    searchParams.get("sellerId") || onlineSellers.at(0)?.id || "";
+    searchParams.get("sellerId") ||
+    (user?.curriculum ? (onlineSellers.at(0)?.id ?? "intro") : "intro");
 
   if (firstSellerId === "intro") {
     return <IntroPanel />;

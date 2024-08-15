@@ -1,3 +1,4 @@
+import { CurrencyInput } from "../CurrencyInput";
 import { PaymentItem } from "./PaymentItem";
 import {
   CdrUser,
@@ -7,7 +8,6 @@ import {
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
-import { PriceInput } from "@/components/custom/PriceInput";
 import { StyledFormField } from "@/components/custom/StyledFormField";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
@@ -125,7 +125,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
                           label="Montant"
                           id="total"
                           input={(field) => (
-                            <PriceInput id="price" {...field} />
+                            <CurrencyInput id="price" {...field} />
                           )}
                         />
                         <StyledFormField

@@ -1,13 +1,12 @@
+import { CurrencyInput } from "../CurrencyInput";
 import { LoadingButton } from "../LoadingButton";
 import { MultiSelect } from "../MultiSelect";
-import { PriceInput } from "../PriceInput";
 import { StyledFormField } from "../StyledFormField";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
 import { variantFormSchema } from "@/forms/variantFormSchema";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { UseFormReturn } from "react-hook-form";
@@ -67,7 +66,7 @@ export const AddEditVariantForm = ({
           form={form}
           label="Prix"
           id="price"
-          input={(field) => <PriceInput id="price" {...field} />}
+          input={(field) => <CurrencyInput id="price" {...field} />}
         />
         <StyledFormField
           form={form}

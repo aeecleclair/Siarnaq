@@ -47,7 +47,7 @@ export const AddProductAccordionItem = ({
       ticket_max_use: values.ticket_max_use
         ? parseInt(values.ticket_max_use)
         : null,
-      ticket_expiration: apiFormatDate(values.ticket_expiration),
+      ticket_expiration: values.ticket_expiration?.toISOString(),
     };
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {

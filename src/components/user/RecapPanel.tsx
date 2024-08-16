@@ -3,11 +3,13 @@ import { ProductPart } from "../custom/Product/ProductPart";
 import { Card, CardHeader, CardContent, CardFooter } from "../ui/card";
 import { PaymentButton } from "./PaymentButton";
 import { useUser } from "@/hooks/useUser";
+import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTokenStore } from "@/stores/token";
 
 export const RecapPanel = () => {
   const { userId } = useTokenStore();
   const { user } = useUser(userId);
+  const { purchases } = useUserPurchases(userId);
 
   return (
     <Card>
@@ -21,7 +23,7 @@ export const RecapPanel = () => {
         )}
       </CardContent>
       <CardFooter className="px-6 py-4">
-        <PaymentButton />
+        {purchases.length > 0 && <PaymentButton />}
       </CardFooter>
     </Card>
   );

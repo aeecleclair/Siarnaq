@@ -5,7 +5,8 @@
     "summary": "Récapitulatif"
   },
   "IntroCarouselItem": {
-    "description": "Bienvenu sur le site de chaîne de rentrée associative de l'École Centrale de Lyon. Sur ce site, vous pouvez adhérer aux associations du campus, souscrire à certains services et prendre des places pour les événements de la rentrée. Nous vous demanderons quelques informations administratives. À la fin du parcours, vous pourrez payer en ligne par carte bancaire.",
+    "description": "Bienvenu dans la Chaîne De Rentrée associative de l'École Centrale de Lyon. Ce site, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra de d'adhérer aux associations et souscrire aux services associatifs de l'école. À la fin du parcours vous serez amené à payer en ligne par carte bancaire.",
+    "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves :",
     "selectCurriculum": "Pour commencer, veuillez sélectionner votre cursus :",
     "begin": "On commence ?",
     "validate": "Valider"

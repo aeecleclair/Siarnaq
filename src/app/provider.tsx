@@ -7,7 +7,6 @@ import { client, createClient } from "@hey-api/client-fetch";
 export default function Providers({ children }: { children: React.ReactNode }) {
   const { token } = useTokenStore();
   const { refetch } = useToken();
-  console.log("Token", token);
 
   createClient({
     // set default base url for requests

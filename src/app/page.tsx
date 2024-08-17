@@ -66,7 +66,10 @@ export default function Home() {
             </p>
             <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
               © {new Date().getFullYear()}{" "}
-              <a href="https://www.eclair.ec-lyon.fr/" className="font-medium underline underline-offset-4">
+              <a
+                href="https://www.eclair.ec-lyon.fr/"
+                className="font-medium underline underline-offset-4"
+              >
                 ÉCLAIR
               </a>
               . Tout droits réservés.

@@ -50,13 +50,27 @@ export const useUsers = () => {
         switch (message.command) {
           case "NEW_USER":
             const user = message.data as CoreUserSimple;
-            if (!(returnedUsers?.find((u) => u.id === user.id) ?? false)) {
+            const userFound = returnedUsers.find((u) => u.id === user.id);
+            if (!userFound) {
               setReturnedUsers([...returnedUsers, user]);
+            } else {
+              // This case can occur when a user is updated but we don't know if he already had an account before
+              setReturnedUsers(
+                returnedUsers.map((u) => (u.id === user.id ? user : u)),
+              );
             }
+            break;
+          case "UPDATE_USER":
+            const updatedUser = message.data as CoreUserSimple;
+            setReturnedUsers(
+              returnedUsers.map((user) =>
+                user.id === updatedUser.id ? updatedUser : user,
+              ),
+            );
             break;
           case "WSStatus":
             if ((message.data as WSStatus).status === "invalid_token") {
-              console.log("Invalid token, clearing messages");
+              console.log("Invalid token");
             }
             break;
         }

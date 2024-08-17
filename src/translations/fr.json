@@ -5,7 +5,7 @@
     "summary": "Récapitulatif"
   },
   "IntroCarouselItem": {
-    "description": "Bienvenu dans la Chaîne De Rentrée associative de l'École Centrale de Lyon. Ce site, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra de d'adhérer aux associations et souscrire aux services associatifs de l'école. À la fin du parcours vous serez amené à payer en ligne par carte bancaire.",
+    "description": "Bienvenue dans la Chaîne De Rentrée associative de l'École Centrale de Lyon. Ce site, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra d'adhérer aux associations et souscrire aux services associatifs de l'école. À la fin du parcours vous serez amenés à payer en ligne par carte bancaire.",
     "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves :",
     "selectCurriculum": "Pour commencer, veuillez sélectionner votre cursus :",
     "begin": "On commence ?",
@@ -48,7 +48,7 @@
   },
   "Login": {
     "title": "Chaîne de rentrée associative {year}",
-    "description": "Bienvenu dans la Chaîne De Rentrée associative de l'École Centrale de Lyon. Ce site, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra de d'adhérer aux associations et souscrire aux services associatifs de l'école.",
+    "description": "Bienvenue dans la Chaîne De Rentrée associative de l'École Centrale de Lyon. Ce site, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra d'adhérer aux associations et souscrire aux services associatifs de l'école.",
     "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves :",
     "alreadyHaveMyECLAccount": "Vous avez déjà un compte MyECL ?",
     "or": "Sinon",

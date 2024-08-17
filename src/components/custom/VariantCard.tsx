@@ -1,3 +1,4 @@
+import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useToast } from "../ui/use-toast";
 import { LoadingButton } from "./LoadingButton";
@@ -128,6 +129,20 @@ export const VariantCard = ({
           className={`text-sm font-medium ${!isSelectable && "text-muted-foreground"}`}
         >
           <span>{selectTranslation(variant.name_en, variant.name_fr)}</span>
+
+          {isAdmin && (
+            <div className="py-2 flex gap-2">
+              {variant.allowed_curriculum?.map((curriculum) => (
+                <Badge
+                  key={curriculum.id}
+                  variant="outline"
+                  className="text-xs text-muted-foreground"
+                >
+                  {curriculum.name}
+                </Badge>
+              ))}
+            </div>
+          )}
         </CardTitle>
         {!variant.unique && (
           <div className="flex items-center space-x-2">

@@ -98,7 +98,9 @@ export const PurchaseItem = ({
           <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
         )}
 
-        <span className="font-bold w-1/6">{purchase.seller.name}</span>
+        <span className="font-bold w-1/6">
+          {purchase.quantity} x {purchase.seller.name}
+        </span>
         <span className="w-1/6">
           {selectTranslation(
             purchase.product.name_en,

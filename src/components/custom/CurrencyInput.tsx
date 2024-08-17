@@ -41,7 +41,6 @@ export const CurrencyInput: React.FC<CurrencyInputProps> = ({
       input.setSelectionRange(end, end);
     }
     const numericValue = rawValue.replace(/[^0-9.]/g, "");
-    console.log(numericValue);
     onChange(numericValue);
   };
 

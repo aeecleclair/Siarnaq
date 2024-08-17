@@ -104,7 +104,6 @@ export const VariantCardOptions = ({
   }
 
   async function toggleEnabled() {
-    console.log("toggleEnabled");
     setIsLoading(true);
     const body: ProductVariantEdit = {
       enabled: !variant.enabled,

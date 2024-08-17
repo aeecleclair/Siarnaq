@@ -28,15 +28,15 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   return (
-    <Suspense>
-      <html lang={locale}>
-        <Script
-          defer
-          data-domain="rentree.myecl.fr"
-          src="https://plausible.eclair.ec-lyon.fr/js/script.js"
-          strategy="lazyOnload"
-        />
+    <html lang={locale}>
+      <Script
+        defer
+        data-domain="rentree.myecl.fr"
+        src="https://plausible.eclair.ec-lyon.fr/js/script.js"
+        strategy="lazyOnload"
+      />
 
+      <Suspense>
         <body className={inter.className}>
           <QueryProvider>
             <Provider>
@@ -47,7 +47,7 @@ export default async function RootLayout({
             </Provider>
           </QueryProvider>
         </body>
-      </html>
-    </Suspense>
+      </Suspense>
+    </html>
   );
 }

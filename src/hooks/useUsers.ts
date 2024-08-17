@@ -1,5 +1,5 @@
 import { useToken } from "./useToken";
-import { CoreUserSimple, getCdrUsers } from "@/api";
+import { CdrUser, getCdrUsers } from "@/api";
 import { useTokenStore } from "@/stores/token";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
@@ -9,12 +9,12 @@ export interface WSStatus {
 }
 interface UserStreamMessage {
   command: string;
-  data: CoreUserSimple | WSStatus;
+  data: CdrUser | WSStatus;
 }
 
 export const useUsers = () => {
   const { isTokenExpired } = useToken();
-  const [returnedUsers, setReturnedUsers] = useState<CoreUserSimple[]>([]);
+  const [returnedUsers, setReturnedUsers] = useState<CdrUser[]>([]);
   const { isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -49,7 +49,7 @@ export const useUsers = () => {
       if (message.command) {
         switch (message.command) {
           case "NEW_USER":
-            const user = message.data as CoreUserSimple;
+            const user = message.data as CdrUser;
             const userFound = returnedUsers.find((u) => u.id === user.id);
             if (!userFound) {
               setReturnedUsers([...returnedUsers, user]);
@@ -61,7 +61,7 @@ export const useUsers = () => {
             }
             break;
           case "UPDATE_USER":
-            const updatedUser = message.data as CoreUserSimple;
+            const updatedUser = message.data as CdrUser;
             setReturnedUsers(
               returnedUsers.map((user) =>
                 user.id === updatedUser.id ? updatedUser : user,

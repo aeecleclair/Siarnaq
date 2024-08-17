@@ -109,10 +109,9 @@ export const ProductPanel = () => {
                 if (!onlineSellers || sellerIndex === undefined) {
                   return;
                 }
-                router.replace(
+                router.push(
                   `/?sellerId=${onlineSellers[sellerIndex - 1]?.id || ""}`,
                 );
-                router.refresh();
               }}
               disabled={sellerIndex === 0}
             >

@@ -39,8 +39,7 @@ export const useToken = () => {
     }
     if (!refreshToken) {
       setToken(null);
-      router.replace("/login");
-      router.refresh();
+      router.push("/login");
       return;
     }
     setIsRefreshing(true);
@@ -58,8 +57,7 @@ export const useToken = () => {
       }
       setToken(null);
       setRefreshToken(null);
-      router.replace("/login");
-      router.refresh();
+      router.push("/login");
       return;
     }
 
@@ -72,8 +70,7 @@ export const useToken = () => {
       console.error("Error Response", result);
       setToken(null);
       setRefreshToken(null);
-      router.replace("/login");
-      router.refresh();
+      router.push("/login");
       return;
     }
 

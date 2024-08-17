@@ -16,7 +16,7 @@ export const useUserPayments = (userId: string | null) => {
 
   return {
     payments: data?.data || [],
-    total: data?.data?.reduce((acc, payment) => acc + payment.total, 0),
+    total: data?.data?.reduce((acc, payment) => acc + payment.total / 100, 0),
     isLoading,
     refetch,
   };

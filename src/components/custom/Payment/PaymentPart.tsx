@@ -78,7 +78,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
     setIsLoading(true);
     const body: PaymentBase = {
       ...values,
-      total: parseFloat(values.total),
+      total: parseFloat(values.total) * 100,
     };
     const { data, error } = await postCdrUsersUserIdPayments({
       path: {

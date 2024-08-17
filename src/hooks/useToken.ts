@@ -34,7 +34,6 @@ export const useToken = () => {
     if (!isTokenExpired()) {
       return token;
     }
-    console.log(isRefreshing, refreshToken);
     if (isRefreshing) {
       return;
     }
@@ -78,7 +77,6 @@ export const useToken = () => {
       return;
     }
 
-    console.log("Access Token Response", result);
     setToken(result.access_token);
     setRefreshToken(result.refresh_token ?? null);
     return result.access_token;

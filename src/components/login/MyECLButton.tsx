@@ -45,7 +45,6 @@ const MyECLButton = () => {
       auth.skipStateCheck,
     );
     if (auth.isOAuth2Error(params)) {
-      console.error("Error Response", params);
       throw new Error(); // Handle OAuth 2.0 redirect error
     }
 
@@ -63,7 +62,6 @@ const MyECLButton = () => {
       response,
     );
     if (auth.isOAuth2Error(result)) {
-      console.error("Error Response", result);
       setIsLoading(false);
       throw new Error(); // Handle OAuth 2.0 response body error
     }

@@ -162,7 +162,7 @@ export const ProductAccordion = ({
                         ?.map((curriculum) => curriculum.id)
                         .includes(user?.curriculum?.id ?? "") ||
                         false) &&
-                      (product.related_membership ?? false) &&
+                      (product.related_membership ?? true) &&
                       !isMembershipAlreadyTaken
                     }
                     isAdmin={isAdmin}

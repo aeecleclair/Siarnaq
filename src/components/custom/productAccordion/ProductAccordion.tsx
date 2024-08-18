@@ -14,6 +14,7 @@ import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useSizeStore } from "@/stores/SizeStore";
 import { useTranslation } from "@/translations/utils";
 import { useTranslations } from "next-intl";
+import { HiOutlineCheckBadge } from "react-icons/hi2";
 
 interface ProductAccordionProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;
@@ -85,16 +86,21 @@ export const ProductAccordion = ({
         <ContextMenu>
           <ContextMenuTrigger>
             <AccordionTrigger>
-              <div className="flex flex-col items-start justify-between">
-                <h3 className="text-lg font-semibold">
-                  {selectTranslation(product.name_en, product.name_fr)}
-                </h3>
-                <p className="text-sm text-gray-500">
-                  {selectTranslation(
-                    product.description_en,
-                    product.description_fr,
-                  )}
-                </p>
+              <div className="flex flex-row items-center gap-2">
+                {product.related_membership && isMembershipAlreadyTaken && (
+                  <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
+                )}
+                <div className="flex flex-col items-start justify-between">
+                  <h3 className="text-lg font-semibold">
+                    {selectTranslation(product.name_en, product.name_fr)}
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    {selectTranslation(
+                      product.description_en,
+                      product.description_fr,
+                    )}
+                  </p>
+                </div>
               </div>
             </AccordionTrigger>
           </ContextMenuTrigger>
@@ -155,7 +161,9 @@ export const ProductAccordion = ({
                       (variant.allowed_curriculum
                         ?.map((curriculum) => curriculum.id)
                         .includes(user?.curriculum?.id ?? "") ||
-                        false)
+                        false) &&
+                      (product.related_membership ?? false) &&
+                      !isMembershipAlreadyTaken
                     }
                     isAdmin={isAdmin}
                     displayWarning={displayWarning}

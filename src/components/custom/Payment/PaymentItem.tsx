@@ -1,5 +1,5 @@
 import {
-  PaymentType_Output,
+  PaymentType,
   PaymentComplete,
   deleteCdrUsersUserIdPaymentsPaymentId,
   CdrUser,
@@ -35,7 +35,7 @@ export const PaymentItem = ({
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
-  const paymentIcon = (paymentType: PaymentType_Output) => {
+  const paymentIcon = (paymentType: PaymentType) => {
     switch (paymentType) {
       case "cash":
         return <HiOutlineBanknotes className="w-5 h-5 mr-2" />;

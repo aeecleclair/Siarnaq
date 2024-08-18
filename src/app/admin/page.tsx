@@ -21,17 +21,17 @@ const AdminPage = () => {
   const { sellers } = useSellers();
   const router = useRouter();
   const { status } = useStatus();
-  const userGroups = user?.groups?.map((group) => group.id);
-  const isUserInASellerGroup = userGroups?.some((group) =>
-    sellers.some((seller) => seller.group_id === group),
-  );
 
   useEffect(() => {
     if (!user) return;
+    const userGroups = user.groups?.map((group) => group.id);
+    const isUserInASellerGroup = userGroups?.some((group) =>
+      sellers.some((seller) => seller.group_id === group),
+    );
     if (!isAdmin && !isUserInASellerGroup) {
       router.push("/");
     }
-  }, [isAdmin, isUserInASellerGroup, router, user]);
+  }, [isAdmin, router, sellers, user]);
 
   useEffect(() => {
     if (status?.status) {

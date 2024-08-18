@@ -131,7 +131,7 @@ export const VariantCard = ({
           <span>{selectTranslation(variant.name_en, variant.name_fr)}</span>
 
           {isAdmin && (
-            <div className="py-2 flex gap-2">
+            <div className="py-2 flex flex-wrap gap-2">
               {variant.allowed_curriculum?.map((curriculum) => (
                 <Badge
                   key={curriculum.id}

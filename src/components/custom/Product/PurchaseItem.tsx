@@ -49,7 +49,11 @@ export const PurchaseItem = ({
     (product) => !allPurchasesIds?.includes(product.id),
   );
   const isMembershipAlreadyTaken = memberships?.some(
-    (membership) => membership === purchase.product.related_membership,
+    (membership) =>
+      purchase.product.related_membership?.includes(membership) ||
+      purchase.product.product_constraints?.some((constraint) =>
+        constraint?.related_membership?.includes(membership),
+      ),
   );
 
   const displayWarning =

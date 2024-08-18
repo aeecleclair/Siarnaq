@@ -73,8 +73,13 @@ export const ProductAccordion = ({
   const isOneVariantTaken = product.variants?.some((variant) =>
     purchasedVariantIds.includes(variant.id),
   );
-  const isMembershipAlreadyTaken = memberships.some(
-    (membership) => membership.membership === product.related_membership,
+
+  const isMembershipAlreadyTaken = memberships?.some(
+    (membership) =>
+      product.related_membership?.includes(membership.membership) ||
+      product.product_constraints?.some((constraint) =>
+        constraint?.related_membership?.includes(membership.membership),
+      ),
   );
 
   const displayWarning =
@@ -162,7 +167,6 @@ export const ProductAccordion = ({
                         ?.map((curriculum) => curriculum.id)
                         .includes(user?.curriculum?.id ?? "") ||
                         false) &&
-                      (product.related_membership ?? true) &&
                       !isMembershipAlreadyTaken
                     }
                     isAdmin={isAdmin}

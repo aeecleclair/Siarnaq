@@ -47,7 +47,6 @@ export const VariantCard = ({
       ?.quantity || 0;
   const selected = numberSelectedVariant > 0;
   const [isLoading, setIsLoading] = useState(false);
-  const shouldDisplayWarning = displayWarning || (selected && !isSelectable);
 
   const purchaseVariant = async (quantity: number) => {
     setIsLoading(true);
@@ -101,7 +100,7 @@ export const VariantCard = ({
 
   return (
     <Card
-      className={`min-w-40 h-[${showDescription ? "110" : "95"}px] ${selected && "shadow-lg"} ${selected && (shouldDisplayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${(isSelectable || (!isSelectable && selected)) && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
+      className={`min-w-40 h-[${showDescription ? "110" : "95"}px] ${selected && "shadow-lg"} ${selected && (displayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${(isSelectable || (!isSelectable && selected)) && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
       onClick={() => {
         if (isSelectable && variant.enabled && variant.unique && !isLoading) {
           if (selected) {

@@ -74,16 +74,21 @@ export const ProductAccordion = ({
     purchasedVariantIds.includes(variant.id),
   );
 
-  const isMembershipAlreadyTaken = memberships?.some(
-    (membership) =>
-      product.related_membership?.includes(membership.membership) ||
-      product.product_constraints?.some((constraint) =>
-        constraint?.related_membership?.includes(membership.membership),
-      ),
+  const isMembershipAlreadyTaken = memberships?.some((membership) =>
+    product.related_membership?.includes(membership.membership),
+  );
+
+  const isConstraintMembershipTaken = memberships?.some((membership) =>
+    product.product_constraints?.some((constraint) =>
+      constraint?.related_membership?.includes(membership.membership),
+    ),
   );
 
   const displayWarning =
-    isMissingConstraint && isOneVariantTaken && !isMembershipAlreadyTaken;
+    isMissingConstraint &&
+    isOneVariantTaken &&
+    !isMembershipAlreadyTaken &&
+    !isConstraintMembershipTaken;
 
   return (
     (isAdmin || (variantToDisplay?.length ?? 0) > 0) && (

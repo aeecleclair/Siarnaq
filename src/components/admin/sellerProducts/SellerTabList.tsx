@@ -54,7 +54,7 @@ export const SellerTabList = ({
               className="w-full min-w-18"
               onClick={() => handleClick("cdrrecap")}
             >
-              Récaputilatif
+              Récapitulatif
             </TabsTrigger>
           )}
         </>

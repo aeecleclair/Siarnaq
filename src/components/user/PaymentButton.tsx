@@ -21,7 +21,7 @@ export const PaymentButton = () => {
         isOpened={isOpened}
         setIsOpened={setIsOpened}
         isLoading={isLoading}
-        title="Payer"
+        title={t("pay")}
         description={
           <div>
             <div className="my-2 font-semibold">{t("title")}</div>

@@ -1,6 +1,7 @@
-import { useToken } from "./useToken";
 import { getCdrUsersUserIdMemberships } from "@/api";
 import { useQuery } from "@tanstack/react-query";
+
+import { useToken } from "./useToken";
 
 export const useUserMemberships = (userId: string | null) => {
   const { isTokenExpired } = useToken();

@@ -1,6 +1,7 @@
-import { useToken } from "./useToken";
 import { getCdrStatus } from "@/api";
 import { useQuery } from "@tanstack/react-query";
+
+import { useToken } from "./useToken";
 
 export const useStatus = () => {
   const { isTokenExpired } = useToken();

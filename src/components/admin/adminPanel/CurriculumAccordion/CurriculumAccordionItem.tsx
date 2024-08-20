@@ -1,11 +1,12 @@
-import { AddCurriculumButton } from "./AddCurriculumButton";
-import { CurriculumItem } from "./CurriculumItem";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useCurriculums } from "@/hooks/useCurriculums";
+
+import { AddCurriculumButton } from "./AddCurriculumButton";
+import { CurriculumItem } from "./CurriculumItem";
 
 export const CurriculumAccordionItem = () => {
   const { curriculums } = useCurriculums();

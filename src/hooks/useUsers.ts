@@ -1,8 +1,9 @@
-import { useToken } from "./useToken";
 import { CdrUser, getCdrUsers } from "@/api";
 import { useTokenStore } from "@/stores/token";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import { useToken } from "./useToken";
 
 export interface WSStatus {
   status: string;

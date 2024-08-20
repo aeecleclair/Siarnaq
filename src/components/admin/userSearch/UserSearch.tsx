@@ -1,6 +1,7 @@
+import { useUsers } from "@/hooks/useUsers";
+
 import { columns } from "./Columns";
 import { DataTable } from "./DataTable";
-import { useUsers } from "@/hooks/useUsers";
 
 export const UserSearch = () => {
   const { users } = useUsers();

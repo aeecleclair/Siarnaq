@@ -1,6 +1,3 @@
-import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
-import { Accordion } from "../ui/accordion";
-import { useToast } from "../ui/use-toast";
 import {
   app__modules__cdr__schemas_cdr__ProductComplete,
   getCdrOnlineSellersSellerIdProducts,
@@ -22,6 +19,10 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
+import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
+import { Accordion } from "../ui/accordion";
+import { useToast } from "../ui/use-toast";
 
 export const ProductPanel = () => {
   const t = useTranslations("ProductPanel");

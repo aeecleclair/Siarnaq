@@ -1,8 +1,9 @@
+import { CdrUser, SellerComplete } from "@/api";
+import { useSearchParams } from "next/navigation";
+
 import { IntroPanel } from "./IntroPanel";
 import { ProductPanel } from "./ProductPanel";
 import { RecapPanel } from "./RecapPanel";
-import { CdrUser, SellerComplete } from "@/api";
-import { useSearchParams } from "next/navigation";
 
 interface CentralPanelProps {
   user: CdrUser;

@@ -1,11 +1,12 @@
-import { SellerTabContentList } from "./SellerTabContentList";
-import { SellerTabList } from "./SellerTabList";
 import { SellerComplete, Status, getCdrSellers } from "@/api";
 import { Tabs } from "@/components/ui/tabs";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useSellers } from "@/hooks/useSellers";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+
+import { SellerTabContentList } from "./SellerTabContentList";
+import { SellerTabList } from "./SellerTabList";
 
 interface SellerTabProps {
   status: Status;

@@ -1,3 +1,11 @@
+import { CdrUser, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
+import { useCurriculums } from "@/hooks/useCurriculums";
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
+import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 import { LoadingButton } from "../custom/LoadingButton";
 import { Badge } from "../ui/badge";
 import { CarouselContent, CarouselItem, useCarousel } from "../ui/carousel";
@@ -10,13 +18,6 @@ import {
   SelectValue,
 } from "../ui/select";
 import { useToast } from "../ui/use-toast";
-import { CdrUser, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
-import { useCurriculums } from "@/hooks/useCurriculums";
-import { useOnlineSellers } from "@/hooks/useOnlineSellers";
-import { AnimatePresence, motion } from "framer-motion";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 interface IntroCarouselItemsProps {
   user: CdrUser;

@@ -1,12 +1,9 @@
-import { PaymentPart } from "../../../custom/Payment/PaymentPart";
-import { ProductPart } from "../../../custom/Product/ProductPart";
-import { MigrateUserForm } from "./MigrateUserForm";
 import {
   CdrUser,
+  ProductBase,
   patchCdrUsersUserIdCurriculumsCurriculumId,
   postCdrSellersSellerIdProducts,
   postCdrUsersUserIdCurriculumsCurriculumId,
-  ProductBase,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
@@ -33,6 +30,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePencil } from "react-icons/hi";
 import { z } from "zod";
+
+import { PaymentPart } from "../../../custom/Payment/PaymentPart";
+import { ProductPart } from "../../../custom/Product/ProductPart";
+import { MigrateUserForm } from "./MigrateUserForm";
 
 interface RecapPanelProps {
   user: CdrUser;

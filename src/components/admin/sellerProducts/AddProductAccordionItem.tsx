@@ -12,7 +12,7 @@ import { apiFormatDate } from "@/lib/date_conversion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { HiPlus } from "react-icons/hi";
+import { HiPlus } from "react-icons/hi2";
 import { z } from "zod";
 
 interface AddProductAccordionItemProps {

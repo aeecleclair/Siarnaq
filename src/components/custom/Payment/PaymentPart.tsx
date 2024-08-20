@@ -28,10 +28,10 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
-  HiOutlineArchive,
+  HiOutlineArchiveBox,
   HiOutlineAtSymbol,
   HiOutlineCreditCard,
-} from "react-icons/hi";
+} from "react-icons/hi2";
 import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
 import { z } from "zod";
 
@@ -65,7 +65,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
       case "card":
         return <HiOutlineCreditCard className="w-5 h-5 mr-2" />;
       case "archived":
-        return <HiOutlineArchive className="w-5 h-5 mr-2" />;
+        return <HiOutlineArchiveBox className="w-5 h-5 mr-2" />;
     }
   };
 

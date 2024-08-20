@@ -12,7 +12,7 @@ import {
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { Row } from "@tanstack/react-table";
 import { MergeIcon, UserRoundMinusIcon } from "lucide-react";
-import { HiTrash, HiX } from "react-icons/hi";
+import { HiTrash } from "react-icons/hi2";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;

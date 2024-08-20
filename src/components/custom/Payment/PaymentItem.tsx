@@ -11,11 +11,11 @@ import { useToast } from "@/components/ui/use-toast";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
-  HiOutlineArchive,
+  HiOutlineArchiveBox,
   HiOutlineAtSymbol,
   HiOutlineCreditCard,
   HiTrash,
-} from "react-icons/hi";
+} from "react-icons/hi2";
 import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
 
 interface PaymentItemProps {
@@ -46,7 +46,7 @@ export const PaymentItem = ({
       case "card":
         return <HiOutlineCreditCard className="w-5 h-5 mr-2" />;
       case "archived":
-        return <HiOutlineArchive className="w-5 h-5 mr-2" />;
+        return <HiOutlineArchiveBox className="w-5 h-5 mr-2" />;
     }
   };
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {

@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
-import { HiCheck, HiX } from "react-icons/hi";
+import { HiCheck, HiXMark } from "react-icons/hi2";
 
 const DialogStatus = {
   SUCCESS: "SUCCESS",
@@ -48,7 +48,7 @@ export const StatusDialog = ({
               {status === "SUCCESS" ? (
                 <HiCheck className="text-white w-32 h-32 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               ) : (
-                <HiX className="text-white w-32 h-32 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+                <HiXMark className="text-white w-32 h-32 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
               )}
             </div>
           </DialogTitle>

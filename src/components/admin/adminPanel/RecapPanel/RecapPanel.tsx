@@ -31,7 +31,7 @@ import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { HiOutlinePencil } from "react-icons/hi";
+import { HiOutlinePencil } from "react-icons/hi2";
 import { z } from "zod";
 
 interface RecapPanelProps {

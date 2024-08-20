@@ -10,6 +10,7 @@ import {
   HiOutlineShoppingCart,
   HiOutlineSparkles,
 } from "react-icons/hi";
+import { HiOutlineEllipsisHorizontal } from "react-icons/hi2";
 
 interface AssociationPanelProps {
   onlineSellers: SellerComplete[];
@@ -62,7 +63,7 @@ export const AssociationPanel = ({
                 {purchasesCount > 0 ? (
                   <HiOutlineShoppingCart className="h-4 w-4 mr-2" />
                 ) : (
-                  <div className="w-4 mr-2"></div>
+                  <HiOutlineEllipsisHorizontal className="h-4 w-4 mr-2" />
                 )}
                 {seller.name}
                 {purchasesCount > 0 && (

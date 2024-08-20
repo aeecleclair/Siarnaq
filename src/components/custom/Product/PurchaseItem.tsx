@@ -95,15 +95,19 @@ export const PurchaseItem = ({
   return (
     <div>
       <div className="flex flex-row w-full items-center">
-        {displayWarning && (
-          <HiOutlineExclamationCircle className="inline-block mr-2 h-5 w-5 text-destructive" />
-        )}
+        <span className="font-bold w-7 ">
+          {displayWarning && (
+            <HiOutlineExclamationCircle className="inline-block mr-2 h-5 w-5 text-destructive" />
+          )}
 
-        {purchase.validated && (
-          <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
-        )}
+          {purchase.validated && (
+            <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
+          )}
+        </span>
 
-        <span className="font-bold w-1/12 ">{purchase.quantity} x</span>
+        <span className="font-bold w-11 pr-3 text-right">
+          {purchase.quantity} x
+        </span>
 
         <span className="font-bold w-1/6">{purchase.seller.name}</span>
         <span className="w-1/6">

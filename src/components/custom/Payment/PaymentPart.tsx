@@ -185,7 +185,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
           )}
         </CardTitle>
       </div>
-      <div className="space-y-2">
+      <div className="space-y-2 mt-4">
         {payments.length > 0 ? (
           <>
             {payments?.map((payment) => (

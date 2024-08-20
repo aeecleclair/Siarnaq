@@ -5,12 +5,12 @@ import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { HiOutlineClipboardList } from "react-icons/hi";
 import {
-  HiOutlineClipboardList,
+  HiOutlineEllipsisHorizontal,
   HiOutlineShoppingCart,
   HiOutlineSparkles,
-} from "react-icons/hi";
-import { HiOutlineEllipsisHorizontal } from "react-icons/hi2";
+} from "react-icons/hi2";
 
 interface AssociationPanelProps {
   onlineSellers: SellerComplete[];

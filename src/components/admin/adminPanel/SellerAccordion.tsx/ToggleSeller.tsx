@@ -10,7 +10,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useGroups } from "@/hooks/useGroups";
 import { useSellers } from "@/hooks/useSellers";
 import { useState } from "react";
-import { HiPlus, HiTrash } from "react-icons/hi";
+import { HiPlus, HiTrash } from "react-icons/hi2";
 
 interface ToggleSellerProps {
   group: CoreGroupSimple;

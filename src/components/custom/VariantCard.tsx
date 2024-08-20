@@ -13,7 +13,7 @@ import { useTokenStore } from "@/stores/token";
 import { useTranslation } from "@/translations/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
-import { HiMinus, HiPlus } from "react-icons/hi";
+import { HiMinus, HiPlus } from "react-icons/hi2";
 
 interface VariantCardProps {
   variant: ProductVariantComplete;

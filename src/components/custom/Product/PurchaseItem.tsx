@@ -11,7 +11,7 @@ import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslation } from "@/translations/utils";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { HiCheck, HiOutlineExclamation, HiX } from "react-icons/hi";
+import { HiCheck, HiOutlineExclamationCircle, HiXMark } from "react-icons/hi2";
 import { HiOutlineCheckBadge } from "react-icons/hi2";
 
 interface PurchaseItemProps {
@@ -95,7 +95,7 @@ export const PurchaseItem = ({
     <div>
       <div className="flex flex-row w-full items-center">
         {displayWarning && (
-          <HiOutlineExclamation className="inline-block mr-2 h-5 w-5 text-destructive" />
+          <HiOutlineExclamationCircle className="inline-block mr-2 h-5 w-5 text-destructive" />
         )}
 
         {purchase.validated && (
@@ -126,7 +126,7 @@ export const PurchaseItem = ({
             onClick={onValidate}
           >
             {purchase.validated ? (
-              <HiX className="w-5 h-5" />
+              <HiXMark className="w-5 h-5" />
             ) : (
               <HiCheck className="w-5 h-5" />
             )}

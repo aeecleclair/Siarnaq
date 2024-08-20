@@ -34,7 +34,7 @@ export const RecapPanel = () => {
       <CardFooter className="px-6 py-4">
         {remainingToPay >= 0 && (
           <div className="italic">
-            {t("remainingToPay")} {remainingToPay} €
+            {t("remainingToPay")} {remainingToPay.toFixed(2)} €
           </div>
         )}
         {purchases.length > 0 && remainingToPay > 0 && <PaymentButton />}

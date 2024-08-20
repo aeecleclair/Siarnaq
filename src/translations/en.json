@@ -24,6 +24,9 @@
   "ProductAccordion": {
     "mustBuy": "You must buy {products}"
   },
+  "Recap": {
+    "remainingToPay": "Remaining to pay:"
+  },
   "ProductPart": {
     "summary": "Summary",
     "total": "Total",

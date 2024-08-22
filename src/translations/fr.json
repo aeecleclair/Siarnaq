@@ -21,7 +21,7 @@
     "pay": "Payer"
   },
   "ProductPanel": {
-    "noProductFound": "Aucun produit trouvé"
+    "noProductFound": "Aucun produit disponible"
   },
   "ProductAccordion": {
     "mustBuy": "Vous devez acheter {products}"

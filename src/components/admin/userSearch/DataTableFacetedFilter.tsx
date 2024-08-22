@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import { Column } from "@tanstack/react-table";
 import * as React from "react";
+import { HiOutlineFilter } from "react-icons/hi";
 
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
@@ -42,7 +43,7 @@ export function DataTableFacetedFilter<TData, TValue>({
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-8 border-dashed">
-          <PlusCircledIcon className="mr-2 h-4 w-4" />
+          <HiOutlineFilter className="mr-2 h-4 w-4" />
           {title}
           {selectedValues?.size > 0 && (
             <>

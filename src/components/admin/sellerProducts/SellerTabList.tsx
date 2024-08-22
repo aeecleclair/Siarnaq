@@ -1,5 +1,6 @@
 import { SellerComplete, Status } from "@/api";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface SellerTabListProps {
@@ -13,6 +14,7 @@ export const SellerTabList = ({
   sellers,
   isAdmin,
 }: SellerTabListProps) => {
+  const t = useTranslations("ProductPart");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -54,7 +56,7 @@ export const SellerTabList = ({
               className="w-full min-w-18"
               onClick={() => handleClick("cdrrecap")}
             >
-              Récaputilatif
+              {t("summary")}
             </TabsTrigger>
           )}
         </>

@@ -50,6 +50,9 @@ export const IntroCarouselItems = ({
   const content: React.ReactNode[] = [
     <div key="intro" className="flex flex-col gap-2">
       <span>{t("description")}</span>
+      <span>
+        {t("contact")} <a href="mailto://bde@ec-lyon.fr">bde@ec-lyon.fr</a>
+      </span>
     </div>,
     <div key="curriculum" className="h-full gap-4 flex flex-col">
       <span>{t("selectCurriculum")}</span>

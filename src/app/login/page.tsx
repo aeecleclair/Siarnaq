@@ -41,6 +41,10 @@ const Login = () => {
           <CardTitle>{t("title", { year: year })}</CardTitle>
           <CardDescription className="flex flex-col gap-2">
             <span>{t("description")}</span>
+            <span>
+              {t("contact")}{" "}
+              <a href="mailto://bde@ec-lyon.fr">bde@ec-lyon.fr</a>
+            </span>
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
@@ -61,7 +65,7 @@ const Login = () => {
                 <SelectGroup>
                   {possiblePromos.map((promo) => (
                     <SelectItem key={promo} value={promo}>
-                      {t("promotion", { year: year })}
+                      {t("promotion", { year: promo })}
                     </SelectItem>
                   ))}
                 </SelectGroup>
@@ -75,7 +79,7 @@ const Login = () => {
               className="w-full m-auto"
               onClick={() => {
                 let redirectUri =
-                  process.env.NEXT_PUBLIC_BACKEND_URL + "/calypsso/register";
+                  process.env.NEXT_PUBLIC_BACKEND_URL + "calypsso/register";
                 if (selectedPromo === possiblePromos[0]) {
                   redirectUri += "?external=true";
                 }

@@ -151,7 +151,7 @@ export const VariantCardOptions = ({
           <CustomDialog
             isOpened={isEditDialogOpened}
             setIsOpened={setIsEditDialogOpened}
-            title="Modifer la variante"
+            title="Modifier la variante"
             description={
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>

@@ -143,7 +143,7 @@ export const ProductAccordionOptions = ({
           <CustomDialog
             isOpened={isEditDialogOpened}
             setIsOpened={setIsEditDialogOpened}
-            title="Modifer le produit"
+            title="Modifier le produit"
             description={
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>

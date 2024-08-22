@@ -1,7 +1,3 @@
-import { CurrencyInput } from "../CurrencyInput";
-import { LoadingButton } from "../LoadingButton";
-import { MultiSelect } from "../MultiSelect";
-import { StyledFormField } from "../StyledFormField";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +7,11 @@ import { variantFormSchema } from "@/forms/variantFormSchema";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
+
+import { CurrencyInput } from "../CurrencyInput";
+import { LoadingButton } from "../LoadingButton";
+import { MultiSelect } from "../MultiSelect";
+import { StyledFormField } from "../StyledFormField";
 
 interface AddEditVariantFormProps {
   form: UseFormReturn<z.infer<typeof variantFormSchema>>;

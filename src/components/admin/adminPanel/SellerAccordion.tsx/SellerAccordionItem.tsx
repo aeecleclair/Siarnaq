@@ -1,4 +1,3 @@
-import { ToggleSeller } from "./ToggleSeller";
 import { SellerComplete } from "@/api";
 import {
   AccordionContent,
@@ -6,6 +5,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useGroups } from "@/hooks/useGroups";
+
+import { ToggleSeller } from "./ToggleSeller";
 
 interface SellerAccordionItemProps {
   sellers: SellerComplete[];

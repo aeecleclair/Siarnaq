@@ -1,5 +1,3 @@
-import { CustomDialog } from "../CustomDialog";
-import { LoadingButton } from "../LoadingButton";
 import {
   app__modules__cdr__schemas_cdr__ProductComplete,
   app__modules__cdr__schemas_cdr__ProductEdit,
@@ -21,6 +19,9 @@ import { PencilIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import { CustomDialog } from "../CustomDialog";
+import { LoadingButton } from "../LoadingButton";
 
 interface ProductAccordionOptionsProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;

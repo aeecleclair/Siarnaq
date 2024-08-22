@@ -4,9 +4,9 @@ import { SellerTab } from "@/components/admin/sellerProducts/SellerTab";
 import { UserSearch } from "@/components/admin/userSearch/UserSearch";
 import { Card } from "@/components/ui/card";
 import {
-  ResizablePanelGroup,
-  ResizablePanel,
   ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useSellers } from "@/hooks/useSellers";

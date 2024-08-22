@@ -1,6 +1,5 @@
 "use client";
 
-import MyECLButton from "../../components/login/MyECLButton";
 import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +20,8 @@ import {
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import MyECLButton from "../../components/login/MyECLButton";
 
 const Login = () => {
   const t = useTranslations("Login");

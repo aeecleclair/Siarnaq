@@ -1,6 +1,5 @@
 "use client";
 
-import { AddProductAccordionItem } from "./AddProductAccordionItem";
 import {
   SellerComplete,
   Status,
@@ -12,6 +11,8 @@ import { TabsContent } from "@/components/ui/tabs";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
+import { AddProductAccordionItem } from "./AddProductAccordionItem";
 
 interface SellerTabContentProps {
   status: Status;

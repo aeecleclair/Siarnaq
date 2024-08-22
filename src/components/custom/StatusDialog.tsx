@@ -1,7 +1,8 @@
-import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { HiCheck, HiXMark } from "react-icons/hi2";
+
+import { Button } from "../ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 
 const DialogStatus = {
   SUCCESS: "SUCCESS",

@@ -1,10 +1,11 @@
 "use client";
 
-import { DataTableColumnHeader } from "./DataTableColumnHeader";
-import { fuzzySort } from "./searchFunction";
 import { CdrUser, CurriculumComplete } from "@/api";
 import { Badge } from "@/components/ui/badge";
 import { ColumnDef } from "@tanstack/react-table";
+
+import { DataTableColumnHeader } from "./DataTableColumnHeader";
+import { fuzzySort } from "./searchFunction";
 
 export const columns: ColumnDef<CdrUser>[] = [
   // {

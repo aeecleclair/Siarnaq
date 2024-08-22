@@ -1,11 +1,12 @@
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
+
 import {
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  FormControl,
 } from "../ui/form";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 interface StyledFormFieldProps {
   label: string;

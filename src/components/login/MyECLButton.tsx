@@ -1,11 +1,12 @@
 "use client";
 
-import { LoadingButton } from "../custom/LoadingButton";
 import { useCodeVerifierStore } from "@/stores/codeVerifier";
 import { useTokenStore } from "@/stores/token";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as auth from "oauth4webapi";
 import { useState } from "react";
+
+import { LoadingButton } from "../custom/LoadingButton";
 
 const MyECLButton = () => {
   const router = useRouter();

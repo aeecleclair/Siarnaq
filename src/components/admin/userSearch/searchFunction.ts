@@ -1,4 +1,4 @@
-import { rankItem, compareItems } from "@tanstack/match-sorter-utils";
+import { compareItems, rankItem } from "@tanstack/match-sorter-utils";
 import { FilterFn, SortingFn, sortingFns } from "@tanstack/react-table";
 
 // Define a custom fuzzy sort function that will sort by rank if the row has ranking information

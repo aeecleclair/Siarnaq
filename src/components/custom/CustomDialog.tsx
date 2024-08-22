@@ -1,11 +1,12 @@
+import { DialogTrigger } from "@radix-ui/react-dialog";
+
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "../ui/dialog";
-import { DialogTrigger } from "@radix-ui/react-dialog";
 
 interface CustomDialogProps {
   isOpened: boolean;

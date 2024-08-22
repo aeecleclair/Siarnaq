@@ -1,6 +1,3 @@
-import { CustomDialog } from "../CustomDialog";
-import { LoadingButton } from "../LoadingButton";
-import { AddEditVariantForm } from "./AddEditVariantForm";
 import {
   ProductVariantComplete,
   ProductVariantEdit,
@@ -9,22 +6,26 @@ import {
 } from "@/api";
 import { Button } from "@/components/ui/button";
 import {
-  ContextMenuShortcut,
   ContextMenuContent,
+  ContextMenuShortcut,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { variantFormSchema } from "@/forms/variantFormSchema";
 import {
-  TrashIcon,
   PencilIcon,
   PlayIcon,
   StopIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import { CustomDialog } from "../CustomDialog";
+import { LoadingButton } from "../LoadingButton";
+import { AddEditVariantForm } from "./AddEditVariantForm";
 
 interface VariantCardOptionsProps {
   variant: ProductVariantComplete;

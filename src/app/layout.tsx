@@ -1,6 +1,3 @@
-import "./globals.css";
-import Provider from "./provider";
-import { QueryProvider } from "./queryProvider";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
@@ -8,6 +5,10 @@ import { getLocale, getMessages } from "next-intl/server";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { Suspense } from "react";
+
+import "./globals.css";
+import Provider from "./provider";
+import { QueryProvider } from "./queryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

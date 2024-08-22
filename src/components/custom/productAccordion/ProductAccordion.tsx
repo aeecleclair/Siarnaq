@@ -1,11 +1,3 @@
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../../ui/accordion";
-import { AddingVariantCard } from "./AddingVariantCard";
-import { ProductAccordionOptions } from "./ProductAccordionOptions";
-import { VariantCardWithOptions } from "./VariantCardWithOptions";
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { useUser } from "@/hooks/useUser";
@@ -15,6 +7,15 @@ import { useSizeStore } from "@/stores/SizeStore";
 import { useTranslation } from "@/translations/utils";
 import { useTranslations } from "next-intl";
 import { HiOutlineCheckBadge } from "react-icons/hi2";
+
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../../ui/accordion";
+import { AddingVariantCard } from "./AddingVariantCard";
+import { ProductAccordionOptions } from "./ProductAccordionOptions";
+import { VariantCardWithOptions } from "./VariantCardWithOptions";
 
 interface ProductAccordionProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;

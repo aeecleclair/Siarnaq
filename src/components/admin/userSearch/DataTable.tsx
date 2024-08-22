@@ -1,8 +1,5 @@
 "use client";
 
-import { DataTablePagination } from "./DataTablePagination";
-import { DataTableToolbar } from "./DataTableToolbar";
-import { fuzzyFilter } from "./searchFunction";
 import { CoreUserSimple } from "@/api";
 import {
   Table,
@@ -32,6 +29,10 @@ import {
 import { set } from "date-fns";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
+
+import { DataTablePagination } from "./DataTablePagination";
+import { DataTableToolbar } from "./DataTableToolbar";
+import { fuzzyFilter } from "./searchFunction";
 
 // Extend the FilterFns and FilterMeta interfaces to include our custom filter function and meta
 declare module "@tanstack/react-table" {

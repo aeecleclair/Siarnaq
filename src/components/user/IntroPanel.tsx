@@ -1,9 +1,10 @@
-import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
-import { Carousel } from "../ui/carousel";
-import { IntroCarouselItems } from "./IntroCarouselItems";
 import { useUser } from "@/hooks/useUser";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
+
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Carousel } from "../ui/carousel";
+import { IntroCarouselItems } from "./IntroCarouselItems";
 
 export const IntroPanel = () => {
   const t = useTranslations("IntroPanel");

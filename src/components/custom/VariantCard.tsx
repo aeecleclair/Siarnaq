@@ -1,7 +1,3 @@
-import { Badge } from "../ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { useToast } from "../ui/use-toast";
-import { LoadingButton } from "./LoadingButton";
 import {
   deleteCdrUsersUserIdPurchasesProductVariantId,
   postCdrUsersUserIdPurchasesProductVariantId,
@@ -14,6 +10,11 @@ import { useTranslation } from "@/translations/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi2";
+
+import { Badge } from "../ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { useToast } from "../ui/use-toast";
+import { LoadingButton } from "./LoadingButton";
 
 interface VariantCardProps {
   variant: ProductVariantComplete;

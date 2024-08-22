@@ -1,7 +1,8 @@
-import { useToken } from "./useToken";
 import { getUsersUserId } from "@/api";
 import { useTokenStore } from "@/stores/token";
 import { useQuery } from "@tanstack/react-query";
+
+import { useToken } from "./useToken";
 
 export const useCoreUser = () => {
   const { isTokenExpired } = useToken();

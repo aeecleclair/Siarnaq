@@ -1,4 +1,3 @@
-import { PurchaseItem } from "./PurchaseItem";
 import { CdrUser } from "@/api";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -6,6 +5,8 @@ import { useProducts } from "@/hooks/useProducts";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslations } from "next-intl";
+
+import { PurchaseItem } from "./PurchaseItem";
 
 interface ProductPartProps {
   user: CdrUser;

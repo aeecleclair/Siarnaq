@@ -7,10 +7,10 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import {
+  HiOutlineCalendar,
   HiOutlineEllipsisHorizontal,
   HiOutlineShoppingCart,
   HiOutlineSparkles,
-  HiOutlineCalendar,
 } from "react-icons/hi2";
 
 interface AssociationPanelProps {

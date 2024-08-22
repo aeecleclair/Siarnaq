@@ -71,7 +71,10 @@ export const SellerTabContent = ({
               sellerId={seller.id}
               userId={userId!}
               canAdd={status.status !== "closed"}
-              canEdit={status.status === "pending"}
+              canEdit={
+                status.status === "pending" ||
+                (status.status === "online" && !product.available_online)
+              }
               canRemove={status.status === "pending"}
               canDisable={status.status !== "closed"}
               refreshProduct={refetchProducts}

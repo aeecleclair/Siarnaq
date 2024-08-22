@@ -30,7 +30,7 @@ export function DatePicker({
   const defaultToDate = new Date();
   defaultToDate.setFullYear(defaultToDate.getFullYear() + 10);
   return (
-    <Popover>
+    <Popover modal={true}>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}

@@ -2,6 +2,8 @@
   "AssociationPanel": {
     "associations": "Associations",
     "presentation": "Presentation",
+    "information": "Useful informations",
+
     "summary": "Summary"
   },
   "IntroCarouselItem": {
@@ -34,6 +36,27 @@
   },
   "PurchaseItem": {
     "missing": "Missing {products}"
+  },
+  "Info": {
+    "information": "Useful information",
+    "cdrPhysiqueTitle": "On site Chaîne de rentrée",
+    "cdrPhysiqueSubtitle": "À la suite de cette chaîne de rentrée numérique, vous serez convoqués à la chaîne de rentrée physique.",
+    "cdrPhysiqueDescription": "Vous pourrez y rencontrer les associations, manifester votre intérêt pour les activités proposées et poser toutes vos questions. La chaîne de rentrée physique sera l'occasion de vous inscrire à tous les évènements de la QI et de souscrire aux services associatifs.",
+    "cdrPhysiqueMandatoryWarning": "Votre présence à la chaine de rentré physique est obligatoire pour valider vos inscriptions. En cas de contrainte majeure, prenez rapidement contact avec le Bureau Des Élèves pour trouver une alternative.",
+    "facebookTitle": "Groupe Facebook des nouveaux admis",
+    "facebook": "Une grande partie de la communication sur le campus se fait via des groupes Facebook. Les nouveaux élèves peuvent rejoindre le groupe des Nouveaux Admis 2024 pour ne rater aucune information :",
+    "myECLTitle": "Application MyECL",
+    "myECL": "Développée pour les associations, l'application MyECL vous permettra d'accéder à pleins de services toute l'année. Vous y retrouverez le calendrier des événements, les réservations de salles, le planning du club ciné et de nombreuses autres choses.",
+    "elementTitle": "Messagerie instantanée Element / Matrix",
+    "element": "Une instance Matrix est hébergée sur le campus. Celle-ci vous permettra de communiquer facilement avec les autres élèves, et ce de manière sécurisée, chiffré de bout en bout. Pour y accéder :",
+    "elementStep1": "Téléchargez l'application Element-x sur votre téléphone",
+    "elementStep2": "Sur l'application choisissez \"Changer de fournisseur de compte\" puis \"Continuer\"",
+    "elementStep3": "Entrez l'URL du serveur :",
+    "elementStep4": "Vous pourrez alors vous connecter avec votre compte MyECL",
+
+    "cautionTitle": "Cautions pour le WEI",
+    "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration, prévoyez deux chèques de cautions de 100 € à l'ordre",
+    "cautionInstructions": "Au dos du premier notez : \"Prénom Nom - WEI 2024 - bus\" et du second : \"Prénom Nom - WEI 2024 - site\". Ces chèques ne seront encaissés qu'en cas de dégradations dans les bus ou sur le site du WEI."
   },
   "PaymentPart": {
     "payments": "Payments",

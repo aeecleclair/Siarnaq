@@ -10,6 +10,7 @@ import {
   HiOutlineEllipsisHorizontal,
   HiOutlineShoppingCart,
   HiOutlineSparkles,
+  HiOutlineCalendar,
 } from "react-icons/hi2";
 
 interface AssociationPanelProps {
@@ -76,6 +77,17 @@ export const AssociationPanel = ({
             </Link>
           );
         })}
+        <Link
+          href={canClick ? `/?sellerId=info` : "#"}
+          className={`hover:text-primary ${
+            firstSellerId === "info" ? "font-semibold text-primary" : ""
+          } ${!canClick ? "cursor-not-allowed" : ""}`}
+        >
+          <div className="flex flex-row items-center">
+            <HiOutlineCalendar className="h-4 w-4 mr-2" />
+            {t("information")}
+          </div>
+        </Link>
         <Link
           href={canClick ? `/?sellerId=recap` : "#"}
           className={`hover:text-primary ${

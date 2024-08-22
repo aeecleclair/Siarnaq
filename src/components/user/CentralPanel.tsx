@@ -1,6 +1,7 @@
 import { CdrUser, SellerComplete } from "@/api";
 import { useSearchParams } from "next/navigation";
 
+import { InfoPanel } from "./InfoPanel";
 import { IntroPanel } from "./IntroPanel";
 import { ProductPanel } from "./ProductPanel";
 import { RecapPanel } from "./RecapPanel";
@@ -18,6 +19,9 @@ export const CentralPanel = ({ user, onlineSellers }: CentralPanelProps) => {
 
   if (firstSellerId === "intro") {
     return <IntroPanel />;
+  }
+  if (firstSellerId === "info") {
+    return <InfoPanel />;
   }
   if (firstSellerId === "recap") {
     return <RecapPanel />;

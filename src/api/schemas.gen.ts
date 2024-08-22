@@ -2374,6 +2374,77 @@ export const $CurriculumComplete = {
   title: "CurriculumComplete",
 } as const;
 
+export const $CustomDataBase = {
+  properties: {
+    value: {
+      type: "string",
+      title: "Value",
+    },
+  },
+  type: "object",
+  required: ["value"],
+  title: "CustomDataBase",
+} as const;
+
+export const $CustomDataComplete = {
+  properties: {
+    value: {
+      type: "string",
+      title: "Value",
+    },
+    field_id: {
+      type: "string",
+      format: "uuid",
+      title: "Field Id",
+    },
+    user_id: {
+      type: "string",
+      format: "uuid",
+      title: "User Id",
+    },
+    field: {
+      $ref: "#/components/schemas/CustomDataFieldComplete",
+    },
+  },
+  type: "object",
+  required: ["value", "field_id", "user_id", "field"],
+  title: "CustomDataComplete",
+} as const;
+
+export const $CustomDataFieldBase = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+  },
+  type: "object",
+  required: ["name"],
+  title: "CustomDataFieldBase",
+} as const;
+
+export const $CustomDataFieldComplete = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    seller_id: {
+      type: "string",
+      format: "uuid",
+      title: "Seller Id",
+    },
+  },
+  type: "object",
+  required: ["name", "id", "seller_id"],
+  title: "CustomDataFieldComplete",
+} as const;
+
 export const $Decision = {
   type: "string",
   enum: ["approved", "declined", "pending"],
@@ -5792,9 +5863,9 @@ export const $Ticket = {
     user: {
       $ref: "#/components/schemas/UserTicket",
     },
-    scan: {
+    scan_left: {
       type: "integer",
-      title: "Scan",
+      title: "Scan Left",
     },
     tags: {
       type: "string",
@@ -5807,7 +5878,14 @@ export const $Ticket = {
     },
   },
   type: "object",
-  required: ["id", "product_variant", "user", "scan", "tags", "expiration"],
+  required: [
+    "id",
+    "product_variant",
+    "user",
+    "scan_left",
+    "tags",
+    "expiration",
+  ],
   title: "Ticket",
 } as const;
 

@@ -1,4 +1,5 @@
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
+import { Badge } from "@/components/ui/badge";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { useUser } from "@/hooks/useUser";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
@@ -102,8 +103,11 @@ export const ProductAccordion = ({
                   <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
                 )}
                 <div className="flex flex-col items-start justify-between">
-                  <h3 className="text-lg font-semibold">
-                    {selectTranslation(product.name_en, product.name_fr)}
+                  <h3 className="text-lg font-semibold flex flex-row">
+                    {selectTranslation(product.name_en, product.name_fr)}{" "}
+                    <Badge variant="outline" className="mx-2">
+                      <span className="font-normal text-xs">online</span>
+                    </Badge>
                   </h3>
                   <p className="text-sm text-gray-500">
                     {selectTranslation(

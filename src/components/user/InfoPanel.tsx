@@ -1,3 +1,4 @@
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
@@ -12,6 +13,7 @@ import {
   HiOutlineUserGroup,
 } from "react-icons/hi2";
 
+import { PageIndicator } from "../custom/PageIndicator";
 import {
   Card,
   CardContent,
@@ -24,11 +26,9 @@ export const InfoPanel = () => {
   const t = useTranslations("Info");
 
   const { userId } = useTokenStore();
-  const { user } = useUser(userId);
-  const { purchases, total: totalToPay } = useUserPurchases(userId);
+  const { total: totalToPay } = useUserPurchases(userId);
   const { total: totalPaid } = useUserPayments(userId);
-
-  const remainingToPay = (totalToPay || 0) - (totalPaid || 0);
+  const { onlineSellers } = useOnlineSellers();
 
   return (
     <Card>
@@ -117,7 +117,9 @@ export const InfoPanel = () => {
         <div>{t("cautionInstructions")}</div>
       </CardContent>
 
-      <CardFooter className="px-6 py-4"></CardFooter>
+      <CardFooter className="px-6 py-4">
+        <PageIndicator currentSellerId="info" onlineSellers={onlineSellers} />
+      </CardFooter>
     </Card>
   );
 };

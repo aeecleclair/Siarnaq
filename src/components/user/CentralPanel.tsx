@@ -13,9 +13,7 @@ interface CentralPanelProps {
 
 export const CentralPanel = ({ user, onlineSellers }: CentralPanelProps) => {
   const searchParams = useSearchParams();
-  const firstSellerId =
-    searchParams.get("sellerId") ||
-    (user?.curriculum ? (onlineSellers.at(0)?.id ?? "intro") : "intro");
+  const firstSellerId = searchParams.get("sellerId") || "intro";
 
   if (firstSellerId === "intro") {
     return <IntroPanel />;

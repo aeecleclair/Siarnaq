@@ -1,10 +1,10 @@
-import { getCdrPay } from "@/api";
+import { postCdrPay } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
 export const usePaymentUrl = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["paymentUrl"],
-    queryFn: getCdrPay,
+    queryFn: postCdrPay,
     retry: 3,
     enabled: false,
   });

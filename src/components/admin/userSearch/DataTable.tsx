@@ -110,6 +110,13 @@ export function DataTable<TData, TValue>({
       setRowSelection({});
     }
     const id = (row.original as CoreUserSimple).id;
+    if (id === userId) {
+      const current = new URLSearchParams(Array.from(searchParams.entries()));
+      current.delete("userId");
+      const query = current.toString();
+      router.push(`/admin?${query}`);
+      return;
+    }
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     current.set("userId", id);
     const query = current.toString();

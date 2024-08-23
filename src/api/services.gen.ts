@@ -5022,6 +5022,440 @@ export const postLoansLoanIdExtend = (
 };
 
 /**
+ * Get Movie
+ * Makes a HTTP request to The Movie Database (TMDB)
+ * using an API key and returns a TheMovieDB object
+ * * https://developer.themoviedb.org/reference/movie-details
+ * * https://developer.themoviedb.org/docs/errors
+ */
+export const getCinemaThemoviedbThemoviedbId = (
+  options: Options<GetCinemaThemoviedbThemoviedbIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCinemaThemoviedbThemoviedbIdResponse,
+    GetCinemaThemoviedbThemoviedbIdError
+  >({
+    ...options,
+    url: "/cinema/themoviedb/{themoviedb_id}",
+  });
+};
+
+/**
+ * Get Sessions
+ */
+export const getCinemaSessions = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCinemaSessionsResponse,
+    GetCinemaSessionsError
+  >({
+    ...options,
+    url: "/cinema/sessions",
+  });
+};
+
+/**
+ * Create Session
+ */
+export const postCinemaSessions = (
+  options: Options<PostCinemaSessionsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCinemaSessionsResponse,
+    PostCinemaSessionsError
+  >({
+    ...options,
+    url: "/cinema/sessions",
+  });
+};
+
+/**
+ * Update Session
+ */
+export const patchCinemaSessionsSessionId = (
+  options: Options<PatchCinemaSessionsSessionIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchCinemaSessionsSessionIdResponse,
+    PatchCinemaSessionsSessionIdError
+  >({
+    ...options,
+    url: "/cinema/sessions/{session_id}",
+  });
+};
+
+/**
+ * Delete Session
+ */
+export const deleteCinemaSessionsSessionId = (
+  options: Options<DeleteCinemaSessionsSessionIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCinemaSessionsSessionIdResponse,
+    DeleteCinemaSessionsSessionIdError
+  >({
+    ...options,
+    url: "/cinema/sessions/{session_id}",
+  });
+};
+
+/**
+ * Create Campaigns Logo
+ */
+export const postCinemaSessionsSessionIdPoster = (
+  options: Options<PostCinemaSessionsSessionIdPosterData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCinemaSessionsSessionIdPosterResponse,
+    PostCinemaSessionsSessionIdPosterError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    url: "/cinema/sessions/{session_id}/poster",
+  });
+};
+
+/**
+ * Read Session Poster
+ */
+export const getCinemaSessionsSessionIdPoster = (
+  options: Options<GetCinemaSessionsSessionIdPosterData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCinemaSessionsSessionIdPosterResponse,
+    GetCinemaSessionsSessionIdPosterError
+  >({
+    ...options,
+    url: "/cinema/sessions/{session_id}/poster",
+  });
+};
+
+/**
+ * Get Flappybird Score
+ * Return the leaderboard
+ */
+export const getFlappybirdScores = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetFlappybirdScoresResponse,
+    GetFlappybirdScoresError
+  >({
+    ...options,
+    url: "/flappybird/scores",
+  });
+};
+
+/**
+ * Create Flappybird Score
+ */
+export const postFlappybirdScores = (
+  options: Options<PostFlappybirdScoresData>,
+) => {
+  return (options?.client ?? client).post<
+    PostFlappybirdScoresResponse,
+    PostFlappybirdScoresError
+  >({
+    ...options,
+    url: "/flappybird/scores",
+  });
+};
+
+/**
+ * Get Current User Flappybird Personal Best
+ */
+export const getFlappybirdScoresMe = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetFlappybirdScoresMeResponse,
+    GetFlappybirdScoresMeError
+  >({
+    ...options,
+    url: "/flappybird/scores/me",
+  });
+};
+
+/**
+ * Read Loaners
+ * Get existing loaners.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const getLoansLoaners = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetLoansLoanersResponse,
+    GetLoansLoanersError
+  >({
+    ...options,
+    url: "/loans/loaners/",
+  });
+};
+
+/**
+ * Create Loaner
+ * Create a new loaner.
+ *
+ * Each loaner is associated with a `manager_group`. Users belonging to this group are able to manage the loaner items and loans.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const postLoansLoaners = (options: Options<PostLoansLoanersData>) => {
+  return (options?.client ?? client).post<
+    PostLoansLoanersResponse,
+    PostLoansLoanersError
+  >({
+    ...options,
+    url: "/loans/loaners/",
+  });
+};
+
+/**
+ * Delete Loaner
+ * Delete a loaner. All items and loans associated with the loaner will also be deleted from the database.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const deleteLoansLoanersLoanerId = (
+  options: Options<DeleteLoansLoanersLoanerIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteLoansLoanersLoanerIdResponse,
+    DeleteLoansLoanersLoanerIdError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}",
+  });
+};
+
+/**
+ * Update Loaner
+ * Update a loaner, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const patchLoansLoanersLoanerId = (
+  options: Options<PatchLoansLoanersLoanerIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchLoansLoanersLoanerIdResponse,
+    PatchLoansLoanersLoanerIdError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}",
+  });
+};
+
+/**
+ * Get Loans By Loaner
+ * Return all loans from a given group.
+ *
+ *
+ * The query string `returned` can be used to get only return or non returned loans. By default, all loans are returned.
+ *
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const getLoansLoanersLoanerIdLoans = (
+  options: Options<GetLoansLoanersLoanerIdLoansData>,
+) => {
+  return (options?.client ?? client).get<
+    GetLoansLoanersLoanerIdLoansResponse,
+    GetLoansLoanersLoanerIdLoansError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/loans",
+  });
+};
+
+/**
+ * Get Items By Loaner
+ * Return all items of a loaner.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const getLoansLoanersLoanerIdItems = (
+  options: Options<GetLoansLoanersLoanerIdItemsData>,
+) => {
+  return (options?.client ?? client).get<
+    GetLoansLoanersLoanerIdItemsResponse,
+    GetLoansLoanersLoanerIdItemsError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/items",
+  });
+};
+
+/**
+ * Create Items For Loaner
+ * Create a new item for a loaner. A given loaner can not have more than one item with the same `name`.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const postLoansLoanersLoanerIdItems = (
+  options: Options<PostLoansLoanersLoanerIdItemsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostLoansLoanersLoanerIdItemsResponse,
+    PostLoansLoanersLoanerIdItemsError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/items",
+  });
+};
+
+/**
+ * Update Items For Loaner
+ * Update a loaner's item.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const patchLoansLoanersLoanerIdItemsItemId = (
+  options: Options<PatchLoansLoanersLoanerIdItemsItemIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchLoansLoanersLoanerIdItemsItemIdResponse,
+    PatchLoansLoanersLoanerIdItemsItemIdError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/items/{item_id}",
+  });
+};
+
+/**
+ * Delete Loaner Item
+ * Delete a loaner's item.
+ * This will remove the item from all loans but won't delete any loan.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const deleteLoansLoanersLoanerIdItemsItemId = (
+  options: Options<DeleteLoansLoanersLoanerIdItemsItemIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteLoansLoanersLoanerIdItemsItemIdResponse,
+    DeleteLoansLoanersLoanerIdItemsItemIdError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/items/{item_id}",
+  });
+};
+
+/**
+ * Get Current User Loans
+ * Return all loans from the current user.
+ *
+ * The query string `returned` can be used to get only returned or non returned loans. By default, all loans are returned.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getLoansUsersMe = (options?: Options<GetLoansUsersMeData>) => {
+  return (options?.client ?? client).get<
+    GetLoansUsersMeResponse,
+    GetLoansUsersMeError
+  >({
+    ...options,
+    url: "/loans/users/me",
+  });
+};
+
+/**
+ * Get Current User Loaners
+ * Return all loaners the current user can manage.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getLoansUsersMeLoaners = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetLoansUsersMeLoanersResponse,
+    GetLoansUsersMeLoanersError
+  >({
+    ...options,
+    url: "/loans/users/me/loaners",
+  });
+};
+
+/**
+ * Create Loan
+ * Create a new loan in database and add the requested items
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const postLoans = (options: Options<PostLoansData>) => {
+  return (options?.client ?? client).post<PostLoansResponse, PostLoansError>({
+    ...options,
+    url: "/loans/",
+  });
+};
+
+/**
+ * Update Loan
+ * Update a loan and its items.
+ *
+ * As the endpoint can update the loan items, it will send back
+ * the new representation of the loan `Loan` including the new items relationships
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const patchLoansLoanId = (options: Options<PatchLoansLoanIdData>) => {
+  return (options?.client ?? client).patch<
+    PatchLoansLoanIdResponse,
+    PatchLoansLoanIdError
+  >({
+    ...options,
+    url: "/loans/{loan_id}",
+  });
+};
+
+/**
+ * Delete Loan
+ * Delete a loan
+ * This will remove the loan but won't delete any loaner items.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const deleteLoansLoanId = (options: Options<DeleteLoansLoanIdData>) => {
+  return (options?.client ?? client).delete<
+    DeleteLoansLoanIdResponse,
+    DeleteLoansLoanIdError
+  >({
+    ...options,
+    url: "/loans/{loan_id}",
+  });
+};
+
+/**
+ * Return Loan
+ * Mark a loan as returned. This will update items availability.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const postLoansLoanIdReturn = (
+  options: Options<PostLoansLoanIdReturnData>,
+) => {
+  return (options?.client ?? client).post<
+    PostLoansLoanIdReturnResponse,
+    PostLoansLoanIdReturnError
+  >({
+    ...options,
+    url: "/loans/{loan_id}/return",
+  });
+};
+
+/**
+ * Extend Loan
+ * A new `end` date or an extended `duration` can be provided. If the two are provided, only `end` will be used.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const postLoansLoanIdExtend = (
+  options: Options<PostLoansLoanIdExtendData>,
+) => {
+  return (options?.client ?? client).post<
+    PostLoansLoanIdExtendResponse,
+    PostLoansLoanIdExtendError
+  >({
+    ...options,
+    url: "/loans/{loan_id}/extend",
+  });
+};
+
+/**
  * Get Paper Pdf
  */
 export const getPhPaperIdPdf = (options: Options<GetPhPaperIdPdfData>) => {

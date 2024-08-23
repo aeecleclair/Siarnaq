@@ -3782,6 +3782,240 @@ export type PostLoansLoanIdExtendResponse = void;
 
 export type PostLoansLoanIdExtendError = unknown;
 
+export type GetCinemaThemoviedbThemoviedbIdData = {
+  path: {
+    themoviedb_id: string;
+  };
+};
+
+export type GetCinemaThemoviedbThemoviedbIdResponse = TheMovieDB;
+
+export type GetCinemaThemoviedbThemoviedbIdError = unknown;
+
+export type GetCinemaSessionsResponse = Array<CineSessionComplete>;
+
+export type GetCinemaSessionsError = unknown;
+
+export type PostCinemaSessionsData = {
+  body: CineSessionBase;
+};
+
+export type PostCinemaSessionsResponse = CineSessionComplete;
+
+export type PostCinemaSessionsError = unknown;
+
+export type PatchCinemaSessionsSessionIdData = {
+  body: CineSessionUpdate;
+  path: {
+    session_id: string;
+  };
+};
+
+export type PatchCinemaSessionsSessionIdResponse = unknown;
+
+export type PatchCinemaSessionsSessionIdError = unknown;
+
+export type DeleteCinemaSessionsSessionIdData = {
+  path: {
+    session_id: string;
+  };
+};
+
+export type DeleteCinemaSessionsSessionIdResponse = void;
+
+export type DeleteCinemaSessionsSessionIdError = unknown;
+
+export type PostCinemaSessionsSessionIdPosterData = {
+  path: {
+    session_id: string;
+  };
+};
+
+export type PostCinemaSessionsSessionIdPosterResponse =
+  app__core__standard_responses__Result;
+
+export type PostCinemaSessionsSessionIdPosterError = unknown;
+
+export type GetCinemaSessionsSessionIdPosterData = {
+  path: {
+    session_id: string;
+  };
+};
+
+export type GetCinemaSessionsSessionIdPosterResponse = unknown;
+
+export type GetCinemaSessionsSessionIdPosterError = unknown;
+
+export type GetFlappybirdScoresResponse = Array<FlappyBirdScoreInDB>;
+
+export type GetFlappybirdScoresError = unknown;
+
+export type PostFlappybirdScoresData = {
+  body: FlappyBirdScoreBase;
+};
+
+export type PostFlappybirdScoresResponse = FlappyBirdScoreBase;
+
+export type PostFlappybirdScoresError = unknown;
+
+export type GetFlappybirdScoresMeResponse = FlappyBirdScoreCompleteFeedBack;
+
+export type GetFlappybirdScoresMeError = unknown;
+
+export type GetLoansLoanersResponse = Array<Loaner>;
+
+export type GetLoansLoanersError = unknown;
+
+export type PostLoansLoanersData = {
+  body: LoanerBase;
+};
+
+export type PostLoansLoanersResponse = Loaner;
+
+export type PostLoansLoanersError = unknown;
+
+export type DeleteLoansLoanersLoanerIdData = {
+  path: {
+    loaner_id: string;
+  };
+};
+
+export type DeleteLoansLoanersLoanerIdResponse = void;
+
+export type DeleteLoansLoanersLoanerIdError = unknown;
+
+export type PatchLoansLoanersLoanerIdData = {
+  body: LoanerUpdate;
+  path: {
+    loaner_id: string;
+  };
+};
+
+export type PatchLoansLoanersLoanerIdResponse = void;
+
+export type PatchLoansLoanersLoanerIdError = unknown;
+
+export type GetLoansLoanersLoanerIdLoansData = {
+  path: {
+    loaner_id: string;
+  };
+  query?: {
+    returned?: boolean | null;
+  };
+};
+
+export type GetLoansLoanersLoanerIdLoansResponse = Array<Loan>;
+
+export type GetLoansLoanersLoanerIdLoansError = unknown;
+
+export type GetLoansLoanersLoanerIdItemsData = {
+  path: {
+    loaner_id: string;
+  };
+};
+
+export type GetLoansLoanersLoanerIdItemsResponse = Array<Item>;
+
+export type GetLoansLoanersLoanerIdItemsError = unknown;
+
+export type PostLoansLoanersLoanerIdItemsData = {
+  body: ItemBase;
+  path: {
+    loaner_id: string;
+  };
+};
+
+export type PostLoansLoanersLoanerIdItemsResponse = Item;
+
+export type PostLoansLoanersLoanerIdItemsError = unknown;
+
+export type PatchLoansLoanersLoanerIdItemsItemIdData = {
+  body: ItemUpdate;
+  path: {
+    item_id: string;
+    loaner_id: string;
+  };
+};
+
+export type PatchLoansLoanersLoanerIdItemsItemIdResponse = void;
+
+export type PatchLoansLoanersLoanerIdItemsItemIdError = unknown;
+
+export type DeleteLoansLoanersLoanerIdItemsItemIdData = {
+  path: {
+    item_id: string;
+    loaner_id: string;
+  };
+};
+
+export type DeleteLoansLoanersLoanerIdItemsItemIdResponse = void;
+
+export type DeleteLoansLoanersLoanerIdItemsItemIdError = unknown;
+
+export type GetLoansUsersMeData = {
+  query?: {
+    returned?: boolean | null;
+  };
+};
+
+export type GetLoansUsersMeResponse = Array<Loan>;
+
+export type GetLoansUsersMeError = unknown;
+
+export type GetLoansUsersMeLoanersResponse = Array<Loaner>;
+
+export type GetLoansUsersMeLoanersError = unknown;
+
+export type PostLoansData = {
+  body: LoanCreation;
+};
+
+export type PostLoansResponse = Loan;
+
+export type PostLoansError = unknown;
+
+export type PatchLoansLoanIdData = {
+  body: LoanUpdate;
+  path: {
+    loan_id: string;
+  };
+};
+
+export type PatchLoansLoanIdResponse = void;
+
+export type PatchLoansLoanIdError = unknown;
+
+export type DeleteLoansLoanIdData = {
+  path: {
+    loan_id: string;
+  };
+};
+
+export type DeleteLoansLoanIdResponse = void;
+
+export type DeleteLoansLoanIdError = unknown;
+
+export type PostLoansLoanIdReturnData = {
+  path: {
+    loan_id: string;
+  };
+};
+
+export type PostLoansLoanIdReturnResponse = void;
+
+export type PostLoansLoanIdReturnError = unknown;
+
+export type PostLoansLoanIdExtendData = {
+  body: LoanExtend;
+  path: {
+    loan_id: string;
+  };
+};
+
+export type PostLoansLoanIdExtendResponse = void;
+
+export type PostLoansLoanIdExtendError = unknown;
+
 export type GetPhPaperIdPdfData = {
   path: {
     paper_id: string;
@@ -7315,6 +7549,353 @@ export type $OpenApiTs = {
     };
     delete: {
       req: DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cinema/themoviedb/{themoviedb_id}": {
+    get: {
+      req: GetCinemaThemoviedbThemoviedbIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": TheMovieDB;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cinema/sessions": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<CineSessionComplete>;
+      };
+    };
+    post: {
+      req: PostCinemaSessionsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": CineSessionComplete;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cinema/sessions/{session_id}": {
+    patch: {
+      req: PatchCinemaSessionsSessionIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteCinemaSessionsSessionIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cinema/sessions/{session_id}/poster": {
+    post: {
+      req: PostCinemaSessionsSessionIdPosterData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": app__core__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    get: {
+      req: GetCinemaSessionsSessionIdPosterData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/flappybird/scores": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<FlappyBirdScoreInDB>;
+      };
+    };
+    post: {
+      req: PostFlappybirdScoresData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": FlappyBirdScoreBase;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/flappybird/scores/me": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": FlappyBirdScoreCompleteFeedBack;
+      };
+    };
+  };
+  "/loans/loaners/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Loaner>;
+      };
+    };
+    post: {
+      req: PostLoansLoanersData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Loaner;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/loans/loaners/{loaner_id}": {
+    delete: {
+      req: DeleteLoansLoanersLoanerIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    patch: {
+      req: PatchLoansLoanersLoanerIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/loans/loaners/{loaner_id}/loans": {
+    get: {
+      req: GetLoansLoanersLoanerIdLoansData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Loan>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/loans/loaners/{loaner_id}/items": {
+    get: {
+      req: GetLoansLoanersLoanerIdItemsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Item>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    post: {
+      req: PostLoansLoanersLoanerIdItemsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Item;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/loans/loaners/{loaner_id}/items/{item_id}": {
+    patch: {
+      req: PatchLoansLoanersLoanerIdItemsItemIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteLoansLoanersLoanerIdItemsItemIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/loans/users/me": {
+    get: {
+      req: GetLoansUsersMeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Loan>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/loans/users/me/loaners": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Loaner>;
+      };
+    };
+  };
+  "/loans/": {
+    post: {
+      req: PostLoansData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Loan;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/loans/{loan_id}": {
+    patch: {
+      req: PatchLoansLoanIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteLoansLoanIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/loans/{loan_id}/return": {
+    post: {
+      req: PostLoansLoanIdReturnData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/loans/{loan_id}/extend": {
+    post: {
+      req: PostLoansLoanIdExtendData;
       res: {
         /**
          * Successful Response

@@ -3,6 +3,12 @@ import { LoadingButton } from "@/components/custom/LoadingButton";
 import { MultiSelect } from "@/components/custom/MultiSelect";
 import { StyledFormField } from "@/components/custom/StyledFormField";
 import { TextSeparator } from "@/components/custom/TextSeparator";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -99,140 +105,165 @@ export const AddEditProductForm = ({
           )}
         />
       </div>
-      <TextSeparator text="Tickets" />
-      <FormField
-        control={form.control}
-        name="generate_ticket"
-        render={({ field }) => (
-          <FormItem className="w-full">
-            <div className="grid gap-2">
-              <div className="flex items-center space-x-2">
-                <Switch
-                  id="generate_ticket"
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-                <Label htmlFor="generate_ticket">
-                  {"Générer un ticket pour ce produit"}
-                </Label>
-              </div>
-              <FormMessage />
+      <Accordion type="multiple">
+        <AccordionItem value="tickets">
+          <AccordionTrigger>
+            <h3 className="text-primary hover:text-primary">Tickets</h3>
+          </AccordionTrigger>
+          <AccordionContent>
+            <FormField
+              control={form.control}
+              name="generate_ticket"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <div className="grid gap-2">
+                    <div className="flex items-center space-x-2">
+                      <Switch
+                        id="generate_ticket"
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                      <Label htmlFor="generate_ticket">
+                        {"Générer un ticket pour ce produit"}
+                      </Label>
+                    </div>
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
+            <div className="flex flex-row gap-2">
+              <StyledFormField
+                form={form}
+                label="Nombre d'utilisations maximum"
+                id="ticket_max_use"
+                input={(field) => (
+                  <Input
+                    {...field}
+                    type="number"
+                    disabled={!form.watch("generate_ticket")}
+                  />
+                )}
+              />
+              <StyledFormField
+                form={form}
+                label="Date d'expiration"
+                id="ticket_expiration"
+                input={(field) => (
+                  <DatePicker
+                    date={field.value}
+                    setDate={field.onChange}
+                    fromDate={new Date()}
+                    defaultDate={field.value || new Date()}
+                    disabled={!form.watch("generate_ticket")}
+                  />
+                )}
+              />
             </div>
-          </FormItem>
-        )}
-      />
-      <div className="flex flex-row gap-2">
-        <StyledFormField
-          form={form}
-          label="Nombre d'utilisations maximum"
-          id="ticket_max_use"
-          input={(field) => (
-            <Input
-              {...field}
-              type="number"
-              disabled={!form.watch("generate_ticket")}
-            />
-          )}
-        />
-        <StyledFormField
-          form={form}
-          label="Date d'expiration"
-          id="ticket_expiration"
-          input={(field) => (
-            <DatePicker
-              date={field.value}
-              setDate={field.onChange}
-              fromDate={new Date()}
-              defaultDate={field.value || new Date()}
-              disabled={!form.watch("generate_ticket")}
-            />
-          )}
-        />
-      </div>
-      <TextSeparator text="Conditions" />
-      <div className="flex flex-row gap-2 w-full">
-        <StyledFormField
-          form={form}
-          label="Contraintes"
-          id="product_constraints"
-          input={(field) => (
-            <MultiSelect
-              options={constraint
-                .filter((constraint) => constraint.id !== form.watch("id"))
-                .map((constraint) => ({
-                  label: constraint.name_fr,
-                  value: constraint.id,
-                }))}
-              selected={field.value}
-              {...field}
-              className="w-64"
-            />
-          )}
-        />
-        <StyledFormField
-          form={form}
-          label="Signatures"
-          id="document_constraints"
-          input={(field) => (
-            <MultiSelect
-              options={
-                []
-                //   constraint.map((constraint) => ({
-                //   label: constraint.name,
-                //   value: constraint.id,
-                // }))
-              }
-              selected={[]}
-              {...field}
-              className="w-64"
-            />
-          )}
-        />
-      </div>
-      <TextSeparator text="Informations supplémentaires" />
-      <div className="w-full flex flex-row gap-4 pr-0">
-        <FormField
-          control={form.control}
-          name="product_constraints"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormControl>
-                <Input
-                  {...field}
-                  type="text"
-                  placeholder="Question pour les utilisateurs qui prennent le produit"
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <LoadingButton
-          variant="outline"
-          type="submit"
-          isLoading={isLoading}
-          className="w-[100px]"
-        >
-          Ajouter
-        </LoadingButton>
-      </div>
-      {form.watch("product_constraints") && (
-        <div className="grid gap-4 px-1">
-          {form.watch("product_constraints").map((constraint, index) => (
-            <div key={constraint} className="flex flex-row items-center">
-              <span>{constraint}</span>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="conditions">
+          <AccordionTrigger>
+            <h3 className="text-primary hover:text-primary">Conditions</h3>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="flex flex-row gap-2 w-full">
+              <StyledFormField
+                form={form}
+                label="Contraintes"
+                id="product_constraints"
+                input={(field) => (
+                  <MultiSelect
+                    options={constraint
+                      .filter(
+                        (constraint) => constraint.id !== form.watch("id"),
+                      )
+                      .map((constraint) => ({
+                        label: constraint.name_fr,
+                        value: constraint.id,
+                      }))}
+                    selected={field.value}
+                    {...field}
+                    className="w-64"
+                  />
+                )}
+              />
+              <StyledFormField
+                form={form}
+                label="Signatures"
+                id="document_constraints"
+                input={(field) => (
+                  <MultiSelect
+                    options={
+                      []
+                      //   constraint.map((constraint) => ({
+                      //   label: constraint.name,
+                      //   value: constraint.id,
+                      // }))
+                    }
+                    selected={[]}
+                    {...field}
+                    className="w-64"
+                  />
+                )}
+              />
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="information">
+          <AccordionTrigger>
+            <h3 className="text-primary hover:text-primary">
+              Informations supplémentaires
+            </h3>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="w-full flex flex-row gap-4 pr-0">
+              <FormField
+                control={form.control}
+                name="product_constraints"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="text"
+                        placeholder="Question pour les utilisateurs qui prennent le produit"
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
               <LoadingButton
-                size="icon"
-                variant="destructive"
-                className="flex ml-auto h-8"
+                variant="outline"
+                type="submit"
                 isLoading={isLoading}
-                onClick={() => {}}
+                className="w-[100px]"
               >
-                <HiTrash className="w-5 h-5" />
+                Ajouter
               </LoadingButton>
             </div>
-          ))}
-        </div>
-      )}
+            {form.watch("product_constraints") && (
+              <div className="grid gap-4 px-1">
+                {form.watch("product_constraints").map((constraint, index) => (
+                  <div key={constraint} className="flex flex-row items-center">
+                    <span>{constraint}</span>
+                    <LoadingButton
+                      size="icon"
+                      variant="destructive"
+                      className="flex ml-auto h-8"
+                      isLoading={isLoading}
+                      onClick={() => {}}
+                    >
+                      <HiTrash className="w-5 h-5" />
+                    </LoadingButton>
+                  </div>
+                ))}
+              </div>
+            )}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+
       <div className="flex justify-end mt-2 space-x-4">
         <Button
           variant="outline"

@@ -94,12 +94,15 @@ export function DataTable<TData, TValue>({
     onGlobalFilterChange: setGlobalFilter,
   });
   React.useEffect(() => {
-    if (userId && table.getRowModel().rows.length > 0) {
-      const row = table
-        .getRowModel()
-        .rows.find((row) => (row.original as CoreUserSimple).id === userId);
-      if (row && !row.getIsSelected()) {
-        row.toggleSelected(true);
+    if (userId && !table.getIsSomeRowsSelected()) {
+      const userIndex = data.findIndex(
+        (user) => (user as CoreUserSimple).id === userId,
+      );
+      if (userIndex !== -1) {
+        const row = table.getRow(userIndex.toString(), true);
+        if (row) {
+          row.toggleSelected(true);
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

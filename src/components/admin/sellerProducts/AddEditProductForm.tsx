@@ -4,7 +4,12 @@ import { MultiSelect } from "@/components/custom/MultiSelect";
 import { StyledFormField } from "@/components/custom/StyledFormField";
 import { TextSeparator } from "@/components/custom/TextSeparator";
 import { Button } from "@/components/ui/button";
-import { FormField, FormItem, FormMessage } from "@/components/ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -13,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
 import { UseFormReturn } from "react-hook-form";
+import { HiTrash } from "react-icons/hi";
 import { z } from "zod";
 
 interface AddEditProductFormProps {
@@ -183,6 +189,50 @@ export const AddEditProductForm = ({
           )}
         />
       </div>
+      <TextSeparator text="Informations supplémentaires" />
+      <div className="w-full flex flex-row gap-4 pr-0">
+        <FormField
+          control={form.control}
+          name="product_constraints"
+          render={({ field }) => (
+            <FormItem className="w-full">
+              <FormControl>
+                <Input
+                  {...field}
+                  type="text"
+                  placeholder="Question pour les utilisateurs qui prennent le produit"
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <LoadingButton
+          variant="outline"
+          type="submit"
+          isLoading={isLoading}
+          className="w-[100px]"
+        >
+          Ajouter
+        </LoadingButton>
+      </div>
+      {form.watch("product_constraints") && (
+        <div className="grid gap-4 px-1">
+          {form.watch("product_constraints").map((constraint, index) => (
+            <div key={constraint} className="flex flex-row items-center">
+              <span>{constraint}</span>
+              <LoadingButton
+                size="icon"
+                variant="destructive"
+                className="flex ml-auto h-8"
+                isLoading={isLoading}
+                onClick={() => {}}
+              >
+                <HiTrash className="w-5 h-5" />
+              </LoadingButton>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="flex justify-end mt-2 space-x-4">
         <Button
           variant="outline"

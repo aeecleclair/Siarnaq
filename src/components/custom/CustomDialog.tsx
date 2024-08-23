@@ -14,6 +14,7 @@ interface CustomDialogProps {
   title: string;
   description: string | JSX.Element;
   children?: React.ReactNode;
+  isFullWidth?: boolean;
 }
 
 export const CustomDialog = ({
@@ -22,10 +23,11 @@ export const CustomDialog = ({
   title,
   description,
   children,
+  isFullWidth,
 }: CustomDialogProps) => {
   return (
     <Dialog open={isOpened} onOpenChange={setIsOpened}>
-      <DialogTrigger className="w-full h-full">
+      <DialogTrigger className={isFullWidth ? "w-full" : ""}>
         {children}
       </DialogTrigger>
       <DialogContent

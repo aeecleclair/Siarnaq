@@ -75,6 +75,7 @@ export const AddProductAccordionItem = ({
   return (
     <CustomDialog
       title="Nouveau produit"
+      isFullWidth
       description={
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -89,9 +90,10 @@ export const AddProductAccordionItem = ({
       isOpened={isAddDialogOpened}
       setIsOpened={setIsAddDialogOpened}
     >
-      <div className="flex flex-1 items-center justify-start py-4 font-medium border-b cursor-pointer">
+      <div className="flex flex-1 items-center justify-start py-4 font-medium border-b cursor-pointer ">
         <HiPlus className="w-4 h-4 mr-6" />
-        <h3 className="text-lg font-semibold">New Product</h3>
+        <h3 className="text-lg font-semibold">Nouveau produit</h3>
+        <div className="flex grow"></div>
       </div>
     </CustomDialog>
   );

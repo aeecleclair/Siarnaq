@@ -54,7 +54,7 @@ export const SellerTabContent = ({
   ]);
 
   return (
-    <TabsContent value={seller.id} className="min-w-96">
+    <TabsContent value={seller.id} className="min-w-96 w-full">
       <AddProductAccordionItem
         seller={seller}
         refreshProduct={refetchProducts}

@@ -95,31 +95,35 @@ export const PurchaseItem = ({
   return (
     <div>
       <div className="flex flex-row w-full items-center">
-        <span className="font-bold w-7 ">
-          {displayWarning && (
-            <HiOutlineExclamationCircle className="inline-block mr-2 h-5 w-5 text-destructive" />
-          )}
+        <span className="flex flex-col items-center md:flex-row">
+          <span className="font-bold w-7">
+            {displayWarning && (
+              <HiOutlineExclamationCircle className="inline-block mr-2 h-5 w-5 text-destructive" />
+            )}
 
-          {purchase.validated && (
-            <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
-          )}
+            {purchase.validated && (
+              <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
+            )}
+          </span>
+
+          <span className="font-bold w-11 pr-3 text-center md:text-right">
+            {purchase.quantity} x
+          </span>
         </span>
 
-        <span className="font-bold w-11 pr-3 text-right">
-          {purchase.quantity} x
-        </span>
-
-        <span className="font-bold w-1/6">{purchase.seller.name}</span>
-        <span className="w-1/6">
-          {selectTranslation(
-            purchase.product.name_en,
-            purchase.product.name_fr,
-          )}
-        </span>
-        <span className="w-1/6">
-          {selectTranslation(variant?.name_en, variant?.name_fr)}
-        </span>
-        <span className="ml-auto font-semibold">
+        <div className="flex flex-col md:flex-row w-3/4">
+          <span className="font-bold md:w-1/3">{purchase.seller.name}</span>
+          <span className="md:w-1/3">
+            {selectTranslation(
+              purchase.product.name_en,
+              purchase.product.name_fr,
+            )}
+          </span>
+          <span className="md:w-1/3">
+            {selectTranslation(variant?.name_en, variant?.name_fr)}
+          </span>
+        </div>
+        <span className="ml-auto w-24 text-right font-semibold">
           {((purchase.quantity * purchase.price) / 100).toFixed(2)} €
         </span>
         {isAdmin && (

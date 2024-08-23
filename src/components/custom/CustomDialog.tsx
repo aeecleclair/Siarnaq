@@ -1,12 +1,12 @@
-import { DialogTrigger } from "@radix-ui/react-dialog";
-
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "../ui/dialog";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface CustomDialogProps {
   isOpened: boolean;
@@ -31,13 +31,15 @@ export const CustomDialog = ({
         {children}
       </DialogTrigger>
       <DialogContent
-        className="sm:max-w-[600px]"
+        className="sm:max-w-[600px] m-0 p-0"
         onClick={(e) => e.stopPropagation()}
       >
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-        </DialogHeader>
-        <DialogDescription>{description}</DialogDescription>
+        <ScrollArea className="max-h-[80vh] px-6">
+          <DialogHeader className="pt-6 m-1">
+            <DialogTitle>{title}</DialogTitle>
+          </DialogHeader>
+          <DialogDescription className="pb-6 m-1">{description}</DialogDescription>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );

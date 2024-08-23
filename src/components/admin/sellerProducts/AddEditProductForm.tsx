@@ -110,7 +110,7 @@ export const AddEditProductForm = ({
           <AccordionTrigger>
             <h3 className="text-primary hover:text-primary">Tickets</h3>
           </AccordionTrigger>
-          <AccordionContent>
+          <AccordionContent className="grid gap-4">
             <FormField
               control={form.control}
               name="generate_ticket"
@@ -166,7 +166,7 @@ export const AddEditProductForm = ({
           <AccordionTrigger>
             <h3 className="text-primary hover:text-primary">Conditions</h3>
           </AccordionTrigger>
-          <AccordionContent>
+          <AccordionContent className="grid gap-4">
             <div className="flex flex-row gap-2 w-full">
               <StyledFormField
                 form={form}
@@ -216,8 +216,8 @@ export const AddEditProductForm = ({
               Informations supplémentaires
             </h3>
           </AccordionTrigger>
-          <AccordionContent>
-            <div className="w-full flex flex-row gap-4 pr-0">
+          <AccordionContent className="grid gap-4">
+            <div className="w-full flex flex-row gap-4 p-1">
               <FormField
                 control={form.control}
                 name="product_constraints"
@@ -235,7 +235,7 @@ export const AddEditProductForm = ({
               />
               <LoadingButton
                 variant="outline"
-                type="submit"
+                type="button"
                 isLoading={isLoading}
                 className="w-[100px]"
               >

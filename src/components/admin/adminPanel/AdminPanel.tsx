@@ -12,7 +12,7 @@ interface AdminPanelProps {
 
 export const AdminPanel = ({ sellers, status }: AdminPanelProps) => {
   return (
-    <Accordion type="multiple">
+    <Accordion type="multiple" defaultValue={["status"]}>
       <SellerAccordionItem sellers={sellers} />
       <CurriculumAccordionItem />
       <StatusAccordionItem status={status} />

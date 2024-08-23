@@ -37,7 +37,8 @@ export const SellerTabContent = ({
       typeof window !== "undefined" &&
       productExpansion[seller.id] === undefined &&
       seller.id === activeSellerId &&
-      products
+      products &&
+      products.length > 0
     ) {
       setExpandedProducts(
         seller.id,

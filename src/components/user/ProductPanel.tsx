@@ -38,7 +38,8 @@ export const ProductPanel = () => {
       typeof window !== "undefined" &&
       productExpansion[firstSellerId] === undefined &&
       seller?.id === firstSellerId &&
-      onlineProducts
+      onlineProducts &&
+      onlineProducts.length > 0
     ) {
       setExpandedProducts(
         firstSellerId,

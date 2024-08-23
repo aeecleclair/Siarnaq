@@ -82,7 +82,7 @@ export const PaymentItem = ({
         {paymentIcon(payment.payment_type)}
         {t(payment.payment_type)}
       </span>
-      <span className="ml-auto font-semibold w-24 flex justify-end">
+      <span className="ml-auto font-semibold w-28 flex justify-end">
         {(payment.total / 100).toFixed(2)} €
       </span>
       {isAdmin && (

@@ -16,13 +16,28 @@ interface DataTableViewOptionsProps<TData> {
   table: Table<TData>;
 }
 
+const getColumnName = (value: string) => {
+  switch (value) {
+    case "name":
+      return "Nom";
+    case "firstname":
+      return "Prénom";
+    case "nickname":
+      return "Surnom";
+    case "curriculum":
+      return "Cursus";
+    default:
+      return value;
+  }
+};
+
 export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="hidden h-8 lg:flex ml-2">
+      <DropdownMenuTrigger>
+        <Button variant="outline" size="sm" className="hidden h-8 lg:flex">
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
           Colonnes
         </Button>
@@ -43,7 +58,7 @@ export function DataTableViewOptions<TData>({
                 checked={column.getIsVisible()}
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
-                {column.id}
+                {getColumnName(column.id)}
               </DropdownMenuCheckboxItem>
             );
           })}

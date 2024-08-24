@@ -27,7 +27,6 @@ import {
 export const InfoPanel = () => {
   const t = useTranslations("Info");
 
-  const { userId } = useTokenStore();
   const { onlineSellers } = useOnlineSellers();
 
   return (

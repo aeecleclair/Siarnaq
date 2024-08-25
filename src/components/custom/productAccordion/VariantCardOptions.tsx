@@ -152,6 +152,7 @@ export const VariantCardOptions = ({
             isOpened={isEditDialogOpened}
             setIsOpened={setIsEditDialogOpened}
             title="Modifier la variante"
+            isFullWidth
             description={
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -204,6 +205,7 @@ export const VariantCardOptions = ({
             isOpened={isRemoveDialogOpened}
             setIsOpened={setIsRemoveDialogOpened}
             title="Supprimer la variante"
+            isFullWidth
             description={
               <>
                 <div>Êtes-vous sûr de vouloir supprimer cette variante ?</div>

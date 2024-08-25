@@ -144,6 +144,7 @@ export const ProductAccordionOptions = ({
             isOpened={isEditDialogOpened}
             setIsOpened={setIsEditDialogOpened}
             title="Modifier le produit"
+            isFullWidth
             description={
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -172,6 +173,7 @@ export const ProductAccordionOptions = ({
             isOpened={isRemoveDialogOpened}
             setIsOpened={setIsRemoveDialogOpened}
             title="Supprimer la producte"
+            isFullWidth
             description={
               <>
                 <div>Êtes-vous sûr de vouloir supprimer ce produit ?</div>

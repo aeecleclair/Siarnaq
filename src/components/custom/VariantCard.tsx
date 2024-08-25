@@ -8,11 +8,12 @@ import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
 import { useTokenStore } from "@/stores/token";
 import { useTranslation } from "@/translations/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 
 import { Badge } from "../ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Input } from "../ui/input";
 import { useToast } from "../ui/use-toast";
 import { LoadingButton } from "./LoadingButton";
 
@@ -48,6 +49,11 @@ export const VariantCard = ({
       ?.quantity || 0;
   const selected = numberSelectedVariant > 0;
   const [isLoading, setIsLoading] = useState(false);
+  const [inputQuantity, setInputQuantity] = useState(numberSelectedVariant);
+
+  useEffect(() => {
+    setInputQuantity(numberSelectedVariant);
+  }, [numberSelectedVariant]);
 
   const purchaseVariant = async (quantity: number) => {
     setIsLoading(true);
@@ -71,6 +77,7 @@ export const VariantCard = ({
       return;
     }
     setIsLoading(false);
+    setInputQuantity(quantity);
     refetch();
     refetchUserPurchases();
   };
@@ -169,9 +176,25 @@ export const VariantCard = ({
             >
               <HiMinus className="w-4 h-4" />
             </LoadingButton>
-            <span className="text-xs text-muted-foreground w-3 justify-center flex">
-              {numberSelectedVariant}
-            </span>
+            <Input
+              type="text"
+              className="w-12 text-s flex"
+              value={inputQuantity}
+              disabled={!variant.enabled || !isSelectable}
+              onChange={(e) => {
+                setInputQuantity(Number(e.target.value) || 0);
+              }}
+              onBlur={(e) => {
+                if (!isSelectable) return;
+                e.stopPropagation();
+                const newQuantity = Number(e.target.value) || 0;
+                if (newQuantity === 0) {
+                  if (inputQuantity != 0) cancelPurchase();
+                  return;
+                }
+                purchaseVariant(newQuantity);
+              }}
+            />
             <LoadingButton
               variant="outline"
               className="h-6 px-1"

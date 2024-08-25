@@ -63,6 +63,7 @@ export const ProductAccordionOptions = ({
       ticket_expiration: product.ticket_expiration
         ? new Date(product.ticket_expiration)
         : undefined,
+      data_fields: [],
     },
   });
 

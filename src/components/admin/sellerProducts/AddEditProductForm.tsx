@@ -1,3 +1,8 @@
+import {
+  CustomDataFieldBase,
+  deleteCdrSellersSellerIdProductsProductIdDataFieldId,
+  postCdrSellersSellerIdProductsProductIdData,
+} from "@/api";
 import { DatePicker } from "@/components/custom/DatePicker";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { MultiSelect } from "@/components/custom/MultiSelect";
@@ -21,9 +26,11 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
+import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { HiTrash } from "react-icons/hi";
 import { z } from "zod";
@@ -46,11 +53,74 @@ export const AddEditProductForm = ({
   isEdit = false,
 }: AddEditProductFormProps) => {
   const { products: constraint } = useProducts();
-  const { data } = useSellerProductData(sellerId, productId ?? null);
+  const { data, refetch } = useSellerProductData(sellerId, productId ?? null);
+  const [isAddingLoading, setIsAddingLoading] = useState(false);
+  const [isDeletingLoading, setIsDeletingLoading] = useState(false);
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setIsOpened(false);
+  }
+
+  async function onAddData() {
+    const data = form.getValues("data_field_name");
+    if (!data) return;
+    if (isEdit) {
+      setIsAddingLoading(true);
+      const body: CustomDataFieldBase = {
+        name: data,
+      };
+      const { error } = await postCdrSellersSellerIdProductsProductIdData({
+        body: body,
+        path: { seller_id: sellerId, product_id: productId! },
+      });
+      if (error) {
+        toast({
+          title: "Error",
+          description: (error as { detail: String }).detail,
+          variant: "destructive",
+        });
+        setIsAddingLoading(false);
+        return;
+      }
+      refetch();
+      setIsAddingLoading(false);
+    } else {
+      form.setValue("data_field_name", "");
+      form.setValue("data_fields", [
+        ...form.getValues("data_fields"),
+        {
+          id: form.getValues("data_fields").length.toString(),
+          name: data,
+          product_id: "",
+        },
+      ]);
+    }
+  }
+
+  async function onDeleteData(id: string) {
+    if (isEdit) {
+      setIsDeletingLoading(true);
+      const { error } = await deleteCdrSellersSellerIdProductsProductIdDataFieldId({
+        path: { seller_id: sellerId, product_id: productId!, field_id: id },
+      });
+      if (error) {
+        toast({
+          title: "Error",
+          description: (error as { detail: String }).detail,
+          variant: "destructive",
+        });
+        setIsDeletingLoading(false);
+        return;
+      }
+      refetch();
+      setIsDeletingLoading(false);
+    } else {
+      form.setValue(
+        "data_fields",
+        form.getValues("data_fields").filter((field) => field.id !== id),
+      );
+    }
   }
 
   return (
@@ -226,7 +296,7 @@ export const AddEditProductForm = ({
             <div className="w-full flex flex-row gap-4 p-1">
               <FormField
                 control={form.control}
-                name="product_constraints"
+                name="data_field_name"
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
@@ -242,22 +312,23 @@ export const AddEditProductForm = ({
               <LoadingButton
                 variant="outline"
                 type="button"
-                isLoading={isLoading}
+                isLoading={isAddingLoading}
                 className="w-[100px]"
+                onClick={onAddData}
               >
                 Ajouter
               </LoadingButton>
             </div>
             <div className="grid gap-4 px-1">
-              {data.map((field) => (
+              {(isEdit ? data : form.watch("data_fields")).map((field) => (
                 <div key={field.id} className="flex flex-row items-center">
                   <span>{field.name}</span>
                   <LoadingButton
                     size="icon"
                     variant="destructive"
                     className="flex ml-auto h-8"
-                    isLoading={isLoading}
-                    onClick={() => {}}
+                    isLoading={isDeletingLoading}
+                    onClick={() => onDeleteData(field.id)}
                   >
                     <HiTrash className="w-5 h-5" />
                   </LoadingButton>

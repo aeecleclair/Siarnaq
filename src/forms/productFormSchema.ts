@@ -16,6 +16,14 @@ export const productFormSchema = z
     available_online: z.enum(["true", "false"], {
       required_error: "Veuillez renseigner la disponibilité du produit",
     }),
+    data_field_name: z.string().optional(),
+    data_fields: z.array(
+      z.object({
+        name: z.string(),
+        id: z.string(),
+        product_id: z.string(),
+      }),
+    ),
     product_constraints: z.array(z.string()),
     document_constraints: z.array(z.string()),
     generate_ticket: z.boolean(),

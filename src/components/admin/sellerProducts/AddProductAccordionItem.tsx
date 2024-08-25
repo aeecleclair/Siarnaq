@@ -2,12 +2,12 @@ import {
   ProductBase,
   SellerComplete,
   postCdrSellersSellerIdProducts,
+  postCdrSellersSellerIdProductsProductIdData,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
-import { apiFormatDate } from "@/lib/date_conversion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -35,6 +35,7 @@ export const AddProductAccordionItem = ({
     defaultValues: {
       product_constraints: [],
       document_constraints: [],
+      data_fields: [],
       ticket_max_use: "1",
       generate_ticket: false,
     },
@@ -66,6 +67,22 @@ export const AddProductAccordionItem = ({
       setIsAddDialogOpened(false);
       return;
     }
+    const data_fields = values.data_fields;
+    if (data && data_fields.length) {
+      const dataFields = data_fields.map((dataField) => ({
+        ...dataField,
+        product_id: data.id,
+      }));
+      await Promise.all(
+        dataFields.map((dataField) =>
+          postCdrSellersSellerIdProductsProductIdData({
+            body: { name: dataField.name },
+            path: { seller_id: seller.id, product_id: data.id },
+          }),
+        ),
+      );
+    }
+
     refreshProduct();
     setIsAddDialogOpened(false);
     setIsLoading(false);

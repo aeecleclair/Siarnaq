@@ -54,23 +54,23 @@ import type {
   DeleteCdrCurriculumsCurriculumIdError,
   DeleteCdrCurriculumsCurriculumIdResponse,
   DeleteCdrSellersSellerIdData,
-  DeleteCdrSellersSellerIdDataFieldIdData,
-  DeleteCdrSellersSellerIdDataFieldIdError,
-  DeleteCdrSellersSellerIdDataFieldIdResponse,
   DeleteCdrSellersSellerIdDocumentsDocumentIdData,
   DeleteCdrSellersSellerIdDocumentsDocumentIdError,
   DeleteCdrSellersSellerIdDocumentsDocumentIdResponse,
   DeleteCdrSellersSellerIdError,
   DeleteCdrSellersSellerIdProductsProductIdData,
+  DeleteCdrSellersSellerIdProductsProductIdDataFieldIdData,
+  DeleteCdrSellersSellerIdProductsProductIdDataFieldIdError,
+  DeleteCdrSellersSellerIdProductsProductIdDataFieldIdResponse,
   DeleteCdrSellersSellerIdProductsProductIdError,
   DeleteCdrSellersSellerIdProductsProductIdResponse,
+  DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData,
+  DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError,
+  DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdData,
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
   DeleteCdrSellersSellerIdProductsProductIdVariantsVariantIdResponse,
   DeleteCdrSellersSellerIdResponse,
-  DeleteCdrSellersSellerIdUsersUserIdDataFieldIdData,
-  DeleteCdrSellersSellerIdUsersUserIdDataFieldIdError,
-  DeleteCdrSellersSellerIdUsersUserIdDataFieldIdResponse,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdData,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdError,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdResponse,
@@ -122,6 +122,11 @@ import type {
   DeletePhonebookAssociationsMembershipsMembershipIdData,
   DeletePhonebookAssociationsMembershipsMembershipIdError,
   DeletePhonebookAssociationsMembershipsMembershipIdResponse,
+  DeleteRaidTeamsError,
+  DeleteRaidTeamsResponse,
+  DeleteRaidTeamsTeamIdData,
+  DeleteRaidTeamsTeamIdError,
+  DeleteRaidTeamsTeamIdResponse,
   DeleteRecommendationRecommendationsRecommendationIdData,
   DeleteRecommendationRecommendationsRecommendationIdError,
   DeleteRecommendationRecommendationsRecommendationIdResponse,
@@ -247,10 +252,13 @@ import type {
   GetCdrSellersSellerIdDocumentsResponse,
   GetCdrSellersSellerIdProductsData,
   GetCdrSellersSellerIdProductsError,
+  GetCdrSellersSellerIdProductsProductIdDataData,
+  GetCdrSellersSellerIdProductsProductIdDataError,
+  GetCdrSellersSellerIdProductsProductIdDataResponse,
+  GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData,
+  GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError,
+  GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
   GetCdrSellersSellerIdProductsResponse,
-  GetCdrSellersSellerIdUsersUserIdDataFieldIdData,
-  GetCdrSellersSellerIdUsersUserIdDataFieldIdError,
-  GetCdrSellersSellerIdUsersUserIdDataFieldIdResponse,
   GetCdrSellersSellerIdUsersUserIdPurchasesData,
   GetCdrSellersSellerIdUsersUserIdPurchasesError,
   GetCdrSellersSellerIdUsersUserIdPurchasesResponse,
@@ -300,6 +308,8 @@ import type {
   GetFlappybirdScoresMeError,
   GetFlappybirdScoresMeResponse,
   GetFlappybirdScoresResponse,
+  GetGoogleApiOauth2CallbackError,
+  GetGoogleApiOauth2CallbackResponse,
   GetGroupsError,
   GetGroupsGroupIdData,
   GetGroupsGroupIdError,
@@ -366,6 +376,28 @@ import type {
   GetPhonebookRoletagsResponse,
   GetPrivacyError,
   GetPrivacyResponse,
+  GetRaidDocumentDocumentIdData,
+  GetRaidDocumentDocumentIdError,
+  GetRaidDocumentDocumentIdResponse,
+  GetRaidDriveError,
+  GetRaidDriveResponse,
+  GetRaidInformationError,
+  GetRaidInformationResponse,
+  GetRaidParticipantsParticipantIdData,
+  GetRaidParticipantsParticipantIdError,
+  GetRaidParticipantsParticipantIdResponse,
+  GetRaidParticipantsParticipantIdTeamData,
+  GetRaidParticipantsParticipantIdTeamError,
+  GetRaidParticipantsParticipantIdTeamResponse,
+  GetRaidPayError,
+  GetRaidPayResponse,
+  GetRaidPriceError,
+  GetRaidPriceResponse,
+  GetRaidTeamsError,
+  GetRaidTeamsResponse,
+  GetRaidTeamsTeamIdData,
+  GetRaidTeamsTeamIdError,
+  GetRaidTeamsTeamIdResponse,
   GetRecommendationRecommendationsError,
   GetRecommendationRecommendationsRecommendationIdPictureData,
   GetRecommendationRecommendationsRecommendationIdPictureError,
@@ -495,13 +527,13 @@ import type {
   PatchCdrSellersSellerIdProductsProductIdData,
   PatchCdrSellersSellerIdProductsProductIdError,
   PatchCdrSellersSellerIdProductsProductIdResponse,
+  PatchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData,
+  PatchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError,
+  PatchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
   PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdData,
   PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdError,
   PatchCdrSellersSellerIdProductsProductIdVariantsVariantIdResponse,
   PatchCdrSellersSellerIdResponse,
-  PatchCdrSellersSellerIdUsersUserIdDataFieldIdData,
-  PatchCdrSellersSellerIdUsersUserIdDataFieldIdError,
-  PatchCdrSellersSellerIdUsersUserIdDataFieldIdResponse,
   PatchCdrStatusData,
   PatchCdrStatusError,
   PatchCdrStatusResponse,
@@ -538,6 +570,21 @@ import type {
   PatchPhonebookAssociationsMembershipsMembershipIdData,
   PatchPhonebookAssociationsMembershipsMembershipIdError,
   PatchPhonebookAssociationsMembershipsMembershipIdResponse,
+  PatchRaidDriveData,
+  PatchRaidDriveError,
+  PatchRaidDriveResponse,
+  PatchRaidInformationData,
+  PatchRaidInformationError,
+  PatchRaidInformationResponse,
+  PatchRaidParticipantsParticipantIdData,
+  PatchRaidParticipantsParticipantIdError,
+  PatchRaidParticipantsParticipantIdResponse,
+  PatchRaidPriceData,
+  PatchRaidPriceError,
+  PatchRaidPriceResponse,
+  PatchRaidTeamsTeamIdData,
+  PatchRaidTeamsTeamIdError,
+  PatchRaidTeamsTeamIdResponse,
   PatchRecommendationRecommendationsRecommendationIdData,
   PatchRecommendationRecommendationsRecommendationIdError,
   PatchRecommendationRecommendationsRecommendationIdResponse,
@@ -664,21 +711,21 @@ import type {
   PostCdrSellersData,
   PostCdrSellersError,
   PostCdrSellersResponse,
-  PostCdrSellersSellerIdDataData,
-  PostCdrSellersSellerIdDataError,
-  PostCdrSellersSellerIdDataResponse,
   PostCdrSellersSellerIdDocumentsData,
   PostCdrSellersSellerIdDocumentsError,
   PostCdrSellersSellerIdDocumentsResponse,
   PostCdrSellersSellerIdProductsData,
   PostCdrSellersSellerIdProductsError,
+  PostCdrSellersSellerIdProductsProductIdDataData,
+  PostCdrSellersSellerIdProductsProductIdDataError,
+  PostCdrSellersSellerIdProductsProductIdDataResponse,
+  PostCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData,
+  PostCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError,
+  PostCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
   PostCdrSellersSellerIdProductsProductIdVariantsData,
   PostCdrSellersSellerIdProductsProductIdVariantsError,
   PostCdrSellersSellerIdProductsProductIdVariantsResponse,
   PostCdrSellersSellerIdProductsResponse,
-  PostCdrSellersSellerIdUsersUserIdDataFieldIdData,
-  PostCdrSellersSellerIdUsersUserIdDataFieldIdError,
-  PostCdrSellersSellerIdUsersUserIdDataFieldIdResponse,
   PostCdrUsersUserIdCurriculumsCurriculumIdData,
   PostCdrUsersUserIdCurriculumsCurriculumIdError,
   PostCdrUsersUserIdCurriculumsCurriculumIdResponse,
@@ -760,6 +807,42 @@ import type {
   PostPhonebookAssociationsMembershipsError,
   PostPhonebookAssociationsMembershipsResponse,
   PostPhonebookAssociationsResponse,
+  PostRaidDocumentData,
+  PostRaidDocumentDocumentIdValidateData,
+  PostRaidDocumentDocumentIdValidateError,
+  PostRaidDocumentDocumentIdValidateResponse,
+  PostRaidDocumentError,
+  PostRaidDocumentResponse,
+  PostRaidParticipantParticipantIdHonourData,
+  PostRaidParticipantParticipantIdHonourError,
+  PostRaidParticipantParticipantIdHonourResponse,
+  PostRaidParticipantParticipantIdPaymentData,
+  PostRaidParticipantParticipantIdPaymentError,
+  PostRaidParticipantParticipantIdPaymentResponse,
+  PostRaidParticipantParticipantIdTshirtPaymentData,
+  PostRaidParticipantParticipantIdTshirtPaymentError,
+  PostRaidParticipantParticipantIdTshirtPaymentResponse,
+  PostRaidParticipantsData,
+  PostRaidParticipantsError,
+  PostRaidParticipantsResponse,
+  PostRaidSecurityFileData,
+  PostRaidSecurityFileError,
+  PostRaidSecurityFileResponse,
+  PostRaidTeamsData,
+  PostRaidTeamsError,
+  PostRaidTeamsJoinTokenData,
+  PostRaidTeamsJoinTokenError,
+  PostRaidTeamsJoinTokenResponse,
+  PostRaidTeamsMergeData,
+  PostRaidTeamsMergeError,
+  PostRaidTeamsMergeResponse,
+  PostRaidTeamsResponse,
+  PostRaidTeamsTeamIdInviteData,
+  PostRaidTeamsTeamIdInviteError,
+  PostRaidTeamsTeamIdInviteResponse,
+  PostRaidTeamsTeamIdKickParticipantIdData,
+  PostRaidTeamsTeamIdKickParticipantIdError,
+  PostRaidTeamsTeamIdKickParticipantIdResponse,
   PostRecommendationRecommendationsData,
   PostRecommendationRecommendationsError,
   PostRecommendationRecommendationsRecommendationIdPictureData,
@@ -1234,6 +1317,19 @@ export const deleteModuleVisibilityRootGroupId = (
   >({
     ...options,
     url: "/module-visibility/{root}/{group_id}",
+  });
+};
+
+/**
+ * Google Api Callback
+ */
+export const getGoogleApiOauth2Callback = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetGoogleApiOauth2CallbackResponse,
+    GetGoogleApiOauth2CallbackError
+  >({
+    ...options,
+    url: "/google-api/oauth2callback",
   });
 };
 
@@ -1913,680 +2009,668 @@ export const getUsersUserIdProfilePicture = (
 };
 
 /**
- * Get Recommendation
- * Get recommendations.
+ * Read Advertisers
+ * Get existing advertisers.
+ */
+export const getAdvertAdvertisers = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetAdvertAdvertisersResponse,
+    GetAdvertAdvertisersError
+  >({
+    ...options,
+    url: "/advert/advertisers",
+  });
+};
+
+/**
+ * Create Advertiser
+ * Create a new advertiser.
+ *
+ * Each advertiser is associated with a `manager_group`. Users belonging to this group are able to manage the adverts related to the advertiser.
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const getRecommendationRecommendations = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetRecommendationRecommendationsResponse,
-    GetRecommendationRecommendationsError
-  >({
-    ...options,
-    url: "/recommendation/recommendations",
-  });
-};
-
-/**
- * Create Recommendation
- * Create a recommendation.
- *
- * **This endpoint is only usable by members of the group BDE**
- */
-export const postRecommendationRecommendations = (
-  options: Options<PostRecommendationRecommendationsData>,
+export const postAdvertAdvertisers = (
+  options: Options<PostAdvertAdvertisersData>,
 ) => {
   return (options?.client ?? client).post<
-    PostRecommendationRecommendationsResponse,
-    PostRecommendationRecommendationsError
+    PostAdvertAdvertisersResponse,
+    PostAdvertAdvertisersError
   >({
     ...options,
-    url: "/recommendation/recommendations",
+    url: "/advert/advertisers",
   });
 };
 
 /**
- * Edit Recommendation
- * Edit a recommendation.
+ * Delete Advertiser
+ * Delete an advertiser. All adverts associated with the advertiser will also be deleted from the database.
  *
- * **This endpoint is only usable by members of the group BDE**
+ * **This endpoint is only usable by administrators**
  */
-export const patchRecommendationRecommendationsRecommendationId = (
-  options: Options<PatchRecommendationRecommendationsRecommendationIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchRecommendationRecommendationsRecommendationIdResponse,
-    PatchRecommendationRecommendationsRecommendationIdError
-  >({
-    ...options,
-    url: "/recommendation/recommendations/{recommendation_id}",
-  });
-};
-
-/**
- * Delete Recommendation
- * Delete a recommendation.
- *
- * **This endpoint is only usable by members of the group BDE**
- */
-export const deleteRecommendationRecommendationsRecommendationId = (
-  options: Options<DeleteRecommendationRecommendationsRecommendationIdData>,
+export const deleteAdvertAdvertisersAdvertiserId = (
+  options: Options<DeleteAdvertAdvertisersAdvertiserIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteRecommendationRecommendationsRecommendationIdResponse,
-    DeleteRecommendationRecommendationsRecommendationIdError
+    DeleteAdvertAdvertisersAdvertiserIdResponse,
+    DeleteAdvertAdvertisersAdvertiserIdError
   >({
     ...options,
-    url: "/recommendation/recommendations/{recommendation_id}",
+    url: "/advert/advertisers/{advertiser_id}",
   });
 };
 
 /**
- * Read Recommendation Image
- * Get the image of a recommendation.
+ * Update Advertiser
+ * Update an advertiser
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const patchAdvertAdvertisersAdvertiserId = (
+  options: Options<PatchAdvertAdvertisersAdvertiserIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchAdvertAdvertisersAdvertiserIdResponse,
+    PatchAdvertAdvertisersAdvertiserIdError
+  >({
+    ...options,
+    url: "/advert/advertisers/{advertiser_id}",
+  });
+};
+
+/**
+ * Get Current User Advertisers
+ * Return all advertisers the current user can manage.
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const getRecommendationRecommendationsRecommendationIdPicture = (
-  options: Options<GetRecommendationRecommendationsRecommendationIdPictureData>,
-) => {
+export const getAdvertMeAdvertisers = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetRecommendationRecommendationsRecommendationIdPictureResponse,
-    GetRecommendationRecommendationsRecommendationIdPictureError
+    GetAdvertMeAdvertisersResponse,
+    GetAdvertMeAdvertisersError
   >({
     ...options,
-    url: "/recommendation/recommendations/{recommendation_id}/picture",
+    url: "/advert/me/advertisers",
   });
 };
 
 /**
- * Create Recommendation Image
- * Add an image to a recommendation.
+ * Read Adverts
+ * Get existing adverts. If advertisers optional parameter is used, search adverts by advertisers
  *
- * **This endpoint is only usable by members of the group BDE**
+ * **The user must be authenticated to use this endpoint**
  */
-export const postRecommendationRecommendationsRecommendationIdPicture = (
-  options: Options<PostRecommendationRecommendationsRecommendationIdPictureData>,
+export const getAdvertAdverts = (options?: Options<GetAdvertAdvertsData>) => {
+  return (options?.client ?? client).get<
+    GetAdvertAdvertsResponse,
+    GetAdvertAdvertsError
+  >({
+    ...options,
+    url: "/advert/adverts",
+  });
+};
+
+/**
+ * Create Advert
+ * Create a new advert
+ *
+ * **The user must be a member of the advertiser group_manager to use this endpoint**
+ */
+export const postAdvertAdverts = (options: Options<PostAdvertAdvertsData>) => {
+  return (options?.client ?? client).post<
+    PostAdvertAdvertsResponse,
+    PostAdvertAdvertsError
+  >({
+    ...options,
+    url: "/advert/adverts",
+  });
+};
+
+/**
+ * Read Advert
+ * Get an advert
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getAdvertAdvertsAdvertId = (
+  options: Options<GetAdvertAdvertsAdvertIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetAdvertAdvertsAdvertIdResponse,
+    GetAdvertAdvertsAdvertIdError
+  >({
+    ...options,
+    url: "/advert/adverts/{advert_id}",
+  });
+};
+
+/**
+ * Update Advert
+ * Edit an advert
+ *
+ * **The user must be a member of the advertiser group_manager to use this endpoint**
+ */
+export const patchAdvertAdvertsAdvertId = (
+  options: Options<PatchAdvertAdvertsAdvertIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchAdvertAdvertsAdvertIdResponse,
+    PatchAdvertAdvertsAdvertIdError
+  >({
+    ...options,
+    url: "/advert/adverts/{advert_id}",
+  });
+};
+
+/**
+ * Delete Advert
+ * Delete an advert
+ *
+ * **The user must be admin or a member of the advertiser group_manager to use this endpoint**
+ */
+export const deleteAdvertAdvertsAdvertId = (
+  options: Options<DeleteAdvertAdvertsAdvertIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteAdvertAdvertsAdvertIdResponse,
+    DeleteAdvertAdvertsAdvertIdError
+  >({
+    ...options,
+    url: "/advert/adverts/{advert_id}",
+  });
+};
+
+/**
+ * Read Advert Image
+ * Get the image of an advert
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getAdvertAdvertsAdvertIdPicture = (
+  options: Options<GetAdvertAdvertsAdvertIdPictureData>,
+) => {
+  return (options?.client ?? client).get<
+    GetAdvertAdvertsAdvertIdPictureResponse,
+    GetAdvertAdvertsAdvertIdPictureError
+  >({
+    ...options,
+    url: "/advert/adverts/{advert_id}/picture",
+  });
+};
+
+/**
+ * Create Advert Image
+ * Add an image to an advert
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const postAdvertAdvertsAdvertIdPicture = (
+  options: Options<PostAdvertAdvertsAdvertIdPictureData>,
 ) => {
   return (options?.client ?? client).post<
-    PostRecommendationRecommendationsRecommendationIdPictureResponse,
-    PostRecommendationRecommendationsRecommendationIdPictureError
+    PostAdvertAdvertsAdvertIdPictureResponse,
+    PostAdvertAdvertsAdvertIdPictureError
   >({
     ...options,
     ...formDataBodySerializer,
-    url: "/recommendation/recommendations/{recommendation_id}/picture",
+    url: "/advert/adverts/{advert_id}/picture",
   });
 };
 
 /**
- * Read Loaners
- * Get existing loaners.
+ * Get Products
+ * Return all products
  *
- * **This endpoint is only usable by administrators**
+ * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const getLoansLoaners = (options?: Options) => {
+export const getAmapProducts = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetLoansLoanersResponse,
-    GetLoansLoanersError
+    GetAmapProductsResponse,
+    GetAmapProductsError
   >({
     ...options,
-    url: "/loans/loaners/",
+    url: "/amap/products",
   });
 };
 
 /**
- * Create Loaner
- * Create a new loaner.
+ * Create Product
+ * Create a new product
  *
- * Each loaner is associated with a `manager_group`. Users belonging to this group are able to manage the loaner items and loans.
- *
- * **This endpoint is only usable by administrators**
+ * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const postLoansLoaners = (options: Options<PostLoansLoanersData>) => {
+export const postAmapProducts = (options: Options<PostAmapProductsData>) => {
   return (options?.client ?? client).post<
-    PostLoansLoanersResponse,
-    PostLoansLoanersError
+    PostAmapProductsResponse,
+    PostAmapProductsError
   >({
     ...options,
-    url: "/loans/loaners/",
+    url: "/amap/products",
   });
 };
 
 /**
- * Delete Loaner
- * Delete a loaner. All items and loans associated with the loaner will also be deleted from the database.
- *
- * **This endpoint is only usable by administrators**
+ * Get Product By Id
+ * Get a specific product
  */
-export const deleteLoansLoanersLoanerId = (
-  options: Options<DeleteLoansLoanersLoanerIdData>,
+export const getAmapProductsProductId = (
+  options: Options<GetAmapProductsProductIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetAmapProductsProductIdResponse,
+    GetAmapProductsProductIdError
+  >({
+    ...options,
+    url: "/amap/products/{product_id}",
+  });
+};
+
+/**
+ * Edit Product
+ * Edit a product
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const patchAmapProductsProductId = (
+  options: Options<PatchAmapProductsProductIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchAmapProductsProductIdResponse,
+    PatchAmapProductsProductIdError
+  >({
+    ...options,
+    url: "/amap/products/{product_id}",
+  });
+};
+
+/**
+ * Delete Product
+ * Delete a product. A product can not be deleted if it is already used in a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const deleteAmapProductsProductId = (
+  options: Options<DeleteAmapProductsProductIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteLoansLoanersLoanerIdResponse,
-    DeleteLoansLoanersLoanerIdError
+    DeleteAmapProductsProductIdResponse,
+    DeleteAmapProductsProductIdError
   >({
     ...options,
-    url: "/loans/loaners/{loaner_id}",
+    url: "/amap/products/{product_id}",
   });
 };
 
 /**
- * Update Loaner
- * Update a loaner, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
- *
- * **This endpoint is only usable by administrators**
+ * Get Deliveries
+ * Get all deliveries.
  */
-export const patchLoansLoanersLoanerId = (
-  options: Options<PatchLoansLoanersLoanerIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchLoansLoanersLoanerIdResponse,
-    PatchLoansLoanersLoanerIdError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}",
-  });
-};
-
-/**
- * Get Loans By Loaner
- * Return all loans from a given group.
- *
- *
- * The query string `returned` can be used to get only return or non returned loans. By default, all loans are returned.
- *
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const getLoansLoanersLoanerIdLoans = (
-  options: Options<GetLoansLoanersLoanerIdLoansData>,
-) => {
+export const getAmapDeliveries = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetLoansLoanersLoanerIdLoansResponse,
-    GetLoansLoanersLoanerIdLoansError
+    GetAmapDeliveriesResponse,
+    GetAmapDeliveriesError
   >({
     ...options,
-    url: "/loans/loaners/{loaner_id}/loans",
+    url: "/amap/deliveries",
   });
 };
 
 /**
- * Get Items By Loaner
- * Return all items of a loaner.
+ * Create Delivery
+ * Create a new delivery.
  *
- * **The user must be a member of the loaner group_manager to use this endpoint**
+ * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const getLoansLoanersLoanerIdItems = (
-  options: Options<GetLoansLoanersLoanerIdItemsData>,
-) => {
-  return (options?.client ?? client).get<
-    GetLoansLoanersLoanerIdItemsResponse,
-    GetLoansLoanersLoanerIdItemsError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}/items",
-  });
-};
-
-/**
- * Create Items For Loaner
- * Create a new item for a loaner. A given loaner can not have more than one item with the same `name`.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const postLoansLoanersLoanerIdItems = (
-  options: Options<PostLoansLoanersLoanerIdItemsData>,
+export const postAmapDeliveries = (
+  options: Options<PostAmapDeliveriesData>,
 ) => {
   return (options?.client ?? client).post<
-    PostLoansLoanersLoanerIdItemsResponse,
-    PostLoansLoanersLoanerIdItemsError
+    PostAmapDeliveriesResponse,
+    PostAmapDeliveriesError
   >({
     ...options,
-    url: "/loans/loaners/{loaner_id}/items",
+    url: "/amap/deliveries",
   });
 };
 
 /**
- * Update Items For Loaner
- * Update a loaner's item.
+ * Delete Delivery
+ * Delete a delivery.
  *
- * **The user must be a member of the loaner group_manager to use this endpoint**
+ * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const patchLoansLoanersLoanerIdItemsItemId = (
-  options: Options<PatchLoansLoanersLoanerIdItemsItemIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchLoansLoanersLoanerIdItemsItemIdResponse,
-    PatchLoansLoanersLoanerIdItemsItemIdError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}/items/{item_id}",
-  });
-};
-
-/**
- * Delete Loaner Item
- * Delete a loaner's item.
- * This will remove the item from all loans but won't delete any loan.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const deleteLoansLoanersLoanerIdItemsItemId = (
-  options: Options<DeleteLoansLoanersLoanerIdItemsItemIdData>,
+export const deleteAmapDeliveriesDeliveryId = (
+  options: Options<DeleteAmapDeliveriesDeliveryIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteLoansLoanersLoanerIdItemsItemIdResponse,
-    DeleteLoansLoanersLoanerIdItemsItemIdError
+    DeleteAmapDeliveriesDeliveryIdResponse,
+    DeleteAmapDeliveriesDeliveryIdError
   >({
     ...options,
-    url: "/loans/loaners/{loaner_id}/items/{item_id}",
+    url: "/amap/deliveries/{delivery_id}",
   });
 };
 
 /**
- * Get Current User Loans
- * Return all loans from the current user.
+ * Edit Delivery
+ * Edit a delivery.
  *
- * The query string `returned` can be used to get only returned or non returned loans. By default, all loans are returned.
- *
- * **The user must be authenticated to use this endpoint**
+ * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const getLoansUsersMe = (options?: Options<GetLoansUsersMeData>) => {
-  return (options?.client ?? client).get<
-    GetLoansUsersMeResponse,
-    GetLoansUsersMeError
-  >({
-    ...options,
-    url: "/loans/users/me",
-  });
-};
-
-/**
- * Get Current User Loaners
- * Return all loaners the current user can manage.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const getLoansUsersMeLoaners = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetLoansUsersMeLoanersResponse,
-    GetLoansUsersMeLoanersError
-  >({
-    ...options,
-    url: "/loans/users/me/loaners",
-  });
-};
-
-/**
- * Create Loan
- * Create a new loan in database and add the requested items
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const postLoans = (options: Options<PostLoansData>) => {
-  return (options?.client ?? client).post<PostLoansResponse, PostLoansError>({
-    ...options,
-    url: "/loans/",
-  });
-};
-
-/**
- * Update Loan
- * Update a loan and its items.
- *
- * As the endpoint can update the loan items, it will send back
- * the new representation of the loan `Loan` including the new items relationships
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const patchLoansLoanId = (options: Options<PatchLoansLoanIdData>) => {
-  return (options?.client ?? client).patch<
-    PatchLoansLoanIdResponse,
-    PatchLoansLoanIdError
-  >({
-    ...options,
-    url: "/loans/{loan_id}",
-  });
-};
-
-/**
- * Delete Loan
- * Delete a loan
- * This will remove the loan but won't delete any loaner items.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const deleteLoansLoanId = (options: Options<DeleteLoansLoanIdData>) => {
-  return (options?.client ?? client).delete<
-    DeleteLoansLoanIdResponse,
-    DeleteLoansLoanIdError
-  >({
-    ...options,
-    url: "/loans/{loan_id}",
-  });
-};
-
-/**
- * Return Loan
- * Mark a loan as returned. This will update items availability.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const postLoansLoanIdReturn = (
-  options: Options<PostLoansLoanIdReturnData>,
-) => {
-  return (options?.client ?? client).post<
-    PostLoansLoanIdReturnResponse,
-    PostLoansLoanIdReturnError
-  >({
-    ...options,
-    url: "/loans/{loan_id}/return",
-  });
-};
-
-/**
- * Extend Loan
- * A new `end` date or an extended `duration` can be provided. If the two are provided, only `end` will be used.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const postLoansLoanIdExtend = (
-  options: Options<PostLoansLoanIdExtendData>,
-) => {
-  return (options?.client ?? client).post<
-    PostLoansLoanIdExtendResponse,
-    PostLoansLoanIdExtendError
-  >({
-    ...options,
-    url: "/loans/{loan_id}/extend",
-  });
-};
-
-/**
- * Get Events
- * Get all events from the database.
- */
-export const getCalendarEvents = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCalendarEventsResponse,
-    GetCalendarEventsError
-  >({
-    ...options,
-    url: "/calendar/events/",
-  });
-};
-
-/**
- * Add Event
- * Add an event to the calendar.
- */
-export const postCalendarEvents = (
-  options: Options<PostCalendarEventsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostCalendarEventsResponse,
-    PostCalendarEventsError
-  >({
-    ...options,
-    url: "/calendar/events/",
-  });
-};
-
-/**
- * Get Confirmed Events
- * Get all confirmed events.
- *
- * **Usable by every member**
- */
-export const getCalendarEventsConfirmed = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCalendarEventsConfirmedResponse,
-    GetCalendarEventsConfirmedError
-  >({
-    ...options,
-    url: "/calendar/events/confirmed",
-  });
-};
-
-/**
- * Get Applicant Bookings
- * Get one user bookings.
- *
- * **Usable by the user or admins**
- */
-export const getCalendarEventsUserApplicantId = (
-  options: Options<GetCalendarEventsUserApplicantIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCalendarEventsUserApplicantIdResponse,
-    GetCalendarEventsUserApplicantIdError
-  >({
-    ...options,
-    url: "/calendar/events/user/{applicant_id}",
-  });
-};
-
-/**
- * Get Event By Id
- * Get an event's information by its id.
- */
-export const getCalendarEventsEventId = (
-  options: Options<GetCalendarEventsEventIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCalendarEventsEventIdResponse,
-    GetCalendarEventsEventIdError
-  >({
-    ...options,
-    url: "/calendar/events/{event_id}",
-  });
-};
-
-/**
- * Edit Bookings Id
- * Edit an event.
- *
- * **Only usable by admins or applicant before decision**
- */
-export const patchCalendarEventsEventId = (
-  options: Options<PatchCalendarEventsEventIdData>,
+export const patchAmapDeliveriesDeliveryId = (
+  options: Options<PatchAmapDeliveriesDeliveryIdData>,
 ) => {
   return (options?.client ?? client).patch<
-    PatchCalendarEventsEventIdResponse,
-    PatchCalendarEventsEventIdError
+    PatchAmapDeliveriesDeliveryIdResponse,
+    PatchAmapDeliveriesDeliveryIdError
   >({
     ...options,
-    url: "/calendar/events/{event_id}",
+    url: "/amap/deliveries/{delivery_id}",
   });
 };
 
 /**
- * Delete Bookings Id
- * Remove an event.
+ * Add Product To Delivery
+ * Add `product_id` product to `delivery_id` delivery. This endpoint will only add a membership between the two objects.
  *
- * **Only usable by admins or applicant before decision**
+ * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const deleteCalendarEventsEventId = (
-  options: Options<DeleteCalendarEventsEventIdData>,
+export const postAmapDeliveriesDeliveryIdProducts = (
+  options: Options<PostAmapDeliveriesDeliveryIdProductsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostAmapDeliveriesDeliveryIdProductsResponse,
+    PostAmapDeliveriesDeliveryIdProductsError
+  >({
+    ...options,
+    url: "/amap/deliveries/{delivery_id}/products",
+  });
+};
+
+/**
+ * Remove Product From Delivery
+ * Remove a given product from a delivery. This won't delete the product nor the delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const deleteAmapDeliveriesDeliveryIdProducts = (
+  options: Options<DeleteAmapDeliveriesDeliveryIdProductsData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteCalendarEventsEventIdResponse,
-    DeleteCalendarEventsEventIdError
+    DeleteAmapDeliveriesDeliveryIdProductsResponse,
+    DeleteAmapDeliveriesDeliveryIdProductsError
   >({
     ...options,
-    url: "/calendar/events/{event_id}",
+    url: "/amap/deliveries/{delivery_id}/products",
   });
 };
 
 /**
- * Get Event Applicant
+ * Get Orders From Delivery
+ * Get orders from a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const getCalendarEventsEventIdApplicant = (
-  options: Options<GetCalendarEventsEventIdApplicantData>,
+export const getAmapDeliveriesDeliveryIdOrders = (
+  options: Options<GetAmapDeliveriesDeliveryIdOrdersData>,
 ) => {
   return (options?.client ?? client).get<
-    GetCalendarEventsEventIdApplicantResponse,
-    GetCalendarEventsEventIdApplicantError
+    GetAmapDeliveriesDeliveryIdOrdersResponse,
+    GetAmapDeliveriesDeliveryIdOrdersError
   >({
     ...options,
-    url: "/calendar/events/{event_id}/applicant",
+    url: "/amap/deliveries/{delivery_id}/orders",
   });
 };
 
 /**
- * Confirm Booking
- * Give a decision to an event.
+ * Get Order By Id
+ * Get content of an order.
  *
- * **Only usable by admins**
+ * **The user must be a member of the group AMAP to use this endpoint**
  */
-export const patchCalendarEventsEventIdReplyDecision = (
-  options: Options<PatchCalendarEventsEventIdReplyDecisionData>,
+export const getAmapOrdersOrderId = (
+  options: Options<GetAmapOrdersOrderIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetAmapOrdersOrderIdResponse,
+    GetAmapOrdersOrderIdError
+  >({
+    ...options,
+    url: "/amap/orders/{order_id}",
+  });
+};
+
+/**
+ * Edit Order From Delivery
+ * Edit an order.
+ *
+ * **A member of the group AMAP can edit orders of other users**
+ */
+export const patchAmapOrdersOrderId = (
+  options: Options<PatchAmapOrdersOrderIdData>,
 ) => {
   return (options?.client ?? client).patch<
-    PatchCalendarEventsEventIdReplyDecisionResponse,
-    PatchCalendarEventsEventIdReplyDecisionError
+    PatchAmapOrdersOrderIdResponse,
+    PatchAmapOrdersOrderIdError
   >({
     ...options,
-    url: "/calendar/events/{event_id}/reply/{decision}",
+    url: "/amap/orders/{order_id}",
   });
 };
 
 /**
- * Recreate Ical File
- * Create manually the icalendar file
+ * Remove Order
+ * Delete an order.
  *
- * **Only usable by global admins**
+ * **A member of the group AMAP can delete orders of other users**
  */
-export const postCalendarIcalCreate = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCalendarIcalCreateResponse,
-    PostCalendarIcalCreateError
-  >({
-    ...options,
-    url: "/calendar/ical/create",
-  });
-};
-
-/**
- * Get Icalendar File
- * Get the icalendar file corresponding to the event in the database.
- */
-export const getCalendarIcal = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCalendarIcalResponse,
-    GetCalendarIcalError
-  >({
-    ...options,
-    url: "/calendar/ical",
-  });
-};
-
-/**
- * Get Movie
- * Makes a HTTP request to The Movie Database (TMDB)
- * using an API key and returns a TheMovieDB object
- * * https://developer.themoviedb.org/reference/movie-details
- * * https://developer.themoviedb.org/docs/errors
- */
-export const getCinemaThemoviedbThemoviedbId = (
-  options: Options<GetCinemaThemoviedbThemoviedbIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCinemaThemoviedbThemoviedbIdResponse,
-    GetCinemaThemoviedbThemoviedbIdError
-  >({
-    ...options,
-    url: "/cinema/themoviedb/{themoviedb_id}",
-  });
-};
-
-/**
- * Get Sessions
- */
-export const getCinemaSessions = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCinemaSessionsResponse,
-    GetCinemaSessionsError
-  >({
-    ...options,
-    url: "/cinema/sessions",
-  });
-};
-
-/**
- * Create Session
- */
-export const postCinemaSessions = (
-  options: Options<PostCinemaSessionsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostCinemaSessionsResponse,
-    PostCinemaSessionsError
-  >({
-    ...options,
-    url: "/cinema/sessions",
-  });
-};
-
-/**
- * Update Session
- */
-export const patchCinemaSessionsSessionId = (
-  options: Options<PatchCinemaSessionsSessionIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchCinemaSessionsSessionIdResponse,
-    PatchCinemaSessionsSessionIdError
-  >({
-    ...options,
-    url: "/cinema/sessions/{session_id}",
-  });
-};
-
-/**
- * Delete Session
- */
-export const deleteCinemaSessionsSessionId = (
-  options: Options<DeleteCinemaSessionsSessionIdData>,
+export const deleteAmapOrdersOrderId = (
+  options: Options<DeleteAmapOrdersOrderIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteCinemaSessionsSessionIdResponse,
-    DeleteCinemaSessionsSessionIdError
+    DeleteAmapOrdersOrderIdResponse,
+    DeleteAmapOrdersOrderIdError
   >({
     ...options,
-    url: "/cinema/sessions/{session_id}",
+    url: "/amap/orders/{order_id}",
   });
 };
 
 /**
- * Create Campaigns Logo
+ * Add Order To Delievery
+ * Add an order to a delivery.
+ *
+ * **A member of the group AMAP can create an order for every user**
  */
-export const postCinemaSessionsSessionIdPoster = (
-  options: Options<PostCinemaSessionsSessionIdPosterData>,
+export const postAmapOrders = (options: Options<PostAmapOrdersData>) => {
+  return (options?.client ?? client).post<
+    PostAmapOrdersResponse,
+    PostAmapOrdersError
+  >({
+    ...options,
+    url: "/amap/orders",
+  });
+};
+
+/**
+ * Open Ordering Of Delivery
+ */
+export const postAmapDeliveriesDeliveryIdOpenordering = (
+  options: Options<PostAmapDeliveriesDeliveryIdOpenorderingData>,
 ) => {
   return (options?.client ?? client).post<
-    PostCinemaSessionsSessionIdPosterResponse,
-    PostCinemaSessionsSessionIdPosterError
+    PostAmapDeliveriesDeliveryIdOpenorderingResponse,
+    PostAmapDeliveriesDeliveryIdOpenorderingError
   >({
     ...options,
-    ...formDataBodySerializer,
-    url: "/cinema/sessions/{session_id}/poster",
+    url: "/amap/deliveries/{delivery_id}/openordering",
   });
 };
 
 /**
- * Read Session Poster
+ * Lock Delivery
  */
-export const getCinemaSessionsSessionIdPoster = (
-  options: Options<GetCinemaSessionsSessionIdPosterData>,
+export const postAmapDeliveriesDeliveryIdLock = (
+  options: Options<PostAmapDeliveriesDeliveryIdLockData>,
 ) => {
-  return (options?.client ?? client).get<
-    GetCinemaSessionsSessionIdPosterResponse,
-    GetCinemaSessionsSessionIdPosterError
+  return (options?.client ?? client).post<
+    PostAmapDeliveriesDeliveryIdLockResponse,
+    PostAmapDeliveriesDeliveryIdLockError
   >({
     ...options,
-    url: "/cinema/sessions/{session_id}/poster",
+    url: "/amap/deliveries/{delivery_id}/lock",
+  });
+};
+
+/**
+ * Mark Delivery As Delivered
+ */
+export const postAmapDeliveriesDeliveryIdDelivered = (
+  options: Options<PostAmapDeliveriesDeliveryIdDeliveredData>,
+) => {
+  return (options?.client ?? client).post<
+    PostAmapDeliveriesDeliveryIdDeliveredResponse,
+    PostAmapDeliveriesDeliveryIdDeliveredError
+  >({
+    ...options,
+    url: "/amap/deliveries/{delivery_id}/delivered",
+  });
+};
+
+/**
+ * Archive Of Delivery
+ */
+export const postAmapDeliveriesDeliveryIdArchive = (
+  options: Options<PostAmapDeliveriesDeliveryIdArchiveData>,
+) => {
+  return (options?.client ?? client).post<
+    PostAmapDeliveriesDeliveryIdArchiveResponse,
+    PostAmapDeliveriesDeliveryIdArchiveError
+  >({
+    ...options,
+    url: "/amap/deliveries/{delivery_id}/archive",
+  });
+};
+
+/**
+ * Get Users Cash
+ * Get cash from all users.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const getAmapUsersCash = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetAmapUsersCashResponse,
+    GetAmapUsersCashError
+  >({
+    ...options,
+    url: "/amap/users/cash",
+  });
+};
+
+/**
+ * Get Cash By Id
+ * Get cash from a specific user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
+ */
+export const getAmapUsersUserIdCash = (
+  options: Options<GetAmapUsersUserIdCashData>,
+) => {
+  return (options?.client ?? client).get<
+    GetAmapUsersUserIdCashResponse,
+    GetAmapUsersUserIdCashError
+  >({
+    ...options,
+    url: "/amap/users/{user_id}/cash",
+  });
+};
+
+/**
+ * Create Cash Of User
+ * Create cash for an user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const postAmapUsersUserIdCash = (
+  options: Options<PostAmapUsersUserIdCashData>,
+) => {
+  return (options?.client ?? client).post<
+    PostAmapUsersUserIdCashResponse,
+    PostAmapUsersUserIdCashError
+  >({
+    ...options,
+    url: "/amap/users/{user_id}/cash",
+  });
+};
+
+/**
+ * Edit Cash By Id
+ * Edit cash for an user. This will add the balance to the current balance.
+ * A negative value can be provided to remove money from the user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const patchAmapUsersUserIdCash = (
+  options: Options<PatchAmapUsersUserIdCashData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchAmapUsersUserIdCashResponse,
+    PatchAmapUsersUserIdCashError
+  >({
+    ...options,
+    url: "/amap/users/{user_id}/cash",
+  });
+};
+
+/**
+ * Get Orders Of User
+ * Get orders from an user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
+ */
+export const getAmapUsersUserIdOrders = (
+  options: Options<GetAmapUsersUserIdOrdersData>,
+) => {
+  return (options?.client ?? client).get<
+    GetAmapUsersUserIdOrdersResponse,
+    GetAmapUsersUserIdOrdersError
+  >({
+    ...options,
+    url: "/amap/users/{user_id}/orders",
+  });
+};
+
+/**
+ * Get Information
+ * Return all information
+ */
+export const getAmapInformation = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetAmapInformationResponse,
+    GetAmapInformationError
+  >({
+    ...options,
+    url: "/amap/information",
+  });
+};
+
+/**
+ * Edit Information
+ * Update information
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const patchAmapInformation = (
+  options: Options<PatchAmapInformationData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchAmapInformationResponse,
+    PatchAmapInformationError
+  >({
+    ...options,
+    url: "/amap/information",
   });
 };
 
@@ -2880,446 +2964,611 @@ export const deleteBookingRoomsRoomId = (
 };
 
 /**
- * Get All Associations
- * Return all associations from database as a list of AssociationComplete schemas
+ * Get Events
+ * Get all events from the database.
  */
-export const getPhonebookAssociations = (options?: Options) => {
+export const getCalendarEvents = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetPhonebookAssociationsResponse,
-    GetPhonebookAssociationsError
+    GetCalendarEventsResponse,
+    GetCalendarEventsError
   >({
     ...options,
-    url: "/phonebook/associations/",
+    url: "/calendar/events/",
   });
 };
 
 /**
- * Create Association
- * Create a new Association by giving an AssociationBase scheme
- *
- * **This endpoint is only usable by CAA, BDE**
+ * Add Event
+ * Add an event to the calendar.
  */
-export const postPhonebookAssociations = (
-  options: Options<PostPhonebookAssociationsData>,
+export const postCalendarEvents = (
+  options: Options<PostCalendarEventsData>,
 ) => {
   return (options?.client ?? client).post<
-    PostPhonebookAssociationsResponse,
-    PostPhonebookAssociationsError
+    PostCalendarEventsResponse,
+    PostCalendarEventsError
   >({
     ...options,
-    url: "/phonebook/associations/",
+    url: "/calendar/events/",
   });
 };
 
 /**
- * Get All Role Tags
- * Return all available role tags from RoleTags enum.
- */
-export const getPhonebookRoletags = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetPhonebookRoletagsResponse,
-    GetPhonebookRoletagsError
-  >({
-    ...options,
-    url: "/phonebook/roletags",
-  });
-};
-
-/**
- * Get All Kinds
- * Return all available kinds of from Kinds enum.
- */
-export const getPhonebookAssociationsKinds = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetPhonebookAssociationsKindsResponse,
-    GetPhonebookAssociationsKindsError
-  >({
-    ...options,
-    url: "/phonebook/associations/kinds",
-  });
-};
-
-/**
- * Update Association
- * Update an Association
+ * Get Confirmed Events
+ * Get all confirmed events.
  *
- * **This endpoint is only usable by CAA, BDE and association's president**
+ * **Usable by every member**
  */
-export const patchPhonebookAssociationsAssociationId = (
-  options: Options<PatchPhonebookAssociationsAssociationIdData>,
+export const getCalendarEventsConfirmed = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCalendarEventsConfirmedResponse,
+    GetCalendarEventsConfirmedError
+  >({
+    ...options,
+    url: "/calendar/events/confirmed",
+  });
+};
+
+/**
+ * Get Applicant Bookings
+ * Get one user bookings.
+ *
+ * **Usable by the user or admins**
+ */
+export const getCalendarEventsUserApplicantId = (
+  options: Options<GetCalendarEventsUserApplicantIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCalendarEventsUserApplicantIdResponse,
+    GetCalendarEventsUserApplicantIdError
+  >({
+    ...options,
+    url: "/calendar/events/user/{applicant_id}",
+  });
+};
+
+/**
+ * Get Event By Id
+ * Get an event's information by its id.
+ */
+export const getCalendarEventsEventId = (
+  options: Options<GetCalendarEventsEventIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCalendarEventsEventIdResponse,
+    GetCalendarEventsEventIdError
+  >({
+    ...options,
+    url: "/calendar/events/{event_id}",
+  });
+};
+
+/**
+ * Edit Bookings Id
+ * Edit an event.
+ *
+ * **Only usable by admins or applicant before decision**
+ */
+export const patchCalendarEventsEventId = (
+  options: Options<PatchCalendarEventsEventIdData>,
 ) => {
   return (options?.client ?? client).patch<
-    PatchPhonebookAssociationsAssociationIdResponse,
-    PatchPhonebookAssociationsAssociationIdError
+    PatchCalendarEventsEventIdResponse,
+    PatchCalendarEventsEventIdError
   >({
     ...options,
-    url: "/phonebook/associations/{association_id}",
+    url: "/calendar/events/{event_id}",
   });
 };
 
 /**
- * Delete Association
- * Delete an Association
+ * Delete Bookings Id
+ * Remove an event.
  *
- * [!] Memberships linked to association_id will be deleted too
- *
- * **This endpoint is only usable by CAA and BDE**
+ * **Only usable by admins or applicant before decision**
  */
-export const deletePhonebookAssociationsAssociationId = (
-  options: Options<DeletePhonebookAssociationsAssociationIdData>,
+export const deleteCalendarEventsEventId = (
+  options: Options<DeleteCalendarEventsEventIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeletePhonebookAssociationsAssociationIdResponse,
-    DeletePhonebookAssociationsAssociationIdError
+    DeleteCalendarEventsEventIdResponse,
+    DeleteCalendarEventsEventIdError
   >({
     ...options,
-    url: "/phonebook/associations/{association_id}",
+    url: "/calendar/events/{event_id}",
   });
 };
 
 /**
- * Get Association Members
- * Return the list of MemberComplete of an Association.
+ * Get Event Applicant
  */
-export const getPhonebookAssociationsAssociationIdMembers = (
-  options: Options<GetPhonebookAssociationsAssociationIdMembersData>,
+export const getCalendarEventsEventIdApplicant = (
+  options: Options<GetCalendarEventsEventIdApplicantData>,
 ) => {
   return (options?.client ?? client).get<
-    GetPhonebookAssociationsAssociationIdMembersResponse,
-    GetPhonebookAssociationsAssociationIdMembersError
+    GetCalendarEventsEventIdApplicantResponse,
+    GetCalendarEventsEventIdApplicantError
   >({
     ...options,
-    url: "/phonebook/associations/{association_id}/members/",
+    url: "/calendar/events/{event_id}/applicant",
   });
 };
 
 /**
- * Get Association Members By Mandate Year
- * Return the list of MemberComplete of an Association with given mandate_year.
- */
-export const getPhonebookAssociationsAssociationIdMembersMandateYear = (
-  options: Options<GetPhonebookAssociationsAssociationIdMembersMandateYearData>,
-) => {
-  return (options?.client ?? client).get<
-    GetPhonebookAssociationsAssociationIdMembersMandateYearResponse,
-    GetPhonebookAssociationsAssociationIdMembersMandateYearError
-  >({
-    ...options,
-    url: "/phonebook/associations/{association_id}/members/{mandate_year}",
-  });
-};
-
-/**
- * Get Member Details
- * Return MemberComplete for given user_id.
- */
-export const getPhonebookMemberUserId = (
-  options: Options<GetPhonebookMemberUserIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetPhonebookMemberUserIdResponse,
-    GetPhonebookMemberUserIdError
-  >({
-    ...options,
-    url: "/phonebook/member/{user_id}",
-  });
-};
-
-/**
- * Create Membership
- * Create a new Membership.
- * 'role_tags' are used to indicate if the members has a main role in the association (president, secretary ...) and 'role_name' is the display name for this membership
+ * Confirm Booking
+ * Give a decision to an event.
  *
- * **This endpoint is only usable by CAA, BDE and association's president**
+ * **Only usable by admins**
  */
-export const postPhonebookAssociationsMemberships = (
-  options: Options<PostPhonebookAssociationsMembershipsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostPhonebookAssociationsMembershipsResponse,
-    PostPhonebookAssociationsMembershipsError
-  >({
-    ...options,
-    url: "/phonebook/associations/memberships",
-  });
-};
-
-/**
- * Update Membership
- * Update a Membership.
- *
- * **This endpoint is only usable by CAA, BDE and association's president**
- */
-export const patchPhonebookAssociationsMembershipsMembershipId = (
-  options: Options<PatchPhonebookAssociationsMembershipsMembershipIdData>,
+export const patchCalendarEventsEventIdReplyDecision = (
+  options: Options<PatchCalendarEventsEventIdReplyDecisionData>,
 ) => {
   return (options?.client ?? client).patch<
-    PatchPhonebookAssociationsMembershipsMembershipIdResponse,
-    PatchPhonebookAssociationsMembershipsMembershipIdError
+    PatchCalendarEventsEventIdReplyDecisionResponse,
+    PatchCalendarEventsEventIdReplyDecisionError
   >({
     ...options,
-    url: "/phonebook/associations/memberships/{membership_id}",
+    url: "/calendar/events/{event_id}/reply/{decision}",
   });
 };
 
 /**
- * Delete Membership
- * Delete a membership.
+ * Recreate Ical File
+ * Create manually the icalendar file
  *
- * **This endpoint is only usable by CAA, BDE and association's president**
+ * **Only usable by global admins**
  */
-export const deletePhonebookAssociationsMembershipsMembershipId = (
-  options: Options<DeletePhonebookAssociationsMembershipsMembershipIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeletePhonebookAssociationsMembershipsMembershipIdResponse,
-    DeletePhonebookAssociationsMembershipsMembershipIdError
+export const postCalendarIcalCreate = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCalendarIcalCreateResponse,
+    PostCalendarIcalCreateError
   >({
     ...options,
-    url: "/phonebook/associations/memberships/{membership_id}",
+    url: "/calendar/ical/create",
   });
 };
 
 /**
- * Create Association Logo
- * Upload a logo for an Association.
- * **The user must be a member of the group CAA or BDE to use this endpoint**
+ * Get Icalendar File
+ * Get the icalendar file corresponding to the event in the database.
  */
-export const postPhonebookAssociationsAssociationIdPicture = (
-  options: Options<PostPhonebookAssociationsAssociationIdPictureData>,
+export const getCalendarIcal = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCalendarIcalResponse,
+    GetCalendarIcalError
+  >({
+    ...options,
+    url: "/calendar/ical",
+  });
+};
+
+/**
+ * Get Sections
+ * Return sections in the database as a list of `schemas_campaign.SectionBase`
+ *
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ */
+export const getCampaignSections = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignSectionsResponse,
+    GetCampaignSectionsError
+  >({
+    ...options,
+    url: "/campaign/sections",
+  });
+};
+
+/**
+ * Add Section
+ * Add a section.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignSections = (
+  options: Options<PostCampaignSectionsData>,
 ) => {
   return (options?.client ?? client).post<
-    PostPhonebookAssociationsAssociationIdPictureResponse,
-    PostPhonebookAssociationsAssociationIdPictureError
+    PostCampaignSectionsResponse,
+    PostCampaignSectionsError
+  >({
+    ...options,
+    url: "/campaign/sections",
+  });
+};
+
+/**
+ * Delete Section
+ * Delete a section.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignSectionsSectionId = (
+  options: Options<DeleteCampaignSectionsSectionIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignSectionsSectionIdResponse,
+    DeleteCampaignSectionsSectionIdError
+  >({
+    ...options,
+    url: "/campaign/sections/{section_id}",
+  });
+};
+
+/**
+ * Get Lists
+ * Return campaign lists registered for the vote.
+ *
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ */
+export const getCampaignLists = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignListsResponse,
+    GetCampaignListsError
+  >({
+    ...options,
+    url: "/campaign/lists",
+  });
+};
+
+/**
+ * Add List
+ * Add a campaign list to a section.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignLists = (options: Options<PostCampaignListsData>) => {
+  return (options?.client ?? client).post<
+    PostCampaignListsResponse,
+    PostCampaignListsError
+  >({
+    ...options,
+    url: "/campaign/lists",
+  });
+};
+
+/**
+ * Delete List
+ * Delete the campaign list with the given id.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignListsListId = (
+  options: Options<DeleteCampaignListsListIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignListsListIdResponse,
+    DeleteCampaignListsListIdError
+  >({
+    ...options,
+    url: "/campaign/lists/{list_id}",
+  });
+};
+
+/**
+ * Update List
+ * Update the campaign list with the given id.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const patchCampaignListsListId = (
+  options: Options<PatchCampaignListsListIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchCampaignListsListIdResponse,
+    PatchCampaignListsListIdError
+  >({
+    ...options,
+    url: "/campaign/lists/{list_id}",
+  });
+};
+
+/**
+ * Delete Lists By Type
+ * Delete the all lists by type.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignLists = (
+  options?: Options<DeleteCampaignListsData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignListsResponse,
+    DeleteCampaignListsError
+  >({
+    ...options,
+    url: "/campaign/lists/",
+  });
+};
+
+/**
+ * Get Voters
+ * Return the voters (groups allowed to vote) for the current campaign.
+ */
+export const getCampaignVoters = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignVotersResponse,
+    GetCampaignVotersError
+  >({
+    ...options,
+    url: "/campaign/voters",
+  });
+};
+
+/**
+ * Add Voter
+ * Add voters (groups allowed to vote) for this campaign
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignVoters = (
+  options: Options<PostCampaignVotersData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCampaignVotersResponse,
+    PostCampaignVotersError
+  >({
+    ...options,
+    url: "/campaign/voters",
+  });
+};
+
+/**
+ * Delete Voters
+ * Remove voters (groups allowed to vote)
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignVoters = (options?: Options) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignVotersResponse,
+    DeleteCampaignVotersError
+  >({
+    ...options,
+    url: "/campaign/voters",
+  });
+};
+
+/**
+ * Delete Voter By Group Id
+ * Remove a voter by its group id
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignVotersGroupId = (
+  options: Options<DeleteCampaignVotersGroupIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignVotersGroupIdResponse,
+    DeleteCampaignVotersGroupIdError
+  >({
+    ...options,
+    url: "/campaign/voters/{group_id}",
+  });
+};
+
+/**
+ * Open Vote
+ * If the status is 'waiting', change it to 'voting' and create the blank lists.
+ *
+ * > WARNING: this operation can not be reversed.
+ * > When the status is 'open', all users can vote and sections and lists can no longer be edited.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusOpen = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusOpenResponse,
+    PostCampaignStatusOpenError
+  >({
+    ...options,
+    url: "/campaign/status/open",
+  });
+};
+
+/**
+ * Close Vote
+ * If the status is 'open', change it to 'closed'.
+ *
+ * > WARNING: this operation can not be reversed.
+ * > When the status is 'closed', users are no longer able to vote.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusClose = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusCloseResponse,
+    PostCampaignStatusCloseError
+  >({
+    ...options,
+    url: "/campaign/status/close",
+  });
+};
+
+/**
+ * Count Voting
+ * If the status is 'closed', change it to 'counting'.
+ *
+ * > WARNING: this operation can not be reversed.
+ * > When the status is 'counting', administrators can see the results of the vote.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusCounting = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusCountingResponse,
+    PostCampaignStatusCountingError
+  >({
+    ...options,
+    url: "/campaign/status/counting",
+  });
+};
+
+/**
+ * Publish Vote
+ * If the status is 'counting', change it to 'published'.
+ *
+ * > WARNING: this operation can not be reversed.
+ * > When the status is 'published', everyone can see the results of the vote.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusPublished = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusPublishedResponse,
+    PostCampaignStatusPublishedError
+  >({
+    ...options,
+    url: "/campaign/status/published",
+  });
+};
+
+/**
+ * Reset Vote
+ * Reset the vote. Can only be used if the current status is counting ou published.
+ *
+ * > WARNING: This will delete all votes then put the module to Waiting status. This will also delete blank lists.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusReset = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusResetResponse,
+    PostCampaignStatusResetError
+  >({
+    ...options,
+    url: "/campaign/status/reset",
+  });
+};
+
+/**
+ * Get Sections Already Voted
+ * Return the list of id of sections an user has already voted for.
+ *
+ * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
+ */
+export const getCampaignVotes = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignVotesResponse,
+    GetCampaignVotesError
+  >({
+    ...options,
+    url: "/campaign/votes",
+  });
+};
+
+/**
+ * Vote
+ * Add a vote for a given campaign list.
+ *
+ * An user can only vote for one list per section.
+ *
+ * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
+ */
+export const postCampaignVotes = (options: Options<PostCampaignVotesData>) => {
+  return (options?.client ?? client).post<
+    PostCampaignVotesResponse,
+    PostCampaignVotesError
+  >({
+    ...options,
+    url: "/campaign/votes",
+  });
+};
+
+/**
+ * Get Results
+ * Return the results of the vote.
+ *
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ */
+export const getCampaignResults = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignResultsResponse,
+    GetCampaignResultsError
+  >({
+    ...options,
+    url: "/campaign/results",
+  });
+};
+
+/**
+ * Get Status Vote
+ * Get the current status of the vote.
+ *
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ */
+export const getCampaignStatus = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignStatusResponse,
+    GetCampaignStatusError
+  >({
+    ...options,
+    url: "/campaign/status",
+  });
+};
+
+/**
+ * Get Stats For Section
+ * Get stats about a given section.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const getCampaignStatsSectionId = (
+  options: Options<GetCampaignStatsSectionIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCampaignStatsSectionIdResponse,
+    GetCampaignStatsSectionIdError
+  >({
+    ...options,
+    url: "/campaign/stats/{section_id}",
+  });
+};
+
+/**
+ * Create Campaigns Logo
+ * Upload a logo for a campaign list.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignListsListIdLogo = (
+  options: Options<PostCampaignListsListIdLogoData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCampaignListsListIdLogoResponse,
+    PostCampaignListsListIdLogoError
   >({
     ...options,
     ...formDataBodySerializer,
-    url: "/phonebook/associations/{association_id}/picture",
+    url: "/campaign/lists/{list_id}/logo",
   });
 };
 
 /**
- * Read Association Logo
- * Get the logo of an Association.
+ * Read Campaigns Logo
+ * Get the logo of a campaign list.
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
-export const getPhonebookAssociationsAssociationIdPicture = (
-  options: Options<GetPhonebookAssociationsAssociationIdPictureData>,
+export const getCampaignListsListIdLogo = (
+  options: Options<GetCampaignListsListIdLogoData>,
 ) => {
   return (options?.client ?? client).get<
-    GetPhonebookAssociationsAssociationIdPictureResponse,
-    GetPhonebookAssociationsAssociationIdPictureError
+    GetCampaignListsListIdLogoResponse,
+    GetCampaignListsListIdLogoError
   >({
     ...options,
-    url: "/phonebook/associations/{association_id}/picture",
-  });
-};
-
-/**
- * Read Advertisers
- * Get existing advertisers.
- */
-export const getAdvertAdvertisers = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetAdvertAdvertisersResponse,
-    GetAdvertAdvertisersError
-  >({
-    ...options,
-    url: "/advert/advertisers",
-  });
-};
-
-/**
- * Create Advertiser
- * Create a new advertiser.
- *
- * Each advertiser is associated with a `manager_group`. Users belonging to this group are able to manage the adverts related to the advertiser.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const postAdvertAdvertisers = (
-  options: Options<PostAdvertAdvertisersData>,
-) => {
-  return (options?.client ?? client).post<
-    PostAdvertAdvertisersResponse,
-    PostAdvertAdvertisersError
-  >({
-    ...options,
-    url: "/advert/advertisers",
-  });
-};
-
-/**
- * Delete Advertiser
- * Delete an advertiser. All adverts associated with the advertiser will also be deleted from the database.
- *
- * **This endpoint is only usable by administrators**
- */
-export const deleteAdvertAdvertisersAdvertiserId = (
-  options: Options<DeleteAdvertAdvertisersAdvertiserIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteAdvertAdvertisersAdvertiserIdResponse,
-    DeleteAdvertAdvertisersAdvertiserIdError
-  >({
-    ...options,
-    url: "/advert/advertisers/{advertiser_id}",
-  });
-};
-
-/**
- * Update Advertiser
- * Update an advertiser
- *
- * **This endpoint is only usable by administrators**
- */
-export const patchAdvertAdvertisersAdvertiserId = (
-  options: Options<PatchAdvertAdvertisersAdvertiserIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchAdvertAdvertisersAdvertiserIdResponse,
-    PatchAdvertAdvertisersAdvertiserIdError
-  >({
-    ...options,
-    url: "/advert/advertisers/{advertiser_id}",
-  });
-};
-
-/**
- * Get Current User Advertisers
- * Return all advertisers the current user can manage.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const getAdvertMeAdvertisers = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetAdvertMeAdvertisersResponse,
-    GetAdvertMeAdvertisersError
-  >({
-    ...options,
-    url: "/advert/me/advertisers",
-  });
-};
-
-/**
- * Read Adverts
- * Get existing adverts. If advertisers optional parameter is used, search adverts by advertisers
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const getAdvertAdverts = (options?: Options<GetAdvertAdvertsData>) => {
-  return (options?.client ?? client).get<
-    GetAdvertAdvertsResponse,
-    GetAdvertAdvertsError
-  >({
-    ...options,
-    url: "/advert/adverts",
-  });
-};
-
-/**
- * Create Advert
- * Create a new advert
- *
- * **The user must be a member of the advertiser group_manager to use this endpoint**
- */
-export const postAdvertAdverts = (options: Options<PostAdvertAdvertsData>) => {
-  return (options?.client ?? client).post<
-    PostAdvertAdvertsResponse,
-    PostAdvertAdvertsError
-  >({
-    ...options,
-    url: "/advert/adverts",
-  });
-};
-
-/**
- * Read Advert
- * Get an advert
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const getAdvertAdvertsAdvertId = (
-  options: Options<GetAdvertAdvertsAdvertIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetAdvertAdvertsAdvertIdResponse,
-    GetAdvertAdvertsAdvertIdError
-  >({
-    ...options,
-    url: "/advert/adverts/{advert_id}",
-  });
-};
-
-/**
- * Update Advert
- * Edit an advert
- *
- * **The user must be a member of the advertiser group_manager to use this endpoint**
- */
-export const patchAdvertAdvertsAdvertId = (
-  options: Options<PatchAdvertAdvertsAdvertIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchAdvertAdvertsAdvertIdResponse,
-    PatchAdvertAdvertsAdvertIdError
-  >({
-    ...options,
-    url: "/advert/adverts/{advert_id}",
-  });
-};
-
-/**
- * Delete Advert
- * Delete an advert
- *
- * **The user must be admin or a member of the advertiser group_manager to use this endpoint**
- */
-export const deleteAdvertAdvertsAdvertId = (
-  options: Options<DeleteAdvertAdvertsAdvertIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteAdvertAdvertsAdvertIdResponse,
-    DeleteAdvertAdvertsAdvertIdError
-  >({
-    ...options,
-    url: "/advert/adverts/{advert_id}",
-  });
-};
-
-/**
- * Read Advert Image
- * Get the image of an advert
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const getAdvertAdvertsAdvertIdPicture = (
-  options: Options<GetAdvertAdvertsAdvertIdPictureData>,
-) => {
-  return (options?.client ?? client).get<
-    GetAdvertAdvertsAdvertIdPictureResponse,
-    GetAdvertAdvertsAdvertIdPictureError
-  >({
-    ...options,
-    url: "/advert/adverts/{advert_id}/picture",
-  });
-};
-
-/**
- * Create Advert Image
- * Add an image to an advert
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const postAdvertAdvertsAdvertIdPicture = (
-  options: Options<PostAdvertAdvertsAdvertIdPictureData>,
-) => {
-  return (options?.client ?? client).post<
-    PostAdvertAdvertsAdvertIdPictureResponse,
-    PostAdvertAdvertsAdvertIdPictureError
-  >({
-    ...options,
-    ...formDataBodySerializer,
-    url: "/advert/adverts/{advert_id}/picture",
+    url: "/campaign/lists/{list_id}/logo",
   });
 };
 
@@ -3358,7 +3607,7 @@ export const getCdrUsersPending = (options?: Options) => {
  * Get Cdr User
  * Get a user.
  *
- * **User must be part of a seller group to use this endpoint**
+ * **User must be part of a seller group or trying to get itself to use this endpoint**
  */
 export const getCdrUsersUserId = (options: Options<GetCdrUsersUserIdData>) => {
   return (options?.client ?? client).get<
@@ -4234,92 +4483,541 @@ export const patchCdrProductsProductIdTicketsSecret = (
 };
 
 /**
- * Create Custom Data Field
+ * Get Custom Data Fields
  */
-export const postCdrSellersSellerIdData = (
-  options: Options<PostCdrSellersSellerIdDataData>,
+export const getCdrSellersSellerIdProductsProductIdData = (
+  options: Options<GetCdrSellersSellerIdProductsProductIdDataData>,
 ) => {
-  return (options?.client ?? client).post<
-    PostCdrSellersSellerIdDataResponse,
-    PostCdrSellersSellerIdDataError
+  return (options?.client ?? client).get<
+    GetCdrSellersSellerIdProductsProductIdDataResponse,
+    GetCdrSellersSellerIdProductsProductIdDataError
   >({
     ...options,
-    url: "/cdr/sellers/{seller_id}/data/",
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/data/",
+  });
+};
+
+/**
+ * Create Custom Data Field
+ */
+export const postCdrSellersSellerIdProductsProductIdData = (
+  options: Options<PostCdrSellersSellerIdProductsProductIdDataData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCdrSellersSellerIdProductsProductIdDataResponse,
+    PostCdrSellersSellerIdProductsProductIdDataError
+  >({
+    ...options,
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/data/",
   });
 };
 
 /**
  * Delete Customdata Field
  */
-export const deleteCdrSellersSellerIdDataFieldId = (
-  options: Options<DeleteCdrSellersSellerIdDataFieldIdData>,
+export const deleteCdrSellersSellerIdProductsProductIdDataFieldId = (
+  options: Options<DeleteCdrSellersSellerIdProductsProductIdDataFieldIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteCdrSellersSellerIdDataFieldIdResponse,
-    DeleteCdrSellersSellerIdDataFieldIdError
+    DeleteCdrSellersSellerIdProductsProductIdDataFieldIdResponse,
+    DeleteCdrSellersSellerIdProductsProductIdDataFieldIdError
   >({
     ...options,
-    url: "/cdr/sellers/{seller_id}/data/{field_id}/",
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/data/{field_id}/",
   });
 };
 
 /**
  * Get Customdata
  */
-export const getCdrSellersSellerIdUsersUserIdDataFieldId = (
-  options: Options<GetCdrSellersSellerIdUsersUserIdDataFieldIdData>,
+export const getCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId = (
+  options: Options<GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData>,
 ) => {
   return (options?.client ?? client).get<
-    GetCdrSellersSellerIdUsersUserIdDataFieldIdResponse,
-    GetCdrSellersSellerIdUsersUserIdDataFieldIdError
+    GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
+    GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError
   >({
     ...options,
-    url: "/cdr/sellers/{seller_id}/users/{user_id}/data/{field_id}/",
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/users/{user_id}/data/{field_id}/",
   });
 };
 
 /**
  * Create Custom Data
  */
-export const postCdrSellersSellerIdUsersUserIdDataFieldId = (
-  options: Options<PostCdrSellersSellerIdUsersUserIdDataFieldIdData>,
+export const postCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId = (
+  options: Options<PostCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData>,
 ) => {
   return (options?.client ?? client).post<
-    PostCdrSellersSellerIdUsersUserIdDataFieldIdResponse,
-    PostCdrSellersSellerIdUsersUserIdDataFieldIdError
+    PostCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
+    PostCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError
   >({
     ...options,
-    url: "/cdr/sellers/{seller_id}/users/{user_id}/data/{field_id}/",
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/users/{user_id}/data/{field_id}/",
   });
 };
 
 /**
  * Update Custom Data
  */
-export const patchCdrSellersSellerIdUsersUserIdDataFieldId = (
-  options: Options<PatchCdrSellersSellerIdUsersUserIdDataFieldIdData>,
+export const patchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId = (
+  options: Options<PatchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData>,
 ) => {
   return (options?.client ?? client).patch<
-    PatchCdrSellersSellerIdUsersUserIdDataFieldIdResponse,
-    PatchCdrSellersSellerIdUsersUserIdDataFieldIdError
+    PatchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
+    PatchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError
   >({
     ...options,
-    url: "/cdr/sellers/{seller_id}/users/{user_id}/data/{field_id}/",
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/users/{user_id}/data/{field_id}/",
   });
 };
 
 /**
  * Delete Customdata
  */
-export const deleteCdrSellersSellerIdUsersUserIdDataFieldId = (
-  options: Options<DeleteCdrSellersSellerIdUsersUserIdDataFieldIdData>,
+export const deleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId = (
+  options: Options<DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteCdrSellersSellerIdUsersUserIdDataFieldIdResponse,
-    DeleteCdrSellersSellerIdUsersUserIdDataFieldIdError
+    DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
+    DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError
   >({
     ...options,
-    url: "/cdr/sellers/{seller_id}/users/{user_id}/data/{field_id}/",
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/users/{user_id}/data/{field_id}/",
+  });
+};
+
+/**
+ * Get Movie
+ * Makes a HTTP request to The Movie Database (TMDB)
+ * using an API key and returns a TheMovieDB object
+ * * https://developer.themoviedb.org/reference/movie-details
+ * * https://developer.themoviedb.org/docs/errors
+ */
+export const getCinemaThemoviedbThemoviedbId = (
+  options: Options<GetCinemaThemoviedbThemoviedbIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCinemaThemoviedbThemoviedbIdResponse,
+    GetCinemaThemoviedbThemoviedbIdError
+  >({
+    ...options,
+    url: "/cinema/themoviedb/{themoviedb_id}",
+  });
+};
+
+/**
+ * Get Sessions
+ */
+export const getCinemaSessions = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCinemaSessionsResponse,
+    GetCinemaSessionsError
+  >({
+    ...options,
+    url: "/cinema/sessions",
+  });
+};
+
+/**
+ * Create Session
+ */
+export const postCinemaSessions = (
+  options: Options<PostCinemaSessionsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCinemaSessionsResponse,
+    PostCinemaSessionsError
+  >({
+    ...options,
+    url: "/cinema/sessions",
+  });
+};
+
+/**
+ * Update Session
+ */
+export const patchCinemaSessionsSessionId = (
+  options: Options<PatchCinemaSessionsSessionIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchCinemaSessionsSessionIdResponse,
+    PatchCinemaSessionsSessionIdError
+  >({
+    ...options,
+    url: "/cinema/sessions/{session_id}",
+  });
+};
+
+/**
+ * Delete Session
+ */
+export const deleteCinemaSessionsSessionId = (
+  options: Options<DeleteCinemaSessionsSessionIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCinemaSessionsSessionIdResponse,
+    DeleteCinemaSessionsSessionIdError
+  >({
+    ...options,
+    url: "/cinema/sessions/{session_id}",
+  });
+};
+
+/**
+ * Create Campaigns Logo
+ */
+export const postCinemaSessionsSessionIdPoster = (
+  options: Options<PostCinemaSessionsSessionIdPosterData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCinemaSessionsSessionIdPosterResponse,
+    PostCinemaSessionsSessionIdPosterError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    url: "/cinema/sessions/{session_id}/poster",
+  });
+};
+
+/**
+ * Read Session Poster
+ */
+export const getCinemaSessionsSessionIdPoster = (
+  options: Options<GetCinemaSessionsSessionIdPosterData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCinemaSessionsSessionIdPosterResponse,
+    GetCinemaSessionsSessionIdPosterError
+  >({
+    ...options,
+    url: "/cinema/sessions/{session_id}/poster",
+  });
+};
+
+/**
+ * Get Flappybird Score
+ * Return the leaderboard
+ */
+export const getFlappybirdScores = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetFlappybirdScoresResponse,
+    GetFlappybirdScoresError
+  >({
+    ...options,
+    url: "/flappybird/scores",
+  });
+};
+
+/**
+ * Create Flappybird Score
+ */
+export const postFlappybirdScores = (
+  options: Options<PostFlappybirdScoresData>,
+) => {
+  return (options?.client ?? client).post<
+    PostFlappybirdScoresResponse,
+    PostFlappybirdScoresError
+  >({
+    ...options,
+    url: "/flappybird/scores",
+  });
+};
+
+/**
+ * Get Current User Flappybird Personal Best
+ */
+export const getFlappybirdScoresMe = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetFlappybirdScoresMeResponse,
+    GetFlappybirdScoresMeError
+  >({
+    ...options,
+    url: "/flappybird/scores/me",
+  });
+};
+
+/**
+ * Read Loaners
+ * Get existing loaners.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const getLoansLoaners = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetLoansLoanersResponse,
+    GetLoansLoanersError
+  >({
+    ...options,
+    url: "/loans/loaners/",
+  });
+};
+
+/**
+ * Create Loaner
+ * Create a new loaner.
+ *
+ * Each loaner is associated with a `manager_group`. Users belonging to this group are able to manage the loaner items and loans.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const postLoansLoaners = (options: Options<PostLoansLoanersData>) => {
+  return (options?.client ?? client).post<
+    PostLoansLoanersResponse,
+    PostLoansLoanersError
+  >({
+    ...options,
+    url: "/loans/loaners/",
+  });
+};
+
+/**
+ * Delete Loaner
+ * Delete a loaner. All items and loans associated with the loaner will also be deleted from the database.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const deleteLoansLoanersLoanerId = (
+  options: Options<DeleteLoansLoanersLoanerIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteLoansLoanersLoanerIdResponse,
+    DeleteLoansLoanersLoanerIdError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}",
+  });
+};
+
+/**
+ * Update Loaner
+ * Update a loaner, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const patchLoansLoanersLoanerId = (
+  options: Options<PatchLoansLoanersLoanerIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchLoansLoanersLoanerIdResponse,
+    PatchLoansLoanersLoanerIdError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}",
+  });
+};
+
+/**
+ * Get Loans By Loaner
+ * Return all loans from a given group.
+ *
+ *
+ * The query string `returned` can be used to get only return or non returned loans. By default, all loans are returned.
+ *
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const getLoansLoanersLoanerIdLoans = (
+  options: Options<GetLoansLoanersLoanerIdLoansData>,
+) => {
+  return (options?.client ?? client).get<
+    GetLoansLoanersLoanerIdLoansResponse,
+    GetLoansLoanersLoanerIdLoansError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/loans",
+  });
+};
+
+/**
+ * Get Items By Loaner
+ * Return all items of a loaner.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const getLoansLoanersLoanerIdItems = (
+  options: Options<GetLoansLoanersLoanerIdItemsData>,
+) => {
+  return (options?.client ?? client).get<
+    GetLoansLoanersLoanerIdItemsResponse,
+    GetLoansLoanersLoanerIdItemsError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/items",
+  });
+};
+
+/**
+ * Create Items For Loaner
+ * Create a new item for a loaner. A given loaner can not have more than one item with the same `name`.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const postLoansLoanersLoanerIdItems = (
+  options: Options<PostLoansLoanersLoanerIdItemsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostLoansLoanersLoanerIdItemsResponse,
+    PostLoansLoanersLoanerIdItemsError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/items",
+  });
+};
+
+/**
+ * Update Items For Loaner
+ * Update a loaner's item.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const patchLoansLoanersLoanerIdItemsItemId = (
+  options: Options<PatchLoansLoanersLoanerIdItemsItemIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchLoansLoanersLoanerIdItemsItemIdResponse,
+    PatchLoansLoanersLoanerIdItemsItemIdError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/items/{item_id}",
+  });
+};
+
+/**
+ * Delete Loaner Item
+ * Delete a loaner's item.
+ * This will remove the item from all loans but won't delete any loan.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const deleteLoansLoanersLoanerIdItemsItemId = (
+  options: Options<DeleteLoansLoanersLoanerIdItemsItemIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteLoansLoanersLoanerIdItemsItemIdResponse,
+    DeleteLoansLoanersLoanerIdItemsItemIdError
+  >({
+    ...options,
+    url: "/loans/loaners/{loaner_id}/items/{item_id}",
+  });
+};
+
+/**
+ * Get Current User Loans
+ * Return all loans from the current user.
+ *
+ * The query string `returned` can be used to get only returned or non returned loans. By default, all loans are returned.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getLoansUsersMe = (options?: Options<GetLoansUsersMeData>) => {
+  return (options?.client ?? client).get<
+    GetLoansUsersMeResponse,
+    GetLoansUsersMeError
+  >({
+    ...options,
+    url: "/loans/users/me",
+  });
+};
+
+/**
+ * Get Current User Loaners
+ * Return all loaners the current user can manage.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getLoansUsersMeLoaners = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetLoansUsersMeLoanersResponse,
+    GetLoansUsersMeLoanersError
+  >({
+    ...options,
+    url: "/loans/users/me/loaners",
+  });
+};
+
+/**
+ * Create Loan
+ * Create a new loan in database and add the requested items
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const postLoans = (options: Options<PostLoansData>) => {
+  return (options?.client ?? client).post<PostLoansResponse, PostLoansError>({
+    ...options,
+    url: "/loans/",
+  });
+};
+
+/**
+ * Update Loan
+ * Update a loan and its items.
+ *
+ * As the endpoint can update the loan items, it will send back
+ * the new representation of the loan `Loan` including the new items relationships
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const patchLoansLoanId = (options: Options<PatchLoansLoanIdData>) => {
+  return (options?.client ?? client).patch<
+    PatchLoansLoanIdResponse,
+    PatchLoansLoanIdError
+  >({
+    ...options,
+    url: "/loans/{loan_id}",
+  });
+};
+
+/**
+ * Delete Loan
+ * Delete a loan
+ * This will remove the loan but won't delete any loaner items.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const deleteLoansLoanId = (options: Options<DeleteLoansLoanIdData>) => {
+  return (options?.client ?? client).delete<
+    DeleteLoansLoanIdResponse,
+    DeleteLoansLoanIdError
+  >({
+    ...options,
+    url: "/loans/{loan_id}",
+  });
+};
+
+/**
+ * Return Loan
+ * Mark a loan as returned. This will update items availability.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const postLoansLoanIdReturn = (
+  options: Options<PostLoansLoanIdReturnData>,
+) => {
+  return (options?.client ?? client).post<
+    PostLoansLoanIdReturnResponse,
+    PostLoansLoanIdReturnError
+  >({
+    ...options,
+    url: "/loans/{loan_id}/return",
+  });
+};
+
+/**
+ * Extend Loan
+ * A new `end` date or an extended `duration` can be provided. If the two are provided, only `end` will be used.
+ *
+ * **The user must be a member of the loaner group_manager to use this endpoint**
+ */
+export const postLoansLoanIdExtend = (
+  options: Options<PostLoansLoanIdExtendData>,
+) => {
+  return (options?.client ?? client).post<
+    PostLoansLoanIdExtendResponse,
+    PostLoansLoanIdExtendError
+  >({
+    ...options,
+    url: "/loans/{loan_id}/extend",
   });
 };
 
@@ -4423,889 +5121,237 @@ export const deletePhPaperId = (options: Options<DeletePhPaperIdData>) => {
 };
 
 /**
- * Get Sections
- * Return sections in the database as a list of `schemas_campaign.SectionBase`
- *
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ * Get All Associations
+ * Return all associations from database as a list of AssociationComplete schemas
  */
-export const getCampaignSections = (options?: Options) => {
+export const getPhonebookAssociations = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetCampaignSectionsResponse,
-    GetCampaignSectionsError
+    GetPhonebookAssociationsResponse,
+    GetPhonebookAssociationsError
   >({
     ...options,
-    url: "/campaign/sections",
+    url: "/phonebook/associations/",
   });
 };
 
 /**
- * Add Section
- * Add a section.
+ * Create Association
+ * Create a new Association by giving an AssociationBase scheme
  *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
+ * **This endpoint is only usable by CAA, BDE**
  */
-export const postCampaignSections = (
-  options: Options<PostCampaignSectionsData>,
+export const postPhonebookAssociations = (
+  options: Options<PostPhonebookAssociationsData>,
 ) => {
   return (options?.client ?? client).post<
-    PostCampaignSectionsResponse,
-    PostCampaignSectionsError
+    PostPhonebookAssociationsResponse,
+    PostPhonebookAssociationsError
   >({
     ...options,
-    url: "/campaign/sections",
+    url: "/phonebook/associations/",
   });
 };
 
 /**
- * Delete Section
- * Delete a section.
- *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
+ * Get All Role Tags
+ * Return all available role tags from RoleTags enum.
  */
-export const deleteCampaignSectionsSectionId = (
-  options: Options<DeleteCampaignSectionsSectionIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteCampaignSectionsSectionIdResponse,
-    DeleteCampaignSectionsSectionIdError
-  >({
-    ...options,
-    url: "/campaign/sections/{section_id}",
-  });
-};
-
-/**
- * Get Lists
- * Return campaign lists registered for the vote.
- *
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
- */
-export const getCampaignLists = (options?: Options) => {
+export const getPhonebookRoletags = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetCampaignListsResponse,
-    GetCampaignListsError
+    GetPhonebookRoletagsResponse,
+    GetPhonebookRoletagsError
   >({
     ...options,
-    url: "/campaign/lists",
+    url: "/phonebook/roletags",
   });
 };
 
 /**
- * Add List
- * Add a campaign list to a section.
- *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
+ * Get All Kinds
+ * Return all available kinds of from Kinds enum.
  */
-export const postCampaignLists = (options: Options<PostCampaignListsData>) => {
-  return (options?.client ?? client).post<
-    PostCampaignListsResponse,
-    PostCampaignListsError
+export const getPhonebookAssociationsKinds = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetPhonebookAssociationsKindsResponse,
+    GetPhonebookAssociationsKindsError
   >({
     ...options,
-    url: "/campaign/lists",
+    url: "/phonebook/associations/kinds",
   });
 };
 
 /**
- * Delete List
- * Delete the campaign list with the given id.
+ * Update Association
+ * Update an Association
  *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
+ * **This endpoint is only usable by CAA, BDE and association's president**
  */
-export const deleteCampaignListsListId = (
-  options: Options<DeleteCampaignListsListIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteCampaignListsListIdResponse,
-    DeleteCampaignListsListIdError
-  >({
-    ...options,
-    url: "/campaign/lists/{list_id}",
-  });
-};
-
-/**
- * Update List
- * Update the campaign list with the given id.
- *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const patchCampaignListsListId = (
-  options: Options<PatchCampaignListsListIdData>,
+export const patchPhonebookAssociationsAssociationId = (
+  options: Options<PatchPhonebookAssociationsAssociationIdData>,
 ) => {
   return (options?.client ?? client).patch<
-    PatchCampaignListsListIdResponse,
-    PatchCampaignListsListIdError
+    PatchPhonebookAssociationsAssociationIdResponse,
+    PatchPhonebookAssociationsAssociationIdError
   >({
     ...options,
-    url: "/campaign/lists/{list_id}",
+    url: "/phonebook/associations/{association_id}",
   });
 };
 
 /**
- * Delete Lists By Type
- * Delete the all lists by type.
+ * Delete Association
+ * Delete an Association
  *
- * This endpoint can only be used in 'waiting' status.
+ * [!] Memberships linked to association_id will be deleted too
  *
- * **The user must be a member of the group CAA to use this endpoint**
+ * **This endpoint is only usable by CAA and BDE**
  */
-export const deleteCampaignLists = (
-  options?: Options<DeleteCampaignListsData>,
+export const deletePhonebookAssociationsAssociationId = (
+  options: Options<DeletePhonebookAssociationsAssociationIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteCampaignListsResponse,
-    DeleteCampaignListsError
+    DeletePhonebookAssociationsAssociationIdResponse,
+    DeletePhonebookAssociationsAssociationIdError
   >({
     ...options,
-    url: "/campaign/lists/",
+    url: "/phonebook/associations/{association_id}",
   });
 };
 
 /**
- * Get Voters
- * Return the voters (groups allowed to vote) for the current campaign.
+ * Get Association Members
+ * Return the list of MemberComplete of an Association.
  */
-export const getCampaignVoters = (options?: Options) => {
+export const getPhonebookAssociationsAssociationIdMembers = (
+  options: Options<GetPhonebookAssociationsAssociationIdMembersData>,
+) => {
   return (options?.client ?? client).get<
-    GetCampaignVotersResponse,
-    GetCampaignVotersError
+    GetPhonebookAssociationsAssociationIdMembersResponse,
+    GetPhonebookAssociationsAssociationIdMembersError
   >({
     ...options,
-    url: "/campaign/voters",
+    url: "/phonebook/associations/{association_id}/members/",
   });
 };
 
 /**
- * Add Voter
- * Add voters (groups allowed to vote) for this campaign
- *
- * **The user must be a member of the group CAA to use this endpoint**
+ * Get Association Members By Mandate Year
+ * Return the list of MemberComplete of an Association with given mandate_year.
  */
-export const postCampaignVoters = (
-  options: Options<PostCampaignVotersData>,
+export const getPhonebookAssociationsAssociationIdMembersMandateYear = (
+  options: Options<GetPhonebookAssociationsAssociationIdMembersMandateYearData>,
+) => {
+  return (options?.client ?? client).get<
+    GetPhonebookAssociationsAssociationIdMembersMandateYearResponse,
+    GetPhonebookAssociationsAssociationIdMembersMandateYearError
+  >({
+    ...options,
+    url: "/phonebook/associations/{association_id}/members/{mandate_year}",
+  });
+};
+
+/**
+ * Get Member Details
+ * Return MemberComplete for given user_id.
+ */
+export const getPhonebookMemberUserId = (
+  options: Options<GetPhonebookMemberUserIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetPhonebookMemberUserIdResponse,
+    GetPhonebookMemberUserIdError
+  >({
+    ...options,
+    url: "/phonebook/member/{user_id}",
+  });
+};
+
+/**
+ * Create Membership
+ * Create a new Membership.
+ * 'role_tags' are used to indicate if the members has a main role in the association (president, secretary ...) and 'role_name' is the display name for this membership
+ *
+ * **This endpoint is only usable by CAA, BDE and association's president**
+ */
+export const postPhonebookAssociationsMemberships = (
+  options: Options<PostPhonebookAssociationsMembershipsData>,
 ) => {
   return (options?.client ?? client).post<
-    PostCampaignVotersResponse,
-    PostCampaignVotersError
+    PostPhonebookAssociationsMembershipsResponse,
+    PostPhonebookAssociationsMembershipsError
   >({
     ...options,
-    url: "/campaign/voters",
+    url: "/phonebook/associations/memberships",
   });
 };
 
 /**
- * Delete Voters
- * Remove voters (groups allowed to vote)
+ * Update Membership
+ * Update a Membership.
  *
- * **The user must be a member of the group CAA to use this endpoint**
+ * **This endpoint is only usable by CAA, BDE and association's president**
  */
-export const deleteCampaignVoters = (options?: Options) => {
+export const patchPhonebookAssociationsMembershipsMembershipId = (
+  options: Options<PatchPhonebookAssociationsMembershipsMembershipIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchPhonebookAssociationsMembershipsMembershipIdResponse,
+    PatchPhonebookAssociationsMembershipsMembershipIdError
+  >({
+    ...options,
+    url: "/phonebook/associations/memberships/{membership_id}",
+  });
+};
+
+/**
+ * Delete Membership
+ * Delete a membership.
+ *
+ * **This endpoint is only usable by CAA, BDE and association's president**
+ */
+export const deletePhonebookAssociationsMembershipsMembershipId = (
+  options: Options<DeletePhonebookAssociationsMembershipsMembershipIdData>,
+) => {
   return (options?.client ?? client).delete<
-    DeleteCampaignVotersResponse,
-    DeleteCampaignVotersError
+    DeletePhonebookAssociationsMembershipsMembershipIdResponse,
+    DeletePhonebookAssociationsMembershipsMembershipIdError
   >({
     ...options,
-    url: "/campaign/voters",
+    url: "/phonebook/associations/memberships/{membership_id}",
   });
 };
 
 /**
- * Delete Voter By Group Id
- * Remove a voter by its group id
- *
- * **The user must be a member of the group CAA to use this endpoint**
+ * Create Association Logo
+ * Upload a logo for an Association.
+ * **The user must be a member of the group CAA or BDE to use this endpoint**
  */
-export const deleteCampaignVotersGroupId = (
-  options: Options<DeleteCampaignVotersGroupIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteCampaignVotersGroupIdResponse,
-    DeleteCampaignVotersGroupIdError
-  >({
-    ...options,
-    url: "/campaign/voters/{group_id}",
-  });
-};
-
-/**
- * Open Vote
- * If the status is 'waiting', change it to 'voting' and create the blank lists.
- *
- * > WARNING: this operation can not be reversed.
- * > When the status is 'open', all users can vote and sections and lists can no longer be edited.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusOpen = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusOpenResponse,
-    PostCampaignStatusOpenError
-  >({
-    ...options,
-    url: "/campaign/status/open",
-  });
-};
-
-/**
- * Close Vote
- * If the status is 'open', change it to 'closed'.
- *
- * > WARNING: this operation can not be reversed.
- * > When the status is 'closed', users are no longer able to vote.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusClose = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusCloseResponse,
-    PostCampaignStatusCloseError
-  >({
-    ...options,
-    url: "/campaign/status/close",
-  });
-};
-
-/**
- * Count Voting
- * If the status is 'closed', change it to 'counting'.
- *
- * > WARNING: this operation can not be reversed.
- * > When the status is 'counting', administrators can see the results of the vote.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusCounting = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusCountingResponse,
-    PostCampaignStatusCountingError
-  >({
-    ...options,
-    url: "/campaign/status/counting",
-  });
-};
-
-/**
- * Publish Vote
- * If the status is 'counting', change it to 'published'.
- *
- * > WARNING: this operation can not be reversed.
- * > When the status is 'published', everyone can see the results of the vote.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusPublished = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusPublishedResponse,
-    PostCampaignStatusPublishedError
-  >({
-    ...options,
-    url: "/campaign/status/published",
-  });
-};
-
-/**
- * Reset Vote
- * Reset the vote. Can only be used if the current status is counting ou published.
- *
- * > WARNING: This will delete all votes then put the module to Waiting status. This will also delete blank lists.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusReset = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusResetResponse,
-    PostCampaignStatusResetError
-  >({
-    ...options,
-    url: "/campaign/status/reset",
-  });
-};
-
-/**
- * Get Sections Already Voted
- * Return the list of id of sections an user has already voted for.
- *
- * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
- */
-export const getCampaignVotes = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCampaignVotesResponse,
-    GetCampaignVotesError
-  >({
-    ...options,
-    url: "/campaign/votes",
-  });
-};
-
-/**
- * Vote
- * Add a vote for a given campaign list.
- *
- * An user can only vote for one list per section.
- *
- * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
- */
-export const postCampaignVotes = (options: Options<PostCampaignVotesData>) => {
-  return (options?.client ?? client).post<
-    PostCampaignVotesResponse,
-    PostCampaignVotesError
-  >({
-    ...options,
-    url: "/campaign/votes",
-  });
-};
-
-/**
- * Get Results
- * Return the results of the vote.
- *
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
- */
-export const getCampaignResults = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCampaignResultsResponse,
-    GetCampaignResultsError
-  >({
-    ...options,
-    url: "/campaign/results",
-  });
-};
-
-/**
- * Get Status Vote
- * Get the current status of the vote.
- *
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
- */
-export const getCampaignStatus = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCampaignStatusResponse,
-    GetCampaignStatusError
-  >({
-    ...options,
-    url: "/campaign/status",
-  });
-};
-
-/**
- * Get Stats For Section
- * Get stats about a given section.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const getCampaignStatsSectionId = (
-  options: Options<GetCampaignStatsSectionIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCampaignStatsSectionIdResponse,
-    GetCampaignStatsSectionIdError
-  >({
-    ...options,
-    url: "/campaign/stats/{section_id}",
-  });
-};
-
-/**
- * Create Campaigns Logo
- * Upload a logo for a campaign list.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignListsListIdLogo = (
-  options: Options<PostCampaignListsListIdLogoData>,
+export const postPhonebookAssociationsAssociationIdPicture = (
+  options: Options<PostPhonebookAssociationsAssociationIdPictureData>,
 ) => {
   return (options?.client ?? client).post<
-    PostCampaignListsListIdLogoResponse,
-    PostCampaignListsListIdLogoError
+    PostPhonebookAssociationsAssociationIdPictureResponse,
+    PostPhonebookAssociationsAssociationIdPictureError
   >({
     ...options,
     ...formDataBodySerializer,
-    url: "/campaign/lists/{list_id}/logo",
+    url: "/phonebook/associations/{association_id}/picture",
   });
 };
 
 /**
- * Read Campaigns Logo
- * Get the logo of a campaign list.
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ * Read Association Logo
+ * Get the logo of an Association.
  */
-export const getCampaignListsListIdLogo = (
-  options: Options<GetCampaignListsListIdLogoData>,
+export const getPhonebookAssociationsAssociationIdPicture = (
+  options: Options<GetPhonebookAssociationsAssociationIdPictureData>,
 ) => {
   return (options?.client ?? client).get<
-    GetCampaignListsListIdLogoResponse,
-    GetCampaignListsListIdLogoError
+    GetPhonebookAssociationsAssociationIdPictureResponse,
+    GetPhonebookAssociationsAssociationIdPictureError
   >({
     ...options,
-    url: "/campaign/lists/{list_id}/logo",
-  });
-};
-
-/**
- * Get Products
- * Return all products
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const getAmapProducts = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetAmapProductsResponse,
-    GetAmapProductsError
-  >({
-    ...options,
-    url: "/amap/products",
-  });
-};
-
-/**
- * Create Product
- * Create a new product
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const postAmapProducts = (options: Options<PostAmapProductsData>) => {
-  return (options?.client ?? client).post<
-    PostAmapProductsResponse,
-    PostAmapProductsError
-  >({
-    ...options,
-    url: "/amap/products",
-  });
-};
-
-/**
- * Get Product By Id
- * Get a specific product
- */
-export const getAmapProductsProductId = (
-  options: Options<GetAmapProductsProductIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetAmapProductsProductIdResponse,
-    GetAmapProductsProductIdError
-  >({
-    ...options,
-    url: "/amap/products/{product_id}",
-  });
-};
-
-/**
- * Edit Product
- * Edit a product
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const patchAmapProductsProductId = (
-  options: Options<PatchAmapProductsProductIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchAmapProductsProductIdResponse,
-    PatchAmapProductsProductIdError
-  >({
-    ...options,
-    url: "/amap/products/{product_id}",
-  });
-};
-
-/**
- * Delete Product
- * Delete a product. A product can not be deleted if it is already used in a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const deleteAmapProductsProductId = (
-  options: Options<DeleteAmapProductsProductIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteAmapProductsProductIdResponse,
-    DeleteAmapProductsProductIdError
-  >({
-    ...options,
-    url: "/amap/products/{product_id}",
-  });
-};
-
-/**
- * Get Deliveries
- * Get all deliveries.
- */
-export const getAmapDeliveries = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetAmapDeliveriesResponse,
-    GetAmapDeliveriesError
-  >({
-    ...options,
-    url: "/amap/deliveries",
-  });
-};
-
-/**
- * Create Delivery
- * Create a new delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const postAmapDeliveries = (
-  options: Options<PostAmapDeliveriesData>,
-) => {
-  return (options?.client ?? client).post<
-    PostAmapDeliveriesResponse,
-    PostAmapDeliveriesError
-  >({
-    ...options,
-    url: "/amap/deliveries",
-  });
-};
-
-/**
- * Delete Delivery
- * Delete a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const deleteAmapDeliveriesDeliveryId = (
-  options: Options<DeleteAmapDeliveriesDeliveryIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteAmapDeliveriesDeliveryIdResponse,
-    DeleteAmapDeliveriesDeliveryIdError
-  >({
-    ...options,
-    url: "/amap/deliveries/{delivery_id}",
-  });
-};
-
-/**
- * Edit Delivery
- * Edit a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const patchAmapDeliveriesDeliveryId = (
-  options: Options<PatchAmapDeliveriesDeliveryIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchAmapDeliveriesDeliveryIdResponse,
-    PatchAmapDeliveriesDeliveryIdError
-  >({
-    ...options,
-    url: "/amap/deliveries/{delivery_id}",
-  });
-};
-
-/**
- * Add Product To Delivery
- * Add `product_id` product to `delivery_id` delivery. This endpoint will only add a membership between the two objects.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const postAmapDeliveriesDeliveryIdProducts = (
-  options: Options<PostAmapDeliveriesDeliveryIdProductsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostAmapDeliveriesDeliveryIdProductsResponse,
-    PostAmapDeliveriesDeliveryIdProductsError
-  >({
-    ...options,
-    url: "/amap/deliveries/{delivery_id}/products",
-  });
-};
-
-/**
- * Remove Product From Delivery
- * Remove a given product from a delivery. This won't delete the product nor the delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const deleteAmapDeliveriesDeliveryIdProducts = (
-  options: Options<DeleteAmapDeliveriesDeliveryIdProductsData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteAmapDeliveriesDeliveryIdProductsResponse,
-    DeleteAmapDeliveriesDeliveryIdProductsError
-  >({
-    ...options,
-    url: "/amap/deliveries/{delivery_id}/products",
-  });
-};
-
-/**
- * Get Orders From Delivery
- * Get orders from a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const getAmapDeliveriesDeliveryIdOrders = (
-  options: Options<GetAmapDeliveriesDeliveryIdOrdersData>,
-) => {
-  return (options?.client ?? client).get<
-    GetAmapDeliveriesDeliveryIdOrdersResponse,
-    GetAmapDeliveriesDeliveryIdOrdersError
-  >({
-    ...options,
-    url: "/amap/deliveries/{delivery_id}/orders",
-  });
-};
-
-/**
- * Get Order By Id
- * Get content of an order.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const getAmapOrdersOrderId = (
-  options: Options<GetAmapOrdersOrderIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetAmapOrdersOrderIdResponse,
-    GetAmapOrdersOrderIdError
-  >({
-    ...options,
-    url: "/amap/orders/{order_id}",
-  });
-};
-
-/**
- * Edit Order From Delivery
- * Edit an order.
- *
- * **A member of the group AMAP can edit orders of other users**
- */
-export const patchAmapOrdersOrderId = (
-  options: Options<PatchAmapOrdersOrderIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchAmapOrdersOrderIdResponse,
-    PatchAmapOrdersOrderIdError
-  >({
-    ...options,
-    url: "/amap/orders/{order_id}",
-  });
-};
-
-/**
- * Remove Order
- * Delete an order.
- *
- * **A member of the group AMAP can delete orders of other users**
- */
-export const deleteAmapOrdersOrderId = (
-  options: Options<DeleteAmapOrdersOrderIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteAmapOrdersOrderIdResponse,
-    DeleteAmapOrdersOrderIdError
-  >({
-    ...options,
-    url: "/amap/orders/{order_id}",
-  });
-};
-
-/**
- * Add Order To Delievery
- * Add an order to a delivery.
- *
- * **A member of the group AMAP can create an order for every user**
- */
-export const postAmapOrders = (options: Options<PostAmapOrdersData>) => {
-  return (options?.client ?? client).post<
-    PostAmapOrdersResponse,
-    PostAmapOrdersError
-  >({
-    ...options,
-    url: "/amap/orders",
-  });
-};
-
-/**
- * Open Ordering Of Delivery
- */
-export const postAmapDeliveriesDeliveryIdOpenordering = (
-  options: Options<PostAmapDeliveriesDeliveryIdOpenorderingData>,
-) => {
-  return (options?.client ?? client).post<
-    PostAmapDeliveriesDeliveryIdOpenorderingResponse,
-    PostAmapDeliveriesDeliveryIdOpenorderingError
-  >({
-    ...options,
-    url: "/amap/deliveries/{delivery_id}/openordering",
-  });
-};
-
-/**
- * Lock Delivery
- */
-export const postAmapDeliveriesDeliveryIdLock = (
-  options: Options<PostAmapDeliveriesDeliveryIdLockData>,
-) => {
-  return (options?.client ?? client).post<
-    PostAmapDeliveriesDeliveryIdLockResponse,
-    PostAmapDeliveriesDeliveryIdLockError
-  >({
-    ...options,
-    url: "/amap/deliveries/{delivery_id}/lock",
-  });
-};
-
-/**
- * Mark Delivery As Delivered
- */
-export const postAmapDeliveriesDeliveryIdDelivered = (
-  options: Options<PostAmapDeliveriesDeliveryIdDeliveredData>,
-) => {
-  return (options?.client ?? client).post<
-    PostAmapDeliveriesDeliveryIdDeliveredResponse,
-    PostAmapDeliveriesDeliveryIdDeliveredError
-  >({
-    ...options,
-    url: "/amap/deliveries/{delivery_id}/delivered",
-  });
-};
-
-/**
- * Archive Of Delivery
- */
-export const postAmapDeliveriesDeliveryIdArchive = (
-  options: Options<PostAmapDeliveriesDeliveryIdArchiveData>,
-) => {
-  return (options?.client ?? client).post<
-    PostAmapDeliveriesDeliveryIdArchiveResponse,
-    PostAmapDeliveriesDeliveryIdArchiveError
-  >({
-    ...options,
-    url: "/amap/deliveries/{delivery_id}/archive",
-  });
-};
-
-/**
- * Get Users Cash
- * Get cash from all users.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const getAmapUsersCash = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetAmapUsersCashResponse,
-    GetAmapUsersCashError
-  >({
-    ...options,
-    url: "/amap/users/cash",
-  });
-};
-
-/**
- * Get Cash By Id
- * Get cash from a specific user.
- *
- * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
- */
-export const getAmapUsersUserIdCash = (
-  options: Options<GetAmapUsersUserIdCashData>,
-) => {
-  return (options?.client ?? client).get<
-    GetAmapUsersUserIdCashResponse,
-    GetAmapUsersUserIdCashError
-  >({
-    ...options,
-    url: "/amap/users/{user_id}/cash",
-  });
-};
-
-/**
- * Create Cash Of User
- * Create cash for an user.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const postAmapUsersUserIdCash = (
-  options: Options<PostAmapUsersUserIdCashData>,
-) => {
-  return (options?.client ?? client).post<
-    PostAmapUsersUserIdCashResponse,
-    PostAmapUsersUserIdCashError
-  >({
-    ...options,
-    url: "/amap/users/{user_id}/cash",
-  });
-};
-
-/**
- * Edit Cash By Id
- * Edit cash for an user. This will add the balance to the current balance.
- * A negative value can be provided to remove money from the user.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const patchAmapUsersUserIdCash = (
-  options: Options<PatchAmapUsersUserIdCashData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchAmapUsersUserIdCashResponse,
-    PatchAmapUsersUserIdCashError
-  >({
-    ...options,
-    url: "/amap/users/{user_id}/cash",
-  });
-};
-
-/**
- * Get Orders Of User
- * Get orders from an user.
- *
- * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
- */
-export const getAmapUsersUserIdOrders = (
-  options: Options<GetAmapUsersUserIdOrdersData>,
-) => {
-  return (options?.client ?? client).get<
-    GetAmapUsersUserIdOrdersResponse,
-    GetAmapUsersUserIdOrdersError
-  >({
-    ...options,
-    url: "/amap/users/{user_id}/orders",
-  });
-};
-
-/**
- * Get Information
- * Return all information
- */
-export const getAmapInformation = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetAmapInformationResponse,
-    GetAmapInformationError
-  >({
-    ...options,
-    url: "/amap/information",
-  });
-};
-
-/**
- * Edit Information
- * Update information
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const patchAmapInformation = (
-  options: Options<PatchAmapInformationData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchAmapInformationResponse,
-    PatchAmapInformationError
-  >({
-    ...options,
-    url: "/amap/information",
+    url: "/phonebook/associations/{association_id}/picture",
   });
 };
 
@@ -5836,43 +5882,534 @@ export const patchTombolaRafflesRaffleIdLock = (
 };
 
 /**
- * Get Flappybird Score
- * Return the leaderboard
+ * Get Participant By Id
+ * Get a participant by id
  */
-export const getFlappybirdScores = (options?: Options) => {
+export const getRaidParticipantsParticipantId = (
+  options: Options<GetRaidParticipantsParticipantIdData>,
+) => {
   return (options?.client ?? client).get<
-    GetFlappybirdScoresResponse,
-    GetFlappybirdScoresError
+    GetRaidParticipantsParticipantIdResponse,
+    GetRaidParticipantsParticipantIdError
   >({
     ...options,
-    url: "/flappybird/scores",
+    url: "/raid/participants/{participant_id}",
   });
 };
 
 /**
- * Create Flappybird Score
+ * Update Participant
+ * Update a participant
  */
-export const postFlappybirdScores = (
-  options: Options<PostFlappybirdScoresData>,
+export const patchRaidParticipantsParticipantId = (
+  options: Options<PatchRaidParticipantsParticipantIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchRaidParticipantsParticipantIdResponse,
+    PatchRaidParticipantsParticipantIdError
+  >({
+    ...options,
+    url: "/raid/participants/{participant_id}",
+  });
+};
+
+/**
+ * Create Participant
+ * Create a participant
+ */
+export const postRaidParticipants = (
+  options: Options<PostRaidParticipantsData>,
 ) => {
   return (options?.client ?? client).post<
-    PostFlappybirdScoresResponse,
-    PostFlappybirdScoresError
+    PostRaidParticipantsResponse,
+    PostRaidParticipantsError
   >({
     ...options,
-    url: "/flappybird/scores",
+    url: "/raid/participants",
   });
 };
 
 /**
- * Get Current User Flappybird Personal Best
+ * Get All Teams
+ * Get all teams
  */
-export const getFlappybirdScoresMe = (options?: Options) => {
+export const getRaidTeams = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetFlappybirdScoresMeResponse,
-    GetFlappybirdScoresMeError
+    GetRaidTeamsResponse,
+    GetRaidTeamsError
   >({
     ...options,
-    url: "/flappybird/scores/me",
+    url: "/raid/teams",
+  });
+};
+
+/**
+ * Create Team
+ * Create a team
+ */
+export const postRaidTeams = (options: Options<PostRaidTeamsData>) => {
+  return (options?.client ?? client).post<
+    PostRaidTeamsResponse,
+    PostRaidTeamsError
+  >({
+    ...options,
+    url: "/raid/teams",
+  });
+};
+
+/**
+ * Delete All Teams
+ * Delete all teams
+ */
+export const deleteRaidTeams = (options?: Options) => {
+  return (options?.client ?? client).delete<
+    DeleteRaidTeamsResponse,
+    DeleteRaidTeamsError
+  >({
+    ...options,
+    url: "/raid/teams",
+  });
+};
+
+/**
+ * Get Team By Participant Id
+ * Get a team by participant id
+ */
+export const getRaidParticipantsParticipantIdTeam = (
+  options: Options<GetRaidParticipantsParticipantIdTeamData>,
+) => {
+  return (options?.client ?? client).get<
+    GetRaidParticipantsParticipantIdTeamResponse,
+    GetRaidParticipantsParticipantIdTeamError
+  >({
+    ...options,
+    url: "/raid/participants/{participant_id}/team",
+  });
+};
+
+/**
+ * Get Team By Id
+ * Get a team by id
+ */
+export const getRaidTeamsTeamId = (
+  options: Options<GetRaidTeamsTeamIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetRaidTeamsTeamIdResponse,
+    GetRaidTeamsTeamIdError
+  >({
+    ...options,
+    url: "/raid/teams/{team_id}",
+  });
+};
+
+/**
+ * Update Team
+ * Update a team
+ */
+export const patchRaidTeamsTeamId = (
+  options: Options<PatchRaidTeamsTeamIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchRaidTeamsTeamIdResponse,
+    PatchRaidTeamsTeamIdError
+  >({
+    ...options,
+    url: "/raid/teams/{team_id}",
+  });
+};
+
+/**
+ * Delete Team
+ * Delete a team
+ */
+export const deleteRaidTeamsTeamId = (
+  options: Options<DeleteRaidTeamsTeamIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteRaidTeamsTeamIdResponse,
+    DeleteRaidTeamsTeamIdError
+  >({
+    ...options,
+    url: "/raid/teams/{team_id}",
+  });
+};
+
+/**
+ * Upload Document
+ * Upload a document
+ */
+export const postRaidDocument = (options: Options<PostRaidDocumentData>) => {
+  return (options?.client ?? client).post<
+    PostRaidDocumentResponse,
+    PostRaidDocumentError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    url: "/raid/document",
+  });
+};
+
+/**
+ * Read Document
+ * Read a document
+ */
+export const getRaidDocumentDocumentId = (
+  options: Options<GetRaidDocumentDocumentIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetRaidDocumentDocumentIdResponse,
+    GetRaidDocumentDocumentIdError
+  >({
+    ...options,
+    url: "/raid/document/{document_id}",
+  });
+};
+
+/**
+ * Validate Document
+ * Validate a document
+ */
+export const postRaidDocumentDocumentIdValidate = (
+  options: Options<PostRaidDocumentDocumentIdValidateData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRaidDocumentDocumentIdValidateResponse,
+    PostRaidDocumentDocumentIdValidateError
+  >({
+    ...options,
+    url: "/raid/document/{document_id}/validate",
+  });
+};
+
+/**
+ * Set Security File
+ * Confirm security file
+ */
+export const postRaidSecurityFile = (
+  options: Options<PostRaidSecurityFileData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRaidSecurityFileResponse,
+    PostRaidSecurityFileError
+  >({
+    ...options,
+    url: "/raid/security_file/",
+  });
+};
+
+/**
+ * Confirm Payment
+ * Confirm payment manually
+ */
+export const postRaidParticipantParticipantIdPayment = (
+  options: Options<PostRaidParticipantParticipantIdPaymentData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRaidParticipantParticipantIdPaymentResponse,
+    PostRaidParticipantParticipantIdPaymentError
+  >({
+    ...options,
+    url: "/raid/participant/{participant_id}/payment",
+  });
+};
+
+/**
+ * Confirm T Shirt Payment
+ * Confirm T shirt payment
+ */
+export const postRaidParticipantParticipantIdTShirtPayment = (
+  options: Options<PostRaidParticipantParticipantIdTshirtPaymentData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRaidParticipantParticipantIdTshirtPaymentResponse,
+    PostRaidParticipantParticipantIdTshirtPaymentError
+  >({
+    ...options,
+    url: "/raid/participant/{participant_id}/t_shirt_payment",
+  });
+};
+
+/**
+ * Validate Attestation On Honour
+ * Validate attestation on honour
+ */
+export const postRaidParticipantParticipantIdHonour = (
+  options: Options<PostRaidParticipantParticipantIdHonourData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRaidParticipantParticipantIdHonourResponse,
+    PostRaidParticipantParticipantIdHonourError
+  >({
+    ...options,
+    url: "/raid/participant/{participant_id}/honour",
+  });
+};
+
+/**
+ * Create Invite Token
+ * Create an invite token
+ */
+export const postRaidTeamsTeamIdInvite = (
+  options: Options<PostRaidTeamsTeamIdInviteData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRaidTeamsTeamIdInviteResponse,
+    PostRaidTeamsTeamIdInviteError
+  >({
+    ...options,
+    url: "/raid/teams/{team_id}/invite",
+  });
+};
+
+/**
+ * Join Team
+ * Join a team
+ */
+export const postRaidTeamsJoinToken = (
+  options: Options<PostRaidTeamsJoinTokenData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRaidTeamsJoinTokenResponse,
+    PostRaidTeamsJoinTokenError
+  >({
+    ...options,
+    url: "/raid/teams/join/{token}",
+  });
+};
+
+/**
+ * Kick Team Member
+ * Leave a team
+ */
+export const postRaidTeamsTeamIdKickParticipantId = (
+  options: Options<PostRaidTeamsTeamIdKickParticipantIdData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRaidTeamsTeamIdKickParticipantIdResponse,
+    PostRaidTeamsTeamIdKickParticipantIdError
+  >({
+    ...options,
+    url: "/raid/teams/{team_id}/kick/{participant_id}",
+  });
+};
+
+/**
+ * Merge Teams
+ * Merge two teams
+ */
+export const postRaidTeamsMerge = (
+  options: Options<PostRaidTeamsMergeData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRaidTeamsMergeResponse,
+    PostRaidTeamsMergeError
+  >({
+    ...options,
+    url: "/raid/teams/merge",
+  });
+};
+
+/**
+ * Get Raid Information
+ * Get raid information
+ */
+export const getRaidInformation = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetRaidInformationResponse,
+    GetRaidInformationError
+  >({
+    ...options,
+    url: "/raid/information",
+  });
+};
+
+/**
+ * Update Raid Information
+ * Update raid information
+ */
+export const patchRaidInformation = (
+  options: Options<PatchRaidInformationData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchRaidInformationResponse,
+    PatchRaidInformationError
+  >({
+    ...options,
+    url: "/raid/information",
+  });
+};
+
+/**
+ * Get Drive Folders
+ * Get drive folders
+ */
+export const getRaidDrive = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetRaidDriveResponse,
+    GetRaidDriveError
+  >({
+    ...options,
+    url: "/raid/drive",
+  });
+};
+
+/**
+ * Update Drive Folders
+ * Update drive folders
+ */
+export const patchRaidDrive = (options: Options<PatchRaidDriveData>) => {
+  return (options?.client ?? client).patch<
+    PatchRaidDriveResponse,
+    PatchRaidDriveError
+  >({
+    ...options,
+    url: "/raid/drive",
+  });
+};
+
+/**
+ * Get Raid Price
+ * Get raid price
+ */
+export const getRaidPrice = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetRaidPriceResponse,
+    GetRaidPriceError
+  >({
+    ...options,
+    url: "/raid/price",
+  });
+};
+
+/**
+ * Update Raid Price
+ * Update raid price
+ */
+export const patchRaidPrice = (options: Options<PatchRaidPriceData>) => {
+  return (options?.client ?? client).patch<
+    PatchRaidPriceResponse,
+    PatchRaidPriceError
+  >({
+    ...options,
+    url: "/raid/price",
+  });
+};
+
+/**
+ * Get Payment Url
+ * Get payment url
+ */
+export const getRaidPay = (options?: Options) => {
+  return (options?.client ?? client).get<GetRaidPayResponse, GetRaidPayError>({
+    ...options,
+    url: "/raid/pay",
+  });
+};
+
+/**
+ * Get Recommendation
+ * Get recommendations.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getRecommendationRecommendations = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetRecommendationRecommendationsResponse,
+    GetRecommendationRecommendationsError
+  >({
+    ...options,
+    url: "/recommendation/recommendations",
+  });
+};
+
+/**
+ * Create Recommendation
+ * Create a recommendation.
+ *
+ * **This endpoint is only usable by members of the group BDE**
+ */
+export const postRecommendationRecommendations = (
+  options: Options<PostRecommendationRecommendationsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRecommendationRecommendationsResponse,
+    PostRecommendationRecommendationsError
+  >({
+    ...options,
+    url: "/recommendation/recommendations",
+  });
+};
+
+/**
+ * Edit Recommendation
+ * Edit a recommendation.
+ *
+ * **This endpoint is only usable by members of the group BDE**
+ */
+export const patchRecommendationRecommendationsRecommendationId = (
+  options: Options<PatchRecommendationRecommendationsRecommendationIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchRecommendationRecommendationsRecommendationIdResponse,
+    PatchRecommendationRecommendationsRecommendationIdError
+  >({
+    ...options,
+    url: "/recommendation/recommendations/{recommendation_id}",
+  });
+};
+
+/**
+ * Delete Recommendation
+ * Delete a recommendation.
+ *
+ * **This endpoint is only usable by members of the group BDE**
+ */
+export const deleteRecommendationRecommendationsRecommendationId = (
+  options: Options<DeleteRecommendationRecommendationsRecommendationIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteRecommendationRecommendationsRecommendationIdResponse,
+    DeleteRecommendationRecommendationsRecommendationIdError
+  >({
+    ...options,
+    url: "/recommendation/recommendations/{recommendation_id}",
+  });
+};
+
+/**
+ * Read Recommendation Image
+ * Get the image of a recommendation.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getRecommendationRecommendationsRecommendationIdPicture = (
+  options: Options<GetRecommendationRecommendationsRecommendationIdPictureData>,
+) => {
+  return (options?.client ?? client).get<
+    GetRecommendationRecommendationsRecommendationIdPictureResponse,
+    GetRecommendationRecommendationsRecommendationIdPictureError
+  >({
+    ...options,
+    url: "/recommendation/recommendations/{recommendation_id}/picture",
+  });
+};
+
+/**
+ * Create Recommendation Image
+ * Add an image to a recommendation.
+ *
+ * **This endpoint is only usable by members of the group BDE**
+ */
+export const postRecommendationRecommendationsRecommendationIdPicture = (
+  options: Options<PostRecommendationRecommendationsRecommendationIdPictureData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRecommendationRecommendationsRecommendationIdPictureResponse,
+    PostRecommendationRecommendationsRecommendationIdPictureError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    url: "/recommendation/recommendations/{recommendation_id}/picture",
   });
 };

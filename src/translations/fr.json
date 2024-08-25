@@ -17,7 +17,7 @@
   },
   "PaymentButton": {
     "title": "Information sur le prestataire de paiement",
-    "description": "Vous allez être redirigés vers HelloAsso pour procéder au paiement. HelloAsso est une entreprise française proposant des solutions de paiement pour les associations, se finançant uniquement par des dons. Par défaut, HelloAsso vous proposera de faire un don (nommé 'contribution volontaire'), vous pouvez refuser de le faire sans compromettre le paiement. Si vous choisissez de faire un don, seul HelloAsso en bénéficiera.",
+    "description": "Vous allez être redirigés vers HelloAsso pour procéder au paiement. HelloAsso est une entreprise française proposant des solutions de paiement pour les associations. Elle se finance uniquement par des dons. Par défaut, HelloAsso vous proposera de faire un don (nommé 'contribution volontaire'), vous pouvez refuser de le faire sans compromettre le paiement. Si vous choisissez de faire un don, seul HelloAsso en bénéficiera.",
     "pay": "Payer"
   },
   "ProductPanel": {

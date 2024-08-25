@@ -46,7 +46,7 @@
     "facebookTitle": "Groupe Facebook des nouveaux admis",
     "facebook": "Une grande partie de la communication sur le campus se fait via des groupes Facebook. Les nouveaux élèves peuvent rejoindre le groupe des Nouveaux Admis 2024 pour ne rater aucune information :",
     "myECLTitle": "Application MyECL",
-    "myECL": "Développée pour les associations, l'application MyECL vous permettra d'accéder à plein de services toute l'année. Vous y retrouverez le calendrier des événements, les réservations de salles, le planning du club ciné et de nombreuses autres choses.",
+    "myECL": "Essentielle à la vie étudiante centralienne, l'application MyECL vous permettra d'accéder à plein de services toute l'année. Vous y retrouverez le calendrier des événements, les réservations de salles, le planning du club ciné et de nombreuses autres choses.",
     "downloadMyECLiOS": "Téléchargez MyECL sous iOS/iPadOS",
     "downloadMyECLAndroid": "Téléchargez MyECL sous Android",
     "elementTitle": "Messagerie instantanée Element / Matrix",
@@ -55,7 +55,6 @@
     "elementStep2": "Sur l'application choisissez \"Changer de fournisseur de compte\" puis \"Continuer\"",
     "elementStep3": "Entrez l'URL du serveur :",
     "elementStep4": "Vous pourrez alors vous connecter avec votre compte MyECL",
-
     "cautionTitle": "Cautions pour le WEI",
     "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration, prévoyez deux chèques de caution de 100 € à l'ordre",
     "cautionInstructions": "Au dos du premier, notez : \"Prénom Nom - WEI 2024 - bus\" et du second : \"Prénom Nom - WEI 2024 - site\". Ces chèques ne seront encaissés qu'en cas de dégradations dans les bus ou sur le site du WEI."

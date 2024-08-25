@@ -173,7 +173,7 @@ export const ProductAccordionOptions = ({
           <CustomDialog
             isOpened={isRemoveDialogOpened}
             setIsOpened={setIsRemoveDialogOpened}
-            title="Supprimer la producte"
+            title="Supprimer le produit"
             isFullWidth
             description={
               <>

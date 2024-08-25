@@ -2009,6 +2009,671 @@ export const getUsersUserIdProfilePicture = (
 };
 
 /**
+ * Get All Associations
+ * Return all associations from database as a list of AssociationComplete schemas
+ */
+export const getPhonebookAssociations = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetPhonebookAssociationsResponse,
+    GetPhonebookAssociationsError
+  >({
+    ...options,
+    url: "/phonebook/associations/",
+  });
+};
+
+/**
+ * Create Association
+ * Create a new Association by giving an AssociationBase scheme
+ *
+ * **This endpoint is only usable by CAA, BDE**
+ */
+export const postPhonebookAssociations = (
+  options: Options<PostPhonebookAssociationsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostPhonebookAssociationsResponse,
+    PostPhonebookAssociationsError
+  >({
+    ...options,
+    url: "/phonebook/associations/",
+  });
+};
+
+/**
+ * Get All Role Tags
+ * Return all available role tags from RoleTags enum.
+ */
+export const getPhonebookRoletags = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetPhonebookRoletagsResponse,
+    GetPhonebookRoletagsError
+  >({
+    ...options,
+    url: "/phonebook/roletags",
+  });
+};
+
+/**
+ * Get All Kinds
+ * Return all available kinds of from Kinds enum.
+ */
+export const getPhonebookAssociationsKinds = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetPhonebookAssociationsKindsResponse,
+    GetPhonebookAssociationsKindsError
+  >({
+    ...options,
+    url: "/phonebook/associations/kinds",
+  });
+};
+
+/**
+ * Update Association
+ * Update an Association
+ *
+ * **This endpoint is only usable by CAA, BDE and association's president**
+ */
+export const patchPhonebookAssociationsAssociationId = (
+  options: Options<PatchPhonebookAssociationsAssociationIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchPhonebookAssociationsAssociationIdResponse,
+    PatchPhonebookAssociationsAssociationIdError
+  >({
+    ...options,
+    url: "/phonebook/associations/{association_id}",
+  });
+};
+
+/**
+ * Delete Association
+ * Delete an Association
+ *
+ * [!] Memberships linked to association_id will be deleted too
+ *
+ * **This endpoint is only usable by CAA and BDE**
+ */
+export const deletePhonebookAssociationsAssociationId = (
+  options: Options<DeletePhonebookAssociationsAssociationIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeletePhonebookAssociationsAssociationIdResponse,
+    DeletePhonebookAssociationsAssociationIdError
+  >({
+    ...options,
+    url: "/phonebook/associations/{association_id}",
+  });
+};
+
+/**
+ * Get Association Members
+ * Return the list of MemberComplete of an Association.
+ */
+export const getPhonebookAssociationsAssociationIdMembers = (
+  options: Options<GetPhonebookAssociationsAssociationIdMembersData>,
+) => {
+  return (options?.client ?? client).get<
+    GetPhonebookAssociationsAssociationIdMembersResponse,
+    GetPhonebookAssociationsAssociationIdMembersError
+  >({
+    ...options,
+    url: "/phonebook/associations/{association_id}/members/",
+  });
+};
+
+/**
+ * Get Association Members By Mandate Year
+ * Return the list of MemberComplete of an Association with given mandate_year.
+ */
+export const getPhonebookAssociationsAssociationIdMembersMandateYear = (
+  options: Options<GetPhonebookAssociationsAssociationIdMembersMandateYearData>,
+) => {
+  return (options?.client ?? client).get<
+    GetPhonebookAssociationsAssociationIdMembersMandateYearResponse,
+    GetPhonebookAssociationsAssociationIdMembersMandateYearError
+  >({
+    ...options,
+    url: "/phonebook/associations/{association_id}/members/{mandate_year}",
+  });
+};
+
+/**
+ * Get Member Details
+ * Return MemberComplete for given user_id.
+ */
+export const getPhonebookMemberUserId = (
+  options: Options<GetPhonebookMemberUserIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetPhonebookMemberUserIdResponse,
+    GetPhonebookMemberUserIdError
+  >({
+    ...options,
+    url: "/phonebook/member/{user_id}",
+  });
+};
+
+/**
+ * Create Membership
+ * Create a new Membership.
+ * 'role_tags' are used to indicate if the members has a main role in the association (president, secretary ...) and 'role_name' is the display name for this membership
+ *
+ * **This endpoint is only usable by CAA, BDE and association's president**
+ */
+export const postPhonebookAssociationsMemberships = (
+  options: Options<PostPhonebookAssociationsMembershipsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostPhonebookAssociationsMembershipsResponse,
+    PostPhonebookAssociationsMembershipsError
+  >({
+    ...options,
+    url: "/phonebook/associations/memberships",
+  });
+};
+
+/**
+ * Update Membership
+ * Update a Membership.
+ *
+ * **This endpoint is only usable by CAA, BDE and association's president**
+ */
+export const patchPhonebookAssociationsMembershipsMembershipId = (
+  options: Options<PatchPhonebookAssociationsMembershipsMembershipIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchPhonebookAssociationsMembershipsMembershipIdResponse,
+    PatchPhonebookAssociationsMembershipsMembershipIdError
+  >({
+    ...options,
+    url: "/phonebook/associations/memberships/{membership_id}",
+  });
+};
+
+/**
+ * Delete Membership
+ * Delete a membership.
+ *
+ * **This endpoint is only usable by CAA, BDE and association's president**
+ */
+export const deletePhonebookAssociationsMembershipsMembershipId = (
+  options: Options<DeletePhonebookAssociationsMembershipsMembershipIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeletePhonebookAssociationsMembershipsMembershipIdResponse,
+    DeletePhonebookAssociationsMembershipsMembershipIdError
+  >({
+    ...options,
+    url: "/phonebook/associations/memberships/{membership_id}",
+  });
+};
+
+/**
+ * Create Association Logo
+ * Upload a logo for an Association.
+ * **The user must be a member of the group CAA or BDE to use this endpoint**
+ */
+export const postPhonebookAssociationsAssociationIdPicture = (
+  options: Options<PostPhonebookAssociationsAssociationIdPictureData>,
+) => {
+  return (options?.client ?? client).post<
+    PostPhonebookAssociationsAssociationIdPictureResponse,
+    PostPhonebookAssociationsAssociationIdPictureError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    url: "/phonebook/associations/{association_id}/picture",
+  });
+};
+
+/**
+ * Read Association Logo
+ * Get the logo of an Association.
+ */
+export const getPhonebookAssociationsAssociationIdPicture = (
+  options: Options<GetPhonebookAssociationsAssociationIdPictureData>,
+) => {
+  return (options?.client ?? client).get<
+    GetPhonebookAssociationsAssociationIdPictureResponse,
+    GetPhonebookAssociationsAssociationIdPictureError
+  >({
+    ...options,
+    url: "/phonebook/associations/{association_id}/picture",
+  });
+};
+
+/**
+ * Get Sections
+ * Return sections in the database as a list of `schemas_campaign.SectionBase`
+ *
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ */
+export const getCampaignSections = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignSectionsResponse,
+    GetCampaignSectionsError
+  >({
+    ...options,
+    url: "/campaign/sections",
+  });
+};
+
+/**
+ * Add Section
+ * Add a section.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignSections = (
+  options: Options<PostCampaignSectionsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCampaignSectionsResponse,
+    PostCampaignSectionsError
+  >({
+    ...options,
+    url: "/campaign/sections",
+  });
+};
+
+/**
+ * Delete Section
+ * Delete a section.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignSectionsSectionId = (
+  options: Options<DeleteCampaignSectionsSectionIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignSectionsSectionIdResponse,
+    DeleteCampaignSectionsSectionIdError
+  >({
+    ...options,
+    url: "/campaign/sections/{section_id}",
+  });
+};
+
+/**
+ * Get Lists
+ * Return campaign lists registered for the vote.
+ *
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ */
+export const getCampaignLists = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignListsResponse,
+    GetCampaignListsError
+  >({
+    ...options,
+    url: "/campaign/lists",
+  });
+};
+
+/**
+ * Add List
+ * Add a campaign list to a section.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignLists = (options: Options<PostCampaignListsData>) => {
+  return (options?.client ?? client).post<
+    PostCampaignListsResponse,
+    PostCampaignListsError
+  >({
+    ...options,
+    url: "/campaign/lists",
+  });
+};
+
+/**
+ * Delete List
+ * Delete the campaign list with the given id.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignListsListId = (
+  options: Options<DeleteCampaignListsListIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignListsListIdResponse,
+    DeleteCampaignListsListIdError
+  >({
+    ...options,
+    url: "/campaign/lists/{list_id}",
+  });
+};
+
+/**
+ * Update List
+ * Update the campaign list with the given id.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const patchCampaignListsListId = (
+  options: Options<PatchCampaignListsListIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchCampaignListsListIdResponse,
+    PatchCampaignListsListIdError
+  >({
+    ...options,
+    url: "/campaign/lists/{list_id}",
+  });
+};
+
+/**
+ * Delete Lists By Type
+ * Delete the all lists by type.
+ *
+ * This endpoint can only be used in 'waiting' status.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignLists = (
+  options?: Options<DeleteCampaignListsData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignListsResponse,
+    DeleteCampaignListsError
+  >({
+    ...options,
+    url: "/campaign/lists/",
+  });
+};
+
+/**
+ * Get Voters
+ * Return the voters (groups allowed to vote) for the current campaign.
+ */
+export const getCampaignVoters = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignVotersResponse,
+    GetCampaignVotersError
+  >({
+    ...options,
+    url: "/campaign/voters",
+  });
+};
+
+/**
+ * Add Voter
+ * Add voters (groups allowed to vote) for this campaign
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignVoters = (
+  options: Options<PostCampaignVotersData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCampaignVotersResponse,
+    PostCampaignVotersError
+  >({
+    ...options,
+    url: "/campaign/voters",
+  });
+};
+
+/**
+ * Delete Voters
+ * Remove voters (groups allowed to vote)
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignVoters = (options?: Options) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignVotersResponse,
+    DeleteCampaignVotersError
+  >({
+    ...options,
+    url: "/campaign/voters",
+  });
+};
+
+/**
+ * Delete Voter By Group Id
+ * Remove a voter by its group id
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const deleteCampaignVotersGroupId = (
+  options: Options<DeleteCampaignVotersGroupIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteCampaignVotersGroupIdResponse,
+    DeleteCampaignVotersGroupIdError
+  >({
+    ...options,
+    url: "/campaign/voters/{group_id}",
+  });
+};
+
+/**
+ * Open Vote
+ * If the status is 'waiting', change it to 'voting' and create the blank lists.
+ *
+ * > WARNING: this operation can not be reversed.
+ * > When the status is 'open', all users can vote and sections and lists can no longer be edited.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusOpen = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusOpenResponse,
+    PostCampaignStatusOpenError
+  >({
+    ...options,
+    url: "/campaign/status/open",
+  });
+};
+
+/**
+ * Close Vote
+ * If the status is 'open', change it to 'closed'.
+ *
+ * > WARNING: this operation can not be reversed.
+ * > When the status is 'closed', users are no longer able to vote.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusClose = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusCloseResponse,
+    PostCampaignStatusCloseError
+  >({
+    ...options,
+    url: "/campaign/status/close",
+  });
+};
+
+/**
+ * Count Voting
+ * If the status is 'closed', change it to 'counting'.
+ *
+ * > WARNING: this operation can not be reversed.
+ * > When the status is 'counting', administrators can see the results of the vote.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusCounting = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusCountingResponse,
+    PostCampaignStatusCountingError
+  >({
+    ...options,
+    url: "/campaign/status/counting",
+  });
+};
+
+/**
+ * Publish Vote
+ * If the status is 'counting', change it to 'published'.
+ *
+ * > WARNING: this operation can not be reversed.
+ * > When the status is 'published', everyone can see the results of the vote.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusPublished = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusPublishedResponse,
+    PostCampaignStatusPublishedError
+  >({
+    ...options,
+    url: "/campaign/status/published",
+  });
+};
+
+/**
+ * Reset Vote
+ * Reset the vote. Can only be used if the current status is counting ou published.
+ *
+ * > WARNING: This will delete all votes then put the module to Waiting status. This will also delete blank lists.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignStatusReset = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCampaignStatusResetResponse,
+    PostCampaignStatusResetError
+  >({
+    ...options,
+    url: "/campaign/status/reset",
+  });
+};
+
+/**
+ * Get Sections Already Voted
+ * Return the list of id of sections an user has already voted for.
+ *
+ * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
+ */
+export const getCampaignVotes = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignVotesResponse,
+    GetCampaignVotesError
+  >({
+    ...options,
+    url: "/campaign/votes",
+  });
+};
+
+/**
+ * Vote
+ * Add a vote for a given campaign list.
+ *
+ * An user can only vote for one list per section.
+ *
+ * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
+ */
+export const postCampaignVotes = (options: Options<PostCampaignVotesData>) => {
+  return (options?.client ?? client).post<
+    PostCampaignVotesResponse,
+    PostCampaignVotesError
+  >({
+    ...options,
+    url: "/campaign/votes",
+  });
+};
+
+/**
+ * Get Results
+ * Return the results of the vote.
+ *
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ */
+export const getCampaignResults = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignResultsResponse,
+    GetCampaignResultsError
+  >({
+    ...options,
+    url: "/campaign/results",
+  });
+};
+
+/**
+ * Get Status Vote
+ * Get the current status of the vote.
+ *
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ */
+export const getCampaignStatus = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCampaignStatusResponse,
+    GetCampaignStatusError
+  >({
+    ...options,
+    url: "/campaign/status",
+  });
+};
+
+/**
+ * Get Stats For Section
+ * Get stats about a given section.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const getCampaignStatsSectionId = (
+  options: Options<GetCampaignStatsSectionIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCampaignStatsSectionIdResponse,
+    GetCampaignStatsSectionIdError
+  >({
+    ...options,
+    url: "/campaign/stats/{section_id}",
+  });
+};
+
+/**
+ * Create Campaigns Logo
+ * Upload a logo for a campaign list.
+ *
+ * **The user must be a member of the group CAA to use this endpoint**
+ */
+export const postCampaignListsListIdLogo = (
+  options: Options<PostCampaignListsListIdLogoData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCampaignListsListIdLogoResponse,
+    PostCampaignListsListIdLogoError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    url: "/campaign/lists/{list_id}/logo",
+  });
+};
+
+/**
+ * Read Campaigns Logo
+ * Get the logo of a campaign list.
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
+ */
+export const getCampaignListsListIdLogo = (
+  options: Options<GetCampaignListsListIdLogoData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCampaignListsListIdLogoResponse,
+    GetCampaignListsListIdLogoError
+  >({
+    ...options,
+    url: "/campaign/lists/{list_id}/logo",
+  });
+};
+
+/**
  * Read Advertisers
  * Get existing advertisers.
  */
@@ -2214,6 +2879,532 @@ export const postAdvertAdvertsAdvertIdPicture = (
     ...options,
     ...formDataBodySerializer,
     url: "/advert/adverts/{advert_id}/picture",
+  });
+};
+
+/**
+ * Get Raffle
+ * Return all raffles
+ */
+export const getTombolaRaffles = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetTombolaRafflesResponse,
+    GetTombolaRafflesError
+  >({
+    ...options,
+    url: "/tombola/raffles",
+  });
+};
+
+/**
+ * Create Raffle
+ * Create a new raffle
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const postTombolaRaffles = (
+  options: Options<PostTombolaRafflesData>,
+) => {
+  return (options?.client ?? client).post<
+    PostTombolaRafflesResponse,
+    PostTombolaRafflesError
+  >({
+    ...options,
+    url: "/tombola/raffles",
+  });
+};
+
+/**
+ * Edit Raffle
+ * Edit a raffle
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const patchTombolaRafflesRaffleId = (
+  options: Options<PatchTombolaRafflesRaffleIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchTombolaRafflesRaffleIdResponse,
+    PatchTombolaRafflesRaffleIdError
+  >({
+    ...options,
+    url: "/tombola/raffles/{raffle_id}",
+  });
+};
+
+/**
+ * Delete Raffle
+ * Delete a raffle.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const deleteTombolaRafflesRaffleId = (
+  options: Options<DeleteTombolaRafflesRaffleIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteTombolaRafflesRaffleIdResponse,
+    DeleteTombolaRafflesRaffleIdError
+  >({
+    ...options,
+    url: "/tombola/raffles/{raffle_id}",
+  });
+};
+
+/**
+ * Get Raffles By Group Id
+ * Return all raffles from a group
+ */
+export const getTombolaGroupGroupIdRaffles = (
+  options: Options<GetTombolaGroupGroupIdRafflesData>,
+) => {
+  return (options?.client ?? client).get<
+    GetTombolaGroupGroupIdRafflesResponse,
+    GetTombolaGroupGroupIdRafflesError
+  >({
+    ...options,
+    url: "/tombola/group/{group_id}/raffles",
+  });
+};
+
+/**
+ * Get Raffle Stats
+ * Return the number of ticket sold and the total amount recollected for a raffle
+ */
+export const getTombolaRafflesRaffleIdStats = (
+  options: Options<GetTombolaRafflesRaffleIdStatsData>,
+) => {
+  return (options?.client ?? client).get<
+    GetTombolaRafflesRaffleIdStatsResponse,
+    GetTombolaRafflesRaffleIdStatsError
+  >({
+    ...options,
+    url: "/tombola/raffles/{raffle_id}/stats",
+  });
+};
+
+/**
+ * Create Current Raffle Logo
+ * Upload a logo for a specific raffle.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const postTombolaRafflesRaffleIdLogo = (
+  options: Options<PostTombolaRafflesRaffleIdLogoData>,
+) => {
+  return (options?.client ?? client).post<
+    PostTombolaRafflesRaffleIdLogoResponse,
+    PostTombolaRafflesRaffleIdLogoError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    url: "/tombola/raffles/{raffle_id}/logo",
+  });
+};
+
+/**
+ * Read Raffle Logo
+ * Get the logo of a specific raffle.
+ */
+export const getTombolaRafflesRaffleIdLogo = (
+  options: Options<GetTombolaRafflesRaffleIdLogoData>,
+) => {
+  return (options?.client ?? client).get<
+    GetTombolaRafflesRaffleIdLogoResponse,
+    GetTombolaRafflesRaffleIdLogoError
+  >({
+    ...options,
+    url: "/tombola/raffles/{raffle_id}/logo",
+  });
+};
+
+/**
+ * Get Pack Tickets
+ * Return all tickets
+ */
+export const getTombolaPackTickets = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetTombolaPackTicketsResponse,
+    GetTombolaPackTicketsError
+  >({
+    ...options,
+    url: "/tombola/pack_tickets",
+  });
+};
+
+/**
+ * Create Packticket
+ * Create a new packticket
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const postTombolaPackTickets = (
+  options: Options<PostTombolaPackTicketsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostTombolaPackTicketsResponse,
+    PostTombolaPackTicketsError
+  >({
+    ...options,
+    url: "/tombola/pack_tickets",
+  });
+};
+
+/**
+ * Edit Packticket
+ * Edit a packticket
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const patchTombolaPackTicketsPackticketId = (
+  options: Options<PatchTombolaPackTicketsPackticketIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchTombolaPackTicketsPackticketIdResponse,
+    PatchTombolaPackTicketsPackticketIdError
+  >({
+    ...options,
+    url: "/tombola/pack_tickets/{packticket_id}",
+  });
+};
+
+/**
+ * Delete Packticket
+ * Delete a packticket.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const deleteTombolaPackTicketsPackticketId = (
+  options: Options<DeleteTombolaPackTicketsPackticketIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteTombolaPackTicketsPackticketIdResponse,
+    DeleteTombolaPackTicketsPackticketIdError
+  >({
+    ...options,
+    url: "/tombola/pack_tickets/{packticket_id}",
+  });
+};
+
+/**
+ * Get Pack Tickets By Raffle Id
+ * Return all pack_tickets associated to a raffle
+ */
+export const getTombolaRafflesRaffleIdPackTickets = (
+  options: Options<GetTombolaRafflesRaffleIdPackTicketsData>,
+) => {
+  return (options?.client ?? client).get<
+    GetTombolaRafflesRaffleIdPackTicketsResponse,
+    GetTombolaRafflesRaffleIdPackTicketsError
+  >({
+    ...options,
+    url: "/tombola/raffles/{raffle_id}/pack_tickets",
+  });
+};
+
+/**
+ * Get Tickets
+ * Return all tickets
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const getTombolaTickets = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetTombolaTicketsResponse,
+    GetTombolaTicketsError
+  >({
+    ...options,
+    url: "/tombola/tickets",
+  });
+};
+
+/**
+ * Buy Ticket
+ * Buy a ticket
+ */
+export const postTombolaTicketsBuyPackId = (
+  options: Options<PostTombolaTicketsBuyPackIdData>,
+) => {
+  return (options?.client ?? client).post<
+    PostTombolaTicketsBuyPackIdResponse,
+    PostTombolaTicketsBuyPackIdError
+  >({
+    ...options,
+    url: "/tombola/tickets/buy/{pack_id}",
+  });
+};
+
+/**
+ * Get Tickets By Userid
+ * Get tickets of a specific user.
+ *
+ * **Only admin users can get tickets of another user**
+ */
+export const getTombolaUsersUserIdTickets = (
+  options: Options<GetTombolaUsersUserIdTicketsData>,
+) => {
+  return (options?.client ?? client).get<
+    GetTombolaUsersUserIdTicketsResponse,
+    GetTombolaUsersUserIdTicketsError
+  >({
+    ...options,
+    url: "/tombola/users/{user_id}/tickets",
+  });
+};
+
+/**
+ * Get Tickets By Raffleid
+ * Get tickets from a specific raffle.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint
+ */
+export const getTombolaRafflesRaffleIdTickets = (
+  options: Options<GetTombolaRafflesRaffleIdTicketsData>,
+) => {
+  return (options?.client ?? client).get<
+    GetTombolaRafflesRaffleIdTicketsResponse,
+    GetTombolaRafflesRaffleIdTicketsError
+  >({
+    ...options,
+    url: "/tombola/raffles/{raffle_id}/tickets",
+  });
+};
+
+/**
+ * Get Prizes
+ * Return all prizes
+ */
+export const getTombolaPrizes = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetTombolaPrizesResponse,
+    GetTombolaPrizesError
+  >({
+    ...options,
+    url: "/tombola/prizes",
+  });
+};
+
+/**
+ * Create Prize
+ * Create a new prize
+ *
+ * **The user must be a member of the raffle's group to use this endpoint
+ */
+export const postTombolaPrizes = (options: Options<PostTombolaPrizesData>) => {
+  return (options?.client ?? client).post<
+    PostTombolaPrizesResponse,
+    PostTombolaPrizesError
+  >({
+    ...options,
+    url: "/tombola/prizes",
+  });
+};
+
+/**
+ * Edit Prize
+ * Edit a prize
+ *
+ * **The user must be a member of the group raffle's to use this endpoint
+ */
+export const patchTombolaPrizesPrizeId = (
+  options: Options<PatchTombolaPrizesPrizeIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchTombolaPrizesPrizeIdResponse,
+    PatchTombolaPrizesPrizeIdError
+  >({
+    ...options,
+    url: "/tombola/prizes/{prize_id}",
+  });
+};
+
+/**
+ * Delete Prize
+ * Delete a prize.
+ *
+ * **The user must be a member of the group raffle's to use this endpoint
+ */
+export const deleteTombolaPrizesPrizeId = (
+  options: Options<DeleteTombolaPrizesPrizeIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteTombolaPrizesPrizeIdResponse,
+    DeleteTombolaPrizesPrizeIdError
+  >({
+    ...options,
+    url: "/tombola/prizes/{prize_id}",
+  });
+};
+
+/**
+ * Get Prizes By Raffleid
+ * Get prizes from a specific raffle.
+ */
+export const getTombolaRafflesRaffleIdPrizes = (
+  options: Options<GetTombolaRafflesRaffleIdPrizesData>,
+) => {
+  return (options?.client ?? client).get<
+    GetTombolaRafflesRaffleIdPrizesResponse,
+    GetTombolaRafflesRaffleIdPrizesError
+  >({
+    ...options,
+    url: "/tombola/raffles/{raffle_id}/prizes",
+  });
+};
+
+/**
+ * Create Prize Picture
+ * Upload a logo for a specific prize.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const postTombolaPrizesPrizeIdPicture = (
+  options: Options<PostTombolaPrizesPrizeIdPictureData>,
+) => {
+  return (options?.client ?? client).post<
+    PostTombolaPrizesPrizeIdPictureResponse,
+    PostTombolaPrizesPrizeIdPictureError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    url: "/tombola/prizes/{prize_id}/picture",
+  });
+};
+
+/**
+ * Read Prize Logo
+ * Get the logo of a specific prize.
+ */
+export const getTombolaPrizesPrizeIdPicture = (
+  options: Options<GetTombolaPrizesPrizeIdPictureData>,
+) => {
+  return (options?.client ?? client).get<
+    GetTombolaPrizesPrizeIdPictureResponse,
+    GetTombolaPrizesPrizeIdPictureError
+  >({
+    ...options,
+    url: "/tombola/prizes/{prize_id}/picture",
+  });
+};
+
+/**
+ * Get Users Cash
+ * Get cash from all users.
+ *
+ * **The user must be a member of the group admin to use this endpoint
+ */
+export const getTombolaUsersCash = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetTombolaUsersCashResponse,
+    GetTombolaUsersCashError
+  >({
+    ...options,
+    url: "/tombola/users/cash",
+  });
+};
+
+/**
+ * Get Cash By Id
+ * Get cash from a specific user.
+ *
+ * **The user must be a member of the group admin to use this endpoint or can only access the endpoint for its own user_id**
+ */
+export const getTombolaUsersUserIdCash = (
+  options: Options<GetTombolaUsersUserIdCashData>,
+) => {
+  return (options?.client ?? client).get<
+    GetTombolaUsersUserIdCashResponse,
+    GetTombolaUsersUserIdCashError
+  >({
+    ...options,
+    url: "/tombola/users/{user_id}/cash",
+  });
+};
+
+/**
+ * Create Cash Of User
+ * Create cash for a user.
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const postTombolaUsersUserIdCash = (
+  options: Options<PostTombolaUsersUserIdCashData>,
+) => {
+  return (options?.client ?? client).post<
+    PostTombolaUsersUserIdCashResponse,
+    PostTombolaUsersUserIdCashError
+  >({
+    ...options,
+    url: "/tombola/users/{user_id}/cash",
+  });
+};
+
+/**
+ * Edit Cash By Id
+ * Edit cash for an user. This will add the balance to the current balance.
+ * A negative value can be provided to remove money from the user.
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const patchTombolaUsersUserIdCash = (
+  options: Options<PatchTombolaUsersUserIdCashData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchTombolaUsersUserIdCashResponse,
+    PatchTombolaUsersUserIdCashError
+  >({
+    ...options,
+    url: "/tombola/users/{user_id}/cash",
+  });
+};
+
+/**
+ * Draw Winner
+ */
+export const postTombolaPrizesPrizeIdDraw = (
+  options: Options<PostTombolaPrizesPrizeIdDrawData>,
+) => {
+  return (options?.client ?? client).post<
+    PostTombolaPrizesPrizeIdDrawResponse,
+    PostTombolaPrizesPrizeIdDrawError
+  >({
+    ...options,
+    url: "/tombola/prizes/{prize_id}/draw",
+  });
+};
+
+/**
+ * Open Raffle
+ * Open a raffle
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const patchTombolaRafflesRaffleIdOpen = (
+  options: Options<PatchTombolaRafflesRaffleIdOpenData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchTombolaRafflesRaffleIdOpenResponse,
+    PatchTombolaRafflesRaffleIdOpenError
+  >({
+    ...options,
+    url: "/tombola/raffles/{raffle_id}/open",
+  });
+};
+
+/**
+ * Lock Raffle
+ * Lock a raffle
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const patchTombolaRafflesRaffleIdLock = (
+  options: Options<PatchTombolaRafflesRaffleIdLockData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchTombolaRafflesRaffleIdLockResponse,
+    PatchTombolaRafflesRaffleIdLockError
+  >({
+    ...options,
+    url: "/tombola/raffles/{raffle_id}/lock",
   });
 };
 
@@ -2675,900 +3866,109 @@ export const patchAmapInformation = (
 };
 
 /**
- * Get Managers
- * Get existing managers.
- *
- * **This endpoint is only usable by administrators**
- */
-export const getBookingManagers = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetBookingManagersResponse,
-    GetBookingManagersError
-  >({
-    ...options,
-    url: "/booking/managers",
-  });
-};
-
-/**
- * Create Manager
- * Create a manager.
- *
- * **This endpoint is only usable by administrators**
- */
-export const postBookingManagers = (
-  options: Options<PostBookingManagersData>,
-) => {
-  return (options?.client ?? client).post<
-    PostBookingManagersResponse,
-    PostBookingManagersError
-  >({
-    ...options,
-    url: "/booking/managers",
-  });
-};
-
-/**
- * Update Manager
- * Update a manager, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
- *
- * **This endpoint is only usable by administrators**
- */
-export const patchBookingManagersManagerId = (
-  options: Options<PatchBookingManagersManagerIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchBookingManagersManagerIdResponse,
-    PatchBookingManagersManagerIdError
-  >({
-    ...options,
-    url: "/booking/managers/{manager_id}",
-  });
-};
-
-/**
- * Delete Manager
- * Delete a manager only if the manager is not linked to any room
- *
- * **This endpoint is only usable by administrators**
- */
-export const deleteBookingManagersManagerId = (
-  options: Options<DeleteBookingManagersManagerIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteBookingManagersManagerIdResponse,
-    DeleteBookingManagersManagerIdError
-  >({
-    ...options,
-    url: "/booking/managers/{manager_id}",
-  });
-};
-
-/**
- * Get Current User Managers
- * Return all managers the current user is a member.
+ * Get Recommendation
+ * Get recommendations.
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const getBookingManagersUsersMe = (options?: Options) => {
+export const getRecommendationRecommendations = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetBookingManagersUsersMeResponse,
-    GetBookingManagersUsersMeError
+    GetRecommendationRecommendationsResponse,
+    GetRecommendationRecommendationsError
   >({
     ...options,
-    url: "/booking/managers/users/me",
+    url: "/recommendation/recommendations",
   });
 };
 
 /**
- * Get Bookings For Manager
- * Return all bookings a user can manage.
+ * Create Recommendation
+ * Create a recommendation.
+ *
+ * **This endpoint is only usable by members of the group BDE**
+ */
+export const postRecommendationRecommendations = (
+  options: Options<PostRecommendationRecommendationsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostRecommendationRecommendationsResponse,
+    PostRecommendationRecommendationsError
+  >({
+    ...options,
+    url: "/recommendation/recommendations",
+  });
+};
+
+/**
+ * Edit Recommendation
+ * Edit a recommendation.
+ *
+ * **This endpoint is only usable by members of the group BDE**
+ */
+export const patchRecommendationRecommendationsRecommendationId = (
+  options: Options<PatchRecommendationRecommendationsRecommendationIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchRecommendationRecommendationsRecommendationIdResponse,
+    PatchRecommendationRecommendationsRecommendationIdError
+  >({
+    ...options,
+    url: "/recommendation/recommendations/{recommendation_id}",
+  });
+};
+
+/**
+ * Delete Recommendation
+ * Delete a recommendation.
+ *
+ * **This endpoint is only usable by members of the group BDE**
+ */
+export const deleteRecommendationRecommendationsRecommendationId = (
+  options: Options<DeleteRecommendationRecommendationsRecommendationIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteRecommendationRecommendationsRecommendationIdResponse,
+    DeleteRecommendationRecommendationsRecommendationIdError
+  >({
+    ...options,
+    url: "/recommendation/recommendations/{recommendation_id}",
+  });
+};
+
+/**
+ * Read Recommendation Image
+ * Get the image of a recommendation.
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const getBookingBookingsUsersMeManage = (options?: Options) => {
+export const getRecommendationRecommendationsRecommendationIdPicture = (
+  options: Options<GetRecommendationRecommendationsRecommendationIdPictureData>,
+) => {
   return (options?.client ?? client).get<
-    GetBookingBookingsUsersMeManageResponse,
-    GetBookingBookingsUsersMeManageError
+    GetRecommendationRecommendationsRecommendationIdPictureResponse,
+    GetRecommendationRecommendationsRecommendationIdPictureError
   >({
     ...options,
-    url: "/booking/bookings/users/me/manage",
+    url: "/recommendation/recommendations/{recommendation_id}/picture",
   });
 };
 
 /**
- * Get Confirmed Bookings For Manager
- * Return all confirmed bookings a user can manage.
- * **The user must be authenticated to use this endpoint**
- */
-export const getBookingBookingsConfirmedUsersMeManage = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetBookingBookingsConfirmedUsersMeManageResponse,
-    GetBookingBookingsConfirmedUsersMeManageError
-  >({
-    ...options,
-    url: "/booking/bookings/confirmed/users/me/manage",
-  });
-};
-
-/**
- * Get Confirmed Bookings
- * Return all confirmed bookings.
+ * Create Recommendation Image
+ * Add an image to a recommendation.
  *
- * **The user must be authenticated to use this endpoint**
+ * **This endpoint is only usable by members of the group BDE**
  */
-export const getBookingBookingsConfirmed = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetBookingBookingsConfirmedResponse,
-    GetBookingBookingsConfirmedError
-  >({
-    ...options,
-    url: "/booking/bookings/confirmed",
-  });
-};
-
-/**
- * Get Applicant Bookings
- * Get the user bookings.
- *
- * **Only usable by the user**
- */
-export const getBookingBookingsUsersMe = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetBookingBookingsUsersMeResponse,
-    GetBookingBookingsUsersMeError
-  >({
-    ...options,
-    url: "/booking/bookings/users/me",
-  });
-};
-
-/**
- * Create Booking
- * Create a booking.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const postBookingBookings = (
-  options: Options<PostBookingBookingsData>,
+export const postRecommendationRecommendationsRecommendationIdPicture = (
+  options: Options<PostRecommendationRecommendationsRecommendationIdPictureData>,
 ) => {
   return (options?.client ?? client).post<
-    PostBookingBookingsResponse,
-    PostBookingBookingsError
-  >({
-    ...options,
-    url: "/booking/bookings",
-  });
-};
-
-/**
- * Edit Booking
- * Edit a booking.
- *
- * **Only usable by a user in the manager group of the booking or applicant before decision**
- */
-export const patchBookingBookingsBookingId = (
-  options: Options<PatchBookingBookingsBookingIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchBookingBookingsBookingIdResponse,
-    PatchBookingBookingsBookingIdError
-  >({
-    ...options,
-    url: "/booking/bookings/{booking_id}",
-  });
-};
-
-/**
- * Delete Booking
- * Remove a booking.
- *
- * **Only usable by the applicant before decision**
- */
-export const deleteBookingBookingsBookingId = (
-  options: Options<DeleteBookingBookingsBookingIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteBookingBookingsBookingIdResponse,
-    DeleteBookingBookingsBookingIdError
-  >({
-    ...options,
-    url: "/booking/bookings/{booking_id}",
-  });
-};
-
-/**
- * Confirm Booking
- * Give a decision to a booking.
- *
- * **Only usable by a user in the manager group of the booking**
- */
-export const patchBookingBookingsBookingIdReplyDecision = (
-  options: Options<PatchBookingBookingsBookingIdReplyDecisionData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchBookingBookingsBookingIdReplyDecisionResponse,
-    PatchBookingBookingsBookingIdReplyDecisionError
-  >({
-    ...options,
-    url: "/booking/bookings/{booking_id}/reply/{decision}",
-  });
-};
-
-/**
- * Get Rooms
- * Get all rooms.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const getBookingRooms = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetBookingRoomsResponse,
-    GetBookingRoomsError
-  >({
-    ...options,
-    url: "/booking/rooms",
-  });
-};
-
-/**
- * Create Room
- * Create a new room in database.
- *
- * **This endpoint is only usable by admins**
- */
-export const postBookingRooms = (options: Options<PostBookingRoomsData>) => {
-  return (options?.client ?? client).post<
-    PostBookingRoomsResponse,
-    PostBookingRoomsError
-  >({
-    ...options,
-    url: "/booking/rooms",
-  });
-};
-
-/**
- * Edit Room
- * Edit a room.
- *
- * **This endpoint is only usable by admins**
- */
-export const patchBookingRoomsRoomId = (
-  options: Options<PatchBookingRoomsRoomIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchBookingRoomsRoomIdResponse,
-    PatchBookingRoomsRoomIdError
-  >({
-    ...options,
-    url: "/booking/rooms/{room_id}",
-  });
-};
-
-/**
- * Delete Room
- * Delete a room only if there are not future or ongoing bookings of this room
- *
- * **This endpoint is only usable by admins**
- */
-export const deleteBookingRoomsRoomId = (
-  options: Options<DeleteBookingRoomsRoomIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteBookingRoomsRoomIdResponse,
-    DeleteBookingRoomsRoomIdError
-  >({
-    ...options,
-    url: "/booking/rooms/{room_id}",
-  });
-};
-
-/**
- * Get Events
- * Get all events from the database.
- */
-export const getCalendarEvents = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCalendarEventsResponse,
-    GetCalendarEventsError
-  >({
-    ...options,
-    url: "/calendar/events/",
-  });
-};
-
-/**
- * Add Event
- * Add an event to the calendar.
- */
-export const postCalendarEvents = (
-  options: Options<PostCalendarEventsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostCalendarEventsResponse,
-    PostCalendarEventsError
-  >({
-    ...options,
-    url: "/calendar/events/",
-  });
-};
-
-/**
- * Get Confirmed Events
- * Get all confirmed events.
- *
- * **Usable by every member**
- */
-export const getCalendarEventsConfirmed = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCalendarEventsConfirmedResponse,
-    GetCalendarEventsConfirmedError
-  >({
-    ...options,
-    url: "/calendar/events/confirmed",
-  });
-};
-
-/**
- * Get Applicant Bookings
- * Get one user bookings.
- *
- * **Usable by the user or admins**
- */
-export const getCalendarEventsUserApplicantId = (
-  options: Options<GetCalendarEventsUserApplicantIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCalendarEventsUserApplicantIdResponse,
-    GetCalendarEventsUserApplicantIdError
-  >({
-    ...options,
-    url: "/calendar/events/user/{applicant_id}",
-  });
-};
-
-/**
- * Get Event By Id
- * Get an event's information by its id.
- */
-export const getCalendarEventsEventId = (
-  options: Options<GetCalendarEventsEventIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCalendarEventsEventIdResponse,
-    GetCalendarEventsEventIdError
-  >({
-    ...options,
-    url: "/calendar/events/{event_id}",
-  });
-};
-
-/**
- * Edit Bookings Id
- * Edit an event.
- *
- * **Only usable by admins or applicant before decision**
- */
-export const patchCalendarEventsEventId = (
-  options: Options<PatchCalendarEventsEventIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchCalendarEventsEventIdResponse,
-    PatchCalendarEventsEventIdError
-  >({
-    ...options,
-    url: "/calendar/events/{event_id}",
-  });
-};
-
-/**
- * Delete Bookings Id
- * Remove an event.
- *
- * **Only usable by admins or applicant before decision**
- */
-export const deleteCalendarEventsEventId = (
-  options: Options<DeleteCalendarEventsEventIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteCalendarEventsEventIdResponse,
-    DeleteCalendarEventsEventIdError
-  >({
-    ...options,
-    url: "/calendar/events/{event_id}",
-  });
-};
-
-/**
- * Get Event Applicant
- */
-export const getCalendarEventsEventIdApplicant = (
-  options: Options<GetCalendarEventsEventIdApplicantData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCalendarEventsEventIdApplicantResponse,
-    GetCalendarEventsEventIdApplicantError
-  >({
-    ...options,
-    url: "/calendar/events/{event_id}/applicant",
-  });
-};
-
-/**
- * Confirm Booking
- * Give a decision to an event.
- *
- * **Only usable by admins**
- */
-export const patchCalendarEventsEventIdReplyDecision = (
-  options: Options<PatchCalendarEventsEventIdReplyDecisionData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchCalendarEventsEventIdReplyDecisionResponse,
-    PatchCalendarEventsEventIdReplyDecisionError
-  >({
-    ...options,
-    url: "/calendar/events/{event_id}/reply/{decision}",
-  });
-};
-
-/**
- * Recreate Ical File
- * Create manually the icalendar file
- *
- * **Only usable by global admins**
- */
-export const postCalendarIcalCreate = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCalendarIcalCreateResponse,
-    PostCalendarIcalCreateError
-  >({
-    ...options,
-    url: "/calendar/ical/create",
-  });
-};
-
-/**
- * Get Icalendar File
- * Get the icalendar file corresponding to the event in the database.
- */
-export const getCalendarIcal = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCalendarIcalResponse,
-    GetCalendarIcalError
-  >({
-    ...options,
-    url: "/calendar/ical",
-  });
-};
-
-/**
- * Get Sections
- * Return sections in the database as a list of `schemas_campaign.SectionBase`
- *
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
- */
-export const getCampaignSections = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCampaignSectionsResponse,
-    GetCampaignSectionsError
-  >({
-    ...options,
-    url: "/campaign/sections",
-  });
-};
-
-/**
- * Add Section
- * Add a section.
- *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignSections = (
-  options: Options<PostCampaignSectionsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostCampaignSectionsResponse,
-    PostCampaignSectionsError
-  >({
-    ...options,
-    url: "/campaign/sections",
-  });
-};
-
-/**
- * Delete Section
- * Delete a section.
- *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const deleteCampaignSectionsSectionId = (
-  options: Options<DeleteCampaignSectionsSectionIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteCampaignSectionsSectionIdResponse,
-    DeleteCampaignSectionsSectionIdError
-  >({
-    ...options,
-    url: "/campaign/sections/{section_id}",
-  });
-};
-
-/**
- * Get Lists
- * Return campaign lists registered for the vote.
- *
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
- */
-export const getCampaignLists = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCampaignListsResponse,
-    GetCampaignListsError
-  >({
-    ...options,
-    url: "/campaign/lists",
-  });
-};
-
-/**
- * Add List
- * Add a campaign list to a section.
- *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignLists = (options: Options<PostCampaignListsData>) => {
-  return (options?.client ?? client).post<
-    PostCampaignListsResponse,
-    PostCampaignListsError
-  >({
-    ...options,
-    url: "/campaign/lists",
-  });
-};
-
-/**
- * Delete List
- * Delete the campaign list with the given id.
- *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const deleteCampaignListsListId = (
-  options: Options<DeleteCampaignListsListIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteCampaignListsListIdResponse,
-    DeleteCampaignListsListIdError
-  >({
-    ...options,
-    url: "/campaign/lists/{list_id}",
-  });
-};
-
-/**
- * Update List
- * Update the campaign list with the given id.
- *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const patchCampaignListsListId = (
-  options: Options<PatchCampaignListsListIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchCampaignListsListIdResponse,
-    PatchCampaignListsListIdError
-  >({
-    ...options,
-    url: "/campaign/lists/{list_id}",
-  });
-};
-
-/**
- * Delete Lists By Type
- * Delete the all lists by type.
- *
- * This endpoint can only be used in 'waiting' status.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const deleteCampaignLists = (
-  options?: Options<DeleteCampaignListsData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteCampaignListsResponse,
-    DeleteCampaignListsError
-  >({
-    ...options,
-    url: "/campaign/lists/",
-  });
-};
-
-/**
- * Get Voters
- * Return the voters (groups allowed to vote) for the current campaign.
- */
-export const getCampaignVoters = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCampaignVotersResponse,
-    GetCampaignVotersError
-  >({
-    ...options,
-    url: "/campaign/voters",
-  });
-};
-
-/**
- * Add Voter
- * Add voters (groups allowed to vote) for this campaign
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignVoters = (
-  options: Options<PostCampaignVotersData>,
-) => {
-  return (options?.client ?? client).post<
-    PostCampaignVotersResponse,
-    PostCampaignVotersError
-  >({
-    ...options,
-    url: "/campaign/voters",
-  });
-};
-
-/**
- * Delete Voters
- * Remove voters (groups allowed to vote)
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const deleteCampaignVoters = (options?: Options) => {
-  return (options?.client ?? client).delete<
-    DeleteCampaignVotersResponse,
-    DeleteCampaignVotersError
-  >({
-    ...options,
-    url: "/campaign/voters",
-  });
-};
-
-/**
- * Delete Voter By Group Id
- * Remove a voter by its group id
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const deleteCampaignVotersGroupId = (
-  options: Options<DeleteCampaignVotersGroupIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteCampaignVotersGroupIdResponse,
-    DeleteCampaignVotersGroupIdError
-  >({
-    ...options,
-    url: "/campaign/voters/{group_id}",
-  });
-};
-
-/**
- * Open Vote
- * If the status is 'waiting', change it to 'voting' and create the blank lists.
- *
- * > WARNING: this operation can not be reversed.
- * > When the status is 'open', all users can vote and sections and lists can no longer be edited.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusOpen = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusOpenResponse,
-    PostCampaignStatusOpenError
-  >({
-    ...options,
-    url: "/campaign/status/open",
-  });
-};
-
-/**
- * Close Vote
- * If the status is 'open', change it to 'closed'.
- *
- * > WARNING: this operation can not be reversed.
- * > When the status is 'closed', users are no longer able to vote.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusClose = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusCloseResponse,
-    PostCampaignStatusCloseError
-  >({
-    ...options,
-    url: "/campaign/status/close",
-  });
-};
-
-/**
- * Count Voting
- * If the status is 'closed', change it to 'counting'.
- *
- * > WARNING: this operation can not be reversed.
- * > When the status is 'counting', administrators can see the results of the vote.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusCounting = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusCountingResponse,
-    PostCampaignStatusCountingError
-  >({
-    ...options,
-    url: "/campaign/status/counting",
-  });
-};
-
-/**
- * Publish Vote
- * If the status is 'counting', change it to 'published'.
- *
- * > WARNING: this operation can not be reversed.
- * > When the status is 'published', everyone can see the results of the vote.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusPublished = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusPublishedResponse,
-    PostCampaignStatusPublishedError
-  >({
-    ...options,
-    url: "/campaign/status/published",
-  });
-};
-
-/**
- * Reset Vote
- * Reset the vote. Can only be used if the current status is counting ou published.
- *
- * > WARNING: This will delete all votes then put the module to Waiting status. This will also delete blank lists.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignStatusReset = (options?: Options) => {
-  return (options?.client ?? client).post<
-    PostCampaignStatusResetResponse,
-    PostCampaignStatusResetError
-  >({
-    ...options,
-    url: "/campaign/status/reset",
-  });
-};
-
-/**
- * Get Sections Already Voted
- * Return the list of id of sections an user has already voted for.
- *
- * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
- */
-export const getCampaignVotes = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCampaignVotesResponse,
-    GetCampaignVotesError
-  >({
-    ...options,
-    url: "/campaign/votes",
-  });
-};
-
-/**
- * Vote
- * Add a vote for a given campaign list.
- *
- * An user can only vote for one list per section.
- *
- * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
- */
-export const postCampaignVotes = (options: Options<PostCampaignVotesData>) => {
-  return (options?.client ?? client).post<
-    PostCampaignVotesResponse,
-    PostCampaignVotesError
-  >({
-    ...options,
-    url: "/campaign/votes",
-  });
-};
-
-/**
- * Get Results
- * Return the results of the vote.
- *
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
- */
-export const getCampaignResults = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCampaignResultsResponse,
-    GetCampaignResultsError
-  >({
-    ...options,
-    url: "/campaign/results",
-  });
-};
-
-/**
- * Get Status Vote
- * Get the current status of the vote.
- *
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
- */
-export const getCampaignStatus = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCampaignStatusResponse,
-    GetCampaignStatusError
-  >({
-    ...options,
-    url: "/campaign/status",
-  });
-};
-
-/**
- * Get Stats For Section
- * Get stats about a given section.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const getCampaignStatsSectionId = (
-  options: Options<GetCampaignStatsSectionIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCampaignStatsSectionIdResponse,
-    GetCampaignStatsSectionIdError
-  >({
-    ...options,
-    url: "/campaign/stats/{section_id}",
-  });
-};
-
-/**
- * Create Campaigns Logo
- * Upload a logo for a campaign list.
- *
- * **The user must be a member of the group CAA to use this endpoint**
- */
-export const postCampaignListsListIdLogo = (
-  options: Options<PostCampaignListsListIdLogoData>,
-) => {
-  return (options?.client ?? client).post<
-    PostCampaignListsListIdLogoResponse,
-    PostCampaignListsListIdLogoError
+    PostRecommendationRecommendationsRecommendationIdPictureResponse,
+    PostRecommendationRecommendationsRecommendationIdPictureError
   >({
     ...options,
     ...formDataBodySerializer,
-    url: "/campaign/lists/{list_id}/logo",
-  });
-};
-
-/**
- * Read Campaigns Logo
- * Get the logo of a campaign list.
- * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
- */
-export const getCampaignListsListIdLogo = (
-  options: Options<GetCampaignListsListIdLogoData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCampaignListsListIdLogoResponse,
-    GetCampaignListsListIdLogoError
-  >({
-    ...options,
-    url: "/campaign/lists/{list_id}/logo",
+    url: "/recommendation/recommendations/{recommendation_id}/picture",
   });
 };
 
@@ -4588,110 +4988,291 @@ export const deleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId = (
 };
 
 /**
- * Get Movie
- * Makes a HTTP request to The Movie Database (TMDB)
- * using an API key and returns a TheMovieDB object
- * * https://developer.themoviedb.org/reference/movie-details
- * * https://developer.themoviedb.org/docs/errors
+ * Get Managers
+ * Get existing managers.
+ *
+ * **This endpoint is only usable by administrators**
  */
-export const getCinemaThemoviedbThemoviedbId = (
-  options: Options<GetCinemaThemoviedbThemoviedbIdData>,
-) => {
+export const getBookingManagers = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetCinemaThemoviedbThemoviedbIdResponse,
-    GetCinemaThemoviedbThemoviedbIdError
+    GetBookingManagersResponse,
+    GetBookingManagersError
   >({
     ...options,
-    url: "/cinema/themoviedb/{themoviedb_id}",
+    url: "/booking/managers",
   });
 };
 
 /**
- * Get Sessions
+ * Create Manager
+ * Create a manager.
+ *
+ * **This endpoint is only usable by administrators**
  */
-export const getCinemaSessions = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetCinemaSessionsResponse,
-    GetCinemaSessionsError
-  >({
-    ...options,
-    url: "/cinema/sessions",
-  });
-};
-
-/**
- * Create Session
- */
-export const postCinemaSessions = (
-  options: Options<PostCinemaSessionsData>,
+export const postBookingManagers = (
+  options: Options<PostBookingManagersData>,
 ) => {
   return (options?.client ?? client).post<
-    PostCinemaSessionsResponse,
-    PostCinemaSessionsError
+    PostBookingManagersResponse,
+    PostBookingManagersError
   >({
     ...options,
-    url: "/cinema/sessions",
+    url: "/booking/managers",
   });
 };
 
 /**
- * Update Session
+ * Update Manager
+ * Update a manager, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
+ *
+ * **This endpoint is only usable by administrators**
  */
-export const patchCinemaSessionsSessionId = (
-  options: Options<PatchCinemaSessionsSessionIdData>,
+export const patchBookingManagersManagerId = (
+  options: Options<PatchBookingManagersManagerIdData>,
 ) => {
   return (options?.client ?? client).patch<
-    PatchCinemaSessionsSessionIdResponse,
-    PatchCinemaSessionsSessionIdError
+    PatchBookingManagersManagerIdResponse,
+    PatchBookingManagersManagerIdError
   >({
     ...options,
-    url: "/cinema/sessions/{session_id}",
+    url: "/booking/managers/{manager_id}",
   });
 };
 
 /**
- * Delete Session
+ * Delete Manager
+ * Delete a manager only if the manager is not linked to any room
+ *
+ * **This endpoint is only usable by administrators**
  */
-export const deleteCinemaSessionsSessionId = (
-  options: Options<DeleteCinemaSessionsSessionIdData>,
+export const deleteBookingManagersManagerId = (
+  options: Options<DeleteBookingManagersManagerIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteCinemaSessionsSessionIdResponse,
-    DeleteCinemaSessionsSessionIdError
+    DeleteBookingManagersManagerIdResponse,
+    DeleteBookingManagersManagerIdError
   >({
     ...options,
-    url: "/cinema/sessions/{session_id}",
+    url: "/booking/managers/{manager_id}",
   });
 };
 
 /**
- * Create Campaigns Logo
+ * Get Current User Managers
+ * Return all managers the current user is a member.
+ *
+ * **The user must be authenticated to use this endpoint**
  */
-export const postCinemaSessionsSessionIdPoster = (
-  options: Options<PostCinemaSessionsSessionIdPosterData>,
+export const getBookingManagersUsersMe = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetBookingManagersUsersMeResponse,
+    GetBookingManagersUsersMeError
+  >({
+    ...options,
+    url: "/booking/managers/users/me",
+  });
+};
+
+/**
+ * Get Bookings For Manager
+ * Return all bookings a user can manage.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getBookingBookingsUsersMeManage = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetBookingBookingsUsersMeManageResponse,
+    GetBookingBookingsUsersMeManageError
+  >({
+    ...options,
+    url: "/booking/bookings/users/me/manage",
+  });
+};
+
+/**
+ * Get Confirmed Bookings For Manager
+ * Return all confirmed bookings a user can manage.
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getBookingBookingsConfirmedUsersMeManage = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetBookingBookingsConfirmedUsersMeManageResponse,
+    GetBookingBookingsConfirmedUsersMeManageError
+  >({
+    ...options,
+    url: "/booking/bookings/confirmed/users/me/manage",
+  });
+};
+
+/**
+ * Get Confirmed Bookings
+ * Return all confirmed bookings.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getBookingBookingsConfirmed = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetBookingBookingsConfirmedResponse,
+    GetBookingBookingsConfirmedError
+  >({
+    ...options,
+    url: "/booking/bookings/confirmed",
+  });
+};
+
+/**
+ * Get Applicant Bookings
+ * Get the user bookings.
+ *
+ * **Only usable by the user**
+ */
+export const getBookingBookingsUsersMe = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetBookingBookingsUsersMeResponse,
+    GetBookingBookingsUsersMeError
+  >({
+    ...options,
+    url: "/booking/bookings/users/me",
+  });
+};
+
+/**
+ * Create Booking
+ * Create a booking.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const postBookingBookings = (
+  options: Options<PostBookingBookingsData>,
 ) => {
   return (options?.client ?? client).post<
-    PostCinemaSessionsSessionIdPosterResponse,
-    PostCinemaSessionsSessionIdPosterError
+    PostBookingBookingsResponse,
+    PostBookingBookingsError
   >({
     ...options,
-    ...formDataBodySerializer,
-    url: "/cinema/sessions/{session_id}/poster",
+    url: "/booking/bookings",
   });
 };
 
 /**
- * Read Session Poster
+ * Edit Booking
+ * Edit a booking.
+ *
+ * **Only usable by a user in the manager group of the booking or applicant before decision**
  */
-export const getCinemaSessionsSessionIdPoster = (
-  options: Options<GetCinemaSessionsSessionIdPosterData>,
+export const patchBookingBookingsBookingId = (
+  options: Options<PatchBookingBookingsBookingIdData>,
 ) => {
-  return (options?.client ?? client).get<
-    GetCinemaSessionsSessionIdPosterResponse,
-    GetCinemaSessionsSessionIdPosterError
+  return (options?.client ?? client).patch<
+    PatchBookingBookingsBookingIdResponse,
+    PatchBookingBookingsBookingIdError
   >({
     ...options,
-    url: "/cinema/sessions/{session_id}/poster",
+    url: "/booking/bookings/{booking_id}",
+  });
+};
+
+/**
+ * Delete Booking
+ * Remove a booking.
+ *
+ * **Only usable by the applicant before decision**
+ */
+export const deleteBookingBookingsBookingId = (
+  options: Options<DeleteBookingBookingsBookingIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteBookingBookingsBookingIdResponse,
+    DeleteBookingBookingsBookingIdError
+  >({
+    ...options,
+    url: "/booking/bookings/{booking_id}",
+  });
+};
+
+/**
+ * Confirm Booking
+ * Give a decision to a booking.
+ *
+ * **Only usable by a user in the manager group of the booking**
+ */
+export const patchBookingBookingsBookingIdReplyDecision = (
+  options: Options<PatchBookingBookingsBookingIdReplyDecisionData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchBookingBookingsBookingIdReplyDecisionResponse,
+    PatchBookingBookingsBookingIdReplyDecisionError
+  >({
+    ...options,
+    url: "/booking/bookings/{booking_id}/reply/{decision}",
+  });
+};
+
+/**
+ * Get Rooms
+ * Get all rooms.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getBookingRooms = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetBookingRoomsResponse,
+    GetBookingRoomsError
+  >({
+    ...options,
+    url: "/booking/rooms",
+  });
+};
+
+/**
+ * Create Room
+ * Create a new room in database.
+ *
+ * **This endpoint is only usable by admins**
+ */
+export const postBookingRooms = (options: Options<PostBookingRoomsData>) => {
+  return (options?.client ?? client).post<
+    PostBookingRoomsResponse,
+    PostBookingRoomsError
+  >({
+    ...options,
+    url: "/booking/rooms",
+  });
+};
+
+/**
+ * Edit Room
+ * Edit a room.
+ *
+ * **This endpoint is only usable by admins**
+ */
+export const patchBookingRoomsRoomId = (
+  options: Options<PatchBookingRoomsRoomIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchBookingRoomsRoomIdResponse,
+    PatchBookingRoomsRoomIdError
+  >({
+    ...options,
+    url: "/booking/rooms/{room_id}",
+  });
+};
+
+/**
+ * Delete Room
+ * Delete a room only if there are not future or ongoing bookings of this room
+ *
+ * **This endpoint is only usable by admins**
+ */
+export const deleteBookingRoomsRoomId = (
+  options: Options<DeleteBookingRoomsRoomIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteBookingRoomsRoomIdResponse,
+    DeleteBookingRoomsRoomIdError
+  >({
+    ...options,
+    url: "/booking/rooms/{room_id}",
   });
 };
 
@@ -5126,332 +5707,6 @@ export const getCinemaSessionsSessionIdPoster = (
   >({
     ...options,
     url: "/cinema/sessions/{session_id}/poster",
-  });
-};
-
-/**
- * Get Flappybird Score
- * Return the leaderboard
- */
-export const getFlappybirdScores = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetFlappybirdScoresResponse,
-    GetFlappybirdScoresError
-  >({
-    ...options,
-    url: "/flappybird/scores",
-  });
-};
-
-/**
- * Create Flappybird Score
- */
-export const postFlappybirdScores = (
-  options: Options<PostFlappybirdScoresData>,
-) => {
-  return (options?.client ?? client).post<
-    PostFlappybirdScoresResponse,
-    PostFlappybirdScoresError
-  >({
-    ...options,
-    url: "/flappybird/scores",
-  });
-};
-
-/**
- * Get Current User Flappybird Personal Best
- */
-export const getFlappybirdScoresMe = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetFlappybirdScoresMeResponse,
-    GetFlappybirdScoresMeError
-  >({
-    ...options,
-    url: "/flappybird/scores/me",
-  });
-};
-
-/**
- * Read Loaners
- * Get existing loaners.
- *
- * **This endpoint is only usable by administrators**
- */
-export const getLoansLoaners = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetLoansLoanersResponse,
-    GetLoansLoanersError
-  >({
-    ...options,
-    url: "/loans/loaners/",
-  });
-};
-
-/**
- * Create Loaner
- * Create a new loaner.
- *
- * Each loaner is associated with a `manager_group`. Users belonging to this group are able to manage the loaner items and loans.
- *
- * **This endpoint is only usable by administrators**
- */
-export const postLoansLoaners = (options: Options<PostLoansLoanersData>) => {
-  return (options?.client ?? client).post<
-    PostLoansLoanersResponse,
-    PostLoansLoanersError
-  >({
-    ...options,
-    url: "/loans/loaners/",
-  });
-};
-
-/**
- * Delete Loaner
- * Delete a loaner. All items and loans associated with the loaner will also be deleted from the database.
- *
- * **This endpoint is only usable by administrators**
- */
-export const deleteLoansLoanersLoanerId = (
-  options: Options<DeleteLoansLoanersLoanerIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteLoansLoanersLoanerIdResponse,
-    DeleteLoansLoanersLoanerIdError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}",
-  });
-};
-
-/**
- * Update Loaner
- * Update a loaner, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
- *
- * **This endpoint is only usable by administrators**
- */
-export const patchLoansLoanersLoanerId = (
-  options: Options<PatchLoansLoanersLoanerIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchLoansLoanersLoanerIdResponse,
-    PatchLoansLoanersLoanerIdError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}",
-  });
-};
-
-/**
- * Get Loans By Loaner
- * Return all loans from a given group.
- *
- *
- * The query string `returned` can be used to get only return or non returned loans. By default, all loans are returned.
- *
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const getLoansLoanersLoanerIdLoans = (
-  options: Options<GetLoansLoanersLoanerIdLoansData>,
-) => {
-  return (options?.client ?? client).get<
-    GetLoansLoanersLoanerIdLoansResponse,
-    GetLoansLoanersLoanerIdLoansError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}/loans",
-  });
-};
-
-/**
- * Get Items By Loaner
- * Return all items of a loaner.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const getLoansLoanersLoanerIdItems = (
-  options: Options<GetLoansLoanersLoanerIdItemsData>,
-) => {
-  return (options?.client ?? client).get<
-    GetLoansLoanersLoanerIdItemsResponse,
-    GetLoansLoanersLoanerIdItemsError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}/items",
-  });
-};
-
-/**
- * Create Items For Loaner
- * Create a new item for a loaner. A given loaner can not have more than one item with the same `name`.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const postLoansLoanersLoanerIdItems = (
-  options: Options<PostLoansLoanersLoanerIdItemsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostLoansLoanersLoanerIdItemsResponse,
-    PostLoansLoanersLoanerIdItemsError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}/items",
-  });
-};
-
-/**
- * Update Items For Loaner
- * Update a loaner's item.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const patchLoansLoanersLoanerIdItemsItemId = (
-  options: Options<PatchLoansLoanersLoanerIdItemsItemIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchLoansLoanersLoanerIdItemsItemIdResponse,
-    PatchLoansLoanersLoanerIdItemsItemIdError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}/items/{item_id}",
-  });
-};
-
-/**
- * Delete Loaner Item
- * Delete a loaner's item.
- * This will remove the item from all loans but won't delete any loan.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const deleteLoansLoanersLoanerIdItemsItemId = (
-  options: Options<DeleteLoansLoanersLoanerIdItemsItemIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteLoansLoanersLoanerIdItemsItemIdResponse,
-    DeleteLoansLoanersLoanerIdItemsItemIdError
-  >({
-    ...options,
-    url: "/loans/loaners/{loaner_id}/items/{item_id}",
-  });
-};
-
-/**
- * Get Current User Loans
- * Return all loans from the current user.
- *
- * The query string `returned` can be used to get only returned or non returned loans. By default, all loans are returned.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const getLoansUsersMe = (options?: Options<GetLoansUsersMeData>) => {
-  return (options?.client ?? client).get<
-    GetLoansUsersMeResponse,
-    GetLoansUsersMeError
-  >({
-    ...options,
-    url: "/loans/users/me",
-  });
-};
-
-/**
- * Get Current User Loaners
- * Return all loaners the current user can manage.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const getLoansUsersMeLoaners = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetLoansUsersMeLoanersResponse,
-    GetLoansUsersMeLoanersError
-  >({
-    ...options,
-    url: "/loans/users/me/loaners",
-  });
-};
-
-/**
- * Create Loan
- * Create a new loan in database and add the requested items
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const postLoans = (options: Options<PostLoansData>) => {
-  return (options?.client ?? client).post<PostLoansResponse, PostLoansError>({
-    ...options,
-    url: "/loans/",
-  });
-};
-
-/**
- * Update Loan
- * Update a loan and its items.
- *
- * As the endpoint can update the loan items, it will send back
- * the new representation of the loan `Loan` including the new items relationships
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const patchLoansLoanId = (options: Options<PatchLoansLoanIdData>) => {
-  return (options?.client ?? client).patch<
-    PatchLoansLoanIdResponse,
-    PatchLoansLoanIdError
-  >({
-    ...options,
-    url: "/loans/{loan_id}",
-  });
-};
-
-/**
- * Delete Loan
- * Delete a loan
- * This will remove the loan but won't delete any loaner items.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const deleteLoansLoanId = (options: Options<DeleteLoansLoanIdData>) => {
-  return (options?.client ?? client).delete<
-    DeleteLoansLoanIdResponse,
-    DeleteLoansLoanIdError
-  >({
-    ...options,
-    url: "/loans/{loan_id}",
-  });
-};
-
-/**
- * Return Loan
- * Mark a loan as returned. This will update items availability.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const postLoansLoanIdReturn = (
-  options: Options<PostLoansLoanIdReturnData>,
-) => {
-  return (options?.client ?? client).post<
-    PostLoansLoanIdReturnResponse,
-    PostLoansLoanIdReturnError
-  >({
-    ...options,
-    url: "/loans/{loan_id}/return",
-  });
-};
-
-/**
- * Extend Loan
- * A new `end` date or an extended `duration` can be provided. If the two are provided, only `end` will be used.
- *
- * **The user must be a member of the loaner group_manager to use this endpoint**
- */
-export const postLoansLoanIdExtend = (
-  options: Options<PostLoansLoanIdExtendData>,
-) => {
-  return (options?.client ?? client).post<
-    PostLoansLoanIdExtendResponse,
-    PostLoansLoanIdExtendError
-  >({
-    ...options,
-    url: "/loans/{loan_id}/extend",
   });
 };
 
@@ -5551,767 +5806,6 @@ export const deletePhPaperId = (options: Options<DeletePhPaperIdData>) => {
   >({
     ...options,
     url: "/ph/{paper_id}",
-  });
-};
-
-/**
- * Get All Associations
- * Return all associations from database as a list of AssociationComplete schemas
- */
-export const getPhonebookAssociations = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetPhonebookAssociationsResponse,
-    GetPhonebookAssociationsError
-  >({
-    ...options,
-    url: "/phonebook/associations/",
-  });
-};
-
-/**
- * Create Association
- * Create a new Association by giving an AssociationBase scheme
- *
- * **This endpoint is only usable by CAA, BDE**
- */
-export const postPhonebookAssociations = (
-  options: Options<PostPhonebookAssociationsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostPhonebookAssociationsResponse,
-    PostPhonebookAssociationsError
-  >({
-    ...options,
-    url: "/phonebook/associations/",
-  });
-};
-
-/**
- * Get All Role Tags
- * Return all available role tags from RoleTags enum.
- */
-export const getPhonebookRoletags = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetPhonebookRoletagsResponse,
-    GetPhonebookRoletagsError
-  >({
-    ...options,
-    url: "/phonebook/roletags",
-  });
-};
-
-/**
- * Get All Kinds
- * Return all available kinds of from Kinds enum.
- */
-export const getPhonebookAssociationsKinds = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetPhonebookAssociationsKindsResponse,
-    GetPhonebookAssociationsKindsError
-  >({
-    ...options,
-    url: "/phonebook/associations/kinds",
-  });
-};
-
-/**
- * Update Association
- * Update an Association
- *
- * **This endpoint is only usable by CAA, BDE and association's president**
- */
-export const patchPhonebookAssociationsAssociationId = (
-  options: Options<PatchPhonebookAssociationsAssociationIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchPhonebookAssociationsAssociationIdResponse,
-    PatchPhonebookAssociationsAssociationIdError
-  >({
-    ...options,
-    url: "/phonebook/associations/{association_id}",
-  });
-};
-
-/**
- * Delete Association
- * Delete an Association
- *
- * [!] Memberships linked to association_id will be deleted too
- *
- * **This endpoint is only usable by CAA and BDE**
- */
-export const deletePhonebookAssociationsAssociationId = (
-  options: Options<DeletePhonebookAssociationsAssociationIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeletePhonebookAssociationsAssociationIdResponse,
-    DeletePhonebookAssociationsAssociationIdError
-  >({
-    ...options,
-    url: "/phonebook/associations/{association_id}",
-  });
-};
-
-/**
- * Get Association Members
- * Return the list of MemberComplete of an Association.
- */
-export const getPhonebookAssociationsAssociationIdMembers = (
-  options: Options<GetPhonebookAssociationsAssociationIdMembersData>,
-) => {
-  return (options?.client ?? client).get<
-    GetPhonebookAssociationsAssociationIdMembersResponse,
-    GetPhonebookAssociationsAssociationIdMembersError
-  >({
-    ...options,
-    url: "/phonebook/associations/{association_id}/members/",
-  });
-};
-
-/**
- * Get Association Members By Mandate Year
- * Return the list of MemberComplete of an Association with given mandate_year.
- */
-export const getPhonebookAssociationsAssociationIdMembersMandateYear = (
-  options: Options<GetPhonebookAssociationsAssociationIdMembersMandateYearData>,
-) => {
-  return (options?.client ?? client).get<
-    GetPhonebookAssociationsAssociationIdMembersMandateYearResponse,
-    GetPhonebookAssociationsAssociationIdMembersMandateYearError
-  >({
-    ...options,
-    url: "/phonebook/associations/{association_id}/members/{mandate_year}",
-  });
-};
-
-/**
- * Get Member Details
- * Return MemberComplete for given user_id.
- */
-export const getPhonebookMemberUserId = (
-  options: Options<GetPhonebookMemberUserIdData>,
-) => {
-  return (options?.client ?? client).get<
-    GetPhonebookMemberUserIdResponse,
-    GetPhonebookMemberUserIdError
-  >({
-    ...options,
-    url: "/phonebook/member/{user_id}",
-  });
-};
-
-/**
- * Create Membership
- * Create a new Membership.
- * 'role_tags' are used to indicate if the members has a main role in the association (president, secretary ...) and 'role_name' is the display name for this membership
- *
- * **This endpoint is only usable by CAA, BDE and association's president**
- */
-export const postPhonebookAssociationsMemberships = (
-  options: Options<PostPhonebookAssociationsMembershipsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostPhonebookAssociationsMembershipsResponse,
-    PostPhonebookAssociationsMembershipsError
-  >({
-    ...options,
-    url: "/phonebook/associations/memberships",
-  });
-};
-
-/**
- * Update Membership
- * Update a Membership.
- *
- * **This endpoint is only usable by CAA, BDE and association's president**
- */
-export const patchPhonebookAssociationsMembershipsMembershipId = (
-  options: Options<PatchPhonebookAssociationsMembershipsMembershipIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchPhonebookAssociationsMembershipsMembershipIdResponse,
-    PatchPhonebookAssociationsMembershipsMembershipIdError
-  >({
-    ...options,
-    url: "/phonebook/associations/memberships/{membership_id}",
-  });
-};
-
-/**
- * Delete Membership
- * Delete a membership.
- *
- * **This endpoint is only usable by CAA, BDE and association's president**
- */
-export const deletePhonebookAssociationsMembershipsMembershipId = (
-  options: Options<DeletePhonebookAssociationsMembershipsMembershipIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeletePhonebookAssociationsMembershipsMembershipIdResponse,
-    DeletePhonebookAssociationsMembershipsMembershipIdError
-  >({
-    ...options,
-    url: "/phonebook/associations/memberships/{membership_id}",
-  });
-};
-
-/**
- * Create Association Logo
- * Upload a logo for an Association.
- * **The user must be a member of the group CAA or BDE to use this endpoint**
- */
-export const postPhonebookAssociationsAssociationIdPicture = (
-  options: Options<PostPhonebookAssociationsAssociationIdPictureData>,
-) => {
-  return (options?.client ?? client).post<
-    PostPhonebookAssociationsAssociationIdPictureResponse,
-    PostPhonebookAssociationsAssociationIdPictureError
-  >({
-    ...options,
-    ...formDataBodySerializer,
-    url: "/phonebook/associations/{association_id}/picture",
-  });
-};
-
-/**
- * Read Association Logo
- * Get the logo of an Association.
- */
-export const getPhonebookAssociationsAssociationIdPicture = (
-  options: Options<GetPhonebookAssociationsAssociationIdPictureData>,
-) => {
-  return (options?.client ?? client).get<
-    GetPhonebookAssociationsAssociationIdPictureResponse,
-    GetPhonebookAssociationsAssociationIdPictureError
-  >({
-    ...options,
-    url: "/phonebook/associations/{association_id}/picture",
-  });
-};
-
-/**
- * Get Raffle
- * Return all raffles
- */
-export const getTombolaRaffles = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetTombolaRafflesResponse,
-    GetTombolaRafflesError
-  >({
-    ...options,
-    url: "/tombola/raffles",
-  });
-};
-
-/**
- * Create Raffle
- * Create a new raffle
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const postTombolaRaffles = (
-  options: Options<PostTombolaRafflesData>,
-) => {
-  return (options?.client ?? client).post<
-    PostTombolaRafflesResponse,
-    PostTombolaRafflesError
-  >({
-    ...options,
-    url: "/tombola/raffles",
-  });
-};
-
-/**
- * Edit Raffle
- * Edit a raffle
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const patchTombolaRafflesRaffleId = (
-  options: Options<PatchTombolaRafflesRaffleIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchTombolaRafflesRaffleIdResponse,
-    PatchTombolaRafflesRaffleIdError
-  >({
-    ...options,
-    url: "/tombola/raffles/{raffle_id}",
-  });
-};
-
-/**
- * Delete Raffle
- * Delete a raffle.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const deleteTombolaRafflesRaffleId = (
-  options: Options<DeleteTombolaRafflesRaffleIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteTombolaRafflesRaffleIdResponse,
-    DeleteTombolaRafflesRaffleIdError
-  >({
-    ...options,
-    url: "/tombola/raffles/{raffle_id}",
-  });
-};
-
-/**
- * Get Raffles By Group Id
- * Return all raffles from a group
- */
-export const getTombolaGroupGroupIdRaffles = (
-  options: Options<GetTombolaGroupGroupIdRafflesData>,
-) => {
-  return (options?.client ?? client).get<
-    GetTombolaGroupGroupIdRafflesResponse,
-    GetTombolaGroupGroupIdRafflesError
-  >({
-    ...options,
-    url: "/tombola/group/{group_id}/raffles",
-  });
-};
-
-/**
- * Get Raffle Stats
- * Return the number of ticket sold and the total amount recollected for a raffle
- */
-export const getTombolaRafflesRaffleIdStats = (
-  options: Options<GetTombolaRafflesRaffleIdStatsData>,
-) => {
-  return (options?.client ?? client).get<
-    GetTombolaRafflesRaffleIdStatsResponse,
-    GetTombolaRafflesRaffleIdStatsError
-  >({
-    ...options,
-    url: "/tombola/raffles/{raffle_id}/stats",
-  });
-};
-
-/**
- * Create Current Raffle Logo
- * Upload a logo for a specific raffle.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const postTombolaRafflesRaffleIdLogo = (
-  options: Options<PostTombolaRafflesRaffleIdLogoData>,
-) => {
-  return (options?.client ?? client).post<
-    PostTombolaRafflesRaffleIdLogoResponse,
-    PostTombolaRafflesRaffleIdLogoError
-  >({
-    ...options,
-    ...formDataBodySerializer,
-    url: "/tombola/raffles/{raffle_id}/logo",
-  });
-};
-
-/**
- * Read Raffle Logo
- * Get the logo of a specific raffle.
- */
-export const getTombolaRafflesRaffleIdLogo = (
-  options: Options<GetTombolaRafflesRaffleIdLogoData>,
-) => {
-  return (options?.client ?? client).get<
-    GetTombolaRafflesRaffleIdLogoResponse,
-    GetTombolaRafflesRaffleIdLogoError
-  >({
-    ...options,
-    url: "/tombola/raffles/{raffle_id}/logo",
-  });
-};
-
-/**
- * Get Pack Tickets
- * Return all tickets
- */
-export const getTombolaPackTickets = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetTombolaPackTicketsResponse,
-    GetTombolaPackTicketsError
-  >({
-    ...options,
-    url: "/tombola/pack_tickets",
-  });
-};
-
-/**
- * Create Packticket
- * Create a new packticket
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const postTombolaPackTickets = (
-  options: Options<PostTombolaPackTicketsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostTombolaPackTicketsResponse,
-    PostTombolaPackTicketsError
-  >({
-    ...options,
-    url: "/tombola/pack_tickets",
-  });
-};
-
-/**
- * Edit Packticket
- * Edit a packticket
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const patchTombolaPackTicketsPackticketId = (
-  options: Options<PatchTombolaPackTicketsPackticketIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchTombolaPackTicketsPackticketIdResponse,
-    PatchTombolaPackTicketsPackticketIdError
-  >({
-    ...options,
-    url: "/tombola/pack_tickets/{packticket_id}",
-  });
-};
-
-/**
- * Delete Packticket
- * Delete a packticket.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const deleteTombolaPackTicketsPackticketId = (
-  options: Options<DeleteTombolaPackTicketsPackticketIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteTombolaPackTicketsPackticketIdResponse,
-    DeleteTombolaPackTicketsPackticketIdError
-  >({
-    ...options,
-    url: "/tombola/pack_tickets/{packticket_id}",
-  });
-};
-
-/**
- * Get Pack Tickets By Raffle Id
- * Return all pack_tickets associated to a raffle
- */
-export const getTombolaRafflesRaffleIdPackTickets = (
-  options: Options<GetTombolaRafflesRaffleIdPackTicketsData>,
-) => {
-  return (options?.client ?? client).get<
-    GetTombolaRafflesRaffleIdPackTicketsResponse,
-    GetTombolaRafflesRaffleIdPackTicketsError
-  >({
-    ...options,
-    url: "/tombola/raffles/{raffle_id}/pack_tickets",
-  });
-};
-
-/**
- * Get Tickets
- * Return all tickets
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const getTombolaTickets = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetTombolaTicketsResponse,
-    GetTombolaTicketsError
-  >({
-    ...options,
-    url: "/tombola/tickets",
-  });
-};
-
-/**
- * Buy Ticket
- * Buy a ticket
- */
-export const postTombolaTicketsBuyPackId = (
-  options: Options<PostTombolaTicketsBuyPackIdData>,
-) => {
-  return (options?.client ?? client).post<
-    PostTombolaTicketsBuyPackIdResponse,
-    PostTombolaTicketsBuyPackIdError
-  >({
-    ...options,
-    url: "/tombola/tickets/buy/{pack_id}",
-  });
-};
-
-/**
- * Get Tickets By Userid
- * Get tickets of a specific user.
- *
- * **Only admin users can get tickets of another user**
- */
-export const getTombolaUsersUserIdTickets = (
-  options: Options<GetTombolaUsersUserIdTicketsData>,
-) => {
-  return (options?.client ?? client).get<
-    GetTombolaUsersUserIdTicketsResponse,
-    GetTombolaUsersUserIdTicketsError
-  >({
-    ...options,
-    url: "/tombola/users/{user_id}/tickets",
-  });
-};
-
-/**
- * Get Tickets By Raffleid
- * Get tickets from a specific raffle.
- *
- * **The user must be a member of the raffle's group to use this endpoint
- */
-export const getTombolaRafflesRaffleIdTickets = (
-  options: Options<GetTombolaRafflesRaffleIdTicketsData>,
-) => {
-  return (options?.client ?? client).get<
-    GetTombolaRafflesRaffleIdTicketsResponse,
-    GetTombolaRafflesRaffleIdTicketsError
-  >({
-    ...options,
-    url: "/tombola/raffles/{raffle_id}/tickets",
-  });
-};
-
-/**
- * Get Prizes
- * Return all prizes
- */
-export const getTombolaPrizes = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetTombolaPrizesResponse,
-    GetTombolaPrizesError
-  >({
-    ...options,
-    url: "/tombola/prizes",
-  });
-};
-
-/**
- * Create Prize
- * Create a new prize
- *
- * **The user must be a member of the raffle's group to use this endpoint
- */
-export const postTombolaPrizes = (options: Options<PostTombolaPrizesData>) => {
-  return (options?.client ?? client).post<
-    PostTombolaPrizesResponse,
-    PostTombolaPrizesError
-  >({
-    ...options,
-    url: "/tombola/prizes",
-  });
-};
-
-/**
- * Edit Prize
- * Edit a prize
- *
- * **The user must be a member of the group raffle's to use this endpoint
- */
-export const patchTombolaPrizesPrizeId = (
-  options: Options<PatchTombolaPrizesPrizeIdData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchTombolaPrizesPrizeIdResponse,
-    PatchTombolaPrizesPrizeIdError
-  >({
-    ...options,
-    url: "/tombola/prizes/{prize_id}",
-  });
-};
-
-/**
- * Delete Prize
- * Delete a prize.
- *
- * **The user must be a member of the group raffle's to use this endpoint
- */
-export const deleteTombolaPrizesPrizeId = (
-  options: Options<DeleteTombolaPrizesPrizeIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteTombolaPrizesPrizeIdResponse,
-    DeleteTombolaPrizesPrizeIdError
-  >({
-    ...options,
-    url: "/tombola/prizes/{prize_id}",
-  });
-};
-
-/**
- * Get Prizes By Raffleid
- * Get prizes from a specific raffle.
- */
-export const getTombolaRafflesRaffleIdPrizes = (
-  options: Options<GetTombolaRafflesRaffleIdPrizesData>,
-) => {
-  return (options?.client ?? client).get<
-    GetTombolaRafflesRaffleIdPrizesResponse,
-    GetTombolaRafflesRaffleIdPrizesError
-  >({
-    ...options,
-    url: "/tombola/raffles/{raffle_id}/prizes",
-  });
-};
-
-/**
- * Create Prize Picture
- * Upload a logo for a specific prize.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const postTombolaPrizesPrizeIdPicture = (
-  options: Options<PostTombolaPrizesPrizeIdPictureData>,
-) => {
-  return (options?.client ?? client).post<
-    PostTombolaPrizesPrizeIdPictureResponse,
-    PostTombolaPrizesPrizeIdPictureError
-  >({
-    ...options,
-    ...formDataBodySerializer,
-    url: "/tombola/prizes/{prize_id}/picture",
-  });
-};
-
-/**
- * Read Prize Logo
- * Get the logo of a specific prize.
- */
-export const getTombolaPrizesPrizeIdPicture = (
-  options: Options<GetTombolaPrizesPrizeIdPictureData>,
-) => {
-  return (options?.client ?? client).get<
-    GetTombolaPrizesPrizeIdPictureResponse,
-    GetTombolaPrizesPrizeIdPictureError
-  >({
-    ...options,
-    url: "/tombola/prizes/{prize_id}/picture",
-  });
-};
-
-/**
- * Get Users Cash
- * Get cash from all users.
- *
- * **The user must be a member of the group admin to use this endpoint
- */
-export const getTombolaUsersCash = (options?: Options) => {
-  return (options?.client ?? client).get<
-    GetTombolaUsersCashResponse,
-    GetTombolaUsersCashError
-  >({
-    ...options,
-    url: "/tombola/users/cash",
-  });
-};
-
-/**
- * Get Cash By Id
- * Get cash from a specific user.
- *
- * **The user must be a member of the group admin to use this endpoint or can only access the endpoint for its own user_id**
- */
-export const getTombolaUsersUserIdCash = (
-  options: Options<GetTombolaUsersUserIdCashData>,
-) => {
-  return (options?.client ?? client).get<
-    GetTombolaUsersUserIdCashResponse,
-    GetTombolaUsersUserIdCashError
-  >({
-    ...options,
-    url: "/tombola/users/{user_id}/cash",
-  });
-};
-
-/**
- * Create Cash Of User
- * Create cash for a user.
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const postTombolaUsersUserIdCash = (
-  options: Options<PostTombolaUsersUserIdCashData>,
-) => {
-  return (options?.client ?? client).post<
-    PostTombolaUsersUserIdCashResponse,
-    PostTombolaUsersUserIdCashError
-  >({
-    ...options,
-    url: "/tombola/users/{user_id}/cash",
-  });
-};
-
-/**
- * Edit Cash By Id
- * Edit cash for an user. This will add the balance to the current balance.
- * A negative value can be provided to remove money from the user.
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const patchTombolaUsersUserIdCash = (
-  options: Options<PatchTombolaUsersUserIdCashData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchTombolaUsersUserIdCashResponse,
-    PatchTombolaUsersUserIdCashError
-  >({
-    ...options,
-    url: "/tombola/users/{user_id}/cash",
-  });
-};
-
-/**
- * Draw Winner
- */
-export const postTombolaPrizesPrizeIdDraw = (
-  options: Options<PostTombolaPrizesPrizeIdDrawData>,
-) => {
-  return (options?.client ?? client).post<
-    PostTombolaPrizesPrizeIdDrawResponse,
-    PostTombolaPrizesPrizeIdDrawError
-  >({
-    ...options,
-    url: "/tombola/prizes/{prize_id}/draw",
-  });
-};
-
-/**
- * Open Raffle
- * Open a raffle
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const patchTombolaRafflesRaffleIdOpen = (
-  options: Options<PatchTombolaRafflesRaffleIdOpenData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchTombolaRafflesRaffleIdOpenResponse,
-    PatchTombolaRafflesRaffleIdOpenError
-  >({
-    ...options,
-    url: "/tombola/raffles/{raffle_id}/open",
-  });
-};
-
-/**
- * Lock Raffle
- * Lock a raffle
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const patchTombolaRafflesRaffleIdLock = (
-  options: Options<PatchTombolaRafflesRaffleIdLockData>,
-) => {
-  return (options?.client ?? client).patch<
-    PatchTombolaRafflesRaffleIdLockResponse,
-    PatchTombolaRafflesRaffleIdLockError
-  >({
-    ...options,
-    url: "/tombola/raffles/{raffle_id}/lock",
   });
 };
 
@@ -6742,108 +6236,180 @@ export const getRaidPay = (options?: Options) => {
 };
 
 /**
- * Get Recommendation
- * Get recommendations.
- *
- * **The user must be authenticated to use this endpoint**
+ * Get Events
+ * Get all events from the database.
  */
-export const getRecommendationRecommendations = (options?: Options) => {
+export const getCalendarEvents = (options?: Options) => {
   return (options?.client ?? client).get<
-    GetRecommendationRecommendationsResponse,
-    GetRecommendationRecommendationsError
+    GetCalendarEventsResponse,
+    GetCalendarEventsError
   >({
     ...options,
-    url: "/recommendation/recommendations",
+    url: "/calendar/events/",
   });
 };
 
 /**
- * Create Recommendation
- * Create a recommendation.
- *
- * **This endpoint is only usable by members of the group BDE**
+ * Add Event
+ * Add an event to the calendar.
  */
-export const postRecommendationRecommendations = (
-  options: Options<PostRecommendationRecommendationsData>,
+export const postCalendarEvents = (
+  options: Options<PostCalendarEventsData>,
 ) => {
   return (options?.client ?? client).post<
-    PostRecommendationRecommendationsResponse,
-    PostRecommendationRecommendationsError
+    PostCalendarEventsResponse,
+    PostCalendarEventsError
   >({
     ...options,
-    url: "/recommendation/recommendations",
+    url: "/calendar/events/",
   });
 };
 
 /**
- * Edit Recommendation
- * Edit a recommendation.
+ * Get Confirmed Events
+ * Get all confirmed events.
  *
- * **This endpoint is only usable by members of the group BDE**
+ * **Usable by every member**
  */
-export const patchRecommendationRecommendationsRecommendationId = (
-  options: Options<PatchRecommendationRecommendationsRecommendationIdData>,
+export const getCalendarEventsConfirmed = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCalendarEventsConfirmedResponse,
+    GetCalendarEventsConfirmedError
+  >({
+    ...options,
+    url: "/calendar/events/confirmed",
+  });
+};
+
+/**
+ * Get Applicant Bookings
+ * Get one user bookings.
+ *
+ * **Usable by the user or admins**
+ */
+export const getCalendarEventsUserApplicantId = (
+  options: Options<GetCalendarEventsUserApplicantIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCalendarEventsUserApplicantIdResponse,
+    GetCalendarEventsUserApplicantIdError
+  >({
+    ...options,
+    url: "/calendar/events/user/{applicant_id}",
+  });
+};
+
+/**
+ * Get Event By Id
+ * Get an event's information by its id.
+ */
+export const getCalendarEventsEventId = (
+  options: Options<GetCalendarEventsEventIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCalendarEventsEventIdResponse,
+    GetCalendarEventsEventIdError
+  >({
+    ...options,
+    url: "/calendar/events/{event_id}",
+  });
+};
+
+/**
+ * Edit Bookings Id
+ * Edit an event.
+ *
+ * **Only usable by admins or applicant before decision**
+ */
+export const patchCalendarEventsEventId = (
+  options: Options<PatchCalendarEventsEventIdData>,
 ) => {
   return (options?.client ?? client).patch<
-    PatchRecommendationRecommendationsRecommendationIdResponse,
-    PatchRecommendationRecommendationsRecommendationIdError
+    PatchCalendarEventsEventIdResponse,
+    PatchCalendarEventsEventIdError
   >({
     ...options,
-    url: "/recommendation/recommendations/{recommendation_id}",
+    url: "/calendar/events/{event_id}",
   });
 };
 
 /**
- * Delete Recommendation
- * Delete a recommendation.
+ * Delete Bookings Id
+ * Remove an event.
  *
- * **This endpoint is only usable by members of the group BDE**
+ * **Only usable by admins or applicant before decision**
  */
-export const deleteRecommendationRecommendationsRecommendationId = (
-  options: Options<DeleteRecommendationRecommendationsRecommendationIdData>,
+export const deleteCalendarEventsEventId = (
+  options: Options<DeleteCalendarEventsEventIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteRecommendationRecommendationsRecommendationIdResponse,
-    DeleteRecommendationRecommendationsRecommendationIdError
+    DeleteCalendarEventsEventIdResponse,
+    DeleteCalendarEventsEventIdError
   >({
     ...options,
-    url: "/recommendation/recommendations/{recommendation_id}",
+    url: "/calendar/events/{event_id}",
   });
 };
 
 /**
- * Read Recommendation Image
- * Get the image of a recommendation.
- *
- * **The user must be authenticated to use this endpoint**
+ * Get Event Applicant
  */
-export const getRecommendationRecommendationsRecommendationIdPicture = (
-  options: Options<GetRecommendationRecommendationsRecommendationIdPictureData>,
+export const getCalendarEventsEventIdApplicant = (
+  options: Options<GetCalendarEventsEventIdApplicantData>,
 ) => {
   return (options?.client ?? client).get<
-    GetRecommendationRecommendationsRecommendationIdPictureResponse,
-    GetRecommendationRecommendationsRecommendationIdPictureError
+    GetCalendarEventsEventIdApplicantResponse,
+    GetCalendarEventsEventIdApplicantError
   >({
     ...options,
-    url: "/recommendation/recommendations/{recommendation_id}/picture",
+    url: "/calendar/events/{event_id}/applicant",
   });
 };
 
 /**
- * Create Recommendation Image
- * Add an image to a recommendation.
+ * Confirm Booking
+ * Give a decision to an event.
  *
- * **This endpoint is only usable by members of the group BDE**
+ * **Only usable by admins**
  */
-export const postRecommendationRecommendationsRecommendationIdPicture = (
-  options: Options<PostRecommendationRecommendationsRecommendationIdPictureData>,
+export const patchCalendarEventsEventIdReplyDecision = (
+  options: Options<PatchCalendarEventsEventIdReplyDecisionData>,
 ) => {
-  return (options?.client ?? client).post<
-    PostRecommendationRecommendationsRecommendationIdPictureResponse,
-    PostRecommendationRecommendationsRecommendationIdPictureError
+  return (options?.client ?? client).patch<
+    PatchCalendarEventsEventIdReplyDecisionResponse,
+    PatchCalendarEventsEventIdReplyDecisionError
   >({
     ...options,
-    ...formDataBodySerializer,
-    url: "/recommendation/recommendations/{recommendation_id}/picture",
+    url: "/calendar/events/{event_id}/reply/{decision}",
+  });
+};
+
+/**
+ * Recreate Ical File
+ * Create manually the icalendar file
+ *
+ * **Only usable by global admins**
+ */
+export const postCalendarIcalCreate = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostCalendarIcalCreateResponse,
+    PostCalendarIcalCreateError
+  >({
+    ...options,
+    url: "/calendar/ical/create",
+  });
+};
+
+/**
+ * Get Icalendar File
+ * Get the icalendar file corresponding to the event in the database.
+ */
+export const getCalendarIcal = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCalendarIcalResponse,
+    GetCalendarIcalError
+  >({
+    ...options,
+    url: "/calendar/ical",
   });
 };

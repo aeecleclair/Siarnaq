@@ -38,7 +38,9 @@ export const CustomDialog = ({
           <DialogHeader className="pt-6 m-1">
             <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
-          <DialogDescription className="pb-6 m-1">{description}</DialogDescription>
+          <DialogDescription className="pb-6 m-1">
+            {description}
+          </DialogDescription>
         </ScrollArea>
       </DialogContent>
     </Dialog>

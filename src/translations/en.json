@@ -3,25 +3,25 @@
     "associations": "Associations",
     "presentation": "Presentation",
     "information": "Useful informations",
-
     "summary": "Summary"
   },
   "IntroCarouselItem": {
-    "description": "Consequat sint incididunt laborum ipsum. Nostrud enim culpa consequat laborum eiusmod minim consectetur deserunt sunt proident adipisicing Adipisicing quis magna ea magna sint minim nostrud do ullamco non commodo adipisicing. Nisi elit veniam nostrud esse fugiat culpa. Excepteur ex minim sint cillum ipsum et ex pariatur nostrud. Laborum eiusmod tempor dolor sunt. In aute ad dolor non laborum ea nulla fugiat.  Anim consectetur qui excepteur aute exercitation deserunt do nulla eiusmod magna tempor qui. Sunt velit commodo enim occaecat incididuntnon nostrud dolor velit. Consequat non laborum aliquip incididunt eu. Ullamco exercitation magna in non nostrud elit cupidatat ad minim nostrud. Enim tempor commodo ad magna.",
+    "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services. At the end of the process, you'll be asked to pay online by credit card.",
+    "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
     "selectCurriculum": "To start, please select your curriculum:",
     "begin": "Shall we start?",
-    "validate": "Validate"
+    "validate": "Confirm"
   },
   "IntroPanel": {
     "presentation": "Presentation"
   },
   "PaymentButton": {
     "title": "Information about the payment provider",
-    "description": "You will be redirected to HelloAsso to proceed with the payment of your registration. This service does not take any fees on payments, it relies solely on donations. By default, HelloAsso offers you to make a donation, which you can refuse without compromising the payment. If you choose to do so, only HelloAsso will benefit from it.",
+    "description": "You will be redirected to HelloAsso to proceed to payment. HelloAsso is a French company offering payment solutions for associations. It is financed exclusively by donations. By default, HelloAsso will propose you to make a donation (called 'contribution volontaire' or 'voluntary contribution'), you can refuse to do so without compromising the payment. If you choose to make a donation, only HelloAsso will benefit it.",
     "pay": "Pay"
   },
   "ProductPanel": {
-    "noProductFound": "No product found"
+    "noProductFound": "No product available"
   },
   "ProductAccordion": {
     "mustBuy": "You must buy {products}"
@@ -40,28 +40,29 @@
   "Info": {
     "information": "Useful information",
     "cdrPhysiqueTitle": "On site Chaîne de rentrée",
-    "cdrPhysiqueSubtitle": "À la suite de cette chaîne de rentrée numérique, vous serez convoqués à la chaîne de rentrée physique.",
-    "cdrPhysiqueDescription": "Vous pourrez y rencontrer les associations, manifester votre intérêt pour les activités proposées et poser toutes vos questions. La chaîne de rentrée physique sera l'occasion de vous inscrire à tous les évènements de la QI et de souscrire aux services associatifs.",
-    "cdrPhysiqueMandatoryWarning": "Votre présence à la chaine de rentré physique est obligatoire pour valider vos inscriptions. En cas de contrainte majeure, prenez rapidement contact avec le Bureau Des Élèves pour trouver une alternative.",
-    "facebookTitle": "Groupe Facebook des nouveaux admis",
-    "facebook": "Une grande partie de la communication sur le campus se fait via des groupes Facebook. Les nouveaux élèves peuvent rejoindre le groupe des Nouveaux Admis 2024 pour ne rater aucune information :",
-    "myECLTitle": "Application MyECL",
-    "myECL": "Développée pour les associations, l'application MyECL vous permettra d'accéder à pleins de services toute l'année. Vous y retrouverez le calendrier des événements, les réservations de salles, le planning du club ciné et de nombreuses autres choses.",
-    "elementTitle": "Messagerie instantanée Element / Matrix",
-    "element": "Une instance Matrix est hébergée sur le campus. Celle-ci vous permettra de communiquer facilement avec les autres élèves, et ce de manière sécurisée, chiffré de bout en bout. Pour y accéder :",
-    "elementStep1": "Téléchargez l'application Element-x sur votre téléphone",
-    "elementStep2": "Sur l'application choisissez \"Changer de fournisseur de compte\" puis \"Continuer\"",
-    "elementStep3": "Entrez l'URL du serveur :",
-    "elementStep4": "Vous pourrez alors vous connecter avec votre compte MyECL",
-
-    "cautionTitle": "Cautions pour le WEI",
-    "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration, prévoyez deux chèques de cautions de 100 € à l'ordre",
-    "cautionInstructions": "Au dos du premier notez : \"Prénom Nom - WEI 2024 - bus\" et du second : \"Prénom Nom - WEI 2024 - site\". Ces chèques ne seront encaissés qu'en cas de dégradations dans les bus ou sur le site du WEI."
+    "cdrPhysiqueSubtitle": "Following this online Chaîne de Rentrée, you will be called in the onsite Chaîne de Rentrée.",
+    "cdrPhysiqueDescription": "You'll be able to meet associations, express your interest for offered activities and ask any questions you may have. The onsite Chaîne de Rentrée will be the opportunity to register for all QI events and subscribe to association services.",
+    "cdrPhysiqueMandatoryWarning": "Your presence at the onsite Chaîne de Rentrée is mandatory to validate your registration. In the event of a major unavailability, please contact the Student Council (BDE) as soon as possible to find an alternative solution.",
+    "facebookTitle": "Facebook group for new students",
+    "facebook": "The majority of the campus' communication takes place via Facebook groups. New students can join the group 'Nouveaux Admis 2024' to make sure they don't miss any information:",
+    "myECLTitle": "MyECL Application",
+    "myECL": "'Essential to student life at Centrale, the MyECL application gives you access to lots of services during the year. You'll find the events calendar, room reservations, the film club schedule and much more.",
+    "downloadMyECLiOS": "Download MyECL for iOS/iPadOS",
+    "downloadMyECLAndroid": "Download MyECL for Android",
+    "elementTitle": "Element / Matrix instant messaging",
+    "element": "A Matrix instance is hosted on campus. This will enable you to communicate easily with other students in a secure, end-to-end encrypted way. To access it :",
+    "elementStep1": "Download Element-x application on your phone",
+    "elementStep2": "On the application choose \"Change account provider\" (\"Changer de fournisseur de compte\") then \"Continue\" (\"Continuer\")",
+    "elementStep3": "Enter our server URL:",
+    "elementStep4": "You can then log in with your MyECL account",
+    "cautionTitle": "Deposit for the WEI",
+    "cautionDescription": "If you book a place at the Integration Weekend (WEI), please bring two €100 deposit checks payable to",
+    "cautionInstructions": "On the back of the first write: \"First name Last name - WEI 2024 - bus\" and on the back of the second: \"First name Last name - WEI 2024 - site\". These deposit checks will only be cashed in the event of damage to the buses or the WEI site."
   },
   "PaymentPart": {
-    "payments": "Payments",
+    "payments": "Fulfilled payments",
     "total": "Total",
-    "noPayment": "No payment",
+    "noPayment": "No payment where made",
     "cash": "Cash",
     "check": "Check",
     "HelloAsso": "HelloAsso",
@@ -69,12 +70,13 @@
     "archived": "Archived"
   },
   "Login": {
-    "title": "Back to school {year}",
-    "description": "Consequat sint incididunt laborum ipsum. Nostrud enim culpa consequat laborum eiusmod minim consectetur deserunt sunt proident adipisicing. Adipisicing quis magna ea magna sint minim nostrud do ullamco non commodo adipisicing. Nisi elit veniam nostrud esse fugiat culpa. Excepteur ex minim sint cillum ipsum et ex pariatur nostrud. Laborum eiusmod tempor dolor sunt. In aute ad dolor non laborum ea nulla fugiat. Anim consectetur qui excepteur aute exercitation deserunt do nulla eiusmod magna tempor qui. Sunt velit commodo enim occaecat incididunt non nostrud dolor velit. Consequat non laborum aliquip incididunt eu. Ullamco exercitation magna in non nostrud elit cupidatat ad minim nostrud. Enim tempor commodo ad magna.",
+    "title": "Chaîne de rentrée {year}",
+    "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services.",
+    "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
     "alreadyHaveMyECLAccount": "Already have a MyECL account?",
     "or": "Or",
-    "selectPromotion": "Please select your promotion:",
-    "promotion": "Promotion {year}",
+    "selectPromotion": "Please select your school year:",
+    "promotion": "School year {year}",
     "register": "Register"
   }
 }

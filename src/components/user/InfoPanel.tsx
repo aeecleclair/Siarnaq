@@ -5,9 +5,11 @@ import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
 import {
+  HiEnvelope,
   HiOutlineBanknotes,
   HiOutlineCalendar,
   HiOutlineDevicePhoneMobile,
+  HiOutlineEnvelope,
   HiOutlineLink,
   HiOutlineNewspaper,
   HiOutlineUserGroup,
@@ -25,9 +27,6 @@ import {
 export const InfoPanel = () => {
   const t = useTranslations("Info");
 
-  const { userId } = useTokenStore();
-  const { total: totalToPay } = useUserPurchases(userId);
-  const { total: totalPaid } = useUserPayments(userId);
   const { onlineSellers } = useOnlineSellers();
 
   return (
@@ -43,6 +42,27 @@ export const InfoPanel = () => {
         <div>{t("cdrPhysiqueSubtitle")}</div>
         <div>{t("cdrPhysiqueDescription")}</div>
         <div className="font-bold">{t("cdrPhysiqueMandatoryWarning")}</div>
+
+        <div className="pl-10">
+          <a
+            href="mailto://bde@ec-lyon.fr"
+            className="font-medium hover:underline underline-offset-4 flex flex-row items-center"
+          >
+            <HiOutlineEnvelope className="h-4 w-4 mr-2" />
+            bde@ec-lyon.fr
+          </a>
+        </div>
+
+        {/* */}
+        <h3 className="text-lg font-semibold flex flex-row items-center pt-5">
+          <HiOutlineBanknotes className="h-4 w-4 mr-2" />
+          {t("cautionTitle")}
+        </h3>
+        <div>
+          {t("cautionDescription")} &laquo;
+          <span className="italic"> AEECL - WEI </span> &raquo;.
+        </div>
+        <div>{t("cautionInstructions")}</div>
 
         {/* */}
         <h3 className="text-lg font-semibold flex flex-row items-center pt-5">
@@ -71,14 +91,14 @@ export const InfoPanel = () => {
             className="font-medium hover:underline underline-offset-4 flex flex-row items-center"
           >
             <HiOutlineLink className="h-4 w-4 mr-2" />
-            Téléchargez MyECL sous iOS/iPadOS
+            {t("downloadMyECLiOS")}
           </a>
           <a
             href="https://play.google.com/store/apps/details?id=fr.myecl.titan"
             className="font-medium hover:underline underline-offset-4 flex flex-row items-center"
           >
             <HiOutlineLink className="h-4 w-4 mr-2" />
-            Téléchargez MyECL sous Android
+            {t("downloadMyECLAndroid")}
           </a>
         </div>
         {/* */}
@@ -94,7 +114,7 @@ export const InfoPanel = () => {
                 href="https://element.io/download"
                 className="font-medium hover:underline underline-offset-4 flex flex-row items-center"
               >
-                <HiOutlineLink className="h-4 w-4 mr-2" />
+                <HiOutlineLink className="h-4 w-4 mr-1" />
                 {t("elementStep1")}
               </a>
             </li>
@@ -105,16 +125,6 @@ export const InfoPanel = () => {
             <li>{t("elementStep4")}</li>
           </ol>
         </div>
-        {/* */}
-        <h3 className="text-lg font-semibold flex flex-row items-center pt-5">
-          <HiOutlineBanknotes className="h-4 w-4 mr-2" />
-          {t("cautionTitle")}
-        </h3>
-        <div>
-          {t("cautionDescription")} &laquo;
-          <span className="italic"> AEECL - WEI </span> &raquo;.
-        </div>
-        <div>{t("cautionInstructions")}</div>
       </CardContent>
 
       <CardFooter className="px-6 py-4">

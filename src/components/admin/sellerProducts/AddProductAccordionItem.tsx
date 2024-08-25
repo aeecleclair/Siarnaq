@@ -83,6 +83,7 @@ export const AddProductAccordionItem = ({
               form={form}
               setIsOpened={setIsAddDialogOpened}
               isLoading={isLoading}
+              sellerId={seller.id}
             />
           </form>
         </Form>

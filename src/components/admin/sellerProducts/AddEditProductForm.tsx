@@ -23,6 +23,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
+import { useSellerProductData } from "@/hooks/useSellerProductData";
 import { UseFormReturn } from "react-hook-form";
 import { HiTrash } from "react-icons/hi";
 import { z } from "zod";
@@ -32,15 +33,20 @@ interface AddEditProductFormProps {
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
   isEdit?: boolean;
+  sellerId: string;
+  productId?: string;
 }
 
 export const AddEditProductForm = ({
   form,
   isLoading,
   setIsOpened,
+  sellerId,
+  productId,
   isEdit = false,
 }: AddEditProductFormProps) => {
   const { products: constraint } = useProducts();
+  const { data } = useSellerProductData(sellerId, productId ?? null);
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
@@ -242,24 +248,22 @@ export const AddEditProductForm = ({
                 Ajouter
               </LoadingButton>
             </div>
-            {form.watch("product_constraints") && (
-              <div className="grid gap-4 px-1">
-                {form.watch("product_constraints").map((constraint, index) => (
-                  <div key={constraint} className="flex flex-row items-center">
-                    <span>{constraint}</span>
-                    <LoadingButton
-                      size="icon"
-                      variant="destructive"
-                      className="flex ml-auto h-8"
-                      isLoading={isLoading}
-                      onClick={() => {}}
-                    >
-                      <HiTrash className="w-5 h-5" />
-                    </LoadingButton>
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="grid gap-4 px-1">
+              {data.map((field) => (
+                <div key={field.id} className="flex flex-row items-center">
+                  <span>{field.name}</span>
+                  <LoadingButton
+                    size="icon"
+                    variant="destructive"
+                    className="flex ml-auto h-8"
+                    isLoading={isLoading}
+                    onClick={() => {}}
+                  >
+                    <HiTrash className="w-5 h-5" />
+                  </LoadingButton>
+                </div>
+              ))}
+            </div>
           </AccordionContent>
         </AccordionItem>
       </Accordion>

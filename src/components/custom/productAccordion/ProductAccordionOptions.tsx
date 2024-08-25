@@ -151,6 +151,8 @@ export const ProductAccordionOptions = ({
                     form={form}
                     setIsOpened={setIsEditDialogOpened}
                     isLoading={isLoading}
+                    sellerId={sellerId}
+                    productId={product.id}
                     isEdit
                   />
                 </form>

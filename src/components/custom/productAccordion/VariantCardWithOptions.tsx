@@ -47,6 +47,7 @@ export const VariantCardWithOptions = ({
           isSelectable={isSelectable}
           isAdmin={isAdmin}
           displayWarning={displayWarning}
+          productId={product.id}
         />
       </ContextMenuTrigger>
       <VariantCardOptions

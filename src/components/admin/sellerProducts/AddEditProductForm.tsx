@@ -101,9 +101,10 @@ export const AddEditProductForm = ({
   async function onDeleteData(id: string) {
     if (isEdit) {
       setIsDeletingLoading(true);
-      const { error } = await deleteCdrSellersSellerIdProductsProductIdDataFieldId({
-        path: { seller_id: sellerId, product_id: productId!, field_id: id },
-      });
+      const { error } =
+        await deleteCdrSellersSellerIdProductsProductIdDataFieldId({
+          path: { seller_id: sellerId, product_id: productId!, field_id: id },
+        });
       if (error) {
         toast({
           title: "Error",

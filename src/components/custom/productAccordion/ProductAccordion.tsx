@@ -100,7 +100,9 @@ export const ProductAccordion = ({
             <AccordionTrigger>
               <div className="flex flex-row items-center gap-2">
                 {product.related_membership && isMembershipAlreadyTaken && (
-                  <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
+                  <div className="w-20">
+                    <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
+                  </div>
                 )}
                 <div className="flex flex-col items-start justify-between">
                   <h3 className="text-lg font-semibold flex flex-row">

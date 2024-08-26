@@ -11,7 +11,7 @@ export const IntroPanel = () => {
   const { userId } = useTokenStore();
   const { user, refetch } = useUser(userId);
   return (
-    <Card>
+    <Card className="max-md:w-auto">
       <CardHeader>
         <CardTitle>{t("presentation")}</CardTitle>
       </CardHeader>

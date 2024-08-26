@@ -24,7 +24,8 @@
     "noProductFound": "Aucun produit disponible"
   },
   "ProductAccordion": {
-    "mustBuy": "Vous devez acheter {products}"
+    "mustBuy": "Vous devez acheter {products}",
+    "membershipAlreadyTaken": "Vous avez déjà pris l'adhésion à {membership} jusqu'au {date}"
   },
   "Recap": {
     "remainingToPay": "Reste à payer :"

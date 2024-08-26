@@ -6,6 +6,8 @@ import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useSizeStore } from "@/stores/SizeStore";
 import { useTranslation } from "@/translations/utils";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 import { useTranslations } from "next-intl";
 import { HiOutlineCheckBadge } from "react-icons/hi2";
 
@@ -76,9 +78,11 @@ export const ProductAccordion = ({
     purchasedVariantIds.includes(variant.id),
   );
 
-  const isMembershipAlreadyTaken = memberships?.some((membership) =>
+  const takenMembership = memberships?.find((membership) =>
     product.related_membership?.includes(membership.membership),
   );
+
+  const isMembershipAlreadyTaken = takenMembership !== undefined;
 
   const isConstraintMembershipTaken = memberships?.some((membership) =>
     product.product_constraints?.some((constraint) =>
@@ -100,7 +104,9 @@ export const ProductAccordion = ({
             <AccordionTrigger>
               <div className="flex flex-row items-center gap-2">
                 {product.related_membership && isMembershipAlreadyTaken && (
-                  <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
+                  <div className="w-20">
+                    <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
+                  </div>
                 )}
                 <div className="flex flex-col items-start justify-between">
                   <h3 className="text-lg font-semibold flex flex-row">
@@ -146,6 +152,18 @@ export const ProductAccordion = ({
                       selectTranslation(product.name_en, product.name_fr),
                     )
                     .join(", ") ?? "",
+              })}
+            </p>
+          )}
+          {product.related_membership && isMembershipAlreadyTaken && (
+            <p className="text-green-700 my-2 font-semibold">
+              {t("membershipAlreadyTaken", {
+                membership: takenMembership?.membership ?? "",
+                date: format(
+                  new Date(takenMembership?.end_date),
+                  "dd/MM/yyyy",
+                  { locale: fr },
+                ),
               })}
             </p>
           )}

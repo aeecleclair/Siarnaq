@@ -24,7 +24,8 @@
     "noProductFound": "No product available"
   },
   "ProductAccordion": {
-    "mustBuy": "You must buy {products}"
+    "mustBuy": "You must buy {products}",
+    "membershipAlreadyTaken": "You have already taken the membership to {membership} until {date}"
   },
   "Recap": {
     "remainingToPay": "Remaining to pay:"

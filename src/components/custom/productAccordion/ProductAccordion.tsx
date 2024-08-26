@@ -111,7 +111,7 @@ export const ProductAccordion = ({
                 <div className="flex flex-col items-start justify-between">
                   <h3 className="text-lg font-semibold flex flex-row">
                     {selectTranslation(product.name_en, product.name_fr)}
-                    {isAdmin && (
+                    {product.available_online && (
                       <Badge variant="outline" className="mx-2">
                         <span className="font-normal text-xs">online</span>
                       </Badge>

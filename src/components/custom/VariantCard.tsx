@@ -178,7 +178,7 @@ export const VariantCard = ({
             </LoadingButton>
             <Input
               type="text"
-              className="w-12 text-s flex"
+              className="w-12 text-s flex h-6"
               value={inputQuantity}
               disabled={!variant.enabled || !isSelectable}
               onChange={(e) => {

@@ -50,7 +50,7 @@ export const ProductAccordionOptions = ({
     defaultValues: {
       id: product.id,
       name_fr: product.name_fr,
-      name_en: product.name_en,
+      name_en: product.name_en || undefined,
       description_fr: product.description_fr || undefined,
       description_en: product.description_en || undefined,
       available_online: product.available_online ? "true" : "false",

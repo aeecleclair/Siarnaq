@@ -917,6 +917,19 @@ export const $Body_token_auth_token_post = {
   title: "Body_token_auth_token_post",
 } as const;
 
+export const $Body_upload_document_raid_document_post = {
+  properties: {
+    file: {
+      type: "string",
+      format: "binary",
+      title: "File",
+    },
+  },
+  type: "object",
+  required: ["file"],
+  title: "Body_upload_document_raid_document_post",
+} as const;
+
 export const $BookingBase = {
   properties: {
     reason: {
@@ -2434,14 +2447,14 @@ export const $CustomDataFieldComplete = {
       format: "uuid",
       title: "Id",
     },
-    seller_id: {
+    product_id: {
       type: "string",
       format: "uuid",
-      title: "Seller Id",
+      title: "Product Id",
     },
   },
   type: "object",
-  required: ["name", "id", "seller_id"],
+  required: ["name", "id", "product_id"],
   title: "CustomDataFieldComplete",
 } as const;
 
@@ -2541,6 +2554,39 @@ export const $DeliveryUpdate = {
   title: "DeliveryUpdate",
 } as const;
 
+export const $Difficulty = {
+  type: "string",
+  enum: ["discovery", "sports", "expert"],
+  title: "Difficulty",
+} as const;
+
+export const $Document = {
+  properties: {
+    type: {
+      $ref: "#/components/schemas/DocumentType",
+    },
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+    uploaded_at: {
+      type: "string",
+      format: "date",
+      title: "Uploaded At",
+    },
+    validation: {
+      $ref: "#/components/schemas/DocumentValidation",
+    },
+  },
+  type: "object",
+  required: ["type", "name", "id", "uploaded_at", "validation"],
+  title: "Document",
+} as const;
+
 export const $DocumentBase = {
   properties: {
     name: {
@@ -2575,10 +2621,80 @@ export const $DocumentComplete = {
   title: "DocumentComplete",
 } as const;
 
+export const $DocumentCreation = {
+  properties: {
+    id: {
+      type: "string",
+      title: "Id",
+    },
+  },
+  type: "object",
+  required: ["id"],
+  title: "DocumentCreation",
+} as const;
+
 export const $DocumentSignatureType = {
   type: "string",
   enum: ["material", "numeric"],
   title: "DocumentSignatureType",
+} as const;
+
+export const $DocumentType = {
+  type: "string",
+  enum: [
+    "idCard",
+    "medicalCertificate",
+    "studentCard",
+    "raidRules",
+    "parentAuthorization",
+  ],
+  title: "DocumentType",
+} as const;
+
+export const $DocumentValidation = {
+  type: "string",
+  enum: ["pending", "accepted", "refused", "temporary"],
+  title: "DocumentValidation",
+} as const;
+
+export const $EmergencyContact = {
+  properties: {
+    firstname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Firstname",
+    },
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    phone: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Phone",
+    },
+  },
+  type: "object",
+  title: "EmergencyContact",
 } as const;
 
 export const $EventApplicant = {
@@ -3159,6 +3275,22 @@ export const $IntrospectTokenResponse = {
   type: "object",
   required: ["active"],
   title: "IntrospectTokenResponse",
+} as const;
+
+export const $InviteToken = {
+  properties: {
+    team_id: {
+      type: "string",
+      title: "Team Id",
+    },
+    token: {
+      type: "string",
+      title: "Token",
+    },
+  },
+  type: "object",
+  required: ["team_id", "token"],
+  title: "InviteToken",
 } as const;
 
 export const $Item = {
@@ -3983,6 +4115,12 @@ export const $ManagerUpdate = {
   title: "ManagerUpdate",
 } as const;
 
+export const $MeetingPlace = {
+  type: "string",
+  enum: ["centrale", "bellecour", "anyway"],
+  title: "MeetingPlace",
+} as const;
+
 export const $MemberComplete = {
   properties: {
     name: {
@@ -4507,6 +4645,566 @@ export const $PaperUpdate = {
   title: "PaperUpdate",
 } as const;
 
+export const $Participant = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    firstname: {
+      type: "string",
+      title: "Firstname",
+    },
+    birthday: {
+      type: "string",
+      format: "date",
+      title: "Birthday",
+    },
+    phone: {
+      type: "string",
+      title: "Phone",
+    },
+    email: {
+      type: "string",
+      title: "Email",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+    bike_size: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Size",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    t_shirt_size: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Size",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    situation: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Situation",
+    },
+    validation_progress: {
+      type: "number",
+      title: "Validation Progress",
+    },
+    payment: {
+      type: "boolean",
+      title: "Payment",
+    },
+    t_shirt_payment: {
+      type: "boolean",
+      title: "T Shirt Payment",
+    },
+    number_of_document: {
+      type: "integer",
+      title: "Number Of Document",
+    },
+    number_of_validated_document: {
+      type: "integer",
+      title: "Number Of Validated Document",
+    },
+    address: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Address",
+    },
+    other_school: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Other School",
+    },
+    company: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Company",
+    },
+    diet: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Diet",
+    },
+    id_card: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Document",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    medical_certificate: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Document",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    security_file: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/SecurityFile",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    student_card: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Document",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    raid_rules: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Document",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    parent_authorization: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Document",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    attestation_on_honour: {
+      type: "boolean",
+      title: "Attestation On Honour",
+    },
+    is_minor: {
+      type: "boolean",
+      title: "Is Minor",
+    },
+  },
+  type: "object",
+  required: [
+    "name",
+    "firstname",
+    "birthday",
+    "phone",
+    "email",
+    "id",
+    "bike_size",
+    "t_shirt_size",
+    "situation",
+    "validation_progress",
+    "payment",
+    "t_shirt_payment",
+    "number_of_document",
+    "number_of_validated_document",
+    "address",
+    "id_card",
+    "medical_certificate",
+    "security_file",
+    "attestation_on_honour",
+    "is_minor",
+  ],
+  title: "Participant",
+} as const;
+
+export const $ParticipantBase = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    firstname: {
+      type: "string",
+      title: "Firstname",
+    },
+    birthday: {
+      type: "string",
+      format: "date",
+      title: "Birthday",
+    },
+    phone: {
+      type: "string",
+      title: "Phone",
+    },
+    email: {
+      type: "string",
+      title: "Email",
+    },
+  },
+  type: "object",
+  required: ["name", "firstname", "birthday", "phone", "email"],
+  title: "ParticipantBase",
+} as const;
+
+export const $ParticipantPreview = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    firstname: {
+      type: "string",
+      title: "Firstname",
+    },
+    birthday: {
+      type: "string",
+      format: "date",
+      title: "Birthday",
+    },
+    phone: {
+      type: "string",
+      title: "Phone",
+    },
+    email: {
+      type: "string",
+      title: "Email",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+    bike_size: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Size",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    t_shirt_size: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Size",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    situation: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Situation",
+    },
+    validation_progress: {
+      type: "number",
+      title: "Validation Progress",
+    },
+    payment: {
+      type: "boolean",
+      title: "Payment",
+    },
+    t_shirt_payment: {
+      type: "boolean",
+      title: "T Shirt Payment",
+    },
+    number_of_document: {
+      type: "integer",
+      title: "Number Of Document",
+    },
+    number_of_validated_document: {
+      type: "integer",
+      title: "Number Of Validated Document",
+    },
+  },
+  type: "object",
+  required: [
+    "name",
+    "firstname",
+    "birthday",
+    "phone",
+    "email",
+    "id",
+    "bike_size",
+    "t_shirt_size",
+    "situation",
+    "validation_progress",
+    "payment",
+    "t_shirt_payment",
+    "number_of_document",
+    "number_of_validated_document",
+  ],
+  title: "ParticipantPreview",
+} as const;
+
+export const $ParticipantUpdate = {
+  properties: {
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    firstname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Firstname",
+    },
+    birthday: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Birthday",
+    },
+    address: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Address",
+    },
+    phone: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Phone",
+    },
+    email: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Email",
+    },
+    bike_size: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Size",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    t_shirt_size: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Size",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    situation: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Situation",
+    },
+    other_school: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Other School",
+    },
+    company: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Company",
+    },
+    diet: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Diet",
+    },
+    attestation_on_honour: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Attestation On Honour",
+    },
+    id_card_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Id Card Id",
+    },
+    medical_certificate_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Medical Certificate Id",
+    },
+    security_file_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Security File Id",
+    },
+    student_card_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Student Card Id",
+    },
+    raid_rules_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Raid Rules Id",
+    },
+    parent_authorization_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Parent Authorization Id",
+    },
+  },
+  type: "object",
+  title: "ParticipantUpdate",
+} as const;
+
 export const $PaymentBase = {
   properties: {
     total: {
@@ -4674,7 +5372,14 @@ export const $ProductBase = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -4760,7 +5465,6 @@ export const $ProductBase = {
   type: "object",
   required: [
     "name_fr",
-    "name_en",
     "available_online",
     "generate_ticket",
     "product_constraints",
@@ -4776,7 +5480,14 @@ export const $ProductCompleteNoConstraint = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -4864,7 +5575,6 @@ export const $ProductCompleteNoConstraint = {
   type: "object",
   required: [
     "name_fr",
-    "name_en",
     "available_online",
     "id",
     "seller_id",
@@ -4915,7 +5625,14 @@ export const $ProductVariantBase = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -4974,14 +5691,7 @@ export const $ProductVariantBase = {
     },
   },
   type: "object",
-  required: [
-    "name_fr",
-    "name_en",
-    "price",
-    "enabled",
-    "unique",
-    "allowed_curriculum",
-  ],
+  required: ["name_fr", "price", "enabled", "unique", "allowed_curriculum"],
   title: "ProductVariantBase",
 } as const;
 
@@ -5002,7 +5712,14 @@ export const $ProductVariantComplete = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -5061,15 +5778,7 @@ export const $ProductVariantComplete = {
     },
   },
   type: "object",
-  required: [
-    "id",
-    "product_id",
-    "name_fr",
-    "name_en",
-    "price",
-    "enabled",
-    "unique",
-  ],
+  required: ["id", "product_id", "name_fr", "price", "enabled", "unique"],
   title: "ProductVariantComplete",
 } as const;
 
@@ -5411,6 +6120,185 @@ export const $RaffleStatusType = {
   title: "RaffleStatusType",
 } as const;
 
+export const $RaidDriveFoldersCreation = {
+  properties: {
+    parent_folder_id: {
+      type: "string",
+      title: "Parent Folder Id",
+    },
+  },
+  type: "object",
+  required: ["parent_folder_id"],
+  title: "RaidDriveFoldersCreation",
+} as const;
+
+export const $RaidInformation = {
+  properties: {
+    raid_start_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Raid Start Date",
+    },
+    raid_end_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Raid End Date",
+    },
+    raid_registering_end_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Raid Registering End Date",
+    },
+    payment_link: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Payment Link",
+    },
+    contact: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Contact",
+    },
+    president: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/EmergencyContact",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    volunteer_responsible: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/EmergencyContact",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    security_responsible: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/EmergencyContact",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    rescue: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/EmergencyContact",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    raid_rules_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Raid Rules Id",
+    },
+    raid_information_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Raid Information Id",
+    },
+  },
+  type: "object",
+  title: "RaidInformation",
+} as const;
+
+export const $RaidPrice = {
+  properties: {
+    student_price: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Student Price",
+    },
+    partner_price: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Partner Price",
+    },
+    t_shirt_price: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "T Shirt Price",
+    },
+  },
+  type: "object",
+  title: "RaidPrice",
+} as const;
+
 export const $Recommendation = {
   properties: {
     title: {
@@ -5638,6 +6526,323 @@ export const $SectionComplete = {
   title: "SectionComplete",
 } as const;
 
+export const $SecurityFile = {
+  properties: {
+    allergy: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Allergy",
+    },
+    asthma: {
+      type: "boolean",
+      title: "Asthma",
+    },
+    intensive_care_unit: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Intensive Care Unit",
+    },
+    intensive_care_unit_when: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Intensive Care Unit When",
+    },
+    ongoing_treatment: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ongoing Treatment",
+    },
+    sicknesses: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Sicknesses",
+    },
+    hospitalization: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Hospitalization",
+    },
+    surgical_operation: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Surgical Operation",
+    },
+    trauma: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Trauma",
+    },
+    family: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Family",
+    },
+    emergency_person_firstname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Emergency Person Firstname",
+    },
+    emergency_person_name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Emergency Person Name",
+    },
+    emergency_person_phone: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Emergency Person Phone",
+    },
+    file_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "File Id",
+    },
+    validation: {
+      $ref: "#/components/schemas/DocumentValidation",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+  },
+  type: "object",
+  required: ["asthma", "validation", "id"],
+  title: "SecurityFile",
+} as const;
+
+export const $SecurityFileBase = {
+  properties: {
+    allergy: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Allergy",
+    },
+    asthma: {
+      type: "boolean",
+      title: "Asthma",
+    },
+    intensive_care_unit: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Intensive Care Unit",
+    },
+    intensive_care_unit_when: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Intensive Care Unit When",
+    },
+    ongoing_treatment: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ongoing Treatment",
+    },
+    sicknesses: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Sicknesses",
+    },
+    hospitalization: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Hospitalization",
+    },
+    surgical_operation: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Surgical Operation",
+    },
+    trauma: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Trauma",
+    },
+    family: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Family",
+    },
+    emergency_person_firstname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Emergency Person Firstname",
+    },
+    emergency_person_name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Emergency Person Name",
+    },
+    emergency_person_phone: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Emergency Person Phone",
+    },
+    file_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "File Id",
+    },
+  },
+  type: "object",
+  required: ["asthma"],
+  title: "SecurityFileBase",
+} as const;
+
 export const $SellerBase = {
   properties: {
     name: {
@@ -5776,6 +6981,12 @@ export const $SignatureComplete = {
   title: "SignatureComplete",
 } as const;
 
+export const $Size = {
+  type: "string",
+  enum: ["XS", "S", "M", "L", "XL"],
+  title: "Size",
+} as const;
+
 export const $Status = {
   properties: {
     status: {
@@ -5796,6 +7007,225 @@ export const $StatusType = {
   enum: ["waiting", "open", "closed", "counting", "published"],
   title: "StatusType",
   description: "Status of the voting",
+} as const;
+
+export const $Team = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+    number: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Number",
+    },
+    captain: {
+      $ref: "#/components/schemas/Participant",
+    },
+    second: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Participant",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    difficulty: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Difficulty",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    meeting_place: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MeetingPlace",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    validation_progress: {
+      type: "number",
+      title: "Validation Progress",
+    },
+    file_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "File Id",
+    },
+  },
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "number",
+    "captain",
+    "second",
+    "difficulty",
+    "meeting_place",
+    "validation_progress",
+    "file_id",
+  ],
+  title: "Team",
+} as const;
+
+export const $TeamBase = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+  },
+  type: "object",
+  required: ["name"],
+  title: "TeamBase",
+} as const;
+
+export const $TeamPreview = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+    number: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Number",
+    },
+    captain: {
+      $ref: "#/components/schemas/ParticipantPreview",
+    },
+    second: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/ParticipantPreview",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    difficulty: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Difficulty",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    meeting_place: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MeetingPlace",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    validation_progress: {
+      type: "number",
+      title: "Validation Progress",
+    },
+  },
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "number",
+    "captain",
+    "second",
+    "difficulty",
+    "meeting_place",
+    "validation_progress",
+  ],
+  title: "TeamPreview",
+} as const;
+
+export const $TeamUpdate = {
+  properties: {
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    number: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Number",
+    },
+    difficulty: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Difficulty",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    meeting_place: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MeetingPlace",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  title: "TeamUpdate",
 } as const;
 
 export const $TheMovieDB = {
@@ -6349,7 +7779,14 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -6453,7 +7890,6 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
   type: "object",
   required: [
     "name_fr",
-    "name_en",
     "available_online",
     "id",
     "seller_id",

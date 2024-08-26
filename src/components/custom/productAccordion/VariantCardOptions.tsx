@@ -56,7 +56,7 @@ export const VariantCardOptions = ({
     resolver: zodResolver(variantFormSchema),
     mode: "onBlur",
     defaultValues: {
-      name_en: variant.name_en,
+      name_en: variant.name_en || undefined,
       name_fr: variant.name_fr,
       description_en: variant?.description_en || undefined,
       description_fr: variant?.description_fr || undefined,

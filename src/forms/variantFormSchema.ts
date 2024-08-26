@@ -8,13 +8,7 @@ export const variantFormSchema = z.object({
     .min(1, {
       message: "Veuillez renseigner le nom de la variante",
     }),
-  name_en: z
-    .string({
-      required_error: "Veuillez renseigner le nom de la variante",
-    })
-    .min(1, {
-      message: "Veuillez renseigner le nom de la variante",
-    }),
+  name_en: z.string().optional(),
   description_fr: z.string().optional(),
   description_en: z.string().optional(),
   price: z

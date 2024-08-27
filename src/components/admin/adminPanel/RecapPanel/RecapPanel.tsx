@@ -1,6 +1,8 @@
 import {
   CdrUser,
+  CdrUserUpdate,
   ProductBase,
+  patchCdrUsersUserId,
   patchCdrUsersUserIdCurriculumsCurriculumId,
   postCdrSellersSellerIdProducts,
   postCdrUsersUserIdCurriculumsCurriculumId,
@@ -103,34 +105,39 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
   const form = useForm<z.infer<typeof migrateUserFormSchema>>({
     resolver: zodResolver(migrateUserFormSchema),
     mode: "onBlur",
+    defaultValues: {
+      nickname: user.nickname ?? undefined,
+      email: undefined,
+      floor: undefined,
+      birthday: undefined,
+      phone: undefined,
+      promo: undefined,
+    },
   });
 
   async function onSubmit(values: z.infer<typeof migrateUserFormSchema>) {
     setIsLoading(true);
-    // Waiting for API call
-    // const body: ProductBase = {
-    //   ...values,
-    //   available_online: values.available_online === "true",
-    // };
-    // const { data, error } = await postCdrSellersSellerIdProducts({
-    //   path: {
-    //     seller_id: seller.id,
-    //   },
-    //   body: body,
-    // });
-    // if (error) {
-    //   toast({
-    //     title: "Error",
-    //     description: (error as { detail: String }).detail,
-    //     variant: "destructive",
-    //   });
-    //   setIsLoading(false);
-    //   setIsAddDialogOpened(false);
-    //   return;
-    // }
-    // refreshProduct();
-    // setIsAddDialogOpened(false);
+    const body: CdrUserUpdate = {
+      ...values,
+    };
+    const { data, error } = await patchCdrUsersUserId({
+      path: {
+        user_id: user.id,
+      },
+      body: body,
+    });
+    if (error) {
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
+      setIsLoading(false);
+      setIsOpened(false);
+      return;
+    }
     setIsLoading(false);
+    setIsOpened(false);
     form.reset();
   }
 

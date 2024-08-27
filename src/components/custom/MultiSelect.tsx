@@ -96,7 +96,31 @@ function MultiSelect({
               <CommandEmpty>No item found.</CommandEmpty>
             </>
           )}
-          <CommandGroup className="max-h-64 overflow-auto">
+          <CommandGroup className="max-h-64 overflow-auto ">
+            <CommandItem
+              key={"selectAll"}
+              onSelect={() => {
+                onChange(
+                  selected.length === options.length
+                    ? []
+                    : options.map((option) => option.value),
+                );
+                setOpen(true);
+              }}
+              className="font-bold"
+            >
+              <Check
+                className={cn(
+                  "mr-2 h-4 w-4",
+                  selected.length === options.length
+                    ? "opacity-100"
+                    : "opacity-0",
+                )}
+              />
+              {selected.length === options.length
+                ? "Tout désélectionner"
+                : "Tout sélectionner"}
+            </CommandItem>
             {options.map((option) => (
               <CommandItem
                 key={option.value}

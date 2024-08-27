@@ -1,5 +1,6 @@
 "use client";
 
+import { AddUserWithCurriculum } from "@/components/custom/User/AddUserWithCurriculum";
 import { Input } from "@/components/ui/input";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { Table } from "@tanstack/react-table";
@@ -43,6 +44,7 @@ export function DataTableToolbar<TData>({
             })}
           />
         )}
+        <AddUserWithCurriculum />
       </div>
       <DataTableViewOptions table={table} />
     </div>

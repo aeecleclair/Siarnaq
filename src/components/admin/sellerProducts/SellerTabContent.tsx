@@ -76,7 +76,10 @@ export const SellerTabContent = ({
                 status.status === "pending" ||
                 (status.status === "online" && !product.available_online)
               }
-              canRemove={status.status === "pending"}
+              canRemove={
+                status.status === "pending" ||
+                (status.status === "online" && !product.available_online)
+              }
               canDisable={status.status !== "closed"}
               refreshProduct={refetchProducts}
               isSelectable={status.status === "onsite"}

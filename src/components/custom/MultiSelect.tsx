@@ -17,6 +17,8 @@ import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown, X } from "lucide-react";
 import * as React from "react";
 
+import { ScrollArea } from "../ui/scroll-area";
+
 export type OptionType = {
   label: string;
   value: string;
@@ -45,7 +47,7 @@ function MultiSelect({
   };
 
   return (
-    <Popover open={open} onOpenChange={setOpen} {...props}>
+    <Popover open={open} onOpenChange={setOpen} modal={true} {...props}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
@@ -96,31 +98,57 @@ function MultiSelect({
               <CommandEmpty>No item found.</CommandEmpty>
             </>
           )}
-          <CommandGroup className="max-h-64 overflow-auto">
-            {options.map((option) => (
+          <ScrollArea className="h-64">
+            <CommandGroup>
               <CommandItem
-                key={option.value}
+                key={"selectAll"}
                 onSelect={() => {
                   onChange(
-                    selected.includes(option.value)
-                      ? selected.filter((item) => item !== option.value)
-                      : [...selected, option.value],
+                    selected.length === options.length
+                      ? []
+                      : options.map((option) => option.value),
                   );
                   setOpen(true);
                 }}
+                className="font-bold"
               >
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    selected.includes(option.value)
+                    selected.length === options.length
                       ? "opacity-100"
                       : "opacity-0",
                   )}
                 />
-                {option.label}
+                {selected.length === options.length
+                  ? "Tout désélectionner"
+                  : "Tout sélectionner"}
               </CommandItem>
-            ))}
-          </CommandGroup>
+              {options.map((option) => (
+                <CommandItem
+                  key={option.value}
+                  onSelect={() => {
+                    onChange(
+                      selected.includes(option.value)
+                        ? selected.filter((item) => item !== option.value)
+                        : [...selected, option.value],
+                    );
+                    setOpen(true);
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      selected.includes(option.value)
+                        ? "opacity-100"
+                        : "opacity-0",
+                    )}
+                  />
+                  {option.label}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </ScrollArea>
         </Command>
       </PopoverContent>
     </Popover>

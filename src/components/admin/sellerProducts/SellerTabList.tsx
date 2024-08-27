@@ -26,14 +26,12 @@ export const SellerTabList = ({
   };
 
   return (
-    <TabsList
-      className={`grid w-full h-${10 * (Math.floor((sellers.length + (isAdmin ? 1 : 0) + (status.status === "onsite" && isAdmin ? 1 : 0)) / 10) + 1)} grid-cols-10`}
-    >
+    <TabsList className={`grid w-full grid-flow-row grid-cols-7`}>
       {sellers.map((seller) => (
         <TabsTrigger
           key={seller.id}
           value={seller.id}
-          className="min-w-18"
+          className="min-w-18 w-full"
           onClick={() => handleClick(seller.id)}
         >
           {seller.name}

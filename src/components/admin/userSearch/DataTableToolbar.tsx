@@ -26,7 +26,9 @@ export function DataTableToolbar<TData>({
         <Input
           placeholder="Filtrer"
           value={globalFilter}
-          onChange={(event) => setGlobalFilter(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setGlobalFilter(event.target.value)
+          }
           className="h-8 w-[150px] lg:w-[250px]"
         />
         {table.getColumn("curriculum") && (

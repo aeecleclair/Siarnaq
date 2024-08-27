@@ -5495,7 +5495,14 @@ export const $ProductBase = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -5581,7 +5588,6 @@ export const $ProductBase = {
   type: "object",
   required: [
     "name_fr",
-    "name_en",
     "available_online",
     "generate_ticket",
     "product_constraints",
@@ -5597,7 +5603,14 @@ export const $ProductCompleteNoConstraint = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -5685,7 +5698,6 @@ export const $ProductCompleteNoConstraint = {
   type: "object",
   required: [
     "name_fr",
-    "name_en",
     "available_online",
     "id",
     "seller_id",
@@ -5736,7 +5748,14 @@ export const $ProductVariantBase = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -5795,14 +5814,7 @@ export const $ProductVariantBase = {
     },
   },
   type: "object",
-  required: [
-    "name_fr",
-    "name_en",
-    "price",
-    "enabled",
-    "unique",
-    "allowed_curriculum",
-  ],
+  required: ["name_fr", "price", "enabled", "unique", "allowed_curriculum"],
   title: "ProductVariantBase",
 } as const;
 
@@ -5823,7 +5835,14 @@ export const $ProductVariantComplete = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -5882,15 +5901,7 @@ export const $ProductVariantComplete = {
     },
   },
   type: "object",
-  required: [
-    "id",
-    "product_id",
-    "name_fr",
-    "name_en",
-    "price",
-    "enabled",
-    "unique",
-  ],
+  required: ["id", "product_id", "name_fr", "price", "enabled", "unique"],
   title: "ProductVariantComplete",
 } as const;
 
@@ -7891,7 +7902,14 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
       title: "Name Fr",
     },
     name_en: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Name En",
     },
     description_fr: {
@@ -7995,7 +8013,6 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
   type: "object",
   required: [
     "name_fr",
-    "name_en",
     "available_online",
     "id",
     "seller_id",

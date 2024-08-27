@@ -47,8 +47,7 @@ export const SellerTabList = ({
           >
             Admin
           </TabsTrigger>
-          {((isAdmin && status.status == "online") ||
-            status.status === "onsite") && (
+          {(status.status == "online" || status.status === "onsite") && (
             <TabsTrigger
               key="cdrrecap"
               value="cdrrecap"

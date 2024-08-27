@@ -179,7 +179,7 @@ export const VariantCard = ({
             if (selected) {
               cancelPurchase();
             } else {
-              if (productFields.length === 0) {
+              if (productFields.length === 0 || !isAdmin) {
                 purchaseVariant(1);
               } else {
                 openFieldDialog();
@@ -281,7 +281,8 @@ export const VariantCard = ({
                   e.stopPropagation();
                   if (
                     productFields.length === 0 ||
-                    numberSelectedVariant !== 0
+                    numberSelectedVariant !== 0 ||
+                    !isAdmin
                   ) {
                     purchaseVariant(numberSelectedVariant + 1);
                   } else {

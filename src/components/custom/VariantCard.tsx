@@ -181,7 +181,7 @@ export const VariantCard = ({
               className="w-12 text-s flex h-6"
               value={inputQuantity}
               disabled={!variant.enabled || !isSelectable}
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setInputQuantity(Number(e.target.value) || 0);
               }}
               onBlur={(e) => {

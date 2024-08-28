@@ -140,7 +140,14 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
     }
     setIsLoading(false);
     setIsOpened(false);
-    form.reset();
+    form.reset({
+      nickname: values.nickname ?? undefined,
+      email: values.email ?? undefined,
+      floor: values.floor ?? undefined,
+      birthday: values.birthday ? new Date(values.birthday) : undefined,
+      phone: values.phone ?? undefined,
+      promo: values.promo ? values.promo.toString() : undefined,
+    });
   }
 
   return (

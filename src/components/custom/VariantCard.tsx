@@ -215,7 +215,7 @@ export const VariantCard = ({
               <LoadingButton
                 variant="outline"
                 className="h-6 px-1"
-                disabled={!selected || !variant.enabled || !isSelectable}
+                disabled={!selected || !isSelectable}
                 onClick={(e) => {
                   if (!isSelectable) {
                     if (selected) {
@@ -239,7 +239,7 @@ export const VariantCard = ({
                 type="text"
                 className="w-12 text-s flex h-6"
                 value={inputQuantity}
-                disabled={!variant.enabled || !isSelectable}
+                disabled={!isSelectable}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setInputQuantity(Number(e.target.value) || 0);
                 }}
@@ -265,7 +265,7 @@ export const VariantCard = ({
               <LoadingButton
                 variant="outline"
                 className="h-6 px-1"
-                disabled={!variant.enabled || !isSelectable}
+                disabled={!isSelectable}
                 onClick={(e) => {
                   if (!isSelectable) return;
                   e.stopPropagation();

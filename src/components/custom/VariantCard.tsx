@@ -308,8 +308,8 @@ export const VariantCard = ({
               </CardContent>
             </Card>
           </TooltipTrigger>
-          <TooltipContent>
-            {isAdmin && (
+          {isAdmin && (
+            <TooltipContent>
               <div className="py-2 flex flex-wrap gap-2">
                 {variant.allowed_curriculum?.map((curriculum) => (
                   <Badge
@@ -321,8 +321,8 @@ export const VariantCard = ({
                   </Badge>
                 ))}
               </div>
-            )}
-          </TooltipContent>
+            </TooltipContent>
+          )}
         </Tooltip>
       </TooltipProvider>
     </>

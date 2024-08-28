@@ -46,6 +46,7 @@ export const useUsers = () => {
       ws.send(JSON.stringify({ token: token }));
     };
     ws.onmessage = (event) => {
+      console.log("WebSocket message received:", event.data);
       const message = JSON.parse(event.data) as UserStreamMessage;
       if (message.command) {
         switch (message.command) {

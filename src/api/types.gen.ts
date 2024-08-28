@@ -311,11 +311,27 @@ export type CdrUser = {
   nickname?: string | null;
   id: string;
   curriculum?: CurriculumComplete | null;
+  promo?: number | null;
+  email: string;
+  birthday?: string | null;
+  phone?: string | null;
+  floor?: FloorsType | null;
+};
+
+export type CdrUserPreview = {
+  name: string;
+  firstname: string;
+  nickname?: string | null;
+  id: string;
+  curriculum?: CurriculumComplete | null;
 };
 
 export type CdrUserUpdate = {
+  promo?: number | null;
   nickname?: string | null;
   email?: string | null;
+  birthday?: string | null;
+  phone?: string | null;
   floor?: FloorsType | null;
 };
 
@@ -2912,11 +2928,11 @@ export type GetCampaignListsListIdLogoResponse = unknown;
 
 export type GetCampaignListsListIdLogoError = unknown;
 
-export type GetCdrUsersResponse = Array<CdrUser>;
+export type GetCdrUsersResponse = Array<CdrUserPreview>;
 
 export type GetCdrUsersError = unknown;
 
-export type GetCdrUsersPendingResponse = Array<CdrUser>;
+export type GetCdrUsersPendingResponse = Array<CdrUserPreview>;
 
 export type GetCdrUsersPendingError = unknown;
 
@@ -6502,7 +6518,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "200": Array<CdrUser>;
+        "200": Array<CdrUserPreview>;
       };
     };
   };
@@ -6512,7 +6528,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "200": Array<CdrUser>;
+        "200": Array<CdrUserPreview>;
       };
     };
   };

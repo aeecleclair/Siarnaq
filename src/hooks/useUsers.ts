@@ -1,4 +1,4 @@
-import { CdrUser, getCdrUsers } from "@/api";
+import { CdrUser, CdrUserPreview, getCdrUsers } from "@/api";
 import { useTokenStore } from "@/stores/token";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ interface UserStreamMessage {
 
 export const useUsers = () => {
   const { isTokenExpired } = useToken();
-  const [returnedUsers, setReturnedUsers] = useState<CdrUser[]>([]);
+  const [returnedUsers, setReturnedUsers] = useState<CdrUserPreview[]>([]);
   const { isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {

@@ -1468,14 +1468,114 @@ export const $CdrUser = {
         },
       ],
     },
+    promo: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Promo",
+    },
+    email: {
+      type: "string",
+      title: "Email",
+    },
+    birthday: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Birthday",
+    },
+    phone: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Phone",
+    },
+    floor: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/FloorsType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  required: ["name", "firstname", "id", "email"],
+  title: "CdrUser",
+} as const;
+
+export const $CdrUserPreview = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    firstname: {
+      type: "string",
+      title: "Firstname",
+    },
+    nickname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nickname",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+    curriculum: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/CurriculumComplete",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
   },
   type: "object",
   required: ["name", "firstname", "id"],
-  title: "CdrUser",
+  title: "CdrUserPreview",
 } as const;
 
 export const $CdrUserUpdate = {
   properties: {
+    promo: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Promo",
+    },
     nickname: {
       anyOf: [
         {
@@ -1497,6 +1597,29 @@ export const $CdrUserUpdate = {
         },
       ],
       title: "Email",
+    },
+    birthday: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Birthday",
+    },
+    phone: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Phone",
     },
     floor: {
       anyOf: [

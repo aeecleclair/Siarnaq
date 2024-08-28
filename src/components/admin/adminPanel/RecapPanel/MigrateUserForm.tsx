@@ -1,4 +1,6 @@
+import { DatePicker } from "@/components/custom/DatePicker";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { PhoneCustomInput } from "@/components/custom/PhoneCustomInput";
 import { StyledFormField } from "@/components/custom/StyledFormField";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { migrateUserFormSchema } from "@/forms/migrateUserFormSchema";
+import { addYears } from "date-fns";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
@@ -53,6 +56,11 @@ export const MigrateUserForm = ({
     "X6",
   ];
 
+  const year = new Date().getFullYear();
+  const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
+    return (year - index).toString();
+  });
+
   return (
     <div className="grid gap-6 mt-4">
       <StyledFormField
@@ -89,7 +97,50 @@ export const MigrateUserForm = ({
             </Select>
           )}
         />
+        <StyledFormField
+          form={form}
+          label="Promo"
+          id="promo"
+          input={(field) => (
+            <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent side="top">
+                {possiblePromos.map((promo) => (
+                  <SelectItem key={promo} value={promo}>
+                    <div className="flex items-center flex-row gap-2">
+                      Promotion {promo}
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
       </div>
+      <div className="flex flex-row gap-2 w-full">
+        <StyledFormField
+          form={form}
+          label="Date de naissance"
+          id="birthday"
+          input={(field) => (
+            <DatePicker
+              date={field.value}
+              setDate={field.onChange}
+              defaultDate={field.value || addYears(new Date(), -21)}
+            />
+          )}
+        />
+
+        <StyledFormField
+          form={form}
+          label="Numéro de téléphone"
+          id="phone"
+          input={(field) => <PhoneCustomInput {...field} />}
+        />
+      </div>
+
       <div className="flex justify-end mt-2 space-x-4">
         <Button
           variant="outline"

@@ -2,12 +2,12 @@ import {
   ProductBase,
   SellerComplete,
   postCdrSellersSellerIdProducts,
+  postCdrSellersSellerIdProductsProductIdData,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
-import { apiFormatDate } from "@/lib/date_conversion";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -35,6 +35,7 @@ export const AddProductAccordionItem = ({
     defaultValues: {
       product_constraints: [],
       document_constraints: [],
+      data_fields: [],
       ticket_max_use: "1",
       generate_ticket: false,
     },
@@ -66,6 +67,22 @@ export const AddProductAccordionItem = ({
       setIsAddDialogOpened(false);
       return;
     }
+    const data_fields = values.data_fields;
+    if (data && data_fields.length) {
+      const dataFields = data_fields.map((dataField) => ({
+        ...dataField,
+        product_id: data.id,
+      }));
+      await Promise.all(
+        dataFields.map((dataField) =>
+          postCdrSellersSellerIdProductsProductIdData({
+            body: { name: dataField.name },
+            path: { seller_id: seller.id, product_id: data.id },
+          }),
+        ),
+      );
+    }
+
     refreshProduct();
     setIsAddDialogOpened(false);
     setIsLoading(false);
@@ -75,6 +92,7 @@ export const AddProductAccordionItem = ({
   return (
     <CustomDialog
       title="Nouveau produit"
+      isFullWidth
       description={
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -82,6 +100,7 @@ export const AddProductAccordionItem = ({
               form={form}
               setIsOpened={setIsAddDialogOpened}
               isLoading={isLoading}
+              sellerId={seller.id}
             />
           </form>
         </Form>
@@ -89,9 +108,10 @@ export const AddProductAccordionItem = ({
       isOpened={isAddDialogOpened}
       setIsOpened={setIsAddDialogOpened}
     >
-      <div className="flex flex-1 items-center justify-start py-4 font-medium border-b cursor-pointer">
+      <div className="flex flex-1 items-center justify-start py-4 font-medium border-b cursor-pointer ">
         <HiPlus className="w-4 h-4 mr-6" />
-        <h3 className="text-lg font-semibold">New Product</h3>
+        <h3 className="text-lg font-semibold">Nouveau produit</h3>
+        <div className="flex grow"></div>
       </div>
     </CustomDialog>
   );

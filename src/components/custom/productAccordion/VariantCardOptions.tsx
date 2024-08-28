@@ -2,7 +2,9 @@ import {
   ProductVariantComplete,
   ProductVariantEdit,
   deleteCdrSellersSellerIdProductsProductIdVariantsVariantId,
+  patchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId,
   patchCdrSellersSellerIdProductsProductIdVariantsVariantId,
+  postCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId,
 } from "@/api";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +14,7 @@ import {
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { variantFormSchema } from "@/forms/variantFormSchema";
+import { useSellerProductData } from "@/hooks/useSellerProductData";
 import {
   PencilIcon,
   PlayIcon,
@@ -25,6 +28,8 @@ import { z } from "zod";
 
 import { CustomDialog } from "../CustomDialog";
 import { LoadingButton } from "../LoadingButton";
+import { Answer } from "../customFieldDialog.tsx/CustomFieldInput";
+import { CustomFieldsDialog } from "../customFieldDialog.tsx/CustomFieldsDialog";
 import { AddEditVariantForm } from "./AddEditVariantForm";
 
 interface VariantCardOptionsProps {
@@ -34,6 +39,7 @@ interface VariantCardOptionsProps {
   canDisable?: boolean;
   sellerId: string;
   productId: string;
+  userId: string;
   refreshProduct: () => void;
 }
 
@@ -44,11 +50,15 @@ export const VariantCardOptions = ({
   canDisable,
   sellerId,
   productId,
+  userId,
   refreshProduct,
 }: VariantCardOptionsProps) => {
   const { toast } = useToast();
+  const { data: productFields } = useSellerProductData(sellerId, productId);
   const [isEditDialogOpened, setIsEditDialogOpened] = useState(false);
   const [isRemoveDialogOpened, setIsRemoveDialogOpened] = useState(false);
+  const [isInfoDialogOpened, setIsInfoDialogOpened] = useState(false);
+  const showInfo = productFields.length > 0;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -144,8 +154,40 @@ export const VariantCardOptions = ({
     setIsLoading(false);
   }
 
+  const onCustomFieldValidate = async (answers: Record<string, Answer>) => {
+    setIsLoading(true);
+    await Promise.all(
+      productFields.map((field) => {
+        if (!answers[field.id]) return;
+        if (!answers[field.id].isNew) {
+          patchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId({
+            body: { value: answers[field.id].value },
+            path: {
+              seller_id: sellerId,
+              product_id: productId,
+              user_id: userId,
+              field_id: field.id,
+            },
+          });
+        } else {
+          postCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId({
+            body: { value: answers[field.id].value },
+            path: {
+              seller_id: sellerId,
+              product_id: productId,
+              user_id: userId,
+              field_id: field.id,
+            },
+          });
+        }
+      }),
+    );
+    setIsInfoDialogOpened(false);
+    setIsLoading(false);
+  };
+
   return (
-    (canEdit || canRemove || canDisable) && (
+    (canEdit || canRemove || canDisable || showInfo) && (
       <ContextMenuContent className="w-40">
         {canEdit && (
           <CustomDialog
@@ -186,6 +228,25 @@ export const VariantCardOptions = ({
               <StopIcon className="w-4 h-4" />
             </ContextMenuShortcut>
           </LoadingButton>
+        )}
+        {showInfo && (
+          <CustomFieldsDialog
+            isOpened={isInfoDialogOpened}
+            setIsOpened={setIsInfoDialogOpened}
+            isLoading={isLoading}
+            productFields={productFields}
+            onValidate={onCustomFieldValidate}
+            sellerId={sellerId}
+            productId={productId}
+            userId={userId}
+          >
+            <Button className="w-full" variant="ghost">
+              Information
+              <ContextMenuShortcut>
+                <PencilIcon className="w-4 h-4" />
+              </ContextMenuShortcut>
+            </Button>
+          </CustomFieldsDialog>
         )}
         {!variant.enabled && canDisable && (
           <LoadingButton

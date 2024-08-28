@@ -1,5 +1,5 @@
 import { CustomDataFieldComplete } from "@/api";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { Button } from "../../ui/button";
 import {
@@ -8,6 +8,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "../../ui/dialog";
 import { ScrollArea } from "../../ui/scroll-area";
 import { LoadingButton } from "../LoadingButton";
@@ -22,6 +23,7 @@ interface CustomFieldsDialogProps {
   sellerId: string;
   productId: string;
   userId: string;
+  children?: React.ReactNode;
 }
 
 export const CustomFieldsDialog = ({
@@ -33,11 +35,13 @@ export const CustomFieldsDialog = ({
   sellerId,
   productId,
   userId,
+  children,
 }: CustomFieldsDialogProps) => {
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
 
   return (
     <Dialog open={isOpened} onOpenChange={setIsOpened}>
+      {children && <DialogTrigger className="w-full">{children}</DialogTrigger>}
       <DialogContent
         className="sm:max-w-[600px] m-0 p-0"
         onClick={(e) => e.stopPropagation()}

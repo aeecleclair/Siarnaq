@@ -15,18 +15,8 @@ import { useEffect, useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 
 import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "../ui/dialog";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { ScrollArea } from "../ui/scroll-area";
 import { useToast } from "../ui/use-toast";
 import { LoadingButton } from "./LoadingButton";
 import { Answer } from "./customFieldDialog.tsx/CustomFieldInput";

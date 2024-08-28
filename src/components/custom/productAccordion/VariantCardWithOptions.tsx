@@ -57,6 +57,7 @@ export const VariantCardWithOptions = ({
         canDisable={canDisable}
         sellerId={sellerId}
         productId={product.id}
+        userId={userId}
         refreshProduct={refreshProduct}
       />
     </ContextMenu>

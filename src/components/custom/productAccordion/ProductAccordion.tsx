@@ -52,12 +52,18 @@ export const ProductAccordion = ({
   const { size } = useSizeStore();
   const numberOfCard = Math.round(size / 20);
   const { purchases: userPurchases } = useUserPurchases(userId);
+  const purchasedVariantIds = userPurchases.map(
+    (purchase) => purchase.product_variant_id,
+  );
   const { user } = useUser(userId);
   const { memberships } = useUserMemberships(userId);
   const variantToDisplay = isAdmin
     ? product.variants
     : product.variants
-        ?.filter((variant) => variant.enabled)
+        ?.filter(
+          (variant) =>
+            variant.enabled || purchasedVariantIds.includes(variant.id),
+        )
         .filter((variant) =>
           variant.allowed_curriculum
             ?.map((curriculum) => curriculum.id)
@@ -65,9 +71,6 @@ export const ProductAccordion = ({
         );
   const purchasedProductIds = userPurchases.map(
     (purchase) => purchase.product.id,
-  );
-  const purchasedVariantIds = userPurchases.map(
-    (purchase) => purchase.product_variant_id,
   );
   const missingConstraintProducts = product.product_constraints?.filter(
     (constraint) => !purchasedProductIds.includes(constraint.id),
@@ -193,14 +196,19 @@ export const ProductAccordion = ({
                     refreshProduct={refreshProduct}
                     isSelectable={
                       isSelectable &&
-                      (variant.allowed_curriculum
+                      (((variant.allowed_curriculum
                         ?.map((curriculum) => curriculum.id)
                         .includes(user?.curriculum?.id ?? "") ||
                         false) &&
-                      !isMembershipAlreadyTaken
+                        !isMembershipAlreadyTaken) ||
+                        purchasedVariantIds.includes(variant.id))
                     }
                     isAdmin={isAdmin}
-                    displayWarning={displayWarning}
+                    displayWarning={
+                      displayWarning ||
+                      (!variant.enabled &&
+                        purchasedVariantIds.includes(variant.id))
+                    }
                   />
                 ))}
               </>

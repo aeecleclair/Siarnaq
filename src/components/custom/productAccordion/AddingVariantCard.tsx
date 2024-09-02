@@ -42,7 +42,7 @@ export const AddingVariantCard = ({
     setIsLoading(true);
     const body: ProductVariantBase = {
       ...values,
-      price: parseFloat(values.price) * 100,
+      price: Math.round(parseFloat(values.price) * 100),
       unique: values.unique === "unique",
       enabled: true,
     };

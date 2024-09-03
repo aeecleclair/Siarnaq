@@ -120,14 +120,15 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
   async function onSubmit(values: z.infer<typeof migrateUserFormSchema>) {
     setIsLoading(true);
     const body: CdrUserUpdate = {
-      ...values,
+      nickname: values.nickname,
+      floor: values.floor,
       email:
         (values.email ?? validEmailRegex.test(values.email!))
           ? values.email
           : null,
-      promo: values.promo ? parseInt(values.promo) : undefined,
-      birthday: values.birthday?.toISOString(),
-      phone: values.phone ? "+" + values.phone : null,
+      // promo: values.promo ? parseInt(values.promo) : undefined,
+      // birthday: values.birthday?.toISOString(),
+      // phone: values.phone ? "+" + values.phone : null,
     };
     const { data, error } = await patchCdrUsersUserId({
       path: {

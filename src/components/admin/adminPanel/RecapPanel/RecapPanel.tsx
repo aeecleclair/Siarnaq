@@ -127,6 +127,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
           : null,
       promo: values.promo ? parseInt(values.promo) : undefined,
       birthday: values.birthday?.toISOString(),
+      phone: values.phone ? "+" + values.phone : null,
     };
     const { data, error } = await patchCdrUsersUserId({
       path: {

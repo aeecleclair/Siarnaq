@@ -111,9 +111,9 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       nickname: user.nickname ?? undefined,
       email: user.email ?? undefined,
       floor: user.floor ?? undefined,
-      birthday: user.birthday ? new Date(user.birthday) : undefined,
-      phone: user.phone ?? undefined,
-      promo: user.promo ? user.promo.toString() : undefined,
+      birthday: undefined,
+      phone: undefined,
+      promo:  undefined,
     },
   });
 

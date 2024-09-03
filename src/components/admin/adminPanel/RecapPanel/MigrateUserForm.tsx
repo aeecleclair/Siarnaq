@@ -97,7 +97,7 @@ export const MigrateUserForm = ({
             </Select>
           )}
         />
-        <StyledFormField
+        {/* <StyledFormField
           form={form}
           label="Promo"
           id="promo"
@@ -117,9 +117,9 @@ export const MigrateUserForm = ({
               </SelectContent>
             </Select>
           )}
-        />
+        /> */}
       </div>
-      <div className="flex flex-row gap-2 w-full">
+      {/* <div className="flex flex-row gap-2 w-full">
         <StyledFormField
           form={form}
           label="Date de naissance"
@@ -139,7 +139,7 @@ export const MigrateUserForm = ({
           id="phone"
           input={(field) => <PhoneCustomInput {...field} />}
         />
-      </div>
+      </div> */}
 
       <div className="flex justify-end mt-2 space-x-4">
         <Button

@@ -54,6 +54,8 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
   const [selectedCurriculum, setSelectedCurriculum] = useState(
     user.curriculum?.id,
   );
+
+  const validEmailRegex = /^[\w\-.]*@etu(-enise)?\.ec-lyon\.fr$/;
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setIsOpened(false);
@@ -119,6 +121,10 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
     setIsLoading(true);
     const body: CdrUserUpdate = {
       ...values,
+      email:
+        (values.email ?? validEmailRegex.test(values.email!))
+          ? values.email
+          : null,
       promo: values.promo ? parseInt(values.promo) : undefined,
       birthday: values.birthday?.toISOString(),
     };

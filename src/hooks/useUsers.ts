@@ -24,7 +24,12 @@ export const useUsers = () => {
         throw error;
       }
       if (data) {
-        setReturnedUsers(data);
+        setReturnedUsers(data.map((user) => {
+          return {
+            ...user,
+            nickname: user.nickname ?? ""
+          }
+        }));
       }
       return data;
     },
@@ -52,6 +57,7 @@ export const useUsers = () => {
         switch (message.command) {
           case "NEW_USER":
             const user = message.data as CdrUser;
+            user.nickname = user.nickname ?? "";
             const userFound = returnedUsers.find((u) => u.id === user.id);
             if (!userFound) {
               setReturnedUsers([...returnedUsers, user]);

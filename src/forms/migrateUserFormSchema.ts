@@ -1,7 +1,7 @@
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { z } from "zod";
 
-const validEmailRegex = /^[\w\-.]*@etu(-enise)?\.ec-lyon\.fr$/;
+// const validEmailRegex = /^[\w\-.]*@etu(-enise)?\.ec-lyon\.fr$/;
 
 export const migrateUserFormSchema = z.object({
   nickname: z.string().optional(),
@@ -10,9 +10,9 @@ export const migrateUserFormSchema = z.object({
     .email({
       message: "Veuillez renseigner l'email de Centrale",
     })
-    .refine((email) => validEmailRegex.test(email), {
-      message: "Veuillez renseigner un email de Centrale",
-    })
+    // .refine((email) => validEmailRegex.test(email), {
+    //   message: "Veuillez renseigner un email de Centrale",
+    // })
     .optional(),
   floor: z
     .enum([

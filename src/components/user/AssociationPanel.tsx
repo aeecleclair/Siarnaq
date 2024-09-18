@@ -16,11 +16,13 @@ import {
 interface AssociationPanelProps {
   onlineSellers: SellerComplete[];
   canClick?: boolean;
+  showSellerFeatureFlag?: boolean;
 }
 
 export const AssociationPanel = ({
   onlineSellers,
   canClick,
+  showSellerFeatureFlag,
 }: AssociationPanelProps) => {
   const t = useTranslations("AssociationPanel");
   const { userId } = useTokenStore();
@@ -48,7 +50,7 @@ export const AssociationPanel = ({
             {t("presentation")}
           </div>
         </Link>
-        {onlineSellers.map((seller) => {
+        {showSellerFeatureFlag && onlineSellers.map((seller) => {
           const purchasesCount =
             purchases.filter((purchase) => purchase.seller.id === seller.id)
               .length ?? 0;

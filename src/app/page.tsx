@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
-  const showSellerFeatureFlag = false;
+  const showSellerFeatureFlag = true;
   const { userId } = useTokenStore();
   const { user, refetch } = useUser(userId);
   const router = useRouter();

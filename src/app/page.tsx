@@ -10,6 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
+  const showSellerFeatureFlag = true;
   const { userId } = useTokenStore();
   const { user, refetch } = useUser(userId);
   const router = useRouter();
@@ -53,8 +54,9 @@ export default function Home() {
             <AssociationPanel
               canClick={!!user?.curriculum}
               onlineSellers={onlineSellers}
+              showSellerFeatureFlag={showSellerFeatureFlag}
             />
-            {user && <CentralPanel user={user} onlineSellers={onlineSellers} />}
+            {user && <CentralPanel showSellerFeatureFlag={showSellerFeatureFlag} />}
           </div>
         )}
       </main>

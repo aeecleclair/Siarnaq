@@ -7,11 +7,12 @@ import { ProductPanel } from "./ProductPanel";
 import { RecapPanel } from "./RecapPanel";
 
 interface CentralPanelProps {
-  user: CdrUser;
-  onlineSellers: SellerComplete[];
+  showSellerFeatureFlag?: boolean;
 }
 
-export const CentralPanel = ({ user, onlineSellers }: CentralPanelProps) => {
+export const CentralPanel = ({ 
+  showSellerFeatureFlag,
+ }: CentralPanelProps) => {
   const searchParams = useSearchParams();
   const firstSellerId = searchParams.get("sellerId") || "intro";
 
@@ -24,5 +25,5 @@ export const CentralPanel = ({ user, onlineSellers }: CentralPanelProps) => {
   if (firstSellerId === "recap") {
     return <RecapPanel />;
   }
-  return <ProductPanel />;
+  return showSellerFeatureFlag && <ProductPanel />;
 };

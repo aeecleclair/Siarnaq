@@ -63,6 +63,7 @@ export const ProductAccordionOptions = ({
       ticket_expiration: product.ticket_expiration
         ? new Date(product.ticket_expiration)
         : undefined,
+      data_fields: [],
     },
   });
 
@@ -144,6 +145,7 @@ export const ProductAccordionOptions = ({
             isOpened={isEditDialogOpened}
             setIsOpened={setIsEditDialogOpened}
             title="Modifier le produit"
+            isFullWidth
             description={
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -151,6 +153,8 @@ export const ProductAccordionOptions = ({
                     form={form}
                     setIsOpened={setIsEditDialogOpened}
                     isLoading={isLoading}
+                    sellerId={sellerId}
+                    productId={product.id}
                     isEdit
                   />
                 </form>
@@ -169,7 +173,8 @@ export const ProductAccordionOptions = ({
           <CustomDialog
             isOpened={isRemoveDialogOpened}
             setIsOpened={setIsRemoveDialogOpened}
-            title="Supprimer la producte"
+            title="Supprimer le produit"
+            isFullWidth
             description={
               <>
                 <div>Êtes-vous sûr de vouloir supprimer ce produit ?</div>

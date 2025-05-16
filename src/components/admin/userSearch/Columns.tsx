@@ -1,13 +1,13 @@
 "use client";
 
-import { CdrUser, CurriculumComplete } from "@/api";
+import { CdrUserPreview, CurriculumComplete } from "@/api";
 import { Badge } from "@/components/ui/badge";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { fuzzySort } from "./searchFunction";
 
-export const columns: ColumnDef<CdrUser>[] = [
+export const columns: ColumnDef<CdrUserPreview>[] = [
   // {
   //   id: "select",
   //   header: ({ table }) => (
@@ -71,7 +71,7 @@ export const columns: ColumnDef<CdrUser>[] = [
     cell: ({ row }) => (
       <div className="flex space-x-2">
         <Badge variant="outline">
-          {row.getValue("curriculum")
+          {row.getValue("curriculum") && row.getValue("curriculum") !== ""
             ? (row.getValue("curriculum") as CurriculumComplete).name
             : "Aucun cursus"}
         </Badge>

@@ -42,7 +42,7 @@ export const AddingVariantCard = ({
     setIsLoading(true);
     const body: ProductVariantBase = {
       ...values,
-      price: parseFloat(values.price) * 100,
+      price: Math.round(parseFloat(values.price) * 100),
       unique: values.unique === "unique",
       enabled: true,
     };
@@ -86,7 +86,7 @@ export const AddingVariantCard = ({
         </Form>
       }
     >
-      <Card className={`min-w-40 min-h-20`}>
+      <Card className={`min-w-40 min-h-20 h-full`}>
         <CardContent className="flex flex-col items-center justify-center m-auto h-full p-0 cursor-pointer">
           <HiPlus className="w-8 h-8" />
         </CardContent>

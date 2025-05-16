@@ -48,7 +48,8 @@ const AdminPage = () => {
       <Suspense fallback={<div>Loading...</div>}>
         {status && (
           <Card>
-            {status.status === "onsite" ? (
+            {status.status === "onsite" ||
+            (isAdmin && status.status === "online") ? (
               <ResizablePanelGroup direction="horizontal">
                 <ResizablePanel defaultSize={100 - size} minSize={10}>
                   <UserSearch />

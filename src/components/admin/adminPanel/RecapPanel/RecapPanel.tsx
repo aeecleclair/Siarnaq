@@ -1,6 +1,8 @@
 import {
   CdrUser,
+  CdrUserUpdate,
   ProductBase,
+  patchCdrUsersUserId,
   patchCdrUsersUserIdCurriculumsCurriculumId,
   postCdrSellersSellerIdProducts,
   postCdrUsersUserIdCurriculumsCurriculumId,
@@ -52,6 +54,8 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
   const [selectedCurriculum, setSelectedCurriculum] = useState(
     user.curriculum?.id,
   );
+
+  const validEmailRegex = /^[\w\-.]*@etu(-enise)?\.ec-lyon\.fr$/;
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setIsOpened(false);
@@ -103,35 +107,55 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
   const form = useForm<z.infer<typeof migrateUserFormSchema>>({
     resolver: zodResolver(migrateUserFormSchema),
     mode: "onBlur",
+    defaultValues: {
+      nickname: user.nickname ?? undefined,
+      email: user.email ?? undefined,
+      floor: user.floor ?? undefined,
+      birthday: undefined,
+      phone: undefined,
+      promo:  undefined,
+    },
   });
 
   async function onSubmit(values: z.infer<typeof migrateUserFormSchema>) {
     setIsLoading(true);
-    // Waiting for API call
-    // const body: ProductBase = {
-    //   ...values,
-    //   available_online: values.available_online === "true",
-    // };
-    // const { data, error } = await postCdrSellersSellerIdProducts({
-    //   path: {
-    //     seller_id: seller.id,
-    //   },
-    //   body: body,
-    // });
-    // if (error) {
-    //   toast({
-    //     title: "Error",
-    //     description: (error as { detail: String }).detail,
-    //     variant: "destructive",
-    //   });
-    //   setIsLoading(false);
-    //   setIsAddDialogOpened(false);
-    //   return;
-    // }
-    // refreshProduct();
-    // setIsAddDialogOpened(false);
+    const body: CdrUserUpdate = {
+      nickname: values.nickname,
+      floor: values.floor,
+      email:
+        (values.email ?? validEmailRegex.test(values.email!))
+          ? values.email
+          : null,
+      // promo: values.promo ? parseInt(values.promo) : undefined,
+      // birthday: values.birthday?.toISOString(),
+      // phone: values.phone ? "+" + values.phone : null,
+    };
+    const { data, error } = await patchCdrUsersUserId({
+      path: {
+        user_id: user.id,
+      },
+      body: body,
+    });
+    if (error) {
+      toast({
+        title: "Error",
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
+      setIsLoading(false);
+      setIsOpened(false);
+      return;
+    }
     setIsLoading(false);
-    form.reset();
+    setIsOpened(false);
+    form.reset({
+      nickname: values.nickname ?? undefined,
+      email: values.email ?? undefined,
+      floor: values.floor ?? undefined,
+      birthday: values.birthday ? new Date(values.birthday) : undefined,
+      phone: values.phone ?? undefined,
+      promo: values.promo ? values.promo.toString() : undefined,
+    });
   }
 
   return (

@@ -54,7 +54,7 @@ export const SellerTabContent = ({
   ]);
 
   return (
-    <TabsContent value={seller.id} className="min-w-96">
+    <TabsContent value={seller.id} className="min-w-96 w-full">
       <AddProductAccordionItem
         seller={seller}
         refreshProduct={refetchProducts}
@@ -76,7 +76,10 @@ export const SellerTabContent = ({
                 status.status === "pending" ||
                 (status.status === "online" && !product.available_online)
               }
-              canRemove={status.status === "pending"}
+              canRemove={
+                status.status === "pending" ||
+                (status.status === "online" && !product.available_online)
+              }
               canDisable={status.status !== "closed"}
               refreshProduct={refetchProducts}
               isSelectable={status.status === "onsite"}

@@ -22,8 +22,8 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     .map((product) => product?.product_constraints)
     .flat();
   const allConstraintIds = allConstraint?.map((constraint) => constraint?.id);
-  const membershipsValues = memberships.map(
-    (membership) => membership.membership,
+  const membershipsIds = memberships.map(
+    (membership) => membership.association_membership_id,
   );
   return (
     <div className="grid gap-6 -mt-4">
@@ -42,7 +42,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
                   (purchase) => purchase.product.id,
                 )}
                 purchase={purchase}
-                memberships={membershipsValues}
+                membershipsIds={membershipsIds}
                 user={user}
                 isAdmin={isAdmin}
               />

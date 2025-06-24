@@ -81,15 +81,18 @@ export const ProductAccordion = ({
     purchasedVariantIds.includes(variant.id),
   );
 
-  const takenMembership = memberships?.find((membership) =>
-    product.related_membership?.includes(membership.membership),
+  const takenMembership = memberships?.find(
+    (membership) =>
+      product.related_membership?.id === membership.association_membership_id,
   );
 
   const isMembershipAlreadyTaken = takenMembership !== undefined;
 
   const isConstraintMembershipTaken = memberships?.some((membership) =>
-    product.product_constraints?.some((constraint) =>
-      constraint?.related_membership?.includes(membership.membership),
+    product.product_constraints?.some(
+      (constraint) =>
+        constraint?.related_membership?.id ===
+        membership.association_membership_id,
     ),
   );
 

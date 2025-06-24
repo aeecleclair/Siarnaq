@@ -10,12 +10,13 @@ export type AccessToken = {
  * These values should match GroupType's. They are the lower level groups in Hyperion
  */
 export type AccountType =
-  | "39691052-2ae5-4e12-99d0-7a9f5f2b0136"
-  | "ab4c7503-41b3-11ee-8177-089798f1a4a5"
-  | "703056c4-be9d-475c-aa51-b7fc62a96aaa"
-  | "29751438-103c-42f2-b09b-33fbb20758a7"
-  | "b1cd979e-ecc1-4bd0-bc2b-4dad2ba8cded"
-  | "ae4d1866-e7d9-4d7f-bee7-e0dda24d8dd8";
+  | "student"
+  | "former_student"
+  | "staff"
+  | "association"
+  | "external"
+  | "other_school_student"
+  | "demo";
 
 export type AdvertBase = {
   title: string;
@@ -69,6 +70,8 @@ export type Applicant = {
   firstname: string;
   nickname?: string | null;
   id: string;
+  account_type: AccountType;
+  school_id: string;
   email: string;
   promo?: number | null;
   phone?: string | null;
@@ -79,6 +82,8 @@ export type AssociationBase = {
   kind: Kinds;
   mandate_year: number;
   description?: string | null;
+  associated_groups?: Array<string>;
+  deactivated?: boolean;
 };
 
 export type AssociationComplete = {
@@ -86,6 +91,8 @@ export type AssociationComplete = {
   kind: Kinds;
   mandate_year: number;
   description?: string | null;
+  associated_groups?: Array<string>;
+  deactivated?: boolean;
   id: string;
 };
 
@@ -96,7 +103,9 @@ export type AssociationEdit = {
   mandate_year?: number | null;
 };
 
-export type AvailableAssociationMembership = "AEECL" | "USEECL";
+export type AssociationGroupsEdit = {
+  associated_groups?: Array<string>;
+};
 
 /**
  * Return a dictionary of {key: error message} indicating which element of failed.
@@ -207,7 +216,7 @@ export type Body_token_auth_token_post = {
   code_verifier?: string | null;
 };
 
-export type Body_upload_document_raid_document_post = {
+export type Body_upload_document_raid_document__document_type__post = {
   file: Blob | File;
 };
 
@@ -310,6 +319,8 @@ export type CdrUser = {
   firstname: string;
   nickname?: string | null;
   id: string;
+  account_type: AccountType;
+  school_id: string;
   curriculum?: CurriculumComplete | null;
   promo?: number | null;
   email: string;
@@ -323,6 +334,8 @@ export type CdrUserPreview = {
   firstname: string;
   nickname?: string | null;
   id: string;
+  account_type: AccountType;
+  school_id: string;
   curriculum?: CurriculumComplete | null;
 };
 
@@ -386,12 +399,10 @@ export type CoreBatchMembership = {
 };
 
 /**
- * The schema is used for batch account creation requests. An account type should be provided
+ * The schema is used for batch account creation requests.
  */
 export type CoreBatchUserCreateRequest = {
   email: string;
-  account_type: AccountType;
-  external?: boolean;
 };
 
 /**
@@ -452,6 +463,28 @@ export type CoreMembershipDelete = {
   group_id: string;
 };
 
+export type CoreSchool = {
+  name: string;
+  email_regex: string;
+  id: string;
+};
+
+/**
+ * Schema for school's model
+ */
+export type CoreSchoolBase = {
+  name: string;
+  email_regex: string;
+};
+
+/**
+ * Schema for school update
+ */
+export type CoreSchoolUpdate = {
+  name?: string | null;
+  email_regex?: string | null;
+};
+
 /**
  * Schema for user's model similar to core_user table in database
  */
@@ -460,6 +493,8 @@ export type CoreUser = {
   firstname: string;
   nickname?: string | null;
   id: string;
+  account_type: AccountType;
+  school_id: string;
   email: string;
   birthday?: string | null;
   promo?: number | null;
@@ -467,6 +502,7 @@ export type CoreUser = {
   phone?: string | null;
   created_on?: string | null;
   groups?: Array<CoreGroupSimple>;
+  school?: CoreSchool | null;
 };
 
 export type CoreUserActivateRequest = {
@@ -479,7 +515,7 @@ export type CoreUserActivateRequest = {
   phone?: string | null;
   floor?: FloorsType | null;
   /**
-   * Promotion of the student, an integer like 21
+   * Promotion of the student, an integer like 2021
    */
   promo?: number | null;
 };
@@ -491,8 +527,17 @@ export type CoreUserCreateRequest = {
   email: string;
   /**
    * Allow Hyperion to create an external user. Without this, Hyperion will only allow non external students to be created. The email address will be used to determine if the user should be external or not. An external user may not have an ECL email address, he won't be able to access most features.
+   * @deprecated
    */
-  accept_external?: boolean;
+  accept_external?: boolean | null;
+};
+
+/**
+ * Schema for user fusion
+ */
+export type CoreUserFusionRequest = {
+  user_kept_email: string;
+  user_deleted_email: string;
 };
 
 /**
@@ -503,6 +548,8 @@ export type CoreUserSimple = {
   firstname: string;
   nickname?: string | null;
   id: string;
+  account_type: AccountType;
+  school_id: string;
 };
 
 /**
@@ -516,6 +563,9 @@ export type CoreUserUpdate = {
 };
 
 export type CoreUserUpdateAdmin = {
+  email?: string | null;
+  school_id?: string | null;
+  account_type?: AccountType | null;
   name?: string | null;
   firstname?: string | null;
   promo?: number | null;
@@ -523,7 +573,6 @@ export type CoreUserUpdateAdmin = {
   birthday?: string | null;
   phone?: string | null;
   floor?: FloorsType | null;
-  external?: boolean | null;
 };
 
 export type CurriculumBase = {
@@ -638,6 +687,8 @@ export type EventApplicant = {
   firstname: string;
   nickname?: string | null;
   id: string;
+  account_type: AccountType;
+  school_id: string;
   email: string;
   promo?: number | null;
   phone?: string | null;
@@ -754,9 +805,44 @@ export type FloorsType =
   | "X5"
   | "X6";
 
+export type GenerateTicketBase = {
+  name: string;
+  max_use: number;
+  expiration: string;
+};
+
+export type GenerateTicketComplete = {
+  name: string;
+  max_use: number;
+  expiration: string;
+  id: string;
+};
+
 export type HTTPValidationError = {
   detail?: Array<ValidationError>;
 };
+
+export type History = {
+  id: string;
+  type: HistoryType;
+  other_wallet_name: string;
+  total: number;
+  creation: string;
+  status: TransactionStatus;
+  refund?: HistoryRefund | null;
+};
+
+export type HistoryRefund = {
+  total: number;
+  creation: string;
+};
+
+export type HistoryType =
+  | "transfer"
+  | "received"
+  | "given"
+  | "refund_credited"
+  | "refund_debited";
 
 export type Information = {
   manager: string;
@@ -768,6 +854,17 @@ export type InformationEdit = {
   manager?: string | null;
   link?: string | null;
   description?: string | null;
+};
+
+/**
+ * Schema for Hyperion data
+ */
+export type IntegrityCheckData = {
+  date: string;
+  wallets: Array<WalletBase>;
+  transactions: Array<TransactionBase>;
+  transfers: Array<Transfer>;
+  refunds: Array<RefundBase>;
 };
 
 export type IntrospectTokenResponse = {
@@ -999,15 +1096,34 @@ export type MemberComplete = {
   firstname: string;
   nickname?: string | null;
   id: string;
+  account_type: AccountType;
+  school_id: string;
   email: string;
   phone?: string | null;
   promo?: number | null;
-  memberships: Array<app__modules__phonebook__schemas_phonebook__MembershipComplete>;
+  memberships: Array<MembershipComplete>;
+};
+
+export type MembershipComplete = {
+  user_id: string;
+  association_id: string;
+  mandate_year: number;
+  role_name: string;
+  role_tags?: string | null;
+  member_order: number;
+  id: string;
 };
 
 export type MembershipEdit = {
   role_name?: string | null;
   role_tags?: string | null;
+  member_order?: number | null;
+};
+
+export type MembershipSimple = {
+  name: string;
+  manager_group_id: string;
+  id: string;
 };
 
 export type MembershipUserMappingEmail = {
@@ -1016,37 +1132,16 @@ export type MembershipUserMappingEmail = {
   end_date: string;
 };
 
-export type Message = {
-  /**
-   * A context represents a topic. There can only by one notification per context.
-   */
-  context: string;
-  /**
-   * A message can be visible or not, if it is not visible, it should only trigger an action
-   */
-  is_visible: boolean;
-  title?: string | null;
-  content?: string | null;
-  /**
-   * An identifier for the module that should be triggered when the notification is clicked
-   */
-  action_module?: string | null;
-  action_table?: string | null;
-  /**
-   * The date the notification should be shown
-   */
-  delivery_datetime?: string | null;
-  expire_on: string;
-};
-
 export type ModuleVisibility = {
   root: string;
   allowed_group_ids: Array<string>;
+  allowed_account_types: Array<AccountType>;
 };
 
 export type ModuleVisibilityCreate = {
   root: string;
-  allowed_group_id: string;
+  allowed_group_id?: string | null;
+  allowed_account_type?: AccountType | null;
 };
 
 export type OrderBase = {
@@ -1206,6 +1301,55 @@ export type PaymentUrl = {
   url: string;
 };
 
+export type PlantComplete = {
+  id: string;
+  reference: string;
+  state: PlantState;
+  species_id: string;
+  propagation_method: PropagationMethod;
+  nb_seeds_envelope?: number;
+  planting_date?: string | null;
+  borrower_id?: string | null;
+  nickname?: string | null;
+  previous_note?: string | null;
+  current_note?: string | null;
+  borrowing_date?: string | null;
+  ancestor_id?: string | null;
+  confidential?: boolean;
+};
+
+export type PlantCreation = {
+  species_id: string;
+  propagation_method: PropagationMethod;
+  nb_seeds_envelope?: number;
+  ancestor_id?: string | null;
+  previous_note?: string | null;
+  confidential?: boolean;
+};
+
+export type PlantEdit = {
+  state?: PlantState | null;
+  current_note?: string | null;
+  confidential?: boolean;
+  planting_date?: string | null;
+  borrowing_date?: string | null;
+  nickname?: string | null;
+};
+
+export type PlantSimple = {
+  id: string;
+  reference: string;
+  state: PlantState;
+  species_id: string;
+  propagation_method: PropagationMethod;
+  nb_seeds_envelope?: number;
+  planting_date?: string | null;
+  borrower_id?: string | null;
+  nickname?: string | null;
+};
+
+export type PlantState = "en attente" | "récupérée" | "consommée";
+
 export type PrizeBase = {
   name: string;
   description: string;
@@ -1234,10 +1378,8 @@ export type ProductBase = {
   description_fr?: string | null;
   description_en?: string | null;
   available_online: boolean;
-  related_membership?: AvailableAssociationMembership | null;
-  generate_ticket: boolean;
-  ticket_max_use?: number | null;
-  ticket_expiration?: string | null;
+  related_membership?: MembershipSimple | null;
+  tickets?: Array<GenerateTicketBase>;
   product_constraints: Array<string>;
   document_constraints: Array<string>;
 };
@@ -1251,10 +1393,8 @@ export type ProductCompleteNoConstraint = {
   id: string;
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
-  related_membership?: AvailableAssociationMembership | null;
-  generate_ticket: boolean;
-  ticket_max_use?: number | null;
-  ticket_expiration?: string | null;
+  related_membership?: MembershipSimple | null;
+  tickets: Array<GenerateTicketComplete>;
 };
 
 export type ProductQuantity = {
@@ -1305,6 +1445,8 @@ export type ProductVariantEdit = {
   allowed_curriculum?: Array<string> | null;
   related_membership_added_duration?: string | null;
 };
+
+export type PropagationMethod = "bouture" | "graine";
 
 export type PurchaseBase = {
   quantity: number;
@@ -1406,6 +1548,21 @@ export type RecommendationEdit = {
   description?: string | null;
 };
 
+export type RefundBase = {
+  id: string;
+  total: number;
+  creation: string;
+  transaction_id: string;
+  seller_user_id?: string | null;
+  credited_wallet_id: string;
+  debited_wallet_id: string;
+};
+
+export type RefundInfo = {
+  complete_refund: boolean;
+  amount?: number | null;
+};
+
 export type ResetPasswordRequest = {
   reset_token: string;
   new_password: string;
@@ -1424,6 +1581,16 @@ export type RoomComplete = {
   name: string;
   manager_id: string;
   id: string;
+};
+
+export type ScanInfo = {
+  id: string;
+  tot: number;
+  iat: string;
+  key: string;
+  store: boolean;
+  signature: string;
+  bypass_membership?: boolean;
 };
 
 /**
@@ -1476,6 +1643,23 @@ export type SecurityFileBase = {
   file_id?: string | null;
 };
 
+export type SeedLibraryInformation = {
+  facebook_url?: string;
+  forum_url?: string;
+  description?: string;
+  contact?: string;
+};
+
+export type Seller = {
+  user_id: string;
+  store_id: string;
+  can_bank: boolean;
+  can_see_history: boolean;
+  can_cancel: boolean;
+  can_manage_sellers: boolean;
+  user: CoreUserSimple;
+};
+
 export type SellerBase = {
   name: string;
   group_id: string;
@@ -1489,10 +1673,25 @@ export type SellerComplete = {
   id: string;
 };
 
+export type SellerCreation = {
+  user_id: string;
+  can_bank: boolean;
+  can_see_history: boolean;
+  can_cancel: boolean;
+  can_manage_sellers: boolean;
+};
+
 export type SellerEdit = {
   name?: string | null;
   group_id?: string | null;
   order?: number | null;
+};
+
+export type SellerUpdate = {
+  can_bank?: boolean | null;
+  can_see_history?: boolean | null;
+  can_cancel?: boolean | null;
+  can_manage_sellers?: boolean | null;
 };
 
 export type SignatureBase = {
@@ -1507,7 +1706,58 @@ export type SignatureComplete = {
   document_id: string;
 };
 
-export type Size = "XS" | "S" | "M" | "L" | "XL";
+export type Size = "XS" | "S" | "M" | "L" | "XL" | "None";
+
+export type SpeciesBase = {
+  prefix: string;
+  name: string;
+  difficulty: number;
+  species_type: SpeciesType;
+  card?: string | null;
+  nb_seeds_recommended?: number | null;
+  start_season?: string | null;
+  end_season?: string | null;
+  time_maturation?: number | null;
+};
+
+export type SpeciesComplete = {
+  prefix: string;
+  name: string;
+  difficulty: number;
+  species_type: SpeciesType;
+  card?: string | null;
+  nb_seeds_recommended?: number | null;
+  start_season?: string | null;
+  end_season?: string | null;
+  time_maturation?: number | null;
+  id: string;
+};
+
+export type SpeciesEdit = {
+  name?: string | null;
+  prefix?: string | null;
+  difficulty?: number | null;
+  card?: string | null;
+  species_type?: SpeciesType | null;
+  nb_seeds_recommended?: number | null;
+  start_season?: string | null;
+  end_season?: string | null;
+  time_maturation?: number | null;
+};
+
+export type SpeciesType =
+  | "Plantes aromatiques"
+  | "Plantes potagères"
+  | "Plante d intérieur"
+  | "Plantes fruitières"
+  | "Cactus et succulentes"
+  | "Plantes ornementales"
+  | "Plantes grasses"
+  | "Autre";
+
+export type SpeciesTypesReturn = {
+  species_type: Array<SpeciesType>;
+};
 
 export type Status = {
   status?: CdrStatus;
@@ -1522,6 +1772,61 @@ export type StatusType =
   | "closed"
   | "counting"
   | "published";
+
+export type Store = {
+  name: string;
+  id: string;
+  structure_id: string;
+  wallet_id: string;
+  structure: Structure;
+};
+
+export type StoreBase = {
+  name: string;
+};
+
+export type StoreUpdate = {
+  name?: string | null;
+};
+
+export type Structure = {
+  name: string;
+  association_membership_id?: string | null;
+  manager_user_id: string;
+  id: string;
+  manager_user: CoreUserSimple;
+  association_membership: MembershipSimple | null;
+};
+
+export type StructureBase = {
+  name: string;
+  association_membership_id?: string | null;
+  manager_user_id: string;
+};
+
+export type StructureTranfert = {
+  new_manager_user_id: string;
+};
+
+export type StructureUpdate = {
+  name?: string | null;
+  association_membership_id?: string | null;
+};
+
+export type TOSSignature = {
+  accepted_tos_version: number;
+};
+
+export type TOSSignatureResponse = {
+  accepted_tos_version: number;
+  latest_tos_version: number;
+  tos_content: string;
+  /**
+   * @deprecated
+   */
+  max_transaction_total?: number;
+  max_wallet_balance: number;
+};
 
 export type Team = {
   name: string;
@@ -1575,6 +1880,7 @@ export type Ticket = {
   scan_left: number;
   tags: string;
   expiration: string;
+  name: string;
 };
 
 export type TicketComplete = {
@@ -1604,12 +1910,14 @@ export type TicketSimple = {
 
 export type TokenResponse = {
   access_token: string;
-  token_type?: string;
+  token_type?: "bearer";
   expires_in?: number;
   scope?: string;
   refresh_token: string;
   id_token?: string | null;
 };
+
+export type token_type = "bearer";
 
 /**
  * A list of topics. An user can suscribe to a topic to receive notifications about it.
@@ -1623,13 +1931,92 @@ export type Topic =
   | "loan"
   | "raffle"
   | "vote"
-  | "ph";
+  | "ph"
+  | "test";
+
+export type TransactionBase = {
+  id: string;
+  debited_wallet_id: string;
+  credited_wallet_id: string;
+  transaction_type: TransactionType;
+  seller_user_id: string | null;
+  total: number;
+  creation: string;
+  status: TransactionStatus;
+  qr_code_id?: string | null;
+};
+
+/**
+ * CONFIRMED: The transaction has been confirmed and is complete.
+ * CANCELED: The transaction has been canceled. It is used for transfer requests, for which the user has 15 minutes to complete the HelloAsso checkout
+ * REFUNDED: The transaction between to wallets has been partially or totally refunded.
+ * PENDING: The transaction is pending and has not yet been completed. It is used for transfer requests, for which the user has 15 minutes to complete the HelloAsso checkout
+ */
+export type TransactionStatus =
+  | "confirmed"
+  | "canceled"
+  | "refunded"
+  | "pending";
+
+export type TransactionType = "direct" | "request" | "refund";
+
+export type Transfer = {
+  id: string;
+  type: TransferType;
+  transfer_identifier: string;
+  approver_user_id: string | null;
+  wallet_id: string;
+  total: number;
+  creation: string;
+  confirmed: boolean;
+};
+
+export type TransferInfo = {
+  amount: number;
+  redirect_url: string;
+};
+
+export type TransferType = "hello_asso";
+
+export type UserMembershipBase = {
+  association_membership_id: string;
+  start_date: string;
+  end_date: string;
+};
+
+export type UserMembershipComplete = {
+  association_membership_id: string;
+  start_date: string;
+  end_date: string;
+  id: string;
+  user_id: string;
+  user: CoreUserSimple;
+};
+
+export type UserMembershipEdit = {
+  start_date?: string | null;
+  end_date?: string | null;
+};
+
+export type UserStore = {
+  name: string;
+  id: string;
+  structure_id: string;
+  wallet_id: string;
+  structure: Structure;
+  can_bank: boolean;
+  can_see_history: boolean;
+  can_cancel: boolean;
+  can_manage_sellers: boolean;
+};
 
 export type UserTicket = {
   name: string;
   firstname: string;
   nickname?: string | null;
   id: string;
+  account_type: AccountType;
+  school_id: string;
   promo?: number | null;
   floor?: FloorsType | null;
   created_on?: string | null;
@@ -1664,8 +2051,40 @@ export type VoterGroup = {
   group_id: string;
 };
 
-export type app__core__standard_responses__Result = {
-  success?: boolean;
+export type Wallet = {
+  id: string;
+  type: WalletType;
+  balance: number;
+  store: Store | null;
+  user: CoreUser | null;
+};
+
+export type WalletBase = {
+  id: string;
+  type: WalletType;
+  balance: number;
+};
+
+export type WalletDevice = {
+  name: string;
+  id: string;
+  wallet_id: string;
+  creation: string;
+  status: WalletDeviceStatus;
+};
+
+export type WalletDeviceCreation = {
+  name: string;
+  ed25519_public_key: Blob | File;
+};
+
+export type WalletDeviceStatus = "inactive" | "active" | "revoked";
+
+export type WalletType = "user" | "store";
+
+export type app__core__memberships__schemas_memberships__MembershipBase = {
+  name: string;
+  manager_group_id: string;
 };
 
 export type app__modules__amap__schemas_amap__ProductComplete = {
@@ -1686,20 +2105,6 @@ export type app__modules__campaign__schemas_campaign__Result = {
   count: number;
 };
 
-export type app__modules__cdr__schemas_cdr__MembershipBase = {
-  membership: AvailableAssociationMembership;
-  start_date: string;
-  end_date: string;
-};
-
-export type app__modules__cdr__schemas_cdr__MembershipComplete = {
-  membership: AvailableAssociationMembership;
-  start_date: string;
-  end_date: string;
-  id: string;
-  user_id: string;
-};
-
 export type app__modules__cdr__schemas_cdr__ProductComplete = {
   name_fr: string;
   name_en?: string | null;
@@ -1709,12 +2114,10 @@ export type app__modules__cdr__schemas_cdr__ProductComplete = {
   id: string;
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
-  related_membership?: AvailableAssociationMembership | null;
-  generate_ticket: boolean;
-  ticket_max_use?: number | null;
-  ticket_expiration?: string | null;
+  related_membership?: MembershipSimple | null;
   product_constraints?: Array<ProductCompleteNoConstraint>;
   document_constraints?: Array<DocumentComplete>;
+  tickets?: Array<GenerateTicketComplete>;
 };
 
 export type app__modules__cdr__schemas_cdr__ProductEdit = {
@@ -1724,10 +2127,7 @@ export type app__modules__cdr__schemas_cdr__ProductEdit = {
   description_en?: string | null;
   description?: string | null;
   available_online?: boolean | null;
-  related_membership?: AvailableAssociationMembership | null;
-  generate_ticket?: boolean | null;
-  ticket_max_use?: number | null;
-  ticket_expiration?: string | null;
+  related_membership?: MembershipSimple | null;
   product_constraints?: Array<string> | null;
   document_constraints?: Array<string> | null;
 };
@@ -1738,15 +2138,11 @@ export type app__modules__phonebook__schemas_phonebook__MembershipBase = {
   mandate_year: number;
   role_name: string;
   role_tags?: string | null;
+  member_order: number;
 };
 
-export type app__modules__phonebook__schemas_phonebook__MembershipComplete = {
-  user_id: string;
-  association_id: string;
-  mandate_year: number;
-  role_name: string;
-  role_tags?: string | null;
-  id: string;
+export type app__types__standard_responses__Result = {
+  success?: boolean;
 };
 
 export type PostAuthSimpleTokenData = unknown;
@@ -1828,6 +2224,10 @@ export type GetTermsAndConditionsResponse = unknown;
 
 export type GetTermsAndConditionsError = unknown;
 
+export type GetMyeclpayTermsOfServiceResponse = unknown;
+
+export type GetMyeclpayTermsOfServiceError = unknown;
+
 export type GetSupportResponse = unknown;
 
 export type GetSupportError = unknown;
@@ -1866,7 +2266,7 @@ export type PostModuleVisibilityData = {
   body: ModuleVisibilityCreate;
 };
 
-export type PostModuleVisibilityResponse = ModuleVisibilityCreate;
+export type PostModuleVisibilityResponse = unknown;
 
 export type PostModuleVisibilityError = unknown;
 
@@ -1874,16 +2274,27 @@ export type GetModuleVisibilityMeResponse = Array<string>;
 
 export type GetModuleVisibilityMeError = unknown;
 
-export type DeleteModuleVisibilityRootGroupIdData = {
+export type DeleteModuleVisibilityRootGroupsGroupIdData = {
   path: {
     group_id: string;
     root: string;
   };
 };
 
-export type DeleteModuleVisibilityRootGroupIdResponse = void;
+export type DeleteModuleVisibilityRootGroupsGroupIdResponse = void;
 
-export type DeleteModuleVisibilityRootGroupIdError = unknown;
+export type DeleteModuleVisibilityRootGroupsGroupIdError = unknown;
+
+export type DeleteModuleVisibilityRootAccountTypesAccountTypeData = {
+  path: {
+    account_type: AccountType;
+    root: string;
+  };
+};
+
+export type DeleteModuleVisibilityRootAccountTypesAccountTypeResponse = void;
+
+export type DeleteModuleVisibilityRootAccountTypesAccountTypeError = unknown;
 
 export type GetGoogleApiOauth2CallbackResponse = unknown;
 
@@ -1964,6 +2375,425 @@ export type DeleteGroupsBatchMembershipResponse = void;
 
 export type DeleteGroupsBatchMembershipError = unknown;
 
+export type GetMembershipsResponse = Array<MembershipSimple>;
+
+export type GetMembershipsError = unknown;
+
+export type PostMembershipsData = {
+  body: app__core__memberships__schemas_memberships__MembershipBase;
+};
+
+export type PostMembershipsResponse = MembershipSimple;
+
+export type PostMembershipsError = unknown;
+
+export type GetMembershipsAssociationMembershipIdMembersData = {
+  path: {
+    association_membership_id: string;
+  };
+  query?: {
+    maximalEndDate?: string;
+    maximalStartDate?: string;
+    minimalEndDate?: string;
+    minimalStartDate?: string;
+  };
+};
+
+export type GetMembershipsAssociationMembershipIdMembersResponse =
+  Array<UserMembershipComplete>;
+
+export type GetMembershipsAssociationMembershipIdMembersError = unknown;
+
+export type PatchMembershipsAssociationMembershipIdData = {
+  body: app__core__memberships__schemas_memberships__MembershipBase;
+  path: {
+    association_membership_id: string;
+  };
+};
+
+export type PatchMembershipsAssociationMembershipIdResponse = void;
+
+export type PatchMembershipsAssociationMembershipIdError = unknown;
+
+export type DeleteMembershipsAssociationMembershipIdData = {
+  path: {
+    association_membership_id: string;
+  };
+};
+
+export type DeleteMembershipsAssociationMembershipIdResponse = void;
+
+export type DeleteMembershipsAssociationMembershipIdError = unknown;
+
+export type GetMembershipsUsersUserIdData = {
+  path: {
+    user_id: string;
+  };
+};
+
+export type GetMembershipsUsersUserIdResponse = Array<UserMembershipComplete>;
+
+export type GetMembershipsUsersUserIdError = unknown;
+
+export type PostMembershipsUsersUserIdData = {
+  body: UserMembershipBase;
+  path: {
+    user_id: string;
+  };
+};
+
+export type PostMembershipsUsersUserIdResponse = UserMembershipComplete;
+
+export type PostMembershipsUsersUserIdError = unknown;
+
+export type GetMembershipsUsersUserIdAssociationMembershipIdData = {
+  path: {
+    association_membership_id: string;
+    user_id: string;
+  };
+};
+
+export type GetMembershipsUsersUserIdAssociationMembershipIdResponse =
+  Array<UserMembershipComplete>;
+
+export type GetMembershipsUsersUserIdAssociationMembershipIdError = unknown;
+
+export type PostMembershipsAssociationMembershipIdAddBatchData = {
+  body: Array<MembershipUserMappingEmail>;
+  path: {
+    association_membership_id: string;
+  };
+};
+
+export type PostMembershipsAssociationMembershipIdAddBatchResponse =
+  Array<MembershipUserMappingEmail>;
+
+export type PostMembershipsAssociationMembershipIdAddBatchError = unknown;
+
+export type PatchMembershipsUsersMembershipIdData = {
+  body: UserMembershipEdit;
+  path: {
+    membership_id: string;
+  };
+};
+
+export type PatchMembershipsUsersMembershipIdResponse = void;
+
+export type PatchMembershipsUsersMembershipIdError = unknown;
+
+export type DeleteMembershipsUsersMembershipIdData = {
+  path: {
+    membership_id: string;
+  };
+};
+
+export type DeleteMembershipsUsersMembershipIdResponse = void;
+
+export type DeleteMembershipsUsersMembershipIdError = unknown;
+
+export type GetMyeclpayStructuresResponse = Array<Structure>;
+
+export type GetMyeclpayStructuresError = unknown;
+
+export type PostMyeclpayStructuresData = {
+  body: StructureBase;
+};
+
+export type PostMyeclpayStructuresResponse = Structure;
+
+export type PostMyeclpayStructuresError = unknown;
+
+export type PatchMyeclpayStructuresStructureIdData = {
+  body: StructureUpdate;
+  path: {
+    structure_id: string;
+  };
+};
+
+export type PatchMyeclpayStructuresStructureIdResponse = void;
+
+export type PatchMyeclpayStructuresStructureIdError = unknown;
+
+export type DeleteMyeclpayStructuresStructureIdData = {
+  path: {
+    structure_id: string;
+  };
+};
+
+export type DeleteMyeclpayStructuresStructureIdResponse = void;
+
+export type DeleteMyeclpayStructuresStructureIdError = unknown;
+
+export type PostMyeclpayStructuresStructureIdInitManagerTransferData = {
+  body: StructureTranfert;
+  path: {
+    structure_id: string;
+  };
+};
+
+export type PostMyeclpayStructuresStructureIdInitManagerTransferResponse =
+  unknown;
+
+export type PostMyeclpayStructuresStructureIdInitManagerTransferError = unknown;
+
+export type GetMyeclpayStructuresConfirmManagerTransferData = {
+  query: {
+    token: string;
+  };
+};
+
+export type GetMyeclpayStructuresConfirmManagerTransferResponse = unknown;
+
+export type GetMyeclpayStructuresConfirmManagerTransferError = unknown;
+
+export type PostMyeclpayStructuresStructureIdStoresData = {
+  body: StoreBase;
+  path: {
+    structure_id: string;
+  };
+};
+
+export type PostMyeclpayStructuresStructureIdStoresResponse = Store;
+
+export type PostMyeclpayStructuresStructureIdStoresError = unknown;
+
+export type GetMyeclpayStoresStoreIdHistoryData = {
+  path: {
+    store_id: string;
+  };
+  query?: {
+    end_date?: string | null;
+    start_date?: string | null;
+  };
+};
+
+export type GetMyeclpayStoresStoreIdHistoryResponse = Array<History>;
+
+export type GetMyeclpayStoresStoreIdHistoryError = unknown;
+
+export type GetMyeclpayUsersMeStoresResponse = Array<UserStore>;
+
+export type GetMyeclpayUsersMeStoresError = unknown;
+
+export type PatchMyeclpayStoresStoreIdData = {
+  body: StoreUpdate;
+  path: {
+    store_id: string;
+  };
+};
+
+export type PatchMyeclpayStoresStoreIdResponse = void;
+
+export type PatchMyeclpayStoresStoreIdError = unknown;
+
+export type DeleteMyeclpayStoresStoreIdData = {
+  path: {
+    store_id: string;
+  };
+};
+
+export type DeleteMyeclpayStoresStoreIdResponse = void;
+
+export type DeleteMyeclpayStoresStoreIdError = unknown;
+
+export type PostMyeclpayStoresStoreIdSellersData = {
+  body: SellerCreation;
+  path: {
+    store_id: string;
+  };
+};
+
+export type PostMyeclpayStoresStoreIdSellersResponse = Seller;
+
+export type PostMyeclpayStoresStoreIdSellersError = unknown;
+
+export type GetMyeclpayStoresStoreIdSellersData = {
+  path: {
+    store_id: string;
+  };
+};
+
+export type GetMyeclpayStoresStoreIdSellersResponse = Array<Seller>;
+
+export type GetMyeclpayStoresStoreIdSellersError = unknown;
+
+export type PatchMyeclpayStoresStoreIdSellersSellerUserIdData = {
+  body: SellerUpdate;
+  path: {
+    seller_user_id: string;
+    store_id: string;
+  };
+};
+
+export type PatchMyeclpayStoresStoreIdSellersSellerUserIdResponse = void;
+
+export type PatchMyeclpayStoresStoreIdSellersSellerUserIdError = unknown;
+
+export type DeleteMyeclpayStoresStoreIdSellersSellerUserIdData = {
+  path: {
+    seller_user_id: string;
+    store_id: string;
+  };
+};
+
+export type DeleteMyeclpayStoresStoreIdSellersSellerUserIdResponse = void;
+
+export type DeleteMyeclpayStoresStoreIdSellersSellerUserIdError = unknown;
+
+export type PostMyeclpayUsersMeRegisterResponse = void;
+
+export type PostMyeclpayUsersMeRegisterError = unknown;
+
+export type GetMyeclpayUsersMeTosResponse = TOSSignatureResponse;
+
+export type GetMyeclpayUsersMeTosError = unknown;
+
+export type PostMyeclpayUsersMeTosData = {
+  body: TOSSignature;
+};
+
+export type PostMyeclpayUsersMeTosResponse = void;
+
+export type PostMyeclpayUsersMeTosError = unknown;
+
+export type GetMyeclpayUsersMeWalletDevicesResponse = Array<WalletDevice>;
+
+export type GetMyeclpayUsersMeWalletDevicesError = unknown;
+
+export type PostMyeclpayUsersMeWalletDevicesData = {
+  body: WalletDeviceCreation;
+};
+
+export type PostMyeclpayUsersMeWalletDevicesResponse = WalletDevice;
+
+export type PostMyeclpayUsersMeWalletDevicesError = unknown;
+
+export type GetMyeclpayUsersMeWalletDevicesWalletDeviceIdData = {
+  path: {
+    wallet_device_id: string;
+  };
+};
+
+export type GetMyeclpayUsersMeWalletDevicesWalletDeviceIdResponse =
+  WalletDevice;
+
+export type GetMyeclpayUsersMeWalletDevicesWalletDeviceIdError = unknown;
+
+export type GetMyeclpayUsersMeWalletResponse = Wallet;
+
+export type GetMyeclpayUsersMeWalletError = unknown;
+
+export type GetMyeclpayDevicesActivateData = {
+  query: {
+    token: string;
+  };
+};
+
+export type GetMyeclpayDevicesActivateResponse = unknown;
+
+export type GetMyeclpayDevicesActivateError = unknown;
+
+export type PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeData = {
+  path: {
+    wallet_device_id: string;
+  };
+};
+
+export type PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeResponse = void;
+
+export type PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeError = unknown;
+
+export type GetMyeclpayUsersMeWalletHistoryData = {
+  query?: {
+    end_date?: string | null;
+    start_date?: string | null;
+  };
+};
+
+export type GetMyeclpayUsersMeWalletHistoryResponse = Array<History>;
+
+export type GetMyeclpayUsersMeWalletHistoryError = unknown;
+
+export type PostMyeclpayTransferInitData = {
+  body: TransferInfo;
+};
+
+export type PostMyeclpayTransferInitResponse = PaymentUrl;
+
+export type PostMyeclpayTransferInitError = unknown;
+
+export type GetMyeclpayTransferRedirectData = {
+  query: {
+    checkoutIntentId?: string | null;
+    code?: string | null;
+    error?: string | null;
+    orderId?: string | null;
+    url: string;
+  };
+};
+
+export type GetMyeclpayTransferRedirectResponse = PaymentUrl;
+
+export type GetMyeclpayTransferRedirectError = unknown;
+
+export type PostMyeclpayStoresStoreIdScanCheckData = {
+  body: ScanInfo;
+  path: {
+    store_id: string;
+  };
+};
+
+export type PostMyeclpayStoresStoreIdScanCheckResponse =
+  app__types__standard_responses__Result;
+
+export type PostMyeclpayStoresStoreIdScanCheckError = unknown;
+
+export type PostMyeclpayStoresStoreIdScanData = {
+  body: ScanInfo;
+  path: {
+    store_id: string;
+  };
+};
+
+export type PostMyeclpayStoresStoreIdScanResponse = unknown;
+
+export type PostMyeclpayStoresStoreIdScanError = unknown;
+
+export type PostMyeclpayTransactionsTransactionIdRefundData = {
+  body: RefundInfo;
+  path: {
+    transaction_id: string;
+  };
+};
+
+export type PostMyeclpayTransactionsTransactionIdRefundResponse = void;
+
+export type PostMyeclpayTransactionsTransactionIdRefundError = unknown;
+
+export type PostMyeclpayTransactionsTransactionIdCancelData = {
+  path: {
+    transaction_id: string;
+  };
+};
+
+export type PostMyeclpayTransactionsTransactionIdCancelResponse = void;
+
+export type PostMyeclpayTransactionsTransactionIdCancelError = unknown;
+
+export type GetMyeclpayIntegrityCheckData = {
+  headers: {
+    x_data_verifier_token: string;
+  };
+  query?: {
+    isInitialisation?: boolean;
+    lastChecked?: string | null;
+  };
+};
+
+export type GetMyeclpayIntegrityCheckResponse = IntegrityCheckData;
+
+export type GetMyeclpayIntegrityCheckError = unknown;
+
 export type GetNotificationDevicesResponse = Array<FirebaseDevice>;
 
 export type GetNotificationDevicesError = unknown;
@@ -1985,16 +2815,6 @@ export type DeleteNotificationDevicesFirebaseTokenData = {
 export type DeleteNotificationDevicesFirebaseTokenResponse = void;
 
 export type DeleteNotificationDevicesFirebaseTokenError = unknown;
-
-export type GetNotificationMessagesFirebaseTokenData = {
-  path: {
-    firebase_token: string;
-  };
-};
-
-export type GetNotificationMessagesFirebaseTokenResponse = Array<Message>;
-
-export type GetNotificationMessagesFirebaseTokenError = unknown;
 
 export type PostNotificationTopicsTopicStrSubscribeData = {
   path: {
@@ -2041,9 +2861,66 @@ export type PostNotificationSendFutureResponse = unknown;
 
 export type PostNotificationSendFutureError = unknown;
 
+export type PostNotificationSendTopicResponse = unknown;
+
+export type PostNotificationSendTopicError = unknown;
+
+export type PostNotificationSendTopicFutureResponse = unknown;
+
+export type PostNotificationSendTopicFutureError = unknown;
+
 export type PostPaymentHelloassoWebhookResponse = void;
 
 export type PostPaymentHelloassoWebhookError = unknown;
+
+export type GetSchoolsResponse = Array<CoreSchool>;
+
+export type GetSchoolsError = unknown;
+
+export type PostSchoolsData = {
+  body: CoreSchoolBase;
+};
+
+export type PostSchoolsResponse = CoreSchool;
+
+export type PostSchoolsError = unknown;
+
+export type GetSchoolsSchoolIdData = {
+  path: {
+    school_id: string;
+  };
+};
+
+export type GetSchoolsSchoolIdResponse = CoreSchool;
+
+export type GetSchoolsSchoolIdError = unknown;
+
+export type PatchSchoolsSchoolIdData = {
+  body: CoreSchoolUpdate;
+  path: {
+    school_id: string;
+  };
+};
+
+export type PatchSchoolsSchoolIdResponse = void;
+
+export type PatchSchoolsSchoolIdError = unknown;
+
+export type DeleteSchoolsSchoolIdData = {
+  path: {
+    school_id: string;
+  };
+};
+
+export type DeleteSchoolsSchoolIdResponse = void;
+
+export type DeleteSchoolsSchoolIdError = unknown;
+
+export type GetUsersData = {
+  query?: {
+    accountTypes?: Array<AccountType>;
+  };
+};
 
 export type GetUsersResponse = Array<CoreUserSimple>;
 
@@ -2055,7 +2932,9 @@ export type GetUsersCountError = unknown;
 
 export type GetUsersSearchData = {
   query: {
+    excludedAccountTypes?: Array<AccountType>;
     excludedGroups?: Array<string>;
+    includedAccountTypes?: Array<AccountType>;
     includedGroups?: Array<string>;
     query: string;
   };
@@ -2064,6 +2943,10 @@ export type GetUsersSearchData = {
 export type GetUsersSearchResponse = Array<CoreUserSimple>;
 
 export type GetUsersSearchError = unknown;
+
+export type GetUsersAccountTypesResponse = Array<AccountType>;
+
+export type GetUsersAccountTypesError = unknown;
 
 export type GetUsersMeResponse = CoreUser;
 
@@ -2081,7 +2964,7 @@ export type PostUsersCreateData = {
   body: CoreUserCreateRequest;
 };
 
-export type PostUsersCreateResponse = app__core__standard_responses__Result;
+export type PostUsersCreateResponse = app__types__standard_responses__Result;
 
 export type PostUsersCreateError = unknown;
 
@@ -2097,11 +2980,15 @@ export type PostUsersActivateData = {
   body: CoreUserActivateRequest;
 };
 
-export type PostUsersActivateResponse = app__core__standard_responses__Result;
+export type PostUsersActivateResponse = app__types__standard_responses__Result;
 
 export type PostUsersActivateError = unknown;
 
-export type PostUsersMakeAdminResponse = app__core__standard_responses__Result;
+export type PostUsersS3InitResponse = unknown;
+
+export type PostUsersS3InitError = unknown;
+
+export type PostUsersMakeAdminResponse = app__types__standard_responses__Result;
 
 export type PostUsersMakeAdminError = unknown;
 
@@ -2109,7 +2996,7 @@ export type PostUsersRecoverData = {
   body: Body_recover_user_users_recover_post;
 };
 
-export type PostUsersRecoverResponse = app__core__standard_responses__Result;
+export type PostUsersRecoverResponse = app__types__standard_responses__Result;
 
 export type PostUsersRecoverError = unknown;
 
@@ -2118,7 +3005,7 @@ export type PostUsersResetPasswordData = {
 };
 
 export type PostUsersResetPasswordResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostUsersResetPasswordError = unknown;
 
@@ -2145,7 +3032,7 @@ export type PostUsersChangePasswordData = {
 };
 
 export type PostUsersChangePasswordResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostUsersChangePasswordError = unknown;
 
@@ -2174,6 +3061,14 @@ export type PostUsersMeAskDeletionResponse = void;
 
 export type PostUsersMeAskDeletionError = unknown;
 
+export type PostUsersMergeData = {
+  body: CoreUserFusionRequest;
+};
+
+export type PostUsersMergeResponse = void;
+
+export type PostUsersMergeError = unknown;
+
 export type GetUsersMeProfilePictureResponse = unknown;
 
 export type GetUsersMeProfilePictureError = unknown;
@@ -2181,7 +3076,7 @@ export type GetUsersMeProfilePictureError = unknown;
 export type PostUsersMeProfilePictureData = unknown;
 
 export type PostUsersMeProfilePictureResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostUsersMeProfilePictureError = unknown;
 
@@ -2298,7 +3193,7 @@ export type PostAdvertAdvertsAdvertIdPictureData = {
 };
 
 export type PostAdvertAdvertsAdvertIdPictureResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostAdvertAdvertsAdvertIdPictureError = unknown;
 
@@ -2914,7 +3809,7 @@ export type PostCampaignListsListIdLogoData = {
 };
 
 export type PostCampaignListsListIdLogoResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostCampaignListsListIdLogoError = unknown;
 
@@ -2976,6 +3871,16 @@ export type GetCdrUsersMeSellersError = unknown;
 export type GetCdrOnlineSellersResponse = Array<SellerComplete>;
 
 export type GetCdrOnlineSellersError = unknown;
+
+export type GetCdrSellersSellerIdResultsData = {
+  path: {
+    seller_id: string;
+  };
+};
+
+export type GetCdrSellersSellerIdResultsResponse = unknown;
+
+export type GetCdrSellersSellerIdResultsError = unknown;
 
 export type GetCdrOnlineProductsResponse =
   Array<app__modules__cdr__schemas_cdr__ProductComplete>;
@@ -3209,18 +4114,6 @@ export type PatchCdrUsersUserIdPurchasesProductVariantIdValidatedResponse =
 export type PatchCdrUsersUserIdPurchasesProductVariantIdValidatedError =
   unknown;
 
-export type PostCdrMembershipsMembershipIdAddBatchData = {
-  body: Array<MembershipUserMappingEmail>;
-  path: {
-    membership_id: AvailableAssociationMembership;
-  };
-};
-
-export type PostCdrMembershipsMembershipIdAddBatchResponse =
-  Array<MembershipUserMappingEmail>;
-
-export type PostCdrMembershipsMembershipIdAddBatchError = unknown;
-
 export type GetCdrUsersUserIdSignaturesData = {
   path: {
     user_id: string;
@@ -3357,40 +4250,6 @@ export type PostCdrPayResponse = PaymentUrl;
 
 export type PostCdrPayError = unknown;
 
-export type GetCdrUsersUserIdMembershipsData = {
-  path: {
-    user_id: string;
-  };
-};
-
-export type GetCdrUsersUserIdMembershipsResponse =
-  Array<app__modules__cdr__schemas_cdr__MembershipComplete>;
-
-export type GetCdrUsersUserIdMembershipsError = unknown;
-
-export type PostCdrUsersUserIdMembershipsData = {
-  body: app__modules__cdr__schemas_cdr__MembershipBase;
-  path: {
-    user_id: string;
-  };
-};
-
-export type PostCdrUsersUserIdMembershipsResponse =
-  app__modules__cdr__schemas_cdr__MembershipComplete;
-
-export type PostCdrUsersUserIdMembershipsError = unknown;
-
-export type DeleteCdrUsersUserIdMembershipsMembershipIdData = {
-  path: {
-    membership_id: string;
-    user_id: string;
-  };
-};
-
-export type DeleteCdrUsersUserIdMembershipsMembershipIdResponse = void;
-
-export type DeleteCdrUsersUserIdMembershipsMembershipIdError = unknown;
-
 export type GetCdrStatusResponse = Status;
 
 export type GetCdrStatusError = unknown;
@@ -3402,6 +4261,10 @@ export type PatchCdrStatusData = {
 export type PatchCdrStatusResponse = void;
 
 export type PatchCdrStatusError = unknown;
+
+export type GetCdrUsersMeTicketsResponse = Array<Ticket>;
+
+export type GetCdrUsersMeTicketsError = unknown;
 
 export type GetCdrUsersUserIdTicketsData = {
   path: {
@@ -3423,28 +4286,96 @@ export type GetCdrUsersMeTicketsTicketIdSecretResponse = TicketSecret;
 
 export type GetCdrUsersMeTicketsTicketIdSecretError = unknown;
 
-export type GetCdrProductsProductIdTicketsSecretData = {
+export type GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData =
+  {
+    path: {
+      generator_id: string;
+      product_id: string;
+      secret: string;
+      seller_id: string;
+    };
+  };
+
+export type GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretResponse =
+  Ticket;
+
+export type GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretError =
+  unknown;
+
+export type PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData =
+  {
+    body: TicketScan;
+    path: {
+      generator_id: string;
+      product_id: string;
+      secret: string;
+      seller_id: string;
+    };
+  };
+
+export type PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretResponse =
+  void;
+
+export type PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretError =
+  unknown;
+
+export type GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagData =
+  {
+    path: {
+      generator_id: string;
+      product_id: string;
+      seller_id: string;
+      tag: string;
+    };
+  };
+
+export type GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagResponse =
+  Array<CoreUserSimple>;
+
+export type GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagError =
+  unknown;
+
+export type GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdData = {
   path: {
+    generator_id: string;
     product_id: string;
-    secret: string;
+    seller_id: string;
   };
 };
 
-export type GetCdrProductsProductIdTicketsSecretResponse = Ticket;
+export type GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdResponse =
+  Array<string>;
 
-export type GetCdrProductsProductIdTicketsSecretError = unknown;
+export type GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdError =
+  unknown;
 
-export type PatchCdrProductsProductIdTicketsSecretData = {
-  body: TicketScan;
+export type PostCdrSellersSellerIdProductsProductIdTicketsData = {
+  body: GenerateTicketBase;
   path: {
     product_id: string;
-    secret: string;
+    seller_id: string;
   };
 };
 
-export type PatchCdrProductsProductIdTicketsSecretResponse = void;
+export type PostCdrSellersSellerIdProductsProductIdTicketsResponse =
+  app__modules__cdr__schemas_cdr__ProductComplete;
 
-export type PatchCdrProductsProductIdTicketsSecretError = unknown;
+export type PostCdrSellersSellerIdProductsProductIdTicketsError = unknown;
+
+export type DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdData =
+  {
+    path: {
+      product_id: string;
+      seller_id: string;
+      ticket_generator_id: string;
+    };
+  };
+
+export type DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdResponse =
+  void;
+
+export type DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdError =
+  unknown;
 
 export type GetCdrSellersSellerIdProductsProductIdDataData = {
   path: {
@@ -3598,7 +4529,7 @@ export type PostCinemaSessionsSessionIdPosterData = {
 };
 
 export type PostCinemaSessionsSessionIdPosterResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostCinemaSessionsSessionIdPosterError = unknown;
 
@@ -3627,6 +4558,16 @@ export type PostFlappybirdScoresError = unknown;
 export type GetFlappybirdScoresMeResponse = FlappyBirdScoreCompleteFeedBack;
 
 export type GetFlappybirdScoresMeError = unknown;
+
+export type DeleteFlappybirdScoresTargetedUserIdData = {
+  path: {
+    targeted_user_id: string;
+  };
+};
+
+export type DeleteFlappybirdScoresTargetedUserIdResponse = void;
+
+export type DeleteFlappybirdScoresTargetedUserIdError = unknown;
 
 export type GetLoansLoanersResponse = Array<Loaner>;
 
@@ -3890,6 +4831,27 @@ export type DeletePhonebookAssociationsAssociationIdResponse = void;
 
 export type DeletePhonebookAssociationsAssociationIdError = unknown;
 
+export type PatchPhonebookAssociationsAssociationIdGroupsData = {
+  body: AssociationGroupsEdit;
+  path: {
+    association_id: string;
+  };
+};
+
+export type PatchPhonebookAssociationsAssociationIdGroupsResponse = void;
+
+export type PatchPhonebookAssociationsAssociationIdGroupsError = unknown;
+
+export type PatchPhonebookAssociationsAssociationIdDeactivateData = {
+  path: {
+    association_id: string;
+  };
+};
+
+export type PatchPhonebookAssociationsAssociationIdDeactivateResponse = void;
+
+export type PatchPhonebookAssociationsAssociationIdDeactivateError = unknown;
+
 export type GetPhonebookAssociationsAssociationIdMembersData = {
   path: {
     association_id: string;
@@ -3928,8 +4890,7 @@ export type PostPhonebookAssociationsMembershipsData = {
   body: app__modules__phonebook__schemas_phonebook__MembershipBase;
 };
 
-export type PostPhonebookAssociationsMembershipsResponse =
-  app__modules__phonebook__schemas_phonebook__MembershipComplete;
+export type PostPhonebookAssociationsMembershipsResponse = MembershipComplete;
 
 export type PostPhonebookAssociationsMembershipsError = unknown;
 
@@ -3961,7 +4922,7 @@ export type PostPhonebookAssociationsAssociationIdPictureData = {
 };
 
 export type PostPhonebookAssociationsAssociationIdPictureResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostPhonebookAssociationsAssociationIdPictureError = unknown;
 
@@ -4035,7 +4996,7 @@ export type PostTombolaRafflesRaffleIdLogoData = {
 };
 
 export type PostTombolaRafflesRaffleIdLogoResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostTombolaRafflesRaffleIdLogoError = unknown;
 
@@ -4177,7 +5138,7 @@ export type PostTombolaPrizesPrizeIdPictureData = {
 };
 
 export type PostTombolaPrizesPrizeIdPictureResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostTombolaPrizesPrizeIdPictureError = unknown;
 
@@ -4302,6 +5263,10 @@ export type DeleteRaidTeamsResponse = void;
 
 export type DeleteRaidTeamsError = unknown;
 
+export type PostRaidTeamsGeneratePdfResponse = unknown;
+
+export type PostRaidTeamsGeneratePdfError = unknown;
+
 export type GetRaidParticipantsParticipantIdTeamData = {
   path: {
     participant_id: string;
@@ -4343,11 +5308,15 @@ export type DeleteRaidTeamsTeamIdResponse = void;
 
 export type DeleteRaidTeamsTeamIdError = unknown;
 
-export type PostRaidDocumentData = unknown;
+export type PostRaidDocumentDocumentTypeData = {
+  path: {
+    document_type: DocumentType;
+  };
+};
 
-export type PostRaidDocumentResponse = DocumentCreation;
+export type PostRaidDocumentDocumentTypeResponse = DocumentCreation;
 
-export type PostRaidDocumentError = unknown;
+export type PostRaidDocumentDocumentTypeError = unknown;
 
 export type GetRaidDocumentDocumentIdData = {
   path: {
@@ -4547,10 +5516,137 @@ export type PostRecommendationRecommendationsRecommendationIdPictureData = {
 };
 
 export type PostRecommendationRecommendationsRecommendationIdPictureResponse =
-  app__core__standard_responses__Result;
+  app__types__standard_responses__Result;
 
 export type PostRecommendationRecommendationsRecommendationIdPictureError =
   unknown;
+
+export type GetSeedLibrarySpeciesResponse = Array<SpeciesComplete>;
+
+export type GetSeedLibrarySpeciesError = unknown;
+
+export type PostSeedLibrarySpeciesData = {
+  body: SpeciesBase;
+};
+
+export type PostSeedLibrarySpeciesResponse = SpeciesComplete;
+
+export type PostSeedLibrarySpeciesError = unknown;
+
+export type GetSeedLibrarySpeciesTypesResponse = SpeciesTypesReturn;
+
+export type GetSeedLibrarySpeciesTypesError = unknown;
+
+export type PatchSeedLibrarySpeciesSpeciesIdData = {
+  body: SpeciesEdit;
+  path: {
+    species_id: string;
+  };
+};
+
+export type PatchSeedLibrarySpeciesSpeciesIdResponse = void;
+
+export type PatchSeedLibrarySpeciesSpeciesIdError = unknown;
+
+export type DeleteSeedLibrarySpeciesSpeciesIdData = {
+  path: {
+    species_id: string;
+  };
+};
+
+export type DeleteSeedLibrarySpeciesSpeciesIdResponse = void;
+
+export type DeleteSeedLibrarySpeciesSpeciesIdError = unknown;
+
+export type GetSeedLibraryPlantsWaitingResponse = Array<PlantSimple>;
+
+export type GetSeedLibraryPlantsWaitingError = unknown;
+
+export type GetSeedLibraryPlantsUsersMeResponse = Array<PlantSimple>;
+
+export type GetSeedLibraryPlantsUsersMeError = unknown;
+
+export type GetSeedLibraryPlantsUsersUserIdData = {
+  path: {
+    user_id: string;
+  };
+};
+
+export type GetSeedLibraryPlantsUsersUserIdResponse = Array<PlantSimple>;
+
+export type GetSeedLibraryPlantsUsersUserIdError = unknown;
+
+export type GetSeedLibraryPlantsPlantIdData = {
+  path: {
+    plant_id: string;
+  };
+};
+
+export type GetSeedLibraryPlantsPlantIdResponse = PlantComplete;
+
+export type GetSeedLibraryPlantsPlantIdError = unknown;
+
+export type PatchSeedLibraryPlantsPlantIdData = {
+  body: PlantEdit;
+  path: {
+    plant_id: string;
+  };
+};
+
+export type PatchSeedLibraryPlantsPlantIdResponse = void;
+
+export type PatchSeedLibraryPlantsPlantIdError = unknown;
+
+export type DeleteSeedLibraryPlantsPlantIdData = {
+  path: {
+    plant_id: string;
+  };
+};
+
+export type DeleteSeedLibraryPlantsPlantIdResponse = void;
+
+export type DeleteSeedLibraryPlantsPlantIdError = unknown;
+
+export type PostSeedLibraryPlantsData = {
+  body: PlantCreation;
+};
+
+export type PostSeedLibraryPlantsResponse = PlantComplete;
+
+export type PostSeedLibraryPlantsError = unknown;
+
+export type PatchSeedLibraryPlantsPlantIdAdminData = {
+  body: PlantEdit;
+  path: {
+    plant_id: string;
+  };
+};
+
+export type PatchSeedLibraryPlantsPlantIdAdminResponse = void;
+
+export type PatchSeedLibraryPlantsPlantIdAdminError = unknown;
+
+export type PatchSeedLibraryPlantsPlantIdBorrowData = {
+  path: {
+    plant_id: string;
+  };
+};
+
+export type PatchSeedLibraryPlantsPlantIdBorrowResponse = void;
+
+export type PatchSeedLibraryPlantsPlantIdBorrowError = unknown;
+
+export type GetSeedLibraryInformationResponse = SeedLibraryInformation;
+
+export type GetSeedLibraryInformationError = unknown;
+
+export type PatchSeedLibraryInformationData = {
+  body: SeedLibraryInformation;
+};
+
+export type PatchSeedLibraryInformationResponse = void;
+
+export type PatchSeedLibraryInformationError = unknown;
 
 export type $OpenApiTs = {
   "/auth/simple_token": {
@@ -4711,6 +5807,16 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/myeclpay-terms-of-service": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
   "/support": {
     get: {
       res: {
@@ -4791,7 +5897,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": ModuleVisibilityCreate;
+        "201": unknown;
         /**
          * Validation Error
          */
@@ -4809,9 +5915,24 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/module-visibility/{root}/{group_id}": {
+  "/module-visibility/{root}/groups/{group_id}": {
     delete: {
-      req: DeleteModuleVisibilityRootGroupIdData;
+      req: DeleteModuleVisibilityRootGroupsGroupIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/module-visibility/{root}/account-types/{account_type}": {
+    delete: {
+      req: DeleteModuleVisibilityRootAccountTypesAccountTypeData;
       res: {
         /**
          * Successful Response
@@ -4954,6 +6075,594 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/memberships/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<MembershipSimple>;
+      };
+    };
+    post: {
+      req: PostMembershipsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": MembershipSimple;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/{association_membership_id}/members": {
+    get: {
+      req: GetMembershipsAssociationMembershipIdMembersData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<UserMembershipComplete>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/{association_membership_id}": {
+    patch: {
+      req: PatchMembershipsAssociationMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMembershipsAssociationMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/users/{user_id}": {
+    get: {
+      req: GetMembershipsUsersUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<UserMembershipComplete>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    post: {
+      req: PostMembershipsUsersUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": UserMembershipComplete;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/users/{user_id}/{association_membership_id}": {
+    get: {
+      req: GetMembershipsUsersUserIdAssociationMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<UserMembershipComplete>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/{association_membership_id}/add-batch/": {
+    post: {
+      req: PostMembershipsAssociationMembershipIdAddBatchData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Array<MembershipUserMappingEmail>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/users/{membership_id}": {
+    patch: {
+      req: PatchMembershipsUsersMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMembershipsUsersMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Structure>;
+      };
+    };
+    post: {
+      req: PostMyeclpayStructuresData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Structure;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures/{structure_id}": {
+    patch: {
+      req: PatchMyeclpayStructuresStructureIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMyeclpayStructuresStructureIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures/{structure_id}/init-manager-transfer": {
+    post: {
+      req: PostMyeclpayStructuresStructureIdInitManagerTransferData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures/confirm-manager-transfer": {
+    get: {
+      req: GetMyeclpayStructuresConfirmManagerTransferData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures/{structure_id}/stores": {
+    post: {
+      req: PostMyeclpayStructuresStructureIdStoresData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Store;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/history": {
+    get: {
+      req: GetMyeclpayStoresStoreIdHistoryData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<History>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/stores": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<UserStore>;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}": {
+    patch: {
+      req: PatchMyeclpayStoresStoreIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMyeclpayStoresStoreIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/sellers": {
+    post: {
+      req: PostMyeclpayStoresStoreIdSellersData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Seller;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    get: {
+      req: GetMyeclpayStoresStoreIdSellersData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Seller>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/sellers/{seller_user_id}": {
+    patch: {
+      req: PatchMyeclpayStoresStoreIdSellersSellerUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMyeclpayStoresStoreIdSellersSellerUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/register": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+      };
+    };
+  };
+  "/myeclpay/users/me/tos": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": TOSSignatureResponse;
+      };
+    };
+    post: {
+      req: PostMyeclpayUsersMeTosData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet/devices": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<WalletDevice>;
+      };
+    };
+    post: {
+      req: PostMyeclpayUsersMeWalletDevicesData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": WalletDevice;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet/devices/{wallet_device_id}": {
+    get: {
+      req: GetMyeclpayUsersMeWalletDevicesWalletDeviceIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": WalletDevice;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Wallet;
+      };
+    };
+  };
+  "/myeclpay/devices/activate": {
+    get: {
+      req: GetMyeclpayDevicesActivateData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet/devices/{wallet_device_id}/revoke": {
+    post: {
+      req: PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet/history": {
+    get: {
+      req: GetMyeclpayUsersMeWalletHistoryData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<History>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/transfer/init": {
+    post: {
+      req: PostMyeclpayTransferInitData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": PaymentUrl;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/transfer/redirect": {
+    get: {
+      req: GetMyeclpayTransferRedirectData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": PaymentUrl;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/scan/check": {
+    post: {
+      req: PostMyeclpayStoresStoreIdScanCheckData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": app__types__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/scan": {
+    post: {
+      req: PostMyeclpayStoresStoreIdScanData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/transactions/{transaction_id}/refund": {
+    post: {
+      req: PostMyeclpayTransactionsTransactionIdRefundData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/transactions/{transaction_id}/cancel": {
+    post: {
+      req: PostMyeclpayTransactionsTransactionIdCancelData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/integrity-check": {
+    get: {
+      req: GetMyeclpayIntegrityCheckData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": IntegrityCheckData;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
   "/notification/devices": {
     get: {
       res: {
@@ -4985,21 +6694,6 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/notification/messages/{firebase_token}": {
-    get: {
-      req: GetNotificationMessagesFirebaseTokenData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<Message>;
         /**
          * Validation Error
          */
@@ -5082,6 +6776,26 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/notification/send/topic": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
+      };
+    };
+  };
+  "/notification/send/topic/future": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
+      };
+    };
+  };
   "/payment/helloasso/webhook": {
     post: {
       res: {
@@ -5092,13 +6806,82 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/users/": {
+  "/schools/": {
     get: {
       res: {
         /**
          * Successful Response
          */
+        "200": Array<CoreSchool>;
+      };
+    };
+    post: {
+      req: PostSchoolsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": CoreSchool;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/schools/{school_id}": {
+    get: {
+      req: GetSchoolsSchoolIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": CoreSchool;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    patch: {
+      req: PatchSchoolsSchoolIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteSchoolsSchoolIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users": {
+    get: {
+      req: GetUsersData;
+      res: {
+        /**
+         * Successful Response
+         */
         "200": Array<CoreUserSimple>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
       };
     };
   };
@@ -5124,6 +6907,16 @@ export type $OpenApiTs = {
          * Validation Error
          */
         "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/account-types": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<AccountType>;
       };
     };
   };
@@ -5157,7 +6950,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -5187,11 +6980,21 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
         "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/s3-init": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
       };
     };
   };
@@ -5201,7 +7004,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "200": app__core__standard_responses__Result;
+        "200": app__types__standard_responses__Result;
       };
     };
   };
@@ -5212,7 +7015,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -5227,7 +7030,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -5272,7 +7075,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -5318,6 +7121,21 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/users/merge": {
+    post: {
+      req: PostUsersMergeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
   "/users/me/profile-picture": {
     get: {
       res: {
@@ -5333,7 +7151,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -5506,7 +7324,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -6491,7 +8309,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -6522,7 +8340,7 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/cdr/users/pending": {
+  "/cdr/users/pending/": {
     get: {
       res: {
         /**
@@ -6600,6 +8418,21 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "200": Array<SellerComplete>;
+      };
+    };
+  };
+  "/cdr/sellers/{seller_id}/results/": {
+    get: {
+      req: GetCdrSellersSellerIdResultsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
       };
     };
   };
@@ -6901,21 +8734,6 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/cdr/memberships/{membership_id}/add-batch/": {
-    post: {
-      req: PostCdrMembershipsMembershipIdAddBatchData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": Array<MembershipUserMappingEmail>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
   "/cdr/users/{user_id}/signatures/": {
     get: {
       req: GetCdrUsersUserIdSignaturesData;
@@ -7106,49 +8924,6 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/cdr/users/{user_id}/memberships/": {
-    get: {
-      req: GetCdrUsersUserIdMembershipsData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<app__modules__cdr__schemas_cdr__MembershipComplete>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    post: {
-      req: PostCdrUsersUserIdMembershipsData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__modules__cdr__schemas_cdr__MembershipComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/cdr/users/{user_id}/memberships/{membership_id}/": {
-    delete: {
-      req: DeleteCdrUsersUserIdMembershipsMembershipIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
   "/cdr/status/": {
     get: {
       res: {
@@ -7169,6 +8944,16 @@ export type $OpenApiTs = {
          * Validation Error
          */
         "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/users/me/tickets/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Ticket>;
       };
     };
   };
@@ -7202,9 +8987,9 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/cdr/products/{product_id}/tickets/{secret}/": {
+  "/cdr/sellers/{seller_id}/products/{product_id}/tickets/{generator_id}/{secret}/": {
     get: {
-      req: GetCdrProductsProductIdTicketsSecretData;
+      req: GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData;
       res: {
         /**
          * Successful Response
@@ -7217,7 +9002,67 @@ export type $OpenApiTs = {
       };
     };
     patch: {
-      req: PatchCdrProductsProductIdTicketsSecretData;
+      req: PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/sellers/{seller_id}/products/{product_id}/tickets/{generator_id}/lists/{tag}/": {
+    get: {
+      req: GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<CoreUserSimple>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/sellers/{seller_id}/products/{product_id}/tags/{generator_id}/": {
+    get: {
+      req: GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<string>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/sellers/{seller_id}/products/{product_id}/tickets/": {
+    post: {
+      req: PostCdrSellersSellerIdProductsProductIdTicketsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": app__modules__cdr__schemas_cdr__ProductComplete;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/cdr/sellers/{seller_id}/products/{product_id}/tickets/{ticket_generator_id}": {
+    delete: {
+      req: DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdData;
       res: {
         /**
          * Successful Response
@@ -7400,7 +9245,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -7451,6 +9296,21 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "200": FlappyBirdScoreCompleteFeedBack;
+      };
+    };
+  };
+  "/flappybird/scores/{targeted_user_id}": {
+    delete: {
+      req: DeleteFlappybirdScoresTargetedUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
       };
     };
   };
@@ -7849,6 +9709,36 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/phonebook/associations/{association_id}/groups": {
+    patch: {
+      req: PatchPhonebookAssociationsAssociationIdGroupsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/phonebook/associations/{association_id}/deactivate": {
+    patch: {
+      req: PatchPhonebookAssociationsAssociationIdDeactivateData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
   "/phonebook/associations/{association_id}/members/": {
     get: {
       req: GetPhonebookAssociationsAssociationIdMembersData;
@@ -7901,7 +9791,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__modules__phonebook__schemas_phonebook__MembershipComplete;
+        "201": MembershipComplete;
         /**
          * Validation Error
          */
@@ -7944,7 +9834,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -8053,7 +9943,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -8268,7 +10158,7 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
         /**
          * Validation Error
          */
@@ -8459,6 +10349,16 @@ export type $OpenApiTs = {
       };
     };
   };
+  "/raid/teams/generate-pdf": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
   "/raid/participants/{participant_id}/team": {
     get: {
       req: GetRaidParticipantsParticipantIdTeamData;
@@ -8515,9 +10415,9 @@ export type $OpenApiTs = {
       };
     };
   };
-  "/raid/document": {
+  "/raid/document/{document_type}": {
     post: {
-      req: PostRaidDocumentData;
+      req: PostRaidDocumentDocumentTypeData;
       res: {
         /**
          * Successful Response
@@ -8830,7 +10730,212 @@ export type $OpenApiTs = {
         /**
          * Successful Response
          */
-        "201": app__core__standard_responses__Result;
+        "201": app__types__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/seed_library/species/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<SpeciesComplete>;
+      };
+    };
+    post: {
+      req: PostSeedLibrarySpeciesData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": SpeciesComplete;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/seed_library/species/types": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": SpeciesTypesReturn;
+      };
+    };
+  };
+  "/seed_library/species/{species_id}": {
+    patch: {
+      req: PatchSeedLibrarySpeciesSpeciesIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteSeedLibrarySpeciesSpeciesIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/seed_library/plants/waiting": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<PlantSimple>;
+      };
+    };
+  };
+  "/seed_library/plants/users/me": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<PlantSimple>;
+      };
+    };
+  };
+  "/seed_library/plants/users/{user_id}": {
+    get: {
+      req: GetSeedLibraryPlantsUsersUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<PlantSimple>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/seed_library/plants/{plant_id}": {
+    get: {
+      req: GetSeedLibraryPlantsPlantIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": PlantComplete;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    patch: {
+      req: PatchSeedLibraryPlantsPlantIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteSeedLibraryPlantsPlantIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/seed_library/plants/": {
+    post: {
+      req: PostSeedLibraryPlantsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": PlantComplete;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/seed_library/plants/{plant_id}/admin": {
+    patch: {
+      req: PatchSeedLibraryPlantsPlantIdAdminData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/seed_library/plants/{plant_id}/borrow": {
+    patch: {
+      req: PatchSeedLibraryPlantsPlantIdBorrowData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/seed_library/information": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": SeedLibraryInformation;
+      };
+    };
+    patch: {
+      req: PatchSeedLibraryInformationData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
         /**
          * Validation Error
          */

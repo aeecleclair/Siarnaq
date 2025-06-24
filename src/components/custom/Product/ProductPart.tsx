@@ -15,14 +15,14 @@ interface ProductPartProps {
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   const t = useTranslations("ProductPart");
-  const { memberships } = useUserMemberships(user.id);
+  const { userMemberships } = useUserMemberships(user.id);
   const { purchases, total: totalToPay } = useUserPurchases(user.id);
   const { products: allProducts } = useProducts();
   const allConstraint = allProducts
     .map((product) => product?.product_constraints)
     .flat();
   const allConstraintIds = allConstraint?.map((constraint) => constraint?.id);
-  const membershipsIds = memberships.map(
+  const userAssociationsMembershipsIds = userMemberships.map(
     (membership) => membership.association_membership_id,
   );
   return (
@@ -42,7 +42,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
                   (purchase) => purchase.product.id,
                 )}
                 purchase={purchase}
-                membershipsIds={membershipsIds}
+                userAssociationsMembershipsIds={userAssociationsMembershipsIds}
                 user={user}
                 isAdmin={isAdmin}
               />

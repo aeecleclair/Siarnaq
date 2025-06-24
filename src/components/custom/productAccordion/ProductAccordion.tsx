@@ -140,7 +140,7 @@ export const ProductAccordion = ({
         </ContextMenu>
         <AccordionContent>
           {/* Take care to export all grid-cols-n
-        Can't find a better way to do it for naw */}
+        Can't find a better way to do it for now */}
           <div className="hidden grid-cols-5" />
           <div className="hidden grid-cols-4" />
           <div className="hidden grid-cols-3" />

@@ -805,6 +805,14 @@ export type FloorsType =
   | "X5"
   | "X6";
 
+export type GenerateProductTicket = {
+  name: string;
+  max_use: number;
+  expiration: string;
+  id: string;
+  product_id: string;
+};
+
 export type GenerateTicketBase = {
   name: string;
   max_use: number;
@@ -4285,6 +4293,18 @@ export type GetCdrUsersMeTicketsTicketIdSecretData = {
 export type GetCdrUsersMeTicketsTicketIdSecretResponse = TicketSecret;
 
 export type GetCdrUsersMeTicketsTicketIdSecretError = unknown;
+
+export type GetCdrSellersSellerIdProductsProductIdTicketsData = {
+  path: {
+    product_id: string;
+    seller_id: string;
+  };
+};
+
+export type GetCdrSellersSellerIdProductsProductIdTicketsResponse =
+  Array<GenerateProductTicket>;
+
+export type GetCdrSellersSellerIdProductsProductIdTicketsError = unknown;
 
 export type GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData =
   {

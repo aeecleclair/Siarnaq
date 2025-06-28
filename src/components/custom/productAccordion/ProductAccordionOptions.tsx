@@ -58,11 +58,7 @@ export const ProductAccordionOptions = ({
         product.product_constraints?.map((constraint) => constraint.id) || [],
       document_constraints:
         product.document_constraints?.map((constraint) => constraint.id) || [],
-      generate_ticket: product.generate_ticket,
-      ticket_max_use: product.ticket_max_use?.toString() || "1",
-      ticket_expiration: product.ticket_expiration
-        ? new Date(product.ticket_expiration)
-        : undefined,
+      tickets: [],
       data_fields: [],
     },
   });
@@ -94,10 +90,6 @@ export const ProductAccordionOptions = ({
     const body: app__modules__cdr__schemas_cdr__ProductEdit = {
       ...values,
       available_online: values.available_online === "true",
-      ticket_max_use: values.ticket_max_use
-        ? parseInt(values.ticket_max_use)
-        : null,
-      ticket_expiration: values.ticket_expiration?.toISOString(),
     };
     await patchProduct(body);
     refreshProduct();

@@ -285,12 +285,14 @@ import type {
   GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdData,
   GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdError,
   GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdResponse,
+  GetCdrSellersSellerIdProductsProductIdTicketsData,
   GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagData,
   GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagError,
   GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagResponse,
   GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData,
   GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretError,
   GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretResponse,
+  GetCdrSellersSellerIdProductsProductIdTicketsResponse,
   GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData,
   GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError,
   GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
@@ -5611,6 +5613,21 @@ export const getCdrUsersMeTicketsTicketIdSecret = (
   >({
     ...options,
     url: "/cdr/users/me/tickets/{ticket_id}/secret/",
+  });
+};
+
+/**
+ * Get Tickets Generators By Product
+ */
+export const getCdrSellersSellerIdProductsProductIdTickets = (
+  options: Options<GetCdrSellersSellerIdProductsProductIdTicketsData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCdrSellersSellerIdProductsProductIdTicketsResponse,
+    PostCdrSellersSellerIdProductsProductIdTicketsError
+  >({
+    ...options,
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/tickets/",
   });
 };
 

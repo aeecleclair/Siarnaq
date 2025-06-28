@@ -3513,6 +3513,37 @@ export const $FloorsType = {
   title: "FloorsType",
 } as const;
 
+export const $GenerateProductTicket = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    max_use: {
+      type: "integer",
+      title: "Max Use",
+    },
+    expiration: {
+      type: "string",
+      format: "date-time",
+      title: "Expiration",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    product_id: {
+      type: "string",
+      format: "uuid",
+      title: "Product Id",
+    },
+  },
+  type: "object",
+  required: ["name", "max_use", "expiration", "id", "product_id"],
+  title: "GenerateProductTicket",
+} as const;
+
 export const $GenerateTicketBase = {
   properties: {
     name: {

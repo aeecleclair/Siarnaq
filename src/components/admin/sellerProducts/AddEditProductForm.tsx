@@ -1,13 +1,15 @@
 import {
   CustomDataFieldBase,
+  GenerateTicketBase,
   deleteCdrSellersSellerIdProductsProductIdDataFieldId,
+  deleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorId,
   postCdrSellersSellerIdProductsProductIdData,
+  postCdrSellersSellerIdProductsProductIdTickets,
 } from "@/api";
 import { DatePicker } from "@/components/custom/DatePicker";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { MultiSelect } from "@/components/custom/MultiSelect";
 import { StyledFormField } from "@/components/custom/StyledFormField";
-import { TextSeparator } from "@/components/custom/TextSeparator";
 import {
   Accordion,
   AccordionContent,
@@ -15,25 +17,20 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
+import { useSellerProductTickets } from "@/hooks/useSellerProductTickets";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { HiTrash } from "react-icons/hi";
-import { z } from "zod";
+import z from "zod";
 
 interface AddEditProductFormProps {
   form: UseFormReturn<z.infer<typeof productFormSchema>>;
@@ -53,13 +50,99 @@ export const AddEditProductForm = ({
   isEdit = false,
 }: AddEditProductFormProps) => {
   const { products: constraint } = useProducts();
-  const { data, refetch } = useSellerProductData(sellerId, productId ?? null);
+  const { data, refetch: refetchData } = useSellerProductData(
+    sellerId,
+    productId ?? null,
+  );
+  const { data: tickets, refetch: refetchTickets } = useSellerProductTickets(
+    sellerId,
+    productId ?? null,
+  );
+  const [isAddingTicketLoading, setIsAddingTicketLoading] = useState(false);
+  const [isDeletingTicketLoading, setIsDeletingTicketLoading] = useState(false);
   const [isAddingLoading, setIsAddingLoading] = useState(false);
   const [isDeletingLoading, setIsDeletingLoading] = useState(false);
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setIsOpened(false);
+  }
+
+  async function onAddTicket() {
+    const name = form.getValues("ticket_name");
+    const maxUse = form.getValues("ticket_max_use");
+    const expiration = form.getValues("ticket_expiration");
+
+    if (!name || !maxUse || !expiration) return;
+    if (isEdit) {
+      setIsAddingTicketLoading(true);
+      const body: GenerateTicketBase = {
+        name: name,
+        max_use: parseInt(maxUse),
+        expiration: expiration.toISOString(),
+      };
+      const { error } = await postCdrSellersSellerIdProductsProductIdTickets({
+        body: body,
+        path: { seller_id: sellerId, product_id: productId! },
+      });
+      if (error) {
+        toast({
+          title: "Error",
+          description: (error as { detail: String }).detail,
+          variant: "destructive",
+        });
+        setIsAddingTicketLoading(false);
+        return;
+      }
+      refetchTickets();
+      setIsAddingTicketLoading(false);
+    } else {
+      form.setValue("ticket_name", undefined);
+      form.setValue("ticket_max_use", undefined);
+      form.setValue("ticket_expiration", undefined);
+      form.setValue("tickets", [
+        ...form.getValues("tickets"),
+        {
+          id: form.getValues("tickets").length.toString(),
+          name: name,
+          max_use: parseInt(maxUse),
+          expiration: expiration,
+          product_id: "",
+        },
+      ]);
+    }
+  }
+
+  async function onDeleteTicket(id: string) {
+    if (isEdit) {
+      setIsDeletingTicketLoading(true);
+      const { error } =
+        await deleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorId(
+          {
+            path: {
+              seller_id: sellerId,
+              product_id: productId!,
+              ticket_generator_id: id,
+            },
+          },
+        );
+      if (error) {
+        toast({
+          title: "Error",
+          description: (error as { detail: String }).detail,
+          variant: "destructive",
+        });
+        setIsDeletingTicketLoading(false);
+        return;
+      }
+      refetchTickets();
+      setIsDeletingTicketLoading(false);
+    } else {
+      form.setValue(
+        "tickets",
+        form.getValues("tickets").filter((field) => field.id !== id),
+      );
+    }
   }
 
   async function onAddData() {
@@ -83,7 +166,7 @@ export const AddEditProductForm = ({
         setIsAddingLoading(false);
         return;
       }
-      refetch();
+      refetchData();
       setIsAddingLoading(false);
     } else {
       form.setValue("data_field_name", "");
@@ -102,9 +185,15 @@ export const AddEditProductForm = ({
     if (isEdit) {
       setIsDeletingLoading(true);
       const { error } =
-        await deleteCdrSellersSellerIdProductsProductIdDataFieldId({
-          path: { seller_id: sellerId, product_id: productId!, field_id: id },
-        });
+        await deleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorId(
+          {
+            path: {
+              seller_id: sellerId,
+              product_id: productId!,
+              ticket_generator_id: id,
+            },
+          },
+        );
       if (error) {
         toast({
           title: "Error",
@@ -114,7 +203,7 @@ export const AddEditProductForm = ({
         setIsDeletingLoading(false);
         return;
       }
-      refetch();
+      refetchData();
       setIsDeletingLoading(false);
     } else {
       form.setValue(
@@ -188,39 +277,18 @@ export const AddEditProductForm = ({
             <h3 className="text-primary hover:text-primary">Tickets</h3>
           </AccordionTrigger>
           <AccordionContent className="grid gap-4">
-            <FormField
-              control={form.control}
-              name="generate_ticket"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <div className="grid gap-2">
-                    <div className="flex items-center space-x-2">
-                      <Switch
-                        id="generate_ticket"
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                      <Label htmlFor="generate_ticket">
-                        {"Générer un ticket pour ce produit"}
-                      </Label>
-                    </div>
-                    <FormMessage />
-                  </div>
-                </FormItem>
-              )}
-            />
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-4">
+              <StyledFormField
+                form={form}
+                label="Nom du ticket"
+                id="ticket_name"
+                input={(field) => <Input {...field} />}
+              />
               <StyledFormField
                 form={form}
                 label="Nombre d'utilisations maximum"
                 id="ticket_max_use"
-                input={(field) => (
-                  <Input
-                    {...field}
-                    type="number"
-                    disabled={!form.watch("generate_ticket")}
-                  />
-                )}
+                input={(field) => <Input {...field} type="number" />}
               />
               <StyledFormField
                 form={form}
@@ -232,10 +300,34 @@ export const AddEditProductForm = ({
                     setDate={field.onChange}
                     fromDate={new Date()}
                     defaultDate={field.value || new Date()}
-                    disabled={!form.watch("generate_ticket")}
                   />
                 )}
               />
+              <LoadingButton
+                variant="outline"
+                type="button"
+                isLoading={isAddingTicketLoading}
+                className="w-[100px] self-end"
+                onClick={onAddTicket}
+              >
+                Ajouter
+              </LoadingButton>
+            </div>
+            <div className="grid gap-4 px-1">
+              {(isEdit ? tickets : form.watch("tickets")).map((ticket) => (
+                <div key={ticket.id} className="flex flex-row items-center">
+                  <span>{ticket.name}</span>
+                  <LoadingButton
+                    size="icon"
+                    variant="destructive"
+                    className="flex ml-auto h-8"
+                    isLoading={isDeletingTicketLoading}
+                    onClick={() => onDeleteTicket(ticket.id)}
+                  >
+                    <HiTrash className="w-5 h-5" />
+                  </LoadingButton>
+                </div>
+              ))}
             </div>
           </AccordionContent>
         </AccordionItem>

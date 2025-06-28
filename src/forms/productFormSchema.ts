@@ -26,11 +26,13 @@ export const productFormSchema = z
     ),
     product_constraints: z.array(z.string()),
     document_constraints: z.array(z.string()),
-    generate_ticket: z.boolean(),
+    ticket_name: z.string().optional(),
     ticket_max_use: z
       .string()
+      .optional()
       .refine(
         (value) => {
+          if (value === undefined) return true;
           const parsedValue = parseInt(value);
           return !isNaN(parsedValue) && parsedValue >= 1;
         },
@@ -38,6 +40,7 @@ export const productFormSchema = z
       )
       .refine(
         (value) => {
+          if (value === undefined) return true;
           const isInt = /^\d+$/.test(value);
           return isInt;
         },
@@ -45,9 +48,18 @@ export const productFormSchema = z
       )
       .optional(),
     ticket_expiration: z.date().optional(),
+    tickets: z.array(
+      z.object({
+        name: z.string(),
+        id: z.string(),
+        max_use: z.number(),
+        expiration: z.date(),
+        product_id: z.string(),
+      }),
+    ),
   })
   .superRefine((data, ctx) => {
-    if (data.generate_ticket && !data.ticket_expiration) {
+    if (!data.ticket_expiration) {
       ctx.addIssue({
         path: ["ticket_expiration"],
         code: z.ZodIssueCode.custom,

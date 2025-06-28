@@ -277,7 +277,7 @@ export const AddEditProductForm = ({
             <h3 className="text-primary hover:text-primary">Tickets</h3>
           </AccordionTrigger>
           <AccordionContent className="grid gap-4">
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-2">
               <StyledFormField
                 form={form}
                 label="Nom du ticket"
@@ -290,6 +290,8 @@ export const AddEditProductForm = ({
                 id="ticket_max_use"
                 input={(field) => <Input {...field} type="number" />}
               />
+            </div>
+            <div className="flex flex-row gap-4">
               <StyledFormField
                 form={form}
                 label="Date d'expiration"

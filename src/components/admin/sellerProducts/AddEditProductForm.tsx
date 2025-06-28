@@ -21,12 +21,21 @@ import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
 import { useSellerProductTickets } from "@/hooks/useSellerProductTickets";
+import { apiFormatDate } from "@/lib/date_conversion";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { HiTrash } from "react-icons/hi";
@@ -315,22 +324,35 @@ export const AddEditProductForm = ({
                 Ajouter
               </LoadingButton>
             </div>
-            <div className="grid gap-4 px-1">
-              {(isEdit ? tickets : form.watch("tickets")).map((ticket) => (
-                <div key={ticket.id} className="flex flex-row items-center">
-                  <span>{ticket.name}</span>
-                  <LoadingButton
-                    size="icon"
-                    variant="destructive"
-                    className="flex ml-auto h-8"
-                    isLoading={isDeletingTicketLoading}
-                    onClick={() => onDeleteTicket(ticket.id)}
-                  >
-                    <HiTrash className="w-5 h-5" />
-                  </LoadingButton>
-                </div>
-              ))}
-            </div>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Nom</TableHead>
+                  <TableHead>Nombre d&apos;utilisations maximum</TableHead>
+                  <TableHead>Date d&apos;expiration</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {(isEdit ? tickets : form.watch("tickets")).map((ticket) => (
+                  <TableRow key={ticket.id}>
+                    <TableCell>{ticket.name}</TableCell>
+                    <TableCell>{ticket.max_use}</TableCell>
+                    <TableCell>{apiFormatDate(ticket.expiration)}</TableCell>
+                    <TableCell className="text-right">
+                      <LoadingButton
+                        size="icon"
+                        variant="destructive"
+                        className="flex ml-auto h-8"
+                        isLoading={isDeletingTicketLoading}
+                        onClick={() => onDeleteTicket(ticket.id)}
+                      >
+                        <HiTrash className="w-5 h-5" />
+                      </LoadingButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="conditions">

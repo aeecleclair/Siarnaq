@@ -29,10 +29,9 @@ export const productFormSchema = z
     ticket_name: z.string().optional(),
     ticket_max_use: z
       .string()
-      .optional()
       .refine(
         (value) => {
-          if (value === undefined) return true;
+          if (!value) return true;
           const parsedValue = parseInt(value);
           return !isNaN(parsedValue) && parsedValue >= 1;
         },
@@ -40,7 +39,7 @@ export const productFormSchema = z
       )
       .refine(
         (value) => {
-          if (value === undefined) return true;
+          if (!value) return true;
           const isInt = /^\d+$/.test(value);
           return isInt;
         },
@@ -59,11 +58,29 @@ export const productFormSchema = z
     ),
   })
   .superRefine((data, ctx) => {
-    if (!data.ticket_expiration) {
-      ctx.addIssue({
-        path: ["ticket_expiration"],
-        code: z.ZodIssueCode.custom,
-        message: "Veuillez renseigner la date d'expiration du ticket",
-      });
+    if (
+      // at least one of the fields is empty AND one is full => incomplete ticket
+      (!data.ticket_name || !data.ticket_max_use || !data.ticket_expiration) &&
+      (data.ticket_name || data.ticket_max_use || data.ticket_expiration)
+    ) {
+      if (!data.ticket_name)
+        ctx.addIssue({
+          path: ["ticket_name"],
+          code: z.ZodIssueCode.custom,
+          message: "Veuillez renseigner le nom du ticket",
+        });
+      if (!data.ticket_max_use)
+        ctx.addIssue({
+          path: ["ticket_max_use"],
+          code: z.ZodIssueCode.custom,
+          message:
+            "Veuillez renseigner le nombre d'utilisations maximum du ticket",
+        });
+      if (!data.ticket_expiration)
+        ctx.addIssue({
+          path: ["ticket_expiration"],
+          code: z.ZodIssueCode.custom,
+          message: "Veuillez renseigner la date d'expiration du ticket",
+        });
     }
   });

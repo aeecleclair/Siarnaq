@@ -37,6 +37,7 @@ export const AddProductAccordionItem = ({
       document_constraints: [],
       data_fields: [],
       tickets: [],
+      ticket_name: "",
       ticket_max_use: "1",
     },
   });

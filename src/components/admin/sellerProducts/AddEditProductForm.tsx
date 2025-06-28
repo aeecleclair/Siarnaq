@@ -97,7 +97,7 @@ export const AddEditProductForm = ({
       refetchTickets();
       setIsAddingTicketLoading(false);
     } else {
-      form.setValue("ticket_name", undefined);
+      form.setValue("ticket_name", "");
       form.setValue("ticket_max_use", undefined);
       form.setValue("ticket_expiration", undefined);
       form.setValue("tickets", [

@@ -53,7 +53,6 @@ export const productFormSchema = z
         id: z.string(),
         max_use: z.number(),
         expiration: z.date(),
-        product_id: z.string(),
       }),
     ),
   })

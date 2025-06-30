@@ -58,7 +58,10 @@ export const ProductAccordionOptions = ({
         product.product_constraints?.map((constraint) => constraint.id) || [],
       document_constraints:
         product.document_constraints?.map((constraint) => constraint.id) || [],
-      tickets: [],
+      tickets: product.tickets?.map((ticket) => ({
+        ...ticket,
+        expiration: new Date(ticket.expiration),
+      })),
       data_fields: [],
     },
   });

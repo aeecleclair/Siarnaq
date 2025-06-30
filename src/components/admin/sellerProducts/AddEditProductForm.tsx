@@ -34,7 +34,6 @@ import { toast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
-import { useSellerProductTickets } from "@/hooks/useSellerProductTickets";
 import { apiFormatDate } from "@/lib/date_conversion";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
@@ -60,10 +59,6 @@ export const AddEditProductForm = ({
 }: AddEditProductFormProps) => {
   const { products: constraint } = useProducts();
   const { data, refetch: refetchData } = useSellerProductData(
-    sellerId,
-    productId ?? null,
-  );
-  const { data: tickets, refetch: refetchTickets } = useSellerProductTickets(
     sellerId,
     productId ?? null,
   );
@@ -103,23 +98,20 @@ export const AddEditProductForm = ({
         setIsAddingTicketLoading(false);
         return;
       }
-      refetchTickets();
       setIsAddingTicketLoading(false);
-    } else {
-      form.setValue("ticket_name", "");
-      form.setValue("ticket_max_use", "1");
-      form.setValue("ticket_expiration", undefined);
-      form.setValue("tickets", [
-        ...form.getValues("tickets"),
-        {
-          id: form.getValues("tickets").length.toString(),
-          name: name,
-          max_use: parseInt(maxUse),
-          expiration: expiration,
-          product_id: "",
-        },
-      ]);
     }
+    form.setValue("ticket_name", "");
+    form.setValue("ticket_max_use", "1");
+    form.setValue("ticket_expiration", undefined);
+    form.setValue("tickets", [
+      ...form.getValues("tickets"),
+      {
+        id: form.getValues("tickets").length.toString(),
+        name: name,
+        max_use: parseInt(maxUse),
+        expiration: expiration,
+      },
+    ]);
   }
 
   async function onDeleteTicket(id: string) {
@@ -144,14 +136,12 @@ export const AddEditProductForm = ({
         setIsDeletingTicketLoading(false);
         return;
       }
-      refetchTickets();
       setIsDeletingTicketLoading(false);
-    } else {
-      form.setValue(
-        "tickets",
-        form.getValues("tickets").filter((field) => field.id !== id),
-      );
     }
+    form.setValue(
+      "tickets",
+      form.getValues("tickets").filter((field) => field.id !== id),
+    );
   }
 
   async function onAddData() {
@@ -194,15 +184,13 @@ export const AddEditProductForm = ({
     if (isEdit) {
       setIsDeletingLoading(true);
       const { error } =
-        await deleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorId(
-          {
-            path: {
-              seller_id: sellerId,
-              product_id: productId!,
-              ticket_generator_id: id,
-            },
+        await deleteCdrSellersSellerIdProductsProductIdDataFieldId({
+          path: {
+            seller_id: sellerId,
+            product_id: productId!,
+            field_id: id,
           },
-        );
+        });
       if (error) {
         toast({
           title: "Error",
@@ -333,7 +321,7 @@ export const AddEditProductForm = ({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {(isEdit ? tickets : form.watch("tickets")).map((ticket) => (
+                {form.watch("tickets").map((ticket) => (
                   <TableRow key={ticket.id}>
                     <TableCell>{ticket.name}</TableCell>
                     <TableCell>{ticket.max_use}</TableCell>

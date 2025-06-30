@@ -58,10 +58,7 @@ export const AddEditProductForm = ({
   isEdit = false,
 }: AddEditProductFormProps) => {
   const { products: constraint } = useProducts();
-  const { data, refetch: refetchData } = useSellerProductData(
-    sellerId,
-    productId ?? null,
-  );
+  const { data, refetch } = useSellerProductData(sellerId, productId ?? null);
   const [isAddingTicketLoading, setIsAddingTicketLoading] = useState(false);
   const [isDeletingTicketLoading, setIsDeletingTicketLoading] = useState(false);
   const [isAddingLoading, setIsAddingLoading] = useState(false);
@@ -165,7 +162,7 @@ export const AddEditProductForm = ({
         setIsAddingLoading(false);
         return;
       }
-      refetchData();
+      refetch();
       setIsAddingLoading(false);
     } else {
       form.setValue("data_field_name", "");
@@ -200,7 +197,7 @@ export const AddEditProductForm = ({
         setIsDeletingLoading(false);
         return;
       }
-      refetchData();
+      refetch();
       setIsDeletingLoading(false);
     } else {
       form.setValue(

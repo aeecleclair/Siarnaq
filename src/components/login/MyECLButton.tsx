@@ -1,14 +1,17 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
 import { useCodeVerifierStore } from "@/stores/codeVerifier";
 import { useTokenStore } from "@/stores/token";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useLocale } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import * as auth from "oauth4webapi";
 import { useState } from "react";
 
 import { LoadingButton } from "../custom/LoadingButton";
 
 const MyECLButton = () => {
+  const locale = useLocale();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { setCodeVerifier, codeVerifier } = useCodeVerifierStore();
@@ -24,7 +27,9 @@ const MyECLButton = () => {
       .discoveryRequest(issuerUrl, { algorithm: "oauth2" })
       .then((response) => auth.processDiscoveryResponse(issuerUrl, response));
   }
-  const redirectUri = process.env.NEXT_PUBLIC_FRONTEND_URL + "/login" ?? "";
+  const redirectUri = process.env.NEXT_PUBLIC_FRONTEND_URL
+    ? `${process.env.NEXT_PUBLIC_FRONTEND_URL}/${locale}/login`
+    : "";
   const client: auth.Client = {
     client_id: process.env.NEXT_PUBLIC_CLIENT_ID ?? "",
     token_endpoint_auth_method: "none",

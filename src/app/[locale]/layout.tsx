@@ -8,11 +8,10 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Suspense } from "react";
 
-import "./globals.css";
 import Provider from "./provider";
 import { QueryProvider } from "./queryProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+export const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Chaîne de rentrée",

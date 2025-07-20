@@ -80,5 +80,9 @@
     "selectPromotion": "Sélectionnez votre promo pour créer un compte :",
     "promotion": "Promotion {year}",
     "register": "S'inscrire"
+  },
+  "Metadata": {
+    "title": "Chaîne de rentrée",
+    "description": "Plateforme de gestion de la rentrée associative de Centrale Lyon"
   }
 }

@@ -50,35 +50,38 @@ export const AssociationPanel = ({
             {t("presentation")}
           </div>
         </Link>
-        {showSellerFeatureFlag && onlineSellers.map((seller) => {
-          const purchasesCount =
-            purchases.filter((purchase) => purchase.seller.id === seller.id)
-              .length ?? 0;
-          return (
-            <Link
-              key={seller.id}
-              href={canClick ? `/?sellerId=${seller.id}` : "#"}
-              className={`hover:text-primary ${
-                seller.id === firstSellerId ? "font-semibold text-primary" : ""
-              } ${!canClick ? "cursor-not-allowed" : ""}`}
-            >
-              <div className="flex flex-row items-center">
-                {purchasesCount > 0 ? (
-                  <HiOutlineShoppingCart className="h-4 w-4 mr-2" />
-                ) : (
-                  <HiOutlineEllipsisHorizontal className="h-4 w-4 mr-2" />
-                )}
-                {seller.name}
-                {purchasesCount > 0 && (
-                  <>
-                    <span className="ml-2">·</span>
-                    <span className="ml-2">{purchasesCount}</span>
-                  </>
-                )}
-              </div>
-            </Link>
-          );
-        })}
+        {showSellerFeatureFlag &&
+          onlineSellers.map((seller) => {
+            const purchasesCount =
+              purchases.filter((purchase) => purchase.seller.id === seller.id)
+                .length ?? 0;
+            return (
+              <Link
+                key={seller.id}
+                href={canClick ? `/?sellerId=${seller.id}` : "#"}
+                className={`hover:text-primary ${
+                  seller.id === firstSellerId
+                    ? "font-semibold text-primary"
+                    : ""
+                } ${!canClick ? "cursor-not-allowed" : ""}`}
+              >
+                <div className="flex flex-row items-center">
+                  {purchasesCount > 0 ? (
+                    <HiOutlineShoppingCart className="h-4 w-4 mr-2" />
+                  ) : (
+                    <HiOutlineEllipsisHorizontal className="h-4 w-4 mr-2" />
+                  )}
+                  {seller.name}
+                  {purchasesCount > 0 && (
+                    <>
+                      <span className="ml-2">·</span>
+                      <span className="ml-2">{purchasesCount}</span>
+                    </>
+                  )}
+                </div>
+              </Link>
+            );
+          })}
         <Link
           href={canClick ? `/?sellerId=info` : "#"}
           className={`hover:text-primary ${

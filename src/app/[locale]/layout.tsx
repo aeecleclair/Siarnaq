@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import Script from "next/script";
@@ -13,11 +13,17 @@ import { QueryProvider } from "./queryProvider";
 
 export const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Chaîne de rentrée",
-  description:
-    "Plateforme de gestion de la rentrée associative de Centrale Lyon",
-};
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await props.params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

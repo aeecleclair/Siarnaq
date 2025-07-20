@@ -79,5 +79,9 @@
     "selectPromotion": "Please select your school year:",
     "promotion": "School year {year}",
     "register": "Register"
+  },
+  "Metadata": {
+    "title": "Associative Back-to-school",
+    "description": "Centrale Lyon associative Back-to-School management platform"
   }
 }

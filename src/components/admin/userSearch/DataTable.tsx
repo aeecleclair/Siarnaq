@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useRouter } from "@/i18n/navigation";
 import { RankingInfo } from "@tanstack/match-sorter-utils";
 import {
   ColumnDef,
@@ -27,7 +28,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { set } from "date-fns";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import * as React from "react";
 
 import { DataTablePagination } from "./DataTablePagination";

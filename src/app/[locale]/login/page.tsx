@@ -17,11 +17,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import MyECLButton from "../../components/login/MyECLButton";
+import MyECLButton from "../../../components/login/MyECLButton";
 
 const Login = () => {
   const t = useTranslations("Login");

@@ -11,8 +11,8 @@ import {
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useSellers } from "@/hooks/useSellers";
 import { useStatus } from "@/hooks/useStatus";
+import { useRouter } from "@/i18n/navigation";
 import { useSizeStore } from "@/stores/SizeStore";
-import { useRouter } from "next/navigation";
 import { Suspense, useEffect } from "react";
 
 const AdminPage = () => {

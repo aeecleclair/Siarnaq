@@ -1,9 +1,9 @@
 import { GetCdrOnlineSellersResponse, SellerComplete } from "@/api";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
+import { Link } from "@/i18n/navigation";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import {

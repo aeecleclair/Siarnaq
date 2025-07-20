@@ -1,6 +1,6 @@
 import { GetCdrOnlineSellersResponse } from "@/api";
+import { useRouter } from "@/i18n/navigation";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { useRouter } from "next/navigation";
 
 import { Button } from "../ui/button";
 

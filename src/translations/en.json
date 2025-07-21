@@ -1,87 +1,77 @@
 {
   "associationPanel": {
     "associations": "Associations",
-    "presentation": "Presentation",
     "information": "Useful informations",
+    "presentation": "Presentation",
     "summary": "Summary"
   },
-  "introCarouselItem": {
-    "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services. At the end of the process, you'll be asked to pay online by credit card.",
-    "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
-    "selectCurriculum": "To start, please select your curriculum:",
-    "begin": "Shall we start?",
-    "validate": "Confirm"
-  },
-  "introPanel": {
-    "presentation": "Presentation"
-  },
-  "paymentButton": {
-    "title": "Information about the payment provider",
-    "description": "You will be redirected to HelloAsso to proceed to payment. HelloAsso is a French company offering payment solutions for associations. It is financed exclusively by donations. By default, HelloAsso will propose you to make a donation (called 'contribution volontaire' or 'voluntary contribution'), you can refuse to do so without compromising the payment. If you choose to make a donation, only HelloAsso will benefit it.",
-    "pay": "Pay"
-  },
-  "productPanel": {
-    "noProductFound": "No product available"
-  },
-  "productAccordion": {
-    "mustBuy": "You must buy {products}",
-    "membershipAlreadyTaken": "You have already taken the membership to {membership} until {date}"
-  },
-  "recap": {
-    "remainingToPay": "Remaining to pay:"
-  },
-  "productPart": {
-    "summary": "Summary",
-    "total": "Total",
-    "noProduct": "No product"
-  },
-  "purchaseItem": {
-    "missing": "Missing {products}"
-  },
   "info": {
-    "information": "Useful information",
-    "cdrPhysiqueTitle": "On site Chaîne de rentrée",
-    "cdrPhysiqueSubtitle": "Following this online Chaîne de Rentrée, you will be called in the onsite Chaîne de Rentrée.",
+    "cautionDescription": "If you book a place at the Integration Weekend (WEI), please bring two €100 deposit checks payable to",
+    "cautionInstructions": "On the back of the first write: \"First name Last name - WEI 2024 - bus\" and on the back of the second: \"First name Last name - WEI 2024 - site\". These deposit checks will only be cashed in the event of damage to the buses or the WEI site.",
+    "cautionTitle": "Deposit for the WEI",
     "cdrPhysiqueDescription": "You'll be able to meet associations, express your interest for offered activities and ask any questions you may have. The onsite Chaîne de Rentrée will be the opportunity to register for all Intregration Weeks' (QI) events and subscribe to association services.",
     "cdrPhysiqueMandatoryWarning": "Your presence at the onsite Chaîne de Rentrée is mandatory to validate your purchases. In the event of a major unavailability, please contact the Student Council (BDE) as soon as possible to find an alternative solution.",
-    "facebookTitle": "Facebook group for new students",
-    "facebook": "The majority of the campus' communication takes place via Facebook groups. New students can join the group 'Nouveaux Admis 2024' to make sure they don't miss any information:",
-    "myECLTitle": "MyECL Application",
-    "myECL": "'Essential to student life at Centrale, the MyECL application gives you access to lots of services during the year. You'll find the events calendar, room reservations, the film club schedule and much more.",
-    "downloadMyECLiOS": "Download MyECL for iOS/iPadOS",
+    "cdrPhysiqueSubtitle": "Following this online Chaîne de Rentrée, you will be called in the onsite Chaîne de Rentrée.",
+    "cdrPhysiqueTitle": "On site Chaîne de rentrée",
     "downloadMyECLAndroid": "Download MyECL for Android",
-    "elementTitle": "Element / Matrix instant messaging",
+    "downloadMyECLiOS": "Download MyECL for iOS/iPadOS",
     "element": "A Matrix instance is hosted on campus. This will enable you to communicate easily with other students in a secure, end-to-end encrypted way. To access it :",
     "elementStep1": "Download Element-x application on your phone",
     "elementStep2": "On the application choose \"Change account provider\" (\"Changer de fournisseur de compte\") then \"Continue\" (\"Continuer\")",
     "elementStep3": "Enter our server URL:",
     "elementStep4": "You can then log in with your MyECL account",
-    "cautionTitle": "Deposit for the WEI",
-    "cautionDescription": "If you book a place at the Integration Weekend (WEI), please bring two €100 deposit checks payable to",
-    "cautionInstructions": "On the back of the first write: \"First name Last name - WEI 2024 - bus\" and on the back of the second: \"First name Last name - WEI 2024 - site\". These deposit checks will only be cashed in the event of damage to the buses or the WEI site."
+    "elementTitle": "Element / Matrix instant messaging",
+    "facebook": "The majority of the campus' communication takes place via Facebook groups. New students can join the group 'Nouveaux Admis 2024' to make sure they don't miss any information:",
+    "facebookTitle": "Facebook group for new students",
+    "information": "Useful information",
+    "myECL": "'Essential to student life at Centrale, the MyECL application gives you access to lots of services during the year. You'll find the events calendar, room reservations, the film club schedule and much more.",
+    "myECLTitle": "MyECL Application"
   },
-  "paymentPart": {
-    "payments": "Fulfilled payments",
-    "total": "Total",
-    "noPayment": "No payment where made",
-    "cash": "Cash",
-    "check": "Check",
-    "HelloAsso": "HelloAsso",
-    "card": "Card",
-    "archived": "Archived"
-  },
-  "login": {
-    "title": "Chaîne de rentrée {year}",
-    "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services.",
+  "introCarouselItem": {
+    "begin": "Shall we start?",
     "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
-    "alreadyHaveMyECLAccount": "Already have a MyECL account?",
-    "or": "Or",
-    "selectPromotion": "Please select your school year:",
-    "promotion": "School year {year}",
-    "register": "Register"
+    "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services. At the end of the process, you'll be asked to pay online by credit card.",
+    "selectCurriculum": "To start, please select your curriculum:",
+    "validate": "Confirm"
+  },
+  "introPanel": {
+    "presentation": "Presentation"
   },
   "metadata": {
-    "title": "Associative Back-to-school",
-    "description": "Centrale Lyon associative Back-to-School management platform"
+    "description": "Centrale Lyon associative Back-to-School management platform",
+    "title": "Associative Back-to-school"
+  },
+  "paymentButton": {
+    "description": "You will be redirected to HelloAsso to proceed to payment. HelloAsso is a French company offering payment solutions for associations. It is financed exclusively by donations. By default, HelloAsso will propose you to make a donation (called 'contribution volontaire' or 'voluntary contribution'), you can refuse to do so without compromising the payment. If you choose to make a donation, only HelloAsso will benefit it.",
+    "pay": "Pay",
+    "title": "Information about the payment provider"
+  },
+  "paymentPart": {
+    "HelloAsso": "HelloAsso",
+    "archived": "Archived",
+    "card": "Card",
+    "cash": "Cash",
+    "check": "Check",
+    "noPayment": "No payment where made",
+    "payments": "Fulfilled payments",
+    "total": "Total"
+  },
+  "productAccordion": {
+    "membershipAlreadyTaken": "You have already taken the membership to {membership} until {date}",
+    "mustBuy": "You must buy {products}"
+  },
+  "productPanel": {
+    "noProductFound": "No product available"
+  },
+  "productPart": {
+    "noProduct": "No product",
+    "summary": "Summary",
+    "total": "Total"
+  },
+  "purchaseItem": {
+    "missing": "Missing {products}"
+  },
+  "recap": {
+    "remainingToPay": "Remaining to pay:"
   }
 }

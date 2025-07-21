@@ -11,7 +11,7 @@ import { Suspense } from "react";
 import Provider from "./provider";
 import { QueryProvider } from "./queryProvider";
 
-export const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;

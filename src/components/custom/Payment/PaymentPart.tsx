@@ -43,7 +43,7 @@ interface PaymentPartProps {
 
 export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
   const { toast } = useToast();
-  const t = useTranslations("PaymentPart");
+  const t = useTranslations("paymentPart");
   const { payments, total: totalPaid, refetch } = useUserPayments(user.id);
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

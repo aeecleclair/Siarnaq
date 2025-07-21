@@ -20,7 +20,7 @@ import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
 import { Accordion } from "../ui/accordion";
 
 export const ProductPanel = () => {
-  const t = useTranslations("ProductPanel");
+  const t = useTranslations("productPanel");
   const { onlineSellers } = useOnlineSellers();
   const searchParams = useSearchParams();
   const firstSellerId =

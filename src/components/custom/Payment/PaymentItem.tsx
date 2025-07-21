@@ -31,7 +31,7 @@ export const PaymentItem = ({
   user,
   isAdmin,
 }: PaymentItemProps) => {
-  const t = useTranslations("PaymentPart");
+  const t = useTranslations("paymentPart");
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [isOpened, setIsOpened] = useState(false);

@@ -15,7 +15,7 @@ export const SellerTabList = ({
   sellers,
   isAdmin,
 }: SellerTabListProps) => {
-  const t = useTranslations("ProductPart");
+  const t = useTranslations("productPart");
   const router = useRouter();
   const searchParams = useSearchParams();
 

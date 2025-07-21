@@ -34,7 +34,7 @@ export const PurchaseItem = ({
   user,
   isAdmin,
 }: PurchaseItemProps) => {
-  const t = useTranslations("PurchaseItem");
+  const t = useTranslations("purchaseItem");
   const { toast } = useToast();
   const { refetch } = useUserPurchases(user.id);
   const { selectTranslation } = useTranslation();

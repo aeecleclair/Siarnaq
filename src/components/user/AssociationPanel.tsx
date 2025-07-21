@@ -24,7 +24,7 @@ export const AssociationPanel = ({
   canClick,
   showSellerFeatureFlag,
 }: AssociationPanelProps) => {
-  const t = useTranslations("AssociationPanel");
+  const t = useTranslations("associationPanel");
   const { userId } = useTokenStore();
   const searchParams = useSearchParams();
   const firstSellerId = searchParams.get("sellerId") || onlineSellers.at(0)?.id;

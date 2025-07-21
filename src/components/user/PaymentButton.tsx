@@ -8,7 +8,7 @@ import { WarningDialog } from "../custom/WarningDialog";
 import { Button } from "../ui/button";
 
 export const PaymentButton = () => {
-  const t = useTranslations("PaymentButton");
+  const t = useTranslations("paymentButton");
   const [isOpened, setIsOpened] = useState(false);
   const { paymentUrl, isLoading, refetch } = usePaymentUrl();
   const router = useRouter();

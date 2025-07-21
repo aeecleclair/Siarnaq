@@ -7,7 +7,7 @@ import { Carousel } from "../ui/carousel";
 import { IntroCarouselItems } from "./IntroCarouselItems";
 
 export const IntroPanel = () => {
-  const t = useTranslations("IntroPanel");
+  const t = useTranslations("introPanel");
   const { userId } = useTokenStore();
   const { user, refetch } = useUser(userId);
   return (

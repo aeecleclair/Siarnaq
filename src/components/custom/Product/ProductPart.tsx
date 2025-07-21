@@ -14,7 +14,7 @@ interface ProductPartProps {
 }
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
-  const t = useTranslations("ProductPart");
+  const t = useTranslations("productPart");
   const { memberships } = useUserMemberships(user.id);
   const { purchases, total: totalToPay } = useUserPurchases(user.id);
   const { products: allProducts } = useProducts();

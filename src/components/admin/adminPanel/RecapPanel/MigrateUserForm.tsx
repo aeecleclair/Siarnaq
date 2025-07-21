@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { migrateUserFormSchema } from "@/forms/migrateUserFormSchema";
 import { addYears } from "date-fns";
+import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
@@ -60,25 +61,26 @@ export const MigrateUserForm = ({
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
     return (year - index).toString();
   });
+  const t = useTranslations("migrateUserForm");
 
   return (
     <div className="grid gap-6 mt-4">
       <StyledFormField
         form={form}
-        label="Surnom"
+        label={t("nickname")}
         id="nickname"
         input={(field) => <Input {...field} />}
       />
       <StyledFormField
         form={form}
-        label="Email de Centrale"
+        label={t("eclEmail")}
         id="email"
         input={(field) => <Input {...field} type="email" />}
       />
       <div className="flex flex-row gap-2 w-full">
         <StyledFormField
           form={form}
-          label="Étage"
+          label={t("floor")}
           id="floor"
           input={(field) => (
             <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -148,14 +150,14 @@ export const MigrateUserForm = ({
           disabled={isLoading}
           className="w-[100px]"
         >
-          Annuler
+          {t("cancel")}
         </Button>
         <LoadingButton
           isLoading={isLoading}
           className="w-[100px]"
           type="submit"
         >
-          {"Modifier"}
+          {t("edit")}
         </LoadingButton>
       </div>
     </div>

@@ -9,5 +9,9 @@
   "i18n-ally.sourceLanguage": "fr",
   "i18n-ally.displayLanguage": "fr",
   "i18n-ally.translate.deepl.useFreeApiEntry": true,
-  "i18n-ally.sortKeys": true
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.extract.ignoredByFiles": {
+    "src\\app\\[locale]\\provider.tsx": ["Authorization", "Bearer ${token}"],
+    "src\\app\\[locale]\\page.tsx": ["\n              © "]
+  }
 }

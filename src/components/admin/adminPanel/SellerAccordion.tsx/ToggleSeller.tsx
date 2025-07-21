@@ -9,6 +9,7 @@ import { LoadingButton } from "@/components/custom/LoadingButton";
 import { useToast } from "@/components/ui/use-toast";
 import { useGroups } from "@/hooks/useGroups";
 import { useSellers } from "@/hooks/useSellers";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { HiPlus, HiTrash } from "react-icons/hi2";
 
@@ -18,6 +19,7 @@ interface ToggleSellerProps {
 }
 
 export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
+  const t = useTranslations("toggleSeller");
   const { toast } = useToast();
   const { refetch: refetchGroups } = useGroups();
   const { refetch: refetchSellers } = useSellers();
@@ -35,7 +37,7 @@ export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
     });
     if (error) {
       toast({
-        title: "Error",
+        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -54,7 +56,7 @@ export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
     });
     if (error) {
       toast({
-        title: "Error",
+        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

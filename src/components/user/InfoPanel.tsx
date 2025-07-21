@@ -25,7 +25,7 @@ import {
 } from "../ui/card";
 
 export const InfoPanel = () => {
-  const t = useTranslations("Info");
+  const t = useTranslations("info");
 
   const { onlineSellers } = useOnlineSellers();
 

@@ -29,7 +29,7 @@ export const IntroCarouselItems = ({
   refetch,
 }: IntroCarouselItemsProps) => {
   const { toast } = useToast();
-  const t = useTranslations("IntroCarouselItem");
+  const t = useTranslations("introCarouselItem");
   const { scrollNext } = useCarousel();
   const { curriculums } = useCurriculums();
   const { onlineSellers } = useOnlineSellers();

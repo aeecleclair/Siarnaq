@@ -24,7 +24,7 @@ import { useState } from "react";
 import MyECLButton from "../../../components/login/MyECLButton";
 
 const Login = () => {
-  const t = useTranslations("Login");
+  const t = useTranslations("login");
   const router = useRouter();
   const year = new Date().getFullYear();
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {

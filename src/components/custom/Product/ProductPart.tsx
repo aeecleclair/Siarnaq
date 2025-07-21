@@ -20,7 +20,7 @@ interface ProductPartProps {
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   const pathname = usePathname();
-  const t = useTranslations("ProductPart");
+  const t = useTranslations("productPart");
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const { userMemberships: memberships } = useUserMemberships(user.id);

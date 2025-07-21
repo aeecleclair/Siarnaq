@@ -1,45 +1,45 @@
 {
-  "AssociationPanel": {
+  "associationPanel": {
     "associations": "Associations",
     "presentation": "Presentation",
     "information": "Useful informations",
     "summary": "Summary"
   },
-  "IntroCarouselItem": {
+  "introCarouselItem": {
     "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services. At the end of the process, you'll be asked to pay online by credit card.",
     "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
     "selectCurriculum": "To start, please select your curriculum:",
     "begin": "Shall we start?",
     "validate": "Confirm"
   },
-  "IntroPanel": {
+  "introPanel": {
     "presentation": "Presentation"
   },
-  "PaymentButton": {
+  "paymentButton": {
     "title": "Information about the payment provider",
     "description": "You will be redirected to HelloAsso to proceed to payment. HelloAsso is a French company offering payment solutions for associations. It is financed exclusively by donations. By default, HelloAsso will propose you to make a donation (called 'contribution volontaire' or 'voluntary contribution'), you can refuse to do so without compromising the payment. If you choose to make a donation, only HelloAsso will benefit it.",
     "pay": "Pay"
   },
-  "ProductPanel": {
+  "productPanel": {
     "noProductFound": "No product available"
   },
-  "ProductAccordion": {
+  "productAccordion": {
     "mustBuy": "You must buy {products}",
     "membershipAlreadyTaken": "You have already taken the membership to {membership} until {date}"
   },
-  "Recap": {
+  "recap": {
     "remainingToPay": "Remaining to pay:"
   },
-  "ProductPart": {
+  "productPart": {
     "summary": "Summary",
     "interestSummary": "Summary of interests",
     "total": "Total",
     "noProduct": "No product"
   },
-  "PurchaseItem": {
+  "purchaseItem": {
     "missing": "Missing {products}"
   },
-  "Info": {
+  "info": {
     "information": "Useful information",
     "cdrPhysiqueTitle": "On site Chaîne de rentrée",
     "cdrPhysiqueSubtitle": "Following this online Chaîne de Rentrée, you will be called in the onsite Chaîne de Rentrée.",
@@ -61,7 +61,7 @@
     "cautionDescription": "If you book a place at the Integration Weekend (WEI), please bring two €100 deposit checks payable to",
     "cautionInstructions": "On the back of the first write: \"First name Last name - WEI 2024 - bus\" and on the back of the second: \"First name Last name - WEI 2024 - site\". These deposit checks will only be cashed in the event of damage to the buses or the WEI site."
   },
-  "PaymentPart": {
+  "paymentPart": {
     "payments": "Fulfilled payments",
     "total": "Total",
     "noPayment": "No payment where made",
@@ -71,7 +71,7 @@
     "card": "Card",
     "archived": "Archived"
   },
-  "Login": {
+  "login": {
     "title": "Chaîne de rentrée {year}",
     "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services.",
     "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
@@ -81,7 +81,7 @@
     "promotion": "School year {year}",
     "register": "Register"
   },
-  "Metadata": {
+  "metadata": {
     "title": "Associative Back-to-school",
     "description": "Centrale Lyon associative Back-to-School management platform"
   }

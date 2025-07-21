@@ -12,7 +12,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { PaymentButton } from "./PaymentButton";
 
 export const RecapPanel = () => {
-  const t = useTranslations("Recap");
+  const t = useTranslations("recap");
 
   const { userId } = useTokenStore();
   const { user } = useUser(userId);

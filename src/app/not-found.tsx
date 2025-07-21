@@ -1,17 +1,12 @@
-import { inter } from "./[locale]/layout";
+"use client";
 
-export const dynamic = "force-static";
+import Error from "next/error";
 
 export default function NotFound() {
   return (
-    <html>
-      <body className={inter.className}>
-        <section className="flex h-screen flex-col place-content-center text-center">
-          <h1 className="text-3xl font-bold">404</h1>
-          <span className="font-medium">
-            Not found, <span className="italic">fyot</span>
-          </span>
-        </section>
+    <html lang="en">
+      <body>
+        <Error statusCode={404} />
       </body>
     </html>
   );

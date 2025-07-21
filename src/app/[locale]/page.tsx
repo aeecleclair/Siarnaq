@@ -7,6 +7,7 @@ import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useRouter } from "@/i18n/navigation";
 import { useTokenStore } from "@/stores/token";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -19,6 +20,7 @@ export default function Home() {
   const code = searchParams.get("code");
   const { onlineSellers } = useOnlineSellers();
   const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
+  const t = useTranslations("page");
 
   return (
     <div className="flex min-h-screen w-full flex-col">
@@ -26,8 +28,8 @@ export default function Home() {
         <StatusDialog
           isOpened={isEndDialogOpened}
           setIsOpened={setIsEndDialogOpened}
-          title="Paiement effectué"
-          description="Votre paiement a été effectué avec succès"
+          title={t("succeededTitle")}
+          description={t("succeededDescription")}
           status="SUCCESS"
           callback={() => {
             refetch();
@@ -40,8 +42,8 @@ export default function Home() {
         <StatusDialog
           isOpened={isEndDialogOpened}
           setIsOpened={setIsEndDialogOpened}
-          title="Paiement refusé"
-          description="Votre paiement a été refusé. Vous pouvez réessayer de payer, si le problème persiste, veuillez nous contacter."
+          title={t("refusedTitle")}
+          description={t("refusedDescription")}
           status="ERROR"
           callback={() => {
             setIsEndDialogOpened(false);
@@ -67,7 +69,7 @@ export default function Home() {
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <p className="text-balance text-sm leading-loose text-muted-foreground">
-              Développé par ÉCLAIR
+              {t("madeByECLAIR")}
             </p>
             <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
               © {new Date().getFullYear()}{" "}
@@ -75,9 +77,9 @@ export default function Home() {
                 href="https://www.eclair.ec-lyon.fr/"
                 className="font-medium underline underline-offset-4"
               >
-                ÉCLAIR
+                {t("ECLAIR")}
               </a>
-              . Tout droits réservés.
+              {t("allRightsReserved")}
             </span>
           </div>
         </div>

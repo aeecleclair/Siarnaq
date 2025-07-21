@@ -6,11 +6,13 @@ import { useToast } from "@/components/ui/use-toast";
 import { curriculumFormSchema } from "@/forms/curriculumFormSchema";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 export const AddCurriculumButton = () => {
+  const t = useTranslations("addCurriculumButton");
   const { toast } = useToast();
   const { refetch: refetchCurriculums } = useCurriculums();
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +33,7 @@ export const AddCurriculumButton = () => {
     });
     if (error) {
       toast({
-        title: "Error",
+        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -54,7 +56,11 @@ export const AddCurriculumButton = () => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Input {...field} type="text" placeholder="Nom du cursus" />
+                  <Input
+                    {...field}
+                    type="text"
+                    placeholder={t("curriculumName")}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -65,7 +71,7 @@ export const AddCurriculumButton = () => {
             isLoading={isLoading}
             className="w-[100px]"
           >
-            Ajouter
+            {t("add")}
           </LoadingButton>
         </div>
       </form>

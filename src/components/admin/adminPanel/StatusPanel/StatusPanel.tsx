@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { useToast } from "@/components/ui/use-toast";
 import { useStatus } from "@/hooks/useStatus";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 interface SellerTabProps {
@@ -14,6 +15,7 @@ interface SellerTabProps {
 }
 
 export const StatusAccordionItem = ({ status }: SellerTabProps) => {
+  const t = useTranslations("statusAccordionItem");
   const { toast } = useToast();
   const { refetch: refetchStatus } = useStatus();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -28,7 +30,7 @@ export const StatusAccordionItem = ({ status }: SellerTabProps) => {
     });
     if (error) {
       toast({
-        title: "Error",
+        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -40,10 +42,10 @@ export const StatusAccordionItem = ({ status }: SellerTabProps) => {
   };
 
   const statusLabels = {
-    pending: "En attente",
-    online: "En ligne",
-    onsite: "Sur place",
-    closed: "Fermé",
+    pending: t("pending"),
+    online: t("online"),
+    onsite: t("onsite"),
+    closed: t("closed"),
   };
 
   const nextStep: Record<CdrStatus, CdrStatus> = {
@@ -54,17 +56,17 @@ export const StatusAccordionItem = ({ status }: SellerTabProps) => {
   };
 
   const statusButtonLabel = {
-    pending: "Réinitialiser",
-    online: "Mettre en ligne",
-    onsite: "Sur place",
-    closed: "Fermer",
+    pending: t("reinit"),
+    online: t("setOnline"),
+    onsite: t("onSiteButtonLabel"),
+    closed: t("close"),
   };
 
   return (
     <AccordionItem value="status">
       <AccordionTrigger>
         <div className="flex flex-col items-start justify-between">
-          <h3 className="text-lg font-semibold">Status</h3>
+          <h3 className="text-lg font-semibold">{t("status")}</h3>
         </div>
       </AccordionTrigger>
       <AccordionContent className="space-y-2">

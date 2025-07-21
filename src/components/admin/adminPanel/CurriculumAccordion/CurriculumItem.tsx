@@ -2,6 +2,7 @@ import { CurriculumComplete, deleteCdrCurriculumsCurriculumId } from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { useToast } from "@/components/ui/use-toast";
 import { useCurriculums } from "@/hooks/useCurriculums";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { HiTrash } from "react-icons/hi2";
 
@@ -10,6 +11,7 @@ interface CurriculumItemProps {
 }
 
 export const CurriculumItem = ({ curriculum }: CurriculumItemProps) => {
+  const t = useTranslations("curriculumItem");
   const { toast } = useToast();
   const { refetch: refetchCurriculums } = useCurriculums();
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +24,7 @@ export const CurriculumItem = ({ curriculum }: CurriculumItemProps) => {
     });
     if (error) {
       toast({
-        title: "Error",
+        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

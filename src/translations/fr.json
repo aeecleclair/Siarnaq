@@ -4,6 +4,32 @@
     "curriculumName": "Nom du cursus",
     "error": "Erreur"
   },
+  "addEditProductForm": {
+    "add": "Ajouter",
+    "availability": "Disponibilité",
+    "available_online": "Est disponible lors de la chaîne de rentrée en ligne",
+    "cancel": "Annuler",
+    "conditions": "Conditions",
+    "description_en": "Description (anglais)",
+    "description_fr": "Description (français)",
+    "document_constraints": "Signatures",
+    "edit": "Modifier",
+    "error": "Error",
+    "generate_ticket": "Générer un ticket pour ce produit",
+    "information": "Informations supplémentaires",
+    "name_en": "Nom (anglais)",
+    "name_fr": "Nom (français)",
+    "onsite": "Ne sera disponible que lors de la chaîne de rentrée en physique",
+    "product_constraints": "Contraintes",
+    "question": "Question pour les utilisateurs qui prennent le produit",
+    "ticket_expiration": "Date d'expiration",
+    "ticket_max_use": "Nombre d'utilisations maximum",
+    "tickets": "Tickets"
+  },
+  "addProductAccordionItem": {
+    "error": "Error",
+    "newProduct": "Nouveau produit"
+  },
   "associationPanel": {
     "associations": "Associations",
     "information": "Informations pratiques",
@@ -101,6 +127,7 @@
     "noProductFound": "Aucun produit disponible"
   },
   "productPart": {
+    "admin": "Admin",
     "noProduct": "Aucun produit",
     "summary": "Récapitulatif",
     "interestSummary": "Récapitulatif des intérêts",
@@ -125,6 +152,9 @@
   },
   "sellerAccordionItem": {
     "association": "Association"
+  },
+  "sellerTabContent": {
+    "noProductFound": "No products found"
   },
   "statusAccordionItem": {
     "close": "Fermer",

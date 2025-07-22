@@ -9,6 +9,7 @@ import { ProductAccordion } from "@/components/custom/productAccordion/ProductAc
 import { Accordion } from "@/components/ui/accordion";
 import { TabsContent } from "@/components/ui/tabs";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -27,6 +28,7 @@ export const SellerTabContent = ({
   products,
   refetchProducts,
 }: SellerTabContentProps) => {
+  const t = useTranslations("sellerTabContent");
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
   const userId = searchParams.get("userId");
@@ -89,7 +91,7 @@ export const SellerTabContent = ({
         </Accordion>
       ) : (
         <div className="p-4 border border-gray-200 rounded-md">
-          <h3 className="text-lg font-semibold">No products found</h3>
+          <h3 className="text-lg font-semibold">{t("noProductFound")}</h3>
         </div>
       )}
     </TabsContent>

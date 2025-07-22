@@ -12,6 +12,15 @@
   "i18n-ally.sortKeys": true,
   "i18n-ally.extract.ignoredByFiles": {
     "src\\app\\[locale]\\provider.tsx": ["Authorization", "Bearer ${token}"],
-    "src\\app\\[locale]\\page.tsx": ["\n              © "]
+    "src\\app\\[locale]\\page.tsx": ["\n              © "],
+    "src\\components\\admin\\adminPanel\\RecapPanel\\MigrateUserForm.tsx": [
+      "Autre",
+      "Adoma",
+      "Exte"
+    ],
+    "src\\components\\admin\\adminPanel\\RecapPanel\\RecapPanel.tsx": [
+      " (",
+      ")\n              "
+    ]
   }
 }

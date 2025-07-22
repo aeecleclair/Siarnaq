@@ -46,7 +46,7 @@ export const SellerTabList = ({
             className="w-full min-w-18"
             onClick={() => handleClick("cdradmin")}
           >
-            Admin
+            {t("admin")}
           </TabsTrigger>
           {(status.status == "online" || status.status === "onsite") && (
             <TabsTrigger

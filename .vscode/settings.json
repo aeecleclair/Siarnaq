@@ -21,6 +21,11 @@
     "src\\components\\admin\\adminPanel\\RecapPanel\\RecapPanel.tsx": [
       " (",
       ")\n              "
+    ],
+    "src\\components\\admin\\userSearch\\Columns.tsx": [" — "],
+    "src\\components\\admin\\userSearch\\DataTableColumnHeader.tsx": [
+      "\n            Asc\n          ",
+      "\n            Desc\n          "
     ]
   }
 }

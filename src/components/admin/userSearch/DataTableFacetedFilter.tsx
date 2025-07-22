@@ -18,6 +18,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import { Column } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 import { HiOutlineFilter } from "react-icons/hi";
 
@@ -36,6 +37,7 @@ export function DataTableFacetedFilter<TData, TValue>({
   title,
   options,
 }: DataTableFacetedFilterProps<TData, TValue>) {
+  const t = useTranslations("dataTableFacetedFilter");
   const facets = column?.getFacetedUniqueValues();
   const selectedValues = new Set(column?.getFilterValue() as string[]);
 
@@ -60,7 +62,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                     variant="secondary"
                     className="rounded-sm px-1 font-normal"
                   >
-                    {selectedValues.size} sélectionnés
+                    {t("selected", { size: selectedValues.size })}
                   </Badge>
                 ) : (
                   options
@@ -84,7 +86,7 @@ export function DataTableFacetedFilter<TData, TValue>({
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>Aucun résultat</CommandEmpty>
+            <CommandEmpty>{t("noResult")}</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value);
@@ -134,7 +136,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                     onSelect={() => column?.setFilterValue(undefined)}
                     className="justify-center text-center"
                   >
-                    Supprimer les filtres
+                    {t("deleteFilters")}
                   </CommandItem>
                 </CommandGroup>
               </>

@@ -42,6 +42,51 @@
   "curriculumItem": {
     "error": "Erreur"
   },
+  "dataTable": {
+    "noResult": "Pas de résultat"
+  },
+  "dataTableColumnHeader": {
+    "curriculum": "Cursus",
+    "firstname": "Prénom",
+    "hide": "Cacher",
+    "name": "Nom",
+    "nickname": "Surnom",
+    "noCurriculum": "Aucun cursus"
+  },
+  "dataTableFacetedFilter": {
+    "deleteFilters": "Supprimer les filtres",
+    "noResult": "Aucun résultat",
+    "selected": "{size} sélectionnés"
+  },
+  "dataTablePagination": {
+    "byPage": "par page",
+    "goToFirstPage": "Go to first page",
+    "goToLastPage": "Go to last page",
+    "goToNextPage": "Go to next page",
+    "goToPreviousPage": "Go to previous page",
+    "pagination": "Page {number} sur {total}",
+    "selected": "{size} sélectionnés"
+  },
+  "dataTableRowActions": {
+    "cancelMerge": "Annuler la fusion",
+    "deleteTeam": "Supprimer l'équipe",
+    "mergeWithTeam": "Fusionner avec une autre équipe",
+    "openMenu": "Open menu",
+    "removeMember": "Retirer un member"
+  },
+  "dataTableToolbar": {
+    "curriculum": "Cursus",
+    "filter": "Filtrer",
+    "noCurriculum": "Aucun cursus"
+  },
+  "dataTableViewOptions": {
+    "name": "Nom",
+    "activateColumns": "Activer les colonnes",
+    "columns": "Colonnes",
+    "curriculum": "Cursus",
+    "firstname": "Prénom",
+    "nickname": "Surnom"
+  },
   "info": {
     "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration, prévoyez deux chèques de caution de 100 € à l'ordre",
     "cautionInstructions": "Au dos du premier, notez : \"Prénom Nom - WEI 2024 - bus\" et du second : \"Prénom Nom - WEI 2024 - site\". Ces chèques ne seront encaissés qu'en cas de dégradations dans les bus ou sur le site du WEI.",

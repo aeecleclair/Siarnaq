@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { Locale, NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -14,7 +14,7 @@ import { QueryProvider } from "./queryProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export async function generateMetadata(props: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "metadata" });
@@ -34,7 +34,7 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {

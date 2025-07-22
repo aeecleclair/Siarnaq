@@ -1,11 +1,12 @@
 import { useTokenStore } from "@/stores/token";
 import { useQuery } from "@tanstack/react-query";
+import { Locale } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import * as auth from "oauth4webapi";
 import { useState } from "react";
 
 export const useToken = () => {
-  const { locale } = useParams<{ locale: string }>();
+  const { locale } = useParams<{ locale: Locale }>();
   const router = useRouter();
   const issuerUrl = new URL(
     process.env.NEXT_PUBLIC_BACKEND_URL ?? "https://hyperion.myecl.fr",

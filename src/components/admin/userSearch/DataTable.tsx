@@ -28,6 +28,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { set } from "date-fns";
+import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
 
@@ -54,6 +55,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations("dataTable");
   const router = useRouter();
   const searchParams = useSearchParams();
   const [rowSelection, setRowSelection] = React.useState({});
@@ -200,7 +202,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  Pas de résultat
+                  {t("noResult")}
                 </TableCell>
               </TableRow>
             )}

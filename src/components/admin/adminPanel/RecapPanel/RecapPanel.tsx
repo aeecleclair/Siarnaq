@@ -113,7 +113,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       floor: user.floor ?? undefined,
       birthday: undefined,
       phone: undefined,
-      promo:  undefined,
+      promo: undefined,
     },
   });
 

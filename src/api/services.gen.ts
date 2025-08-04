@@ -64,6 +64,9 @@ import type {
   DeleteCdrSellersSellerIdProductsProductIdDataFieldIdResponse,
   DeleteCdrSellersSellerIdProductsProductIdError,
   DeleteCdrSellersSellerIdProductsProductIdResponse,
+  DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdData,
+  DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdError,
+  DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdResponse,
   DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData,
   DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError,
   DeleteCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
@@ -74,9 +77,6 @@ import type {
   DeleteCdrUsersUserIdCurriculumsCurriculumIdData,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdError,
   DeleteCdrUsersUserIdCurriculumsCurriculumIdResponse,
-  DeleteCdrUsersUserIdMembershipsMembershipIdData,
-  DeleteCdrUsersUserIdMembershipsMembershipIdError,
-  DeleteCdrUsersUserIdMembershipsMembershipIdResponse,
   DeleteCdrUsersUserIdPaymentsPaymentIdData,
   DeleteCdrUsersUserIdPaymentsPaymentIdError,
   DeleteCdrUsersUserIdPaymentsPaymentIdResponse,
@@ -89,6 +89,9 @@ import type {
   DeleteCinemaSessionsSessionIdData,
   DeleteCinemaSessionsSessionIdError,
   DeleteCinemaSessionsSessionIdResponse,
+  DeleteFlappybirdScoresTargetedUserIdData,
+  DeleteFlappybirdScoresTargetedUserIdError,
+  DeleteFlappybirdScoresTargetedUserIdResponse,
   DeleteGroupsBatchMembershipData,
   DeleteGroupsBatchMembershipError,
   DeleteGroupsBatchMembershipResponse,
@@ -107,9 +110,27 @@ import type {
   DeleteLoansLoanersLoanerIdItemsItemIdError,
   DeleteLoansLoanersLoanerIdItemsItemIdResponse,
   DeleteLoansLoanersLoanerIdResponse,
-  DeleteModuleVisibilityRootGroupIdData,
-  DeleteModuleVisibilityRootGroupIdError,
-  DeleteModuleVisibilityRootGroupIdResponse,
+  DeleteMembershipsAssociationMembershipIdData,
+  DeleteMembershipsAssociationMembershipIdError,
+  DeleteMembershipsAssociationMembershipIdResponse,
+  DeleteMembershipsUsersMembershipIdData,
+  DeleteMembershipsUsersMembershipIdError,
+  DeleteMembershipsUsersMembershipIdResponse,
+  DeleteModuleVisibilityRootAccountTypesAccountTypeData,
+  DeleteModuleVisibilityRootAccountTypesAccountTypeError,
+  DeleteModuleVisibilityRootAccountTypesAccountTypeResponse,
+  DeleteModuleVisibilityRootGroupsGroupIdData,
+  DeleteModuleVisibilityRootGroupsGroupIdError,
+  DeleteModuleVisibilityRootGroupsGroupIdResponse,
+  DeleteMyeclpayStoresStoreIdData,
+  DeleteMyeclpayStoresStoreIdError,
+  DeleteMyeclpayStoresStoreIdResponse,
+  DeleteMyeclpayStoresStoreIdSellersSellerUserIdData,
+  DeleteMyeclpayStoresStoreIdSellersSellerUserIdError,
+  DeleteMyeclpayStoresStoreIdSellersSellerUserIdResponse,
+  DeleteMyeclpayStructuresStructureIdData,
+  DeleteMyeclpayStructuresStructureIdError,
+  DeleteMyeclpayStructuresStructureIdResponse,
   DeleteNotificationDevicesFirebaseTokenData,
   DeleteNotificationDevicesFirebaseTokenError,
   DeleteNotificationDevicesFirebaseTokenResponse,
@@ -130,6 +151,15 @@ import type {
   DeleteRecommendationRecommendationsRecommendationIdData,
   DeleteRecommendationRecommendationsRecommendationIdError,
   DeleteRecommendationRecommendationsRecommendationIdResponse,
+  DeleteSchoolsSchoolIdData,
+  DeleteSchoolsSchoolIdError,
+  DeleteSchoolsSchoolIdResponse,
+  DeleteSeedLibraryPlantsPlantIdData,
+  DeleteSeedLibraryPlantsPlantIdError,
+  DeleteSeedLibraryPlantsPlantIdResponse,
+  DeleteSeedLibrarySpeciesSpeciesIdData,
+  DeleteSeedLibrarySpeciesSpeciesIdError,
+  DeleteSeedLibrarySpeciesSpeciesIdResponse,
   DeleteTombolaPackTicketsPackticketIdData,
   DeleteTombolaPackTicketsPackticketIdError,
   DeleteTombolaPackTicketsPackticketIdResponse,
@@ -241,9 +271,6 @@ import type {
   GetCdrOnlineSellersSellerIdProductsError,
   GetCdrOnlineSellersSellerIdProductsResponse,
   GetCdrProductsError,
-  GetCdrProductsProductIdTicketsSecretData,
-  GetCdrProductsProductIdTicketsSecretError,
-  GetCdrProductsProductIdTicketsSecretResponse,
   GetCdrProductsResponse,
   GetCdrSellersError,
   GetCdrSellersResponse,
@@ -255,10 +282,24 @@ import type {
   GetCdrSellersSellerIdProductsProductIdDataData,
   GetCdrSellersSellerIdProductsProductIdDataError,
   GetCdrSellersSellerIdProductsProductIdDataResponse,
+  GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdData,
+  GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdError,
+  GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdResponse,
+  GetCdrSellersSellerIdProductsProductIdTicketsData,
+  GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagData,
+  GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagError,
+  GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagResponse,
+  GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData,
+  GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretError,
+  GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretResponse,
+  GetCdrSellersSellerIdProductsProductIdTicketsResponse,
   GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData,
   GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError,
   GetCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
   GetCdrSellersSellerIdProductsResponse,
+  GetCdrSellersSellerIdResultsData,
+  GetCdrSellersSellerIdResultsError,
+  GetCdrSellersSellerIdResultsResponse,
   GetCdrSellersSellerIdUsersUserIdPurchasesData,
   GetCdrSellersSellerIdUsersUserIdPurchasesError,
   GetCdrSellersSellerIdUsersUserIdPurchasesResponse,
@@ -270,6 +311,8 @@ import type {
   GetCdrUsersError,
   GetCdrUsersMeSellersError,
   GetCdrUsersMeSellersResponse,
+  GetCdrUsersMeTicketsError,
+  GetCdrUsersMeTicketsResponse,
   GetCdrUsersMeTicketsTicketIdSecretData,
   GetCdrUsersMeTicketsTicketIdSecretError,
   GetCdrUsersMeTicketsTicketIdSecretResponse,
@@ -278,9 +321,6 @@ import type {
   GetCdrUsersResponse,
   GetCdrUsersUserIdData,
   GetCdrUsersUserIdError,
-  GetCdrUsersUserIdMembershipsData,
-  GetCdrUsersUserIdMembershipsError,
-  GetCdrUsersUserIdMembershipsResponse,
   GetCdrUsersUserIdPaymentsData,
   GetCdrUsersUserIdPaymentsError,
   GetCdrUsersUserIdPaymentsResponse,
@@ -330,15 +370,59 @@ import type {
   GetLoansUsersMeLoanersError,
   GetLoansUsersMeLoanersResponse,
   GetLoansUsersMeResponse,
+  GetMembershipsAssociationMembershipIdMembersData,
+  GetMembershipsAssociationMembershipIdMembersError,
+  GetMembershipsAssociationMembershipIdMembersResponse,
+  GetMembershipsError,
+  GetMembershipsResponse,
+  GetMembershipsUsersUserIdAssociationMembershipIdData,
+  GetMembershipsUsersUserIdAssociationMembershipIdError,
+  GetMembershipsUsersUserIdAssociationMembershipIdResponse,
+  GetMembershipsUsersUserIdData,
+  GetMembershipsUsersUserIdError,
+  GetMembershipsUsersUserIdResponse,
   GetModuleVisibilityError,
   GetModuleVisibilityMeError,
   GetModuleVisibilityMeResponse,
   GetModuleVisibilityResponse,
+  GetMyeclpayDevicesActivateData,
+  GetMyeclpayDevicesActivateError,
+  GetMyeclpayDevicesActivateResponse,
+  GetMyeclpayIntegrityCheckData,
+  GetMyeclpayIntegrityCheckError,
+  GetMyeclpayIntegrityCheckResponse,
+  GetMyeclpayStoresStoreIdHistoryData,
+  GetMyeclpayStoresStoreIdHistoryError,
+  GetMyeclpayStoresStoreIdHistoryResponse,
+  GetMyeclpayStoresStoreIdSellersData,
+  GetMyeclpayStoresStoreIdSellersError,
+  GetMyeclpayStoresStoreIdSellersResponse,
+  GetMyeclpayStructuresConfirmManagerTransferData,
+  GetMyeclpayStructuresConfirmManagerTransferError,
+  GetMyeclpayStructuresConfirmManagerTransferResponse,
+  GetMyeclpayStructuresError,
+  GetMyeclpayStructuresResponse,
+  GetMyeclpayTermsOfServiceError,
+  GetMyeclpayTermsOfServiceResponse,
+  GetMyeclpayTransferRedirectData,
+  GetMyeclpayTransferRedirectError,
+  GetMyeclpayTransferRedirectResponse,
+  GetMyeclpayUsersMeStoresError,
+  GetMyeclpayUsersMeStoresResponse,
+  GetMyeclpayUsersMeTosError,
+  GetMyeclpayUsersMeTosResponse,
+  GetMyeclpayUsersMeWalletDevicesError,
+  GetMyeclpayUsersMeWalletDevicesResponse,
+  GetMyeclpayUsersMeWalletDevicesWalletDeviceIdData,
+  GetMyeclpayUsersMeWalletDevicesWalletDeviceIdError,
+  GetMyeclpayUsersMeWalletDevicesWalletDeviceIdResponse,
+  GetMyeclpayUsersMeWalletError,
+  GetMyeclpayUsersMeWalletHistoryData,
+  GetMyeclpayUsersMeWalletHistoryError,
+  GetMyeclpayUsersMeWalletHistoryResponse,
+  GetMyeclpayUsersMeWalletResponse,
   GetNotificationDevicesError,
   GetNotificationDevicesResponse,
-  GetNotificationMessagesFirebaseTokenData,
-  GetNotificationMessagesFirebaseTokenError,
-  GetNotificationMessagesFirebaseTokenResponse,
   GetNotificationTopicsError,
   GetNotificationTopicsResponse,
   GetNotificationTopicsTopicData,
@@ -405,8 +489,29 @@ import type {
   GetRecommendationRecommendationsResponse,
   GetRobotsTxtError,
   GetRobotsTxtResponse,
+  GetSchoolsError,
+  GetSchoolsResponse,
+  GetSchoolsSchoolIdData,
+  GetSchoolsSchoolIdError,
+  GetSchoolsSchoolIdResponse,
   GetSecurityTxtError,
   GetSecurityTxtResponse,
+  GetSeedLibraryInformationError,
+  GetSeedLibraryInformationResponse,
+  GetSeedLibraryPlantsPlantIdData,
+  GetSeedLibraryPlantsPlantIdError,
+  GetSeedLibraryPlantsPlantIdResponse,
+  GetSeedLibraryPlantsUsersMeError,
+  GetSeedLibraryPlantsUsersMeResponse,
+  GetSeedLibraryPlantsUsersUserIdData,
+  GetSeedLibraryPlantsUsersUserIdError,
+  GetSeedLibraryPlantsUsersUserIdResponse,
+  GetSeedLibraryPlantsWaitingError,
+  GetSeedLibraryPlantsWaitingResponse,
+  GetSeedLibrarySpeciesError,
+  GetSeedLibrarySpeciesResponse,
+  GetSeedLibrarySpeciesTypesError,
+  GetSeedLibrarySpeciesTypesResponse,
   GetStyleFileCssData,
   GetStyleFileCssError,
   GetStyleFileCssResponse,
@@ -451,8 +556,11 @@ import type {
   GetTombolaUsersUserIdTicketsData,
   GetTombolaUsersUserIdTicketsError,
   GetTombolaUsersUserIdTicketsResponse,
+  GetUsersAccountTypesError,
+  GetUsersAccountTypesResponse,
   GetUsersCountError,
   GetUsersCountResponse,
+  GetUsersData,
   GetUsersError,
   GetUsersMeError,
   GetUsersMeProfilePictureError,
@@ -477,6 +585,8 @@ import type {
   GetWellKnownOpenidConfigurationResponse,
   GetWellKnownSecurityTxtError,
   GetWellKnownSecurityTxtResponse,
+} from "./types.gen";
+import type {
   PatchAdvertAdvertisersAdvertiserIdData,
   PatchAdvertAdvertisersAdvertiserIdError,
   PatchAdvertAdvertisersAdvertiserIdResponse,
@@ -519,14 +629,14 @@ import type {
   PatchCampaignListsListIdData,
   PatchCampaignListsListIdError,
   PatchCampaignListsListIdResponse,
-  PatchCdrProductsProductIdTicketsSecretData,
-  PatchCdrProductsProductIdTicketsSecretError,
-  PatchCdrProductsProductIdTicketsSecretResponse,
   PatchCdrSellersSellerIdData,
   PatchCdrSellersSellerIdError,
   PatchCdrSellersSellerIdProductsProductIdData,
   PatchCdrSellersSellerIdProductsProductIdError,
   PatchCdrSellersSellerIdProductsProductIdResponse,
+  PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData,
+  PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretError,
+  PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretResponse,
   PatchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData,
   PatchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError,
   PatchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
@@ -561,11 +671,32 @@ import type {
   PatchLoansLoanersLoanerIdItemsItemIdError,
   PatchLoansLoanersLoanerIdItemsItemIdResponse,
   PatchLoansLoanersLoanerIdResponse,
+  PatchMembershipsAssociationMembershipIdData,
+  PatchMembershipsAssociationMembershipIdError,
+  PatchMembershipsAssociationMembershipIdResponse,
+  PatchMembershipsUsersMembershipIdData,
+  PatchMembershipsUsersMembershipIdError,
+  PatchMembershipsUsersMembershipIdResponse,
+  PatchMyeclpayStoresStoreIdData,
+  PatchMyeclpayStoresStoreIdError,
+  PatchMyeclpayStoresStoreIdResponse,
+  PatchMyeclpayStoresStoreIdSellersSellerUserIdData,
+  PatchMyeclpayStoresStoreIdSellersSellerUserIdError,
+  PatchMyeclpayStoresStoreIdSellersSellerUserIdResponse,
+  PatchMyeclpayStructuresStructureIdData,
+  PatchMyeclpayStructuresStructureIdError,
+  PatchMyeclpayStructuresStructureIdResponse,
   PatchPhPaperIdData,
   PatchPhPaperIdError,
   PatchPhPaperIdResponse,
   PatchPhonebookAssociationsAssociationIdData,
+  PatchPhonebookAssociationsAssociationIdDeactivateData,
+  PatchPhonebookAssociationsAssociationIdDeactivateError,
+  PatchPhonebookAssociationsAssociationIdDeactivateResponse,
   PatchPhonebookAssociationsAssociationIdError,
+  PatchPhonebookAssociationsAssociationIdGroupsData,
+  PatchPhonebookAssociationsAssociationIdGroupsError,
+  PatchPhonebookAssociationsAssociationIdGroupsResponse,
   PatchPhonebookAssociationsAssociationIdResponse,
   PatchPhonebookAssociationsMembershipsMembershipIdData,
   PatchPhonebookAssociationsMembershipsMembershipIdError,
@@ -588,6 +719,24 @@ import type {
   PatchRecommendationRecommendationsRecommendationIdData,
   PatchRecommendationRecommendationsRecommendationIdError,
   PatchRecommendationRecommendationsRecommendationIdResponse,
+  PatchSchoolsSchoolIdData,
+  PatchSchoolsSchoolIdError,
+  PatchSchoolsSchoolIdResponse,
+  PatchSeedLibraryInformationData,
+  PatchSeedLibraryInformationError,
+  PatchSeedLibraryInformationResponse,
+  PatchSeedLibraryPlantsPlantIdAdminData,
+  PatchSeedLibraryPlantsPlantIdAdminError,
+  PatchSeedLibraryPlantsPlantIdAdminResponse,
+  PatchSeedLibraryPlantsPlantIdBorrowData,
+  PatchSeedLibraryPlantsPlantIdBorrowError,
+  PatchSeedLibraryPlantsPlantIdBorrowResponse,
+  PatchSeedLibraryPlantsPlantIdData,
+  PatchSeedLibraryPlantsPlantIdError,
+  PatchSeedLibraryPlantsPlantIdResponse,
+  PatchSeedLibrarySpeciesSpeciesIdData,
+  PatchSeedLibrarySpeciesSpeciesIdError,
+  PatchSeedLibrarySpeciesSpeciesIdResponse,
   PatchTombolaPackTicketsPackticketIdData,
   PatchTombolaPackTicketsPackticketIdError,
   PatchTombolaPackTicketsPackticketIdResponse,
@@ -703,9 +852,6 @@ import type {
   PostCdrCurriculumsData,
   PostCdrCurriculumsError,
   PostCdrCurriculumsResponse,
-  PostCdrMembershipsMembershipIdAddBatchData,
-  PostCdrMembershipsMembershipIdAddBatchError,
-  PostCdrMembershipsMembershipIdAddBatchResponse,
   PostCdrPayError,
   PostCdrPayResponse,
   PostCdrSellersData,
@@ -719,6 +865,9 @@ import type {
   PostCdrSellersSellerIdProductsProductIdDataData,
   PostCdrSellersSellerIdProductsProductIdDataError,
   PostCdrSellersSellerIdProductsProductIdDataResponse,
+  PostCdrSellersSellerIdProductsProductIdTicketsData,
+  PostCdrSellersSellerIdProductsProductIdTicketsError,
+  PostCdrSellersSellerIdProductsProductIdTicketsResponse,
   PostCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdData,
   PostCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdError,
   PostCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldIdResponse,
@@ -729,9 +878,6 @@ import type {
   PostCdrUsersUserIdCurriculumsCurriculumIdData,
   PostCdrUsersUserIdCurriculumsCurriculumIdError,
   PostCdrUsersUserIdCurriculumsCurriculumIdResponse,
-  PostCdrUsersUserIdMembershipsData,
-  PostCdrUsersUserIdMembershipsError,
-  PostCdrUsersUserIdMembershipsResponse,
   PostCdrUsersUserIdPaymentsData,
   PostCdrUsersUserIdPaymentsError,
   PostCdrUsersUserIdPaymentsResponse,
@@ -774,9 +920,56 @@ import type {
   PostLoansLoanersLoanerIdItemsResponse,
   PostLoansLoanersResponse,
   PostLoansResponse,
+  PostMembershipsAssociationMembershipIdAddBatchData,
+  PostMembershipsAssociationMembershipIdAddBatchError,
+  PostMembershipsAssociationMembershipIdAddBatchResponse,
+  PostMembershipsData,
+  PostMembershipsError,
+  PostMembershipsResponse,
+  PostMembershipsUsersUserIdData,
+  PostMembershipsUsersUserIdError,
+  PostMembershipsUsersUserIdResponse,
   PostModuleVisibilityData,
   PostModuleVisibilityError,
   PostModuleVisibilityResponse,
+  PostMyeclpayStoresStoreIdScanCheckData,
+  PostMyeclpayStoresStoreIdScanCheckError,
+  PostMyeclpayStoresStoreIdScanCheckResponse,
+  PostMyeclpayStoresStoreIdScanData,
+  PostMyeclpayStoresStoreIdScanError,
+  PostMyeclpayStoresStoreIdScanResponse,
+  PostMyeclpayStoresStoreIdSellersData,
+  PostMyeclpayStoresStoreIdSellersError,
+  PostMyeclpayStoresStoreIdSellersResponse,
+  PostMyeclpayStructuresData,
+  PostMyeclpayStructuresError,
+  PostMyeclpayStructuresResponse,
+  PostMyeclpayStructuresStructureIdInitManagerTransferData,
+  PostMyeclpayStructuresStructureIdInitManagerTransferError,
+  PostMyeclpayStructuresStructureIdInitManagerTransferResponse,
+  PostMyeclpayStructuresStructureIdStoresData,
+  PostMyeclpayStructuresStructureIdStoresError,
+  PostMyeclpayStructuresStructureIdStoresResponse,
+  PostMyeclpayTransactionsTransactionIdCancelData,
+  PostMyeclpayTransactionsTransactionIdCancelError,
+  PostMyeclpayTransactionsTransactionIdCancelResponse,
+  PostMyeclpayTransactionsTransactionIdRefundData,
+  PostMyeclpayTransactionsTransactionIdRefundError,
+  PostMyeclpayTransactionsTransactionIdRefundResponse,
+  PostMyeclpayTransferInitData,
+  PostMyeclpayTransferInitError,
+  PostMyeclpayTransferInitResponse,
+  PostMyeclpayUsersMeRegisterError,
+  PostMyeclpayUsersMeRegisterResponse,
+  PostMyeclpayUsersMeTosData,
+  PostMyeclpayUsersMeTosError,
+  PostMyeclpayUsersMeTosResponse,
+  PostMyeclpayUsersMeWalletDevicesData,
+  PostMyeclpayUsersMeWalletDevicesError,
+  PostMyeclpayUsersMeWalletDevicesResponse,
+  PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeData,
+  PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeError,
+  PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeResponse,
   PostNotificationDevicesData,
   PostNotificationDevicesError,
   PostNotificationDevicesResponse,
@@ -784,6 +977,10 @@ import type {
   PostNotificationSendFutureError,
   PostNotificationSendFutureResponse,
   PostNotificationSendResponse,
+  PostNotificationSendTopicError,
+  PostNotificationSendTopicFutureError,
+  PostNotificationSendTopicFutureResponse,
+  PostNotificationSendTopicResponse,
   PostNotificationTopicsTopicStrSubscribeData,
   PostNotificationTopicsTopicStrSubscribeError,
   PostNotificationTopicsTopicStrSubscribeResponse,
@@ -807,12 +1004,12 @@ import type {
   PostPhonebookAssociationsMembershipsError,
   PostPhonebookAssociationsMembershipsResponse,
   PostPhonebookAssociationsResponse,
-  PostRaidDocumentData,
   PostRaidDocumentDocumentIdValidateData,
   PostRaidDocumentDocumentIdValidateError,
   PostRaidDocumentDocumentIdValidateResponse,
-  PostRaidDocumentError,
-  PostRaidDocumentResponse,
+  PostRaidDocumentDocumentTypeData,
+  PostRaidDocumentDocumentTypeError,
+  PostRaidDocumentDocumentTypeResponse,
   PostRaidParticipantParticipantIdHonourData,
   PostRaidParticipantParticipantIdHonourError,
   PostRaidParticipantParticipantIdHonourResponse,
@@ -830,6 +1027,8 @@ import type {
   PostRaidSecurityFileResponse,
   PostRaidTeamsData,
   PostRaidTeamsError,
+  PostRaidTeamsGeneratePdfError,
+  PostRaidTeamsGeneratePdfResponse,
   PostRaidTeamsJoinTokenData,
   PostRaidTeamsJoinTokenError,
   PostRaidTeamsJoinTokenResponse,
@@ -849,6 +1048,15 @@ import type {
   PostRecommendationRecommendationsRecommendationIdPictureError,
   PostRecommendationRecommendationsRecommendationIdPictureResponse,
   PostRecommendationRecommendationsResponse,
+  PostSchoolsData,
+  PostSchoolsError,
+  PostSchoolsResponse,
+  PostSeedLibraryPlantsData,
+  PostSeedLibraryPlantsError,
+  PostSeedLibraryPlantsResponse,
+  PostSeedLibrarySpeciesData,
+  PostSeedLibrarySpeciesError,
+  PostSeedLibrarySpeciesResponse,
   PostTombolaPackTicketsData,
   PostTombolaPackTicketsError,
   PostTombolaPackTicketsResponse,
@@ -892,6 +1100,9 @@ import type {
   PostUsersMeProfilePictureData,
   PostUsersMeProfilePictureError,
   PostUsersMeProfilePictureResponse,
+  PostUsersMergeData,
+  PostUsersMergeError,
+  PostUsersMergeResponse,
   PostUsersMigrateMailData,
   PostUsersMigrateMailError,
   PostUsersMigrateMailResponse,
@@ -901,6 +1112,8 @@ import type {
   PostUsersResetPasswordData,
   PostUsersResetPasswordError,
   PostUsersResetPasswordResponse,
+  PostUsersS3InitError,
+  PostUsersS3InitResponse,
 } from "./types.gen";
 
 /**
@@ -1176,8 +1389,22 @@ export const getTermsAndConditions = (options?: Options) => {
 };
 
 /**
+ * Read Myeclpay Tos
+ * Return MyECLPay latest ToS
+ */
+export const getMyeclpayTermsOfService = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayTermsOfServiceResponse,
+    GetMyeclpayTermsOfServiceError
+  >({
+    ...options,
+    url: "/myeclpay-terms-of-service",
+  });
+};
+
+/**
  * Read Support
- * Return Hyperion terms and conditions pages
+ * Return Hyperion support
  */
 export const getSupport = (options?: Options) => {
   return (options?.client ?? client).get<GetSupportResponse, GetSupportError>({
@@ -1273,7 +1500,7 @@ export const getModuleVisibility = (options?: Options) => {
 
 /**
  * Add Module Visibility
- * Add a new group to a module
+ * Add a new group or account type to a module
  *
  * **This endpoint is only usable by administrators**
  */
@@ -1306,17 +1533,32 @@ export const getModuleVisibilityMe = (options?: Options) => {
 };
 
 /**
- * Delete Session
+ * Delete Module Group Visibility
  */
-export const deleteModuleVisibilityRootGroupId = (
-  options: Options<DeleteModuleVisibilityRootGroupIdData>,
+export const deleteModuleVisibilityRootGroupsGroupId = (
+  options: Options<DeleteModuleVisibilityRootGroupsGroupIdData>,
 ) => {
   return (options?.client ?? client).delete<
-    DeleteModuleVisibilityRootGroupIdResponse,
-    DeleteModuleVisibilityRootGroupIdError
+    DeleteModuleVisibilityRootGroupsGroupIdResponse,
+    DeleteModuleVisibilityRootGroupsGroupIdError
   >({
     ...options,
-    url: "/module-visibility/{root}/{group_id}",
+    url: "/module-visibility/{root}/groups/{group_id}",
+  });
+};
+
+/**
+ * Delete Module Account Type Visibility
+ */
+export const deleteModuleVisibilityRootAccountTypesAccountType = (
+  options: Options<DeleteModuleVisibilityRootAccountTypesAccountTypeData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteModuleVisibilityRootAccountTypesAccountTypeResponse,
+    DeleteModuleVisibilityRootAccountTypesAccountTypeError
+  >({
+    ...options,
+    url: "/module-visibility/{root}/account-types/{account_type}",
   });
 };
 
@@ -1486,6 +1728,819 @@ export const deleteGroupsBatchMembership = (
 };
 
 /**
+ * Read Associations Memberships
+ * Return all memberships from database as a list of dictionaries
+ */
+export const getMemberships = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetMembershipsResponse,
+    GetMembershipsError
+  >({
+    ...options,
+    url: "/memberships/",
+  });
+};
+
+/**
+ * Create Association Membership
+ * Create a new membership.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const postMemberships = (options: Options<PostMembershipsData>) => {
+  return (options?.client ?? client).post<
+    PostMembershipsResponse,
+    PostMembershipsError
+  >({
+    ...options,
+    url: "/memberships/",
+  });
+};
+
+/**
+ * Read Association Membership
+ * Return membership with the given ID.
+ *
+ * **This endpoint is only usable by ECL members**
+ */
+export const getMembershipsAssociationMembershipIdMembers = (
+  options: Options<GetMembershipsAssociationMembershipIdMembersData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMembershipsAssociationMembershipIdMembersResponse,
+    GetMembershipsAssociationMembershipIdMembersError
+  >({
+    ...options,
+    url: "/memberships/{association_membership_id}/members",
+  });
+};
+
+/**
+ * Update Association Membership
+ * Update a membership.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const patchMembershipsAssociationMembershipId = (
+  options: Options<PatchMembershipsAssociationMembershipIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchMembershipsAssociationMembershipIdResponse,
+    PatchMembershipsAssociationMembershipIdError
+  >({
+    ...options,
+    url: "/memberships/{association_membership_id}",
+  });
+};
+
+/**
+ * Delete Association Membership
+ * Delete a membership.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const deleteMembershipsAssociationMembershipId = (
+  options: Options<DeleteMembershipsAssociationMembershipIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteMembershipsAssociationMembershipIdResponse,
+    DeleteMembershipsAssociationMembershipIdError
+  >({
+    ...options,
+    url: "/memberships/{association_membership_id}",
+  });
+};
+
+/**
+ * Read User Memberships
+ * Return all memberships for a user.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const getMembershipsUsersUserId = (
+  options: Options<GetMembershipsUsersUserIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMembershipsUsersUserIdResponse,
+    GetMembershipsUsersUserIdError
+  >({
+    ...options,
+    url: "/memberships/users/{user_id}",
+  });
+};
+
+/**
+ * Create User Membership
+ * Create a new user membership.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const postMembershipsUsersUserId = (
+  options: Options<PostMembershipsUsersUserIdData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMembershipsUsersUserIdResponse,
+    PostMembershipsUsersUserIdError
+  >({
+    ...options,
+    url: "/memberships/users/{user_id}",
+  });
+};
+
+/**
+ * Read User Association Membership History
+ * Return all user memberships for a specific association membership for a user.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const getMembershipsUsersUserIdAssociationMembershipId = (
+  options: Options<GetMembershipsUsersUserIdAssociationMembershipIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMembershipsUsersUserIdAssociationMembershipIdResponse,
+    GetMembershipsUsersUserIdAssociationMembershipIdError
+  >({
+    ...options,
+    url: "/memberships/users/{user_id}/{association_membership_id}",
+  });
+};
+
+/**
+ * Add Batch Membership
+ * Add a batch of user to a membership.
+ *
+ * Return the list of unknown users whose email is not in the database.
+ *
+ * **User must be an administrator to use this endpoint.**
+ */
+export const postMembershipsAssociationMembershipIdAddBatch = (
+  options: Options<PostMembershipsAssociationMembershipIdAddBatchData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMembershipsAssociationMembershipIdAddBatchResponse,
+    PostMembershipsAssociationMembershipIdAddBatchError
+  >({
+    ...options,
+    url: "/memberships/{association_membership_id}/add-batch/",
+  });
+};
+
+/**
+ * Update User Membership
+ * Update a user membership.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const patchMembershipsUsersMembershipId = (
+  options: Options<PatchMembershipsUsersMembershipIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchMembershipsUsersMembershipIdResponse,
+    PatchMembershipsUsersMembershipIdError
+  >({
+    ...options,
+    url: "/memberships/users/{membership_id}",
+  });
+};
+
+/**
+ * Delete User Membership
+ * Delete a user membership.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const deleteMembershipsUsersMembershipId = (
+  options: Options<DeleteMembershipsUsersMembershipIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteMembershipsUsersMembershipIdResponse,
+    DeleteMembershipsUsersMembershipIdError
+  >({
+    ...options,
+    url: "/memberships/users/{membership_id}",
+  });
+};
+
+/**
+ * Get Structures
+ * Get all structures.
+ */
+export const getMyeclpayStructures = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayStructuresResponse,
+    GetMyeclpayStructuresError
+  >({
+    ...options,
+    url: "/myeclpay/structures",
+  });
+};
+
+/**
+ * Create Structure
+ * Create a new structure.
+ *
+ * A structure contains:
+ * - a name
+ * - an association membership id
+ * - a manager user id
+ * - a list of stores
+ *
+ * **The user must be an admin to use this endpoint**
+ */
+export const postMyeclpayStructures = (
+  options: Options<PostMyeclpayStructuresData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayStructuresResponse,
+    PostMyeclpayStructuresError
+  >({
+    ...options,
+    url: "/myeclpay/structures",
+  });
+};
+
+/**
+ * Update Structure
+ * Update a structure.
+ *
+ * **The user must be an admin to use this endpoint**
+ */
+export const patchMyeclpayStructuresStructureId = (
+  options: Options<PatchMyeclpayStructuresStructureIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchMyeclpayStructuresStructureIdResponse,
+    PatchMyeclpayStructuresStructureIdError
+  >({
+    ...options,
+    url: "/myeclpay/structures/{structure_id}",
+  });
+};
+
+/**
+ * Delete Structure
+ * Delete a structure. Only structures without stores can be deleted.
+ *
+ * **The user must be an admin to use this endpoint**
+ */
+export const deleteMyeclpayStructuresStructureId = (
+  options: Options<DeleteMyeclpayStructuresStructureIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteMyeclpayStructuresStructureIdResponse,
+    DeleteMyeclpayStructuresStructureIdError
+  >({
+    ...options,
+    url: "/myeclpay/structures/{structure_id}",
+  });
+};
+
+/**
+ * Init Transfer Structure Manager
+ * Initiate the transfer of a structure to a new manager. The current manager will receive an email with a link to confirm the transfer.
+ * The link will only be valid for a limited time.
+ *
+ * **The user must be the manager for this structure**
+ */
+export const postMyeclpayStructuresStructureIdInitManagerTransfer = (
+  options: Options<PostMyeclpayStructuresStructureIdInitManagerTransferData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayStructuresStructureIdInitManagerTransferResponse,
+    PostMyeclpayStructuresStructureIdInitManagerTransferError
+  >({
+    ...options,
+    url: "/myeclpay/structures/{structure_id}/init-manager-transfer",
+  });
+};
+
+/**
+ * Confirm Structure Manager Transfer
+ * Update a manager for an association
+ *
+ * The user must have initiated the update of the manager with `init_update_structure_manager`
+ */
+export const getMyeclpayStructuresConfirmManagerTransfer = (
+  options: Options<GetMyeclpayStructuresConfirmManagerTransferData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayStructuresConfirmManagerTransferResponse,
+    GetMyeclpayStructuresConfirmManagerTransferError
+  >({
+    ...options,
+    url: "/myeclpay/structures/confirm-manager-transfer",
+  });
+};
+
+/**
+ * Create Store
+ * Create a store. The structure manager will be added as a seller for the store.
+ *
+ * Stores name should be unique, as an user need to be able to identify a store by its name.
+ *
+ * **The user must be the manager for this structure**
+ */
+export const postMyeclpayStructuresStructureIdStores = (
+  options: Options<PostMyeclpayStructuresStructureIdStoresData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayStructuresStructureIdStoresResponse,
+    PostMyeclpayStructuresStructureIdStoresError
+  >({
+    ...options,
+    url: "/myeclpay/structures/{structure_id}/stores",
+  });
+};
+
+/**
+ * Get Store History
+ * Get all transactions for the store.
+ *
+ * **The user must be authorized to see the store history**
+ */
+export const getMyeclpayStoresStoreIdHistory = (
+  options: Options<GetMyeclpayStoresStoreIdHistoryData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayStoresStoreIdHistoryResponse,
+    GetMyeclpayStoresStoreIdHistoryError
+  >({
+    ...options,
+    url: "/myeclpay/stores/{store_id}/history",
+  });
+};
+
+/**
+ * Get User Stores
+ * Get all stores for the current user.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getMyeclpayUsersMeStores = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayUsersMeStoresResponse,
+    GetMyeclpayUsersMeStoresError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/stores",
+  });
+};
+
+/**
+ * Update Store
+ * Update a store
+ *
+ * **The user must be the manager for this store's structure**
+ */
+export const patchMyeclpayStoresStoreId = (
+  options: Options<PatchMyeclpayStoresStoreIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchMyeclpayStoresStoreIdResponse,
+    PatchMyeclpayStoresStoreIdError
+  >({
+    ...options,
+    url: "/myeclpay/stores/{store_id}",
+  });
+};
+
+/**
+ * Delete Store
+ * Delete a store. Only stores without transactions can be deleted.
+ *
+ * **The user must be the manager for this store's structure**
+ */
+export const deleteMyeclpayStoresStoreId = (
+  options: Options<DeleteMyeclpayStoresStoreIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteMyeclpayStoresStoreIdResponse,
+    DeleteMyeclpayStoresStoreIdError
+  >({
+    ...options,
+    url: "/myeclpay/stores/{store_id}",
+  });
+};
+
+/**
+ * Create Store Seller
+ * Create a store seller.
+ *
+ * This seller will have authorized permissions among:
+ * - can_bank
+ * - can_see_history
+ * - can_cancel
+ * - can_manage_sellers
+ *
+ * **The user must have the `can_manage_sellers` permission for this store**
+ */
+export const postMyeclpayStoresStoreIdSellers = (
+  options: Options<PostMyeclpayStoresStoreIdSellersData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayStoresStoreIdSellersResponse,
+    PostMyeclpayStoresStoreIdSellersError
+  >({
+    ...options,
+    url: "/myeclpay/stores/{store_id}/sellers",
+  });
+};
+
+/**
+ * Get Store Sellers
+ * Get all sellers for the given store.
+ *
+ * **The user must have the `can_manage_sellers` permission for this store**
+ */
+export const getMyeclpayStoresStoreIdSellers = (
+  options: Options<GetMyeclpayStoresStoreIdSellersData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayStoresStoreIdSellersResponse,
+    GetMyeclpayStoresStoreIdSellersError
+  >({
+    ...options,
+    url: "/myeclpay/stores/{store_id}/sellers",
+  });
+};
+
+/**
+ * Update Store Seller
+ * Update a store seller permissions.
+ * The structure manager cannot be updated as a seller.
+ *
+ * **The user must have the `can_manage_sellers` permission for this store**
+ */
+export const patchMyeclpayStoresStoreIdSellersSellerUserId = (
+  options: Options<PatchMyeclpayStoresStoreIdSellersSellerUserIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchMyeclpayStoresStoreIdSellersSellerUserIdResponse,
+    PatchMyeclpayStoresStoreIdSellersSellerUserIdError
+  >({
+    ...options,
+    url: "/myeclpay/stores/{store_id}/sellers/{seller_user_id}",
+  });
+};
+
+/**
+ * Delete Store Seller
+ * Delete a store seller.
+ * The structure manager cannot be deleted as a seller.
+ *
+ * **The user must have the `can_manage_sellers` permission for this store**
+ */
+export const deleteMyeclpayStoresStoreIdSellersSellerUserId = (
+  options: Options<DeleteMyeclpayStoresStoreIdSellersSellerUserIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteMyeclpayStoresStoreIdSellersSellerUserIdResponse,
+    DeleteMyeclpayStoresStoreIdSellersSellerUserIdError
+  >({
+    ...options,
+    url: "/myeclpay/stores/{store_id}/sellers/{seller_user_id}",
+  });
+};
+
+/**
+ * Register User
+ * Sign MyECL Pay TOS for the given user.
+ *
+ * The user will need to accept the latest TOS version to be able to use MyECL Pay.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const postMyeclpayUsersMeRegister = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayUsersMeRegisterResponse,
+    PostMyeclpayUsersMeRegisterError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/register",
+  });
+};
+
+/**
+ * Get User Tos
+ * Get the latest TOS version and the user signed TOS version.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getMyeclpayUsersMeTos = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayUsersMeTosResponse,
+    GetMyeclpayUsersMeTosError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/tos",
+  });
+};
+
+/**
+ * Sign Tos
+ * Sign MyECL Pay TOS for the given user.
+ *
+ * If the user is already registered in the MyECLPay system, this will update the TOS version.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const postMyeclpayUsersMeTos = (
+  options: Options<PostMyeclpayUsersMeTosData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayUsersMeTosResponse,
+    PostMyeclpayUsersMeTosError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/tos",
+  });
+};
+
+/**
+ * Get User Devices
+ * Get user devices.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getMyeclpayUsersMeWalletDevices = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayUsersMeWalletDevicesResponse,
+    GetMyeclpayUsersMeWalletDevicesError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/wallet/devices",
+  });
+};
+
+/**
+ * Create User Devices
+ * Create a new device for the user.
+ * The user will need to activate it using a token sent by email.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const postMyeclpayUsersMeWalletDevices = (
+  options: Options<PostMyeclpayUsersMeWalletDevicesData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayUsersMeWalletDevicesResponse,
+    PostMyeclpayUsersMeWalletDevicesError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/wallet/devices",
+  });
+};
+
+/**
+ * Get User Device
+ * Get user devices.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getMyeclpayUsersMeWalletDevicesWalletDeviceId = (
+  options: Options<GetMyeclpayUsersMeWalletDevicesWalletDeviceIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayUsersMeWalletDevicesWalletDeviceIdResponse,
+    GetMyeclpayUsersMeWalletDevicesWalletDeviceIdError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/wallet/devices/{wallet_device_id}",
+  });
+};
+
+/**
+ * Get User Wallet
+ * Get user wallet.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getMyeclpayUsersMeWallet = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayUsersMeWalletResponse,
+    GetMyeclpayUsersMeWalletError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/wallet",
+  });
+};
+
+/**
+ * Activate User Device
+ * Activate a wallet device
+ */
+export const getMyeclpayDevicesActivate = (
+  options: Options<GetMyeclpayDevicesActivateData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayDevicesActivateResponse,
+    GetMyeclpayDevicesActivateError
+  >({
+    ...options,
+    url: "/myeclpay/devices/activate",
+  });
+};
+
+/**
+ * Revoke User Devices
+ * Revoke a device for the user.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const postMyeclpayUsersMeWalletDevicesWalletDeviceIdRevoke = (
+  options: Options<PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeResponse,
+    PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/wallet/devices/{wallet_device_id}/revoke",
+  });
+};
+
+/**
+ * Get User Wallet History
+ * Get all transactions for the current user's wallet.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const getMyeclpayUsersMeWalletHistory = (
+  options?: Options<GetMyeclpayUsersMeWalletHistoryData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayUsersMeWalletHistoryResponse,
+    GetMyeclpayUsersMeWalletHistoryError
+  >({
+    ...options,
+    url: "/myeclpay/users/me/wallet/history",
+  });
+};
+
+/**
+ * Init Ha Transfer
+ * Initiate HelloAsso transfer, return a payment url to complete the transaction on HelloAsso website.
+ */
+export const postMyeclpayTransferInit = (
+  options: Options<PostMyeclpayTransferInitData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayTransferInitResponse,
+    PostMyeclpayTransferInitError
+  >({
+    ...options,
+    url: "/myeclpay/transfer/init",
+  });
+};
+
+/**
+ * Redirect From Ha Transfer
+ * HelloAsso checkout should be configured to redirect the user to:
+ * - f"{settings.CLIENT_URL}myeclpay/transfer/redirect?url={redirect_url}"
+ * Redirect the user to the provided redirect `url`. The parameters `checkoutIntentId`, `code`, `orderId` and `error` passed by HelloAsso will be added to the redirect URL.
+ * The redirect `url` must be trusted by Hyperion in the dotenv.
+ */
+export const getMyeclpayTransferRedirect = (
+  options: Options<GetMyeclpayTransferRedirectData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayTransferRedirectResponse,
+    GetMyeclpayTransferRedirectError
+  >({
+    ...options,
+    url: "/myeclpay/transfer/redirect",
+  });
+};
+
+/**
+ * Validate Can Scan Qrcode
+ * Validate if a given QR Code can be scanned by the seller.
+ *
+ * The QR Code should be valid, the seller should have the `can_bank` permission for this store,
+ * and the debited wallet device should be active.
+ *
+ * If the store structure has an association membership, the user should be a member of the association.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const postMyeclpayStoresStoreIdScanCheck = (
+  options: Options<PostMyeclpayStoresStoreIdScanCheckData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayStoresStoreIdScanCheckResponse,
+    PostMyeclpayStoresStoreIdScanCheckError
+  >({
+    ...options,
+    url: "/myeclpay/stores/{store_id}/scan/check",
+  });
+};
+
+/**
+ * Store Scan Qrcode
+ * Scan and bank a QR code for this store.
+ *
+ * `signature` should be a base64 encoded string
+ * - signed using *ed25519*,
+ * - where data are a `QRCodeContentData` object:
+ * ```
+ * {
+ * id: UUID
+ * tot: int
+ * iat: datetime
+ * key: UUID
+ * }
+ * ```
+ *
+ * The provided content is checked to ensure:
+ * - the QR Code is not already used
+ * - the QR Code is not expired
+ * - the QR Code is intended to be scanned for a store `scan_info.store`
+ * - the signature is valid and correspond to `wallet_device_id` public key
+ * - the debited's wallet device is active
+ * - the debited's Wallet balance greater than the QR Code total
+ *
+ * **The user must be authenticated to use this endpoint**
+ * **The user must have the `can_bank` permission for this store**
+ */
+export const postMyeclpayStoresStoreIdScan = (
+  options: Options<PostMyeclpayStoresStoreIdScanData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayStoresStoreIdScanResponse,
+    PostMyeclpayStoresStoreIdScanError
+  >({
+    ...options,
+    url: "/myeclpay/stores/{store_id}/scan",
+  });
+};
+
+/**
+ * Refund Transaction
+ * Refund a transaction. Only transactions made in the last 30 days can be refunded.
+ *
+ * Currently transactions between users are forbidden and can thus not be refunded.
+ *
+ * To cancel a transaction made in the last 30 seconds, the endpoint `/myeclpay/transactions/{transaction_id}/cancel` should be used.
+ *
+ * **The user must either be the credited user or a seller with cancel permissions of the credited store of the transaction**
+ */
+export const postMyeclpayTransactionsTransactionIdRefund = (
+  options: Options<PostMyeclpayTransactionsTransactionIdRefundData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayTransactionsTransactionIdRefundResponse,
+    PostMyeclpayTransactionsTransactionIdRefundError
+  >({
+    ...options,
+    url: "/myeclpay/transactions/{transaction_id}/refund",
+  });
+};
+
+/**
+ * Cancel Transaction
+ * Cancel a transaction.
+ * A transaction can be canceled in the first 30 seconds after it has been created.
+ *
+ * To refund an older transaction, use the `/myeclpay/transactions/{transaction_id}/refund` endpoint.
+ *
+ * **The user must either be the credited user or the seller of the transaction**
+ */
+export const postMyeclpayTransactionsTransactionIdCancel = (
+  options: Options<PostMyeclpayTransactionsTransactionIdCancelData>,
+) => {
+  return (options?.client ?? client).post<
+    PostMyeclpayTransactionsTransactionIdCancelResponse,
+    PostMyeclpayTransactionsTransactionIdCancelError
+  >({
+    ...options,
+    url: "/myeclpay/transactions/{transaction_id}/cancel",
+  });
+};
+
+/**
+ * Get Data For Integrity Check
+ * Send all the MyECL Pay data for integrity check.
+ * Data includes:
+ * - Wallets deducted of the last 30 seconds transactions
+ * - Transactions with at least 30 seconds delay
+ * - Transfers
+ * - Refunds
+ *
+ * **The header must contain the MYECLPAY_DATA_VERIFIER_ACCESS_TOKEN defined in the settings in the `x-data-verifier-token` field**
+ */
+export const getMyeclpayIntegrityCheck = (
+  options: Options<GetMyeclpayIntegrityCheckData>,
+) => {
+  return (options?.client ?? client).get<
+    GetMyeclpayIntegrityCheckResponse,
+    GetMyeclpayIntegrityCheckError
+  >({
+    ...options,
+    url: "/myeclpay/integrity-check",
+  });
+};
+
+/**
  * Get Devices
  * Get all devices a user have registered.
  * This endpoint is useful to get firebase tokens for debugging purposes.
@@ -1523,7 +2578,7 @@ export const postNotificationDevices = (
 
 /**
  * Unregister Firebase Device
- * Unregister a new firebase device for the user
+ * Unregister a firebase device for the user
  *
  * **The user must be authenticated to use this endpoint**
  */
@@ -1536,24 +2591,6 @@ export const deleteNotificationDevicesFirebaseToken = (
   >({
     ...options,
     url: "/notification/devices/{firebase_token}",
-  });
-};
-
-/**
- * Get Messages
- * Get all messages for a specific device from the user
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const getNotificationMessagesFirebaseToken = (
-  options: Options<GetNotificationMessagesFirebaseTokenData>,
-) => {
-  return (options?.client ?? client).get<
-    GetNotificationMessagesFirebaseTokenResponse,
-    GetNotificationMessagesFirebaseTokenError
-  >({
-    ...options,
-    url: "/notification/messages/{firebase_token}",
   });
 };
 
@@ -1661,6 +2698,38 @@ export const postNotificationSendFuture = (options?: Options) => {
 };
 
 /**
+ * Send Notification Topic
+ * Send ourself a test notification.
+ *
+ * **Only admins can use this endpoint**
+ */
+export const postNotificationSendTopic = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostNotificationSendTopicResponse,
+    PostNotificationSendTopicError
+  >({
+    ...options,
+    url: "/notification/send/topic",
+  });
+};
+
+/**
+ * Send Future Notification Topic
+ * Send ourself a test notification.
+ *
+ * **Only admins can use this endpoint**
+ */
+export const postNotificationSendTopicFuture = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostNotificationSendTopicFutureResponse,
+    PostNotificationSendTopicFutureError
+  >({
+    ...options,
+    url: "/notification/send/topic/future",
+  });
+};
+
+/**
  * Webhook
  */
 export const postPaymentHelloassoWebhook = (options?: Options) => {
@@ -1674,21 +2743,105 @@ export const postPaymentHelloassoWebhook = (options?: Options) => {
 };
 
 /**
+ * Read Schools
+ * Return all schools from database as a list of dictionaries
+ */
+export const getSchools = (options?: Options) => {
+  return (options?.client ?? client).get<GetSchoolsResponse, GetSchoolsError>({
+    ...options,
+    url: "/schools/",
+  });
+};
+
+/**
+ * Create School
+ * Create a new school and add users to it based on the email regex.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const postSchools = (options: Options<PostSchoolsData>) => {
+  return (options?.client ?? client).post<
+    PostSchoolsResponse,
+    PostSchoolsError
+  >({
+    ...options,
+    url: "/schools/",
+  });
+};
+
+/**
+ * Read School
+ * Return school with id from database as a dictionary.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const getSchoolsSchoolId = (
+  options: Options<GetSchoolsSchoolIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetSchoolsSchoolIdResponse,
+    GetSchoolsSchoolIdError
+  >({
+    ...options,
+    url: "/schools/{school_id}",
+  });
+};
+
+/**
+ * Update School
+ * Update the name or the description of a school.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const patchSchoolsSchoolId = (
+  options: Options<PatchSchoolsSchoolIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchSchoolsSchoolIdResponse,
+    PatchSchoolsSchoolIdError
+  >({
+    ...options,
+    url: "/schools/{school_id}",
+  });
+};
+
+/**
+ * Delete School
+ * Delete school from database.
+ * This will remove the school from all users but won't delete any user.
+ *
+ * `SchoolTypes` schools can not be deleted.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const deleteSchoolsSchoolId = (
+  options: Options<DeleteSchoolsSchoolIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteSchoolsSchoolIdResponse,
+    DeleteSchoolsSchoolIdError
+  >({
+    ...options,
+    url: "/schools/{school_id}",
+  });
+};
+
+/**
  * Read Users
  * Return all users from database as a list of `CoreUserSimple`
  *
  * **This endpoint is only usable by administrators**
  */
-export const getUsers = (options?: Options) => {
+export const getUsers = (options?: Options<GetUsersData>) => {
   return (options?.client ?? client).get<GetUsersResponse, GetUsersError>({
     ...options,
-    url: "/users/",
+    url: "/users",
   });
 };
 
 /**
  * Count Users
- * Return all users from database as a list of `CoreUserSimple`
+ * Return the number of users in the database
  *
  * **This endpoint is only usable by administrators**
  */
@@ -1704,9 +2857,9 @@ export const getUsersCount = (options?: Options) => {
 
 /**
  * Search Users
- * Search for a user using Jaro_Winkler distance algorithm. The
- *
- * `query` will be compared against users name, firstname and nickname
+ * Search for a user using Jaro_Winkler distance algorithm.
+ * The `query` will be compared against users name, firstname and nickname.
+ * Assume that `query` is the beginning of a name, so we can capitalize words to improve results.
  *
  * **The user must be authenticated to use this endpoint**
  */
@@ -1717,6 +2870,20 @@ export const getUsersSearch = (options: Options<GetUsersSearchData>) => {
   >({
     ...options,
     url: "/users/search",
+  });
+};
+
+/**
+ * Get Account Types
+ * Return all account types hardcoded in the system
+ */
+export const getUsersAccountTypes = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetUsersAccountTypesResponse,
+    GetUsersAccountTypesError
+  >({
+    ...options,
+    url: "/users/account-types",
   });
 };
 
@@ -1811,6 +2978,22 @@ export const postUsersActivate = (options: Options<PostUsersActivateData>) => {
 };
 
 /**
+ * Init S3 For Users
+ * This endpoint is used to initialize the S3 bucket for users.
+ * It will create a file for each existing user in the S3 bucket.
+ * It should be used only once, when the S3 bucket is created.
+ */
+export const postUsersS3Init = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostUsersS3InitResponse,
+    PostUsersS3InitError
+  >({
+    ...options,
+    url: "/users/s3-init",
+  });
+};
+
+/**
  * Make Admin
  * This endpoint is only usable if the database contains exactly one user.
  * It will add this user to the `admin` group.
@@ -1860,7 +3043,6 @@ export const postUsersResetPassword = (
 
 /**
  * Migrate Mail
- * Due to a change in the email format, all student users need to migrate their email address.
  * This endpoint will send a confirmation code to the user's new email address. He will need to use this code to confirm the change with `/users/confirm-mail-migration` endpoint.
  */
 export const postUsersMigrateMail = (
@@ -1877,8 +3059,8 @@ export const postUsersMigrateMail = (
 
 /**
  * Migrate Mail Confirm
- * Due to a change in the email format, all student users need to migrate their email address.
  * This endpoint will updates the user new email address.
+ * The user will need to use the confirmation code sent by the `/users/migrate-mail` endpoint.
  */
 export const getUsersMigrateMailConfirm = (
   options: Options<GetUsersMigrateMailConfirmData>,
@@ -1912,7 +3094,7 @@ export const postUsersChangePassword = (
 
 /**
  * Read User
- * Return `CoreUserSimple` representation of user with id `user_id`
+ * Return `CoreUser` representation of user with id `user_id`
  *
  * **The user must be authenticated to use this endpoint**
  */
@@ -1954,6 +3136,20 @@ export const postUsersMeAskDeletion = (options?: Options) => {
   >({
     ...options,
     url: "/users/me/ask-deletion",
+  });
+};
+
+/**
+ * Merge Users
+ * Fusion two users into one. The first user will be deleted and its data will be transferred to the second user.
+ */
+export const postUsersMerge = (options: Options<PostUsersMergeData>) => {
+  return (options?.client ?? client).post<
+    PostUsersMergeResponse,
+    PostUsersMergeError
+  >({
+    ...options,
+    url: "/users/merge",
   });
 };
 
@@ -2011,6 +3207,8 @@ export const getUsersUserIdProfilePicture = (
 /**
  * Read Advertisers
  * Get existing advertisers.
+ *
+ * **The user must be authenticated to use this endpoint**
  */
 export const getAdvertAdvertisers = (options?: Options) => {
   return (options?.client ?? client).get<
@@ -2028,7 +3226,7 @@ export const getAdvertAdvertisers = (options?: Options) => {
  *
  * Each advertiser is associated with a `manager_group`. Users belonging to this group are able to manage the adverts related to the advertiser.
  *
- * **The user must be authenticated to use this endpoint**
+ * **This endpoint is only usable by administrators**
  */
 export const postAdvertAdvertisers = (
   options: Options<PostAdvertAdvertisersData>,
@@ -3599,7 +4797,7 @@ export const getCdrUsersPending = (options?: Options) => {
     GetCdrUsersPendingError
   >({
     ...options,
-    url: "/cdr/users/pending",
+    url: "/cdr/users/pending/",
   });
 };
 
@@ -3700,6 +4898,24 @@ export const getCdrOnlineSellers = (options?: Options) => {
   >({
     ...options,
     url: "/cdr/online/sellers/",
+  });
+};
+
+/**
+ * Send Seller Results
+ * Get a seller's results.
+ *
+ * **User must be CDR Admin to use this endpoint**
+ */
+export const getCdrSellersSellerIdResults = (
+  options: Options<GetCdrSellersSellerIdResultsData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCdrSellersSellerIdResultsResponse,
+    GetCdrSellersSellerIdResultsError
+  >({
+    ...options,
+    url: "/cdr/sellers/{seller_id}/results/",
   });
 };
 
@@ -4089,26 +5305,6 @@ export const patchCdrUsersUserIdPurchasesProductVariantIdValidated = (
 };
 
 /**
- * Add Batch Membership
- * Add a batch of user to a membership.
- *
- * Return the list of unknown users whose email is not in the database.
- *
- * **User must be CDR Admin to use this endpoint**
- */
-export const postCdrMembershipsMembershipIdAddBatch = (
-  options: Options<PostCdrMembershipsMembershipIdAddBatchData>,
-) => {
-  return (options?.client ?? client).post<
-    PostCdrMembershipsMembershipIdAddBatchResponse,
-    PostCdrMembershipsMembershipIdAddBatchError
-  >({
-    ...options,
-    url: "/cdr/memberships/{membership_id}/add-batch/",
-  });
-};
-
-/**
  * Get Signatures By User Id
  * Get a user's signatures.
  *
@@ -4352,51 +5548,6 @@ export const postCdrPay = (options?: Options) => {
 };
 
 /**
- * Get Memberships By User Id
- */
-export const getCdrUsersUserIdMemberships = (
-  options: Options<GetCdrUsersUserIdMembershipsData>,
-) => {
-  return (options?.client ?? client).get<
-    GetCdrUsersUserIdMembershipsResponse,
-    GetCdrUsersUserIdMembershipsError
-  >({
-    ...options,
-    url: "/cdr/users/{user_id}/memberships/",
-  });
-};
-
-/**
- * Create Membership
- */
-export const postCdrUsersUserIdMemberships = (
-  options: Options<PostCdrUsersUserIdMembershipsData>,
-) => {
-  return (options?.client ?? client).post<
-    PostCdrUsersUserIdMembershipsResponse,
-    PostCdrUsersUserIdMembershipsError
-  >({
-    ...options,
-    url: "/cdr/users/{user_id}/memberships/",
-  });
-};
-
-/**
- * Delete Membership
- */
-export const deleteCdrUsersUserIdMembershipsMembershipId = (
-  options: Options<DeleteCdrUsersUserIdMembershipsMembershipIdData>,
-) => {
-  return (options?.client ?? client).delete<
-    DeleteCdrUsersUserIdMembershipsMembershipIdResponse,
-    DeleteCdrUsersUserIdMembershipsMembershipIdError
-  >({
-    ...options,
-    url: "/cdr/users/{user_id}/memberships/{membership_id}/",
-  });
-};
-
-/**
  * Get Status
  */
 export const getCdrStatus = (options?: Options) => {
@@ -4419,6 +5570,19 @@ export const patchCdrStatus = (options: Options<PatchCdrStatusData>) => {
   >({
     ...options,
     url: "/cdr/status/",
+  });
+};
+
+/**
+ * Get My Tickets
+ */
+export const getCdrUsersMeTickets = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetCdrUsersMeTicketsResponse,
+    GetCdrUsersMeTicketsError
+  >({
+    ...options,
+    url: "/cdr/users/me/tickets/",
   });
 };
 
@@ -4453,34 +5617,112 @@ export const getCdrUsersMeTicketsTicketIdSecret = (
 };
 
 /**
- * Get Ticket By Secret
+ * Get Tickets Generators By Product
  */
-export const getCdrProductsProductIdTicketsSecret = (
-  options: Options<GetCdrProductsProductIdTicketsSecretData>,
+export const getCdrSellersSellerIdProductsProductIdTickets = (
+  options: Options<GetCdrSellersSellerIdProductsProductIdTicketsData>,
 ) => {
   return (options?.client ?? client).get<
-    GetCdrProductsProductIdTicketsSecretResponse,
-    GetCdrProductsProductIdTicketsSecretError
+    GetCdrSellersSellerIdProductsProductIdTicketsResponse,
+    PostCdrSellersSellerIdProductsProductIdTicketsError
   >({
     ...options,
-    url: "/cdr/products/{product_id}/tickets/{secret}/",
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/tickets/",
+  });
+};
+
+/**
+ * Get Ticket By Secret
+ */
+export const getCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecret = (
+  options: Options<GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData>,
+) => {
+  return (options?.client ?? client).get<
+    GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretResponse,
+    GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretError
+  >({
+    ...options,
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/tickets/{generator_id}/{secret}/",
   });
 };
 
 /**
  * Scan Ticket
  */
-export const patchCdrProductsProductIdTicketsSecret = (
-  options: Options<PatchCdrProductsProductIdTicketsSecretData>,
+export const patchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecret =
+  (
+    options: Options<PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData>,
+  ) => {
+    return (options?.client ?? client).patch<
+      PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretResponse,
+      PatchCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretError
+    >({
+      ...options,
+      url: "/cdr/sellers/{seller_id}/products/{product_id}/tickets/{generator_id}/{secret}/",
+    });
+  };
+
+/**
+ * Get Users By Tag
+ */
+export const getCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTag =
+  (
+    options: Options<GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagData>,
+  ) => {
+    return (options?.client ?? client).get<
+      GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagResponse,
+      GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdListsTagError
+    >({
+      ...options,
+      url: "/cdr/sellers/{seller_id}/products/{product_id}/tickets/{generator_id}/lists/{tag}/",
+    });
+  };
+
+/**
+ * Get Tags Of Ticket
+ */
+export const getCdrSellersSellerIdProductsProductIdTagsGeneratorId = (
+  options: Options<GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdData>,
 ) => {
-  return (options?.client ?? client).patch<
-    PatchCdrProductsProductIdTicketsSecretResponse,
-    PatchCdrProductsProductIdTicketsSecretError
+  return (options?.client ?? client).get<
+    GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdResponse,
+    GetCdrSellersSellerIdProductsProductIdTagsGeneratorIdError
   >({
     ...options,
-    url: "/cdr/products/{product_id}/tickets/{secret}/",
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/tags/{generator_id}/",
   });
 };
+
+/**
+ * Generate Ticket For Product
+ */
+export const postCdrSellersSellerIdProductsProductIdTickets = (
+  options: Options<PostCdrSellersSellerIdProductsProductIdTicketsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostCdrSellersSellerIdProductsProductIdTicketsResponse,
+    PostCdrSellersSellerIdProductsProductIdTicketsError
+  >({
+    ...options,
+    url: "/cdr/sellers/{seller_id}/products/{product_id}/tickets/",
+  });
+};
+
+/**
+ * Delete Ticket Generator For Product
+ */
+export const deleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorId =
+  (
+    options: Options<DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdData>,
+  ) => {
+    return (options?.client ?? client).delete<
+      DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdResponse,
+      DeleteCdrSellersSellerIdProductsProductIdTicketsTicketGeneratorIdError
+    >({
+      ...options,
+      url: "/cdr/sellers/{seller_id}/products/{product_id}/tickets/{ticket_generator_id}",
+    });
+  };
 
 /**
  * Get Custom Data Fields
@@ -4734,6 +5976,21 @@ export const getFlappybirdScoresMe = (options?: Options) => {
   >({
     ...options,
     url: "/flappybird/scores/me",
+  });
+};
+
+/**
+ * Remove Flappybird Score
+ */
+export const deleteFlappybirdScoresTargetedUserId = (
+  options: Options<DeleteFlappybirdScoresTargetedUserIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteFlappybirdScoresTargetedUserIdResponse,
+    DeleteFlappybirdScoresTargetedUserIdError
+  >({
+    ...options,
+    url: "/flappybird/scores/{targeted_user_id}",
   });
 };
 
@@ -5215,6 +6472,42 @@ export const deletePhonebookAssociationsAssociationId = (
   >({
     ...options,
     url: "/phonebook/associations/{association_id}",
+  });
+};
+
+/**
+ * Update Association Groups
+ * Update the groups associated with an Association
+ *
+ * **This endpoint is only usable by Admins (not BDE and CAA)**
+ */
+export const patchPhonebookAssociationsAssociationIdGroups = (
+  options: Options<PatchPhonebookAssociationsAssociationIdGroupsData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchPhonebookAssociationsAssociationIdGroupsResponse,
+    PatchPhonebookAssociationsAssociationIdGroupsError
+  >({
+    ...options,
+    url: "/phonebook/associations/{association_id}/groups",
+  });
+};
+
+/**
+ * Deactivate Association
+ * Deactivate an Association
+ *
+ * **This endpoint is only usable by CAA and BDE**
+ */
+export const patchPhonebookAssociationsAssociationIdDeactivate = (
+  options: Options<PatchPhonebookAssociationsAssociationIdDeactivateData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchPhonebookAssociationsAssociationIdDeactivateResponse,
+    PatchPhonebookAssociationsAssociationIdDeactivateError
+  >({
+    ...options,
+    url: "/phonebook/associations/{association_id}/deactivate",
   });
 };
 
@@ -5972,6 +7265,21 @@ export const deleteRaidTeams = (options?: Options) => {
 };
 
 /**
+ * Generate Teams Pdf
+ * PDF are automatically generated when a team is created or updated.
+ * This endpoint is used to regenerate all the PDFs.
+ */
+export const postRaidTeamsGeneratePdf = (options?: Options) => {
+  return (options?.client ?? client).post<
+    PostRaidTeamsGeneratePdfResponse,
+    PostRaidTeamsGeneratePdfError
+  >({
+    ...options,
+    url: "/raid/teams/generate-pdf",
+  });
+};
+
+/**
  * Get Team By Participant Id
  * Get a team by participant id
  */
@@ -6039,14 +7347,16 @@ export const deleteRaidTeamsTeamId = (
  * Upload Document
  * Upload a document
  */
-export const postRaidDocument = (options: Options<PostRaidDocumentData>) => {
+export const postRaidDocumentDocumentType = (
+  options: Options<PostRaidDocumentDocumentTypeData>,
+) => {
   return (options?.client ?? client).post<
-    PostRaidDocumentResponse,
-    PostRaidDocumentError
+    PostRaidDocumentDocumentTypeResponse,
+    PostRaidDocumentDocumentTypeError
   >({
     ...options,
     ...formDataBodySerializer,
-    url: "/raid/document",
+    url: "/raid/document/{document_type}",
   });
 };
 
@@ -6411,5 +7721,256 @@ export const postRecommendationRecommendationsRecommendationIdPicture = (
     ...options,
     ...formDataBodySerializer,
     url: "/recommendation/recommendations/{recommendation_id}/picture",
+  });
+};
+
+/**
+ * Get All Species
+ * Return all species from database as a list of SpeciesComplete schemas
+ */
+export const getSeedLibrarySpecies = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetSeedLibrarySpeciesResponse,
+    GetSeedLibrarySpeciesError
+  >({
+    ...options,
+    url: "/seed_library/species/",
+  });
+};
+
+/**
+ * Create Species
+ * Create a new Species by giving an SpeciesBase scheme
+ * **This endpoint is only usable by seed_library **
+ */
+export const postSeedLibrarySpecies = (
+  options: Options<PostSeedLibrarySpeciesData>,
+) => {
+  return (options?.client ?? client).post<
+    PostSeedLibrarySpeciesResponse,
+    PostSeedLibrarySpeciesError
+  >({
+    ...options,
+    url: "/seed_library/species/",
+  });
+};
+
+/**
+ * Get All Species Types
+ * Return all available types of species from SpeciesType enum.
+ */
+export const getSeedLibrarySpeciesTypes = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetSeedLibrarySpeciesTypesResponse,
+    GetSeedLibrarySpeciesTypesError
+  >({
+    ...options,
+    url: "/seed_library/species/types",
+  });
+};
+
+/**
+ * Update Species
+ * Update a Species
+ * **This endpoint is only usable by seed_library**
+ */
+export const patchSeedLibrarySpeciesSpeciesId = (
+  options: Options<PatchSeedLibrarySpeciesSpeciesIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchSeedLibrarySpeciesSpeciesIdResponse,
+    PatchSeedLibrarySpeciesSpeciesIdError
+  >({
+    ...options,
+    url: "/seed_library/species/{species_id}",
+  });
+};
+
+/**
+ * Delete Species
+ * Delete a Species
+ * **This endpoint is only usable by seed_library**
+ */
+export const deleteSeedLibrarySpeciesSpeciesId = (
+  options: Options<DeleteSeedLibrarySpeciesSpeciesIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteSeedLibrarySpeciesSpeciesIdResponse,
+    DeleteSeedLibrarySpeciesSpeciesIdError
+  >({
+    ...options,
+    url: "/seed_library/species/{species_id}",
+  });
+};
+
+/**
+ * Get Waiting Plants
+ * Return all plants where state=waiting from database as a list of PlantsComplete schemas
+ */
+export const getSeedLibraryPlantsWaiting = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetSeedLibraryPlantsWaitingResponse,
+    GetSeedLibraryPlantsWaitingError
+  >({
+    ...options,
+    url: "/seed_library/plants/waiting",
+  });
+};
+
+/**
+ * Get My Plants
+ * Return all plants where user ={user_id} from database as a list of PlantsComplete schemas
+ */
+export const getSeedLibraryPlantsUsersMe = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetSeedLibraryPlantsUsersMeResponse,
+    GetSeedLibraryPlantsUsersMeError
+  >({
+    ...options,
+    url: "/seed_library/plants/users/me",
+  });
+};
+
+/**
+ * Get Plants By User Id
+ * Return all plants where borrower_id = {user_id} from database as a list of PlantsComplete schemas
+ */
+export const getSeedLibraryPlantsUsersUserId = (
+  options: Options<GetSeedLibraryPlantsUsersUserIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetSeedLibraryPlantsUsersUserIdResponse,
+    GetSeedLibraryPlantsUsersUserIdError
+  >({
+    ...options,
+    url: "/seed_library/plants/users/{user_id}",
+  });
+};
+
+/**
+ * Get Plant By Id
+ * Return the plants where plant ={plant_id} from database as a PlantsComplete schemas
+ */
+export const getSeedLibraryPlantsPlantId = (
+  options: Options<GetSeedLibraryPlantsPlantIdData>,
+) => {
+  return (options?.client ?? client).get<
+    GetSeedLibraryPlantsPlantIdResponse,
+    GetSeedLibraryPlantsPlantIdError
+  >({
+    ...options,
+    url: "/seed_library/plants/{plant_id}",
+  });
+};
+
+/**
+ * Update Plant
+ * Update a Plant
+ * **This endpoint is only usable by the owner of the plant**
+ */
+export const patchSeedLibraryPlantsPlantId = (
+  options: Options<PatchSeedLibraryPlantsPlantIdData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchSeedLibraryPlantsPlantIdResponse,
+    PatchSeedLibraryPlantsPlantIdError
+  >({
+    ...options,
+    url: "/seed_library/plants/{plant_id}",
+  });
+};
+
+/**
+ * Delete Plant
+ * Delete a Plant
+ * **This endpoint is only usable by seed_library**
+ */
+export const deleteSeedLibraryPlantsPlantId = (
+  options: Options<DeleteSeedLibraryPlantsPlantIdData>,
+) => {
+  return (options?.client ?? client).delete<
+    DeleteSeedLibraryPlantsPlantIdResponse,
+    DeleteSeedLibraryPlantsPlantIdError
+  >({
+    ...options,
+    url: "/seed_library/plants/{plant_id}",
+  });
+};
+
+/**
+ * Create Plant
+ * Create a new Plant by giving an PlantCreation scheme
+ * **This endpoint is only usable if the plant has an ancestor_id or by seed_library **
+ */
+export const postSeedLibraryPlants = (
+  options: Options<PostSeedLibraryPlantsData>,
+) => {
+  return (options?.client ?? client).post<
+    PostSeedLibraryPlantsResponse,
+    PostSeedLibraryPlantsError
+  >({
+    ...options,
+    url: "/seed_library/plants/",
+  });
+};
+
+/**
+ * Update Plant Admin
+ * Update a Plant
+ * **This endpoint is only usable by seed_library**
+ */
+export const patchSeedLibraryPlantsPlantIdAdmin = (
+  options: Options<PatchSeedLibraryPlantsPlantIdAdminData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchSeedLibraryPlantsPlantIdAdminResponse,
+    PatchSeedLibraryPlantsPlantIdAdminError
+  >({
+    ...options,
+    url: "/seed_library/plants/{plant_id}/admin",
+  });
+};
+
+/**
+ * Borrow Plant
+ * Plant borrowed by the user (modify borrowing date, borrower and state)
+ */
+export const patchSeedLibraryPlantsPlantIdBorrow = (
+  options: Options<PatchSeedLibraryPlantsPlantIdBorrowData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchSeedLibraryPlantsPlantIdBorrowResponse,
+    PatchSeedLibraryPlantsPlantIdBorrowError
+  >({
+    ...options,
+    url: "/seed_library/plants/{plant_id}/borrow",
+  });
+};
+
+/**
+ * Get Seed Library Information
+ */
+export const getSeedLibraryInformation = (options?: Options) => {
+  return (options?.client ?? client).get<
+    GetSeedLibraryInformationResponse,
+    GetSeedLibraryInformationError
+  >({
+    ...options,
+    url: "/seed_library/information",
+  });
+};
+
+/**
+ * Update Seed Library Information
+ */
+export const patchSeedLibraryInformation = (
+  options: Options<PatchSeedLibraryInformationData>,
+) => {
+  return (options?.client ?? client).patch<
+    PatchSeedLibraryInformationResponse,
+    PatchSeedLibraryInformationError
+  >({
+    ...options,
+    url: "/seed_library/information",
   });
 };

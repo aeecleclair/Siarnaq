@@ -10,9 +10,7 @@ interface CentralPanelProps {
   showSellerFeatureFlag?: boolean;
 }
 
-export const CentralPanel = ({ 
-  showSellerFeatureFlag,
- }: CentralPanelProps) => {
+export const CentralPanel = ({ showSellerFeatureFlag }: CentralPanelProps) => {
   const searchParams = useSearchParams();
   const firstSellerId = searchParams.get("sellerId") || "intro";
 

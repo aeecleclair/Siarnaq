@@ -34,7 +34,7 @@ import { toast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { HiTrash } from "react-icons/hi";
@@ -58,6 +58,7 @@ export const AddEditProductForm = ({
   isEdit = false,
 }: AddEditProductFormProps) => {
   const t = useTranslations("addEditProductForm");
+  const format = useFormatter();
   const { products: constraint } = useProducts();
   const { data, refetch } = useSellerProductData(sellerId, productId ?? null);
   const [isAddingTicketLoading, setIsAddingTicketLoading] = useState(false);
@@ -319,7 +320,11 @@ export const AddEditProductForm = ({
                   <TableRow key={ticket.id}>
                     <TableCell>{ticket.name}</TableCell>
                     <TableCell>{ticket.max_use}</TableCell>
-                    <TableCell>{apiFormatDate(ticket.expiration)}</TableCell>
+                    <TableCell>
+                      {format.dateTime(ticket.expiration, {
+                        dateStyle: "medium",
+                      })}
+                    </TableCell>
                     <TableCell className="text-right">
                       <LoadingButton
                         size="icon"

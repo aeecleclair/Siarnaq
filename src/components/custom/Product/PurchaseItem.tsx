@@ -67,31 +67,6 @@ export const PurchaseItem = ({
     (variant) => variant.id === purchase.product_variant_id,
   );
 
-  async function onValidate() {
-    setIsLoading(true);
-    const { data, error } =
-      await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
-        path: {
-          product_variant_id: purchase.product_variant_id,
-          user_id: user.id,
-        },
-        query: {
-          validated: !purchase.validated,
-        },
-      });
-    if (error) {
-      toast({
-        title: "Error",
-        description: (error as { detail: String }).detail,
-        variant: "destructive",
-      });
-      setIsLoading(false);
-      return;
-    }
-    setIsLoading(false);
-    refetch();
-  }
-
   return (
     <div>
       <div className="flex flex-row w-full items-center">
@@ -132,7 +107,9 @@ export const PurchaseItem = ({
             variant="outline"
             className="ml-4 h-8 w-8"
             isLoading={isLoading}
-            onClick={onValidate}
+            onClick={() =>
+              onValidate(purchase, user, setIsLoading, refetch, toast)
+            }
           >
             {purchase.validated ? (
               <HiXMark className="w-5 h-5" />
@@ -157,4 +134,42 @@ export const PurchaseItem = ({
       )}
     </div>
   );
+};
+
+export const onValidate = async (
+  purchase: PurchaseReturn,
+  user: CdrUser,
+  setIsLoading: (loading: boolean) => void,
+  refetch: () => void,
+  toast: (options: {
+    title: string;
+    description?: string;
+    variant?: "default" | "destructive";
+  }) => void,
+) => {
+  try {
+    setIsLoading(true);
+    await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
+      path: {
+        product_variant_id: purchase.product_variant_id,
+        user_id: user.id,
+      },
+      query: {
+        validated: !purchase.validated,
+      },
+    });
+    toast({
+      title: purchase.validated ? "Purchase unvalidated" : "Purchase validated",
+      variant: "default",
+    });
+    refetch();
+  } catch (error) {
+    toast({
+      title: "Error",
+      description: "There was an error validating the purchase.",
+      variant: "destructive",
+    });
+  } finally {
+    setIsLoading(false);
+  }
 };

@@ -1,5 +1,4 @@
 import {
-  AvailableAssociationMembership,
   CdrUser,
   PurchaseReturn,
   app__modules__cdr__schemas_cdr__ProductComplete,
@@ -20,7 +19,7 @@ interface PurchaseItemProps {
   allProducts: app__modules__cdr__schemas_cdr__ProductComplete[];
   allConstraintIds?: (string | undefined)[];
   allPurchasesIds?: string[];
-  memberships?: AvailableAssociationMembership[];
+  userAssociationsMembershipsIds?: string[];
   user: CdrUser;
   isAdmin?: boolean;
 }
@@ -30,7 +29,7 @@ export const PurchaseItem = ({
   allProducts,
   allConstraintIds,
   allPurchasesIds,
-  memberships,
+  userAssociationsMembershipsIds,
   user,
   isAdmin,
 }: PurchaseItemProps) => {
@@ -49,11 +48,11 @@ export const PurchaseItem = ({
   const notTakenConstraintProduct = missingConstraintProduct?.filter(
     (product) => !allPurchasesIds?.includes(product.id),
   );
-  const isMembershipAlreadyTaken = memberships?.some(
-    (membership) =>
-      purchase.product.related_membership?.includes(membership) ||
-      purchase.product.product_constraints?.some((constraint) =>
-        constraint?.related_membership?.includes(membership),
+  const isMembershipAlreadyTaken = userAssociationsMembershipsIds?.some(
+    (membershipId) =>
+      purchase.product.related_membership?.id === membershipId ||
+      purchase.product.product_constraints?.some(
+        (constraint) => constraint?.related_membership?.id === membershipId,
       ),
   );
 

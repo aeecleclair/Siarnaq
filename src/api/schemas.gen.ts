@@ -19,12 +19,13 @@ export const $AccessToken = {
 export const $AccountType = {
   type: "string",
   enum: [
-    "39691052-2ae5-4e12-99d0-7a9f5f2b0136",
-    "ab4c7503-41b3-11ee-8177-089798f1a4a5",
-    "703056c4-be9d-475c-aa51-b7fc62a96aaa",
-    "29751438-103c-42f2-b09b-33fbb20758a7",
-    "b1cd979e-ecc1-4bd0-bc2b-4dad2ba8cded",
-    "ae4d1866-e7d9-4d7f-bee7-e0dda24d8dd8",
+    "student",
+    "former_student",
+    "staff",
+    "association",
+    "external",
+    "other_school_student",
+    "demo",
   ],
   title: "AccountType",
   description: `Various account types that can be created in Hyperion.
@@ -250,6 +251,14 @@ export const $Applicant = {
       type: "string",
       title: "Id",
     },
+    account_type: {
+      $ref: "#/components/schemas/AccountType",
+    },
+    school_id: {
+      type: "string",
+      format: "uuid",
+      title: "School Id",
+    },
     email: {
       type: "string",
       title: "Email",
@@ -278,7 +287,7 @@ export const $Applicant = {
     },
   },
   type: "object",
-  required: ["name", "firstname", "id", "email"],
+  required: ["name", "firstname", "id", "account_type", "school_id", "email"],
   title: "Applicant",
 } as const;
 
@@ -305,6 +314,19 @@ export const $AssociationBase = {
         },
       ],
       title: "Description",
+    },
+    associated_groups: {
+      items: {
+        type: "string",
+      },
+      type: "array",
+      title: "Associated Groups",
+      default: [],
+    },
+    deactivated: {
+      type: "boolean",
+      title: "Deactivated",
+      default: false,
     },
   },
   type: "object",
@@ -335,6 +357,19 @@ export const $AssociationComplete = {
         },
       ],
       title: "Description",
+    },
+    associated_groups: {
+      items: {
+        type: "string",
+      },
+      type: "array",
+      title: "Associated Groups",
+      default: [],
+    },
+    deactivated: {
+      type: "boolean",
+      title: "Deactivated",
+      default: false,
     },
     id: {
       type: "string",
@@ -396,10 +431,19 @@ export const $AssociationEdit = {
   title: "AssociationEdit",
 } as const;
 
-export const $AvailableAssociationMembership = {
-  type: "string",
-  enum: ["AEECL", "USEECL"],
-  title: "AvailableAssociationMembership",
+export const $AssociationGroupsEdit = {
+  properties: {
+    associated_groups: {
+      items: {
+        type: "string",
+      },
+      type: "array",
+      title: "Associated Groups",
+      default: [],
+    },
+  },
+  type: "object",
+  title: "AssociationGroupsEdit",
 } as const;
 
 export const $BatchResult = {
@@ -917,7 +961,7 @@ export const $Body_token_auth_token_post = {
   title: "Body_token_auth_token_post",
 } as const;
 
-export const $Body_upload_document_raid_document_post = {
+export const $Body_upload_document_raid_document__document_type__post = {
   properties: {
     file: {
       type: "string",
@@ -927,7 +971,7 @@ export const $Body_upload_document_raid_document_post = {
   },
   type: "object",
   required: ["file"],
-  title: "Body_upload_document_raid_document_post",
+  title: "Body_upload_document_raid_document__document_type__post",
 } as const;
 
 export const $BookingBase = {
@@ -1458,6 +1502,14 @@ export const $CdrUser = {
       type: "string",
       title: "Id",
     },
+    account_type: {
+      $ref: "#/components/schemas/AccountType",
+    },
+    school_id: {
+      type: "string",
+      format: "uuid",
+      title: "School Id",
+    },
     curriculum: {
       anyOf: [
         {
@@ -1518,7 +1570,7 @@ export const $CdrUser = {
     },
   },
   type: "object",
-  required: ["name", "firstname", "id", "email"],
+  required: ["name", "firstname", "id", "account_type", "school_id", "email"],
   title: "CdrUser",
 } as const;
 
@@ -1547,6 +1599,14 @@ export const $CdrUserPreview = {
       type: "string",
       title: "Id",
     },
+    account_type: {
+      $ref: "#/components/schemas/AccountType",
+    },
+    school_id: {
+      type: "string",
+      format: "uuid",
+      title: "School Id",
+    },
     curriculum: {
       anyOf: [
         {
@@ -1559,7 +1619,7 @@ export const $CdrUserPreview = {
     },
   },
   type: "object",
-  required: ["name", "firstname", "id"],
+  required: ["name", "firstname", "id", "account_type", "school_id"],
   title: "CdrUserPreview",
 } as const;
 
@@ -1878,20 +1938,11 @@ export const $CoreBatchUserCreateRequest = {
       type: "string",
       title: "Email",
     },
-    account_type: {
-      $ref: "#/components/schemas/AccountType",
-    },
-    external: {
-      type: "boolean",
-      title: "External",
-      default: false,
-    },
   },
   type: "object",
-  required: ["email", "account_type"],
+  required: ["email"],
   title: "CoreBatchUserCreateRequest",
-  description:
-    "The schema is used for batch account creation requests. An account type should be provided",
+  description: "The schema is used for batch account creation requests.",
   account_type: "39691052-2ae5-4e12-99d0-7a9f5f2b0136",
   email: "user@example.fr",
 } as const;
@@ -2082,6 +2133,74 @@ export const $CoreMembershipDelete = {
   title: "CoreMembershipDelete",
 } as const;
 
+export const $CoreSchool = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    email_regex: {
+      type: "string",
+      title: "Email Regex",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+  },
+  type: "object",
+  required: ["name", "email_regex", "id"],
+  title: "CoreSchool",
+} as const;
+
+export const $CoreSchoolBase = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    email_regex: {
+      type: "string",
+      title: "Email Regex",
+    },
+  },
+  type: "object",
+  required: ["name", "email_regex"],
+  title: "CoreSchoolBase",
+  description: "Schema for school's model",
+} as const;
+
+export const $CoreSchoolUpdate = {
+  properties: {
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    email_regex: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Email Regex",
+    },
+  },
+  type: "object",
+  title: "CoreSchoolUpdate",
+  description: "Schema for school update",
+} as const;
+
 export const $CoreUser = {
   properties: {
     name: {
@@ -2106,6 +2225,14 @@ export const $CoreUser = {
     id: {
       type: "string",
       title: "Id",
+    },
+    account_type: {
+      $ref: "#/components/schemas/AccountType",
+    },
+    school_id: {
+      type: "string",
+      format: "uuid",
+      title: "School Id",
     },
     email: {
       type: "string",
@@ -2175,9 +2302,19 @@ export const $CoreUser = {
       title: "Groups",
       default: [],
     },
+    school: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/CoreSchool",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
   },
   type: "object",
-  required: ["name", "firstname", "id", "email"],
+  required: ["name", "firstname", "id", "account_type", "school_id", "email"],
   title: "CoreUser",
   description: "Schema for user's model similar to core_user table in database",
 } as const;
@@ -2254,7 +2391,7 @@ export const $CoreUserActivateRequest = {
         },
       ],
       title: "Promo",
-      description: "Promotion of the student, an integer like 21",
+      description: "Promotion of the student, an integer like 2021",
     },
   },
   type: "object",
@@ -2275,11 +2412,18 @@ export const $CoreUserCreateRequest = {
       title: "Email",
     },
     accept_external: {
-      type: "boolean",
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Accept External",
       description:
         "Allow Hyperion to create an external user. Without this, Hyperion will only allow non external students to be created. The email address will be used to determine if the user should be external or not. An external user may not have an ECL email address, he won't be able to access most features.",
-      default: false,
+      deprecated: true,
     },
   },
   type: "object",
@@ -2287,6 +2431,23 @@ export const $CoreUserCreateRequest = {
   title: "CoreUserCreateRequest",
   description: "The schema is used to send an account creation request.",
   email: "user@example.fr",
+} as const;
+
+export const $CoreUserFusionRequest = {
+  properties: {
+    user_kept_email: {
+      type: "string",
+      title: "User Kept Email",
+    },
+    user_deleted_email: {
+      type: "string",
+      title: "User Deleted Email",
+    },
+  },
+  type: "object",
+  required: ["user_kept_email", "user_deleted_email"],
+  title: "CoreUserFusionRequest",
+  description: "Schema for user fusion",
 } as const;
 
 export const $CoreUserSimple = {
@@ -2314,9 +2475,17 @@ export const $CoreUserSimple = {
       type: "string",
       title: "Id",
     },
+    account_type: {
+      $ref: "#/components/schemas/AccountType",
+    },
+    school_id: {
+      type: "string",
+      format: "uuid",
+      title: "School Id",
+    },
   },
   type: "object",
-  required: ["name", "firstname", "id"],
+  required: ["name", "firstname", "id", "account_type", "school_id"],
   title: "CoreUserSimple",
   description:
     "Simplified schema for user's model, used when getting all users",
@@ -2382,6 +2551,39 @@ export const $CoreUserUpdate = {
 
 export const $CoreUserUpdateAdmin = {
   properties: {
+    email: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Email",
+    },
+    school_id: {
+      anyOf: [
+        {
+          type: "string",
+          format: "uuid",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "School Id",
+    },
+    account_type: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/AccountType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
     name: {
       anyOf: [
         {
@@ -2458,17 +2660,6 @@ export const $CoreUserUpdateAdmin = {
           type: "null",
         },
       ],
-    },
-    external: {
-      anyOf: [
-        {
-          type: "boolean",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "External",
     },
   },
   type: "object",
@@ -2845,6 +3036,14 @@ export const $EventApplicant = {
       type: "string",
       title: "Id",
     },
+    account_type: {
+      $ref: "#/components/schemas/AccountType",
+    },
+    school_id: {
+      type: "string",
+      format: "uuid",
+      title: "School Id",
+    },
     email: {
       type: "string",
       title: "Email",
@@ -2873,7 +3072,7 @@ export const $EventApplicant = {
     },
   },
   type: "object",
-  required: ["name", "firstname", "id", "email"],
+  required: ["name", "firstname", "id", "account_type", "school_id", "email"],
   title: "EventApplicant",
 } as const;
 
@@ -3314,6 +3513,84 @@ export const $FloorsType = {
   title: "FloorsType",
 } as const;
 
+export const $GenerateProductTicket = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    max_use: {
+      type: "integer",
+      title: "Max Use",
+    },
+    expiration: {
+      type: "string",
+      format: "date-time",
+      title: "Expiration",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    product_id: {
+      type: "string",
+      format: "uuid",
+      title: "Product Id",
+    },
+  },
+  type: "object",
+  required: ["name", "max_use", "expiration", "id", "product_id"],
+  title: "GenerateProductTicket",
+} as const;
+
+export const $GenerateTicketBase = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    max_use: {
+      type: "integer",
+      title: "Max Use",
+    },
+    expiration: {
+      type: "string",
+      format: "date-time",
+      title: "Expiration",
+    },
+  },
+  type: "object",
+  required: ["name", "max_use", "expiration"],
+  title: "GenerateTicketBase",
+} as const;
+
+export const $GenerateTicketComplete = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    max_use: {
+      type: "integer",
+      title: "Max Use",
+    },
+    expiration: {
+      type: "string",
+      format: "date-time",
+      title: "Expiration",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+  },
+  type: "object",
+  required: ["name", "max_use", "expiration", "id"],
+  title: "GenerateTicketComplete",
+} as const;
+
 export const $HTTPValidationError = {
   properties: {
     detail: {
@@ -3326,6 +3603,71 @@ export const $HTTPValidationError = {
   },
   type: "object",
   title: "HTTPValidationError",
+} as const;
+
+export const $History = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    type: {
+      $ref: "#/components/schemas/HistoryType",
+    },
+    other_wallet_name: {
+      type: "string",
+      title: "Other Wallet Name",
+    },
+    total: {
+      type: "integer",
+      title: "Total",
+    },
+    creation: {
+      type: "string",
+      format: "date-time",
+      title: "Creation",
+    },
+    status: {
+      $ref: "#/components/schemas/TransactionStatus",
+    },
+    refund: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/HistoryRefund",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  required: ["id", "type", "other_wallet_name", "total", "creation", "status"],
+  title: "History",
+} as const;
+
+export const $HistoryRefund = {
+  properties: {
+    total: {
+      type: "integer",
+      title: "Total",
+    },
+    creation: {
+      type: "string",
+      format: "date-time",
+      title: "Creation",
+    },
+  },
+  type: "object",
+  required: ["total", "creation"],
+  title: "HistoryRefund",
+} as const;
+
+export const $HistoryType = {
+  type: "string",
+  enum: ["transfer", "received", "given", "refund_credited", "refund_debited"],
+  title: "HistoryType",
 } as const;
 
 export const $Information = {
@@ -3386,6 +3728,48 @@ export const $InformationEdit = {
   },
   type: "object",
   title: "InformationEdit",
+} as const;
+
+export const $IntegrityCheckData = {
+  properties: {
+    date: {
+      type: "string",
+      format: "date-time",
+      title: "Date",
+    },
+    wallets: {
+      items: {
+        $ref: "#/components/schemas/WalletBase",
+      },
+      type: "array",
+      title: "Wallets",
+    },
+    transactions: {
+      items: {
+        $ref: "#/components/schemas/TransactionBase",
+      },
+      type: "array",
+      title: "Transactions",
+    },
+    transfers: {
+      items: {
+        $ref: "#/components/schemas/Transfer",
+      },
+      type: "array",
+      title: "Transfers",
+    },
+    refunds: {
+      items: {
+        $ref: "#/components/schemas/RefundBase",
+      },
+      type: "array",
+      title: "Refunds",
+    },
+  },
+  type: "object",
+  required: ["date", "wallets", "transactions", "transfers", "refunds"],
+  title: "IntegrityCheckData",
+  description: "Schema for Hyperion data",
 } as const;
 
 export const $IntrospectTokenResponse = {
@@ -4269,6 +4653,14 @@ export const $MemberComplete = {
       type: "string",
       title: "Id",
     },
+    account_type: {
+      $ref: "#/components/schemas/AccountType",
+    },
+    school_id: {
+      type: "string",
+      format: "uuid",
+      title: "School Id",
+    },
     email: {
       type: "string",
       title: "Email",
@@ -4297,15 +4689,73 @@ export const $MemberComplete = {
     },
     memberships: {
       items: {
-        $ref: "#/components/schemas/app__modules__phonebook__schemas_phonebook__MembershipComplete",
+        $ref: "#/components/schemas/MembershipComplete",
       },
       type: "array",
       title: "Memberships",
     },
   },
   type: "object",
-  required: ["name", "firstname", "id", "email", "memberships"],
+  required: [
+    "name",
+    "firstname",
+    "id",
+    "account_type",
+    "school_id",
+    "email",
+    "memberships",
+  ],
   title: "MemberComplete",
+} as const;
+
+export const $MembershipComplete = {
+  properties: {
+    user_id: {
+      type: "string",
+      title: "User Id",
+    },
+    association_id: {
+      type: "string",
+      title: "Association Id",
+    },
+    mandate_year: {
+      type: "integer",
+      title: "Mandate Year",
+    },
+    role_name: {
+      type: "string",
+      title: "Role Name",
+    },
+    role_tags: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Role Tags",
+    },
+    member_order: {
+      type: "integer",
+      title: "Member Order",
+    },
+    id: {
+      type: "string",
+      title: "Id",
+    },
+  },
+  type: "object",
+  required: [
+    "user_id",
+    "association_id",
+    "mandate_year",
+    "role_name",
+    "member_order",
+    "id",
+  ],
+  title: "MembershipComplete",
 } as const;
 
 export const $MembershipEdit = {
@@ -4332,9 +4782,41 @@ export const $MembershipEdit = {
       ],
       title: "Role Tags",
     },
+    member_order: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Member Order",
+    },
   },
   type: "object",
   title: "MembershipEdit",
+} as const;
+
+export const $MembershipSimple = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    manager_group_id: {
+      type: "string",
+      title: "Manager Group Id",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+  },
+  type: "object",
+  required: ["name", "manager_group_id", "id"],
+  title: "MembershipSimple",
 } as const;
 
 export const $MembershipUserMappingEmail = {
@@ -4359,90 +4841,6 @@ export const $MembershipUserMappingEmail = {
   title: "MembershipUserMappingEmail",
 } as const;
 
-export const $Message = {
-  properties: {
-    context: {
-      type: "string",
-      title: "Context",
-      description:
-        "A context represents a topic. There can only by one notification per context.",
-    },
-    is_visible: {
-      type: "boolean",
-      title: "Is Visible",
-      description:
-        "A message can be visible or not, if it is not visible, it should only trigger an action",
-    },
-    title: {
-      anyOf: [
-        {
-          type: "string",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Title",
-    },
-    content: {
-      anyOf: [
-        {
-          type: "string",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Content",
-    },
-    action_module: {
-      anyOf: [
-        {
-          type: "string",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Action Module",
-      description:
-        "An identifier for the module that should be triggered when the notification is clicked",
-    },
-    action_table: {
-      anyOf: [
-        {
-          type: "string",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Action Table",
-    },
-    delivery_datetime: {
-      anyOf: [
-        {
-          type: "string",
-          format: "date-time",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Delivery Datetime",
-      description: "The date the notification should be shown",
-    },
-    expire_on: {
-      type: "string",
-      format: "date-time",
-      title: "Expire On",
-    },
-  },
-  type: "object",
-  required: ["context", "is_visible", "expire_on"],
-  title: "Message",
-} as const;
-
 export const $ModuleVisibility = {
   properties: {
     root: {
@@ -4456,9 +4854,16 @@ export const $ModuleVisibility = {
       type: "array",
       title: "Allowed Group Ids",
     },
+    allowed_account_types: {
+      items: {
+        $ref: "#/components/schemas/AccountType",
+      },
+      type: "array",
+      title: "Allowed Account Types",
+    },
   },
   type: "object",
-  required: ["root", "allowed_group_ids"],
+  required: ["root", "allowed_group_ids", "allowed_account_types"],
   title: "ModuleVisibility",
 } as const;
 
@@ -4469,12 +4874,29 @@ export const $ModuleVisibilityCreate = {
       title: "Root",
     },
     allowed_group_id: {
-      type: "string",
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
       title: "Allowed Group Id",
+    },
+    allowed_account_type: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/AccountType",
+        },
+        {
+          type: "null",
+        },
+      ],
     },
   },
   type: "object",
-  required: ["root", "allowed_group_id"],
+  required: ["root"],
   title: "ModuleVisibilityCreate",
 } as const;
 
@@ -5385,6 +5807,314 @@ export const $PaymentUrl = {
   title: "PaymentUrl",
 } as const;
 
+export const $PlantComplete = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    reference: {
+      type: "string",
+      title: "Reference",
+    },
+    state: {
+      $ref: "#/components/schemas/PlantState",
+    },
+    species_id: {
+      type: "string",
+      format: "uuid",
+      title: "Species Id",
+    },
+    propagation_method: {
+      $ref: "#/components/schemas/PropagationMethod",
+    },
+    nb_seeds_envelope: {
+      type: "integer",
+      title: "Nb Seeds Envelope",
+      default: 1,
+    },
+    planting_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Planting Date",
+    },
+    borrower_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Borrower Id",
+    },
+    nickname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nickname",
+    },
+    previous_note: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Previous Note",
+    },
+    current_note: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Current Note",
+    },
+    borrowing_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Borrowing Date",
+    },
+    ancestor_id: {
+      anyOf: [
+        {
+          type: "string",
+          format: "uuid",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ancestor Id",
+    },
+    confidential: {
+      type: "boolean",
+      title: "Confidential",
+      default: false,
+    },
+  },
+  type: "object",
+  required: ["id", "reference", "state", "species_id", "propagation_method"],
+  title: "PlantComplete",
+} as const;
+
+export const $PlantCreation = {
+  properties: {
+    species_id: {
+      type: "string",
+      format: "uuid",
+      title: "Species Id",
+    },
+    propagation_method: {
+      $ref: "#/components/schemas/PropagationMethod",
+    },
+    nb_seeds_envelope: {
+      type: "integer",
+      title: "Nb Seeds Envelope",
+      default: 1,
+    },
+    ancestor_id: {
+      anyOf: [
+        {
+          type: "string",
+          format: "uuid",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Ancestor Id",
+    },
+    previous_note: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Previous Note",
+    },
+    confidential: {
+      type: "boolean",
+      title: "Confidential",
+      default: false,
+    },
+  },
+  type: "object",
+  required: ["species_id", "propagation_method"],
+  title: "PlantCreation",
+} as const;
+
+export const $PlantEdit = {
+  properties: {
+    state: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/PlantState",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    current_note: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Current Note",
+    },
+    confidential: {
+      type: "boolean",
+      title: "Confidential",
+      default: false,
+    },
+    planting_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Planting Date",
+    },
+    borrowing_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Borrowing Date",
+    },
+    nickname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nickname",
+    },
+  },
+  type: "object",
+  title: "PlantEdit",
+} as const;
+
+export const $PlantSimple = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    reference: {
+      type: "string",
+      title: "Reference",
+    },
+    state: {
+      $ref: "#/components/schemas/PlantState",
+    },
+    species_id: {
+      type: "string",
+      format: "uuid",
+      title: "Species Id",
+    },
+    propagation_method: {
+      $ref: "#/components/schemas/PropagationMethod",
+    },
+    nb_seeds_envelope: {
+      type: "integer",
+      title: "Nb Seeds Envelope",
+      default: 1,
+    },
+    planting_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Planting Date",
+    },
+    borrower_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Borrower Id",
+    },
+    nickname: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nickname",
+    },
+  },
+  type: "object",
+  required: ["id", "reference", "state", "species_id", "propagation_method"],
+  title: "PlantSimple",
+} as const;
+
+export const $PlantState = {
+  type: "string",
+  enum: ["en attente", "récupérée", "consommée"],
+  title: "PlantState",
+} as const;
+
 export const $PrizeBase = {
   properties: {
     name: {
@@ -5534,39 +6264,20 @@ export const $ProductBase = {
     related_membership: {
       anyOf: [
         {
-          $ref: "#/components/schemas/AvailableAssociationMembership",
+          $ref: "#/components/schemas/MembershipSimple",
         },
         {
           type: "null",
         },
       ],
     },
-    generate_ticket: {
-      type: "boolean",
-      title: "Generate Ticket",
-    },
-    ticket_max_use: {
-      anyOf: [
-        {
-          type: "integer",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Ticket Max Use",
-    },
-    ticket_expiration: {
-      anyOf: [
-        {
-          type: "string",
-          format: "date-time",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Ticket Expiration",
+    tickets: {
+      items: {
+        $ref: "#/components/schemas/GenerateTicketBase",
+      },
+      type: "array",
+      title: "Tickets",
+      default: [],
     },
     product_constraints: {
       items: {
@@ -5589,7 +6300,6 @@ export const $ProductBase = {
   required: [
     "name_fr",
     "available_online",
-    "generate_ticket",
     "product_constraints",
     "document_constraints",
   ],
@@ -5660,49 +6370,23 @@ export const $ProductCompleteNoConstraint = {
     related_membership: {
       anyOf: [
         {
-          $ref: "#/components/schemas/AvailableAssociationMembership",
+          $ref: "#/components/schemas/MembershipSimple",
         },
         {
           type: "null",
         },
       ],
     },
-    generate_ticket: {
-      type: "boolean",
-      title: "Generate Ticket",
-    },
-    ticket_max_use: {
-      anyOf: [
-        {
-          type: "integer",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Ticket Max Use",
-    },
-    ticket_expiration: {
-      anyOf: [
-        {
-          type: "string",
-          format: "date-time",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Ticket Expiration",
+    tickets: {
+      items: {
+        $ref: "#/components/schemas/GenerateTicketComplete",
+      },
+      type: "array",
+      title: "Tickets",
     },
   },
   type: "object",
-  required: [
-    "name_fr",
-    "available_online",
-    "id",
-    "seller_id",
-    "generate_ticket",
-  ],
+  required: ["name_fr", "available_online", "id", "seller_id", "tickets"],
   title: "ProductCompleteNoConstraint",
 } as const;
 
@@ -6014,6 +6698,12 @@ export const $ProductVariantEdit = {
   },
   type: "object",
   title: "ProductVariantEdit",
+} as const;
+
+export const $PropagationMethod = {
+  type: "string",
+  enum: ["bouture", "graine"],
+  title: "PropagationMethod",
 } as const;
 
 export const $PurchaseBase = {
@@ -6545,6 +7235,84 @@ export const $RecommendationEdit = {
   title: "RecommendationEdit",
 } as const;
 
+export const $RefundBase = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    total: {
+      type: "integer",
+      title: "Total",
+    },
+    creation: {
+      type: "string",
+      format: "date-time",
+      title: "Creation",
+    },
+    transaction_id: {
+      type: "string",
+      format: "uuid",
+      title: "Transaction Id",
+    },
+    seller_user_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Seller User Id",
+    },
+    credited_wallet_id: {
+      type: "string",
+      format: "uuid",
+      title: "Credited Wallet Id",
+    },
+    debited_wallet_id: {
+      type: "string",
+      format: "uuid",
+      title: "Debited Wallet Id",
+    },
+  },
+  type: "object",
+  required: [
+    "id",
+    "total",
+    "creation",
+    "transaction_id",
+    "credited_wallet_id",
+    "debited_wallet_id",
+  ],
+  title: "RefundBase",
+} as const;
+
+export const $RefundInfo = {
+  properties: {
+    complete_refund: {
+      type: "boolean",
+      title: "Complete Refund",
+    },
+    amount: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Amount",
+    },
+  },
+  type: "object",
+  required: ["complete_refund"],
+  title: "RefundInfo",
+} as const;
+
 export const $ResetPasswordRequest = {
   properties: {
     reset_token: {
@@ -6610,6 +7378,46 @@ export const $RoomComplete = {
   type: "object",
   required: ["name", "manager_id", "id"],
   title: "RoomComplete",
+} as const;
+
+export const $ScanInfo = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    tot: {
+      type: "integer",
+      title: "Tot",
+    },
+    iat: {
+      type: "string",
+      format: "date-time",
+      title: "Iat",
+    },
+    key: {
+      type: "string",
+      format: "uuid",
+      title: "Key",
+    },
+    store: {
+      type: "boolean",
+      title: "Store",
+    },
+    signature: {
+      type: "string",
+      title: "Signature",
+    },
+    bypass_membership: {
+      type: "boolean",
+      title: "Bypass Membership",
+      default: false,
+    },
+  },
+  type: "object",
+  required: ["id", "tot", "iat", "key", "store", "signature"],
+  title: "ScanInfo",
 } as const;
 
 export const $SectionBase = {
@@ -6966,6 +7774,77 @@ export const $SecurityFileBase = {
   title: "SecurityFileBase",
 } as const;
 
+export const $SeedLibraryInformation = {
+  properties: {
+    facebook_url: {
+      type: "string",
+      title: "Facebook Url",
+      default: "",
+    },
+    forum_url: {
+      type: "string",
+      title: "Forum Url",
+      default: "",
+    },
+    description: {
+      type: "string",
+      title: "Description",
+      default: "",
+    },
+    contact: {
+      type: "string",
+      title: "Contact",
+      default: "",
+    },
+  },
+  type: "object",
+  title: "SeedLibraryInformation",
+} as const;
+
+export const $Seller = {
+  properties: {
+    user_id: {
+      type: "string",
+      title: "User Id",
+    },
+    store_id: {
+      type: "string",
+      format: "uuid",
+      title: "Store Id",
+    },
+    can_bank: {
+      type: "boolean",
+      title: "Can Bank",
+    },
+    can_see_history: {
+      type: "boolean",
+      title: "Can See History",
+    },
+    can_cancel: {
+      type: "boolean",
+      title: "Can Cancel",
+    },
+    can_manage_sellers: {
+      type: "boolean",
+      title: "Can Manage Sellers",
+    },
+    user: {
+      $ref: "#/components/schemas/CoreUserSimple",
+    },
+  },
+  type: "object",
+  required: [
+    "user_id",
+    "store_id",
+    "can_bank",
+    "can_see_history",
+    "can_cancel",
+    "can_manage_sellers",
+    "user",
+  ],
+  title: "Seller",
+} as const;
+
 export const $SellerBase = {
   properties: {
     name: {
@@ -7011,6 +7890,40 @@ export const $SellerComplete = {
   title: "SellerComplete",
 } as const;
 
+export const $SellerCreation = {
+  properties: {
+    user_id: {
+      type: "string",
+      title: "User Id",
+    },
+    can_bank: {
+      type: "boolean",
+      title: "Can Bank",
+    },
+    can_see_history: {
+      type: "boolean",
+      title: "Can See History",
+    },
+    can_cancel: {
+      type: "boolean",
+      title: "Can Cancel",
+    },
+    can_manage_sellers: {
+      type: "boolean",
+      title: "Can Manage Sellers",
+    },
+  },
+  type: "object",
+  required: [
+    "user_id",
+    "can_bank",
+    "can_see_history",
+    "can_cancel",
+    "can_manage_sellers",
+  ],
+  title: "SellerCreation",
+} as const;
+
 export const $SellerEdit = {
   properties: {
     name: {
@@ -7049,6 +7962,57 @@ export const $SellerEdit = {
   },
   type: "object",
   title: "SellerEdit",
+} as const;
+
+export const $SellerUpdate = {
+  properties: {
+    can_bank: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Can Bank",
+    },
+    can_see_history: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Can See History",
+    },
+    can_cancel: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Can Cancel",
+    },
+    can_manage_sellers: {
+      anyOf: [
+        {
+          type: "boolean",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Can Manage Sellers",
+    },
+  },
+  type: "object",
+  title: "SellerUpdate",
 } as const;
 
 export const $SignatureBase = {
@@ -7106,8 +8070,310 @@ export const $SignatureComplete = {
 
 export const $Size = {
   type: "string",
-  enum: ["XS", "S", "M", "L", "XL"],
+  enum: ["XS", "S", "M", "L", "XL", "None"],
   title: "Size",
+} as const;
+
+export const $SpeciesBase = {
+  properties: {
+    prefix: {
+      type: "string",
+      title: "Prefix",
+    },
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    difficulty: {
+      type: "integer",
+      title: "Difficulty",
+    },
+    species_type: {
+      $ref: "#/components/schemas/SpeciesType",
+    },
+    card: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Card",
+    },
+    nb_seeds_recommended: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nb Seeds Recommended",
+    },
+    start_season: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Start Season",
+    },
+    end_season: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "End Season",
+    },
+    time_maturation: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Time Maturation",
+    },
+  },
+  type: "object",
+  required: ["prefix", "name", "difficulty", "species_type"],
+  title: "SpeciesBase",
+} as const;
+
+export const $SpeciesComplete = {
+  properties: {
+    prefix: {
+      type: "string",
+      title: "Prefix",
+    },
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    difficulty: {
+      type: "integer",
+      title: "Difficulty",
+    },
+    species_type: {
+      $ref: "#/components/schemas/SpeciesType",
+    },
+    card: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Card",
+    },
+    nb_seeds_recommended: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nb Seeds Recommended",
+    },
+    start_season: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Start Season",
+    },
+    end_season: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "End Season",
+    },
+    time_maturation: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Time Maturation",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+  },
+  type: "object",
+  required: ["prefix", "name", "difficulty", "species_type", "id"],
+  title: "SpeciesComplete",
+} as const;
+
+export const $SpeciesEdit = {
+  properties: {
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    prefix: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Prefix",
+    },
+    difficulty: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Difficulty",
+    },
+    card: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Card",
+    },
+    species_type: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/SpeciesType",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    nb_seeds_recommended: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Nb Seeds Recommended",
+    },
+    start_season: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Start Season",
+    },
+    end_season: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "End Season",
+    },
+    time_maturation: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Time Maturation",
+    },
+  },
+  type: "object",
+  title: "SpeciesEdit",
+} as const;
+
+export const $SpeciesType = {
+  type: "string",
+  enum: [
+    "Plantes aromatiques",
+    "Plantes potagères",
+    "Plante d intérieur",
+    "Plantes fruitières",
+    "Cactus et succulentes",
+    "Plantes ornementales",
+    "Plantes grasses",
+    "Autre",
+  ],
+  title: "SpeciesType",
+} as const;
+
+export const $SpeciesTypesReturn = {
+  properties: {
+    species_type: {
+      items: {
+        $ref: "#/components/schemas/SpeciesType",
+      },
+      type: "array",
+      title: "Species Type",
+    },
+  },
+  type: "object",
+  required: ["species_type"],
+  title: "SpeciesTypesReturn",
 } as const;
 
 export const $Status = {
@@ -7130,6 +8396,235 @@ export const $StatusType = {
   enum: ["waiting", "open", "closed", "counting", "published"],
   title: "StatusType",
   description: "Status of the voting",
+} as const;
+
+export const $Store = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    structure_id: {
+      type: "string",
+      format: "uuid",
+      title: "Structure Id",
+    },
+    wallet_id: {
+      type: "string",
+      format: "uuid",
+      title: "Wallet Id",
+    },
+    structure: {
+      $ref: "#/components/schemas/Structure",
+    },
+  },
+  type: "object",
+  required: ["name", "id", "structure_id", "wallet_id", "structure"],
+  title: "Store",
+} as const;
+
+export const $StoreBase = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+  },
+  type: "object",
+  required: ["name"],
+  title: "StoreBase",
+} as const;
+
+export const $StoreUpdate = {
+  properties: {
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+  },
+  type: "object",
+  title: "StoreUpdate",
+} as const;
+
+export const $Structure = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    association_membership_id: {
+      anyOf: [
+        {
+          type: "string",
+          format: "uuid",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Association Membership Id",
+    },
+    manager_user_id: {
+      type: "string",
+      title: "Manager User Id",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    manager_user: {
+      $ref: "#/components/schemas/CoreUserSimple",
+    },
+    association_membership: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/MembershipSimple",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+  },
+  type: "object",
+  required: [
+    "name",
+    "manager_user_id",
+    "id",
+    "manager_user",
+    "association_membership",
+  ],
+  title: "Structure",
+} as const;
+
+export const $StructureBase = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    association_membership_id: {
+      anyOf: [
+        {
+          type: "string",
+          format: "uuid",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Association Membership Id",
+    },
+    manager_user_id: {
+      type: "string",
+      title: "Manager User Id",
+    },
+  },
+  type: "object",
+  required: ["name", "manager_user_id"],
+  title: "StructureBase",
+} as const;
+
+export const $StructureTranfert = {
+  properties: {
+    new_manager_user_id: {
+      type: "string",
+      title: "New Manager User Id",
+    },
+  },
+  type: "object",
+  required: ["new_manager_user_id"],
+  title: "StructureTranfert",
+} as const;
+
+export const $StructureUpdate = {
+  properties: {
+    name: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Name",
+    },
+    association_membership_id: {
+      anyOf: [
+        {
+          type: "string",
+          format: "uuid",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Association Membership Id",
+    },
+  },
+  type: "object",
+  title: "StructureUpdate",
+} as const;
+
+export const $TOSSignature = {
+  properties: {
+    accepted_tos_version: {
+      type: "integer",
+      title: "Accepted Tos Version",
+    },
+  },
+  type: "object",
+  required: ["accepted_tos_version"],
+  title: "TOSSignature",
+} as const;
+
+export const $TOSSignatureResponse = {
+  properties: {
+    accepted_tos_version: {
+      type: "integer",
+      title: "Accepted Tos Version",
+    },
+    latest_tos_version: {
+      type: "integer",
+      title: "Latest Tos Version",
+    },
+    tos_content: {
+      type: "string",
+      title: "Tos Content",
+    },
+    max_transaction_total: {
+      type: "integer",
+      title: "Max Transaction Total",
+      default: 0,
+      deprecated: true,
+    },
+    max_wallet_balance: {
+      type: "integer",
+      title: "Max Wallet Balance",
+    },
+  },
+  type: "object",
+  required: [
+    "accepted_tos_version",
+    "latest_tos_version",
+    "tos_content",
+    "max_wallet_balance",
+  ],
+  title: "TOSSignatureResponse",
 } as const;
 
 export const $Team = {
@@ -7429,6 +8924,10 @@ export const $Ticket = {
       format: "date-time",
       title: "Expiration",
     },
+    name: {
+      type: "string",
+      title: "Name",
+    },
   },
   type: "object",
   required: [
@@ -7438,6 +8937,7 @@ export const $Ticket = {
     "scan_left",
     "tags",
     "expiration",
+    "name",
   ],
   title: "Ticket",
 } as const;
@@ -7493,6 +8993,7 @@ export const $TicketScan = {
   properties: {
     tag: {
       type: "string",
+      pattern: "[^,]+",
       title: "Tag",
     },
   },
@@ -7553,6 +9054,8 @@ export const $TokenResponse = {
     },
     token_type: {
       type: "string",
+      enum: ["bearer"],
+      const: "bearer",
       title: "Token Type",
       default: "bearer",
     },
@@ -7599,10 +9102,330 @@ export const $Topic = {
     "raffle",
     "vote",
     "ph",
+    "test",
   ],
   title: "Topic",
   description:
     "A list of topics. An user can suscribe to a topic to receive notifications about it.",
+} as const;
+
+export const $TransactionBase = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    debited_wallet_id: {
+      type: "string",
+      format: "uuid",
+      title: "Debited Wallet Id",
+    },
+    credited_wallet_id: {
+      type: "string",
+      format: "uuid",
+      title: "Credited Wallet Id",
+    },
+    transaction_type: {
+      $ref: "#/components/schemas/TransactionType",
+    },
+    seller_user_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Seller User Id",
+    },
+    total: {
+      type: "integer",
+      title: "Total",
+    },
+    creation: {
+      type: "string",
+      format: "date-time",
+      title: "Creation",
+    },
+    status: {
+      $ref: "#/components/schemas/TransactionStatus",
+    },
+    qr_code_id: {
+      anyOf: [
+        {
+          type: "string",
+          format: "uuid",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Qr Code Id",
+    },
+  },
+  type: "object",
+  required: [
+    "id",
+    "debited_wallet_id",
+    "credited_wallet_id",
+    "transaction_type",
+    "seller_user_id",
+    "total",
+    "creation",
+    "status",
+  ],
+  title: "TransactionBase",
+} as const;
+
+export const $TransactionStatus = {
+  type: "string",
+  enum: ["confirmed", "canceled", "refunded", "pending"],
+  title: "TransactionStatus",
+  description: `CONFIRMED: The transaction has been confirmed and is complete.
+CANCELED: The transaction has been canceled. It is used for transfer requests, for which the user has 15 minutes to complete the HelloAsso checkout
+REFUNDED: The transaction between to wallets has been partially or totally refunded.
+PENDING: The transaction is pending and has not yet been completed. It is used for transfer requests, for which the user has 15 minutes to complete the HelloAsso checkout`,
+} as const;
+
+export const $TransactionType = {
+  type: "string",
+  enum: ["direct", "request", "refund"],
+  title: "TransactionType",
+} as const;
+
+export const $Transfer = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    type: {
+      $ref: "#/components/schemas/TransferType",
+    },
+    transfer_identifier: {
+      type: "string",
+      title: "Transfer Identifier",
+    },
+    approver_user_id: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Approver User Id",
+    },
+    wallet_id: {
+      type: "string",
+      format: "uuid",
+      title: "Wallet Id",
+    },
+    total: {
+      type: "integer",
+      title: "Total",
+    },
+    creation: {
+      type: "string",
+      format: "date-time",
+      title: "Creation",
+    },
+    confirmed: {
+      type: "boolean",
+      title: "Confirmed",
+    },
+  },
+  type: "object",
+  required: [
+    "id",
+    "type",
+    "transfer_identifier",
+    "approver_user_id",
+    "wallet_id",
+    "total",
+    "creation",
+    "confirmed",
+  ],
+  title: "Transfer",
+} as const;
+
+export const $TransferInfo = {
+  properties: {
+    amount: {
+      type: "integer",
+      title: "Amount",
+    },
+    redirect_url: {
+      type: "string",
+      title: "Redirect Url",
+    },
+  },
+  type: "object",
+  required: ["amount", "redirect_url"],
+  title: "TransferInfo",
+} as const;
+
+export const $TransferType = {
+  type: "string",
+  enum: ["hello_asso"],
+  const: "hello_asso",
+  title: "TransferType",
+} as const;
+
+export const $UserMembershipBase = {
+  properties: {
+    association_membership_id: {
+      type: "string",
+      format: "uuid",
+      title: "Association Membership Id",
+    },
+    start_date: {
+      type: "string",
+      format: "date",
+      title: "Start Date",
+    },
+    end_date: {
+      type: "string",
+      format: "date",
+      title: "End Date",
+    },
+  },
+  type: "object",
+  required: ["association_membership_id", "start_date", "end_date"],
+  title: "UserMembershipBase",
+} as const;
+
+export const $UserMembershipComplete = {
+  properties: {
+    association_membership_id: {
+      type: "string",
+      format: "uuid",
+      title: "Association Membership Id",
+    },
+    start_date: {
+      type: "string",
+      format: "date",
+      title: "Start Date",
+    },
+    end_date: {
+      type: "string",
+      format: "date",
+      title: "End Date",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    user_id: {
+      type: "string",
+      title: "User Id",
+    },
+    user: {
+      $ref: "#/components/schemas/CoreUserSimple",
+    },
+  },
+  type: "object",
+  required: [
+    "association_membership_id",
+    "start_date",
+    "end_date",
+    "id",
+    "user_id",
+    "user",
+  ],
+  title: "UserMembershipComplete",
+} as const;
+
+export const $UserMembershipEdit = {
+  properties: {
+    start_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Start Date",
+    },
+    end_date: {
+      anyOf: [
+        {
+          type: "string",
+          format: "date",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "End Date",
+    },
+  },
+  type: "object",
+  title: "UserMembershipEdit",
+} as const;
+
+export const $UserStore = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    structure_id: {
+      type: "string",
+      format: "uuid",
+      title: "Structure Id",
+    },
+    wallet_id: {
+      type: "string",
+      format: "uuid",
+      title: "Wallet Id",
+    },
+    structure: {
+      $ref: "#/components/schemas/Structure",
+    },
+    can_bank: {
+      type: "boolean",
+      title: "Can Bank",
+    },
+    can_see_history: {
+      type: "boolean",
+      title: "Can See History",
+    },
+    can_cancel: {
+      type: "boolean",
+      title: "Can Cancel",
+    },
+    can_manage_sellers: {
+      type: "boolean",
+      title: "Can Manage Sellers",
+    },
+  },
+  type: "object",
+  required: [
+    "name",
+    "id",
+    "structure_id",
+    "wallet_id",
+    "structure",
+    "can_bank",
+    "can_see_history",
+    "can_cancel",
+    "can_manage_sellers",
+  ],
+  title: "UserStore",
 } as const;
 
 export const $UserTicket = {
@@ -7629,6 +9452,14 @@ export const $UserTicket = {
     id: {
       type: "string",
       title: "Id",
+    },
+    account_type: {
+      $ref: "#/components/schemas/AccountType",
+    },
+    school_id: {
+      type: "string",
+      format: "uuid",
+      title: "School Id",
     },
     promo: {
       anyOf: [
@@ -7665,7 +9496,7 @@ export const $UserTicket = {
     },
   },
   type: "object",
-  required: ["name", "firstname", "id"],
+  required: ["name", "firstname", "id", "account_type", "school_id"],
   title: "UserTicket",
 } as const;
 
@@ -7752,16 +9583,139 @@ export const $VoterGroup = {
   description: "Base schema for voters (groups allowed to vote).",
 } as const;
 
-export const $app__core__standard_responses__Result = {
+export const $Wallet = {
   properties: {
-    success: {
-      type: "boolean",
-      title: "Success",
-      default: true,
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    type: {
+      $ref: "#/components/schemas/WalletType",
+    },
+    balance: {
+      type: "integer",
+      title: "Balance",
+    },
+    store: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/Store",
+        },
+        {
+          type: "null",
+        },
+      ],
+    },
+    user: {
+      anyOf: [
+        {
+          $ref: "#/components/schemas/CoreUser",
+        },
+        {
+          type: "null",
+        },
+      ],
     },
   },
   type: "object",
-  title: "Result",
+  required: ["id", "type", "balance", "store", "user"],
+  title: "Wallet",
+} as const;
+
+export const $WalletBase = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    type: {
+      $ref: "#/components/schemas/WalletType",
+    },
+    balance: {
+      type: "integer",
+      title: "Balance",
+    },
+  },
+  type: "object",
+  required: ["id", "type", "balance"],
+  title: "WalletBase",
+} as const;
+
+export const $WalletDevice = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    wallet_id: {
+      type: "string",
+      format: "uuid",
+      title: "Wallet Id",
+    },
+    creation: {
+      type: "string",
+      format: "date-time",
+      title: "Creation",
+    },
+    status: {
+      $ref: "#/components/schemas/WalletDeviceStatus",
+    },
+  },
+  type: "object",
+  required: ["name", "id", "wallet_id", "creation", "status"],
+  title: "WalletDevice",
+} as const;
+
+export const $WalletDeviceCreation = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    ed25519_public_key: {
+      type: "string",
+      format: "binary",
+      title: "Ed25519 Public Key",
+    },
+  },
+  type: "object",
+  required: ["name", "ed25519_public_key"],
+  title: "WalletDeviceCreation",
+} as const;
+
+export const $WalletDeviceStatus = {
+  type: "string",
+  enum: ["inactive", "active", "revoked"],
+  title: "WalletDeviceStatus",
+} as const;
+
+export const $WalletType = {
+  type: "string",
+  enum: ["user", "store"],
+  title: "WalletType",
+} as const;
+
+export const $app__core__memberships__schemas_memberships__MembershipBase = {
+  properties: {
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    manager_group_id: {
+      type: "string",
+      title: "Manager Group Id",
+    },
+  },
+  type: "object",
+  required: ["name", "manager_group_id"],
+  title: "MembershipBase",
 } as const;
 
 export const $app__modules__amap__schemas_amap__ProductComplete = {
@@ -7844,57 +9798,6 @@ export const $app__modules__campaign__schemas_campaign__Result = {
   title: "Result",
 } as const;
 
-export const $app__modules__cdr__schemas_cdr__MembershipBase = {
-  properties: {
-    membership: {
-      $ref: "#/components/schemas/AvailableAssociationMembership",
-    },
-    start_date: {
-      type: "string",
-      format: "date",
-      title: "Start Date",
-    },
-    end_date: {
-      type: "string",
-      format: "date",
-      title: "End Date",
-    },
-  },
-  type: "object",
-  required: ["membership", "start_date", "end_date"],
-  title: "MembershipBase",
-} as const;
-
-export const $app__modules__cdr__schemas_cdr__MembershipComplete = {
-  properties: {
-    membership: {
-      $ref: "#/components/schemas/AvailableAssociationMembership",
-    },
-    start_date: {
-      type: "string",
-      format: "date",
-      title: "Start Date",
-    },
-    end_date: {
-      type: "string",
-      format: "date",
-      title: "End Date",
-    },
-    id: {
-      type: "string",
-      format: "uuid",
-      title: "Id",
-    },
-    user_id: {
-      type: "string",
-      title: "User Id",
-    },
-  },
-  type: "object",
-  required: ["membership", "start_date", "end_date", "id", "user_id"],
-  title: "MembershipComplete",
-} as const;
-
 export const $app__modules__cdr__schemas_cdr__ProductComplete = {
   properties: {
     name_fr: {
@@ -7959,39 +9862,12 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
     related_membership: {
       anyOf: [
         {
-          $ref: "#/components/schemas/AvailableAssociationMembership",
+          $ref: "#/components/schemas/MembershipSimple",
         },
         {
           type: "null",
         },
       ],
-    },
-    generate_ticket: {
-      type: "boolean",
-      title: "Generate Ticket",
-    },
-    ticket_max_use: {
-      anyOf: [
-        {
-          type: "integer",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Ticket Max Use",
-    },
-    ticket_expiration: {
-      anyOf: [
-        {
-          type: "string",
-          format: "date-time",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Ticket Expiration",
     },
     product_constraints: {
       items: {
@@ -8009,15 +9885,17 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
       title: "Document Constraints",
       default: [],
     },
+    tickets: {
+      items: {
+        $ref: "#/components/schemas/GenerateTicketComplete",
+      },
+      type: "array",
+      title: "Tickets",
+      default: [],
+    },
   },
   type: "object",
-  required: [
-    "name_fr",
-    "available_online",
-    "id",
-    "seller_id",
-    "generate_ticket",
-  ],
+  required: ["name_fr", "available_online", "id", "seller_id"],
   title: "ProductComplete",
 } as const;
 
@@ -8092,46 +9970,12 @@ export const $app__modules__cdr__schemas_cdr__ProductEdit = {
     related_membership: {
       anyOf: [
         {
-          $ref: "#/components/schemas/AvailableAssociationMembership",
+          $ref: "#/components/schemas/MembershipSimple",
         },
         {
           type: "null",
         },
       ],
-    },
-    generate_ticket: {
-      anyOf: [
-        {
-          type: "boolean",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Generate Ticket",
-    },
-    ticket_max_use: {
-      anyOf: [
-        {
-          type: "integer",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Ticket Max Use",
-    },
-    ticket_expiration: {
-      anyOf: [
-        {
-          type: "string",
-          format: "date-time",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Ticket Expiration",
     },
     product_constraints: {
       anyOf: [
@@ -8197,47 +10041,30 @@ export const $app__modules__phonebook__schemas_phonebook__MembershipBase = {
       ],
       title: "Role Tags",
     },
+    member_order: {
+      type: "integer",
+      title: "Member Order",
+    },
   },
   type: "object",
-  required: ["user_id", "association_id", "mandate_year", "role_name"],
+  required: [
+    "user_id",
+    "association_id",
+    "mandate_year",
+    "role_name",
+    "member_order",
+  ],
   title: "MembershipBase",
 } as const;
 
-export const $app__modules__phonebook__schemas_phonebook__MembershipComplete = {
+export const $app__types__standard_responses__Result = {
   properties: {
-    user_id: {
-      type: "string",
-      title: "User Id",
-    },
-    association_id: {
-      type: "string",
-      title: "Association Id",
-    },
-    mandate_year: {
-      type: "integer",
-      title: "Mandate Year",
-    },
-    role_name: {
-      type: "string",
-      title: "Role Name",
-    },
-    role_tags: {
-      anyOf: [
-        {
-          type: "string",
-        },
-        {
-          type: "null",
-        },
-      ],
-      title: "Role Tags",
-    },
-    id: {
-      type: "string",
-      title: "Id",
+    success: {
+      type: "boolean",
+      title: "Success",
+      default: true,
     },
   },
   type: "object",
-  required: ["user_id", "association_id", "mandate_year", "role_name", "id"],
-  title: "MembershipComplete",
+  title: "Result",
 } as const;

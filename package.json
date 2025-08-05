@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "npx prettier . --write",
+    "format": "prettier . --write",
     "generate": "openapi-ts & yarn format"
   },
   "dependencies": {

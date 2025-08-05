@@ -1,4 +1,4 @@
-import { getCdrUsersUserIdMemberships } from "@/api";
+import { getMembershipsUsersUserId } from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
 import { useToken } from "./useToken";
@@ -8,7 +8,7 @@ export const useUserMemberships = (userId: string | null) => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["userMemberships", userId ?? ""],
     queryFn: () =>
-      getCdrUsersUserIdMemberships({
+      getMembershipsUsersUserId({
         path: { user_id: userId! },
       }),
     retry: 3,
@@ -16,7 +16,7 @@ export const useUserMemberships = (userId: string | null) => {
   });
 
   return {
-    memberships: data?.data || [],
+    userMemberships: data?.data || [],
     isLoading,
     refetch,
   };

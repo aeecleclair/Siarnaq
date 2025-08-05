@@ -1,6 +1,7 @@
 import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
 import { Badge } from "@/components/ui/badge";
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
+import { useMemberships } from "@/hooks/useMemberships";
 import { useUser } from "@/hooks/useUser";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
@@ -56,7 +57,8 @@ export const ProductAccordion = ({
     (purchase) => purchase.product_variant_id,
   );
   const { user } = useUser(userId);
-  const { memberships } = useUserMemberships(userId);
+  const { userMemberships } = useUserMemberships(userId);
+  const { memberships } = useMemberships();
   const variantToDisplay = isAdmin
     ? product.variants
     : product.variants
@@ -81,15 +83,23 @@ export const ProductAccordion = ({
     purchasedVariantIds.includes(variant.id),
   );
 
-  const takenMembership = memberships?.find((membership) =>
-    product.related_membership?.includes(membership.membership),
+  const takenMembership = userMemberships?.find(
+    (userMembership) =>
+      product.related_membership?.id ===
+      userMembership.association_membership_id,
   );
+  const takenMembershipName = memberships.find(
+    (membership) =>
+      membership.id === takenMembership?.association_membership_id,
+  )?.name;
 
   const isMembershipAlreadyTaken = takenMembership !== undefined;
 
-  const isConstraintMembershipTaken = memberships?.some((membership) =>
-    product.product_constraints?.some((constraint) =>
-      constraint?.related_membership?.includes(membership.membership),
+  const isConstraintMembershipTaken = userMemberships?.some((userMembership) =>
+    product.product_constraints?.some(
+      (constraint) =>
+        constraint?.related_membership?.id ===
+        userMembership.association_membership_id,
     ),
   );
 
@@ -140,7 +150,7 @@ export const ProductAccordion = ({
         </ContextMenu>
         <AccordionContent>
           {/* Take care to export all grid-cols-n
-        Can't find a better way to do it for naw */}
+        Can't find a better way to do it for now */}
           <div className="hidden grid-cols-5" />
           <div className="hidden grid-cols-4" />
           <div className="hidden grid-cols-3" />
@@ -161,7 +171,7 @@ export const ProductAccordion = ({
           {product.related_membership && isMembershipAlreadyTaken && (
             <p className="text-green-700 my-2 font-semibold">
               {t("membershipAlreadyTaken", {
-                membership: takenMembership?.membership ?? "",
+                membership: takenMembershipName ?? "",
                 date: format(
                   new Date(takenMembership?.end_date),
                   "dd/MM/yyyy",

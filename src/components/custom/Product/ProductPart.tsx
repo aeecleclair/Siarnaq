@@ -19,6 +19,7 @@ interface ProductPartProps {
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   const t = useTranslations("ProductPart");
+
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const { memberships } = useUserMemberships(user.id);
@@ -29,8 +30,8 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     .map((product) => product?.product_constraints)
     .flat();
   const allConstraintIds = allConstraint?.map((constraint) => constraint?.id);
-  const membershipsValues = memberships.map(
-    (membership) => membership.membership,
+  const userAssociationsMembershipsIds = userMemberships.map(
+    (membership) => membership.association_membership_id,
   );
 
   const handleValidateAll = async () => {
@@ -80,7 +81,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
                   (purchase) => purchase.product.id,
                 )}
                 purchase={purchase}
-                memberships={membershipsValues}
+                userAssociationsMembershipsIds={userAssociationsMembershipsIds}
                 user={user}
                 isAdmin={isAdmin}
               />

@@ -36,8 +36,9 @@ export const AddProductAccordionItem = ({
       product_constraints: [],
       document_constraints: [],
       data_fields: [],
+      tickets: [],
+      ticket_name: "",
       ticket_max_use: "1",
-      generate_ticket: false,
     },
   });
 
@@ -46,10 +47,10 @@ export const AddProductAccordionItem = ({
     const body: ProductBase = {
       ...values,
       available_online: values.available_online === "true",
-      ticket_max_use: values.ticket_max_use
-        ? parseInt(values.ticket_max_use)
-        : null,
-      ticket_expiration: values.ticket_expiration?.toISOString(),
+      tickets: values.tickets.map((ticket) => ({
+        ...ticket,
+        expiration: ticket.expiration.toISOString(),
+      })),
     };
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {

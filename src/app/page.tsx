@@ -56,7 +56,9 @@ export default function Home() {
               onlineSellers={onlineSellers}
               showSellerFeatureFlag={showSellerFeatureFlag}
             />
-            {user && <CentralPanel showSellerFeatureFlag={showSellerFeatureFlag} />}
+            {user && (
+              <CentralPanel showSellerFeatureFlag={showSellerFeatureFlag} />
+            )}
           </div>
         )}
       </main>

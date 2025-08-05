@@ -24,12 +24,14 @@ export const useUsers = () => {
         throw error;
       }
       if (data) {
-        setReturnedUsers(data.map((user) => {
-          return {
-            ...user,
-            nickname: user.nickname ?? ""
-          }
-        }));
+        setReturnedUsers(
+          data.map((user) => {
+            return {
+              ...user,
+              nickname: user.nickname ?? "",
+            };
+          }),
+        );
       }
       return data;
     },

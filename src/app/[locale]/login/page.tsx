@@ -28,7 +28,7 @@ const Login = () => {
   const router = useRouter();
   const year = new Date().getFullYear();
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
-    return (year - index).toString();
+    return year - index;
   });
 
   const [selectedPromo, setSelectedPromo] = useState<string | undefined>(
@@ -57,14 +57,17 @@ const Login = () => {
           <TextSeparator text={t("or")} />
           <span className="m-auto">{t("selectPromotion")}</span>
           <div key="curriculum" className="h-full gap-4 flex flex-col">
-            <Select value={selectedPromo} onValueChange={setSelectedPromo}>
+            <Select
+              value={selectedPromo?.toString()}
+              onValueChange={setSelectedPromo}
+            >
               <SelectTrigger className="w-full m-auto">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   {possiblePromos.map((promo) => (
-                    <SelectItem key={promo} value={promo}>
+                    <SelectItem key={promo} value={promo.toString()}>
                       {t("promotion", { year: promo })}
                     </SelectItem>
                   ))}
@@ -80,7 +83,7 @@ const Login = () => {
               onClick={() => {
                 let redirectUri =
                   process.env.NEXT_PUBLIC_BACKEND_URL + "/calypsso/register";
-                if (selectedPromo === possiblePromos[0]) {
+                if (selectedPromo === possiblePromos[0].toString()) {
                   redirectUri += "?external=true";
                 }
                 router.push(redirectUri);

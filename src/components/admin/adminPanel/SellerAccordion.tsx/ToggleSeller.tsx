@@ -19,7 +19,6 @@ interface ToggleSellerProps {
 }
 
 export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
-  const t = useTranslations("toggleSeller");
   const { toast } = useToast();
   const { refetch: refetchGroups } = useGroups();
   const { refetch: refetchSellers } = useSellers();
@@ -37,7 +36,6 @@ export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
     });
     if (error) {
       toast({
-        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -56,7 +54,6 @@ export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
     });
     if (error) {
       toast({
-        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

@@ -1,8 +1,7 @@
 {
   "addCurriculumButton": {
     "add": "Ajouter",
-    "curriculumName": "Nom du cursus",
-    "error": "Erreur"
+    "curriculumName": "Nom du cursus"
   },
   "addEditProductForm": {
     "add": "Ajouter",
@@ -14,7 +13,6 @@
     "description_fr": "Description (français)",
     "document_constraints": "Signatures",
     "edit": "Modifier",
-    "error": "Error",
     "generate_ticket": "Générer un ticket pour ce produit",
     "information": "Informations supplémentaires",
     "name_en": "Nom (anglais)",
@@ -27,7 +25,6 @@
     "tickets": "Tickets"
   },
   "addProductAccordionItem": {
-    "error": "Error",
     "newProduct": "Nouveau produit"
   },
   "associationPanel": {
@@ -39,8 +36,6 @@
   "curriculumAccordionItem": {
     "curriculum": "Cursus"
   },
-  "curriculumItem": {
-    "error": "Erreur"
   },
   "dataTable": {
     "noResult": "Pas de résultat"
@@ -189,7 +184,6 @@
     "edit": "Modifier",
     "editCurriculum": "Modifier le cursus",
     "editUser": "Modifier l'utilisateur",
-    "error": "Error",
     "leftToPay": "Reste à payer",
     "noCurriculum": "Pas de cursus"
   },
@@ -202,7 +196,6 @@
   "statusAccordionItem": {
     "close": "Fermer",
     "closed": "Fermé",
-    "error": "Error",
     "onSiteButtonLabel": "Sur place",
     "online": "En ligne",
     "onsite": "Sur place",
@@ -211,7 +204,7 @@
     "setOnline": "Mettre en ligne",
     "status": "Status"
   },
-  "toggleSeller": {
-    "error": "Error"
+  "toast": {
+    "error": "Erreur"
   }
 }

@@ -80,7 +80,6 @@ export const PurchaseItem = ({
       });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

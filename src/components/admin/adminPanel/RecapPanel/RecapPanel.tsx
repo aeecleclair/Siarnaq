@@ -94,7 +94,6 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
     }
     if (error) {
       toast({
-        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -141,7 +140,6 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
     });
     if (error) {
       toast({
-        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

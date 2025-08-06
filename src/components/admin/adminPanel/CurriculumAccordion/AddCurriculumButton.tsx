@@ -33,7 +33,6 @@ export const AddCurriculumButton = () => {
     });
     if (error) {
       toast({
-        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

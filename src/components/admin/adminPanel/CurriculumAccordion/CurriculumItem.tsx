@@ -11,7 +11,6 @@ interface CurriculumItemProps {
 }
 
 export const CurriculumItem = ({ curriculum }: CurriculumItemProps) => {
-  const t = useTranslations("curriculumItem");
   const { toast } = useToast();
   const { refetch: refetchCurriculums } = useCurriculums();
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +23,6 @@ export const CurriculumItem = ({ curriculum }: CurriculumItemProps) => {
     });
     if (error) {
       toast({
-        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

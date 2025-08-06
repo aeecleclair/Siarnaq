@@ -86,5 +86,8 @@
   },
   "recap": {
     "remainingToPay": "Remaining to pay:"
+  },
+  "toast": {
+    "error": "Error"
   }
 }

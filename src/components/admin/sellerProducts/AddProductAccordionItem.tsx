@@ -62,7 +62,6 @@ export const AddProductAccordionItem = ({
     });
     if (error) {
       toast({
-        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

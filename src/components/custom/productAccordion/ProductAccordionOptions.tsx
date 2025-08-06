@@ -11,7 +11,7 @@ import {
   ContextMenuShortcut,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
-import { toast, useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
@@ -77,7 +77,6 @@ export const ProductAccordionOptions = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -115,7 +114,6 @@ export const ProductAccordionOptions = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

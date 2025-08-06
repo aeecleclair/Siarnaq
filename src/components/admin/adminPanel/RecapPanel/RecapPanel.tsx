@@ -252,11 +252,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
         <CardTitle className="flex flex-row w-full">
           <span className="font-bold">{t("leftToPay")}</span>
           <span className="ml-auto font-semibold">
-            {format.number(remainingToPay, {
-              style: "currency",
-              currency: "EUR",
-              maximumFractionDigits: 2,
-            })}
+            {format.number(remainingToPay, "euro")}
           </span>
         </CardTitle>
       </div>

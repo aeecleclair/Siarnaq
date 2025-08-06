@@ -68,6 +68,30 @@ export const PurchaseItem = ({
     (variant) => variant.id === purchase.product_variant_id,
   );
 
+  async function onValidate() {
+    setIsLoading(true);
+    const { data, error } =
+      await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
+        path: {
+          product_variant_id: purchase.product_variant_id,
+          user_id: user.id,
+        },
+        query: {
+          validated: !purchase.validated,
+        },
+      });
+    if (error) {
+      toast({
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(false);
+    refetch();
+  }
+
   return (
     <div>
       <div className="flex flex-row w-full items-center">

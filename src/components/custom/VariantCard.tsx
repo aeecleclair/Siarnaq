@@ -87,7 +87,6 @@ export const VariantCard = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -112,7 +111,6 @@ export const VariantCard = ({
     );
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

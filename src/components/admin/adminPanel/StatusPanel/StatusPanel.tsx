@@ -30,7 +30,6 @@ export const StatusAccordionItem = ({ status }: SellerTabProps) => {
     });
     if (error) {
       toast({
-        title: t("error"),
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

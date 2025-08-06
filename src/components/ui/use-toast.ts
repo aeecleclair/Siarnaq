@@ -7,6 +7,8 @@ import type {
   ToastActionElement,
   ToastProps,
 } from "@/components/ui/toast"
+import { Locale, useTranslations } from "next-intl"
+import { useParams } from "next/navigation"
 
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
@@ -142,7 +144,7 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, "id">
 
-function toast({ ...props }: Toast) {
+function _toast({ ...props }: Toast) {
   const id = genId()
 
   const update = (props: ToasterToast) =>
@@ -174,6 +176,7 @@ function toast({ ...props }: Toast) {
 
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
+  const t = useTranslations("toast")
 
   React.useEffect(() => {
     listeners.push(setState)
@@ -187,9 +190,14 @@ function useToast() {
 
   return {
     ...state,
-    toast,
+    toast: ({ ...props }) => {
+      if (!props.title) {
+        props.title = t("error")
+      }
+      return _toast({ ...props })
+    },
     dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
   }
 }
 
-export { useToast, toast }
+export { useToast }

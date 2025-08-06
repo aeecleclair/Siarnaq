@@ -39,7 +39,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useMemberships } from "@/hooks/useMemberships";
@@ -71,6 +71,7 @@ export const AddEditProductForm = ({
 }: AddEditProductFormProps) => {
   const t = useTranslations("addEditProductForm");
   const format = useFormatter();
+  const { toast } = useToast();
   const { products: constraint } = useProducts();
   const { data, refetch } = useSellerProductData(sellerId, productId ?? null);
   const [isAddingTicketLoading, setIsAddingTicketLoading] = useState(false);
@@ -105,7 +106,6 @@ export const AddEditProductForm = ({
       });
       if (error) {
         toast({
-          title: "Error",
           description: (error as { detail: String }).detail,
           variant: "destructive",
         });
@@ -143,7 +143,6 @@ export const AddEditProductForm = ({
         );
       if (error) {
         toast({
-          title: "Error",
           description: (error as { detail: String }).detail,
           variant: "destructive",
         });
@@ -174,7 +173,6 @@ export const AddEditProductForm = ({
       });
       if (error) {
         toast({
-          title: t("error"),
           description: (error as { detail: String }).detail,
           variant: "destructive",
         });
@@ -210,7 +208,6 @@ export const AddEditProductForm = ({
         });
       if (error) {
         toast({
-          title: t("error"),
           description: (error as { detail: String }).detail,
           variant: "destructive",
         });

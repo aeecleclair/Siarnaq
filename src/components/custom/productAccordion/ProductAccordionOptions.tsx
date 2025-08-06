@@ -11,7 +11,7 @@ import {
   ContextMenuShortcut,
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
-import { toast, useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
 import { useMemberships } from "@/hooks/useMemberships";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -81,7 +81,6 @@ export const ProductAccordionOptions = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -122,7 +121,6 @@ export const ProductAccordionOptions = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

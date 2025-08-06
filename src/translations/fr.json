@@ -56,7 +56,7 @@
   "dataTableFacetedFilter": {
     "deleteFilters": "Supprimer les filtres",
     "noResult": "Aucun résultat",
-    "selected": "{size} sélectionnés"
+    "selected": "{size, number} sélectionnés"
   },
   "dataTablePagination": {
     "byPage": "par page",
@@ -64,8 +64,8 @@
     "goToLastPage": "Go to last page",
     "goToNextPage": "Go to next page",
     "goToPreviousPage": "Go to previous page",
-    "pagination": "Page {number} sur {total}",
-    "selected": "{size} sélectionnés"
+    "pagination": "Page {number, number} sur {total, number}",
+    "selected": "{size, number} sélectionnés"
   },
   "dataTableRowActions": {
     "cancelMerge": "Annuler la fusion",
@@ -80,11 +80,11 @@
     "noCurriculum": "Aucun cursus"
   },
   "dataTableViewOptions": {
-    "name": "Nom",
     "activateColumns": "Activer les colonnes",
     "columns": "Colonnes",
     "curriculum": "Cursus",
     "firstname": "Prénom",
+    "name": "Nom",
     "nickname": "Surnom"
   },
   "info": {
@@ -124,10 +124,10 @@
     "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves :",
     "description": "Bienvenue dans la Chaîne De Rentrée associative de l'École Centrale de Lyon. Ce site, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra d'adhérer aux associations et souscrire aux services associatifs de l'école.",
     "or": "Sinon",
-    "promotion": "Promotion {year}",
+    "promotion": "Promotion {year, number}",
     "register": "S'inscrire",
     "selectPromotion": "Sélectionnez votre promo pour créer un compte :",
-    "title": "Chaîne de rentrée associative {year}"
+    "title": "Chaîne de rentrée associative {year, number}"
   },
   "metadata": {
     "description": "Plateforme de gestion de la rentrée associative de Centrale Lyon",

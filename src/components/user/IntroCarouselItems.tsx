@@ -49,6 +49,7 @@ export const IntroCarouselItems = ({
       selectedCurriculum !== user.curriculum?.id);
   const content: React.ReactNode[] = [
     <div key="intro" className="flex flex-col gap-2">
+      <span>{t("welcome")}</span>
       <span>{t("description")}</span>
       <span>
         {t("contact")} <a href="mailto://bde@ec-lyon.fr">bde@ec-lyon.fr</a>

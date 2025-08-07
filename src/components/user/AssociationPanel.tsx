@@ -33,6 +33,17 @@ export const AssociationPanel = ({
     purchases?.reduce<number>((acc, purchase) => acc + purchase.quantity, 0) ??
     0;
 
+  const customSellerNames = ["BDE", "BDS", "SDeC", "WEI"] as const;
+  function isInCustomSellerNames(
+    sellerName: string,
+  ): sellerName is (typeof customSellerNames)[number] {
+    return customSellerNames.includes(
+      sellerName as (typeof customSellerNames)[number],
+    );
+  }
+  const displaySellerName = (sellerName: string) =>
+    isInCustomSellerNames(sellerName) ? t(sellerName) : sellerName;
+
   return (
     <div>
       <div className="mx-auto grid w-full max-w-6xl gap-2 mb-6">
@@ -71,7 +82,7 @@ export const AssociationPanel = ({
                   ) : (
                     <HiOutlineEllipsisHorizontal className="h-4 w-4 mr-2" />
                   )}
-                  {seller.name}
+                  {displaySellerName(seller.name)}
                   {purchasesCount > 0 && (
                     <>
                       <span className="ml-2">·</span>

@@ -3,7 +3,7 @@
 import { useRouter } from "@/i18n/navigation";
 import { useCodeVerifierStore } from "@/stores/codeVerifier";
 import { useTokenStore } from "@/stores/token";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import * as auth from "oauth4webapi";
 import { useState } from "react";
@@ -11,6 +11,7 @@ import { useState } from "react";
 import { LoadingButton } from "../custom/LoadingButton";
 
 const MyECLButton = () => {
+  const t = useTranslations("MyECLButton");
   const locale = useLocale();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -116,7 +117,7 @@ const MyECLButton = () => {
         openSSO();
       }}
     >
-      Se connecter avec MyECL
+      {t("authenticate")}
     </LoadingButton>
   );
 };

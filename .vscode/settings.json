@@ -21,12 +21,20 @@
     ],
     "src\\components\\admin\\adminPanel\\RecapPanel\\RecapPanel.tsx": [
       " (",
-      ")\n              "
+      ")\n              ",
+      ")\r\n              "
     ],
     "src\\components\\admin\\userSearch\\Columns.tsx": [" — "],
     "src\\components\\admin\\userSearch\\DataTableColumnHeader.tsx": [
       "\n            Asc\n          ",
       "\n            Desc\n          "
-    ]
-  }
+    ],
+    "src\\components\\custom\\Payment\\PaymentItem.tsx": [
+      " (",
+      ")\r\n                        "
+    ],
+    "src\\components\\custom\\CurrencyInput.tsx": ["€"],
+    "src\\components\\custom\\MultiSelect.tsx": ["Enter"]
+  },
+  "i18n-ally.extract.ignored": []
 }

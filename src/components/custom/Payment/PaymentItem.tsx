@@ -8,7 +8,7 @@ import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import {
   HiOutlineArchiveBox,
@@ -32,6 +32,7 @@ export const PaymentItem = ({
   isAdmin,
 }: PaymentItemProps) => {
   const t = useTranslations("paymentPart");
+  const format = useFormatter();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
@@ -82,34 +83,39 @@ export const PaymentItem = ({
         {t(payment.payment_type)}
       </span>
       <span className="ml-auto font-semibold w-28 flex justify-end">
-        {(payment.total / 100).toFixed(2)} €
+        {format.number(payment.total / 100, "euro")}
       </span>
       {isAdmin && (
         <CustomDialog
           isOpened={isOpened}
           setIsOpened={setIsOpened}
-          title="Supprimer le paiement"
+          title={t("deletePayment")}
           description={
             <div className="grid gap-3">
               <span>
-                Êtes-vous sûr de vouloir supprimer le paiement de{" "}
-                <span className="font-bold">
-                  {user.nickname ? (
+                {t.rich("areYouSure", {
+                  name: () => (
                     <span className="font-bold">
-                      {user.nickname} ({user.firstname} {user.name})
+                      {user.nickname ? (
+                        <span className="font-bold">
+                          {user.nickname} ({user.firstname} {user.name})
+                        </span>
+                      ) : (
+                        <span className="font-bold">
+                          {user.firstname} {user.name}
+                        </span>
+                      )}
                     </span>
-                  ) : (
+                  ),
+                  amount: () => (
                     <span className="font-bold">
-                      {user.firstname} {user.name}
+                      {format.number(payment.total / 100, "euro")}
                     </span>
-                  )}
-                </span>
-                {" d'un montant de "}
-                <span className="font-bold">
-                  {(payment.total / 100).toFixed(2)} €
-                </span>{" "}
-                effectué par{" "}
-                <span className="font-bold">{t(payment.payment_type)}</span> ?
+                  ),
+                  type: () => (
+                    <span className="font-bold">{t(payment.payment_type)}</span>
+                  ),
+                })}
               </span>
               <div className="flex justify-end mt-2 space-x-4">
                 <Button
@@ -118,7 +124,7 @@ export const PaymentItem = ({
                   disabled={isLoading}
                   className="w-[100px]"
                 >
-                  Annuler
+                  {t("cancel")}
                 </Button>
                 <LoadingButton
                   isLoading={isLoading}
@@ -127,7 +133,7 @@ export const PaymentItem = ({
                   variant="destructive"
                   onClick={onDelete}
                 >
-                  {"Supprimer"}
+                  {t("delete")}
                 </LoadingButton>
               </div>
             </div>

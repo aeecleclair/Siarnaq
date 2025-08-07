@@ -6,7 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useProducts } from "@/hooks/useProducts";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 

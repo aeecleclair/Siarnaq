@@ -59,6 +59,10 @@
     "addingVariant": "Ajouter une variante"
   },
   "associationPanel": {
+    "BDE": "Association des élèves",
+    "BDS": "Union sportive des élèves",
+    "SDeC": "Polys de cours",
+    "WEI": "Week-End d'Intégration",
     "associations": "Associations",
     "information": "Informations pratiques",
     "presentation": "Présentation",
@@ -121,33 +125,35 @@
     "select": "Sélectionner une date"
   },
   "info": {
-    "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration, prévoyez deux chèques de caution de 100 € à l'ordre",
-    "cautionInstructions": "Au dos du premier, notez : \"Prénom Nom - WEI 2024 - bus\" et du second : \"Prénom Nom - WEI 2024 - site\". Ces chèques ne seront encaissés qu'en cas de dégradations dans les bus ou sur le site du WEI.",
+    "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration, prévoyez deux chèques de caution de 100 € à l'ordre « <payable>AEECL - WEI</payable> ».",
+    "cautionInstructions": "Au dos du premier, notez : \"Prénom Nom - WEI 2025 - bus\" et du second : \"Prénom Nom - WEI 2025 - site\". Ces chèques ne seront encaissés qu'en cas de dégradations dans les bus ou sur le site du WEI.",
     "cautionTitle": "Cautions pour le WEI",
-    "cdrPhysiqueDescription": "Vous pourrez y rencontrer les associations, manifester votre intérêt pour les activités proposées et poser toutes vos questions. La chaîne de rentrée physique sera l'occasion de vous inscrire à tous les évènements de la Quinzaine d'Intégration et de souscrire aux services associatifs.",
-    "cdrPhysiqueMandatoryWarning": "Votre présence à la Chaîne de Rentrée physique est obligatoire pour valider vos achats. En cas de contrainte majeure, prenez rapidement contact avec le Bureau Des Élèves pour trouver une alternative.",
-    "cdrPhysiqueSubtitle": "À la suite de cette chaîne de rentrée numérique, vous serez convoqués à la chaîne de rentrée physique.",
-    "cdrPhysiqueTitle": "Chaîne de rentrée physique",
+    "cdrOnsiteDescription": "Vous pourrez rencontrer les associations, manifester votre intérêt pour les activités proposées et poser toutes vos questions.",
+    "cdrOnsiteMandatoryWarning": "En cas de contrainte majeure, prenez rapidement contact avec le Bureau Des Élèves pour trouver une alternative :",
+    "cdrOnsiteSubtitle": "À la suite de cette chaîne de rentrée numérique, vous serez convoqués à la chaîne de rentrée en présentiel : votre présence est obligatoire pour valider vos achats.",
+    "cdrOnsiteTitle": "Chaîne de rentrée en présentiel",
     "downloadMyECLAndroid": "Téléchargez MyECL sous Android",
-    "downloadMyECLiOS": "Téléchargez MyECL sous iOS/iPadOS",
+    "downloadMyECLiOS": "Téléchargez MyECL sous iOS",
     "element": "Une instance Matrix est hébergée sur le campus. Celle-ci vous permettra de communiquer facilement avec les autres élèves, et ce de manière sécurisée, chiffrée de bout en bout. Pour y accéder :",
     "elementStep1": "Téléchargez l'application Element-x sur votre téléphone",
     "elementStep2": "Sur l'application choisissez \"Changer de fournisseur de compte\" puis \"Continuer\"",
     "elementStep3": "Entrez l'URL du serveur :",
     "elementStep4": "Vous pourrez alors vous connecter avec votre compte MyECL",
     "elementTitle": "Messagerie instantanée Element / Matrix",
-    "facebook": "Une grande partie de la communication sur le campus se fait via des groupes Facebook. Les nouveaux élèves peuvent rejoindre le groupe des Nouveaux Admis 2024 pour ne rater aucune information :",
+    "facebook": "Une grande partie de la communication sur le campus se fait via des groupes Facebook. Les nouveaux élèves peuvent rejoindre le groupe des Nouveaux Admis 2025 pour ne rater aucune information :",
     "facebookTitle": "Groupe Facebook des nouveaux admis",
+    "group": "Groupe des Admis 2025",
     "information": "Informations pratiques",
-    "myECL": "Essentielle à la vie étudiante centralienne, l'application MyECL vous permettra d'accéder à plein de services toute l'année. Vous y retrouverez le calendrier des événements, les réservations de salles, le planning du club ciné et de nombreuses autres choses.",
+    "myECL": "L'application MyECL est essentielle à la vie étudiante centralienne, elle est nécessaire pour payer lors de nombreux événements (notamment au bar) et vous permettra d'accéder à plein de services (calendrier des événements, planning du cinéma, réservations de salles, etc.).",
     "myECLTitle": "Application MyECL"
   },
   "introCarouselItem": {
     "begin": "On commence ?",
     "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves :",
-    "description": "Bienvenue dans la Chaîne De Rentrée associative de l'École Centrale de Lyon. Ce site, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra d'adhérer aux associations et souscrire aux services associatifs de l'école. À la fin du parcours, vous serez amenés à payer en ligne par carte bancaire.",
+    "description": "Ce site vous permet d'adhérer aux associations, de payer les polycopiés de cours et de prendre votre place pour le Week-End d'Intégration (WEI). Cela vous fera gagner un temps précieux lors de la seconde partie de la chaîne de rentrée qui aura lieu en présentiel. À la fin du parcours, vous serez amenés à payer en ligne par carte bancaire.",
     "selectCurriculum": "Pour commencer, veuillez sélectionner votre cursus :",
-    "validate": "Valider"
+    "validate": "Valider",
+    "welcome": "Bienvenue dans la chaîne de rentrée associative de Centrale Lyon."
   },
   "introPanel": {
     "presentation": "Présentation"
@@ -229,7 +235,8 @@
     "editProduct": "Modifier le produit"
   },
   "productPanel": {
-    "noProductFound": "Aucun produit disponible"
+    "noProductFound": "Aucun produit disponible",
+    "noSellerFound": "Aucun vendeur trouvé"
   },
   "productPart": {
     "admin": "Admin",

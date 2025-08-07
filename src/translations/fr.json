@@ -1,4 +1,10 @@
 {
+  "HelloAssoButton": {
+    "payWithHA": "Payer avec <ha>HelloAsso</ha>"
+  },
+  "MyECLButton": {
+    "authenticate": "Se connecter avec MyECL"
+  },
   "addCurriculumButton": {
     "add": "Ajouter",
     "curriculumName": "Nom du cursus"
@@ -24,8 +30,33 @@
     "ticket_max_use": "Nombre d'utilisations maximum",
     "tickets": "Tickets"
   },
+  "addEditVariantForm": {
+    "add": "Ajouter",
+    "allowed_curriculum": "Cursus",
+    "cancel": "Annuler",
+    "description_en": "Description (anglais)",
+    "description_fr": "Description (français)",
+    "edit": "Modifier",
+    "multiple": "Peux être acheter autant de fois que souhaité",
+    "name_en": "Nom (anglais)",
+    "name_fr": "Nom (français)",
+    "price": "Prix",
+    "purchase": "Achat",
+    "unique": "Ne peux être acheté qu'une seule fois"
+  },
   "addProductAccordionItem": {
     "newProduct": "Nouveau produit"
+  },
+  "addUserWithCurriculum": {
+    "add": "Ajouter",
+    "addCurriculumToUser": "Ajouter un cursus à un utilisateur",
+    "cancel": "Annuler",
+    "curriculum": "Cursus",
+    "searchUser": "Chercher un utilisateur",
+    "user": "Utilisateur"
+  },
+  "addingVariantCard": {
+    "addingVariant": "Ajouter une variante"
   },
   "associationPanel": {
     "associations": "Associations",
@@ -36,6 +67,10 @@
   "curriculumAccordionItem": {
     "curriculum": "Cursus"
   },
+  "customFieldsDialog": {
+    "cancel": "Annuler",
+    "title": "Informations supplémentaire",
+    "validate": "Valider"
   },
   "dataTable": {
     "noResult": "Pas de résultat"
@@ -81,6 +116,9 @@
     "firstname": "Prénom",
     "name": "Nom",
     "nickname": "Surnom"
+  },
+  "datePicker": {
+    "select": "Sélectionner une date"
   },
   "info": {
     "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration, prévoyez deux chèques de caution de 100 € à l'ordre",
@@ -135,6 +173,12 @@
     "floor": "Étage",
     "nickname": "Surnom"
   },
+  "multiselect": {
+    "deselect": "Tout désélectionner",
+    "noItemFound": "Aucun objet trouvé.",
+    "search": "Recherche...",
+    "selectAll": "Tout sélectionner"
+  },
   "page": {
     "ECLAIR": "ÉCLAIR",
     "allRightsReserved": ". Tout droits réservés.",
@@ -144,6 +188,10 @@
     "succeededDescription": "Votre paiement a été effectué avec succès",
     "succeededTitle": "Paiement effectué"
   },
+  "pageIndicator": {
+    "nextPage": "Go to next page",
+    "previousPage": "Go to previous page"
+  },
   "paymentButton": {
     "description": "Vous allez être redirigés vers HelloAsso pour procéder au paiement. HelloAsso est une entreprise française proposant des solutions de paiement pour les associations. Elle se finance uniquement par des dons. Par défaut, HelloAsso vous proposera de faire un don (nommé 'contribution volontaire'), vous pouvez refuser de le faire sans compromettre le paiement. Si vous choisissez de faire un don, seul HelloAsso en bénéficiera.",
     "pay": "Payer",
@@ -151,17 +199,34 @@
   },
   "paymentPart": {
     "HelloAsso": "HelloAsso",
+    "add": "Ajouter",
+    "addPayment": "Ajouter un paiement",
+    "amount": "Montant",
     "archived": "Archivé",
+    "areYouSure": "Êtes-vous sûr de vouloir supprimer le paiement de <name></name> d'un montant de <amount></amount> effectué par <type></type> ?",
+    "cancel": "Annuler",
     "card": "Carte",
     "cash": "Espèces",
     "check": "Chèque",
+    "delete": "Supprimer",
+    "deletePayment": "Supprimer le paiement",
     "noPayment": "Aucun paiement réalisé",
+    "paymentType": "Type de paiement",
     "payments": "Paiements réalisés",
     "total": "Total"
   },
   "productAccordion": {
     "membershipAlreadyTaken": "Vous avez déjà pris l'adhésion à {membership} jusqu'au {date}",
     "mustBuy": "Vous devez acheter {products}"
+  },
+  "productAccordionOptions": {
+    "areYouSure": "Êtes-vous sûr de vouloir supprimer ce produit ?",
+    "cancel": "Annuler",
+    "customToast": "Suppression impossible",
+    "delete": "Supprimer",
+    "deleteProduct": "Supprimer le produit",
+    "edit": "Modifier",
+    "editProduct": "Modifier le produit"
   },
   "productPanel": {
     "noProductFound": "Aucun produit disponible"
@@ -204,7 +269,24 @@
     "setOnline": "Mettre en ligne",
     "status": "Status"
   },
+  "statusDialog": {
+    "continue": "Continuer"
+  },
   "toast": {
     "error": "Erreur"
+  },
+  "variantCardOptions": {
+    "activate": "Activer",
+    "areYouSure": "Êtes-vous sûr de vouloir supprimer cette variante ?",
+    "cancel": "Annuler",
+    "deactivate": "Désactiver",
+    "delete": "Supprimer",
+    "deleteVariant": "Supprimer la variante",
+    "edit": "Modifier",
+    "editVariant": "Modifier la variante",
+    "information": "Information"
+  },
+  "warningDialog": {
+    "cancel": "Annuler"
   }
 }

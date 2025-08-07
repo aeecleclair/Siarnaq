@@ -7,7 +7,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslation } from "@/translations/utils";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { HiCheck, HiOutlineExclamationCircle, HiXMark } from "react-icons/hi2";
 import { HiOutlineCheckBadge } from "react-icons/hi2";
@@ -34,6 +34,7 @@ export const PurchaseItem = ({
   isAdmin,
 }: PurchaseItemProps) => {
   const t = useTranslations("purchaseItem");
+  const format = useFormatter();
   const { toast } = useToast();
   const { refetch } = useUserPurchases(user.id);
   const { selectTranslation } = useTranslation();
@@ -122,7 +123,7 @@ export const PurchaseItem = ({
           </span>
         </div>
         <span className="ml-auto w-24 text-right font-semibold">
-          {((purchase.quantity * purchase.price) / 100).toFixed(2)} €
+          {format.number((purchase.quantity * purchase.price) / 100, "euro")}
         </span>
         {isAdmin && (
           <LoadingButton

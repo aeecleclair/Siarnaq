@@ -1,4 +1,5 @@
 import { CustomDataFieldComplete } from "@/api";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 import { Button } from "../../ui/button";
@@ -37,6 +38,7 @@ export const CustomFieldsDialog = ({
   userId,
   children,
 }: CustomFieldsDialogProps) => {
+  const t = useTranslations("customFieldsDialog");
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
 
   return (
@@ -48,7 +50,7 @@ export const CustomFieldsDialog = ({
       >
         <ScrollArea className="max-h-[80vh] px-6">
           <DialogHeader className="pt-6 m-1">
-            <DialogTitle>Informations supplémentaire</DialogTitle>
+            <DialogTitle>{t("title")}</DialogTitle>
           </DialogHeader>
           <DialogDescription className="py-6 m-1">
             {productFields.map((field) => (
@@ -69,7 +71,7 @@ export const CustomFieldsDialog = ({
                 disabled={isLoading}
                 className="w-[100px]"
               >
-                Annuler
+                {t("cancel")}
               </Button>
               <LoadingButton
                 isLoading={isLoading}
@@ -77,7 +79,7 @@ export const CustomFieldsDialog = ({
                 type="button"
                 onClick={() => onValidate(answers)}
               >
-                {"Valider"}
+                {t("validate")}
               </LoadingButton>
             </div>
           </DialogDescription>

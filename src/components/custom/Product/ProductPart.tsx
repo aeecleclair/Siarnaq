@@ -4,7 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { useProducts } from "@/hooks/useProducts";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 
 import { PurchaseItem } from "./PurchaseItem";
 
@@ -15,6 +15,7 @@ interface ProductPartProps {
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   const t = useTranslations("productPart");
+  const format = useFormatter();
   const { userMemberships } = useUserMemberships(user.id);
   const { purchases, total: totalToPay } = useUserPurchases(user.id);
   const { products: allProducts } = useProducts();
@@ -51,7 +52,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             <div className="flex flex-row w-full">
               <span className="font-bold w-1/6">{t("total")}</span>
               <span className="ml-auto font-semibold">
-                {totalToPay?.toFixed(2)} €
+                {totalToPay && format.number(totalToPay, "euro")}
               </span>
             </div>
           </>

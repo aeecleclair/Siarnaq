@@ -2,6 +2,9 @@
   "addCurriculumButton": {
     "error": "Error"
   },
+  "addUserWithCurriculum": {
+    "searchUser": "Look for a user"
+  },
   "associationPanel": {
     "associations": "Associations",
     "information": "Useful informations",
@@ -53,6 +56,10 @@
   "metadata": {
     "description": "Centrale Lyon associative Back-to-School management platform",
     "title": "Associative Back-to-school"
+  },
+  "multiselect": {
+    "noItemFound": "No item found.",
+    "search": "Search..."
   },
   "paymentButton": {
     "description": "You will be redirected to HelloAsso to proceed to payment. HelloAsso is a French company offering payment solutions for associations. It is financed exclusively by donations. By default, HelloAsso will propose you to make a donation (called 'contribution volontaire' or 'voluntary contribution'), you can refuse to do so without compromising the payment. If you choose to make a donation, only HelloAsso will benefit it.",

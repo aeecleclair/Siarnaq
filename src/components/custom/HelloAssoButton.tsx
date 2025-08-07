@@ -1,4 +1,5 @@
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 
 import { Button } from "../ui/button";
 
@@ -11,6 +12,7 @@ export const HelloAssoButton = ({
   isLoading,
   onClick,
 }: HelloAssoButtonProps) => {
+  const t = useTranslations("HelloAssoButton");
   return (
     <Button
       className="border-[#3d33a6] group-hover:border-[#3d33a6] p-0 group"
@@ -93,10 +95,9 @@ export const HelloAssoButton = ({
         {isLoading ? (
           <ReloadIcon className="h-4 w-4 animate-spin" />
         ) : (
-          <>
-            {"Payer avec "}
-            <span className="font-bold ml-1">helloasso</span>
-          </>
+          t.rich("payWithHA", {
+            ha: (c) => <span className="font-bold ml-1">{c}</span>,
+          })
         )}
       </span>
     </Button>

@@ -34,7 +34,6 @@ export const PurchaseItem = ({
   isAdmin,
 }: PurchaseItemProps) => {
   const t = useTranslations("PurchaseItem");
-  const { toast } = useToast();
   const { refetch } = useUserPurchases(user.id);
   const { selectTranslation } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
@@ -65,31 +64,6 @@ export const PurchaseItem = ({
   const variant = purchase.product.variants?.find(
     (variant) => variant.id === purchase.product_variant_id,
   );
-
-  async function onValidate() {
-    setIsLoading(true);
-    const { data, error } =
-      await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
-        path: {
-          product_variant_id: purchase.product_variant_id,
-          user_id: user.id,
-        },
-        query: {
-          validated: !purchase.validated,
-        },
-      });
-    if (error) {
-      toast({
-        title: "Error",
-        description: (error as { detail: String }).detail,
-        variant: "destructive",
-      });
-      setIsLoading(false);
-      return;
-    }
-    setIsLoading(false);
-    refetch();
-  }
 
   return (
     <div>
@@ -131,7 +105,15 @@ export const PurchaseItem = ({
             variant="outline"
             className="ml-4 h-8 w-8"
             isLoading={isLoading}
-            onClick={onValidate}
+            onClick={() =>
+              onValidate(
+                purchase.product_variant_id,
+                purchase.validated,
+                user.id,
+                setIsLoading,
+                refetch,
+              )
+            }
           >
             {purchase.validated ? (
               <HiXMark className="w-5 h-5" />
@@ -156,4 +138,39 @@ export const PurchaseItem = ({
       )}
     </div>
   );
+};
+
+export const onValidate = async (
+  purchaseid: PurchaseReturn["product_variant_id"],
+  purchaseState: PurchaseReturn["validated"],
+  userid: CdrUser["id"],
+  setIsLoading: (loading: boolean) => void,
+  refetch: () => void,
+) => {
+  const { toast } = useToast();
+  try {
+    setIsLoading(true);
+    await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
+      path: {
+        product_variant_id: purchaseid,
+        user_id: userid,
+      },
+      query: {
+        validated: !purchaseState,
+      },
+    });
+    toast({
+      title: purchaseState ? "Purchase unvalidated" : "Purchase validated",
+      variant: "default",
+    });
+    refetch();
+  } catch (error) {
+    toast({
+      title: "Error",
+      description: "There was an error validating the purchase.",
+      variant: "destructive",
+    });
+  } finally {
+    setIsLoading(false);
+  }
 };

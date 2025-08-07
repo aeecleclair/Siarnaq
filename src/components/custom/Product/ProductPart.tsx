@@ -39,7 +39,13 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     try {
       await Promise.all(
         purchases.map((purchase) =>
-          onValidate(purchase, user.id, setIsLoading, refetch, toast),
+          onValidate(
+            purchase.product_variant_id,
+            purchase.validated,
+            user.id,
+            setIsLoading,
+            refetch,
+          ),
         ),
       );
     } catch (error) {
@@ -66,7 +72,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
       <div className="justify-between flex flex-row">
         <CardTitle>{t("summary")}</CardTitle>
         <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
-          {isLoading ? "Validation en cours..." : "Valider tous les achats"}
+          Valider tous les achats
         </LoadingButton>
       </div>
       <div className="space-y-2">

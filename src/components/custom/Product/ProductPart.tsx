@@ -9,7 +9,7 @@ import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-// ou votre système de toast
+import { LoadingButton } from "../LoadingButton";
 import { PurchaseItem, onValidate } from "./PurchaseItem";
 
 interface ProductPartProps {
@@ -22,7 +22,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
 
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const { memberships } = useUserMemberships(user.id);
+  const { userMemberships: memberships } = useUserMemberships(user.id);
   const { purchases, total: totalToPay, refetch } = useUserPurchases(user.id);
   const { products: allProducts } = useProducts();
 
@@ -30,7 +30,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     .map((product) => product?.product_constraints)
     .flat();
   const allConstraintIds = allConstraint?.map((constraint) => constraint?.id);
-  const userAssociationsMembershipsIds = userMemberships.map(
+  const userAssociationsMembershipsIds = memberships.map(
     (membership) => membership.association_membership_id,
   );
 
@@ -39,7 +39,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     try {
       await Promise.all(
         purchases.map((purchase) =>
-          onValidate(purchase, user, setIsLoading, refetch, toast),
+          onValidate(purchase, user.id, setIsLoading, refetch, toast),
         ),
       );
     } catch (error) {
@@ -53,7 +53,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
         title: purchases
           .map((purchase) => purchase.validated)
           .every((validated) => validated)
-          ? "A Purchase is unvalidated"
+          ? "Some Purchase are unvalidated"
           : "All Purchases are validated",
         variant: "default",
       });
@@ -65,9 +65,9 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     <div className="grid gap-6 -mt-4">
       <div className="justify-between flex flex-row">
         <CardTitle>{t("summary")}</CardTitle>
-        <Button onClick={handleValidateAll} disabled={isLoading}>
+        <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
           {isLoading ? "Validation en cours..." : "Valider tous les achats"}
-        </Button>
+        </LoadingButton>
       </div>
       <div className="space-y-2">
         {purchases?.length > 0 ? (

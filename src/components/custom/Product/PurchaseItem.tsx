@@ -107,7 +107,7 @@ export const PurchaseItem = ({
             className="ml-4 h-8 w-8"
             isLoading={isLoading}
             onClick={() =>
-              onValidate(purchase, user, setIsLoading, refetch, toast)
+              onValidate(purchase, user.id, setIsLoading, refetch, toast)
             }
           >
             {purchase.validated ? (
@@ -137,21 +137,17 @@ export const PurchaseItem = ({
 
 export const onValidate = async (
   purchase: PurchaseReturn,
-  user: CdrUser,
+  userid: CdrUser["id"],
   setIsLoading: (loading: boolean) => void,
   refetch: () => void,
-  toast: (options: {
-    title: string;
-    description?: string;
-    variant?: "default" | "destructive";
-  }) => void,
+  toast: (options: { title: string; description?: string }) => void,
 ) => {
   try {
     setIsLoading(true);
     await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
       path: {
         product_variant_id: purchase.product_variant_id,
-        user_id: user.id,
+        user_id: userid,
       },
       query: {
         validated: !purchase.validated,
@@ -159,14 +155,12 @@ export const onValidate = async (
     });
     toast({
       title: purchase.validated ? "Purchase unvalidated" : "Purchase validated",
-      variant: "default",
     });
     refetch();
   } catch (error) {
     toast({
       title: "Error",
       description: "There was an error validating the purchase.",
-      variant: "destructive",
     });
   } finally {
     setIsLoading(false);

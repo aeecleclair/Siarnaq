@@ -193,6 +193,11 @@
     "search": "Recherche...",
     "selectAll": "Tout sélectionner"
   },
+  "onValidate": {
+    "toastErrorDescription": "Une erreur est survenue pendant la validation de l'achat.",
+    "unvalidated": "Achat invalidé",
+    "validated": "Achat validé"
+  },
   "page": {
     "ECLAIR": "ÉCLAIR",
     "allRightsReserved": "Tout droits réservés.",
@@ -265,7 +270,11 @@
     "summary": "Récapitulatif",
     "interestSummary": "Récapitulatif des intérêts",
     "total": "Total",
-    "noProduct": "Aucun produit"
+    "noProduct": "Aucun produit",
+    "toastErrorDescription": "Une erreur est survenue pendant la validation de l'achat.",
+    "unvalidated": "Certains achats ne sont pas validés",
+    "validateAll": "Valider tous les achats",
+    "validated": "Tous les achats sont validés"
   },
   "purchaseItem": {
     "missing": "Il manque {products}"

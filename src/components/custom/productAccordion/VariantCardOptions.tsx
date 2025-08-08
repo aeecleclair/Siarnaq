@@ -29,8 +29,8 @@ import z from "zod";
 
 import { CustomDialog } from "../CustomDialog";
 import { LoadingButton } from "../LoadingButton";
-import { Answer } from "../customFieldDialog.tsx/CustomFieldInput";
-import { CustomFieldsDialog } from "../customFieldDialog.tsx/CustomFieldsDialog";
+import { Answer } from "../customFieldDialog/CustomFieldInput";
+import { CustomFieldsDialog } from "../customFieldDialog/CustomFieldsDialog";
 import { AddEditVariantForm } from "./AddEditVariantForm";
 
 interface VariantCardOptionsProps {

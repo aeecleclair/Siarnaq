@@ -26,8 +26,8 @@ import {
 } from "../ui/tooltip";
 import { useToast } from "../ui/use-toast";
 import { LoadingButton } from "./LoadingButton";
-import { Answer } from "./customFieldDialog.tsx/CustomFieldInput";
-import { CustomFieldsDialog } from "./customFieldDialog.tsx/CustomFieldsDialog";
+import { Answer } from "./customFieldDialog/CustomFieldInput";
+import { CustomFieldsDialog } from "./customFieldDialog/CustomFieldsDialog";
 
 interface VariantCardProps {
   variant: ProductVariantComplete;

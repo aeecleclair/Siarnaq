@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier . --write",
-    "generate": "openapi-ts & yarn format",
-    "i18n": "i18n-check --source fr --locales src/translations --unused src -f next-intl"
+    "format": "prettier --write",
+    "generate": "openapi-ts & yarn format .",
+    "i18n": "i18n-check --source fr --locales src/translations src -f next-intl"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",

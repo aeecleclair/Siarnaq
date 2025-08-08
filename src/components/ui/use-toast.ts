@@ -158,6 +158,7 @@ function _toast({ ...props }: Toast) {
     toast: {
       ...props,
       id,
+      className: "bg-muted",
       open: true,
       onOpenChange: (open) => {
         if (!open) dismiss()

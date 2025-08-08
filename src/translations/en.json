@@ -194,6 +194,11 @@
     "search": "Search...",
     "selectAll": "Select all"
   },
+  "onValidate": {
+    "toastErrorDescription": "An error occurred while validating the purchase.",
+    "unvalidated": "Purchase unvalidated",
+    "validated": "Purchase validated"
+  },
   "page": {
     "ECLAIR": "ÉCLAIR",
     "allRightsReserved": "All rights reserved.",
@@ -264,7 +269,11 @@
     "admin": "Admin",
     "noProduct": "No product",
     "summary": "Summary",
-    "total": "Total"
+    "toastErrorDescription": "An error occurred while validating the purchase.",
+    "total": "Total",
+    "unvalidated": "Some purchases are unvalidated",
+    "validateAll": "Validate all purchases",
+    "validated": "All the purchases are validated"
   },
   "purchaseItem": {
     "missing": "Missing {products}"

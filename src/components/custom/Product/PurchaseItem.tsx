@@ -7,7 +7,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslation } from "@/translations/utils";
-import { useFormatter, useTranslations } from "next-intl";
+import { Messages, useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { HiCheck, HiOutlineExclamationCircle, HiXMark } from "react-icons/hi2";
 import { HiOutlineCheckBadge } from "react-icons/hi2";
@@ -33,6 +33,7 @@ export const PurchaseItem = ({
   user,
   isAdmin,
 }: PurchaseItemProps) => {
+  const tOnValidate = useTranslations("onValidate");
   const t = useTranslations("purchaseItem");
   const format = useFormatter();
   const { toast } = useToast();
@@ -66,30 +67,6 @@ export const PurchaseItem = ({
   const variant = purchase.product.variants?.find(
     (variant) => variant.id === purchase.product_variant_id,
   );
-
-  async function onValidate() {
-    setIsLoading(true);
-    const { data, error } =
-      await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
-        path: {
-          product_variant_id: purchase.product_variant_id,
-          user_id: user.id,
-        },
-        query: {
-          validated: !purchase.validated,
-        },
-      });
-    if (error) {
-      toast({
-        description: (error as { detail: String }).detail,
-        variant: "destructive",
-      });
-      setIsLoading(false);
-      return;
-    }
-    setIsLoading(false);
-    refetch();
-  }
 
   return (
     <div>
@@ -131,7 +108,17 @@ export const PurchaseItem = ({
             variant="outline"
             className="ml-4 h-8 w-8"
             isLoading={isLoading}
-            onClick={onValidate}
+            onClick={() =>
+              onValidate(
+                purchase.product_variant_id,
+                purchase.validated,
+                user.id,
+                setIsLoading,
+                refetch,
+                toast,
+                tOnValidate,
+              )
+            }
           >
             {purchase.validated ? (
               <HiXMark className="w-5 h-5" />
@@ -156,4 +143,39 @@ export const PurchaseItem = ({
       )}
     </div>
   );
+};
+
+export const onValidate = async (
+  purchaseid: PurchaseReturn["product_variant_id"],
+  purchaseState: PurchaseReturn["validated"],
+  userid: CdrUser["id"],
+  setIsLoading: (loading: boolean) => void,
+  refetch: () => void,
+  toast: ReturnType<typeof useToast>["toast"],
+  t: (arg: keyof Messages["onValidate"]) => string,
+) => {
+  try {
+    setIsLoading(true);
+    await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
+      path: {
+        product_variant_id: purchaseid,
+        user_id: userid,
+      },
+      query: {
+        validated: !purchaseState,
+      },
+    });
+    toast({
+      title: purchaseState ? t("unvalidated") : t("validated"),
+      variant: "default",
+    });
+    refetch();
+  } catch (error) {
+    toast({
+      description: t("toastErrorDescription"),
+      variant: "destructive",
+    });
+  } finally {
+    setIsLoading(false);
+  }
 };

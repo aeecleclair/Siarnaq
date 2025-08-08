@@ -19,7 +19,6 @@
     "description_fr": "Description (français)",
     "document_constraints": "Signatures",
     "edit": "Modifier",
-    "generate_ticket": "Générer un ticket pour ce produit",
     "information": "Informations supplémentaires",
     "name_en": "Nom (anglais)",
     "name_fr": "Nom (français)",
@@ -60,10 +59,10 @@
     "addingVariant": "Ajouter une variante"
   },
   "associationPanel": {
-    "BDE": "Association des élèves",
-    "BDS": "Union sportive des élèves",
+    "BDE": "Association des élèves (AE)",
+    "BDS": "Union sportive des élèves (USE)",
     "SDeC": "Polys de cours",
-    "WEI": "Week-End d'Intégration",
+    "WEI": "Week-End d'Intégration (WEI)",
     "associations": "Associations",
     "information": "Informations pratiques",
     "presentation": "Présentation",

@@ -1,4 +1,5 @@
 import { CdrUser } from "@/api";
+import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
@@ -25,6 +26,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   const { userMemberships: memberships } = useUserMemberships(user.id);
   const { purchases, total: totalToPay, refetch } = useUserPurchases(user.id);
   const { products: allProducts } = useProducts();
+
   const allConstraint = allProducts
     .map((product) => product?.product_constraints)
     .flat();

@@ -2,7 +2,6 @@ import { CurriculumComplete, deleteCdrCurriculumsCurriculumId } from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { useToast } from "@/components/ui/use-toast";
 import { useCurriculums } from "@/hooks/useCurriculums";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { HiTrash } from "react-icons/hi2";
 

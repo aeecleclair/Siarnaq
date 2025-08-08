@@ -19,7 +19,7 @@ import { PencilIcon, TrashIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import z from "zod";
 
 import { CustomDialog } from "../CustomDialog";
 import { LoadingButton } from "../LoadingButton";

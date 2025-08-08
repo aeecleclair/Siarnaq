@@ -31,7 +31,7 @@ import {
   HiOutlineCreditCard,
 } from "react-icons/hi2";
 import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
-import { z } from "zod";
+import z from "zod";
 
 import { CurrencyInput } from "../CurrencyInput";
 import { PaymentItem } from "./PaymentItem";

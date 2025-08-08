@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi2";
-import { z } from "zod";
+import z from "zod";
 
 import { Card, CardContent } from "../../ui/card";
 import { CustomDialog } from "../CustomDialog";

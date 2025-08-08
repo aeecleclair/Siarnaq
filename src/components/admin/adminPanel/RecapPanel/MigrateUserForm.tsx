@@ -15,7 +15,7 @@ import { migrateUserFormSchema } from "@/forms/migrateUserFormSchema";
 import { addYears } from "date-fns";
 import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
+import z from "zod";
 
 interface MigrateUserFormProps {
   form: UseFormReturn<z.infer<typeof migrateUserFormSchema>>;

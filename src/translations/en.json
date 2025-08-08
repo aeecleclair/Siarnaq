@@ -60,6 +60,10 @@
     "addingVariant": "Add a variant"
   },
   "associationPanel": {
+    "BDE": "Student Association (AE)",
+    "BDS": "Student sports union (USE)",
+    "SDeC": "Handouts of lessons",
+    "WEI": "Orientation weekend (WEI)",
     "associations": "Associations",
     "information": "Useful informations",
     "presentation": "Presentation",
@@ -68,6 +72,9 @@
   "curriculumAccordionItem": {
     "curriculum": "Curriculum"
   },
+  "curriculumFormSchema": {
+    "name": "Please enter the name of the curriculum"
+  },
   "customFieldsDialog": {
     "cancel": "Cancel",
     "title": "Additional information",
@@ -75,6 +82,14 @@
   },
   "dataTable": {
     "noResult": "No result"
+  },
+  "dataTableColumnHeader": {
+    "curriculum": "Curriculum",
+    "firstname": "Firstname",
+    "hide": "Hide",
+    "name": "Name",
+    "nickname": "Nickname",
+    "noCurriculum": "No curriculum"
   },
   "dataTableFacetedFilter": {
     "deleteFilters": "Delete filters",
@@ -99,11 +114,16 @@
   },
   "dataTableToolbar": {
     "curriculum": "Curriculum",
+    "filter": "Filter",
     "noCurriculum": "No curriculum"
   },
   "dataTableViewOptions": {
     "activateColumns": "Activate columns",
-    "columns": "Columns"
+    "columns": "Columns",
+    "curriculum": "Curriculum",
+    "firstname": "Firstname",
+    "name": "Name",
+    "nickname": "Nickname"
   },
   "datePicker": {
     "select": "Select a date"
@@ -147,7 +167,7 @@
     "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
     "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services.",
     "or": "Or",
-    "promotion": "School year {year}",
+    "promotion": "School year {year, number}",
     "register": "Register",
     "selectPromotion": "Please select your school year:",
     "title": "Chaîne de rentrée {year, number}"
@@ -162,6 +182,11 @@
     "edit": "Edit",
     "floor": "Floor",
     "nickname": "Nickname"
+  },
+  "migrateUserFormSchema": {
+    "email": "Please enter the email address for Centrale",
+    "phone": "Please enter a valid phone number",
+    "promo": "Please enter a valid school year"
   },
   "multiselect": {
     "deselect": "Deselect all",
@@ -186,6 +211,10 @@
     "description": "You will be redirected to HelloAsso to proceed to payment. HelloAsso is a French company offering payment solutions for associations. It is financed exclusively by donations. By default, HelloAsso will propose you to make a donation (called 'contribution volontaire' or 'voluntary contribution'), you can refuse to do so without compromising the payment. If you choose to make a donation, only HelloAsso will benefit it.",
     "pay": "Pay",
     "title": "Information about the payment provider"
+  },
+  "paymentFormSchema": {
+    "paymentType": "Please specify the payment type",
+    "total": "Please enter a valid amount"
   },
   "paymentPart": {
     "HelloAsso": "HelloAsso",
@@ -218,11 +247,21 @@
     "edit": "Edit",
     "editProduct": "Edit product"
   },
+  "productFormSchema": {
+    "availableOnline": "Please enter the product availability",
+    "nameFR": "Please enter the French name of the product",
+    "noTicketExpiration": "Please enter the ticket expiration date",
+    "noTicketMaxUse": "Please enter the maximum number of uses for the ticket",
+    "noTicketName": "Please enter the ticket name",
+    "ticketMaxUseInt": "Please enter a integer number",
+    "ticketMaxUsePositive": "A ticket must be used at least once"
+  },
   "productPanel": {
     "noProductFound": "No product available",
     "noSellerFound": "No seller found"
   },
   "productPart": {
+    "admin": "Admin",
     "noProduct": "No product",
     "summary": "Summary",
     "total": "Total"
@@ -275,6 +314,12 @@
     "edit": "Edit",
     "editVariant": "Edit variant",
     "information": "Information"
+  },
+  "variantFormSchema": {
+    "allowedCurriculum": "Please enter the authorized curriculum",
+    "nameFR": "Please enter the variant name",
+    "price": "Please enter the price of the product",
+    "unique": "Please enter the quantity of the product"
   },
   "warningDialog": {
     "cancel": "Cancel"

@@ -3,7 +3,6 @@
 import { CdrUserPreview, CurriculumComplete } from "@/api";
 import { Badge } from "@/components/ui/badge";
 import { ColumnDef } from "@tanstack/react-table";
-import { useTranslations } from "next-intl";
 
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { fuzzySort } from "./searchFunction";

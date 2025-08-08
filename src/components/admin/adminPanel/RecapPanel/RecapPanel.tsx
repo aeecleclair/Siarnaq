@@ -32,7 +32,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePencil } from "react-icons/hi2";
-import { z } from "zod";
+import z from "zod";
 
 import { PaymentPart } from "../../../custom/Payment/PaymentPart";
 import { ProductPart } from "../../../custom/Product/ProductPart";

@@ -7,7 +7,7 @@ import { variantFormSchema } from "@/forms/variantFormSchema";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
+import z from "zod";
 
 import { CurrencyInput } from "../CurrencyInput";
 import { LoadingButton } from "../LoadingButton";

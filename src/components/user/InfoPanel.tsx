@@ -39,7 +39,11 @@ export const InfoPanel = () => {
           <HiOutlineCalendar className="h-4 w-4 mr-2" />
           {t("cdrOnsiteTitle")}
         </h3>
-        <div>{t("cdrOnsiteSubtitle")}</div>
+        <div>
+          {t.rich("cdrOnsiteSubtitle", {
+            mandatory: (c) => <span className="font-bold">{c}</span>,
+          })}
+        </div>
         <div>{t("cdrOnsiteDescription")}</div>
         <div className="font-bold">{t("cdrOnsiteMandatoryWarning")}</div>
 

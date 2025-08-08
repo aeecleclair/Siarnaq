@@ -79,7 +79,7 @@ export default function Home() {
               >
                 {t("ECLAIR")}
               </a>
-              {t("allRightsReserved")}
+              . {t("allRightsReserved")}
             </span>
           </div>
         </div>

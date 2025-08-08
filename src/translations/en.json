@@ -1,15 +1,112 @@
 {
+  "HelloAssoButton": {
+    "payWithHA": "Pay with <ha>HelloAsso</ha>"
+  },
+  "MyECLButton": {
+    "authenticate": "Login with MyECL"
+  },
   "addCurriculumButton": {
+    "add": "Add",
+    "curriculumName": "Curriculum name",
     "error": "Error"
   },
+  "addEditProductForm": {
+    "add": "Add",
+    "availability": "Availability",
+    "available_online": "Is available during the online Chaîne de Rentrée",
+    "cancel": "Cancel",
+    "conditions": "Conditions",
+    "description_en": "Description (English)",
+    "description_fr": "Description (French)",
+    "document_constraints": "Signatures",
+    "edit": "Edit",
+    "information": "Additional information",
+    "name_en": "Name (English)",
+    "name_fr": "Name (French)",
+    "onsite": "Will only be available during the onsite Chaîne de Rentrée",
+    "product_constraints": "Constraints",
+    "question": "Question for users who take the product",
+    "ticket_expiration": "Expiration date",
+    "ticket_max_use": "Maximum number of uses",
+    "ticket_name": "Ticket name",
+    "tickets": "Tickets"
+  },
+  "addEditVariantForm": {
+    "add": "Add",
+    "allowed_curriculum": "Curriculum",
+    "cancel": "Cancel",
+    "description_en": "Description (English)",
+    "description_fr": "Description (French)",
+    "edit": "Edit",
+    "multiple": "Can be bought as many times as desired",
+    "name_en": "Name (English)",
+    "name_fr": "Name (French)",
+    "price": "Price",
+    "purchase": "Purchase",
+    "unique": "Can only be bought once"
+  },
+  "addProductAccordionItem": {
+    "newProduct": "New product"
+  },
   "addUserWithCurriculum": {
-    "searchUser": "Look for a user"
+    "add": "Add",
+    "addCurriculumToUser": "Add curriculum to user",
+    "cancel": "Cancel",
+    "curriculum": "curriculum",
+    "searchUser": "Search user",
+    "user": "User"
+  },
+  "addingVariantCard": {
+    "addingVariant": "Add a variant"
   },
   "associationPanel": {
     "associations": "Associations",
     "information": "Useful informations",
     "presentation": "Presentation",
     "summary": "Summary"
+  },
+  "curriculumAccordionItem": {
+    "curriculum": "Curriculum"
+  },
+  "customFieldsDialog": {
+    "cancel": "Cancel",
+    "title": "Additional information",
+    "validate": "Validate"
+  },
+  "dataTable": {
+    "noResult": "No result"
+  },
+  "dataTableFacetedFilter": {
+    "deleteFilters": "Delete filters",
+    "noResult": "No result",
+    "selected": "{size, number} selected"
+  },
+  "dataTablePagination": {
+    "byPage": "by page",
+    "goToFirstPage": "Go to first page",
+    "goToLastPage": "Go to last page",
+    "goToNextPage": "Go to next page",
+    "goToPreviousPage": "Go to previous page",
+    "pagination": "Page {number, number} of {total, number}",
+    "selected": "{size, number} selected"
+  },
+  "dataTableRowActions": {
+    "cancelMerge": "Cancel merge",
+    "deleteTeam": "Delete team",
+    "mergeWithTeam": "Merge with another team",
+    "openMenu": "Open menu",
+    "removeMember": "Remove member"
+  },
+  "dataTableToolbar": {
+    "curriculum": "Curriculum",
+    "noCurriculum": "No curriculum"
+  },
+  "dataTableViewOptions": {
+    "activateColumns": "Activate columns",
+    "columns": "Columns"
+  },
+  "datePicker": {
+    "select": "Select a date"
   },
   "info": {
     "cautionDescription": "If you book a place at the Orientation Weekend (WEI), please bring two €100 deposit checks payable to « <payable>AEECL - WEI</payable> ».",
@@ -53,15 +150,37 @@
     "promotion": "School year {year}",
     "register": "Register",
     "selectPromotion": "Please select your school year:",
-    "title": "Chaîne de rentrée {year}"
+    "title": "Chaîne de rentrée {year, number}"
   },
   "metadata": {
     "description": "Centrale Lyon associative Back-to-School management platform",
     "title": "Associative Back-to-school"
   },
+  "migrateUserForm": {
+    "cancel": "Cancel",
+    "eclEmail": "Email of Centrale",
+    "edit": "Edit",
+    "floor": "Floor",
+    "nickname": "Nickname"
+  },
   "multiselect": {
+    "deselect": "Deselect all",
     "noItemFound": "No item found.",
-    "search": "Search..."
+    "search": "Search...",
+    "selectAll": "Select all"
+  },
+  "page": {
+    "ECLAIR": "ÉCLAIR",
+    "allRightsReserved": "All rights reserved.",
+    "madeByECLAIR": "Developed by ÉCLAIR",
+    "refusedDescription": "Your payment has been refused. You can retry, if the problem persists, please contact us.",
+    "refusedTitle": "Payment refused",
+    "succeededDescription": "Your payment has been made successfully",
+    "succeededTitle": "Payment made"
+  },
+  "pageIndicator": {
+    "nextPage": "Go to next page",
+    "previousPage": "Go to previous page"
   },
   "paymentButton": {
     "description": "You will be redirected to HelloAsso to proceed to payment. HelloAsso is a French company offering payment solutions for associations. It is financed exclusively by donations. By default, HelloAsso will propose you to make a donation (called 'contribution volontaire' or 'voluntary contribution'), you can refuse to do so without compromising the payment. If you choose to make a donation, only HelloAsso will benefit it.",
@@ -70,17 +189,34 @@
   },
   "paymentPart": {
     "HelloAsso": "HelloAsso",
+    "add": "Add",
+    "addPayment": "Add a payment",
+    "amount": "Amount",
     "archived": "Archived",
+    "areYouSure": "Are you sure you want to delete the payment of <name></name> for the amount of <amount></amount> made by <type></type>?",
+    "cancel": "Cancel",
     "card": "Card",
     "cash": "Cash",
     "check": "Check",
+    "delete": "Delete",
+    "deletePayment": "Delete payment",
     "noPayment": "No payment where made",
+    "paymentType": "Payment type",
     "payments": "Fulfilled payments",
     "total": "Total"
   },
   "productAccordion": {
     "membershipAlreadyTaken": "You have already taken the membership to {membership} until {date}",
     "mustBuy": "You must buy {products}"
+  },
+  "productAccordionOptions": {
+    "areYouSure": "Are you sure you want to delete this product?",
+    "cancel": "Cancel",
+    "customToast": "Impossible to delete",
+    "delete": "Delete",
+    "deleteProduct": "Delete product",
+    "edit": "Edit",
+    "editProduct": "Edit product"
   },
   "productPanel": {
     "noProductFound": "No product available",
@@ -97,7 +233,50 @@
   "recap": {
     "remainingToPay": "Remaining to pay:"
   },
+  "recapPanel": {
+    "cancel": "Cancel",
+    "curriculum": "Curriculum",
+    "edit": "Edit",
+    "editCurriculum": "Edit curriculum",
+    "editUser": "Edit user",
+    "leftToPay": "Left to pay",
+    "noCurriculum": "No curriculum"
+  },
+  "sellerAccordionItem": {
+    "association": "Association"
+  },
+  "sellerTabContent": {
+    "noProductFound": "No products found"
+  },
+  "statusAccordionItem": {
+    "close": "Close",
+    "closed": "Closed",
+    "onSiteButtonLabel": "On site",
+    "online": "Online",
+    "onsite": "Onsite",
+    "pending": "Pending",
+    "reinit": "Reset",
+    "setOnline": "Put online",
+    "status": "Status"
+  },
+  "statusDialog": {
+    "continue": "Continue"
+  },
   "toast": {
     "error": "Error"
+  },
+  "variantCardOptions": {
+    "activate": "Enable",
+    "areYouSure": "Are you sure you want to delete this variant?",
+    "cancel": "Cancel",
+    "deactivate": "Disable",
+    "delete": "Delete",
+    "deleteVariant": "Delete variant",
+    "edit": "Edit",
+    "editVariant": "Edit variant",
+    "information": "Information"
+  },
+  "warningDialog": {
+    "cancel": "Cancel"
   }
 }

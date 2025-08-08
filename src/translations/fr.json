@@ -23,11 +23,12 @@
     "information": "Informations supplémentaires",
     "name_en": "Nom (anglais)",
     "name_fr": "Nom (français)",
-    "onsite": "Ne sera disponible que lors de la chaîne de rentrée en physique",
+    "onsite": "Ne sera disponible que lors de la chaîne de rentrée en présentiel",
     "product_constraints": "Contraintes",
     "question": "Question pour les utilisateurs qui prennent le produit",
     "ticket_expiration": "Date d'expiration",
     "ticket_max_use": "Nombre d'utilisations maximum",
+    "ticket_name": "Nom du ticket",
     "tickets": "Tickets"
   },
   "addEditVariantForm": {
@@ -97,10 +98,10 @@
   },
   "dataTablePagination": {
     "byPage": "par page",
-    "goToFirstPage": "Go to first page",
-    "goToLastPage": "Go to last page",
-    "goToNextPage": "Go to next page",
-    "goToPreviousPage": "Go to previous page",
+    "goToFirstPage": "Aller à la première page",
+    "goToLastPage": "Aller à la dernière page",
+    "goToNextPage": "Aller à la page suivante",
+    "goToPreviousPage": "Aller à la page précédente",
     "pagination": "Page {number, number} sur {total, number}",
     "selected": "{size, number} sélectionnés"
   },
@@ -108,7 +109,7 @@
     "cancelMerge": "Annuler la fusion",
     "deleteTeam": "Supprimer l'équipe",
     "mergeWithTeam": "Fusionner avec une autre équipe",
-    "openMenu": "Open menu",
+    "openMenu": "Ouvrir le menu",
     "removeMember": "Retirer un member"
   },
   "dataTableToolbar": {
@@ -195,7 +196,7 @@
   },
   "page": {
     "ECLAIR": "ÉCLAIR",
-    "allRightsReserved": ". Tout droits réservés.",
+    "allRightsReserved": "Tout droits réservés.",
     "madeByECLAIR": "Développé par ÉCLAIR",
     "refusedDescription": "Votre paiement a été refusé. Vous pouvez réessayer de payer, si le problème persiste, veuillez nous contacter.",
     "refusedTitle": "Paiement refusé",
@@ -203,8 +204,8 @@
     "succeededTitle": "Paiement effectué"
   },
   "pageIndicator": {
-    "nextPage": "Go to next page",
-    "previousPage": "Go to previous page"
+    "nextPage": "Aller à la page suivante",
+    "previousPage": "Aller à la page précédente"
   },
   "paymentButton": {
     "description": "Vous allez être redirigés vers HelloAsso pour procéder au paiement. HelloAsso est une entreprise française proposant des solutions de paiement pour les associations. Elle se finance uniquement par des dons. Par défaut, HelloAsso vous proposera de faire un don (nommé 'contribution volontaire'), vous pouvez refuser de le faire sans compromettre le paiement. Si vous choisissez de faire un don, seul HelloAsso en bénéficiera.",
@@ -284,7 +285,7 @@
     "association": "Association"
   },
   "sellerTabContent": {
-    "noProductFound": "No products found"
+    "noProductFound": "Aucun produit trouvé"
   },
   "statusAccordionItem": {
     "close": "Fermer",
@@ -295,7 +296,7 @@
     "pending": "En attente",
     "reinit": "Réinitialiser",
     "setOnline": "Mettre en ligne",
-    "status": "Status"
+    "status": "Statut"
   },
   "statusDialog": {
     "continue": "Continuer"

@@ -269,13 +269,13 @@ export const AddEditProductForm = ({
             <div className="flex flex-row gap-2">
               <StyledFormField
                 form={form}
-                label="Nom du ticket"
+                label={t("ticket_name")}
                 id="ticket_name"
                 input={(field) => <Input {...field} />}
               />
               <StyledFormField
                 form={form}
-                label="Nombre d'utilisations maximum"
+                label={t("ticket_max_use")}
                 id="ticket_max_use"
                 input={(field) => <Input {...field} type="number" />}
               />
@@ -301,15 +301,15 @@ export const AddEditProductForm = ({
                 className="w-[100px] self-end"
                 onClick={onAddTicket}
               >
-                Ajouter
+                {t("add")}
               </LoadingButton>
             </div>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Nom</TableHead>
-                  <TableHead>Nombre d&apos;utilisations maximum</TableHead>
-                  <TableHead>Date d&apos;expiration</TableHead>
+                  <TableHead>{t("ticket_name")}</TableHead>
+                  <TableHead>{t("ticket_max_use")}</TableHead>
+                  <TableHead>{t("ticket_expiration")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>

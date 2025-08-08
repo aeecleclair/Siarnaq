@@ -7,7 +7,7 @@ import {
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import { productFormSchema } from "@/forms/productFormSchema";
+import _productFormSchema from "@/forms/productFormSchema";
 import { useMemberships } from "@/hooks/useMemberships";
 import { useSellerProducts } from "@/hooks/useSellerProducts";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,6 +29,8 @@ export const AddProductAccordionItem = ({
   seller,
   refreshProduct,
 }: AddProductAccordionItemProps) => {
+  const tZod = useTranslations("productFormSchema");
+  const productFormSchema = _productFormSchema(tZod);
   const t = useTranslations("addProductAccordionItem");
   const { toast } = useToast();
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);

@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
-import { migrateUserFormSchema } from "@/forms/migrateUserFormSchema";
+import _migrateUserFormSchema from "@/forms/migrateUserFormSchema";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
@@ -44,6 +44,8 @@ interface RecapPanelProps {
 }
 
 export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
+  const tZod = useTranslations("migrateUserFormSchema");
+  const migrateUserFormSchema = _migrateUserFormSchema(tZod);
   const t = useTranslations("recapPanel");
   const format = useFormatter();
   const { toast } = useToast();

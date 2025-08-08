@@ -4,7 +4,7 @@ import {
 } from "@/api";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import { variantFormSchema } from "@/forms/variantFormSchema";
+import _variantFormSchema from "@/forms/variantFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -31,6 +31,8 @@ export const AddingVariantCard = ({
   isInterestProduct = false,
   isMembershipProduct = false,
 }: AddingVariantCardProps) => {
+  const tZod = useTranslations("variantFormSchema");
+  const variantFormSchema = _variantFormSchema(tZod);
   const t = useTranslations("addingVariantCard");
   const { toast } = useToast();
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);

@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
-import { paymentFormSchema } from "@/forms/paymentFormSchema";
+import _paymentFormSchema from "@/forms/paymentFormSchema";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFormatter, useTranslations } from "next-intl";
@@ -43,6 +43,8 @@ interface PaymentPartProps {
 
 export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
   const { toast } = useToast();
+  const tZod = useTranslations("paymentFormSchema");
+  const paymentFormSchema = _paymentFormSchema(tZod);
   const t = useTranslations("paymentPart");
   const format = useFormatter();
   const { payments, total: totalPaid, refetch } = useUserPayments(user.id);

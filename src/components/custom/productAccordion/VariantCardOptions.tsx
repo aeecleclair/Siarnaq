@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import { variantFormSchema } from "@/forms/variantFormSchema";
+import _variantFormSchema from "@/forms/variantFormSchema";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
 import {
   PencilIcon,
@@ -58,6 +58,8 @@ export const VariantCardOptions = ({
   isInterestProduct = false,
   isMembershipProduct = false,
 }: VariantCardOptionsProps) => {
+  const tZod = useTranslations("variantFormSchema");
+  const variantFormSchema = _variantFormSchema(tZod);
   const t = useTranslations("variantCardOptions");
   const { toast } = useToast();
   const { data: productFields } = useSellerProductData(sellerId, productId);

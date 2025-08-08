@@ -1,10 +1,12 @@
 import { useTokenStore } from "@/stores/token";
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { Locale } from "next-intl";
+import { useParams, useRouter } from "next/navigation";
 import * as auth from "oauth4webapi";
 import { useState } from "react";
 
 export const useToken = () => {
+  const { locale } = useParams<{ locale: Locale }>();
   const router = useRouter();
   const issuerUrl = new URL(
     process.env.NEXT_PUBLIC_BACKEND_URL ?? "https://hyperion.myecl.fr",
@@ -39,7 +41,7 @@ export const useToken = () => {
     }
     if (!refreshToken) {
       setToken(null);
-      router.push("/login");
+      router.push(`/${locale}/login`);
       return;
     }
     setIsRefreshing(true);
@@ -57,7 +59,7 @@ export const useToken = () => {
       }
       setToken(null);
       setRefreshToken(null);
-      router.push("/login");
+      router.push(`/${locale}/login`);
       return;
     }
 
@@ -70,7 +72,7 @@ export const useToken = () => {
       console.error("Error Response", result);
       setToken(null);
       setRefreshToken(null);
-      router.push("/login");
+      router.push(`/${locale}/login`);
       return;
     }
 

@@ -35,7 +35,6 @@ export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -54,7 +53,6 @@ export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

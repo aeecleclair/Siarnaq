@@ -4,18 +4,20 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useCurriculums } from "@/hooks/useCurriculums";
+import { useTranslations } from "next-intl";
 
 import { AddCurriculumButton } from "./AddCurriculumButton";
 import { CurriculumItem } from "./CurriculumItem";
 
 export const CurriculumAccordionItem = () => {
+  const t = useTranslations("curriculumAccordionItem");
   const { curriculums } = useCurriculums();
 
   return (
     <AccordionItem value="curriculum">
       <AccordionTrigger>
         <div className="flex flex-col items-start justify-between">
-          <h3 className="text-lg font-semibold">Cursus</h3>
+          <h3 className="text-lg font-semibold">{t("curriculum")}</h3>
         </div>
       </AccordionTrigger>
       <AccordionContent className="space-y-2">

@@ -1,4 +1,5 @@
 import { DialogDescription } from "@radix-ui/react-dialog";
+import { useTranslations } from "next-intl";
 
 import { Button } from "../ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
@@ -27,6 +28,7 @@ export const WarningDialog = ({
   width = "w-[100px]",
   customButton,
 }: WarningDialogProps) => {
+  const t = useTranslations("warningDialog");
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setIsOpened(false);
@@ -54,7 +56,7 @@ export const WarningDialog = ({
             disabled={isLoading}
             className={width}
           >
-            Annuler
+            {t("cancel")}
           </Button>
           {customButton ?? (
             <LoadingButton

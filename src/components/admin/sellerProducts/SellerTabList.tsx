@@ -1,7 +1,8 @@
 import { SellerComplete, Status } from "@/api";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 interface SellerTabListProps {
   status: Status;
@@ -14,7 +15,7 @@ export const SellerTabList = ({
   sellers,
   isAdmin,
 }: SellerTabListProps) => {
-  const t = useTranslations("ProductPart");
+  const t = useTranslations("productPart");
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -45,7 +46,7 @@ export const SellerTabList = ({
             className="w-full min-w-18"
             onClick={() => handleClick("cdradmin")}
           >
-            Admin
+            {t("admin")}
           </TabsTrigger>
           {(status.status == "online" || status.status === "onsite") && (
             <TabsTrigger

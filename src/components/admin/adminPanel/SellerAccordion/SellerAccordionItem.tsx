@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useGroups } from "@/hooks/useGroups";
+import { useTranslations } from "next-intl";
 
 import { ToggleSeller } from "./ToggleSeller";
 
@@ -13,13 +14,14 @@ interface SellerAccordionItemProps {
 }
 
 export const SellerAccordionItem = ({ sellers }: SellerAccordionItemProps) => {
+  const t = useTranslations("sellerAccordionItem");
   const { groups } = useGroups();
 
   return (
     <AccordionItem value="association">
       <AccordionTrigger>
         <div className="flex flex-col items-start justify-between">
-          <h3 className="text-lg font-semibold">Association</h3>
+          <h3 className="text-lg font-semibold">{t("association")}</h3>
         </div>
       </AccordionTrigger>
       <AccordionContent className="space-y-2">

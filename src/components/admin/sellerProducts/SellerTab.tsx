@@ -2,7 +2,8 @@ import { SellerComplete, Status, getCdrSellers } from "@/api";
 import { Tabs } from "@/components/ui/tabs";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useSellers } from "@/hooks/useSellers";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
 import { SellerTabContentList } from "./SellerTabContentList";

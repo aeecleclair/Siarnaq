@@ -1,12 +1,11 @@
 import { CdrUser } from "@/api";
-import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import { useProducts } from "@/hooks/useProducts";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { LoadingButton } from "../LoadingButton";
@@ -18,7 +17,9 @@ interface ProductPartProps {
 }
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
-  const t = useTranslations("ProductPart");
+  const tOnValidate = useTranslations("onValidate");
+  const t = useTranslations("productPart");
+  const format = useFormatter();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const { userMemberships: memberships } = useUserMemberships(user.id);
@@ -45,13 +46,13 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             setIsLoading,
             refetch,
             toast,
+            tOnValidate,
           ),
         ),
       );
     } catch (error) {
       toast({
-        title: "Error",
-        description: "There was an error validating a purchase.",
+        description: t("toastErrorDescription"),
         variant: "destructive",
       });
     } finally {
@@ -59,8 +60,8 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
         title: purchases
           .map((purchase) => purchase.validated)
           .every((validated) => validated)
-          ? "Some Purchase are unvalidated"
-          : "All Purchases are validated",
+          ? t("unvalidated")
+          : t("validated"),
         variant: "default",
       });
       setIsLoading(false);
@@ -72,7 +73,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
       <div className="justify-between flex flex-row">
         <CardTitle>{t("summary")}</CardTitle>
         <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
-          Valider tous les achats
+          {t("validateAll")}
         </LoadingButton>
       </div>
       <div className="space-y-2">
@@ -96,7 +97,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             <div className="flex flex-row w-full">
               <span className="font-bold w-1/6">{t("total")}</span>
               <span className="ml-auto font-semibold">
-                {totalToPay?.toFixed(2)} €
+                {totalToPay && format.number(totalToPay, "euro")}
               </span>
             </div>
           </>

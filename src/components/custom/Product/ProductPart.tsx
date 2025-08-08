@@ -19,7 +19,6 @@ interface ProductPartProps {
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   const t = useTranslations("ProductPart");
-
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const { userMemberships: memberships } = useUserMemberships(user.id);
@@ -45,6 +44,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             user.id,
             setIsLoading,
             refetch,
+            toast,
           ),
         ),
       );

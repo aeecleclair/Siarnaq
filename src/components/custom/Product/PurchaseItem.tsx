@@ -34,6 +34,7 @@ export const PurchaseItem = ({
   isAdmin,
 }: PurchaseItemProps) => {
   const t = useTranslations("PurchaseItem");
+  const { toast } = useToast();
   const { refetch } = useUserPurchases(user.id);
   const { selectTranslation } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
@@ -112,6 +113,7 @@ export const PurchaseItem = ({
                 user.id,
                 setIsLoading,
                 refetch,
+                toast,
               )
             }
           >
@@ -146,8 +148,8 @@ export const onValidate = async (
   userid: CdrUser["id"],
   setIsLoading: (loading: boolean) => void,
   refetch: () => void,
+  toast: ReturnType<typeof useToast>["toast"],
 ) => {
-  const { toast } = useToast();
   try {
     setIsLoading(true);
     await patchCdrUsersUserIdPurchasesProductVariantIdValidated({

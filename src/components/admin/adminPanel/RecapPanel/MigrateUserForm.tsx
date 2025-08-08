@@ -11,14 +11,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { migrateUserFormSchema } from "@/forms/migrateUserFormSchema";
+import _migrateUserFormSchema from "@/forms/migrateUserFormSchema";
 import { addYears } from "date-fns";
 import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
 import z from "zod";
 
 interface MigrateUserFormProps {
-  form: UseFormReturn<z.infer<typeof migrateUserFormSchema>>;
+  form: UseFormReturn<z.infer<ReturnType<typeof _migrateUserFormSchema>>>;
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
   closeDialog: (event: React.MouseEvent<HTMLButtonElement>) => void;

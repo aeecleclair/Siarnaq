@@ -3,7 +3,7 @@ import { LoadingButton } from "@/components/custom/LoadingButton";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { curriculumFormSchema } from "@/forms/curriculumFormSchema";
+import _curriculumFormSchema from "@/forms/curriculumFormSchema";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -12,6 +12,8 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 
 export const AddCurriculumButton = () => {
+  const tZod = useTranslations("curriculumFormSchema");
+  const curriculumFormSchema = _curriculumFormSchema(tZod);
   const t = useTranslations("addCurriculumButton");
   const { toast } = useToast();
   const { refetch: refetchCurriculums } = useCurriculums();

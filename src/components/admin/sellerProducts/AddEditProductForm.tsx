@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { productFormSchema } from "@/forms/productFormSchema";
+import _productFormSchema from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
 import { useFormatter, useTranslations } from "next-intl";
@@ -41,7 +41,7 @@ import { HiTrash } from "react-icons/hi";
 import z from "zod";
 
 interface AddEditProductFormProps {
-  form: UseFormReturn<z.infer<typeof productFormSchema>>;
+  form: UseFormReturn<z.infer<ReturnType<typeof _productFormSchema>>>;
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
   isEdit?: boolean;

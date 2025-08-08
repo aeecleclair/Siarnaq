@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import { productFormSchema } from "@/forms/productFormSchema";
+import _productFormSchema from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -38,6 +38,8 @@ export const ProductAccordionOptions = ({
   canEdit,
   canRemove,
 }: ProductAccordionOptionsProps) => {
+  const tZod = useTranslations("productFormSchema");
+  const productFormSchema = _productFormSchema(tZod);
   const t = useTranslations("productAccordionOptions");
   const { toast } = useToast();
   const [isEditDialogOpened, setIsEditDialogOpened] = useState(false);

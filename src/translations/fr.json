@@ -71,6 +71,9 @@
   "curriculumAccordionItem": {
     "curriculum": "Cursus"
   },
+  "curriculumFormSchema": {
+    "name": "Veuillez renseigner le nom du cursus"
+  },
   "customFieldsDialog": {
     "cancel": "Annuler",
     "title": "Informations supplémentaire",
@@ -179,6 +182,11 @@
     "floor": "Étage",
     "nickname": "Surnom"
   },
+  "migrateUserFormSchema": {
+    "email": "Veuillez renseigner l'email de Centrale",
+    "phone": "Veuillez renseigner un numéro valide",
+    "promo": "Veuillez renseigner une promo valide"
+  },
   "multiselect": {
     "deselect": "Tout désélectionner",
     "noItemFound": "Aucun objet trouvé.",
@@ -202,6 +210,10 @@
     "description": "Vous allez être redirigés vers HelloAsso pour procéder au paiement. HelloAsso est une entreprise française proposant des solutions de paiement pour les associations. Elle se finance uniquement par des dons. Par défaut, HelloAsso vous proposera de faire un don (nommé 'contribution volontaire'), vous pouvez refuser de le faire sans compromettre le paiement. Si vous choisissez de faire un don, seul HelloAsso en bénéficiera.",
     "pay": "Payer",
     "title": "Information sur le prestataire de paiement"
+  },
+  "paymentFormSchema": {
+    "paymentType": "Veuillez renseigner le type de paiement",
+    "total": "Veuillez renseigner un montant valide"
   },
   "paymentPart": {
     "HelloAsso": "HelloAsso",
@@ -233,6 +245,15 @@
     "deleteProduct": "Supprimer le produit",
     "edit": "Modifier",
     "editProduct": "Modifier le produit"
+  },
+  "productFormSchema": {
+    "availableOnline": "Veuillez renseigner la disponibilité du produit",
+    "nameFR": "Veuillez renseigner le nom français du produit",
+    "noTicketExpiration": "Veuillez renseigner la date d'expiration du ticket",
+    "noTicketMaxUse": "Veuillez renseigner le nombre d'utilisations maximum du ticket",
+    "noTicketName": "Veuillez renseigner le nom du ticket",
+    "ticketMaxUseInt": "Veuillez renseigner un nombre entier",
+    "ticketMaxUsePositive": "Un ticket doit être utilisé au moins une fois"
   },
   "productPanel": {
     "noProductFound": "Aucun produit disponible",
@@ -292,6 +313,12 @@
     "edit": "Modifier",
     "editVariant": "Modifier la variante",
     "information": "Information"
+  },
+  "variantFormSchema": {
+    "allowedCurriculum": "Veuillez renseigner les cursus autorisés",
+    "nameFR": "Veuillez renseigner le nom de la variante",
+    "price": "Veuillez renseigner le prix du produit",
+    "unique": "Veuillez renseigner la quantité du produit"
   },
   "warningDialog": {
     "cancel": "Annuler"

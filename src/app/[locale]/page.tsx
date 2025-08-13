@@ -72,14 +72,17 @@ export default function Home() {
               {t("madeByECLAIR")}
             </p>
             <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
-              © {new Date().getFullYear()}{" "}
-              <a
-                href="https://www.eclair.ec-lyon.fr/"
-                className="font-medium underline underline-offset-4"
-              >
-                {t("ECLAIR")}
-              </a>
-              . {t("allRightsReserved")}
+              {t.rich("license", {
+                date: () => new Date().getFullYear(),
+                eclair: (c) => (
+                  <a
+                    href="https://www.eclair.ec-lyon.fr/"
+                    className="font-medium underline underline-offset-4"
+                  >
+                    {c}
+                  </a>
+                ),
+              })}
             </span>
           </div>
         </div>

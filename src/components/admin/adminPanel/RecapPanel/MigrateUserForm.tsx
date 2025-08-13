@@ -24,39 +24,39 @@ interface MigrateUserFormProps {
   closeDialog: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
+export const possibleFloors = [
+  "Autre",
+  "Adoma",
+  "Exte",
+  "T1",
+  "T2",
+  "T3",
+  "T4",
+  "T56",
+  "U1",
+  "U2",
+  "U3",
+  "U4",
+  "U56",
+  "V1",
+  "V2",
+  "V3",
+  "V45",
+  "V6",
+  "X1",
+  "X2",
+  "X3",
+  "X4",
+  "X5",
+  "X6",
+] as const;
+
 export const MigrateUserForm = ({
   form,
   isLoading,
   setIsOpened,
   closeDialog,
 }: MigrateUserFormProps) => {
-  const possibleFloors = [
-    "Autre",
-    "Adoma",
-    "Exte",
-    "T1",
-    "T2",
-    "T3",
-    "T4",
-    "T56",
-    "U1",
-    "U2",
-    "U3",
-    "U4",
-    "U56",
-    "V1",
-    "V2",
-    "V3",
-    "V45",
-    "V6",
-    "X1",
-    "X2",
-    "X3",
-    "X4",
-    "X5",
-    "X6",
-  ];
-
   const year = new Date().getFullYear();
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
     return (year - index).toString();

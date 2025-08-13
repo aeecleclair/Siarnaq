@@ -4,6 +4,7 @@ import z from "zod";
 export default function productFormSchema(
   t: (arg: keyof Messages["productFormSchema"]) => string,
 ) {
+  // useTranslations("productFormSchema") (don't remove!)
   return z
     .object({
       id: z.string().optional(),

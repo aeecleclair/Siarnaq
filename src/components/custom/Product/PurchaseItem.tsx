@@ -159,6 +159,7 @@ export const onValidate = async (
   t: (arg: keyof Messages["onValidate"]) => string,
 ) => {
   try {
+    // useTranslations("onValidate") (don't remove!)
     setIsLoading(true);
     await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
       path: {

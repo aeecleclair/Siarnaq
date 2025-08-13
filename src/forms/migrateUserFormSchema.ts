@@ -7,6 +7,7 @@ import z from "zod";
 export default function migrateUserFormSchema(
   t: (arg: keyof Messages["migrateUserFormSchema"]) => string,
 ) {
+  // useTranslations("migrateUserFormSchema") (don't remove!)
   return z.object({
     nickname: z.string().optional(),
     email: z

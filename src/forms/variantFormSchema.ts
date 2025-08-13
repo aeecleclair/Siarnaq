@@ -4,22 +4,18 @@ import z from "zod";
 export default function variantFormSchema(
   t: (arg: keyof Messages["variantFormSchema"]) => string,
 ) {
-  return z
-  .object({
-      name_fr: z
-        .string({
-          required_error: t("nameFR"),
-        })
-        .min(1, {
-          message: t("nameFR"),
-        }),
-      name_en: z.string().optional(),
-      description_fr: z.string().optional(),
-      description_en: z.string().optional(),
-      related_membership_added_duration: z
-      .string()
-      .regex(/^([0-9]+Y)?([0-9]+M)?([0-9]+D)?$/)
-      .optional(),
+  // useTranslations("variantFormSchema") (don't remove!)
+  return z.object({
+    name_fr: z
+      .string({
+        required_error: t("nameFR"),
+      })
+      .min(1, {
+        message: t("nameFR"),
+      }),
+    name_en: z.string().optional(),
+    description_fr: z.string().optional(),
+    description_en: z.string().optional(),
     price: z
         .string({
           required_error: t("price"),

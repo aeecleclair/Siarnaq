@@ -4,6 +4,7 @@ import z from "zod";
 export default function variantFormSchema(
   t: (arg: keyof Messages["variantFormSchema"]) => string,
 ) {
+  // useTranslations("variantFormSchema") (don't remove!)
   return z.object({
     name_fr: z
       .string({

@@ -4,6 +4,7 @@ import z from "zod";
 export default function paymentFormSchema(
   t: (arg: keyof Messages["paymentFormSchema"]) => string,
 ) {
+  // useTranslations("paymentFormSchema") (don't remove!)
   return z.object({
     total: z.string().refine(
       (value) => {

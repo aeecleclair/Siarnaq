@@ -158,7 +158,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       floor: values.floor ?? undefined,
       birthday: values.birthday ? new Date(values.birthday) : undefined,
       phone: values.phone ?? undefined,
-      promo: values.promo ? values.promo.toString() : undefined,
+      promo: values.promo?.toString(),
     });
   }
 

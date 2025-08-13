@@ -1,9 +1,9 @@
 import { CdrUser, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
+import { useRouter } from "@/i18n/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { LoadingButton } from "../custom/LoadingButton";
@@ -29,7 +29,7 @@ export const IntroCarouselItems = ({
   refetch,
 }: IntroCarouselItemsProps) => {
   const { toast } = useToast();
-  const t = useTranslations("IntroCarouselItem");
+  const t = useTranslations("introCarouselItem");
   const { scrollNext } = useCarousel();
   const { curriculums } = useCurriculums();
   const { onlineSellers } = useOnlineSellers();
@@ -49,9 +49,13 @@ export const IntroCarouselItems = ({
       selectedCurriculum !== user.curriculum?.id);
   const content: React.ReactNode[] = [
     <div key="intro" className="flex flex-col gap-2">
-      <span>{t("description")}</span>
-      <span>
-        {t("contact")} <a href="mailto://bde@ec-lyon.fr">bde@ec-lyon.fr</a>
+      <span>{t("welcome")}</span>
+      <span className="text-justify">{t("description")}</span>
+      <span className="text-balance">
+        {t("contact")}
+        <a href="mailto://bde@ec-lyon.fr" className="whitespace-pre">
+          bde@ec-lyon.fr
+        </a>
       </span>
     </div>,
     <div key="curriculum" className="h-full gap-4 flex flex-col">
@@ -87,7 +91,6 @@ export const IntroCarouselItems = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

@@ -1,4 +1,5 @@
 import { DialogDescription } from "@radix-ui/react-dialog";
+import { useTranslations } from "next-intl";
 import { HiCheck, HiXMark } from "react-icons/hi2";
 
 import { Button } from "../ui/button";
@@ -28,6 +29,7 @@ export const StatusDialog = ({
   callback,
   width = "w-[100px]",
 }: StatusDialogProps) => {
+  const t = useTranslations("statusDialog");
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     callback();
@@ -57,7 +59,7 @@ export const StatusDialog = ({
         <DialogDescription>{description}</DialogDescription>
         <div className="flex justify-end mt-2 space-x-4">
           <Button variant="outline" onClick={closeDialog} className={width}>
-            Continuer
+            {t("continue")}
           </Button>
         </div>
       </DialogContent>

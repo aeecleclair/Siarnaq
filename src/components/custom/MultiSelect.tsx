@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import { ScrollArea } from "../ui/scroll-area";
@@ -40,6 +41,7 @@ function MultiSelect({
   canSearch = false,
   ...props
 }: MultiSelectProps) {
+  const t = useTranslations("multiselect");
   const [open, setOpen] = React.useState(false);
 
   const handleUnselect = (item: string) => {
@@ -94,8 +96,8 @@ function MultiSelect({
         <Command className={className}>
           {canSearch && (
             <>
-              <CommandInput placeholder="Search ..." />
-              <CommandEmpty>No item found.</CommandEmpty>
+              <CommandInput placeholder={t("search")} />
+              <CommandEmpty>{t("noItemFound")}</CommandEmpty>
             </>
           )}
           <ScrollArea className="h-64">
@@ -121,8 +123,8 @@ function MultiSelect({
                   )}
                 />
                 {selected.length === options.length
-                  ? "Tout désélectionner"
-                  : "Tout sélectionner"}
+                  ? t("deselect")
+                  : t("selectAll")}
               </CommandItem>
               {options.map((option) => (
                 <CommandItem

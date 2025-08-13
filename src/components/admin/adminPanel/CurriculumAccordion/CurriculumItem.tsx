@@ -22,7 +22,6 @@ export const CurriculumItem = ({ curriculum }: CurriculumItemProps) => {
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });

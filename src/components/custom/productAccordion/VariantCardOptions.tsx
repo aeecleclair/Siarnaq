@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import { variantFormSchema } from "@/forms/variantFormSchema";
+import _variantFormSchema from "@/forms/variantFormSchema";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
 import {
   PencilIcon,
@@ -22,14 +22,15 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import z from "zod";
 
 import { CustomDialog } from "../CustomDialog";
 import { LoadingButton } from "../LoadingButton";
-import { Answer } from "../customFieldDialog.tsx/CustomFieldInput";
-import { CustomFieldsDialog } from "../customFieldDialog.tsx/CustomFieldsDialog";
+import { Answer } from "../customFieldDialog/CustomFieldInput";
+import { CustomFieldsDialog } from "../customFieldDialog/CustomFieldsDialog";
 import { AddEditVariantForm } from "./AddEditVariantForm";
 
 interface VariantCardOptionsProps {
@@ -53,6 +54,9 @@ export const VariantCardOptions = ({
   userId,
   refreshProduct,
 }: VariantCardOptionsProps) => {
+  const tZod = useTranslations("variantFormSchema");
+  const variantFormSchema = _variantFormSchema(tZod);
+  const t = useTranslations("variantCardOptions");
   const { toast } = useToast();
   const { data: productFields } = useSellerProductData(sellerId, productId);
   const [isEditDialogOpened, setIsEditDialogOpened] = useState(false);
@@ -89,7 +93,6 @@ export const VariantCardOptions = ({
       });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -141,7 +144,6 @@ export const VariantCardOptions = ({
       });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -193,7 +195,7 @@ export const VariantCardOptions = ({
           <CustomDialog
             isOpened={isEditDialogOpened}
             setIsOpened={setIsEditDialogOpened}
-            title="Modifier la variante"
+            title={t("editVariant")}
             isFullWidth
             description={
               <Form {...form}>
@@ -209,7 +211,7 @@ export const VariantCardOptions = ({
             }
           >
             <Button className="w-full" variant="ghost">
-              Modifier
+              {t("edit")}
               <ContextMenuShortcut>
                 <PencilIcon className="w-4 h-4" />
               </ContextMenuShortcut>
@@ -223,7 +225,7 @@ export const VariantCardOptions = ({
             onClick={toggleEnabled}
             isLoading={isLoading}
           >
-            Désactiver
+            {t("deactivate")}
             <ContextMenuShortcut>
               <StopIcon className="w-4 h-4" />
             </ContextMenuShortcut>
@@ -241,7 +243,7 @@ export const VariantCardOptions = ({
             userId={userId}
           >
             <Button className="w-full" variant="ghost">
-              Information
+              {t("information")}
               <ContextMenuShortcut>
                 <PencilIcon className="w-4 h-4" />
               </ContextMenuShortcut>
@@ -255,7 +257,7 @@ export const VariantCardOptions = ({
             onClick={toggleEnabled}
             isLoading={isLoading}
           >
-            Activer
+            {t("activate")}
             <ContextMenuShortcut>
               <PlayIcon className="w-4 h-4" />
             </ContextMenuShortcut>
@@ -265,11 +267,11 @@ export const VariantCardOptions = ({
           <CustomDialog
             isOpened={isRemoveDialogOpened}
             setIsOpened={setIsRemoveDialogOpened}
-            title="Supprimer la variante"
+            title={t("deleteVariant")}
             isFullWidth
             description={
               <>
-                <div>Êtes-vous sûr de vouloir supprimer cette variante ?</div>
+                <div>{t("areYouSure")}</div>
                 <div className="flex justify-end mt-2 space-x-4">
                   <Button
                     variant="outline"
@@ -277,7 +279,7 @@ export const VariantCardOptions = ({
                     disabled={isLoading}
                     className="w-[100px]"
                   >
-                    Annuler
+                    {t("cancel")}
                   </Button>
                   <LoadingButton
                     isLoading={isLoading}
@@ -285,7 +287,7 @@ export const VariantCardOptions = ({
                     variant="destructive"
                     onClick={removeVariant}
                   >
-                    Supprimer
+                    {t("delete")}
                   </LoadingButton>
                 </div>
               </>
@@ -295,7 +297,7 @@ export const VariantCardOptions = ({
               className="w-full text-destructive hover:text-destructive"
               variant="ghost"
             >
-              Supprimer
+              {t("delete")}
               <ContextMenuShortcut>
                 <TrashIcon className="w-4 h-4 text-destructive" />
               </ContextMenuShortcut>

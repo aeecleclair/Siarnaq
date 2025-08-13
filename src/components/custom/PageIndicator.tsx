@@ -1,6 +1,7 @@
 import { GetCdrOnlineSellersResponse } from "@/api";
+import { useRouter } from "@/i18n/navigation";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { Button } from "../ui/button";
 
@@ -13,6 +14,7 @@ export const PageIndicator = ({
   currentSellerId,
   onlineSellers,
 }: PageIndicatorProps) => {
+  const t = useTranslations("pageIndicator");
   const router = useRouter();
 
   const availablePagesIds = [
@@ -38,7 +40,7 @@ export const PageIndicator = ({
         }}
         disabled={pageIndex === 0}
       >
-        <span className="sr-only">Go to previous page</span>
+        <span className="sr-only">{t("previousPage")}</span>
         <ChevronLeftIcon className="h-4 w-4" />
       </Button>
       {availablePagesIds && pageIndex !== undefined && (
@@ -57,7 +59,7 @@ export const PageIndicator = ({
         }}
         disabled={pageIndex === (availablePagesIds?.length ?? 0) - 1}
       >
-        <span className="sr-only">Go to next page</span>
+        <span className="sr-only">{t("nextPage")}</span>
         <ChevronRightIcon className="h-4 w-4" />
       </Button>
     </div>

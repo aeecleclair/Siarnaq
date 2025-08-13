@@ -33,7 +33,7 @@ export const columns: ColumnDef<CdrUserPreview>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Nom" />
+      <DataTableColumnHeader column={column} title="name" />
     ),
     cell: ({ row }) => <div>{row.getValue("name")}</div>,
     enableSorting: false,
@@ -44,7 +44,7 @@ export const columns: ColumnDef<CdrUserPreview>[] = [
   {
     accessorKey: "firstname",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Prénom" />
+      <DataTableColumnHeader column={column} title="firstname" />
     ),
     cell: ({ row }) => <div>{row.getValue("firstname")}</div>,
     enableSorting: false,
@@ -55,7 +55,7 @@ export const columns: ColumnDef<CdrUserPreview>[] = [
   {
     accessorKey: "nickname",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Surnom" />
+      <DataTableColumnHeader column={column} title="nickname" />
     ),
     cell: ({ row }) => <div>{row.getValue("nickname")}</div>,
     enableSorting: false,
@@ -66,14 +66,14 @@ export const columns: ColumnDef<CdrUserPreview>[] = [
   {
     accessorKey: "curriculum",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Cursus" />
+      <DataTableColumnHeader column={column} title="curriculum" />
     ),
     cell: ({ row }) => (
       <div className="flex space-x-2">
         <Badge variant="outline">
           {row.getValue("curriculum") && row.getValue("curriculum") !== ""
             ? (row.getValue("curriculum") as CurriculumComplete).name
-            : "Aucun cursus"}
+            : " — "}
         </Badge>
       </div>
     ),

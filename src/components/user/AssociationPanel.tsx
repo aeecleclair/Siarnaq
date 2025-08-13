@@ -1,9 +1,9 @@
 import { GetCdrOnlineSellersResponse, SellerComplete } from "@/api";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
+import { Link } from "@/i18n/navigation";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import {
@@ -24,7 +24,7 @@ export const AssociationPanel = ({
   canClick,
   showSellerFeatureFlag,
 }: AssociationPanelProps) => {
-  const t = useTranslations("AssociationPanel");
+  const t = useTranslations("associationPanel");
   const { userId } = useTokenStore();
   const searchParams = useSearchParams();
   const firstSellerId = searchParams.get("sellerId") || onlineSellers.at(0)?.id;
@@ -32,6 +32,17 @@ export const AssociationPanel = ({
   const totalPurchases =
     purchases?.reduce<number>((acc, purchase) => acc + purchase.quantity, 0) ??
     0;
+
+  const customSellerNames = ["BDE", "BDS", "SDeC", "WEI"] as const;
+  function isInCustomSellerNames(
+    sellerName: string,
+  ): sellerName is (typeof customSellerNames)[number] {
+    return customSellerNames.includes(
+      sellerName as (typeof customSellerNames)[number],
+    );
+  }
+  const displaySellerName = (sellerName: string) =>
+    isInCustomSellerNames(sellerName) ? t(sellerName) : sellerName;
 
   return (
     <div>
@@ -71,7 +82,7 @@ export const AssociationPanel = ({
                   ) : (
                     <HiOutlineEllipsisHorizontal className="h-4 w-4 mr-2" />
                   )}
-                  {seller.name}
+                  {displaySellerName(seller.name)}
                   {purchasesCount > 0 && (
                     <>
                       <span className="ml-2">·</span>

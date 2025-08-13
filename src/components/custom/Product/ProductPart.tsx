@@ -7,6 +7,7 @@ import { useProducts } from "@/hooks/useProducts";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { LoadingButton } from "../LoadingButton";
@@ -18,6 +19,7 @@ interface ProductPartProps {
 }
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
+  const pathname = usePathname();
   const t = useTranslations("ProductPart");
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -71,9 +73,11 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     <div className="grid gap-6 -mt-4">
       <div className="justify-between flex flex-row">
         <CardTitle>{t("summary")}</CardTitle>
-        <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
-          Valider tous les achats
-        </LoadingButton>
+        {isAdmin && pathname.startsWith("/admin") ? (
+          <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
+            Valider tous les achats
+          </LoadingButton>
+        ) : null}
       </div>
       <div className="space-y-2">
         {purchases?.length > 0 ? (

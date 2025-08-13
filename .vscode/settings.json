@@ -26,8 +26,8 @@
     ],
     "src\\components\\admin\\userSearch\\Columns.tsx": [" — "],
     "src\\components\\admin\\userSearch\\DataTableColumnHeader.tsx": [
-      "\n            Asc\n          ",
-      "\n            Desc\n          "
+      "\r\n            Asc\r\n          ",
+      "\r\n            Desc\r\n          "
     ],
     "src\\components\\custom\\Payment\\PaymentItem.tsx": [
       " (",
@@ -35,7 +35,7 @@
     ],
     "src\\components\\custom\\CurrencyInput.tsx": ["€"],
     "src\\components\\custom\\MultiSelect.tsx": ["Enter"],
-    "src\\components\\user\\AssociationPanel.tsx": ["·"]
-  },
-  "i18n-ally.extract.ignored": []
+    "src\\components\\user\\AssociationPanel.tsx": ["·"],
+    "src\\forms\\migrateUserFormSchema.ts": ["Autre", "Adoma", "Exte"]
+  }
 }

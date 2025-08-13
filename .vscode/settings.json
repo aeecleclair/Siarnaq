@@ -35,7 +35,6 @@
     ],
     "src\\components\\custom\\CurrencyInput.tsx": ["€"],
     "src\\components\\custom\\MultiSelect.tsx": ["Enter"],
-    "src\\components\\user\\AssociationPanel.tsx": ["·"],
-    "src\\forms\\migrateUserFormSchema.ts": ["Autre", "Adoma", "Exte"]
+    "src\\components\\user\\AssociationPanel.tsx": ["·"]
   }
 }

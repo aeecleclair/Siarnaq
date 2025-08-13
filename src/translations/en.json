@@ -84,7 +84,9 @@
     "noResult": "No result"
   },
   "dataTableColumnHeader": {
+    "asc": "Ascending",
     "curriculum": "Curriculum",
+    "desc": "Descending",
     "firstname": "Firstname",
     "hide": "Hide",
     "name": "Name",
@@ -200,8 +202,7 @@
     "validated": "Purchase validated"
   },
   "page": {
-    "ECLAIR": "ÉCLAIR",
-    "allRightsReserved": "All rights reserved.",
+    "license": "© <date></date> <eclair>ÉCLAIR</eclair>. All rights reserved.",
     "madeByECLAIR": "Developed by ÉCLAIR",
     "refusedDescription": "Your payment has been refused. You can retry, if the problem persists, please contact us.",
     "refusedTitle": "Payment refused",

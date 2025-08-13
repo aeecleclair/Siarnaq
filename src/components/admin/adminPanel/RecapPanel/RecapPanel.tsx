@@ -10,6 +10,7 @@ import {
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { TextSeparator } from "@/components/custom/TextSeparator";
+import UserDisplayName from "@/components/custom/displayName";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
@@ -166,15 +167,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       <div className="space-y-8">
         <CardTitle className="flex flex-row justify-between items-center">
           <div>
-            {user.nickname ? (
-              <span className="font-bold">
-                {user.nickname} ({user.firstname} {user.name})
-              </span>
-            ) : (
-              <span className="font-bold">
-                {user.firstname} {user.name}
-              </span>
-            )}
+            <UserDisplayName user={user} />
           </div>
           <div className="flex gap-4 items-center">
             <span className="font-semibold text-base">

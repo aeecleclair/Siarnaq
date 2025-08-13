@@ -18,6 +18,8 @@ import {
 } from "react-icons/hi2";
 import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
 
+import UserDisplayName from "../displayName";
+
 interface PaymentItemProps {
   payment: PaymentComplete;
   refetch: () => void;
@@ -94,19 +96,7 @@ export const PaymentItem = ({
             <div className="grid gap-3">
               <span>
                 {t.rich("areYouSure", {
-                  name: () => (
-                    <span className="font-bold">
-                      {user.nickname ? (
-                        <span className="font-bold">
-                          {user.nickname} ({user.firstname} {user.name})
-                        </span>
-                      ) : (
-                        <span className="font-bold">
-                          {user.firstname} {user.name}
-                        </span>
-                      )}
-                    </span>
-                  ),
+                  name: () => <UserDisplayName user={user} />,
                   amount: () => (
                     <span className="font-bold">
                       {format.number(payment.total / 100, "euro")}

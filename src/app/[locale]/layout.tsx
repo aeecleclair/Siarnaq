@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Suspense } from "react";
 
+import LocaleDropdown from "./locale-dropdown";
 import Provider from "./provider";
 import { QueryProvider } from "./queryProvider";
 
@@ -56,6 +57,7 @@ export default async function RootLayout({
           <QueryProvider>
             <Provider>
               <NextIntlClientProvider>
+                <LocaleDropdown />
                 {children}
                 <Toaster />
               </NextIntlClientProvider>

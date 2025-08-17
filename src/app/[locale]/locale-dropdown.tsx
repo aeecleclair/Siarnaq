@@ -3,21 +3,31 @@
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { useLocaleStore } from "@/stores/locale";
-import { useLocale } from "next-intl";
+import { CaretSortIcon } from "@radix-ui/react-icons";
+import { Locale, useLocale } from "next-intl";
 import Image from "next/image";
 
 export default function LocaleDropdown() {
   const locale = useLocale();
   const { localeStore, setLocaleStore } = useLocaleStore();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const localeName = {
     en: "English",
     fr: "Français",
+  };
+
+  const onSetLocale = (locale: string) => {
+    router.replace({ pathname }, { locale: locale as Locale });
+    setLocaleStore(locale as Locale);
   };
 
   return (
@@ -32,20 +42,23 @@ export default function LocaleDropdown() {
             className="rounded-2xs border border-border mr-2"
           />
           {localeName[locale]}
+          <CaretSortIcon className="ml-2 size-6 self-center" />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          {routing.locales.map((l) => (
-            <DropdownMenuItem key={l}>
-              <Image
-                src={`/${l}.svg`}
-                alt={localeName[l]}
-                width={30}
-                height={30}
-                className="rounded-2xs border border-border mr-2"
-              />
-              <span>{localeName[l]}</span>
-            </DropdownMenuItem>
-          ))}
+          <DropdownMenuRadioGroup value={locale} onValueChange={onSetLocale}>
+            {routing.locales.map((l) => (
+              <DropdownMenuRadioItem key={l} value={l}>
+                <Image
+                  src={`/${l}.svg`}
+                  alt={localeName[l]}
+                  width={30}
+                  height={30}
+                  className="rounded-2xs border border-border mr-2"
+                />
+                <span>{localeName[l]}</span>
+              </DropdownMenuRadioItem>
+            ))}
+          </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

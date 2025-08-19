@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
+import RedirectPage from "./redirect";
 
-export default function RootPage() {
-  redirect("/fr");
-}
+export default RedirectPage;

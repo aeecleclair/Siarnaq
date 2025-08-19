@@ -18,6 +18,7 @@ interface AddEditVariantFormProps {
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
   isEdit?: boolean;
+  isInterestProduct?: boolean;
 }
 
 export const AddEditVariantForm = ({
@@ -25,6 +26,7 @@ export const AddEditVariantForm = ({
   isLoading,
   setIsOpened,
   isEdit = false,
+  isInterestProduct = false,
 }: AddEditVariantFormProps) => {
   const { curriculums } = useCurriculums();
 
@@ -63,12 +65,14 @@ export const AddEditVariantForm = ({
         />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <StyledFormField
-          form={form}
-          label="Prix"
-          id="price"
-          input={(field) => <CurrencyInput id="price" {...field} />}
-        />
+        {!isInterestProduct && (
+          <StyledFormField
+            form={form}
+            label="Prix"
+            id="price"
+            input={(field) => <CurrencyInput id="price" {...field} />}
+          />
+        )}
         <StyledFormField
           form={form}
           label="Cursus"
@@ -86,32 +90,34 @@ export const AddEditVariantForm = ({
           )}
         />
       </div>
-      <div className="grid gap-2">
-        <StyledFormField
-          form={form}
-          label="Achat"
-          id="unique"
-          input={(field) => (
-            <RadioGroup
-              onValueChange={field.onChange}
-              defaultValue={field.value}
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="unique" id="unique" />
-                <Label htmlFor="unique">
-                  {"Ne peux être acheté qu'une seule fois"}
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="multiple" id="multiple" />
-                <Label htmlFor="multiple">
-                  Peux être acheter autant de fois que souhaité
-                </Label>
-              </div>
-            </RadioGroup>
-          )}
-        />
-      </div>
+      {!isInterestProduct && (
+        <div className="grid gap-2">
+          <StyledFormField
+            form={form}
+            label="Achat"
+            id="unique"
+            input={(field) => (
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="unique" id="unique" />
+                  <Label htmlFor="unique">
+                    {"Ne peux être acheté qu'une seule fois"}
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="multiple" id="multiple" />
+                  <Label htmlFor="multiple">
+                    Peux être acheter autant de fois que souhaité
+                  </Label>
+                </div>
+              </RadioGroup>
+            )}
+          />
+        </div>
+      )}
       <div className="flex justify-end mt-2 space-x-4">
         <Button
           variant="outline"

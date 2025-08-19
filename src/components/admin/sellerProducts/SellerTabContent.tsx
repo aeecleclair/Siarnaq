@@ -73,7 +73,7 @@ export const SellerTabContent = ({
               userId={userId!}
               canAdd={status.status !== "closed"}
               canEdit={
-                status.status === "pending" ||
+                (product.needs_validation && status.status === "pending") ||
                 (status.status === "online" && !product.available_online)
               }
               canRemove={

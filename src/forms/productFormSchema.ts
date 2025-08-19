@@ -60,7 +60,7 @@ export const productFormSchema = z
     if (
       // at least one of the fields is empty AND one is full => incomplete ticket
       (!data.ticket_name || !data.ticket_max_use || !data.ticket_expiration) &&
-      (data.ticket_name || data.ticket_max_use || data.ticket_expiration)
+      (data.ticket_name || data.ticket_expiration)
     ) {
       if (!data.ticket_name)
         ctx.addIssue({

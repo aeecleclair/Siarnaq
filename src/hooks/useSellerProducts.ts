@@ -16,7 +16,10 @@ export const useSellerProducts = (sellerId: string | null) => {
   });
 
   return {
-    products: data?.data || [],
+    products:
+      data?.data?.sort((a, b) => {
+        return Number(a.needs_validation) - Number(b.needs_validation);
+      }) || [],
     isLoading,
     refetch,
   };

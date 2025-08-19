@@ -32,6 +32,7 @@
   },
   "ProductPart": {
     "summary": "Summary",
+    "interestSummary": "Récapitulatif des intérêts",
     "total": "Total",
     "noProduct": "No product"
   },

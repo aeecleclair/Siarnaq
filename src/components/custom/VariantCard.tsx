@@ -37,6 +37,7 @@ interface VariantCardProps {
   isAdmin: boolean;
   displayWarning?: boolean;
   productId: string;
+  isInterestProduct: boolean;
 }
 
 export const VariantCard = ({
@@ -48,6 +49,7 @@ export const VariantCard = ({
   isAdmin,
   displayWarning,
   productId,
+  isInterestProduct = false,
 }: VariantCardProps) => {
   const { toast } = useToast();
   const { selectTranslation } = useTranslation();
@@ -208,13 +210,15 @@ export const VariantCard = ({
                   </div>
                 )}
               <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-1 gap-4">
-                <CardTitle
-                  className={`text-sm font-medium ${!isSelectable && "text-muted-foreground"}`}
-                >
-                  <span>
-                    {selectTranslation(variant.name_en, variant.name_fr)}
-                  </span>
-                </CardTitle>
+                {!isInterestProduct && (
+                  <CardTitle
+                    className={`text-sm font-medium ${!isSelectable && "text-muted-foreground"}`}
+                  >
+                    <span>
+                      selectTranslation(variant.name_en, variant.name_fr)
+                    </span>
+                  </CardTitle>
+                )}
                 {!variant.unique && (
                   <div className="flex items-center space-x-2">
                     <LoadingButton
@@ -295,7 +299,13 @@ export const VariantCard = ({
                 <div
                   className={`text-2xl font-bold ${!isSelectable && "text-muted-foreground"}`}
                 >
-                  <span>{variant.price / 100} €</span>
+                  {isInterestProduct ? (
+                    <span>
+                      {selectTranslation(variant.name_en, variant.name_fr)}
+                    </span>
+                  ) : (
+                    <span>{variant.price / 100} €</span>
+                  )}
                 </div>
                 {showDescription && (
                   <p className="text-xs text-muted-foreground">

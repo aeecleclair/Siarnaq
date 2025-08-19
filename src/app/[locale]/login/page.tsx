@@ -35,7 +35,7 @@ const Login = () => {
     undefined,
   );
   return (
-    <div className="flex [&>div]:w-full h-screen bg-muted/40">
+    <div className="flex [&>div]:w-full h-[--custom-vh] bg-muted/40">
       <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
         <CardHeader>
           <CardTitle>{t("title", { year: year })}</CardTitle>

@@ -170,7 +170,7 @@
     "or": "Sinon",
     "promotion": "Promotion {year, number}",
     "register": "S'inscrire",
-    "selectPromotion": "Sélectionnez votre promo pour créer un compte :",
+    "selectPromotion": "Sélectionnez votre promo pour créer un compte MyECL :",
     "title": "Chaîne de rentrée associative {year, number}"
   },
   "metadata": {

@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
+import RedirectPage from "../redirect";
 
-export default function LoginPage() {
-  redirect("/fr/login");
-}
+export default RedirectPage;

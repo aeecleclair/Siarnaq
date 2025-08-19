@@ -19,15 +19,18 @@ export default function LocaleDropdown() {
   const { localeStore, setLocaleStore } = useLocaleStore();
   const router = useRouter();
   const pathname = usePathname();
+  if (!localeStore) setLocaleStore(locale);
 
   const localeName = {
     en: "English",
     fr: "Français",
   };
 
-  const onSetLocale = (locale: string) => {
-    router.replace({ pathname }, { locale: locale as Locale });
-    setLocaleStore(locale as Locale);
+  const onSetLocale = (l: string) => {
+    if (l !== locale) {
+      router.replace({ pathname }, { locale: l as Locale });
+      setLocaleStore(l as Locale);
+    }
   };
 
   return (

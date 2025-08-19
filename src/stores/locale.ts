@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 interface LocaleStore {
-  localeStore: Locale;
+  localeStore: Locale | undefined;
   setLocaleStore: (size: Locale) => void;
 }
 
@@ -11,7 +11,7 @@ export const useLocaleStore = create<LocaleStore>()(
   devtools(
     persist(
       (set) => ({
-        localeStore: "fr",
+        localeStore: undefined,
         setLocaleStore: (localeStore) => set({ localeStore }),
       }),
       {

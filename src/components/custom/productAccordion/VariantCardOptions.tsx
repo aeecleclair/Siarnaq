@@ -41,7 +41,8 @@ interface VariantCardOptionsProps {
   productId: string;
   userId: string;
   refreshProduct: () => void;
-  isInterestProduct: boolean;
+  isInterestProduct?: boolean;
+  isMembershipProduct?: boolean;
 }
 
 export const VariantCardOptions = ({
@@ -54,6 +55,7 @@ export const VariantCardOptions = ({
   userId,
   refreshProduct,
   isInterestProduct = false,
+  isMembershipProduct = false,
 }: VariantCardOptionsProps) => {
   const { toast } = useToast();
   const { data: productFields } = useSellerProductData(sellerId, productId);
@@ -206,6 +208,7 @@ export const VariantCardOptions = ({
                     isLoading={isLoading}
                     isEdit
                     isInterestProduct={isInterestProduct}
+                    isMembershipProduct={isMembershipProduct}
                   />
                 </form>
               </Form>

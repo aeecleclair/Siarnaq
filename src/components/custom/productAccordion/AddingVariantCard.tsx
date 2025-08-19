@@ -20,6 +20,7 @@ interface AddingVariantCardProps {
   productId: string;
   refreshProduct: () => void;
   isInterestProduct?: boolean;
+  isMembershipProduct?: boolean;
 }
 
 export const AddingVariantCard = ({
@@ -27,6 +28,7 @@ export const AddingVariantCard = ({
   productId,
   refreshProduct,
   isInterestProduct = false,
+  isMembershipProduct = false,
 }: AddingVariantCardProps) => {
   const { toast } = useToast();
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
@@ -86,6 +88,7 @@ export const AddingVariantCard = ({
               setIsOpened={setIsAddDialogOpened}
               isLoading={isLoading}
               isInterestProduct={isInterestProduct}
+              isMembershipProduct={isMembershipProduct}
             />
           </form>
         </Form>

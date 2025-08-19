@@ -13,6 +13,7 @@ export const productFormSchema = z
     name_en: z.string().optional(),
     description_fr: z.string().optional(),
     description_en: z.string().optional(),
+    related_membership: z.string().optional(),
     available_online: z.enum(["true", "false"], {
       required_error: "Veuillez renseigner la disponibilité du produit",
     }),

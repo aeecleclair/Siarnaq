@@ -191,6 +191,9 @@ export const ProductAccordion = ({
                     productId={product.id}
                     refreshProduct={refreshProduct}
                     isInterestProduct={!product.needs_validation}
+                    isMembershipProduct={
+                      product.related_membership != undefined
+                    }
                   />
                 )}
                 {variantToDisplay.map((variant) => (
@@ -221,6 +224,9 @@ export const ProductAccordion = ({
                         purchasedVariantIds.includes(variant.id))
                     }
                     isInterestProduct={!product.needs_validation}
+                    isMembershipProduct={
+                      product.related_membership != undefined
+                    }
                   />
                 ))}
               </>

@@ -22,6 +22,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Table,
   TableBody,
   TableCell,
@@ -32,6 +39,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { productFormSchema } from "@/forms/productFormSchema";
+import { useCoreUser } from "@/hooks/useCoreUser";
+import { useMemberships } from "@/hooks/useMemberships";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
 import { apiFormatDate } from "@/lib/date_conversion";
@@ -63,6 +72,9 @@ export const AddEditProductForm = ({
   const [isDeletingTicketLoading, setIsDeletingTicketLoading] = useState(false);
   const [isAddingLoading, setIsAddingLoading] = useState(false);
   const [isDeletingLoading, setIsDeletingLoading] = useState(false);
+  const { memberships } = useMemberships();
+  const { isAdmin } = useCoreUser();
+  const [selectedMembership, setSelectedMembership] = useState<string>();
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
@@ -265,6 +277,32 @@ export const AddEditProductForm = ({
           )}
         />
       </div>
+      {isAdmin && (
+        <StyledFormField
+          form={form}
+          label="Adhésion liée"
+          id="related_membership"
+          input={(field) => (
+            <Select
+              onValueChange={setSelectedMembership}
+              defaultValue={selectedMembership}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent side="top">
+                {memberships.map((membership) => (
+                  <SelectItem key={membership.id} value={membership.id}>
+                    <div className="flex items-center flex-row gap-2">
+                      {membership.name}
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+      )}
       <Accordion type="multiple">
         <AccordionItem value="tickets">
           <AccordionTrigger>

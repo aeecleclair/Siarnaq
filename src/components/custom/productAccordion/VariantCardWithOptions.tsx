@@ -21,6 +21,7 @@ interface VariantCardWithOptionsProps {
   isAdmin: boolean;
   displayWarning?: boolean;
   isInterestProduct?: boolean;
+  isMembershipProduct?: boolean;
 }
 
 export const VariantCardWithOptions = ({
@@ -37,6 +38,7 @@ export const VariantCardWithOptions = ({
   isAdmin,
   displayWarning,
   isInterestProduct = false,
+  isMembershipProduct = false,
 }: VariantCardWithOptionsProps) => {
   return (
     <ContextMenu>
@@ -63,6 +65,7 @@ export const VariantCardWithOptions = ({
         userId={userId}
         refreshProduct={refreshProduct}
         isInterestProduct={isInterestProduct}
+        isMembershipProduct={isMembershipProduct}
       />
     </ContextMenu>
   );

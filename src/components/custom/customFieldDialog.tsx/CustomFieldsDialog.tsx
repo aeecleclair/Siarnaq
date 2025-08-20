@@ -24,6 +24,7 @@ interface CustomFieldsDialogProps {
   productId: string;
   userId: string;
   children?: React.ReactNode;
+  onlyUserAnswerable?: boolean;
 }
 
 export const CustomFieldsDialog = ({
@@ -36,6 +37,7 @@ export const CustomFieldsDialog = ({
   productId,
   userId,
   children,
+  onlyUserAnswerable = false,
 }: CustomFieldsDialogProps) => {
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
 
@@ -51,17 +53,21 @@ export const CustomFieldsDialog = ({
             <DialogTitle>Informations supplémentaire</DialogTitle>
           </DialogHeader>
           <DialogDescription className="py-6 m-1">
-            {productFields.map((field) => (
-              <CustomFieldInput
-                key={field.id}
-                field={field}
-                answers={answers}
-                setAnswers={setAnswers}
-                sellerId={sellerId}
-                productId={productId}
-                userId={userId}
-              />
-            ))}
+            {productFields
+              .filter((field) =>
+                onlyUserAnswerable ? field.can_user_answer : true,
+              )
+              .map((field) => (
+                <CustomFieldInput
+                  key={field.id}
+                  field={field}
+                  answers={answers}
+                  setAnswers={setAnswers}
+                  sellerId={sellerId}
+                  productId={productId}
+                  userId={userId}
+                />
+              ))}
             <div className="flex justify-end mt-4 space-x-4">
               <Button
                 variant="outline"

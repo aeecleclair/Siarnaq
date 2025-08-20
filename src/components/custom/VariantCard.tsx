@@ -169,6 +169,7 @@ export const VariantCard = ({
         sellerId={sellerId}
         productId={productId}
         userId={userId}
+        onlyUserAnswerable={!isAdmin}
       />
       <TooltipProvider>
         <Tooltip>
@@ -185,7 +186,12 @@ export const VariantCard = ({
                   if (selected) {
                     cancelPurchase();
                   } else {
-                    if (productFields.length === 0 || !isAdmin) {
+                    if (
+                      productFields.length === 0 ||
+                      (!isAdmin &&
+                        productFields.filter((field) => field.can_user_answer)
+                          .length === 0)
+                    ) {
                       purchaseVariant(1);
                     } else {
                       openFieldDialog();

@@ -127,7 +127,10 @@ export const AddProductAccordionItem = ({
       await Promise.all(
         dataFields.map((dataField) =>
           postCdrSellersSellerIdProductsProductIdData({
-            body: { name: dataField.name },
+            body: {
+              name: dataField.name,
+              can_user_answer: dataField.can_user_answer,
+            },
             path: { seller_id: seller.id, product_id: data.id },
           }),
         ),

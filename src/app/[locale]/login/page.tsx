@@ -28,7 +28,7 @@ const Login = () => {
   const router = useRouter();
   const year = new Date().getFullYear();
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
-    return year - index;
+    return (year - index).toString();
   });
 
   const [selectedPromo, setSelectedPromo] = useState<string | undefined>(
@@ -38,7 +38,7 @@ const Login = () => {
     <div className="flex [&>div]:w-full h-[--custom-vh] bg-muted/40">
       <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
         <CardHeader>
-          <CardTitle>{t("title", { year: year })}</CardTitle>
+          <CardTitle>{t("title", { year: year.toString() })}</CardTitle>
           <CardDescription className="flex flex-col gap-2">
             <span>{t("description")}</span>
             <span>

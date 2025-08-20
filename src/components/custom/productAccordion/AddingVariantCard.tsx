@@ -39,18 +39,26 @@ export const AddingVariantCard = ({
     mode: "onBlur",
     defaultValues: {
       price: isInterestProduct ? "0" : undefined,
-      unique: isInterestProduct ? "unique" : undefined,
+      unique: isInterestProduct || isMembershipProduct ? "unique" : undefined,
       allowed_curriculum: [],
+      isMembershipProduct: isMembershipProduct,
     },
   });
 
   async function onSubmit(values: z.infer<typeof variantFormSchema>) {
     setIsLoading(true);
+    const added_duration = values.related_membership_added_duration?.match(
+      /^P?(((\d+)Y)?((\d+)M)?)$/,
+    );
+    console.log(added_duration);
     const body: ProductVariantBase = {
       ...values,
       price: isInterestProduct ? 0 : Math.round(parseFloat(values.price) * 100),
       unique: values.unique === "unique",
       enabled: true,
+      related_membership_added_duration: added_duration
+        ? "P" + added_duration[1]
+        : undefined,
     };
     const { data, error } =
       await postCdrSellersSellerIdProductsProductIdVariants({
@@ -82,7 +90,11 @@ export const AddingVariantCard = ({
       title="Ajouter une variante"
       description={
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit, (errors) => {
+              console.log("Validation errors", errors);
+            })}
+          >
             <AddEditVariantForm
               form={form}
               setIsOpened={setIsAddDialogOpened}

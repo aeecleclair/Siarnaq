@@ -101,6 +101,7 @@ export const AddProductAccordionItem = ({
         expiration: ticket.expiration.toISOString(),
       })),
     };
+    console.log(body);
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {
         seller_id: seller.id,

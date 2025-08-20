@@ -85,22 +85,26 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             (purchase) => purchase.product.needs_validation === true,
           )?.length > 0 ? (
             <>
-              {purchases.map((purchase) => (
-                <PurchaseItem
-                  key={purchase.product_variant_id}
-                  allProducts={allProducts}
-                  allConstraintIds={allConstraintIds}
-                  allPurchasesIds={purchases.map(
-                    (purchase) => purchase.product.id,
-                  )}
-                  purchase={purchase}
-                  userAssociationsMembershipsIds={
-                    userAssociationsMembershipsIds
-                  }
-                  user={user}
-                  isAdmin={isAdmin}
-                />
-              ))}
+              {purchases
+                ?.filter(
+                  (purchase) => purchase.product.needs_validation === true,
+                )
+                .map((purchase) => (
+                  <PurchaseItem
+                    key={purchase.product_variant_id}
+                    allProducts={allProducts}
+                    allConstraintIds={allConstraintIds}
+                    allPurchasesIds={purchases.map(
+                      (purchase) => purchase.product.id,
+                    )}
+                    purchase={purchase}
+                    userAssociationsMembershipsIds={
+                      userAssociationsMembershipsIds
+                    }
+                    user={user}
+                    isAdmin={isAdmin}
+                  />
+                ))}
               <Separator className="my-2" />
               <div className="flex flex-row w-full">
                 <span className="font-bold w-1/6">{t("total")}</span>
@@ -123,23 +127,27 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             (purchase) => purchase.product.needs_validation === false,
           )?.length > 0 ? (
             <>
-              {purchases.map((purchase) => (
-                <PurchaseItem
-                  key={purchase.product_variant_id}
-                  allProducts={allProducts}
-                  allConstraintIds={allConstraintIds}
-                  allPurchasesIds={purchases.map(
-                    (purchase) => purchase.product.id,
-                  )}
-                  purchase={purchase}
-                  userAssociationsMembershipsIds={
-                    userAssociationsMembershipsIds
-                  }
-                  user={user}
-                  isAdmin={isAdmin}
-                  isInterest={true}
-                />
-              ))}
+              {purchases
+                ?.filter(
+                  (purchase) => purchase.product.needs_validation === false,
+                )
+                .map((purchase) => (
+                  <PurchaseItem
+                    key={purchase.product_variant_id}
+                    allProducts={allProducts}
+                    allConstraintIds={allConstraintIds}
+                    allPurchasesIds={purchases.map(
+                      (purchase) => purchase.product.id,
+                    )}
+                    purchase={purchase}
+                    userAssociationsMembershipsIds={
+                      userAssociationsMembershipsIds
+                    }
+                    user={user}
+                    isAdmin={isAdmin}
+                    isInterest={true}
+                  />
+                ))}
             </>
           ) : (
             <div>{t("noProduct")}</div>

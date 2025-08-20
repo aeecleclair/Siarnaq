@@ -327,12 +327,20 @@ export type CdrUserUpdate = {
     phone?: string | null;
     floor?: FloorsType | null;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> d7f12d5 (add self-answerable custom fields)
 };
 
 export type CdrYear = {
     year?: number;
+<<<<<<< HEAD
 >>>>>>> 8ff4682 (fix merge)
+=======
+=======
+>>>>>>> 7d23755 (add self-answerable custom fields)
+>>>>>>> d7f12d5 (add self-answerable custom fields)
 };
 
 export type ChangePasswordRequest = {
@@ -1233,18 +1241,30 @@ export type PaymentBase = {
     total: number;
     payment_type: PaymentType;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     year: number;
 >>>>>>> 8ff4682 (fix merge)
+=======
+    year: number;
+=======
+>>>>>>> 7d23755 (add self-answerable custom fields)
+>>>>>>> d7f12d5 (add self-answerable custom fields)
 };
 
 export type PaymentComplete = {
     total: number;
     payment_type: PaymentType;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     year: number;
 >>>>>>> 8ff4682 (fix merge)
+=======
+    year: number;
+=======
+>>>>>>> 7d23755 (add self-answerable custom fields)
+>>>>>>> d7f12d5 (add self-answerable custom fields)
     id: string;
     user_id: string;
 };
@@ -1338,9 +1358,15 @@ export type ProductBase = {
     product_constraints: Array<(string)>;
     document_constraints: Array<(string)>;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     year?: number | null;
 >>>>>>> 8ff4682 (fix merge)
+=======
+    year?: number | null;
+=======
+>>>>>>> 7d23755 (add self-answerable custom fields)
+>>>>>>> d7f12d5 (add self-answerable custom fields)
 };
 
 export type ProductCompleteNoConstraint = {
@@ -1379,9 +1405,15 @@ export type ProductVariantBase = {
     allowed_curriculum: Array<(string)>;
     related_membership_added_duration?: string | null;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     year: number;
 >>>>>>> 8ff4682 (fix merge)
+=======
+    year: number;
+=======
+>>>>>>> 7d23755 (add self-answerable custom fields)
+>>>>>>> d7f12d5 (add self-answerable custom fields)
 };
 
 export type ProductVariantComplete = {
@@ -7285,7 +7317,10 @@ export type $OpenApiTs = {
         };
     };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> d7f12d5 (add self-answerable custom fields)
     '/cdr/year/': {
         get: {
             res: {
@@ -7304,7 +7339,12 @@ export type $OpenApiTs = {
             };
         };
     };
+<<<<<<< HEAD
 >>>>>>> 8ff4682 (fix merge)
+=======
+=======
+>>>>>>> 7d23755 (add self-answerable custom fields)
+>>>>>>> d7f12d5 (add self-answerable custom fields)
     '/cdr/status/': {
         get: {
             res: {

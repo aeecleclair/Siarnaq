@@ -283,10 +283,7 @@ export const AddEditProductForm = ({
           label="Adhésion liée"
           id="related_membership"
           input={(field) => (
-            <Select
-              onValueChange={setSelectedMembership}
-              defaultValue={selectedMembership}
-            >
+            <Select onValueChange={field.onChange} defaultValue={field.value}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>

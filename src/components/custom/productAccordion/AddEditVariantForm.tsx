@@ -92,17 +92,17 @@ export const AddEditVariantForm = ({
           )}
         />
       </div>
-      {!isInterestProduct && (
+      {isMembershipProduct && (
         <div className="grid gap-2">
           <StyledFormField
             form={form}
-            label="Durée d'adhésion ajoutée (format: 'AyBm' pour A an(s) et B mois)"
+            label="Durée d'adhésion ajoutée (format: 'AYBMCD' pour A an(s), B mois et C jour(s))"
             id="related_membership_added_duration"
             input={(field) => <Textarea {...field} />}
           />
         </div>
       )}
-      {isMembershipProduct && (
+      {!isInterestProduct && !isMembershipProduct && (
         <div className="grid gap-2">
           <StyledFormField
             form={form}

@@ -1,27 +1,42 @@
 import { z } from "zod";
 
-export const variantFormSchema = z.object({
-  name_fr: z
-    .string({
-      required_error: "Veuillez renseigner le nom de la variante",
-    })
-    .min(1, {
-      message: "Veuillez renseigner le nom de la variante",
+export const variantFormSchema = z
+  .object({
+    name_fr: z
+      .string({
+        required_error: "Veuillez renseigner le nom de la variante",
+      })
+      .min(1, {
+        message: "Veuillez renseigner le nom de la variante",
+      }),
+    name_en: z.string().optional(),
+    description_fr: z.string().optional(),
+    description_en: z.string().optional(),
+    related_membership_added_duration: z
+      .string()
+      .regex(/^([0-9]+Y)?([0-9]+M)?$/)
+      .optional(),
+    price: z
+      .string({
+        required_error: "Veuillez renseigner le prix du produit",
+      })
+      .min(0, {
+        message: "Veuillez renseigner le prix du produit",
+      }),
+    unique: z.enum(["unique", "multiple"], {
+      required_error: "Veuillez renseigner la quantité du produit",
     }),
-  name_en: z.string().optional(),
-  description_fr: z.string().optional(),
-  description_en: z.string().optional(),
-  price: z
-    .string({
-      required_error: "Veuillez renseigner le prix du produit",
-    })
-    .min(0, {
-      message: "Veuillez renseigner le prix du produit",
+    allowed_curriculum: z.array(z.string(), {
+      required_error: "Veuillez renseigner les cursus autorisés",
     }),
-  unique: z.enum(["unique", "multiple"], {
-    required_error: "Veuillez renseigner la quantité du produit",
-  }),
-  allowed_curriculum: z.array(z.string(), {
-    required_error: "Veuillez renseigner les cursus autorisés",
-  }),
-});
+    isMembershipProduct: z.boolean(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.isMembershipProduct && !data.related_membership_added_duration) {
+      ctx.addIssue({
+        path: ["related_membership_added_duration"],
+        code: z.ZodIssueCode.custom,
+        message: "Ce champ est requis pour un produit d'adhésion",
+      });
+    }
+  });

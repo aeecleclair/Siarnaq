@@ -78,6 +78,10 @@ export const VariantCardOptions = ({
       unique: variant.unique ? "unique" : "multiple",
       allowed_curriculum:
         variant.allowed_curriculum?.map((curriculum) => curriculum.id) || [],
+      related_membership_added_duration:
+        variant?.related_membership_added_duration?.match(/^P(.+)$/)?.at(1) ||
+        undefined,
+      isMembershipProduct: isMembershipProduct,
     },
   });
 
@@ -105,11 +109,17 @@ export const VariantCardOptions = ({
 
   async function onSubmit(values: z.infer<typeof variantFormSchema>) {
     setIsLoading(true);
+    const added_duration = values.related_membership_added_duration?.match(
+      /^P?(((\d+)Y)?((\d+)M)?)$/,
+    );
     const body: ProductVariantEdit = {
       ...values,
       price: Math.round(parseFloat(values.price) * 100),
       unique: values.unique === "unique",
       enabled: true,
+      related_membership_added_duration: added_duration
+        ? "P" + added_duration[1]
+        : undefined,
     };
     await patchVariant(body);
     refreshProduct();

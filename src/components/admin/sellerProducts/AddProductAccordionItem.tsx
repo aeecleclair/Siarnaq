@@ -87,7 +87,6 @@ export const AddProductAccordionItem = ({
 
   async function onSubmit(values: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
-    console.log("clicked");
     const body: ProductBase = {
       ...values,
       available_online: values.available_online === "true",

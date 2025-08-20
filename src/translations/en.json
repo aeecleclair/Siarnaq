@@ -169,10 +169,10 @@
     "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
     "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services.",
     "or": "Or",
-    "promotion": "School year {year, number}",
+    "promotion": "School year {year}",
     "register": "Register",
     "selectPromotion": "Please select your school year to create a MyECL account:",
-    "title": "Chaîne de rentrée {year, number}"
+    "title": "Chaîne de rentrée {year}"
   },
   "metadata": {
     "description": "Centrale Lyon associative Back-to-School management platform",

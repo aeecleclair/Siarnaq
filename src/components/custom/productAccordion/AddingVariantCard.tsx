@@ -48,9 +48,8 @@ export const AddingVariantCard = ({
   async function onSubmit(values: z.infer<typeof variantFormSchema>) {
     setIsLoading(true);
     const added_duration = values.related_membership_added_duration?.match(
-      /^P?(((\d+)Y)?((\d+)M)?)$/,
+      /^P?(((\d+)Y)?((\d+)M)?((\d+)D)?)$/,
     );
-    console.log(added_duration);
     const body: ProductVariantBase = {
       ...values,
       price: isInterestProduct ? 0 : Math.round(parseFloat(values.price) * 100),
@@ -90,11 +89,7 @@ export const AddingVariantCard = ({
       title="Ajouter une variante"
       description={
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit, (errors) => {
-              console.log("Validation errors", errors);
-            })}
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <AddEditVariantForm
               form={form}
               setIsOpened={setIsAddDialogOpened}

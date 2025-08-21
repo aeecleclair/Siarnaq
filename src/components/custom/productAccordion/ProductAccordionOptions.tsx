@@ -94,7 +94,6 @@ export const ProductAccordionOptions = ({
 
   async function onSubmit(values: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
-    console.log(values);
     const body: app__modules__cdr__schemas_cdr__ProductEdit = {
       ...values,
       related_membership: values.related_membership

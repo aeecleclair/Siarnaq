@@ -14,7 +14,7 @@ export const variantFormSchema = z
     description_en: z.string().optional(),
     related_membership_added_duration: z
       .string()
-      .regex(/^([0-9]+Y)?([0-9]+M)?$/)
+      .regex(/^([0-9]+Y)?([0-9]+M)?([0-9]+D)?$/)
       .optional(),
     price: z
       .string({

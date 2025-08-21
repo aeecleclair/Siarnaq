@@ -24,9 +24,9 @@ const AdminPage = () => {
 
   useEffect(() => {
     if (!user) return;
-    const userGroups = user.groups?.map((group) => group.id);
-    const isUserInASellerGroup = userGroups?.some((group) =>
-      sellers.some((seller) => seller.group_id === group),
+    const userGroups = user.groups?.map((group: { id: any }) => group.id);
+    const isUserInASellerGroup = userGroups?.some((group: any) =>
+      sellers.some((seller: { group_id: any }) => seller.group_id === group),
     );
     if (!isAdmin && !isUserInASellerGroup) {
       router.push("/");

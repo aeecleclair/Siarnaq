@@ -82,10 +82,6 @@ export const VariantCardOptions = ({
       unique: variant.unique ? "unique" : "multiple",
       allowed_curriculum:
         variant.allowed_curriculum?.map((curriculum) => curriculum.id) || [],
-      related_membership_added_duration:
-        variant?.related_membership_added_duration?.match(/^P(.+)$/)?.at(1) ||
-        undefined,
-      isMembershipProduct: isMembershipProduct,
     },
   });
 

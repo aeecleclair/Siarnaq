@@ -105,6 +105,7 @@ export const AddProductAccordionItem = ({
         expiration: ticket.expiration.toISOString(),
       })),
     };
+    console.log(body);
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {
         seller_id: seller.id,
@@ -129,7 +130,10 @@ export const AddProductAccordionItem = ({
       await Promise.all(
         dataFields.map((dataField) =>
           postCdrSellersSellerIdProductsProductIdData({
-            body: { name: dataField.name },
+            body: {
+              name: dataField.name,
+              can_user_answer: dataField.can_user_answer,
+            },
             path: { seller_id: seller.id, product_id: data.id },
           }),
         ),

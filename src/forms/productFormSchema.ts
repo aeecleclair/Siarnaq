@@ -23,9 +23,11 @@ export default function productFormSchema(
         required_error: t("availableOnline"),
       }),
       data_field_name: z.string().optional(),
+      data_field_can_user_answer: z.boolean().optional(),
       data_fields: z.array(
         z.object({
           name: z.string(),
+          can_user_answer: z.boolean(),
           id: z.string(),
           product_id: z.string(),
         }),

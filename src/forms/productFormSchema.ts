@@ -1,22 +1,26 @@
-import { z } from "zod";
+import { Messages } from "next-intl";
+import z from "zod";
 
-export const productFormSchema = z
-  .object({
-    id: z.string().optional(),
-    name_fr: z
-      .string({
-        required_error: "Veuillez renseigner le nom du produit",
-      })
-      .min(1, {
-        message: "Veuillez renseigner le nom du produit",
+export default function productFormSchema(
+  t: (arg: keyof Messages["productFormSchema"]) => string,
+) {
+  // useTranslations("productFormSchema") (don't remove!)
+  return z
+    .object({
+      id: z.string().optional(),
+      name_fr: z
+        .string({
+          required_error: t("nameFR"),
+        })
+        .min(1, {
+          message: t("nameFR"),
+        }),
+      name_en: z.string().optional(), // still optional?
+      description_fr: z.string().optional(),
+      description_en: z.string().optional(),
+      available_online: z.enum(["true", "false"], {
+        required_error: t("availableOnline"),
       }),
-    name_en: z.string().optional(),
-    description_fr: z.string().optional(),
-    description_en: z.string().optional(),
-    related_membership: z.string().optional(),
-    available_online: z.enum(["true", "false"], {
-      required_error: "Veuillez renseigner la disponibilité du produit",
-    }),
     data_field_name: z.string().optional(),
     data_fields: z.array(
       z.object({
@@ -36,7 +40,7 @@ export const productFormSchema = z
           const parsedValue = parseInt(value);
           return !isNaN(parsedValue) && parsedValue >= 1;
         },
-        { message: "Un ticket doit être utilisé au moins une fois" },
+        { message: t("ticketMaxUsePositive") },
       )
       .refine(
         (value) => {
@@ -44,7 +48,7 @@ export const productFormSchema = z
           const isInt = /^\d+$/.test(value);
           return isInt;
         },
-        { message: "Veuillez renseigner un nombre entier" },
+        { message: t("ticketMaxUseInt") },
       )
       .optional(),
     ticket_expiration: z.date().optional(),
@@ -67,20 +71,21 @@ export const productFormSchema = z
         ctx.addIssue({
           path: ["ticket_name"],
           code: z.ZodIssueCode.custom,
-          message: "Veuillez renseigner le nom du ticket",
+          message: t("noTicketName"),
         });
       if (!data.ticket_max_use)
         ctx.addIssue({
           path: ["ticket_max_use"],
           code: z.ZodIssueCode.custom,
           message:
-            "Veuillez renseigner le nombre d'utilisations maximum du ticket",
+            t("noTicketMaxUse"),
         });
       if (!data.ticket_expiration)
         ctx.addIssue({
           path: ["ticket_expiration"],
           code: z.ZodIssueCode.custom,
-          message: "Veuillez renseigner la date d'expiration du ticket",
+          message: t("noTicketExpiration"),
         });
     }
   });
+}

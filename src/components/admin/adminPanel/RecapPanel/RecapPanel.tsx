@@ -10,6 +10,7 @@ import {
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { TextSeparator } from "@/components/custom/TextSeparator";
+import UserDisplayName from "@/components/custom/displayName";
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
@@ -23,15 +24,16 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
-import { migrateUserFormSchema } from "@/forms/migrateUserFormSchema";
+import _migrateUserFormSchema from "@/forms/migrateUserFormSchema";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePencil } from "react-icons/hi2";
-import { z } from "zod";
+import z from "zod";
 
 import { PaymentPart } from "../../../custom/Payment/PaymentPart";
 import { ProductPart } from "../../../custom/Product/ProductPart";
@@ -43,6 +45,10 @@ interface RecapPanelProps {
 }
 
 export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
+  const tZod = useTranslations("migrateUserFormSchema");
+  const migrateUserFormSchema = _migrateUserFormSchema(tZod);
+  const t = useTranslations("recapPanel");
+  const format = useFormatter();
   const { toast } = useToast();
   const { total: totalPaid } = useUserPayments(user.id);
   const { total: totalToPay } = useUserPurchases(user.id);
@@ -91,7 +97,6 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
     }
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -138,7 +143,6 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -154,7 +158,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       floor: values.floor ?? undefined,
       birthday: values.birthday ? new Date(values.birthday) : undefined,
       phone: values.phone ?? undefined,
-      promo: values.promo ? values.promo.toString() : undefined,
+      promo: values.promo?.toString(),
     });
   }
 
@@ -163,28 +167,20 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       <div className="space-y-8">
         <CardTitle className="flex flex-row justify-between items-center">
           <div>
-            {user.nickname ? (
-              <span className="font-bold">
-                {user.nickname} ({user.firstname} {user.name})
-              </span>
-            ) : (
-              <span className="font-bold">
-                {user.firstname} {user.name}
-              </span>
-            )}
+            <UserDisplayName user={user} />
           </div>
           <div className="flex gap-4 items-center">
             <span className="font-semibold text-base">
-              {user.curriculum?.name ?? "Pas de cursus"}
+              {user.curriculum?.name ?? t("noCurriculum")}
             </span>
             <CustomDialog
               isOpened={isOpened}
               setIsOpened={setIsOpened}
-              title={"Modifier le cursus"}
+              title={t("editCurriculum")}
               description={
                 <div className="grid gap-6 mt-4">
                   <div className="grid gap-2">
-                    <Label>Cursus</Label>
+                    <Label>{t("curriculum")}</Label>
                     <Select
                       onValueChange={setSelectedCurriculum}
                       defaultValue={selectedCurriculum}
@@ -210,7 +206,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
                       disabled={isLoading}
                       className="w-[100px]"
                     >
-                      Annuler
+                      {t("cancel")}
                     </Button>
                     <LoadingButton
                       isLoading={isLoading}
@@ -218,10 +214,10 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
                       type="button"
                       onClick={onCurriculumSubmit}
                     >
-                      {"Modifier"}
+                      {t("edit")}
                     </LoadingButton>
                   </div>
-                  <TextSeparator text="Modifier l'utilisateur" />
+                  <TextSeparator text={t("editUser")} />
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                       <MigrateUserForm
@@ -247,9 +243,9 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       <PaymentPart user={user} isAdmin />
       <div className="grid gap-6">
         <CardTitle className="flex flex-row w-full">
-          <span className="font-bold">Reste à payer</span>
+          <span className="font-bold">{t("leftToPay")}</span>
           <span className="ml-auto font-semibold">
-            {remainingToPay.toFixed(2)} €
+            {format.number(remainingToPay, "euro")}
           </span>
         </CardTitle>
       </div>

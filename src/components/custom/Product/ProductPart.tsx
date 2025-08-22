@@ -1,13 +1,12 @@
 import { CdrUser } from "@/api";
-import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import { useProducts } from "@/hooks/useProducts";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
-import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { LoadingButton } from "../LoadingButton";
@@ -19,8 +18,11 @@ interface ProductPartProps {
 }
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
+  const tOnValidate = useTranslations("onValidate");
+  const t = useTranslations("productPart");
+  const format = useFormatter();
   const pathname = usePathname();
-  const t = useTranslations("ProductPart");
+  const locale = useLocale();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const { userMemberships: memberships } = useUserMemberships(user.id);
@@ -47,13 +49,13 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             setIsLoading,
             refetch,
             toast,
+            tOnValidate,
           ),
         ),
       );
     } catch (error) {
       toast({
-        title: "Error",
-        description: "There was an error validating a purchase.",
+        description: t("toastErrorDescription"),
         variant: "destructive",
       });
     } finally {
@@ -61,8 +63,8 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
         title: purchases
           .map((purchase) => purchase.validated)
           .every((validated) => validated)
-          ? "Some Purchase are unvalidated"
-          : "All Purchases are validated",
+          ? t("unvalidated")
+          : t("validated"),
         variant: "default",
       });
       setIsLoading(false);

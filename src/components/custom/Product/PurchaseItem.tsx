@@ -7,7 +7,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslation } from "@/translations/utils";
-import { useTranslations } from "next-intl";
+import { Messages, useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { HiCheck, HiOutlineExclamationCircle, HiXMark } from "react-icons/hi2";
 import { HiOutlineCheckBadge } from "react-icons/hi2";
@@ -35,7 +35,9 @@ export const PurchaseItem = ({
   isAdmin,
   isInterest = false,
 }: PurchaseItemProps) => {
-  const t = useTranslations("PurchaseItem");
+  const tOnValidate = useTranslations("onValidate");
+  const t = useTranslations("purchaseItem");
+  const format = useFormatter();
   const { toast } = useToast();
   const { refetch } = useUserPurchases(user.id);
   const { selectTranslation } = useTranslation();
@@ -102,7 +104,7 @@ export const PurchaseItem = ({
           </span>
         </div>
         <span className="ml-auto w-24 text-right font-semibold">
-          {((purchase.quantity * purchase.price) / 100).toFixed(2)} €
+          {format.number((purchase.quantity * purchase.price) / 100, "euro")}
         </span>
         {!isInterest && isAdmin && (
           <LoadingButton
@@ -118,6 +120,7 @@ export const PurchaseItem = ({
                 setIsLoading,
                 refetch,
                 toast,
+                tOnValidate,
               )
             }
           >
@@ -153,8 +156,10 @@ export const onValidate = async (
   setIsLoading: (loading: boolean) => void,
   refetch: () => void,
   toast: ReturnType<typeof useToast>["toast"],
+  t: (arg: keyof Messages["onValidate"]) => string,
 ) => {
   try {
+    // useTranslations("onValidate") (don't remove!)
     setIsLoading(true);
     await patchCdrUsersUserIdPurchasesProductVariantIdValidated({
       path: {
@@ -166,14 +171,13 @@ export const onValidate = async (
       },
     });
     toast({
-      title: purchaseState ? "Purchase unvalidated" : "Purchase validated",
+      title: purchaseState ? t("unvalidated") : t("validated"),
       variant: "default",
     });
     refetch();
   } catch (error) {
     toast({
-      title: "Error",
-      description: "There was an error validating the purchase.",
+      description: t("toastErrorDescription"),
       variant: "destructive",
     });
   } finally {

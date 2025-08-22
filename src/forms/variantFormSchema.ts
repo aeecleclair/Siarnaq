@@ -1,13 +1,17 @@
-import { z } from "zod";
+import { Messages } from "next-intl";
+import z from "zod";
 
-export const variantFormSchema = z
-  .object({
+export default function variantFormSchema(
+  t: (arg: keyof Messages["variantFormSchema"]) => string,
+) {
+  // useTranslations("variantFormSchema") (don't remove!)
+  return z.object({
     name_fr: z
       .string({
-        required_error: "Veuillez renseigner le nom de la variante",
+        required_error: t("nameFR"),
       })
       .min(1, {
-        message: "Veuillez renseigner le nom de la variante",
+        message: t("nameFR"),
       }),
     name_en: z.string().optional(),
     description_fr: z.string().optional(),
@@ -18,16 +22,16 @@ export const variantFormSchema = z
       .optional(),
     price: z
       .string({
-        required_error: "Veuillez renseigner le prix du produit",
+        required_error: t("price"),
       })
       .min(0, {
-        message: "Veuillez renseigner le prix du produit",
+        message: t("price"),
       }),
     unique: z.enum(["unique", "multiple"], {
-      required_error: "Veuillez renseigner la quantité du produit",
+      required_error: t("unique"),
     }),
     allowed_curriculum: z.array(z.string(), {
-      required_error: "Veuillez renseigner les cursus autorisés",
+      required_error: t("allowedCurriculum"),
     }),
     isMembershipProduct: z.boolean(),
   })
@@ -40,3 +44,4 @@ export const variantFormSchema = z
       });
     }
   });
+}

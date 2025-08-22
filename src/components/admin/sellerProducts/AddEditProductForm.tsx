@@ -38,19 +38,20 @@ import {
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { productFormSchema } from "@/forms/productFormSchema";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useMemberships } from "@/hooks/useMemberships";
+import { useToast } from "@/components/ui/use-toast";
+import _productFormSchema from "@/forms/productFormSchema";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
-import { apiFormatDate } from "@/lib/date_conversion";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { HiTrash } from "react-icons/hi";
 import z from "zod";
 
 interface AddEditProductFormProps {
-  form: UseFormReturn<z.infer<typeof productFormSchema>>;
+  form: UseFormReturn<z.infer<ReturnType<typeof _productFormSchema>>>;
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
   isEdit?: boolean;
@@ -66,6 +67,9 @@ export const AddEditProductForm = ({
   productId,
   isEdit = false,
 }: AddEditProductFormProps) => {
+  const t = useTranslations("addEditProductForm");
+  const format = useFormatter();
+  const { toast } = useToast();
   const { products: constraint } = useProducts();
   const { data, refetch } = useSellerProductData(sellerId, productId ?? null);
   const [isAddingTicketLoading, setIsAddingTicketLoading] = useState(false);
@@ -100,7 +104,6 @@ export const AddEditProductForm = ({
       });
       if (error) {
         toast({
-          title: "Error",
           description: (error as { detail: String }).detail,
           variant: "destructive",
         });
@@ -138,7 +141,6 @@ export const AddEditProductForm = ({
         );
       if (error) {
         toast({
-          title: "Error",
           description: (error as { detail: String }).detail,
           variant: "destructive",
         });
@@ -167,7 +169,6 @@ export const AddEditProductForm = ({
       });
       if (error) {
         toast({
-          title: "Error",
           description: (error as { detail: String }).detail,
           variant: "destructive",
         });
@@ -202,7 +203,6 @@ export const AddEditProductForm = ({
         });
       if (error) {
         toast({
-          title: "Error",
           description: (error as { detail: String }).detail,
           variant: "destructive",
         });
@@ -224,13 +224,13 @@ export const AddEditProductForm = ({
       <div className="flex flex-row gap-2 w-full">
         <StyledFormField
           form={form}
-          label="Nom (français)"
+          label={t("name_fr")}
           id="name_fr"
           input={(field) => <Input {...field} />}
         />
         <StyledFormField
           form={form}
-          label="Nom (anglais)"
+          label={t("name_en")}
           id="name_en"
           input={(field) => <Input {...field} />}
         />
@@ -238,13 +238,13 @@ export const AddEditProductForm = ({
       <div className="flex flex-row gap-2">
         <StyledFormField
           form={form}
-          label="Description (français)"
+          label={t("description_fr")}
           id="description_fr"
           input={(field) => <Textarea {...field} />}
         />
         <StyledFormField
           form={form}
-          label="Description (anglais)"
+          label={t("description_en")}
           id="description_en"
           input={(field) => <Textarea {...field} />}
         />
@@ -252,7 +252,7 @@ export const AddEditProductForm = ({
       <div className="grid gap-2">
         <StyledFormField
           form={form}
-          label="Disponibilité"
+          label={t("availability")}
           id="available_online"
           input={(field) => (
             <RadioGroup
@@ -262,16 +262,12 @@ export const AddEditProductForm = ({
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="true" id="available_online" />
                 <Label htmlFor="available_online">
-                  {"Est disponible lors de la chaîne de rentrée en ligne"}
+                  {t("available_online")}
                 </Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="false" id="onsite" />
-                <Label htmlFor="onsite">
-                  {
-                    "Ne sera disponible que lors de la chaîne de rentrée en physique"
-                  }
-                </Label>
+                <Label htmlFor="onsite">{t("onsite")}</Label>
               </div>
             </RadioGroup>
           )}
@@ -303,19 +299,19 @@ export const AddEditProductForm = ({
       <Accordion type="multiple">
         <AccordionItem value="tickets">
           <AccordionTrigger>
-            <h3 className="text-primary hover:text-primary">Tickets</h3>
+            <h3 className="text-primary hover:text-primary">{t("tickets")}</h3>
           </AccordionTrigger>
           <AccordionContent className="grid gap-4">
             <div className="flex flex-row gap-2">
               <StyledFormField
                 form={form}
-                label="Nom du ticket"
+                label={t("ticket_name")}
                 id="ticket_name"
                 input={(field) => <Input {...field} />}
               />
               <StyledFormField
                 form={form}
-                label="Nombre d'utilisations maximum"
+                label={t("ticket_max_use")}
                 id="ticket_max_use"
                 input={(field) => <Input {...field} type="number" />}
               />
@@ -323,7 +319,7 @@ export const AddEditProductForm = ({
             <div className="flex flex-row gap-4">
               <StyledFormField
                 form={form}
-                label="Date d'expiration"
+                label={t("ticket_expiration")}
                 id="ticket_expiration"
                 input={(field) => (
                   <DatePicker
@@ -341,15 +337,15 @@ export const AddEditProductForm = ({
                 className="w-[100px] self-end"
                 onClick={onAddTicket}
               >
-                Ajouter
+                {t("add")}
               </LoadingButton>
             </div>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Nom</TableHead>
-                  <TableHead>Nombre d&apos;utilisations maximum</TableHead>
-                  <TableHead>Date d&apos;expiration</TableHead>
+                  <TableHead>{t("ticket_name")}</TableHead>
+                  <TableHead>{t("ticket_max_use")}</TableHead>
+                  <TableHead>{t("ticket_expiration")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -357,7 +353,11 @@ export const AddEditProductForm = ({
                   <TableRow key={ticket.id}>
                     <TableCell>{ticket.name}</TableCell>
                     <TableCell>{ticket.max_use}</TableCell>
-                    <TableCell>{apiFormatDate(ticket.expiration)}</TableCell>
+                    <TableCell>
+                      {format.dateTime(ticket.expiration, {
+                        dateStyle: "medium",
+                      })}
+                    </TableCell>
                     <TableCell className="text-right">
                       <LoadingButton
                         size="icon"
@@ -377,13 +377,15 @@ export const AddEditProductForm = ({
         </AccordionItem>
         <AccordionItem value="conditions">
           <AccordionTrigger>
-            <h3 className="text-primary hover:text-primary">Conditions</h3>
+            <h3 className="text-primary hover:text-primary">
+              {t("conditions")}
+            </h3>
           </AccordionTrigger>
           <AccordionContent className="grid gap-4">
             <div className="flex flex-row gap-2 w-full">
               <StyledFormField
                 form={form}
-                label="Contraintes"
+                label={t("product_constraints")}
                 id="product_constraints"
                 input={(field) => (
                   <MultiSelect
@@ -403,7 +405,7 @@ export const AddEditProductForm = ({
               />
               <StyledFormField
                 form={form}
-                label="Signatures"
+                label={t("document_constraints")}
                 id="document_constraints"
                 input={(field) => (
                   <MultiSelect
@@ -426,7 +428,7 @@ export const AddEditProductForm = ({
         <AccordionItem value="information">
           <AccordionTrigger>
             <h3 className="text-primary hover:text-primary">
-              Informations supplémentaires
+              {t("information")}
             </h3>
           </AccordionTrigger>
           <AccordionContent className="grid gap-4">
@@ -440,7 +442,7 @@ export const AddEditProductForm = ({
                       <Input
                         {...field}
                         type="text"
-                        placeholder="Question pour les utilisateurs qui prennent le produit"
+                        placeholder={t("question")}
                       />
                     </FormControl>
                   </FormItem>
@@ -453,7 +455,7 @@ export const AddEditProductForm = ({
                 className="w-[100px]"
                 onClick={onAddData}
               >
-                Ajouter
+                {t("add")}
               </LoadingButton>
             </div>
             <div className="grid gap-4 px-1">
@@ -483,14 +485,14 @@ export const AddEditProductForm = ({
           disabled={isLoading}
           className="w-[100px]"
         >
-          Annuler
+          {t("cancel")}
         </Button>
         <LoadingButton
           isLoading={isLoading}
           className="w-[100px]"
           type="submit"
         >
-          {isEdit ? "Modifier" : "Ajouter"}
+          {isEdit ? t("edit") : t("add")}
         </LoadingButton>
       </div>
     </div>

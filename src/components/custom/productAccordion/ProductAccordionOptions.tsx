@@ -12,14 +12,15 @@ import {
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import { toast, useToast } from "@/components/ui/use-toast";
-import { productFormSchema } from "@/forms/productFormSchema";
 import { useMemberships } from "@/hooks/useMemberships";
 import { apiFormatDate } from "@/lib/date_conversion";
+import _productFormSchema from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import z from "zod";
 
 import { CustomDialog } from "../CustomDialog";
 import { LoadingButton } from "../LoadingButton";
@@ -39,6 +40,9 @@ export const ProductAccordionOptions = ({
   canEdit,
   canRemove,
 }: ProductAccordionOptionsProps) => {
+  const tZod = useTranslations("productFormSchema");
+  const productFormSchema = _productFormSchema(tZod);
+  const t = useTranslations("productAccordionOptions");
   const { toast } = useToast();
   const [isEditDialogOpened, setIsEditDialogOpened] = useState(false);
   const [isRemoveDialogOpened, setIsRemoveDialogOpened] = useState(false);
@@ -82,7 +86,6 @@ export const ProductAccordionOptions = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -123,14 +126,13 @@ export const ProductAccordionOptions = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
       setIsLoading(false);
       setIsRemoveDialogOpened(false);
       toast({
-        title: "Suppression impossible",
+        title: t("customToast"),
         description: error.toString(),
       });
       return;
@@ -146,7 +148,7 @@ export const ProductAccordionOptions = ({
           <CustomDialog
             isOpened={isEditDialogOpened}
             setIsOpened={setIsEditDialogOpened}
-            title="Modifier le produit"
+            title={t("editProduct")}
             isFullWidth
             description={
               <Form {...form}>
@@ -164,7 +166,7 @@ export const ProductAccordionOptions = ({
             }
           >
             <Button className="w-full" variant="ghost">
-              Modifier
+              {t("edit")}
               <ContextMenuShortcut>
                 <PencilIcon className="w-4 h-4" />
               </ContextMenuShortcut>
@@ -175,11 +177,11 @@ export const ProductAccordionOptions = ({
           <CustomDialog
             isOpened={isRemoveDialogOpened}
             setIsOpened={setIsRemoveDialogOpened}
-            title="Supprimer le produit"
+            title={t("deleteProduct")}
             isFullWidth
             description={
               <>
-                <div>Êtes-vous sûr de vouloir supprimer ce produit ?</div>
+                <div>{t("areYouSure")}</div>
                 <div className="flex justify-end mt-2 space-x-4">
                   <Button
                     variant="outline"
@@ -187,7 +189,7 @@ export const ProductAccordionOptions = ({
                     disabled={isLoading}
                     className="w-[100px]"
                   >
-                    Annuler
+                    {t("cancel")}
                   </Button>
                   <LoadingButton
                     isLoading={isLoading}
@@ -195,7 +197,7 @@ export const ProductAccordionOptions = ({
                     variant="destructive"
                     onClick={removeProduct}
                   >
-                    Supprimer
+                    {t("delete")}
                   </LoadingButton>
                 </div>
               </>
@@ -205,7 +207,7 @@ export const ProductAccordionOptions = ({
               className="w-full text-destructive hover:text-destructive"
               variant="ghost"
             >
-              Supprimer
+              {t("delete")}
               <ContextMenuShortcut>
                 <TrashIcon className="w-4 h-4 text-destructive" />
               </ContextMenuShortcut>

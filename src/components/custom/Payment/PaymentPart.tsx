@@ -19,10 +19,10 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
-import { paymentFormSchema } from "@/forms/paymentFormSchema";
+import _paymentFormSchema from "@/forms/paymentFormSchema";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
@@ -31,7 +31,7 @@ import {
   HiOutlineCreditCard,
 } from "react-icons/hi2";
 import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
-import { z } from "zod";
+import z from "zod";
 
 import { CurrencyInput } from "../CurrencyInput";
 import { PaymentItem } from "./PaymentItem";
@@ -43,7 +43,10 @@ interface PaymentPartProps {
 
 export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
   const { toast } = useToast();
-  const t = useTranslations("PaymentPart");
+  const tZod = useTranslations("paymentFormSchema");
+  const paymentFormSchema = _paymentFormSchema(tZod);
+  const t = useTranslations("paymentPart");
+  const format = useFormatter();
   const { payments, total: totalPaid, refetch } = useUserPayments(user.id);
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -89,7 +92,6 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -115,7 +117,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
             <CustomDialog
               isOpened={isOpened}
               setIsOpened={setIsOpened}
-              title="Ajouter un paiement"
+              title={t("addPayment")}
               description={
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -123,7 +125,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
                       <div className="flex flex-row gap-2 w-full">
                         <StyledFormField
                           form={form}
-                          label="Montant"
+                          label={t("amount")}
                           id="total"
                           input={(field) => (
                             <CurrencyInput id="price" {...field} />
@@ -131,7 +133,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
                         />
                         <StyledFormField
                           form={form}
-                          label="Type de paiement"
+                          label={t("paymentType")}
                           id="payment_type"
                           input={(field) => (
                             <Select
@@ -165,14 +167,14 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
                           disabled={isLoading}
                           className="w-[100px]"
                         >
-                          Annuler
+                          {t("cancel")}
                         </Button>
                         <LoadingButton
                           isLoading={isLoading}
                           className="w-[100px]"
                           type="submit"
                         >
-                          {"Ajouter"}
+                          {t("add")}
                         </LoadingButton>
                       </div>
                     </div>
@@ -180,7 +182,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
                 </Form>
               }
             >
-              <Button className="w-[100px]">Ajouter</Button>
+              <Button className="w-[100px]">{t("add")}</Button>
             </CustomDialog>
           )}
         </CardTitle>
@@ -201,7 +203,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
             <div className="flex flex-row w-full">
               <span className="font-bold w-1/6">{t("total")}</span>
               <span className="ml-auto font-semibold">
-                {totalPaid?.toFixed(2)} €
+                {totalPaid && format.number(totalPaid, "euro")}
               </span>
             </div>
           </>

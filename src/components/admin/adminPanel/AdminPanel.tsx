@@ -2,7 +2,7 @@ import { SellerComplete, Status } from "@/api";
 import { Accordion } from "@/components/ui/accordion";
 
 import { CurriculumAccordionItem } from "./CurriculumAccordion/CurriculumAccordionItem";
-import { SellerAccordionItem } from "./SellerAccordion.tsx/SellerAccordionItem";
+import { SellerAccordionItem } from "./SellerAccordion/SellerAccordionItem";
 import { StatusAccordionItem } from "./StatusPanel/StatusPanel";
 
 interface AdminPanelProps {

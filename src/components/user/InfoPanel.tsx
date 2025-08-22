@@ -25,7 +25,7 @@ import {
 } from "../ui/card";
 
 export const InfoPanel = () => {
-  const t = useTranslations("Info");
+  const t = useTranslations("info");
 
   const { onlineSellers } = useOnlineSellers();
 
@@ -37,11 +37,15 @@ export const InfoPanel = () => {
       <CardContent className="space-y-2">
         <h3 className="text-lg font-semibold flex flex-row items-center pt-5">
           <HiOutlineCalendar className="h-4 w-4 mr-2" />
-          {t("cdrPhysiqueTitle")}
+          {t("cdrOnsiteTitle")}
         </h3>
-        <div>{t("cdrPhysiqueSubtitle")}</div>
-        <div>{t("cdrPhysiqueDescription")}</div>
-        <div className="font-bold">{t("cdrPhysiqueMandatoryWarning")}</div>
+        <div>
+          {t.rich("cdrOnsiteSubtitle", {
+            mandatory: (c) => <span className="font-bold">{c}</span>,
+          })}
+        </div>
+        <div>{t("cdrOnsiteDescription")}</div>
+        <div className="font-bold">{t("cdrOnsiteMandatoryWarning")}</div>
 
         <div className="pl-10">
           <a
@@ -59,8 +63,9 @@ export const InfoPanel = () => {
           {t("cautionTitle")}
         </h3>
         <div>
-          {t("cautionDescription")} &laquo;
-          <span className="italic"> AEECL - WEI </span> &raquo;.
+          {t.rich("cautionDescription", {
+            payable: (c) => <span className="italic">{c}</span>,
+          })}
         </div>
         <div>{t("cautionInstructions")}</div>
 
@@ -71,12 +76,13 @@ export const InfoPanel = () => {
         </h3>
         <div>{t("facebook")}</div>
         <div className="pl-10">
+          {/* TODO: provide a clean link like https://www.facebook.com/groups/admis2024 */}
           <a
-            href="https://www.facebook.com/groups/admis2024"
+            href="https://www.facebook.com/share/g/1FQ72yPVjk"
             className="font-medium hover:underline underline-offset-4 flex flex-row items-center"
           >
             <HiOutlineLink className="h-4 w-4 mr-2" />
-            Groupe des Admis 2024
+            {t("group")}
           </a>
         </div>
         {/* */}
@@ -102,6 +108,7 @@ export const InfoPanel = () => {
           </a>
         </div>
         {/* */}
+        {/* I'm so sorry Jho...
         <h3 className="text-lg font-semibold flex flex-row items-center pt-5">
           <HiOutlineUserGroup className="h-4 w-4 mr-2" />
           {t("elementTitle")}
@@ -125,6 +132,7 @@ export const InfoPanel = () => {
             <li>{t("elementStep4")}</li>
           </ol>
         </div>
+        */}
       </CardContent>
 
       <CardFooter className="px-6 py-4">

@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { useTokenStore } from "@/stores/token";
 import { useTranslation } from "@/translations/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useFormatter } from "next-intl";
 import { useEffect, useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 
@@ -26,8 +27,8 @@ import {
 } from "../ui/tooltip";
 import { useToast } from "../ui/use-toast";
 import { LoadingButton } from "./LoadingButton";
-import { Answer } from "./customFieldDialog.tsx/CustomFieldInput";
-import { CustomFieldsDialog } from "./customFieldDialog.tsx/CustomFieldsDialog";
+import { Answer } from "./customFieldDialog/CustomFieldInput";
+import { CustomFieldsDialog } from "./customFieldDialog/CustomFieldsDialog";
 
 interface VariantCardProps {
   variant: ProductVariantComplete;
@@ -52,6 +53,7 @@ export const VariantCard = ({
   productId,
   isInterestProduct = false,
 }: VariantCardProps) => {
+  const format = useFormatter();
   const { toast } = useToast();
   const { selectTranslation } = useTranslation();
   const { userId: myUserId } = useTokenStore();
@@ -87,7 +89,6 @@ export const VariantCard = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -112,7 +113,6 @@ export const VariantCard = ({
     );
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -326,7 +326,7 @@ export const VariantCard = ({
                   <span>
                     {isInterestProduct
                       ? selectTranslation(variant.name_en, variant.name_fr)
-                      : `${variant.price / 100} €`}
+                      : `${format.number(variant.price / 100, "euro")}
                   </span>
                 </div>
                 {showDescription && (

@@ -1,6 +1,6 @@
 import { usePaymentUrl } from "@/hooks/usePaymentUrl";
+import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { HelloAssoButton } from "../custom/HelloAssoButton";
@@ -8,7 +8,7 @@ import { WarningDialog } from "../custom/WarningDialog";
 import { Button } from "../ui/button";
 
 export const PaymentButton = () => {
-  const t = useTranslations("PaymentButton");
+  const t = useTranslations("paymentButton");
   const [isOpened, setIsOpened] = useState(false);
   const { paymentUrl, isLoading, refetch } = usePaymentUrl();
   const router = useRouter();

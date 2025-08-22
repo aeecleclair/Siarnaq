@@ -4,12 +4,13 @@ import {
 } from "@/api";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import { variantFormSchema } from "@/forms/variantFormSchema";
+import _variantFormSchema from "@/forms/variantFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi2";
-import { z } from "zod";
+import z from "zod";
 
 import { Card, CardContent } from "../../ui/card";
 import { CustomDialog } from "../CustomDialog";
@@ -28,6 +29,9 @@ export const AddingVariantCard = ({
   refreshProduct,
   isInterestProduct = false,
 }: AddingVariantCardProps) => {
+  const tZod = useTranslations("variantFormSchema");
+  const variantFormSchema = _variantFormSchema(tZod);
+  const t = useTranslations("addingVariantCard");
   const { toast } = useToast();
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +64,6 @@ export const AddingVariantCard = ({
       });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -77,7 +80,7 @@ export const AddingVariantCard = ({
     <CustomDialog
       isOpened={isAddDialogOpened}
       setIsOpened={setIsAddDialogOpened}
-      title="Ajouter une variante"
+      title={t("addingVariant")}
       description={
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>

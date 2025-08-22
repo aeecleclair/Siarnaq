@@ -3,10 +3,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { variantFormSchema } from "@/forms/variantFormSchema";
+import _variantFormSchema from "@/forms/variantFormSchema";
 import { useCurriculums } from "@/hooks/useCurriculums";
+import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
-import { z } from "zod";
+import z from "zod";
 
 import { CurrencyInput } from "../CurrencyInput";
 import { LoadingButton } from "../LoadingButton";
@@ -14,7 +15,7 @@ import { MultiSelect } from "../MultiSelect";
 import { StyledFormField } from "../StyledFormField";
 
 interface AddEditVariantFormProps {
-  form: UseFormReturn<z.infer<typeof variantFormSchema>>;
+  form: UseFormReturn<z.infer<ReturnType<typeof _variantFormSchema>>>;
   isLoading: boolean;
   setIsOpened: (value: boolean) => void;
   isEdit?: boolean;
@@ -28,6 +29,7 @@ export const AddEditVariantForm = ({
   isEdit = false,
   isInterestProduct = false,
 }: AddEditVariantFormProps) => {
+  const t = useTranslations("addEditVariantForm");
   const { curriculums } = useCurriculums();
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
@@ -39,13 +41,13 @@ export const AddEditVariantForm = ({
       <div className="flex flex-row gap-2 w-full">
         <StyledFormField
           form={form}
-          label="Nom (français)"
+          label={t("name_fr")}
           id="name_fr"
           input={(field) => <Input {...field} />}
         />
         <StyledFormField
           form={form}
-          label="Nom (anglais)"
+          label={t("name_en")}
           id="name_en"
           input={(field) => <Input {...field} />}
         />
@@ -53,13 +55,13 @@ export const AddEditVariantForm = ({
       <div className="flex flex-row gap-2">
         <StyledFormField
           form={form}
-          label="Description (français)"
+          label={t("description_fr")}
           id="description_fr"
           input={(field) => <Textarea {...field} />}
         />
         <StyledFormField
           form={form}
-          label="Description (anglais)"
+          label={t("description_en")}
           id="description_en"
           input={(field) => <Textarea {...field} />}
         />
@@ -68,14 +70,14 @@ export const AddEditVariantForm = ({
         {!isInterestProduct && (
           <StyledFormField
             form={form}
-            label="Prix"
+            label={t("price")}
             id="price"
             input={(field) => <CurrencyInput id="price" {...field} />}
           />
         )}
         <StyledFormField
           form={form}
-          label="Cursus"
+          label={t("allowed_curriculum")}
           id="allowed_curriculum"
           input={(field) => (
             <MultiSelect
@@ -94,7 +96,7 @@ export const AddEditVariantForm = ({
         <div className="grid gap-2">
           <StyledFormField
             form={form}
-            label="Achat"
+            label={t("purchase")}
             id="unique"
             input={(field) => (
               <RadioGroup
@@ -104,13 +106,13 @@ export const AddEditVariantForm = ({
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="unique" id="unique" />
                   <Label htmlFor="unique">
-                    {"Ne peux être acheté qu'une seule fois"}
+                    {t("unique")}
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="multiple" id="multiple" />
                   <Label htmlFor="multiple">
-                    Peux être acheter autant de fois que souhaité
+                    {t("multiple")}
                   </Label>
                 </div>
               </RadioGroup>
@@ -125,14 +127,14 @@ export const AddEditVariantForm = ({
           disabled={isLoading}
           className="w-[100px]"
         >
-          Annuler
+          {t("cancel")}
         </Button>
         <LoadingButton
           isLoading={isLoading}
           className="w-[100px]"
           type="submit"
         >
-          {isEdit ? "Modifier" : "Ajouter"}
+          {isEdit ? t("edit") : t("add")}
         </LoadingButton>
       </div>
     </div>

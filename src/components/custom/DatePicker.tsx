@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import { Button } from "../ui/button";
@@ -27,6 +28,7 @@ export function DatePicker({
   toDate,
   disabled,
 }: DatePickerProps) {
+  const t = useTranslations("datePicker");
   const defaultToDate = new Date();
   defaultToDate.setFullYear(defaultToDate.getFullYear() + 10);
   return (
@@ -45,7 +47,7 @@ export function DatePicker({
           {date ? (
             format(date, "PPP", { locale: fr })
           ) : (
-            <span>Sélectionner une date</span>
+            <span>{t("select")}</span>
           )}
         </Button>
       </PopoverTrigger>

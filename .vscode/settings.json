@@ -1,7 +1,27 @@
 {
+  "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "i18n-ally.localesPaths": ["./src/translations"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sourceLanguage": "fr",
+  "i18n-ally.displayLanguage": "fr",
+  "i18n-ally.translate.deepl.useFreeApiEntry": true,
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.extract.ignoredByFiles": {
+    "src\\app\\[locale]\\provider.tsx": ["Authorization", "Bearer ${token}"],
+    "src\\components\\admin\\adminPanel\\RecapPanel\\MigrateUserForm.tsx": [
+      "Autre",
+      "Adoma",
+      "Exte"
+    ],
+    "src\\components\\admin\\userSearch\\Columns.tsx": [" — "],
+    "src\\components\\custom\\CurrencyInput.tsx": ["€"],
+    "src\\components\\custom\\MultiSelect.tsx": ["Enter"],
+    "src\\components\\user\\AssociationPanel.tsx": ["·"],
+    "src\\app\\[locale]\\locale-dropdown.tsx": ["English", "Français"]
+  }
 }

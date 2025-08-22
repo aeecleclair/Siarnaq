@@ -37,7 +37,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
 import { useToast } from "@/components/ui/use-toast";
 import _productFormSchema from "@/forms/productFormSchema";
 import { useCoreUser } from "@/hooks/useCoreUser";

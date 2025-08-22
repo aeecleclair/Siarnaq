@@ -98,7 +98,7 @@ export const AddEditVariantForm = ({
             form={form}
             label="Durée d'adhésion ajoutée (format: 'AYBMCD' pour A an(s), B mois et C jour(s))"
             id="related_membership_added_duration"
-            input={(field) => <Textarea {...field} />}
+            input={(field) => <Input {...field} />}
           />
         </div>
       )}

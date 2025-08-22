@@ -48,7 +48,7 @@ export const AddingVariantCard = ({
   async function onSubmit(values: z.infer<typeof variantFormSchema>) {
     setIsLoading(true);
     const added_duration = values.related_membership_added_duration?.match(
-      /^P?(((\d+)Y)?((\d+)M)?((\d+)D)?)$/,
+      /^P?((\d+Y)?(\d+M)?(\d+D)?)$/,
     );
     const body: ProductVariantBase = {
       ...values,

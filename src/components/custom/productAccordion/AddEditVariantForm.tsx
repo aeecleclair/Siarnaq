@@ -117,15 +117,11 @@ export const AddEditVariantForm = ({
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="unique" id="unique" />
-                  <Label htmlFor="unique">
-                    {"Ne peux être acheté qu'une seule fois"}
-                  </Label>
+                  <Label htmlFor="unique">{t("unique")}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="multiple" id="multiple" />
-                  <Label htmlFor="multiple">
-                    Peux être acheter autant de fois que souhaité
-                  </Label>
+                  <Label htmlFor="multiple">{t("multiple")}</Label>
                 </div>
               </RadioGroup>
             )}

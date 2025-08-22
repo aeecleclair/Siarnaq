@@ -42,7 +42,8 @@ interface VariantCardOptionsProps {
   productId: string;
   userId: string;
   refreshProduct: () => void;
-  isInterestProduct: boolean;
+  isInterestProduct?: boolean;
+  isMembershipProduct?: boolean;
 }
 
 export const VariantCardOptions = ({
@@ -55,6 +56,7 @@ export const VariantCardOptions = ({
   userId,
   refreshProduct,
   isInterestProduct = false,
+  isMembershipProduct = false,
 }: VariantCardOptionsProps) => {
   const tZod = useTranslations("variantFormSchema");
   const variantFormSchema = _variantFormSchema(tZod);
@@ -106,11 +108,17 @@ export const VariantCardOptions = ({
 
   async function onSubmit(values: z.infer<typeof variantFormSchema>) {
     setIsLoading(true);
+    const added_duration = values.related_membership_added_duration?.match(
+      /^P?((\d+Y)?(\d+M)?(\d+D)?)$/,
+    );
     const body: ProductVariantEdit = {
       ...values,
       price: Math.round(parseFloat(values.price) * 100),
       unique: values.unique === "unique",
       enabled: true,
+      related_membership_added_duration: added_duration
+        ? "P" + added_duration[1]
+        : undefined,
     };
     await patchVariant(body);
     refreshProduct();
@@ -208,6 +216,7 @@ export const VariantCardOptions = ({
                     isLoading={isLoading}
                     isEdit
                     isInterestProduct={isInterestProduct}
+                    isMembershipProduct={isMembershipProduct}
                   />
                 </form>
               </Form>

@@ -17,10 +17,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import {
   Table,
   TableBody,
@@ -32,6 +41,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import _productFormSchema from "@/forms/productFormSchema";
+import { useCoreUser } from "@/hooks/useCoreUser";
+import { useMemberships } from "@/hooks/useMemberships";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
 import { useFormatter, useTranslations } from "next-intl";
@@ -66,6 +77,9 @@ export const AddEditProductForm = ({
   const [isDeletingTicketLoading, setIsDeletingTicketLoading] = useState(false);
   const [isAddingLoading, setIsAddingLoading] = useState(false);
   const [isDeletingLoading, setIsDeletingLoading] = useState(false);
+  const { memberships } = useMemberships();
+  const { isAdmin } = useCoreUser();
+  const [selectedMembership, setSelectedMembership] = useState<string>();
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
@@ -144,11 +158,13 @@ export const AddEditProductForm = ({
 
   async function onAddData() {
     const data = form.getValues("data_field_name");
+    const can_user_answer = form.getValues("data_field_can_user_answer");
     if (!data) return;
     if (isEdit) {
       setIsAddingLoading(true);
       const body: CustomDataFieldBase = {
         name: data,
+        can_user_answer: can_user_answer || false,
       };
       const { error } = await postCdrSellersSellerIdProductsProductIdData({
         body: body,
@@ -171,6 +187,7 @@ export const AddEditProductForm = ({
         {
           id: form.getValues("data_fields").length.toString(),
           name: data,
+          can_user_answer: can_user_answer || false,
           product_id: "",
         },
       ]);
@@ -260,6 +277,29 @@ export const AddEditProductForm = ({
           )}
         />
       </div>
+      {isAdmin && (
+        <StyledFormField
+          form={form}
+          label="Adhésion liée"
+          id="related_membership"
+          input={(field) => (
+            <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent side="top">
+                {memberships.map((membership) => (
+                  <SelectItem key={membership.id} value={membership.id}>
+                    <div className="flex items-center flex-row gap-2">
+                      {membership.name}
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+      )}
       <Accordion type="multiple">
         <AccordionItem value="tickets">
           <AccordionTrigger>
@@ -396,7 +436,7 @@ export const AddEditProductForm = ({
             </h3>
           </AccordionTrigger>
           <AccordionContent className="grid gap-4">
-            <div className="w-full flex flex-row gap-4 p-1">
+            <div className="w-full flex flex-row gap-1 p-1">
               <FormField
                 control={form.control}
                 name="data_field_name"
@@ -408,6 +448,24 @@ export const AddEditProductForm = ({
                         type="text"
                         placeholder={t("question")}
                       />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="data_field_can_user_answer"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Button variant="ghost" onClick={field.onChange}>
+                        <Checkbox
+                          checked={field.value}
+                          className="mr-2"
+                          onCheckedChange={field.onChange}
+                        />
+                        Auto-réponse
+                      </Button>
                     </FormControl>
                   </FormItem>
                 )}
@@ -425,16 +483,25 @@ export const AddEditProductForm = ({
             <div className="grid gap-4 px-1">
               {(isEdit ? data : form.watch("data_fields")).map((field) => (
                 <div key={field.id} className="flex flex-row items-center">
-                  <span>{field.name}</span>
-                  <LoadingButton
-                    size="icon"
-                    variant="destructive"
-                    className="flex ml-auto h-8"
-                    isLoading={isDeletingLoading}
-                    onClick={() => onDeleteData(field.id)}
-                  >
-                    <HiTrash className="w-5 h-5" />
-                  </LoadingButton>
+                  <span className="whitespace-nowrap">{field.name}</span>
+
+                  <div className="flex items-center gap-2 ml-auto">
+                    {field.can_user_answer && (
+                      <span className="text-sm text-green-600 whitespace-nowrap font-bold">
+                        L&apos;utilisateur peut répondre.
+                      </span>
+                    )}
+
+                    <LoadingButton
+                      size="icon"
+                      variant="destructive"
+                      className="h-8"
+                      isLoading={isDeletingLoading}
+                      onClick={() => onDeleteData(field.id)}
+                    >
+                      <HiTrash className="w-5 h-5" />
+                    </LoadingButton>
+                  </div>
                 </div>
               ))}
             </div>

@@ -268,11 +268,12 @@
   },
   "productPart": {
     "admin": "Admin",
-    "interestSummary": "Récapitulatif des intérêts",
     "noProduct": "No product",
     "summary": "Summary",
-    "toastErrorDescription": "An error occurred while validating the purchase.",
+    "interestSummary": "Summary of interests",
     "total": "Total",
+    "noProduct": "No product",
+    "toastErrorDescription": "An error occurred while validating the purchase.",
     "unvalidated": "Some purchases are unvalidated",
     "validateAll": "Validate all purchases",
     "validated": "All the purchases are validated"

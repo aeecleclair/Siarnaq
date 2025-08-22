@@ -20,6 +20,7 @@ interface AddEditVariantFormProps {
   setIsOpened: (value: boolean) => void;
   isEdit?: boolean;
   isInterestProduct?: boolean;
+  isMembershipProduct?: boolean;
 }
 
 export const AddEditVariantForm = ({
@@ -28,6 +29,7 @@ export const AddEditVariantForm = ({
   setIsOpened,
   isEdit = false,
   isInterestProduct = false,
+  isMembershipProduct = false,
 }: AddEditVariantFormProps) => {
   const t = useTranslations("addEditVariantForm");
   const { curriculums } = useCurriculums();
@@ -92,7 +94,17 @@ export const AddEditVariantForm = ({
           )}
         />
       </div>
-      {!isInterestProduct && (
+      {isMembershipProduct && (
+        <div className="grid gap-2">
+          <StyledFormField
+            form={form}
+            label="Durée d'adhésion ajoutée (format: 'AYBMCD' pour A an(s), B mois et C jour(s))"
+            id="related_membership_added_duration"
+            input={(field) => <Input {...field} />}
+          />
+        </div>
+      )}
+      {!isInterestProduct && !isMembershipProduct && (
         <div className="grid gap-2">
           <StyledFormField
             form={form}

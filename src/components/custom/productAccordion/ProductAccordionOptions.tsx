@@ -13,6 +13,7 @@ import {
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import _productFormSchema from "@/forms/productFormSchema";
+import { useMemberships } from "@/hooks/useMemberships";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -47,6 +48,8 @@ export const ProductAccordionOptions = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const { memberships } = useMemberships();
+
   const form = useForm<z.infer<typeof productFormSchema>>({
     resolver: zodResolver(productFormSchema),
     mode: "onBlur",
@@ -65,6 +68,7 @@ export const ProductAccordionOptions = ({
         ...ticket,
         expiration: new Date(ticket.expiration),
       })),
+      related_membership: product.related_membership?.id || undefined,
       data_fields: [],
     },
   });
@@ -92,8 +96,12 @@ export const ProductAccordionOptions = ({
 
   async function onSubmit(values: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
+    console.log(values);
     const body: app__modules__cdr__schemas_cdr__ProductEdit = {
       ...values,
+      related_membership: values.related_membership
+        ? memberships.find((m) => m.id == values.related_membership)
+        : undefined,
       available_online: values.available_online === "true",
     };
     await patchProduct(body);

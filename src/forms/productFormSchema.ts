@@ -18,13 +18,16 @@ export default function productFormSchema(
       name_en: z.string().optional(), // still optional?
       description_fr: z.string().optional(),
       description_en: z.string().optional(),
+      related_membership: z.string().optional(),
       available_online: z.enum(["true", "false"], {
         required_error: t("availableOnline"),
       }),
       data_field_name: z.string().optional(),
+      data_field_can_user_answer: z.boolean().optional(),
       data_fields: z.array(
         z.object({
           name: z.string(),
+          can_user_answer: z.boolean(),
           id: z.string(),
           product_id: z.string(),
         }),

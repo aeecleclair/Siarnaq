@@ -8,6 +8,7 @@ import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import _productFormSchema from "@/forms/productFormSchema";
+import { useMemberships } from "@/hooks/useMemberships";
 import { useSellerProducts } from "@/hooks/useSellerProducts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -43,6 +44,7 @@ export const AddProductAccordionItem = ({
   const hasInterestProduct = products.some(
     (product) => product.needs_validation === false,
   );
+  const { memberships } = useMemberships();
 
   const form = useForm<z.infer<typeof productFormSchema>>({
     resolver: zodResolver(productFormSchema),
@@ -95,11 +97,15 @@ export const AddProductAccordionItem = ({
       ...values,
       available_online: values.available_online === "true",
       needs_validation: true,
+      related_membership: values.related_membership
+        ? memberships.find((m) => m.id == values.related_membership)
+        : undefined,
       tickets: values.tickets.map((ticket) => ({
         ...ticket,
         expiration: ticket.expiration.toISOString(),
       })),
     };
+    console.log(body);
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {
         seller_id: seller.id,
@@ -124,7 +130,10 @@ export const AddProductAccordionItem = ({
       await Promise.all(
         dataFields.map((dataField) =>
           postCdrSellersSellerIdProductsProductIdData({
-            body: { name: dataField.name },
+            body: {
+              name: dataField.name,
+              can_user_answer: dataField.can_user_answer,
+            },
             path: { seller_id: seller.id, product_id: data.id },
           }),
         ),

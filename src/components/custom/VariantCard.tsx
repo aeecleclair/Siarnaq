@@ -8,6 +8,7 @@ import { ProductVariantComplete, PurchaseBase } from "@/api/types.gen";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
+import { cn } from "@/lib/utils";
 import { useTokenStore } from "@/stores/token";
 import { useTranslation } from "@/translations/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
@@ -175,7 +176,21 @@ export const VariantCard = ({
         <Tooltip>
           <TooltipTrigger className="w-full">
             <Card
-              className={`min-w-40 h-full ${selected && "shadow-lg"} ${selected && (displayWarning ? "border-destructive shadow-destructive/30" : "border-black")} ${!variant.enabled && "text-muted-foreground"} ${(isSelectable || (!isSelectable && selected)) && variant.enabled && variant.unique && !isLoading && "cursor-pointer"}`}
+              className={cn(
+                "min-w-40 h-full",
+                selected
+                  ? displayWarning
+                    ? "border-destructive shadow-destructive/30 shadow-lg"
+                    : "shadow-lg border-black"
+                  : "shadow-lg",
+                !variant.enabled ? "text-muted-foreground" : "",
+                (isSelectable || (!isSelectable && selected)) &&
+                  variant.enabled &&
+                  variant.unique &&
+                  !isLoading
+                  ? "cursor-pointer"
+                  : "",
+              )}
               onClick={() => {
                 if (
                   isSelectable &&
@@ -209,7 +224,10 @@ export const VariantCard = ({
                 isLoading && (
                   <div className="w-full h-0 relative">
                     <div
-                      className={`flex m-auto ${showDescription ? "h-[109px]" : "h-[93px]"} w-full bg-white rounded-md bg-opacity-50`}
+                      className={cn(
+                        "flex m-auto  w-full bg-white rounded-md bg-opacity-50",
+                        showDescription ? "h-[109px]" : "h-[93px]",
+                      )}
                     >
                       <ReloadIcon className="flex h-6 w-6 animate-spin m-auto" />
                     </div>
@@ -218,10 +236,13 @@ export const VariantCard = ({
               <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 pb-1 gap-4">
                 {!isInterestProduct && (
                   <CardTitle
-                    className={`text-sm font-medium ${!isSelectable && "text-muted-foreground"}`}
+                    className={cn(
+                      "text-sm font-medium",
+                      !isSelectable ? "text-muted-foreground" : "",
+                    )}
                   >
                     <span>
-                      selectTranslation(variant.name_en, variant.name_fr)
+                      {selectTranslation(variant.name_en, variant.name_fr)}
                     </span>
                   </CardTitle>
                 )}
@@ -303,15 +324,16 @@ export const VariantCard = ({
               </CardHeader>
               <CardContent className="flex p-4 pt-0 mr-auto">
                 <div
-                  className={`text-2xl font-bold ${!isSelectable && "text-muted-foreground"}`}
-                >
-                  {isInterestProduct ? (
-                    <span>
-                      {selectTranslation(variant.name_en, variant.name_fr)}
-                    </span>
-                  ) : (
-                    <span>{variant.price / 100} €</span>
+                  className={cn(
+                    "text-2xl font-bold",
+                    !isSelectable ? "text-muted-foreground" : "",
                   )}
+                >
+                  <span>
+                    {isInterestProduct
+                      ? selectTranslation(variant.name_en, variant.name_fr)
+                      : `${variant.price / 100} €`}
+                  </span>
                 </div>
                 {showDescription && (
                   <p className="text-xs text-muted-foreground">

@@ -172,7 +172,7 @@ export const AddProductAccordionItem = ({
         isOpened={isAddDialogOpened}
         setIsOpened={setIsAddDialogOpened}
       >
-        <div className="flex flex-1 items-center">
+        <div className="flex flex-1 items-center pt-4">
           <HiPlus className="w-4 h-4 mr-6" />
           <h3 className="text-lg font-semibold">Nouveau produit</h3>
           <div className="flex grow"></div>

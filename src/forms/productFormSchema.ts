@@ -48,7 +48,7 @@ export default function productFormSchema(
             const isInt = /^\d+$/.test(value);
             return isInt;
           },
-          { message: t("ticketMaxUseInt")" },
+          { message: t("ticketMaxUseInt") },
         )
         .optional(),
       ticket_expiration: z.date().optional(),
@@ -61,30 +61,32 @@ export default function productFormSchema(
         }),
       ),
     })
-  .superRefine((data, ctx) => {
-    if (
-      // at least one of the fields is empty AND one is full => incomplete ticket
-      (!data.ticket_name || !data.ticket_max_use || !data.ticket_expiration) &&
-      (data.ticket_name || data.ticket_expiration)
-    ) {
-      if (!data.ticket_name)
-        ctx.addIssue({
-          path: ["ticket_name"],
-          code: z.ZodIssueCode.custom,
-          message: t("noTicketName"),
-        });
-      if (!data.ticket_max_use)
-        ctx.addIssue({
-          path: ["ticket_max_use"],
-          code: z.ZodIssueCode.custom,
-          message:
-            t("noTicketMaxUse"),
-        });
-      if (!data.ticket_expiration)
-        ctx.addIssue({
-          path: ["ticket_expiration"],
-          code: z.ZodIssueCode.custom,
-          message: t("noTicketExpiration"),
-        });
-    }
-  });
+    .superRefine((data, ctx) => {
+      if (
+        // at least one of the fields is empty AND one is full => incomplete ticket
+        (!data.ticket_name ||
+          !data.ticket_max_use ||
+          !data.ticket_expiration) &&
+        (data.ticket_name || data.ticket_expiration)
+      ) {
+        if (!data.ticket_name)
+          ctx.addIssue({
+            path: ["ticket_name"],
+            code: z.ZodIssueCode.custom,
+            message: t("noTicketName"),
+          });
+        if (!data.ticket_max_use)
+          ctx.addIssue({
+            path: ["ticket_max_use"],
+            code: z.ZodIssueCode.custom,
+            message: t("noTicketMaxUse"),
+          });
+        if (!data.ticket_expiration)
+          ctx.addIssue({
+            path: ["ticket_expiration"],
+            code: z.ZodIssueCode.custom,
+            message: t("noTicketExpiration"),
+          });
+      }
+    });
+}

@@ -105,15 +105,11 @@ export const AddEditVariantForm = ({
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="unique" id="unique" />
-                  <Label htmlFor="unique">
-                    {t("unique")}
-                  </Label>
+                  <Label htmlFor="unique">{t("unique")}</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="multiple" id="multiple" />
-                  <Label htmlFor="multiple">
-                    {t("multiple")}
-                  </Label>
+                  <Label htmlFor="multiple">{t("multiple")}</Label>
                 </div>
               </RadioGroup>
             )}

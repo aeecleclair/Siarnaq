@@ -1628,8 +1628,6 @@ export const $CdrUserUpdate = {
     },
     type: 'object',
     title: 'CdrUserUpdate'
-<<<<<<< HEAD
-=======
 } as const;
 
 export const $CdrYear = {
@@ -1642,7 +1640,6 @@ export const $CdrYear = {
     },
     type: 'object',
     title: 'CdrYear'
->>>>>>> 8ff4682 (fix merge)
 } as const;
 
 export const $ChangePasswordRequest = {
@@ -5531,12 +5528,6 @@ export const $PaymentBase = {
         },
         payment_type: {
             '$ref': '#/components/schemas/PaymentType'
-<<<<<<< HEAD
-        }
-    },
-    type: 'object',
-    required: ['total', 'payment_type'],
-=======
         },
         year: {
             type: 'integer',
@@ -5545,7 +5536,6 @@ export const $PaymentBase = {
     },
     type: 'object',
     required: ['total', 'payment_type', 'year'],
->>>>>>> 8ff4682 (fix merge)
     title: 'PaymentBase'
 } as const;
 
@@ -5558,13 +5548,10 @@ export const $PaymentComplete = {
         payment_type: {
             '$ref': '#/components/schemas/PaymentType'
         },
-<<<<<<< HEAD
-=======
         year: {
             type: 'integer',
             title: 'Year'
         },
->>>>>>> 8ff4682 (fix merge)
         id: {
             type: 'string',
             format: 'uuid',
@@ -5576,11 +5563,7 @@ export const $PaymentComplete = {
         }
     },
     type: 'object',
-<<<<<<< HEAD
-    required: ['total', 'payment_type', 'id', 'user_id'],
-=======
     required: ['total', 'payment_type', 'year', 'id', 'user_id'],
->>>>>>> 8ff4682 (fix merge)
     title: 'PaymentComplete'
 } as const;
 
@@ -6059,11 +6042,7 @@ export const $ProductBase = {
         needs_validation: {
             type: 'boolean',
             title: 'Needs Validation',
-<<<<<<< HEAD
-            default: false
-=======
             default: true
->>>>>>> 8ff4682 (fix merge)
         },
         related_membership: {
             anyOf: [
@@ -6098,8 +6077,6 @@ export const $ProductBase = {
             },
             type: 'array',
             title: 'Document Constraints'
-<<<<<<< HEAD
-=======
         },
         year: {
             anyOf: [
@@ -6111,7 +6088,6 @@ export const $ProductBase = {
                 }
             ],
             title: 'Year'
->>>>>>> 8ff4682 (fix merge)
         }
     },
     type: 'object',
@@ -6312,12 +6288,6 @@ export const $ProductVariantBase = {
                 }
             ],
             title: 'Related Membership Added Duration'
-<<<<<<< HEAD
-        }
-    },
-    type: 'object',
-    required: ['name_fr', 'price', 'enabled', 'unique', 'allowed_curriculum'],
-=======
         },
         year: {
             type: 'integer',
@@ -6326,7 +6296,6 @@ export const $ProductVariantBase = {
     },
     type: 'object',
     required: ['name_fr', 'price', 'enabled', 'unique', 'allowed_curriculum', 'year'],
->>>>>>> 8ff4682 (fix merge)
     title: 'ProductVariantBase'
 } as const;
 

@@ -46,7 +46,6 @@ import { useMemberships } from "@/hooks/useMemberships";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
 import { useFormatter, useTranslations } from "next-intl";
-import { apiFormatDate } from "@/lib/date_conversion";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { HiTrash } from "react-icons/hi";
@@ -304,30 +303,9 @@ export const AddEditProductForm = ({
       <Accordion type="multiple">
         <AccordionItem value="tickets">
           <AccordionTrigger>
-            <h3 className="text-primary hover:text-primary">{t("tickets")}</h3>
+            <h3 className="text-primary hover:text-primary">Tickets</h3>
           </AccordionTrigger>
           <AccordionContent className="grid gap-4">
-            <FormField
-              control={form.control}
-              name="generate_ticket"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <div className="grid gap-2">
-                    <div className="flex items-center space-x-2">
-                      <Switch
-                        id="generate_ticket"
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                      <Label htmlFor="generate_ticket">
-                        {t("generate_ticket")}
-                      </Label>
-                    </div>
-                    <FormMessage />
-                  </div>
-                </FormItem>
-              )}
-            />
             <div className="flex flex-row gap-2">
               <StyledFormField
                 form={form}
@@ -363,6 +341,7 @@ export const AddEditProductForm = ({
                 className="w-[100px] self-end"
                 onClick={onAddTicket}
               >
+                Ajouter
                 {t("add")}
               </LoadingButton>
             </div>

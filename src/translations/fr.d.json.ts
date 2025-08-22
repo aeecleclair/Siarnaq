@@ -270,11 +270,12 @@ declare const messages: {
   },
   "productPart": {
     "admin": "Admin",
-    "interestSummary": "Récapitulatif des intérêts",
     "noProduct": "Aucun produit",
     "summary": "Récapitulatif",
-    "toastErrorDescription": "Une erreur est survenue pendant la validation de l'achat.",
+    "interestSummary": "Récapitulatif des intérêts",
     "total": "Total",
+    "noProduct": "Aucun produit",
+    "toastErrorDescription": "Une erreur est survenue pendant la validation de l'achat.",
     "unvalidated": "Certains achats ne sont pas validés",
     "validateAll": "Valider tous les achats",
     "validated": "Tous les achats sont validés"

@@ -326,27 +326,10 @@ export type CdrUserUpdate = {
     birthday?: string | null;
     phone?: string | null;
     floor?: FloorsType | null;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> d7f12d5 (add self-answerable custom fields)
-=======
->>>>>>> ca44525 (fix rebase)
 };
 
 export type CdrYear = {
     year?: number;
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 8ff4682 (fix merge)
-=======
-=======
->>>>>>> 7d23755 (add self-answerable custom fields)
->>>>>>> d7f12d5 (add self-answerable custom fields)
-=======
->>>>>>> ca44525 (fix rebase)
 };
 
 export type ChangePasswordRequest = {
@@ -1246,39 +1229,13 @@ export type ParticipantUpdate = {
 export type PaymentBase = {
     total: number;
     payment_type: PaymentType;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     year: number;
->>>>>>> 8ff4682 (fix merge)
-=======
-    year: number;
-=======
->>>>>>> 7d23755 (add self-answerable custom fields)
->>>>>>> d7f12d5 (add self-answerable custom fields)
-=======
-    year: number;
->>>>>>> ca44525 (fix rebase)
 };
 
 export type PaymentComplete = {
     total: number;
     payment_type: PaymentType;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     year: number;
->>>>>>> 8ff4682 (fix merge)
-=======
-    year: number;
-=======
->>>>>>> 7d23755 (add self-answerable custom fields)
->>>>>>> d7f12d5 (add self-answerable custom fields)
-=======
-    year: number;
->>>>>>> ca44525 (fix rebase)
     id: string;
     user_id: string;
 };
@@ -1371,20 +1328,7 @@ export type ProductBase = {
     tickets?: Array<GenerateTicketBase>;
     product_constraints: Array<(string)>;
     document_constraints: Array<(string)>;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     year?: number | null;
->>>>>>> 8ff4682 (fix merge)
-=======
-    year?: number | null;
-=======
->>>>>>> 7d23755 (add self-answerable custom fields)
->>>>>>> d7f12d5 (add self-answerable custom fields)
-=======
-    year?: number | null;
->>>>>>> ca44525 (fix rebase)
 };
 
 export type ProductCompleteNoConstraint = {
@@ -1422,20 +1366,7 @@ export type ProductVariantBase = {
     unique: boolean;
     allowed_curriculum: Array<(string)>;
     related_membership_added_duration?: string | null;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     year: number;
->>>>>>> 8ff4682 (fix merge)
-=======
-    year: number;
-=======
->>>>>>> 7d23755 (add self-answerable custom fields)
->>>>>>> d7f12d5 (add self-answerable custom fields)
-=======
-    year: number;
->>>>>>> ca44525 (fix rebase)
 };
 
 export type ProductVariantComplete = {
@@ -7338,14 +7269,6 @@ export type $OpenApiTs = {
             };
         };
     };
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> d7f12d5 (add self-answerable custom fields)
-=======
->>>>>>> ca44525 (fix rebase)
     '/cdr/year/': {
         get: {
             res: {
@@ -7364,15 +7287,6 @@ export type $OpenApiTs = {
             };
         };
     };
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 8ff4682 (fix merge)
-=======
-=======
->>>>>>> 7d23755 (add self-answerable custom fields)
->>>>>>> d7f12d5 (add self-answerable custom fields)
-=======
->>>>>>> ca44525 (fix rebase)
     '/cdr/status/': {
         get: {
             res: {

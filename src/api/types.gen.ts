@@ -326,6 +326,13 @@ export type CdrUserUpdate = {
     birthday?: string | null;
     phone?: string | null;
     floor?: FloorsType | null;
+<<<<<<< HEAD
+=======
+};
+
+export type CdrYear = {
+    year?: number;
+>>>>>>> 8ff4682 (fix merge)
 };
 
 export type ChangePasswordRequest = {
@@ -1225,11 +1232,19 @@ export type ParticipantUpdate = {
 export type PaymentBase = {
     total: number;
     payment_type: PaymentType;
+<<<<<<< HEAD
+=======
+    year: number;
+>>>>>>> 8ff4682 (fix merge)
 };
 
 export type PaymentComplete = {
     total: number;
     payment_type: PaymentType;
+<<<<<<< HEAD
+=======
+    year: number;
+>>>>>>> 8ff4682 (fix merge)
     id: string;
     user_id: string;
 };
@@ -1322,6 +1337,10 @@ export type ProductBase = {
     tickets?: Array<GenerateTicketBase>;
     product_constraints: Array<(string)>;
     document_constraints: Array<(string)>;
+<<<<<<< HEAD
+=======
+    year?: number | null;
+>>>>>>> 8ff4682 (fix merge)
 };
 
 export type ProductCompleteNoConstraint = {
@@ -1359,6 +1378,10 @@ export type ProductVariantBase = {
     unique: boolean;
     allowed_curriculum: Array<(string)>;
     related_membership_added_duration?: string | null;
+<<<<<<< HEAD
+=======
+    year: number;
+>>>>>>> 8ff4682 (fix merge)
 };
 
 export type ProductVariantComplete = {
@@ -3199,6 +3222,14 @@ export type DeleteCdrUsersUserIdPaymentsPaymentIdError = unknown;
 export type PostCdrPayResponse = PaymentUrl;
 
 export type PostCdrPayError = unknown;
+
+export type GetCdrYearResponse = CdrYear;
+
+export type GetCdrYearError = unknown;
+
+export type PatchCdrYearResponse = void;
+
+export type PatchCdrYearError = unknown;
 
 export type GetCdrStatusResponse = Status;
 
@@ -7253,6 +7284,27 @@ export type $OpenApiTs = {
             };
         };
     };
+<<<<<<< HEAD
+=======
+    '/cdr/year/': {
+        get: {
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '200': CdrYear;
+            };
+        };
+        patch: {
+            res: {
+                /**
+                 * Successful Response
+                 */
+                '204': void;
+            };
+        };
+    };
+>>>>>>> 8ff4682 (fix merge)
     '/cdr/status/': {
         get: {
             res: {

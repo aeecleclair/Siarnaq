@@ -19,9 +19,9 @@ interface ProductPartProps {
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   const tOnValidate = useTranslations("onValidate");
-  const pathname = usePathname();
   const t = useTranslations("productPart");
   const format = useFormatter();
+  const pathname = usePathname();
   const locale = useLocale();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);

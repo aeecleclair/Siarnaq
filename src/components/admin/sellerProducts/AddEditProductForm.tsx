@@ -303,7 +303,7 @@ export const AddEditProductForm = ({
       <Accordion type="multiple">
         <AccordionItem value="tickets">
           <AccordionTrigger>
-            <h3 className="text-primary hover:text-primary">Tickets</h3>
+            <h3 className="text-primary hover:text-primary">{t("tickets")}</h3>
           </AccordionTrigger>
           <AccordionContent className="grid gap-4">
             <div className="flex flex-row gap-2">
@@ -341,7 +341,6 @@ export const AddEditProductForm = ({
                 className="w-[100px] self-end"
                 onClick={onAddTicket}
               >
-                Ajouter
                 {t("add")}
               </LoadingButton>
             </div>

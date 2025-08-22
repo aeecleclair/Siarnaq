@@ -805,14 +805,6 @@ export type FloorsType =
   | "X5"
   | "X6";
 
-export type GenerateProductTicket = {
-  name: string;
-  max_use: number;
-  expiration: string;
-  id: string;
-  product_id: string;
-};
-
 export type GenerateTicketBase = {
   name: string;
   max_use: number;
@@ -824,6 +816,12 @@ export type GenerateTicketComplete = {
   max_use: number;
   expiration: string;
   id: string;
+};
+
+export type GroupNotificationRequest = {
+  group_id: string;
+  title: string;
+  content: string;
 };
 
 export type HTTPValidationError = {
@@ -1386,6 +1384,7 @@ export type ProductBase = {
   description_fr?: string | null;
   description_en?: string | null;
   available_online: boolean;
+  needs_validation: boolean;
   related_membership?: MembershipSimple | null;
   tickets?: Array<GenerateTicketBase>;
   product_constraints: Array<string>;
@@ -1398,6 +1397,7 @@ export type ProductCompleteNoConstraint = {
   description_fr?: string | null;
   description_en?: string | null;
   available_online: boolean;
+  needs_validation: boolean;
   id: string;
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
@@ -1530,6 +1530,7 @@ export type RaidInformation = {
 export type RaidPrice = {
   student_price?: number | null;
   partner_price?: number | null;
+  external_price?: number | null;
   t_shirt_price?: number | null;
 };
 
@@ -1927,20 +1928,13 @@ export type TokenResponse = {
 
 export type token_type = "bearer";
 
-/**
- * A list of topics. An user can suscribe to a topic to receive notifications about it.
- */
-export type Topic =
-  | "cinema"
-  | "advert"
-  | "amap"
-  | "booking"
-  | "event"
-  | "loan"
-  | "raffle"
-  | "vote"
-  | "ph"
-  | "test";
+export type TopicUser = {
+  id: string;
+  name: string;
+  module_root: string;
+  topic_identifier: string | null;
+  is_user_subscribed: boolean;
+};
 
 export type TransactionBase = {
   id: string;
@@ -2119,6 +2113,7 @@ export type app__modules__cdr__schemas_cdr__ProductComplete = {
   description_fr?: string | null;
   description_en?: string | null;
   available_online: boolean;
+  needs_validation: boolean;
   id: string;
   seller_id: string;
   variants?: Array<ProductVariantComplete>;
@@ -2152,951 +2147,6 @@ export type app__modules__phonebook__schemas_phonebook__MembershipBase = {
 export type app__types__standard_responses__Result = {
   success?: boolean;
 };
-
-export type PostAuthSimpleTokenData = unknown;
-
-export type PostAuthSimpleTokenResponse = AccessToken;
-
-export type PostAuthSimpleTokenError = unknown;
-
-export type GetAuthAuthorizeData = {
-  query: {
-    client_id: string;
-    code_challenge?: string | null;
-    code_challenge_method?: string | null;
-    nonce?: string | null;
-    redirect_uri?: string | null;
-    response_type: string;
-    scope?: string | null;
-    state?: string | null;
-  };
-};
-
-export type GetAuthAuthorizeResponse = string;
-
-export type GetAuthAuthorizeError = unknown;
-
-export type PostAuthAuthorizeData = unknown;
-
-export type PostAuthAuthorizeResponse = string;
-
-export type PostAuthAuthorizeError = unknown;
-
-export type PostAuthAuthorizationFlowAuthorizeValidationData = unknown;
-
-export type PostAuthTokenData = {
-  headers?: {
-    authorization?: string | null;
-  };
-};
-
-export type PostAuthTokenResponse = TokenResponse;
-
-export type PostAuthTokenError = unknown;
-
-export type PostAuthIntrospectData = {
-  headers?: {
-    authorization?: string | null;
-  };
-};
-
-export type PostAuthIntrospectResponse = IntrospectTokenResponse;
-
-export type PostAuthIntrospectError = unknown;
-
-export type GetAuthUserinfoResponse = unknown;
-
-export type GetAuthUserinfoError = unknown;
-
-export type GetOidcAuthorizationFlowJwksUriResponse = unknown;
-
-export type GetOidcAuthorizationFlowJwksUriError = unknown;
-
-export type GetWellKnownOauthAuthorizationServerResponse = unknown;
-
-export type GetWellKnownOauthAuthorizationServerError = unknown;
-
-export type GetWellKnownOpenidConfigurationResponse = unknown;
-
-export type GetWellKnownOpenidConfigurationError = unknown;
-
-export type GetInformationResponse = CoreInformation;
-
-export type GetInformationError = unknown;
-
-export type GetPrivacyResponse = unknown;
-
-export type GetPrivacyError = unknown;
-
-export type GetTermsAndConditionsResponse = unknown;
-
-export type GetTermsAndConditionsError = unknown;
-
-export type GetMyeclpayTermsOfServiceResponse = unknown;
-
-export type GetMyeclpayTermsOfServiceError = unknown;
-
-export type GetSupportResponse = unknown;
-
-export type GetSupportError = unknown;
-
-export type GetSecurityTxtResponse = unknown;
-
-export type GetSecurityTxtError = unknown;
-
-export type GetWellKnownSecurityTxtResponse = unknown;
-
-export type GetWellKnownSecurityTxtError = unknown;
-
-export type GetRobotsTxtResponse = unknown;
-
-export type GetRobotsTxtError = unknown;
-
-export type GetStyleFileCssData = {
-  path: {
-    file: string;
-  };
-};
-
-export type GetStyleFileCssResponse = unknown;
-
-export type GetStyleFileCssError = unknown;
-
-export type GetFaviconIcoResponse = unknown;
-
-export type GetFaviconIcoError = unknown;
-
-export type GetModuleVisibilityResponse = Array<ModuleVisibility>;
-
-export type GetModuleVisibilityError = unknown;
-
-export type PostModuleVisibilityData = {
-  body: ModuleVisibilityCreate;
-};
-
-export type PostModuleVisibilityResponse = unknown;
-
-export type PostModuleVisibilityError = unknown;
-
-export type GetModuleVisibilityMeResponse = Array<string>;
-
-export type GetModuleVisibilityMeError = unknown;
-
-export type DeleteModuleVisibilityRootGroupsGroupIdData = {
-  path: {
-    group_id: string;
-    root: string;
-  };
-};
-
-export type DeleteModuleVisibilityRootGroupsGroupIdResponse = void;
-
-export type DeleteModuleVisibilityRootGroupsGroupIdError = unknown;
-
-export type DeleteModuleVisibilityRootAccountTypesAccountTypeData = {
-  path: {
-    account_type: AccountType;
-    root: string;
-  };
-};
-
-export type DeleteModuleVisibilityRootAccountTypesAccountTypeResponse = void;
-
-export type DeleteModuleVisibilityRootAccountTypesAccountTypeError = unknown;
-
-export type GetGoogleApiOauth2CallbackResponse = unknown;
-
-export type GetGoogleApiOauth2CallbackError = unknown;
-
-export type GetGroupsResponse = Array<CoreGroupSimple>;
-
-export type GetGroupsError = unknown;
-
-export type PostGroupsData = {
-  body: CoreGroupCreate;
-};
-
-export type PostGroupsResponse = CoreGroupSimple;
-
-export type PostGroupsError = unknown;
-
-export type GetGroupsGroupIdData = {
-  path: {
-    group_id: string;
-  };
-};
-
-export type GetGroupsGroupIdResponse = CoreGroup;
-
-export type GetGroupsGroupIdError = unknown;
-
-export type PatchGroupsGroupIdData = {
-  body: CoreGroupUpdate;
-  path: {
-    group_id: string;
-  };
-};
-
-export type PatchGroupsGroupIdResponse = void;
-
-export type PatchGroupsGroupIdError = unknown;
-
-export type DeleteGroupsGroupIdData = {
-  path: {
-    group_id: string;
-  };
-};
-
-export type DeleteGroupsGroupIdResponse = void;
-
-export type DeleteGroupsGroupIdError = unknown;
-
-export type PostGroupsMembershipData = {
-  body: CoreMembership;
-};
-
-export type PostGroupsMembershipResponse = CoreGroup;
-
-export type PostGroupsMembershipError = unknown;
-
-export type DeleteGroupsMembershipData = {
-  body: CoreMembershipDelete;
-};
-
-export type DeleteGroupsMembershipResponse = void;
-
-export type DeleteGroupsMembershipError = unknown;
-
-export type PostGroupsBatchMembershipData = {
-  body: CoreBatchMembership;
-};
-
-export type PostGroupsBatchMembershipResponse = void;
-
-export type PostGroupsBatchMembershipError = unknown;
-
-export type DeleteGroupsBatchMembershipData = {
-  body: CoreBatchDeleteMembership;
-};
-
-export type DeleteGroupsBatchMembershipResponse = void;
-
-export type DeleteGroupsBatchMembershipError = unknown;
-
-export type GetMembershipsResponse = Array<MembershipSimple>;
-
-export type GetMembershipsError = unknown;
-
-export type PostMembershipsData = {
-  body: app__core__memberships__schemas_memberships__MembershipBase;
-};
-
-export type PostMembershipsResponse = MembershipSimple;
-
-export type PostMembershipsError = unknown;
-
-export type GetMembershipsAssociationMembershipIdMembersData = {
-  path: {
-    association_membership_id: string;
-  };
-  query?: {
-    maximalEndDate?: string;
-    maximalStartDate?: string;
-    minimalEndDate?: string;
-    minimalStartDate?: string;
-  };
-};
-
-export type GetMembershipsAssociationMembershipIdMembersResponse =
-  Array<UserMembershipComplete>;
-
-export type GetMembershipsAssociationMembershipIdMembersError = unknown;
-
-export type PatchMembershipsAssociationMembershipIdData = {
-  body: app__core__memberships__schemas_memberships__MembershipBase;
-  path: {
-    association_membership_id: string;
-  };
-};
-
-export type PatchMembershipsAssociationMembershipIdResponse = void;
-
-export type PatchMembershipsAssociationMembershipIdError = unknown;
-
-export type DeleteMembershipsAssociationMembershipIdData = {
-  path: {
-    association_membership_id: string;
-  };
-};
-
-export type DeleteMembershipsAssociationMembershipIdResponse = void;
-
-export type DeleteMembershipsAssociationMembershipIdError = unknown;
-
-export type GetMembershipsUsersUserIdData = {
-  path: {
-    user_id: string;
-  };
-};
-
-export type GetMembershipsUsersUserIdResponse = Array<UserMembershipComplete>;
-
-export type GetMembershipsUsersUserIdError = unknown;
-
-export type PostMembershipsUsersUserIdData = {
-  body: UserMembershipBase;
-  path: {
-    user_id: string;
-  };
-};
-
-export type PostMembershipsUsersUserIdResponse = UserMembershipComplete;
-
-export type PostMembershipsUsersUserIdError = unknown;
-
-export type GetMembershipsUsersUserIdAssociationMembershipIdData = {
-  path: {
-    association_membership_id: string;
-    user_id: string;
-  };
-};
-
-export type GetMembershipsUsersUserIdAssociationMembershipIdResponse =
-  Array<UserMembershipComplete>;
-
-export type GetMembershipsUsersUserIdAssociationMembershipIdError = unknown;
-
-export type PostMembershipsAssociationMembershipIdAddBatchData = {
-  body: Array<MembershipUserMappingEmail>;
-  path: {
-    association_membership_id: string;
-  };
-};
-
-export type PostMembershipsAssociationMembershipIdAddBatchResponse =
-  Array<MembershipUserMappingEmail>;
-
-export type PostMembershipsAssociationMembershipIdAddBatchError = unknown;
-
-export type PatchMembershipsUsersMembershipIdData = {
-  body: UserMembershipEdit;
-  path: {
-    membership_id: string;
-  };
-};
-
-export type PatchMembershipsUsersMembershipIdResponse = void;
-
-export type PatchMembershipsUsersMembershipIdError = unknown;
-
-export type DeleteMembershipsUsersMembershipIdData = {
-  path: {
-    membership_id: string;
-  };
-};
-
-export type DeleteMembershipsUsersMembershipIdResponse = void;
-
-export type DeleteMembershipsUsersMembershipIdError = unknown;
-
-export type GetMyeclpayStructuresResponse = Array<Structure>;
-
-export type GetMyeclpayStructuresError = unknown;
-
-export type PostMyeclpayStructuresData = {
-  body: StructureBase;
-};
-
-export type PostMyeclpayStructuresResponse = Structure;
-
-export type PostMyeclpayStructuresError = unknown;
-
-export type PatchMyeclpayStructuresStructureIdData = {
-  body: StructureUpdate;
-  path: {
-    structure_id: string;
-  };
-};
-
-export type PatchMyeclpayStructuresStructureIdResponse = void;
-
-export type PatchMyeclpayStructuresStructureIdError = unknown;
-
-export type DeleteMyeclpayStructuresStructureIdData = {
-  path: {
-    structure_id: string;
-  };
-};
-
-export type DeleteMyeclpayStructuresStructureIdResponse = void;
-
-export type DeleteMyeclpayStructuresStructureIdError = unknown;
-
-export type PostMyeclpayStructuresStructureIdInitManagerTransferData = {
-  body: StructureTranfert;
-  path: {
-    structure_id: string;
-  };
-};
-
-export type PostMyeclpayStructuresStructureIdInitManagerTransferResponse =
-  unknown;
-
-export type PostMyeclpayStructuresStructureIdInitManagerTransferError = unknown;
-
-export type GetMyeclpayStructuresConfirmManagerTransferData = {
-  query: {
-    token: string;
-  };
-};
-
-export type GetMyeclpayStructuresConfirmManagerTransferResponse = unknown;
-
-export type GetMyeclpayStructuresConfirmManagerTransferError = unknown;
-
-export type PostMyeclpayStructuresStructureIdStoresData = {
-  body: StoreBase;
-  path: {
-    structure_id: string;
-  };
-};
-
-export type PostMyeclpayStructuresStructureIdStoresResponse = Store;
-
-export type PostMyeclpayStructuresStructureIdStoresError = unknown;
-
-export type GetMyeclpayStoresStoreIdHistoryData = {
-  path: {
-    store_id: string;
-  };
-  query?: {
-    end_date?: string | null;
-    start_date?: string | null;
-  };
-};
-
-export type GetMyeclpayStoresStoreIdHistoryResponse = Array<History>;
-
-export type GetMyeclpayStoresStoreIdHistoryError = unknown;
-
-export type GetMyeclpayUsersMeStoresResponse = Array<UserStore>;
-
-export type GetMyeclpayUsersMeStoresError = unknown;
-
-export type PatchMyeclpayStoresStoreIdData = {
-  body: StoreUpdate;
-  path: {
-    store_id: string;
-  };
-};
-
-export type PatchMyeclpayStoresStoreIdResponse = void;
-
-export type PatchMyeclpayStoresStoreIdError = unknown;
-
-export type DeleteMyeclpayStoresStoreIdData = {
-  path: {
-    store_id: string;
-  };
-};
-
-export type DeleteMyeclpayStoresStoreIdResponse = void;
-
-export type DeleteMyeclpayStoresStoreIdError = unknown;
-
-export type PostMyeclpayStoresStoreIdSellersData = {
-  body: SellerCreation;
-  path: {
-    store_id: string;
-  };
-};
-
-export type PostMyeclpayStoresStoreIdSellersResponse = Seller;
-
-export type PostMyeclpayStoresStoreIdSellersError = unknown;
-
-export type GetMyeclpayStoresStoreIdSellersData = {
-  path: {
-    store_id: string;
-  };
-};
-
-export type GetMyeclpayStoresStoreIdSellersResponse = Array<Seller>;
-
-export type GetMyeclpayStoresStoreIdSellersError = unknown;
-
-export type PatchMyeclpayStoresStoreIdSellersSellerUserIdData = {
-  body: SellerUpdate;
-  path: {
-    seller_user_id: string;
-    store_id: string;
-  };
-};
-
-export type PatchMyeclpayStoresStoreIdSellersSellerUserIdResponse = void;
-
-export type PatchMyeclpayStoresStoreIdSellersSellerUserIdError = unknown;
-
-export type DeleteMyeclpayStoresStoreIdSellersSellerUserIdData = {
-  path: {
-    seller_user_id: string;
-    store_id: string;
-  };
-};
-
-export type DeleteMyeclpayStoresStoreIdSellersSellerUserIdResponse = void;
-
-export type DeleteMyeclpayStoresStoreIdSellersSellerUserIdError = unknown;
-
-export type PostMyeclpayUsersMeRegisterResponse = void;
-
-export type PostMyeclpayUsersMeRegisterError = unknown;
-
-export type GetMyeclpayUsersMeTosResponse = TOSSignatureResponse;
-
-export type GetMyeclpayUsersMeTosError = unknown;
-
-export type PostMyeclpayUsersMeTosData = {
-  body: TOSSignature;
-};
-
-export type PostMyeclpayUsersMeTosResponse = void;
-
-export type PostMyeclpayUsersMeTosError = unknown;
-
-export type GetMyeclpayUsersMeWalletDevicesResponse = Array<WalletDevice>;
-
-export type GetMyeclpayUsersMeWalletDevicesError = unknown;
-
-export type PostMyeclpayUsersMeWalletDevicesData = {
-  body: WalletDeviceCreation;
-};
-
-export type PostMyeclpayUsersMeWalletDevicesResponse = WalletDevice;
-
-export type PostMyeclpayUsersMeWalletDevicesError = unknown;
-
-export type GetMyeclpayUsersMeWalletDevicesWalletDeviceIdData = {
-  path: {
-    wallet_device_id: string;
-  };
-};
-
-export type GetMyeclpayUsersMeWalletDevicesWalletDeviceIdResponse =
-  WalletDevice;
-
-export type GetMyeclpayUsersMeWalletDevicesWalletDeviceIdError = unknown;
-
-export type GetMyeclpayUsersMeWalletResponse = Wallet;
-
-export type GetMyeclpayUsersMeWalletError = unknown;
-
-export type GetMyeclpayDevicesActivateData = {
-  query: {
-    token: string;
-  };
-};
-
-export type GetMyeclpayDevicesActivateResponse = unknown;
-
-export type GetMyeclpayDevicesActivateError = unknown;
-
-export type PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeData = {
-  path: {
-    wallet_device_id: string;
-  };
-};
-
-export type PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeResponse = void;
-
-export type PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeError = unknown;
-
-export type GetMyeclpayUsersMeWalletHistoryData = {
-  query?: {
-    end_date?: string | null;
-    start_date?: string | null;
-  };
-};
-
-export type GetMyeclpayUsersMeWalletHistoryResponse = Array<History>;
-
-export type GetMyeclpayUsersMeWalletHistoryError = unknown;
-
-export type PostMyeclpayTransferInitData = {
-  body: TransferInfo;
-};
-
-export type PostMyeclpayTransferInitResponse = PaymentUrl;
-
-export type PostMyeclpayTransferInitError = unknown;
-
-export type GetMyeclpayTransferRedirectData = {
-  query: {
-    checkoutIntentId?: string | null;
-    code?: string | null;
-    error?: string | null;
-    orderId?: string | null;
-    url: string;
-  };
-};
-
-export type GetMyeclpayTransferRedirectResponse = PaymentUrl;
-
-export type GetMyeclpayTransferRedirectError = unknown;
-
-export type PostMyeclpayStoresStoreIdScanCheckData = {
-  body: ScanInfo;
-  path: {
-    store_id: string;
-  };
-};
-
-export type PostMyeclpayStoresStoreIdScanCheckResponse =
-  app__types__standard_responses__Result;
-
-export type PostMyeclpayStoresStoreIdScanCheckError = unknown;
-
-export type PostMyeclpayStoresStoreIdScanData = {
-  body: ScanInfo;
-  path: {
-    store_id: string;
-  };
-};
-
-export type PostMyeclpayStoresStoreIdScanResponse = unknown;
-
-export type PostMyeclpayStoresStoreIdScanError = unknown;
-
-export type PostMyeclpayTransactionsTransactionIdRefundData = {
-  body: RefundInfo;
-  path: {
-    transaction_id: string;
-  };
-};
-
-export type PostMyeclpayTransactionsTransactionIdRefundResponse = void;
-
-export type PostMyeclpayTransactionsTransactionIdRefundError = unknown;
-
-export type PostMyeclpayTransactionsTransactionIdCancelData = {
-  path: {
-    transaction_id: string;
-  };
-};
-
-export type PostMyeclpayTransactionsTransactionIdCancelResponse = void;
-
-export type PostMyeclpayTransactionsTransactionIdCancelError = unknown;
-
-export type GetMyeclpayIntegrityCheckData = {
-  headers: {
-    x_data_verifier_token: string;
-  };
-  query?: {
-    isInitialisation?: boolean;
-    lastChecked?: string | null;
-  };
-};
-
-export type GetMyeclpayIntegrityCheckResponse = IntegrityCheckData;
-
-export type GetMyeclpayIntegrityCheckError = unknown;
-
-export type GetNotificationDevicesResponse = Array<FirebaseDevice>;
-
-export type GetNotificationDevicesError = unknown;
-
-export type PostNotificationDevicesData = {
-  body: Body_register_firebase_device_notification_devices_post;
-};
-
-export type PostNotificationDevicesResponse = void;
-
-export type PostNotificationDevicesError = unknown;
-
-export type DeleteNotificationDevicesFirebaseTokenData = {
-  path: {
-    firebase_token: string;
-  };
-};
-
-export type DeleteNotificationDevicesFirebaseTokenResponse = void;
-
-export type DeleteNotificationDevicesFirebaseTokenError = unknown;
-
-export type PostNotificationTopicsTopicStrSubscribeData = {
-  path: {
-    /**
-     * The topic to subscribe to. The Topic may be followed by an additional identifier (ex: cinema_4c029b5f-2bf7-4b70-85d4-340a4bd28653)
-     */
-    topic_str: string;
-  };
-};
-
-export type PostNotificationTopicsTopicStrSubscribeResponse = void;
-
-export type PostNotificationTopicsTopicStrSubscribeError = unknown;
-
-export type PostNotificationTopicsTopicStrUnsubscribeData = {
-  path: {
-    topic_str: string;
-  };
-};
-
-export type PostNotificationTopicsTopicStrUnsubscribeResponse = void;
-
-export type PostNotificationTopicsTopicStrUnsubscribeError = unknown;
-
-export type GetNotificationTopicsResponse = Array<string>;
-
-export type GetNotificationTopicsError = unknown;
-
-export type GetNotificationTopicsTopicData = {
-  path: {
-    topic: Topic;
-  };
-};
-
-export type GetNotificationTopicsTopicResponse = Array<string>;
-
-export type GetNotificationTopicsTopicError = unknown;
-
-export type PostNotificationSendResponse = unknown;
-
-export type PostNotificationSendError = unknown;
-
-export type PostNotificationSendFutureResponse = unknown;
-
-export type PostNotificationSendFutureError = unknown;
-
-export type PostNotificationSendTopicResponse = unknown;
-
-export type PostNotificationSendTopicError = unknown;
-
-export type PostNotificationSendTopicFutureResponse = unknown;
-
-export type PostNotificationSendTopicFutureError = unknown;
-
-export type PostPaymentHelloassoWebhookResponse = void;
-
-export type PostPaymentHelloassoWebhookError = unknown;
-
-export type GetSchoolsResponse = Array<CoreSchool>;
-
-export type GetSchoolsError = unknown;
-
-export type PostSchoolsData = {
-  body: CoreSchoolBase;
-};
-
-export type PostSchoolsResponse = CoreSchool;
-
-export type PostSchoolsError = unknown;
-
-export type GetSchoolsSchoolIdData = {
-  path: {
-    school_id: string;
-  };
-};
-
-export type GetSchoolsSchoolIdResponse = CoreSchool;
-
-export type GetSchoolsSchoolIdError = unknown;
-
-export type PatchSchoolsSchoolIdData = {
-  body: CoreSchoolUpdate;
-  path: {
-    school_id: string;
-  };
-};
-
-export type PatchSchoolsSchoolIdResponse = void;
-
-export type PatchSchoolsSchoolIdError = unknown;
-
-export type DeleteSchoolsSchoolIdData = {
-  path: {
-    school_id: string;
-  };
-};
-
-export type DeleteSchoolsSchoolIdResponse = void;
-
-export type DeleteSchoolsSchoolIdError = unknown;
-
-export type GetUsersData = {
-  query?: {
-    accountTypes?: Array<AccountType>;
-  };
-};
-
-export type GetUsersResponse = Array<CoreUserSimple>;
-
-export type GetUsersError = unknown;
-
-export type GetUsersCountResponse = number;
-
-export type GetUsersCountError = unknown;
-
-export type GetUsersSearchData = {
-  query: {
-    excludedAccountTypes?: Array<AccountType>;
-    excludedGroups?: Array<string>;
-    includedAccountTypes?: Array<AccountType>;
-    includedGroups?: Array<string>;
-    query: string;
-  };
-};
-
-export type GetUsersSearchResponse = Array<CoreUserSimple>;
-
-export type GetUsersSearchError = unknown;
-
-export type GetUsersAccountTypesResponse = Array<AccountType>;
-
-export type GetUsersAccountTypesError = unknown;
-
-export type GetUsersMeResponse = CoreUser;
-
-export type GetUsersMeError = unknown;
-
-export type PatchUsersMeData = {
-  body: CoreUserUpdate;
-};
-
-export type PatchUsersMeResponse = void;
-
-export type PatchUsersMeError = unknown;
-
-export type PostUsersCreateData = {
-  body: CoreUserCreateRequest;
-};
-
-export type PostUsersCreateResponse = app__types__standard_responses__Result;
-
-export type PostUsersCreateError = unknown;
-
-export type PostUsersBatchCreationData = {
-  body: Array<CoreBatchUserCreateRequest>;
-};
-
-export type PostUsersBatchCreationResponse = BatchResult;
-
-export type PostUsersBatchCreationError = unknown;
-
-export type PostUsersActivateData = {
-  body: CoreUserActivateRequest;
-};
-
-export type PostUsersActivateResponse = app__types__standard_responses__Result;
-
-export type PostUsersActivateError = unknown;
-
-export type PostUsersS3InitResponse = unknown;
-
-export type PostUsersS3InitError = unknown;
-
-export type PostUsersMakeAdminResponse = app__types__standard_responses__Result;
-
-export type PostUsersMakeAdminError = unknown;
-
-export type PostUsersRecoverData = {
-  body: Body_recover_user_users_recover_post;
-};
-
-export type PostUsersRecoverResponse = app__types__standard_responses__Result;
-
-export type PostUsersRecoverError = unknown;
-
-export type PostUsersResetPasswordData = {
-  body: ResetPasswordRequest;
-};
-
-export type PostUsersResetPasswordResponse =
-  app__types__standard_responses__Result;
-
-export type PostUsersResetPasswordError = unknown;
-
-export type PostUsersMigrateMailData = {
-  body: MailMigrationRequest;
-};
-
-export type PostUsersMigrateMailResponse = void;
-
-export type PostUsersMigrateMailError = unknown;
-
-export type GetUsersMigrateMailConfirmData = {
-  query: {
-    token: string;
-  };
-};
-
-export type GetUsersMigrateMailConfirmResponse = unknown;
-
-export type GetUsersMigrateMailConfirmError = unknown;
-
-export type PostUsersChangePasswordData = {
-  body: ChangePasswordRequest;
-};
-
-export type PostUsersChangePasswordResponse =
-  app__types__standard_responses__Result;
-
-export type PostUsersChangePasswordError = unknown;
-
-export type GetUsersUserIdData = {
-  path: {
-    user_id: string;
-  };
-};
-
-export type GetUsersUserIdResponse = CoreUser;
-
-export type GetUsersUserIdError = unknown;
-
-export type PatchUsersUserIdData = {
-  body: CoreUserUpdateAdmin;
-  path: {
-    user_id: string;
-  };
-};
-
-export type PatchUsersUserIdResponse = void;
-
-export type PatchUsersUserIdError = unknown;
-
-export type PostUsersMeAskDeletionResponse = void;
-
-export type PostUsersMeAskDeletionError = unknown;
-
-export type PostUsersMergeData = {
-  body: CoreUserFusionRequest;
-};
-
-export type PostUsersMergeResponse = void;
-
-export type PostUsersMergeError = unknown;
-
-export type GetUsersMeProfilePictureResponse = unknown;
-
-export type GetUsersMeProfilePictureError = unknown;
-
-export type PostUsersMeProfilePictureData = unknown;
-
-export type PostUsersMeProfilePictureResponse =
-  app__types__standard_responses__Result;
-
-export type PostUsersMeProfilePictureError = unknown;
-
-export type GetUsersUserIdProfilePictureData = {
-  path: {
-    user_id: string;
-  };
-};
-
-export type GetUsersUserIdProfilePictureResponse = unknown;
-
-export type GetUsersUserIdProfilePictureError = unknown;
 
 export type GetAdvertAdvertisersResponse = Array<AdvertiserComplete>;
 
@@ -4293,18 +3343,6 @@ export type GetCdrUsersMeTicketsTicketIdSecretData = {
 export type GetCdrUsersMeTicketsTicketIdSecretResponse = TicketSecret;
 
 export type GetCdrUsersMeTicketsTicketIdSecretError = unknown;
-
-export type GetCdrSellersSellerIdProductsProductIdTicketsData = {
-  path: {
-    product_id: string;
-    seller_id: string;
-  };
-};
-
-export type GetCdrSellersSellerIdProductsProductIdTicketsResponse =
-  Array<GenerateProductTicket>;
-
-export type GetCdrSellersSellerIdProductsProductIdTicketsError = unknown;
 
 export type GetCdrSellersSellerIdProductsProductIdTicketsGeneratorIdSecretData =
   {
@@ -5668,1532 +4706,947 @@ export type PatchSeedLibraryInformationResponse = void;
 
 export type PatchSeedLibraryInformationError = unknown;
 
+export type PostAuthSimpleTokenData = unknown;
+
+export type PostAuthSimpleTokenResponse = AccessToken;
+
+export type PostAuthSimpleTokenError = unknown;
+
+export type GetAuthAuthorizeData = {
+  query: {
+    client_id: string;
+    code_challenge?: string | null;
+    code_challenge_method?: string | null;
+    nonce?: string | null;
+    redirect_uri?: string | null;
+    response_type: string;
+    scope?: string | null;
+    state?: string | null;
+  };
+};
+
+export type GetAuthAuthorizeResponse = string;
+
+export type GetAuthAuthorizeError = unknown;
+
+export type PostAuthAuthorizeData = unknown;
+
+export type PostAuthAuthorizeResponse = string;
+
+export type PostAuthAuthorizeError = unknown;
+
+export type PostAuthAuthorizationFlowAuthorizeValidationData = unknown;
+
+export type PostAuthTokenData = {
+  headers?: {
+    authorization?: string | null;
+  };
+};
+
+export type PostAuthTokenResponse = TokenResponse;
+
+export type PostAuthTokenError = unknown;
+
+export type PostAuthIntrospectData = {
+  headers?: {
+    authorization?: string | null;
+  };
+};
+
+export type PostAuthIntrospectResponse = IntrospectTokenResponse;
+
+export type PostAuthIntrospectError = unknown;
+
+export type GetAuthUserinfoResponse = unknown;
+
+export type GetAuthUserinfoError = unknown;
+
+export type GetOidcAuthorizationFlowJwksUriResponse = unknown;
+
+export type GetOidcAuthorizationFlowJwksUriError = unknown;
+
+export type GetWellKnownOauthAuthorizationServerResponse = unknown;
+
+export type GetWellKnownOauthAuthorizationServerError = unknown;
+
+export type GetWellKnownOpenidConfigurationResponse = unknown;
+
+export type GetWellKnownOpenidConfigurationError = unknown;
+
+export type GetInformationResponse = CoreInformation;
+
+export type GetInformationError = unknown;
+
+export type GetPrivacyResponse = unknown;
+
+export type GetPrivacyError = unknown;
+
+export type GetTermsAndConditionsResponse = unknown;
+
+export type GetTermsAndConditionsError = unknown;
+
+export type GetMyeclpayTermsOfServiceResponse = unknown;
+
+export type GetMyeclpayTermsOfServiceError = unknown;
+
+export type GetSupportResponse = unknown;
+
+export type GetSupportError = unknown;
+
+export type GetSecurityTxtResponse = unknown;
+
+export type GetSecurityTxtError = unknown;
+
+export type GetWellKnownSecurityTxtResponse = unknown;
+
+export type GetWellKnownSecurityTxtError = unknown;
+
+export type GetRobotsTxtResponse = unknown;
+
+export type GetRobotsTxtError = unknown;
+
+export type GetStyleFileCssData = {
+  path: {
+    file: string;
+  };
+};
+
+export type GetStyleFileCssResponse = unknown;
+
+export type GetStyleFileCssError = unknown;
+
+export type GetFaviconIcoResponse = unknown;
+
+export type GetFaviconIcoError = unknown;
+
+export type GetModuleVisibilityResponse = Array<ModuleVisibility>;
+
+export type GetModuleVisibilityError = unknown;
+
+export type PostModuleVisibilityData = {
+  body: ModuleVisibilityCreate;
+};
+
+export type PostModuleVisibilityResponse = unknown;
+
+export type PostModuleVisibilityError = unknown;
+
+export type GetModuleVisibilityMeResponse = Array<string>;
+
+export type GetModuleVisibilityMeError = unknown;
+
+export type DeleteModuleVisibilityRootGroupsGroupIdData = {
+  path: {
+    group_id: string;
+    root: string;
+  };
+};
+
+export type DeleteModuleVisibilityRootGroupsGroupIdResponse = void;
+
+export type DeleteModuleVisibilityRootGroupsGroupIdError = unknown;
+
+export type DeleteModuleVisibilityRootAccountTypesAccountTypeData = {
+  path: {
+    account_type: AccountType;
+    root: string;
+  };
+};
+
+export type DeleteModuleVisibilityRootAccountTypesAccountTypeResponse = void;
+
+export type DeleteModuleVisibilityRootAccountTypesAccountTypeError = unknown;
+
+export type GetGoogleApiOauth2CallbackResponse = unknown;
+
+export type GetGoogleApiOauth2CallbackError = unknown;
+
+export type GetGroupsResponse = Array<CoreGroupSimple>;
+
+export type GetGroupsError = unknown;
+
+export type PostGroupsData = {
+  body: CoreGroupCreate;
+};
+
+export type PostGroupsResponse = CoreGroupSimple;
+
+export type PostGroupsError = unknown;
+
+export type GetGroupsGroupIdData = {
+  path: {
+    group_id: string;
+  };
+};
+
+export type GetGroupsGroupIdResponse = CoreGroup;
+
+export type GetGroupsGroupIdError = unknown;
+
+export type PatchGroupsGroupIdData = {
+  body: CoreGroupUpdate;
+  path: {
+    group_id: string;
+  };
+};
+
+export type PatchGroupsGroupIdResponse = void;
+
+export type PatchGroupsGroupIdError = unknown;
+
+export type DeleteGroupsGroupIdData = {
+  path: {
+    group_id: string;
+  };
+};
+
+export type DeleteGroupsGroupIdResponse = void;
+
+export type DeleteGroupsGroupIdError = unknown;
+
+export type PostGroupsMembershipData = {
+  body: CoreMembership;
+};
+
+export type PostGroupsMembershipResponse = CoreGroup;
+
+export type PostGroupsMembershipError = unknown;
+
+export type DeleteGroupsMembershipData = {
+  body: CoreMembershipDelete;
+};
+
+export type DeleteGroupsMembershipResponse = void;
+
+export type DeleteGroupsMembershipError = unknown;
+
+export type PostGroupsBatchMembershipData = {
+  body: CoreBatchMembership;
+};
+
+export type PostGroupsBatchMembershipResponse = void;
+
+export type PostGroupsBatchMembershipError = unknown;
+
+export type DeleteGroupsBatchMembershipData = {
+  body: CoreBatchDeleteMembership;
+};
+
+export type DeleteGroupsBatchMembershipResponse = void;
+
+export type DeleteGroupsBatchMembershipError = unknown;
+
+export type GetMembershipsResponse = Array<MembershipSimple>;
+
+export type GetMembershipsError = unknown;
+
+export type PostMembershipsData = {
+  body: app__core__memberships__schemas_memberships__MembershipBase;
+};
+
+export type PostMembershipsResponse = MembershipSimple;
+
+export type PostMembershipsError = unknown;
+
+export type GetMembershipsAssociationMembershipIdMembersData = {
+  path: {
+    association_membership_id: string;
+  };
+  query?: {
+    maximalEndDate?: string;
+    maximalStartDate?: string;
+    minimalEndDate?: string;
+    minimalStartDate?: string;
+  };
+};
+
+export type GetMembershipsAssociationMembershipIdMembersResponse =
+  Array<UserMembershipComplete>;
+
+export type GetMembershipsAssociationMembershipIdMembersError = unknown;
+
+export type PatchMembershipsAssociationMembershipIdData = {
+  body: app__core__memberships__schemas_memberships__MembershipBase;
+  path: {
+    association_membership_id: string;
+  };
+};
+
+export type PatchMembershipsAssociationMembershipIdResponse = void;
+
+export type PatchMembershipsAssociationMembershipIdError = unknown;
+
+export type DeleteMembershipsAssociationMembershipIdData = {
+  path: {
+    association_membership_id: string;
+  };
+};
+
+export type DeleteMembershipsAssociationMembershipIdResponse = void;
+
+export type DeleteMembershipsAssociationMembershipIdError = unknown;
+
+export type GetMembershipsUsersUserIdData = {
+  path: {
+    user_id: string;
+  };
+};
+
+export type GetMembershipsUsersUserIdResponse = Array<UserMembershipComplete>;
+
+export type GetMembershipsUsersUserIdError = unknown;
+
+export type PostMembershipsUsersUserIdData = {
+  body: UserMembershipBase;
+  path: {
+    user_id: string;
+  };
+};
+
+export type PostMembershipsUsersUserIdResponse = UserMembershipComplete;
+
+export type PostMembershipsUsersUserIdError = unknown;
+
+export type GetMembershipsUsersUserIdAssociationMembershipIdData = {
+  path: {
+    association_membership_id: string;
+    user_id: string;
+  };
+};
+
+export type GetMembershipsUsersUserIdAssociationMembershipIdResponse =
+  Array<UserMembershipComplete>;
+
+export type GetMembershipsUsersUserIdAssociationMembershipIdError = unknown;
+
+export type PostMembershipsAssociationMembershipIdAddBatchData = {
+  body: Array<MembershipUserMappingEmail>;
+  path: {
+    association_membership_id: string;
+  };
+};
+
+export type PostMembershipsAssociationMembershipIdAddBatchResponse =
+  Array<MembershipUserMappingEmail>;
+
+export type PostMembershipsAssociationMembershipIdAddBatchError = unknown;
+
+export type PatchMembershipsUsersMembershipIdData = {
+  body: UserMembershipEdit;
+  path: {
+    membership_id: string;
+  };
+};
+
+export type PatchMembershipsUsersMembershipIdResponse = void;
+
+export type PatchMembershipsUsersMembershipIdError = unknown;
+
+export type DeleteMembershipsUsersMembershipIdData = {
+  path: {
+    membership_id: string;
+  };
+};
+
+export type DeleteMembershipsUsersMembershipIdResponse = void;
+
+export type DeleteMembershipsUsersMembershipIdError = unknown;
+
+export type GetMyeclpayStructuresResponse = Array<Structure>;
+
+export type GetMyeclpayStructuresError = unknown;
+
+export type PostMyeclpayStructuresData = {
+  body: StructureBase;
+};
+
+export type PostMyeclpayStructuresResponse = Structure;
+
+export type PostMyeclpayStructuresError = unknown;
+
+export type PatchMyeclpayStructuresStructureIdData = {
+  body: StructureUpdate;
+  path: {
+    structure_id: string;
+  };
+};
+
+export type PatchMyeclpayStructuresStructureIdResponse = void;
+
+export type PatchMyeclpayStructuresStructureIdError = unknown;
+
+export type DeleteMyeclpayStructuresStructureIdData = {
+  path: {
+    structure_id: string;
+  };
+};
+
+export type DeleteMyeclpayStructuresStructureIdResponse = void;
+
+export type DeleteMyeclpayStructuresStructureIdError = unknown;
+
+export type PostMyeclpayStructuresStructureIdInitManagerTransferData = {
+  body: StructureTranfert;
+  path: {
+    structure_id: string;
+  };
+};
+
+export type PostMyeclpayStructuresStructureIdInitManagerTransferResponse =
+  unknown;
+
+export type PostMyeclpayStructuresStructureIdInitManagerTransferError = unknown;
+
+export type GetMyeclpayStructuresConfirmManagerTransferData = {
+  query: {
+    token: string;
+  };
+};
+
+export type GetMyeclpayStructuresConfirmManagerTransferResponse = unknown;
+
+export type GetMyeclpayStructuresConfirmManagerTransferError = unknown;
+
+export type PostMyeclpayStructuresStructureIdStoresData = {
+  body: StoreBase;
+  path: {
+    structure_id: string;
+  };
+};
+
+export type PostMyeclpayStructuresStructureIdStoresResponse = Store;
+
+export type PostMyeclpayStructuresStructureIdStoresError = unknown;
+
+export type GetMyeclpayStoresStoreIdHistoryData = {
+  path: {
+    store_id: string;
+  };
+  query?: {
+    end_date?: string | null;
+    start_date?: string | null;
+  };
+};
+
+export type GetMyeclpayStoresStoreIdHistoryResponse = Array<History>;
+
+export type GetMyeclpayStoresStoreIdHistoryError = unknown;
+
+export type GetMyeclpayUsersMeStoresResponse = Array<UserStore>;
+
+export type GetMyeclpayUsersMeStoresError = unknown;
+
+export type PatchMyeclpayStoresStoreIdData = {
+  body: StoreUpdate;
+  path: {
+    store_id: string;
+  };
+};
+
+export type PatchMyeclpayStoresStoreIdResponse = void;
+
+export type PatchMyeclpayStoresStoreIdError = unknown;
+
+export type DeleteMyeclpayStoresStoreIdData = {
+  path: {
+    store_id: string;
+  };
+};
+
+export type DeleteMyeclpayStoresStoreIdResponse = void;
+
+export type DeleteMyeclpayStoresStoreIdError = unknown;
+
+export type PostMyeclpayStoresStoreIdSellersData = {
+  body: SellerCreation;
+  path: {
+    store_id: string;
+  };
+};
+
+export type PostMyeclpayStoresStoreIdSellersResponse = Seller;
+
+export type PostMyeclpayStoresStoreIdSellersError = unknown;
+
+export type GetMyeclpayStoresStoreIdSellersData = {
+  path: {
+    store_id: string;
+  };
+};
+
+export type GetMyeclpayStoresStoreIdSellersResponse = Array<Seller>;
+
+export type GetMyeclpayStoresStoreIdSellersError = unknown;
+
+export type PatchMyeclpayStoresStoreIdSellersSellerUserIdData = {
+  body: SellerUpdate;
+  path: {
+    seller_user_id: string;
+    store_id: string;
+  };
+};
+
+export type PatchMyeclpayStoresStoreIdSellersSellerUserIdResponse = void;
+
+export type PatchMyeclpayStoresStoreIdSellersSellerUserIdError = unknown;
+
+export type DeleteMyeclpayStoresStoreIdSellersSellerUserIdData = {
+  path: {
+    seller_user_id: string;
+    store_id: string;
+  };
+};
+
+export type DeleteMyeclpayStoresStoreIdSellersSellerUserIdResponse = void;
+
+export type DeleteMyeclpayStoresStoreIdSellersSellerUserIdError = unknown;
+
+export type PostMyeclpayUsersMeRegisterResponse = void;
+
+export type PostMyeclpayUsersMeRegisterError = unknown;
+
+export type GetMyeclpayUsersMeTosResponse = TOSSignatureResponse;
+
+export type GetMyeclpayUsersMeTosError = unknown;
+
+export type PostMyeclpayUsersMeTosData = {
+  body: TOSSignature;
+};
+
+export type PostMyeclpayUsersMeTosResponse = void;
+
+export type PostMyeclpayUsersMeTosError = unknown;
+
+export type GetMyeclpayUsersMeWalletDevicesResponse = Array<WalletDevice>;
+
+export type GetMyeclpayUsersMeWalletDevicesError = unknown;
+
+export type PostMyeclpayUsersMeWalletDevicesData = {
+  body: WalletDeviceCreation;
+};
+
+export type PostMyeclpayUsersMeWalletDevicesResponse = WalletDevice;
+
+export type PostMyeclpayUsersMeWalletDevicesError = unknown;
+
+export type GetMyeclpayUsersMeWalletDevicesWalletDeviceIdData = {
+  path: {
+    wallet_device_id: string;
+  };
+};
+
+export type GetMyeclpayUsersMeWalletDevicesWalletDeviceIdResponse =
+  WalletDevice;
+
+export type GetMyeclpayUsersMeWalletDevicesWalletDeviceIdError = unknown;
+
+export type GetMyeclpayUsersMeWalletResponse = Wallet;
+
+export type GetMyeclpayUsersMeWalletError = unknown;
+
+export type GetMyeclpayDevicesActivateData = {
+  query: {
+    token: string;
+  };
+};
+
+export type GetMyeclpayDevicesActivateResponse = unknown;
+
+export type GetMyeclpayDevicesActivateError = unknown;
+
+export type PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeData = {
+  path: {
+    wallet_device_id: string;
+  };
+};
+
+export type PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeResponse = void;
+
+export type PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeError = unknown;
+
+export type GetMyeclpayUsersMeWalletHistoryData = {
+  query?: {
+    end_date?: string | null;
+    start_date?: string | null;
+  };
+};
+
+export type GetMyeclpayUsersMeWalletHistoryResponse = Array<History>;
+
+export type GetMyeclpayUsersMeWalletHistoryError = unknown;
+
+export type PostMyeclpayTransferInitData = {
+  body: TransferInfo;
+};
+
+export type PostMyeclpayTransferInitResponse = PaymentUrl;
+
+export type PostMyeclpayTransferInitError = unknown;
+
+export type GetMyeclpayTransferRedirectData = {
+  query: {
+    checkoutIntentId?: string | null;
+    code?: string | null;
+    error?: string | null;
+    orderId?: string | null;
+    url: string;
+  };
+};
+
+export type GetMyeclpayTransferRedirectResponse = PaymentUrl;
+
+export type GetMyeclpayTransferRedirectError = unknown;
+
+export type PostMyeclpayStoresStoreIdScanCheckData = {
+  body: ScanInfo;
+  path: {
+    store_id: string;
+  };
+};
+
+export type PostMyeclpayStoresStoreIdScanCheckResponse =
+  app__types__standard_responses__Result;
+
+export type PostMyeclpayStoresStoreIdScanCheckError = unknown;
+
+export type PostMyeclpayStoresStoreIdScanData = {
+  body: ScanInfo;
+  path: {
+    store_id: string;
+  };
+};
+
+export type PostMyeclpayStoresStoreIdScanResponse = unknown;
+
+export type PostMyeclpayStoresStoreIdScanError = unknown;
+
+export type PostMyeclpayTransactionsTransactionIdRefundData = {
+  body: RefundInfo;
+  path: {
+    transaction_id: string;
+  };
+};
+
+export type PostMyeclpayTransactionsTransactionIdRefundResponse = void;
+
+export type PostMyeclpayTransactionsTransactionIdRefundError = unknown;
+
+export type PostMyeclpayTransactionsTransactionIdCancelData = {
+  path: {
+    transaction_id: string;
+  };
+};
+
+export type PostMyeclpayTransactionsTransactionIdCancelResponse = void;
+
+export type PostMyeclpayTransactionsTransactionIdCancelError = unknown;
+
+export type GetMyeclpayIntegrityCheckData = {
+  headers: {
+    x_data_verifier_token: string;
+  };
+  query?: {
+    isInitialisation?: boolean;
+    lastChecked?: string | null;
+  };
+};
+
+export type GetMyeclpayIntegrityCheckResponse = IntegrityCheckData;
+
+export type GetMyeclpayIntegrityCheckError = unknown;
+
+export type GetNotificationDevicesResponse = Array<FirebaseDevice>;
+
+export type GetNotificationDevicesError = unknown;
+
+export type PostNotificationDevicesData = {
+  body: Body_register_firebase_device_notification_devices_post;
+};
+
+export type PostNotificationDevicesResponse = void;
+
+export type PostNotificationDevicesError = unknown;
+
+export type DeleteNotificationDevicesFirebaseTokenData = {
+  path: {
+    firebase_token: string;
+  };
+};
+
+export type DeleteNotificationDevicesFirebaseTokenResponse = void;
+
+export type DeleteNotificationDevicesFirebaseTokenError = unknown;
+
+export type PostNotificationTopicsTopicIdSubscribeData = {
+  path: {
+    topic_id: string;
+  };
+};
+
+export type PostNotificationTopicsTopicIdSubscribeResponse = void;
+
+export type PostNotificationTopicsTopicIdSubscribeError = unknown;
+
+export type PostNotificationTopicsTopicIdUnsubscribeData = {
+  path: {
+    topic_id: string;
+  };
+};
+
+export type PostNotificationTopicsTopicIdUnsubscribeResponse = void;
+
+export type PostNotificationTopicsTopicIdUnsubscribeError = unknown;
+
+export type GetNotificationTopicsResponse = Array<TopicUser>;
+
+export type GetNotificationTopicsError = unknown;
+
+export type PostNotificationSendData = {
+  body: GroupNotificationRequest;
+};
+
+export type PostNotificationSendResponse = void;
+
+export type PostNotificationSendError = unknown;
+
+export type PostNotificationTestSendResponse = unknown;
+
+export type PostNotificationTestSendError = unknown;
+
+export type PostNotificationTestSendFutureResponse = void;
+
+export type PostNotificationTestSendFutureError = unknown;
+
+export type PostNotificationTestSendTopicResponse = void;
+
+export type PostNotificationTestSendTopicError = unknown;
+
+export type PostNotificationTestSendTopicFutureResponse = void;
+
+export type PostNotificationTestSendTopicFutureError = unknown;
+
+export type PostPaymentHelloassoWebhookResponse = void;
+
+export type PostPaymentHelloassoWebhookError = unknown;
+
+export type GetSchoolsResponse = Array<CoreSchool>;
+
+export type GetSchoolsError = unknown;
+
+export type PostSchoolsData = {
+  body: CoreSchoolBase;
+};
+
+export type PostSchoolsResponse = CoreSchool;
+
+export type PostSchoolsError = unknown;
+
+export type GetSchoolsSchoolIdData = {
+  path: {
+    school_id: string;
+  };
+};
+
+export type GetSchoolsSchoolIdResponse = CoreSchool;
+
+export type GetSchoolsSchoolIdError = unknown;
+
+export type PatchSchoolsSchoolIdData = {
+  body: CoreSchoolUpdate;
+  path: {
+    school_id: string;
+  };
+};
+
+export type PatchSchoolsSchoolIdResponse = void;
+
+export type PatchSchoolsSchoolIdError = unknown;
+
+export type DeleteSchoolsSchoolIdData = {
+  path: {
+    school_id: string;
+  };
+};
+
+export type DeleteSchoolsSchoolIdResponse = void;
+
+export type DeleteSchoolsSchoolIdError = unknown;
+
+export type GetUsersData = {
+  query?: {
+    accountTypes?: Array<AccountType>;
+  };
+};
+
+export type GetUsersResponse = Array<CoreUserSimple>;
+
+export type GetUsersError = unknown;
+
+export type GetUsersCountResponse = number;
+
+export type GetUsersCountError = unknown;
+
+export type GetUsersSearchData = {
+  query: {
+    excludedAccountTypes?: Array<AccountType>;
+    excludedGroups?: Array<string>;
+    includedAccountTypes?: Array<AccountType>;
+    includedGroups?: Array<string>;
+    query: string;
+  };
+};
+
+export type GetUsersSearchResponse = Array<CoreUserSimple>;
+
+export type GetUsersSearchError = unknown;
+
+export type GetUsersAccountTypesResponse = Array<AccountType>;
+
+export type GetUsersAccountTypesError = unknown;
+
+export type GetUsersMeResponse = CoreUser;
+
+export type GetUsersMeError = unknown;
+
+export type PatchUsersMeData = {
+  body: CoreUserUpdate;
+};
+
+export type PatchUsersMeResponse = void;
+
+export type PatchUsersMeError = unknown;
+
+export type PostUsersCreateData = {
+  body: CoreUserCreateRequest;
+};
+
+export type PostUsersCreateResponse = app__types__standard_responses__Result;
+
+export type PostUsersCreateError = unknown;
+
+export type PostUsersBatchCreationData = {
+  body: Array<CoreBatchUserCreateRequest>;
+};
+
+export type PostUsersBatchCreationResponse = BatchResult;
+
+export type PostUsersBatchCreationError = unknown;
+
+export type PostUsersActivateData = {
+  body: CoreUserActivateRequest;
+};
+
+export type PostUsersActivateResponse = app__types__standard_responses__Result;
+
+export type PostUsersActivateError = unknown;
+
+export type PostUsersS3InitResponse = unknown;
+
+export type PostUsersS3InitError = unknown;
+
+export type PostUsersMakeAdminResponse = app__types__standard_responses__Result;
+
+export type PostUsersMakeAdminError = unknown;
+
+export type PostUsersRecoverData = {
+  body: Body_recover_user_users_recover_post;
+};
+
+export type PostUsersRecoverResponse = app__types__standard_responses__Result;
+
+export type PostUsersRecoverError = unknown;
+
+export type PostUsersResetPasswordData = {
+  body: ResetPasswordRequest;
+};
+
+export type PostUsersResetPasswordResponse =
+  app__types__standard_responses__Result;
+
+export type PostUsersResetPasswordError = unknown;
+
+export type PostUsersMigrateMailData = {
+  body: MailMigrationRequest;
+};
+
+export type PostUsersMigrateMailResponse = void;
+
+export type PostUsersMigrateMailError = unknown;
+
+export type GetUsersMigrateMailConfirmData = {
+  query: {
+    token: string;
+  };
+};
+
+export type GetUsersMigrateMailConfirmResponse = unknown;
+
+export type GetUsersMigrateMailConfirmError = unknown;
+
+export type PostUsersChangePasswordData = {
+  body: ChangePasswordRequest;
+};
+
+export type PostUsersChangePasswordResponse =
+  app__types__standard_responses__Result;
+
+export type PostUsersChangePasswordError = unknown;
+
+export type GetUsersUserIdData = {
+  path: {
+    user_id: string;
+  };
+};
+
+export type GetUsersUserIdResponse = CoreUser;
+
+export type GetUsersUserIdError = unknown;
+
+export type PatchUsersUserIdData = {
+  body: CoreUserUpdateAdmin;
+  path: {
+    user_id: string;
+  };
+};
+
+export type PatchUsersUserIdResponse = void;
+
+export type PatchUsersUserIdError = unknown;
+
+export type PostUsersMeAskDeletionResponse = void;
+
+export type PostUsersMeAskDeletionError = unknown;
+
+export type PostUsersMergeData = {
+  body: CoreUserFusionRequest;
+};
+
+export type PostUsersMergeResponse = void;
+
+export type PostUsersMergeError = unknown;
+
+export type GetUsersMeProfilePictureResponse = unknown;
+
+export type GetUsersMeProfilePictureError = unknown;
+
+export type PostUsersMeProfilePictureData = unknown;
+
+export type PostUsersMeProfilePictureResponse =
+  app__types__standard_responses__Result;
+
+export type PostUsersMeProfilePictureError = unknown;
+
+export type GetUsersUserIdProfilePictureData = {
+  path: {
+    user_id: string;
+  };
+};
+
+export type GetUsersUserIdProfilePictureResponse = unknown;
+
+export type GetUsersUserIdProfilePictureError = unknown;
+
 export type $OpenApiTs = {
-  "/auth/simple_token": {
-    post: {
-      req: PostAuthSimpleTokenData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": AccessToken;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/auth/authorize": {
-    get: {
-      req: GetAuthAuthorizeData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": string;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    post: {
-      req: PostAuthAuthorizeData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": string;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/auth/authorization-flow/authorize-validation": {
-    post: {
-      req: PostAuthAuthorizationFlowAuthorizeValidationData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "307": unknown;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/auth/token": {
-    post: {
-      req: PostAuthTokenData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": TokenResponse;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/auth/introspect": {
-    post: {
-      req: PostAuthIntrospectData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": IntrospectTokenResponse;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/auth/userinfo": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/oidc/authorization-flow/jwks_uri": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/.well-known/oauth-authorization-server": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/.well-known/openid-configuration": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/information": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": CoreInformation;
-      };
-    };
-  };
-  "/privacy": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/terms-and-conditions": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/myeclpay-terms-of-service": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/support": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/security.txt": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/.well-known/security.txt": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/robots.txt": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/style/{file}.css": {
-    get: {
-      req: GetStyleFileCssData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/favicon.ico": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/module-visibility/": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<ModuleVisibility>;
-      };
-    };
-    post: {
-      req: PostModuleVisibilityData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": unknown;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/module-visibility/me": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<string>;
-      };
-    };
-  };
-  "/module-visibility/{root}/groups/{group_id}": {
-    delete: {
-      req: DeleteModuleVisibilityRootGroupsGroupIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/module-visibility/{root}/account-types/{account_type}": {
-    delete: {
-      req: DeleteModuleVisibilityRootAccountTypesAccountTypeData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/google-api/oauth2callback": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-  };
-  "/groups/": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<CoreGroupSimple>;
-      };
-    };
-    post: {
-      req: PostGroupsData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": CoreGroupSimple;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/groups/{group_id}": {
-    get: {
-      req: GetGroupsGroupIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": CoreGroup;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    patch: {
-      req: PatchGroupsGroupIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteGroupsGroupIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/groups/membership": {
-    post: {
-      req: PostGroupsMembershipData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": CoreGroup;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteGroupsMembershipData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/groups/batch-membership": {
-    post: {
-      req: PostGroupsBatchMembershipData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteGroupsBatchMembershipData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/memberships/": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<MembershipSimple>;
-      };
-    };
-    post: {
-      req: PostMembershipsData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": MembershipSimple;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/memberships/{association_membership_id}/members": {
-    get: {
-      req: GetMembershipsAssociationMembershipIdMembersData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<UserMembershipComplete>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/memberships/{association_membership_id}": {
-    patch: {
-      req: PatchMembershipsAssociationMembershipIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteMembershipsAssociationMembershipIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/memberships/users/{user_id}": {
-    get: {
-      req: GetMembershipsUsersUserIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<UserMembershipComplete>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    post: {
-      req: PostMembershipsUsersUserIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": UserMembershipComplete;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/memberships/users/{user_id}/{association_membership_id}": {
-    get: {
-      req: GetMembershipsUsersUserIdAssociationMembershipIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<UserMembershipComplete>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/memberships/{association_membership_id}/add-batch/": {
-    post: {
-      req: PostMembershipsAssociationMembershipIdAddBatchData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": Array<MembershipUserMappingEmail>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/memberships/users/{membership_id}": {
-    patch: {
-      req: PatchMembershipsUsersMembershipIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteMembershipsUsersMembershipIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/structures": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<Structure>;
-      };
-    };
-    post: {
-      req: PostMyeclpayStructuresData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": Structure;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/structures/{structure_id}": {
-    patch: {
-      req: PatchMyeclpayStructuresStructureIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteMyeclpayStructuresStructureIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/structures/{structure_id}/init-manager-transfer": {
-    post: {
-      req: PostMyeclpayStructuresStructureIdInitManagerTransferData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": unknown;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/structures/confirm-manager-transfer": {
-    get: {
-      req: GetMyeclpayStructuresConfirmManagerTransferData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/structures/{structure_id}/stores": {
-    post: {
-      req: PostMyeclpayStructuresStructureIdStoresData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": Store;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/stores/{store_id}/history": {
-    get: {
-      req: GetMyeclpayStoresStoreIdHistoryData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<History>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/users/me/stores": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<UserStore>;
-      };
-    };
-  };
-  "/myeclpay/stores/{store_id}": {
-    patch: {
-      req: PatchMyeclpayStoresStoreIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteMyeclpayStoresStoreIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/stores/{store_id}/sellers": {
-    post: {
-      req: PostMyeclpayStoresStoreIdSellersData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": Seller;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    get: {
-      req: GetMyeclpayStoresStoreIdSellersData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<Seller>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/stores/{store_id}/sellers/{seller_user_id}": {
-    patch: {
-      req: PatchMyeclpayStoresStoreIdSellersSellerUserIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteMyeclpayStoresStoreIdSellersSellerUserIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/users/me/register": {
-    post: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-      };
-    };
-  };
-  "/myeclpay/users/me/tos": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": TOSSignatureResponse;
-      };
-    };
-    post: {
-      req: PostMyeclpayUsersMeTosData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/users/me/wallet/devices": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<WalletDevice>;
-      };
-    };
-    post: {
-      req: PostMyeclpayUsersMeWalletDevicesData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": WalletDevice;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/users/me/wallet/devices/{wallet_device_id}": {
-    get: {
-      req: GetMyeclpayUsersMeWalletDevicesWalletDeviceIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": WalletDevice;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/users/me/wallet": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Wallet;
-      };
-    };
-  };
-  "/myeclpay/devices/activate": {
-    get: {
-      req: GetMyeclpayDevicesActivateData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/users/me/wallet/devices/{wallet_device_id}/revoke": {
-    post: {
-      req: PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/users/me/wallet/history": {
-    get: {
-      req: GetMyeclpayUsersMeWalletHistoryData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<History>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/transfer/init": {
-    post: {
-      req: PostMyeclpayTransferInitData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": PaymentUrl;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/transfer/redirect": {
-    get: {
-      req: GetMyeclpayTransferRedirectData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": PaymentUrl;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/stores/{store_id}/scan/check": {
-    post: {
-      req: PostMyeclpayStoresStoreIdScanCheckData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": app__types__standard_responses__Result;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/stores/{store_id}/scan": {
-    post: {
-      req: PostMyeclpayStoresStoreIdScanData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": unknown;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/transactions/{transaction_id}/refund": {
-    post: {
-      req: PostMyeclpayTransactionsTransactionIdRefundData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/transactions/{transaction_id}/cancel": {
-    post: {
-      req: PostMyeclpayTransactionsTransactionIdCancelData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/myeclpay/integrity-check": {
-    get: {
-      req: GetMyeclpayIntegrityCheckData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": IntegrityCheckData;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/notification/devices": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<FirebaseDevice>;
-      };
-    };
-    post: {
-      req: PostNotificationDevicesData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/notification/devices/{firebase_token}": {
-    delete: {
-      req: DeleteNotificationDevicesFirebaseTokenData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/notification/topics/{topic_str}/subscribe": {
-    post: {
-      req: PostNotificationTopicsTopicStrSubscribeData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/notification/topics/{topic_str}/unsubscribe": {
-    post: {
-      req: PostNotificationTopicsTopicStrUnsubscribeData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/notification/topics": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<string>;
-      };
-    };
-  };
-  "/notification/topics/{topic}": {
-    get: {
-      req: GetNotificationTopicsTopicData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<string>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/notification/send": {
-    post: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": unknown;
-      };
-    };
-  };
-  "/notification/send/future": {
-    post: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": unknown;
-      };
-    };
-  };
-  "/notification/send/topic": {
-    post: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": unknown;
-      };
-    };
-  };
-  "/notification/send/topic/future": {
-    post: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": unknown;
-      };
-    };
-  };
-  "/payment/helloasso/webhook": {
-    post: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-      };
-    };
-  };
-  "/schools/": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<CoreSchool>;
-      };
-    };
-    post: {
-      req: PostSchoolsData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": CoreSchool;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/schools/{school_id}": {
-    get: {
-      req: GetSchoolsSchoolIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": CoreSchool;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    patch: {
-      req: PatchSchoolsSchoolIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    delete: {
-      req: DeleteSchoolsSchoolIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users": {
-    get: {
-      req: GetUsersData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<CoreUserSimple>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/count": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": number;
-      };
-    };
-  };
-  "/users/search": {
-    get: {
-      req: GetUsersSearchData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<CoreUserSimple>;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/account-types": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": Array<AccountType>;
-      };
-    };
-  };
-  "/users/me": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": CoreUser;
-      };
-    };
-    patch: {
-      req: PatchUsersMeData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/create": {
-    post: {
-      req: PostUsersCreateData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__types__standard_responses__Result;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/batch-creation": {
-    post: {
-      req: PostUsersBatchCreationData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": BatchResult;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/activate": {
-    post: {
-      req: PostUsersActivateData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__types__standard_responses__Result;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/s3-init": {
-    post: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": unknown;
-      };
-    };
-  };
-  "/users/make-admin": {
-    post: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": app__types__standard_responses__Result;
-      };
-    };
-  };
-  "/users/recover": {
-    post: {
-      req: PostUsersRecoverData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__types__standard_responses__Result;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/reset-password": {
-    post: {
-      req: PostUsersResetPasswordData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__types__standard_responses__Result;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/migrate-mail": {
-    post: {
-      req: PostUsersMigrateMailData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/migrate-mail-confirm": {
-    get: {
-      req: GetUsersMigrateMailConfirmData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/change-password": {
-    post: {
-      req: PostUsersChangePasswordData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__types__standard_responses__Result;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/{user_id}": {
-    get: {
-      req: GetUsersUserIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": CoreUser;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-    patch: {
-      req: PatchUsersUserIdData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/me/ask-deletion": {
-    post: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-      };
-    };
-  };
-  "/users/merge": {
-    post: {
-      req: PostUsersMergeData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "204": void;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/me/profile-picture": {
-    get: {
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-      };
-    };
-    post: {
-      req: PostUsersMeProfilePictureData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "201": app__types__standard_responses__Result;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
-  "/users/{user_id}/profile-picture": {
-    get: {
-      req: GetUsersUserIdProfilePictureData;
-      res: {
-        /**
-         * Successful Response
-         */
-        "200": unknown;
-        /**
-         * Validation Error
-         */
-        "422": HTTPValidationError;
-      };
-    };
-  };
   "/advert/advertisers": {
     get: {
       res: {
@@ -10956,6 +9409,1531 @@ export type $OpenApiTs = {
          * Successful Response
          */
         "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/auth/simple_token": {
+    post: {
+      req: PostAuthSimpleTokenData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": AccessToken;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/auth/authorize": {
+    get: {
+      req: GetAuthAuthorizeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": string;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    post: {
+      req: PostAuthAuthorizeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": string;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/auth/authorization-flow/authorize-validation": {
+    post: {
+      req: PostAuthAuthorizationFlowAuthorizeValidationData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "307": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/auth/token": {
+    post: {
+      req: PostAuthTokenData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": TokenResponse;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/auth/introspect": {
+    post: {
+      req: PostAuthIntrospectData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": IntrospectTokenResponse;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/auth/userinfo": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/oidc/authorization-flow/jwks_uri": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/.well-known/oauth-authorization-server": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/.well-known/openid-configuration": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/information": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": CoreInformation;
+      };
+    };
+  };
+  "/privacy": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/terms-and-conditions": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/myeclpay-terms-of-service": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/support": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/security.txt": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/.well-known/security.txt": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/robots.txt": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/style/{file}.css": {
+    get: {
+      req: GetStyleFileCssData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/favicon.ico": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/module-visibility/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<ModuleVisibility>;
+      };
+    };
+    post: {
+      req: PostModuleVisibilityData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/module-visibility/me": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<string>;
+      };
+    };
+  };
+  "/module-visibility/{root}/groups/{group_id}": {
+    delete: {
+      req: DeleteModuleVisibilityRootGroupsGroupIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/module-visibility/{root}/account-types/{account_type}": {
+    delete: {
+      req: DeleteModuleVisibilityRootAccountTypesAccountTypeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/google-api/oauth2callback": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+  };
+  "/groups/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<CoreGroupSimple>;
+      };
+    };
+    post: {
+      req: PostGroupsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": CoreGroupSimple;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/groups/{group_id}": {
+    get: {
+      req: GetGroupsGroupIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": CoreGroup;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    patch: {
+      req: PatchGroupsGroupIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteGroupsGroupIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/groups/membership": {
+    post: {
+      req: PostGroupsMembershipData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": CoreGroup;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteGroupsMembershipData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/groups/batch-membership": {
+    post: {
+      req: PostGroupsBatchMembershipData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteGroupsBatchMembershipData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<MembershipSimple>;
+      };
+    };
+    post: {
+      req: PostMembershipsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": MembershipSimple;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/{association_membership_id}/members": {
+    get: {
+      req: GetMembershipsAssociationMembershipIdMembersData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<UserMembershipComplete>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/{association_membership_id}": {
+    patch: {
+      req: PatchMembershipsAssociationMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMembershipsAssociationMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/users/{user_id}": {
+    get: {
+      req: GetMembershipsUsersUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<UserMembershipComplete>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    post: {
+      req: PostMembershipsUsersUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": UserMembershipComplete;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/users/{user_id}/{association_membership_id}": {
+    get: {
+      req: GetMembershipsUsersUserIdAssociationMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<UserMembershipComplete>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/{association_membership_id}/add-batch/": {
+    post: {
+      req: PostMembershipsAssociationMembershipIdAddBatchData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Array<MembershipUserMappingEmail>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/memberships/users/{membership_id}": {
+    patch: {
+      req: PatchMembershipsUsersMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMembershipsUsersMembershipIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Structure>;
+      };
+    };
+    post: {
+      req: PostMyeclpayStructuresData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Structure;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures/{structure_id}": {
+    patch: {
+      req: PatchMyeclpayStructuresStructureIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMyeclpayStructuresStructureIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures/{structure_id}/init-manager-transfer": {
+    post: {
+      req: PostMyeclpayStructuresStructureIdInitManagerTransferData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures/confirm-manager-transfer": {
+    get: {
+      req: GetMyeclpayStructuresConfirmManagerTransferData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/structures/{structure_id}/stores": {
+    post: {
+      req: PostMyeclpayStructuresStructureIdStoresData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Store;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/history": {
+    get: {
+      req: GetMyeclpayStoresStoreIdHistoryData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<History>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/stores": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<UserStore>;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}": {
+    patch: {
+      req: PatchMyeclpayStoresStoreIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMyeclpayStoresStoreIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/sellers": {
+    post: {
+      req: PostMyeclpayStoresStoreIdSellersData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": Seller;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    get: {
+      req: GetMyeclpayStoresStoreIdSellersData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<Seller>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/sellers/{seller_user_id}": {
+    patch: {
+      req: PatchMyeclpayStoresStoreIdSellersSellerUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteMyeclpayStoresStoreIdSellersSellerUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/register": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+      };
+    };
+  };
+  "/myeclpay/users/me/tos": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": TOSSignatureResponse;
+      };
+    };
+    post: {
+      req: PostMyeclpayUsersMeTosData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet/devices": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<WalletDevice>;
+      };
+    };
+    post: {
+      req: PostMyeclpayUsersMeWalletDevicesData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": WalletDevice;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet/devices/{wallet_device_id}": {
+    get: {
+      req: GetMyeclpayUsersMeWalletDevicesWalletDeviceIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": WalletDevice;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Wallet;
+      };
+    };
+  };
+  "/myeclpay/devices/activate": {
+    get: {
+      req: GetMyeclpayDevicesActivateData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet/devices/{wallet_device_id}/revoke": {
+    post: {
+      req: PostMyeclpayUsersMeWalletDevicesWalletDeviceIdRevokeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/users/me/wallet/history": {
+    get: {
+      req: GetMyeclpayUsersMeWalletHistoryData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<History>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/transfer/init": {
+    post: {
+      req: PostMyeclpayTransferInitData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": PaymentUrl;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/transfer/redirect": {
+    get: {
+      req: GetMyeclpayTransferRedirectData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": PaymentUrl;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/scan/check": {
+    post: {
+      req: PostMyeclpayStoresStoreIdScanCheckData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": app__types__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/stores/{store_id}/scan": {
+    post: {
+      req: PostMyeclpayStoresStoreIdScanData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/transactions/{transaction_id}/refund": {
+    post: {
+      req: PostMyeclpayTransactionsTransactionIdRefundData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/transactions/{transaction_id}/cancel": {
+    post: {
+      req: PostMyeclpayTransactionsTransactionIdCancelData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/myeclpay/integrity-check": {
+    get: {
+      req: GetMyeclpayIntegrityCheckData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": IntegrityCheckData;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/notification/devices": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<FirebaseDevice>;
+      };
+    };
+    post: {
+      req: PostNotificationDevicesData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/notification/devices/{firebase_token}": {
+    delete: {
+      req: DeleteNotificationDevicesFirebaseTokenData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/notification/topics/{topic_id}/subscribe": {
+    post: {
+      req: PostNotificationTopicsTopicIdSubscribeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/notification/topics/{topic_id}/unsubscribe": {
+    post: {
+      req: PostNotificationTopicsTopicIdUnsubscribeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/notification/topics": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<TopicUser>;
+      };
+    };
+  };
+  "/notification/send": {
+    post: {
+      req: PostNotificationSendData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/notification/test/send": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
+      };
+    };
+  };
+  "/notification/test/send/future": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+      };
+    };
+  };
+  "/notification/test/send/topic": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+      };
+    };
+  };
+  "/notification/test/send/topic/future": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+      };
+    };
+  };
+  "/payment/helloasso/webhook": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+      };
+    };
+  };
+  "/schools/": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<CoreSchool>;
+      };
+    };
+    post: {
+      req: PostSchoolsData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": CoreSchool;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/schools/{school_id}": {
+    get: {
+      req: GetSchoolsSchoolIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": CoreSchool;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    patch: {
+      req: PatchSchoolsSchoolIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    delete: {
+      req: DeleteSchoolsSchoolIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users": {
+    get: {
+      req: GetUsersData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<CoreUserSimple>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/count": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": number;
+      };
+    };
+  };
+  "/users/search": {
+    get: {
+      req: GetUsersSearchData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<CoreUserSimple>;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/account-types": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": Array<AccountType>;
+      };
+    };
+  };
+  "/users/me": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": CoreUser;
+      };
+    };
+    patch: {
+      req: PatchUsersMeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/create": {
+    post: {
+      req: PostUsersCreateData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": app__types__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/batch-creation": {
+    post: {
+      req: PostUsersBatchCreationData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": BatchResult;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/activate": {
+    post: {
+      req: PostUsersActivateData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": app__types__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/s3-init": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": unknown;
+      };
+    };
+  };
+  "/users/make-admin": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": app__types__standard_responses__Result;
+      };
+    };
+  };
+  "/users/recover": {
+    post: {
+      req: PostUsersRecoverData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": app__types__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/reset-password": {
+    post: {
+      req: PostUsersResetPasswordData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": app__types__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/migrate-mail": {
+    post: {
+      req: PostUsersMigrateMailData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/migrate-mail-confirm": {
+    get: {
+      req: GetUsersMigrateMailConfirmData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/change-password": {
+    post: {
+      req: PostUsersChangePasswordData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": app__types__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/{user_id}": {
+    get: {
+      req: GetUsersUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": CoreUser;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+    patch: {
+      req: PatchUsersUserIdData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/me/ask-deletion": {
+    post: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+      };
+    };
+  };
+  "/users/merge": {
+    post: {
+      req: PostUsersMergeData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "204": void;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/me/profile-picture": {
+    get: {
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
+      };
+    };
+    post: {
+      req: PostUsersMeProfilePictureData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "201": app__types__standard_responses__Result;
+        /**
+         * Validation Error
+         */
+        "422": HTTPValidationError;
+      };
+    };
+  };
+  "/users/{user_id}/profile-picture": {
+    get: {
+      req: GetUsersUserIdProfilePictureData;
+      res: {
+        /**
+         * Successful Response
+         */
+        "200": unknown;
         /**
          * Validation Error
          */

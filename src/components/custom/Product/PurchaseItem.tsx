@@ -22,6 +22,7 @@ interface PurchaseItemProps {
   userAssociationsMembershipsIds?: string[];
   user: CdrUser;
   isAdmin?: boolean;
+  isInterest?: boolean;
 }
 
 export const PurchaseItem = ({
@@ -32,6 +33,7 @@ export const PurchaseItem = ({
   userAssociationsMembershipsIds,
   user,
   isAdmin,
+  isInterest = false,
 }: PurchaseItemProps) => {
   const tOnValidate = useTranslations("onValidate");
   const t = useTranslations("purchaseItem");
@@ -71,21 +73,23 @@ export const PurchaseItem = ({
   return (
     <div>
       <div className="flex flex-row w-full items-center">
-        <span className="flex flex-col items-center md:flex-row">
-          <span className="font-bold w-7">
-            {displayWarning && (
-              <HiOutlineExclamationCircle className="inline-block mr-2 h-5 w-5 text-destructive" />
-            )}
+        {!isInterest && (
+          <span className="flex flex-col items-center md:flex-row">
+            <span className="font-bold w-7">
+              {displayWarning && (
+                <HiOutlineExclamationCircle className="inline-block mr-2 h-5 w-5 text-destructive" />
+              )}
 
-            {purchase.validated && (
-              <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
-            )}
-          </span>
+              {purchase.validated && (
+                <HiOutlineCheckBadge className="w-5 h-5 mr-4 text-green-700" />
+              )}
+            </span>
 
-          <span className="font-bold w-11 pr-3 text-center md:text-right">
-            {purchase.quantity} x
+            <span className="font-bold w-11 pr-3 text-center md:text-right">
+              {purchase.quantity} x
+            </span>
           </span>
-        </span>
+        )}
 
         <div className="flex flex-col md:flex-row w-3/4">
           <span className="font-bold md:w-1/3">{purchase.seller.name}</span>
@@ -102,7 +106,7 @@ export const PurchaseItem = ({
         <span className="ml-auto w-24 text-right font-semibold">
           {format.number((purchase.quantity * purchase.price) / 100, "euro")}
         </span>
-        {isAdmin && (
+        {!isInterest && isAdmin && (
           <LoadingButton
             size="icon"
             variant="outline"

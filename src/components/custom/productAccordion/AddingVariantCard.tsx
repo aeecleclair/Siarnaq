@@ -20,12 +20,14 @@ interface AddingVariantCardProps {
   sellerId: string;
   productId: string;
   refreshProduct: () => void;
+  isInterestProduct?: boolean;
 }
 
 export const AddingVariantCard = ({
   sellerId,
   productId,
   refreshProduct,
+  isInterestProduct = false,
 }: AddingVariantCardProps) => {
   const tZod = useTranslations("variantFormSchema");
   const variantFormSchema = _variantFormSchema(tZod);
@@ -38,6 +40,8 @@ export const AddingVariantCard = ({
     resolver: zodResolver(variantFormSchema),
     mode: "onBlur",
     defaultValues: {
+      price: isInterestProduct ? "0" : undefined,
+      unique: isInterestProduct ? "unique" : undefined,
       allowed_curriculum: [],
     },
   });
@@ -46,7 +50,7 @@ export const AddingVariantCard = ({
     setIsLoading(true);
     const body: ProductVariantBase = {
       ...values,
-      price: Math.round(parseFloat(values.price) * 100),
+      price: isInterestProduct ? 0 : Math.round(parseFloat(values.price) * 100),
       unique: values.unique === "unique",
       enabled: true,
     };
@@ -84,6 +88,7 @@ export const AddingVariantCard = ({
               form={form}
               setIsOpened={setIsAddDialogOpened}
               isLoading={isLoading}
+              isInterestProduct={isInterestProduct}
             />
           </form>
         </Form>

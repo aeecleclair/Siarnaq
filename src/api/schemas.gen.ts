@@ -3513,37 +3513,6 @@ export const $FloorsType = {
   title: "FloorsType",
 } as const;
 
-export const $GenerateProductTicket = {
-  properties: {
-    name: {
-      type: "string",
-      title: "Name",
-    },
-    max_use: {
-      type: "integer",
-      title: "Max Use",
-    },
-    expiration: {
-      type: "string",
-      format: "date-time",
-      title: "Expiration",
-    },
-    id: {
-      type: "string",
-      format: "uuid",
-      title: "Id",
-    },
-    product_id: {
-      type: "string",
-      format: "uuid",
-      title: "Product Id",
-    },
-  },
-  type: "object",
-  required: ["name", "max_use", "expiration", "id", "product_id"],
-  title: "GenerateProductTicket",
-} as const;
-
 export const $GenerateTicketBase = {
   properties: {
     name: {
@@ -3589,6 +3558,26 @@ export const $GenerateTicketComplete = {
   type: "object",
   required: ["name", "max_use", "expiration", "id"],
   title: "GenerateTicketComplete",
+} as const;
+
+export const $GroupNotificationRequest = {
+  properties: {
+    group_id: {
+      type: "string",
+      title: "Group Id",
+    },
+    title: {
+      type: "string",
+      title: "Title",
+    },
+    content: {
+      type: "string",
+      title: "Content",
+    },
+  },
+  type: "object",
+  required: ["group_id", "title", "content"],
+  title: "GroupNotificationRequest",
 } as const;
 
 export const $HTTPValidationError = {
@@ -6261,6 +6250,10 @@ export const $ProductBase = {
       type: "boolean",
       title: "Available Online",
     },
+    needs_validation: {
+      type: "boolean",
+      title: "Needs Validation",
+    },
     related_membership: {
       anyOf: [
         {
@@ -6300,6 +6293,7 @@ export const $ProductBase = {
   required: [
     "name_fr",
     "available_online",
+    "needs_validation",
     "product_constraints",
     "document_constraints",
   ],
@@ -6349,6 +6343,10 @@ export const $ProductCompleteNoConstraint = {
       type: "boolean",
       title: "Available Online",
     },
+    needs_validation: {
+      type: "boolean",
+      title: "Needs Validation",
+    },
     id: {
       type: "string",
       format: "uuid",
@@ -6386,7 +6384,14 @@ export const $ProductCompleteNoConstraint = {
     },
   },
   type: "object",
-  required: ["name_fr", "available_online", "id", "seller_id", "tickets"],
+  required: [
+    "name_fr",
+    "available_online",
+    "needs_validation",
+    "id",
+    "seller_id",
+    "tickets",
+  ],
   title: "ProductCompleteNoConstraint",
 } as const;
 
@@ -7095,6 +7100,17 @@ export const $RaidPrice = {
         },
       ],
       title: "Partner Price",
+    },
+    external_price: {
+      anyOf: [
+        {
+          type: "integer",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "External Price",
     },
     t_shirt_price: {
       anyOf: [
@@ -9090,23 +9106,46 @@ export const $TokenResponse = {
   title: "TokenResponse",
 } as const;
 
-export const $Topic = {
-  type: "string",
-  enum: [
-    "cinema",
-    "advert",
-    "amap",
-    "booking",
-    "event",
-    "loan",
-    "raffle",
-    "vote",
-    "ph",
-    "test",
+export const $TopicUser = {
+  properties: {
+    id: {
+      type: "string",
+      format: "uuid",
+      title: "Id",
+    },
+    name: {
+      type: "string",
+      title: "Name",
+    },
+    module_root: {
+      type: "string",
+      title: "Module Root",
+    },
+    topic_identifier: {
+      anyOf: [
+        {
+          type: "string",
+        },
+        {
+          type: "null",
+        },
+      ],
+      title: "Topic Identifier",
+    },
+    is_user_subscribed: {
+      type: "boolean",
+      title: "Is User Subscribed",
+    },
+  },
+  type: "object",
+  required: [
+    "id",
+    "name",
+    "module_root",
+    "topic_identifier",
+    "is_user_subscribed",
   ],
-  title: "Topic",
-  description:
-    "A list of topics. An user can suscribe to a topic to receive notifications about it.",
+  title: "TopicUser",
 } as const;
 
 export const $TransactionBase = {
@@ -9841,6 +9880,10 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
       type: "boolean",
       title: "Available Online",
     },
+    needs_validation: {
+      type: "boolean",
+      title: "Needs Validation",
+    },
     id: {
       type: "string",
       format: "uuid",
@@ -9895,7 +9938,13 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
     },
   },
   type: "object",
-  required: ["name_fr", "available_online", "id", "seller_id"],
+  required: [
+    "name_fr",
+    "available_online",
+    "needs_validation",
+    "id",
+    "seller_id",
+  ],
   title: "ProductComplete",
 } as const;
 

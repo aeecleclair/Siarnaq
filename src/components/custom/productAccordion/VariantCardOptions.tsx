@@ -42,6 +42,7 @@ interface VariantCardOptionsProps {
   productId: string;
   userId: string;
   refreshProduct: () => void;
+  isInterestProduct: boolean;
 }
 
 export const VariantCardOptions = ({
@@ -53,6 +54,7 @@ export const VariantCardOptions = ({
   productId,
   userId,
   refreshProduct,
+  isInterestProduct = false,
 }: VariantCardOptionsProps) => {
   const tZod = useTranslations("variantFormSchema");
   const variantFormSchema = _variantFormSchema(tZod);
@@ -205,6 +207,7 @@ export const VariantCardOptions = ({
                     setIsOpened={setIsEditDialogOpened}
                     isLoading={isLoading}
                     isEdit
+                    isInterestProduct={isInterestProduct}
                   />
                 </form>
               </Form>

@@ -190,6 +190,7 @@ export const ProductAccordion = ({
                     sellerId={sellerId}
                     productId={product.id}
                     refreshProduct={refreshProduct}
+                    isInterestProduct={!product.needs_validation}
                   />
                 )}
                 {variantToDisplay.map((variant) => (
@@ -219,6 +220,7 @@ export const ProductAccordion = ({
                       (!variant.enabled &&
                         purchasedVariantIds.includes(variant.id))
                     }
+                    isInterestProduct={!product.needs_validation}
                   />
                 ))}
               </>

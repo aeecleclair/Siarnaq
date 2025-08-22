@@ -67,7 +67,7 @@ export default function productFormSchema(
         (!data.ticket_name ||
           !data.ticket_max_use ||
           !data.ticket_expiration) &&
-        (data.ticket_name || data.ticket_max_use || data.ticket_expiration)
+        (data.ticket_name || data.ticket_expiration)
       ) {
         if (!data.ticket_name)
           ctx.addIssue({

@@ -1229,15 +1229,14 @@ export type ParticipantUpdate = {
 export type PaymentBase = {
     total: number;
     payment_type: PaymentType;
-    year: number;
 };
 
 export type PaymentComplete = {
     total: number;
     payment_type: PaymentType;
-    year: number;
     id: string;
     user_id: string;
+    year: number;
 };
 
 export type PaymentType = 'cash' | 'check' | 'HelloAsso' | 'card' | 'archived';
@@ -1328,7 +1327,6 @@ export type ProductBase = {
     tickets?: Array<GenerateTicketBase>;
     product_constraints: Array<(string)>;
     document_constraints: Array<(string)>;
-    year?: number | null;
 };
 
 export type ProductCompleteNoConstraint = {
@@ -1338,6 +1336,7 @@ export type ProductCompleteNoConstraint = {
     description_en?: string | null;
     available_online: boolean;
     needs_validation: boolean;
+    year: number;
     id: string;
     seller_id: string;
     variants?: Array<ProductVariantComplete>;
@@ -1366,11 +1365,11 @@ export type ProductVariantBase = {
     unique: boolean;
     allowed_curriculum: Array<(string)>;
     related_membership_added_duration?: string | null;
-    year: number;
 };
 
 export type ProductVariantComplete = {
     id: string;
+    year: number;
     product_id: string;
     name_fr: string;
     name_en?: string | null;
@@ -2039,6 +2038,7 @@ export type app__modules__cdr__schemas_cdr__ProductComplete = {
     available_online: boolean;
     needs_validation: boolean;
     id: string;
+    year: number;
     seller_id: string;
     variants?: Array<ProductVariantComplete>;
     related_membership?: MembershipSimple | null;

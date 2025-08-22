@@ -5528,14 +5528,10 @@ export const $PaymentBase = {
         },
         payment_type: {
             '$ref': '#/components/schemas/PaymentType'
-        },
-        year: {
-            type: 'integer',
-            title: 'Year'
         }
     },
     type: 'object',
-    required: ['total', 'payment_type', 'year'],
+    required: ['total', 'payment_type'],
     title: 'PaymentBase'
 } as const;
 
@@ -5548,10 +5544,6 @@ export const $PaymentComplete = {
         payment_type: {
             '$ref': '#/components/schemas/PaymentType'
         },
-        year: {
-            type: 'integer',
-            title: 'Year'
-        },
         id: {
             type: 'string',
             format: 'uuid',
@@ -5560,10 +5552,14 @@ export const $PaymentComplete = {
         user_id: {
             type: 'string',
             title: 'User Id'
+        },
+        year: {
+            type: 'integer',
+            title: 'Year'
         }
     },
     type: 'object',
-    required: ['total', 'payment_type', 'year', 'id', 'user_id'],
+    required: ['total', 'payment_type', 'id', 'user_id', 'year'],
     title: 'PaymentComplete'
 } as const;
 
@@ -6077,17 +6073,6 @@ export const $ProductBase = {
             },
             type: 'array',
             title: 'Document Constraints'
-        },
-        year: {
-            anyOf: [
-                {
-                    type: 'integer'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Year'
         }
     },
     type: 'object',
@@ -6142,6 +6127,10 @@ export const $ProductCompleteNoConstraint = {
             type: 'boolean',
             title: 'Needs Validation'
         },
+        year: {
+            type: 'integer',
+            title: 'Year'
+        },
         id: {
             type: 'string',
             format: 'uuid',
@@ -6179,7 +6168,7 @@ export const $ProductCompleteNoConstraint = {
         }
     },
     type: 'object',
-    required: ['name_fr', 'available_online', 'needs_validation', 'id', 'seller_id', 'tickets'],
+    required: ['name_fr', 'available_online', 'needs_validation', 'year', 'id', 'seller_id', 'tickets'],
     title: 'ProductCompleteNoConstraint'
 } as const;
 
@@ -6288,14 +6277,10 @@ export const $ProductVariantBase = {
                 }
             ],
             title: 'Related Membership Added Duration'
-        },
-        year: {
-            type: 'integer',
-            title: 'Year'
         }
     },
     type: 'object',
-    required: ['name_fr', 'price', 'enabled', 'unique', 'allowed_curriculum', 'year'],
+    required: ['name_fr', 'price', 'enabled', 'unique', 'allowed_curriculum'],
     title: 'ProductVariantBase'
 } as const;
 
@@ -6305,6 +6290,10 @@ export const $ProductVariantComplete = {
             type: 'string',
             format: 'uuid',
             title: 'Id'
+        },
+        year: {
+            type: 'integer',
+            title: 'Year'
         },
         product_id: {
             type: 'string',
@@ -6382,7 +6371,7 @@ export const $ProductVariantComplete = {
         }
     },
     type: 'object',
-    required: ['id', 'product_id', 'name_fr', 'price', 'enabled', 'unique'],
+    required: ['id', 'year', 'product_id', 'name_fr', 'price', 'enabled', 'unique'],
     title: 'ProductVariantComplete'
 } as const;
 
@@ -9550,6 +9539,10 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
             format: 'uuid',
             title: 'Id'
         },
+        year: {
+            type: 'integer',
+            title: 'Year'
+        },
         seller_id: {
             type: 'string',
             format: 'uuid',
@@ -9599,7 +9592,7 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
         }
     },
     type: 'object',
-    required: ['name_fr', 'available_online', 'needs_validation', 'id', 'seller_id'],
+    required: ['name_fr', 'available_online', 'needs_validation', 'id', 'year', 'seller_id'],
     title: 'ProductComplete'
 } as const;
 

@@ -7,12 +7,13 @@ import {
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import { productFormSchema } from "@/forms/productFormSchema";
+import _productFormSchema from "@/forms/productFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi2";
-import { z } from "zod";
+import z from "zod";
 
 import { AddEditProductForm } from "./AddEditProductForm";
 
@@ -25,6 +26,9 @@ export const AddProductAccordionItem = ({
   seller,
   refreshProduct,
 }: AddProductAccordionItemProps) => {
+  const tZod = useTranslations("productFormSchema");
+  const productFormSchema = _productFormSchema(tZod);
+  const t = useTranslations("addProductAccordionItem");
   const { toast } = useToast();
   const [isAddDialogOpened, setIsAddDialogOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +64,6 @@ export const AddProductAccordionItem = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -92,7 +95,7 @@ export const AddProductAccordionItem = ({
 
   return (
     <CustomDialog
-      title="Nouveau produit"
+      title={t("newProduct")}
       isFullWidth
       description={
         <Form {...form}>
@@ -111,7 +114,7 @@ export const AddProductAccordionItem = ({
     >
       <div className="flex flex-1 items-center justify-start py-4 font-medium border-b cursor-pointer ">
         <HiPlus className="w-4 h-4 mr-6" />
-        <h3 className="text-lg font-semibold">Nouveau produit</h3>
+        <h3 className="text-lg font-semibold">{t("newProduct")}</h3>
         <div className="flex grow"></div>
       </div>
     </CustomDialog>

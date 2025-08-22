@@ -1,13 +1,12 @@
 import { CdrUser } from "@/api";
-import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import { useProducts } from "@/hooks/useProducts";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
-import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/navigation";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { LoadingButton } from "../LoadingButton";
@@ -19,8 +18,11 @@ interface ProductPartProps {
 }
 
 export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
+  const tOnValidate = useTranslations("onValidate");
+  const t = useTranslations("productPart");
+  const format = useFormatter();
   const pathname = usePathname();
-  const t = useTranslations("ProductPart");
+  const locale = useLocale();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const { userMemberships: memberships } = useUserMemberships(user.id);
@@ -47,13 +49,13 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             setIsLoading,
             refetch,
             toast,
+            tOnValidate,
           ),
         ),
       );
     } catch (error) {
       toast({
-        title: "Error",
-        description: "There was an error validating a purchase.",
+        description: t("toastErrorDescription"),
         variant: "destructive",
       });
     } finally {
@@ -61,8 +63,8 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
         title: purchases
           .map((purchase) => purchase.validated)
           .every((validated) => validated)
-          ? "Some Purchase are unvalidated"
-          : "All Purchases are validated",
+          ? t("unvalidated")
+          : t("validated"),
         variant: "default",
       });
       setIsLoading(false);
@@ -73,9 +75,9 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     <div className="grid gap-6 -mt-4">
       <div className="justify-between flex flex-row">
         <CardTitle>{t("summary")}</CardTitle>
-        {isAdmin && pathname.startsWith("/admin") ? (
+        {isAdmin && pathname.startsWith(`/${locale}/admin`) ? (
           <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
-            Valider tous les achats
+            {t("validateAll")}
           </LoadingButton>
         ) : null}
       </div>
@@ -100,7 +102,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             <div className="flex flex-row w-full">
               <span className="font-bold w-1/6">{t("total")}</span>
               <span className="ml-auto font-semibold">
-                {totalToPay?.toFixed(2)} €
+                {totalToPay && format.number(totalToPay, "euro")}
               </span>
             </div>
           </>

@@ -20,7 +20,7 @@ import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
 import { Accordion } from "../ui/accordion";
 
 export const ProductPanel = () => {
-  const t = useTranslations("ProductPanel");
+  const t = useTranslations("productPanel");
   const { onlineSellers } = useOnlineSellers();
   const searchParams = useSearchParams();
   const firstSellerId =
@@ -68,7 +68,7 @@ export const ProductPanel = () => {
     <div className="grid gap-6">
       <Card>
         <CardHeader>
-          <CardTitle>{seller ? seller.name : "No seller found"}</CardTitle>
+          <CardTitle>{seller ? seller.name : t("noSellerFound")}</CardTitle>
         </CardHeader>
         <CardContent>
           {availableProducts.length > 0 ? (

@@ -328,19 +328,25 @@ export type CdrUserUpdate = {
     floor?: FloorsType | null;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> d7f12d5 (add self-answerable custom fields)
+=======
+>>>>>>> ca44525 (fix rebase)
 };
 
 export type CdrYear = {
     year?: number;
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 8ff4682 (fix merge)
 =======
 =======
 >>>>>>> 7d23755 (add self-answerable custom fields)
 >>>>>>> d7f12d5 (add self-answerable custom fields)
+=======
+>>>>>>> ca44525 (fix rebase)
 };
 
 export type ChangePasswordRequest = {
@@ -1242,6 +1248,7 @@ export type PaymentBase = {
     payment_type: PaymentType;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     year: number;
 >>>>>>> 8ff4682 (fix merge)
@@ -1250,6 +1257,9 @@ export type PaymentBase = {
 =======
 >>>>>>> 7d23755 (add self-answerable custom fields)
 >>>>>>> d7f12d5 (add self-answerable custom fields)
+=======
+    year: number;
+>>>>>>> ca44525 (fix rebase)
 };
 
 export type PaymentComplete = {
@@ -1257,6 +1267,7 @@ export type PaymentComplete = {
     payment_type: PaymentType;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     year: number;
 >>>>>>> 8ff4682 (fix merge)
@@ -1265,6 +1276,9 @@ export type PaymentComplete = {
 =======
 >>>>>>> 7d23755 (add self-answerable custom fields)
 >>>>>>> d7f12d5 (add self-answerable custom fields)
+=======
+    year: number;
+>>>>>>> ca44525 (fix rebase)
     id: string;
     user_id: string;
 };
@@ -1359,6 +1373,7 @@ export type ProductBase = {
     document_constraints: Array<(string)>;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     year?: number | null;
 >>>>>>> 8ff4682 (fix merge)
@@ -1367,6 +1382,9 @@ export type ProductBase = {
 =======
 >>>>>>> 7d23755 (add self-answerable custom fields)
 >>>>>>> d7f12d5 (add self-answerable custom fields)
+=======
+    year?: number | null;
+>>>>>>> ca44525 (fix rebase)
 };
 
 export type ProductCompleteNoConstraint = {
@@ -1406,6 +1424,7 @@ export type ProductVariantBase = {
     related_membership_added_duration?: string | null;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     year: number;
 >>>>>>> 8ff4682 (fix merge)
@@ -1414,6 +1433,9 @@ export type ProductVariantBase = {
 =======
 >>>>>>> 7d23755 (add self-answerable custom fields)
 >>>>>>> d7f12d5 (add self-answerable custom fields)
+=======
+    year: number;
+>>>>>>> ca44525 (fix rebase)
 };
 
 export type ProductVariantComplete = {
@@ -7318,9 +7340,12 @@ export type $OpenApiTs = {
     };
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> d7f12d5 (add self-answerable custom fields)
+=======
+>>>>>>> ca44525 (fix rebase)
     '/cdr/year/': {
         get: {
             res: {
@@ -7340,11 +7365,14 @@ export type $OpenApiTs = {
         };
     };
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 8ff4682 (fix merge)
 =======
 =======
 >>>>>>> 7d23755 (add self-answerable custom fields)
 >>>>>>> d7f12d5 (add self-answerable custom fields)
+=======
+>>>>>>> ca44525 (fix rebase)
     '/cdr/status/': {
         get: {
             res: {

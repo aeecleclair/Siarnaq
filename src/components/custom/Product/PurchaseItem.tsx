@@ -70,6 +70,8 @@ export const PurchaseItem = ({
     (variant) => variant.id === purchase.product_variant_id,
   );
 
+  console.log(purchase);
+
   return (
     <div>
       <div className="flex flex-row w-full items-center">

@@ -458,14 +458,13 @@ export const AddEditProductForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Button variant="ghost" onClick={field.onChange}>
+                      <label className="flex items-center space-x-2 cursor-pointer">
                         <Checkbox
                           checked={field.value}
-                          className="mr-2"
                           onCheckedChange={field.onChange}
                         />
-                        Auto-réponse
-                      </Button>
+                        <span>Auto-réponse</span>
+                      </label>
                     </FormControl>
                   </FormItem>
                 )}

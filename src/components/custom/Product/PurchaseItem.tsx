@@ -66,11 +66,9 @@ export const PurchaseItem = ({
     notTakenConstraintProduct?.length !== 0 &&
     !isMembershipAlreadyTaken;
 
-  const variant = purchase.product.variants?.find(
+  const variant = purchaseCompleteProduct?.variants?.find(
     (variant) => variant.id === purchase.product_variant_id,
   );
-
-  console.log(purchase);
 
   return (
     <div>

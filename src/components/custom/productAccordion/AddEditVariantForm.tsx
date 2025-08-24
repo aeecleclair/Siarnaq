@@ -98,7 +98,7 @@ export const AddEditVariantForm = ({
         <div className="grid gap-2">
           <StyledFormField
             form={form}
-            label="Durée d'adhésion ajoutée (format: 'AYBMCD' pour A an(s), B mois et C jour(s))"
+            label={t("relatedMembershipAddedDuration")}
             id="related_membership_added_duration"
             input={(field) => <Input {...field} />}
           />

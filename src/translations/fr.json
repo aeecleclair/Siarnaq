@@ -42,9 +42,11 @@
     "name_fr": "Nom (français)",
     "price": "Prix",
     "purchase": "Achat",
+    "relatedMembershipAddedDuration": "Durée d'adhésion ajoutée (format: 'AYBMCD' pour A an(s), B mois et C jour(s))",
     "unique": "Ne peux être acheté qu'une seule fois"
   },
   "addProductAccordionItem": {
+    "interest": "Noter l'intérêt",
     "newProduct": "Nouveau produit"
   },
   "addUserWithCurriculum": {

@@ -43,9 +43,11 @@
     "name_fr": "Name (French)",
     "price": "Price",
     "purchase": "Purchase",
+    "relatedMembershipAddedDuration": "Duration of membership added (format: 'AYBMCD' for A year(s), B month(s) and C day(s))",
     "unique": "Can only be bought once"
   },
   "addProductAccordionItem": {
+    "interest": "Take note of the interest",
     "newProduct": "New product"
   },
   "addUserWithCurriculum": {
@@ -268,12 +270,11 @@
   },
   "productPart": {
     "admin": "Admin",
+    "interestSummary": "Summary of interests",
     "noProduct": "No product",
     "summary": "Summary",
-    "interestSummary": "Summary of interests",
-    "total": "Total",
-    "noProduct": "No product",
     "toastErrorDescription": "An error occurred while validating the purchase.",
+    "total": "Total",
     "unvalidated": "Some purchases are unvalidated",
     "validateAll": "Validate all purchases",
     "validated": "All the purchases are validated"

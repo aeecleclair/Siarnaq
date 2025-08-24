@@ -133,8 +133,8 @@ declare const messages: {
     "select": "Sélectionner une date"
   },
   "info": {
-    "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration (WEI), prévoyez deux chèques de caution de 100 € à l'ordre « <payable>AEECL - WEI</payable> ».",
-    "cautionInstructions": "Au dos du premier, notez : \"Prénom Nom - WEI 2025 - bus\" et du second : \"Prénom Nom - WEI 2025 - site\". Ces chèques ne seront encaissés qu'en cas de dégradations dans les bus ou sur le site du WEI.",
+    "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration (WEI), prévoyez un chèque de caution de 100 € à l'ordre « <payable>AEECL - WEI</payable> ».",
+    "cautionInstructions": "Au dos, notez : \"Prénom Nom - WEI 2025\". Ce chèque ne sera encaissé qu'en cas de dégradations pendant le WEI.",
     "cautionTitle": "Cautions pour le WEI",
     "cdrOnsiteDescription": "Vous pourrez rencontrer les associations, manifester votre intérêt pour les activités proposées et poser toutes vos questions.",
     "cdrOnsiteMandatoryWarning": "En cas de contrainte majeure, prenez rapidement contact avec le Bureau Des Élèves pour trouver une alternative :",

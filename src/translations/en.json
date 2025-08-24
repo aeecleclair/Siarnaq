@@ -131,8 +131,8 @@
     "select": "Select a date"
   },
   "info": {
-    "cautionDescription": "If you book a place at the Orientation Weekend (WEI), please bring two €100 deposit checks payable to « <payable>AEECL - WEI</payable> ».",
-    "cautionInstructions": "On the back of the first write: \"First name Last name - WEI 2025 - bus\" and on the back of the second: \"First name Last name - WEI 2025 - site\". These deposit checks will only be cashed in the event of damage to the buses or the WEI site.",
+    "cautionDescription": "If you book a place at the Orientation Weekend (WEI), please bring one €100 deposit check payable to « <payable>AEECL - WEI</payable> ».",
+    "cautionInstructions": "On the back write: \"First name Last name - WEI 2025\". This deposit check will only be cashed in the event of damage during the WEI.",
     "cautionTitle": "Deposit for the WEI",
     "cdrOnsiteDescription": "You'll be able to meet associations, express your interest in proposed activities and ask any questions you may have.",
     "cdrOnsiteMandatoryWarning": "In the event of a major unavailability, please contact the Student Council (BDE) as soon as possible to find an alternative solution:",

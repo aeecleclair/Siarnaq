@@ -25,10 +25,13 @@
     "onsite": "Ne sera disponible que lors de la chaîne de rentrée en présentiel",
     "product_constraints": "Contraintes",
     "question": "Question pour les utilisateurs qui prennent le produit",
+    "related_membership": "Adhésion liée",
+    "selfResponse": "Auto-réponse",
     "ticket_expiration": "Date d'expiration",
     "ticket_max_use": "Nombre d'utilisations maximum",
     "ticket_name": "Nom du ticket",
-    "tickets": "Tickets"
+    "tickets": "Tickets",
+    "userCanAnswer": "L'utilisateur peut répondre."
   },
   "addEditVariantForm": {
     "add": "Ajouter",
@@ -42,7 +45,7 @@
     "name_fr": "Nom (français)",
     "price": "Prix",
     "purchase": "Achat",
-    "relatedMembershipAddedDuration": "Durée d'adhésion ajoutée (format: 'AYBMCD' pour A an(s), B mois et C jour(s))",
+    "related_membership_added_duration": "Durée d'adhésion ajoutée (format: 'AYBMCD' pour A an(s), B mois et C jour(s))",
     "unique": "Ne peux être acheté qu'une seule fois"
   },
   "addProductAccordionItem": {
@@ -331,6 +334,7 @@
     "allowedCurriculum": "Veuillez renseigner les cursus autorisés",
     "nameFR": "Veuillez renseigner le nom de la variante",
     "price": "Veuillez renseigner le prix du produit",
+    "relatedMembershipRequired": "Ce champ est requis pour un produit d'adhésion",
     "unique": "Veuillez renseigner la quantité du produit"
   },
   "warningDialog": {

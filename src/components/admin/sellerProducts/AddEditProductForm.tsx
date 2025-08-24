@@ -280,7 +280,7 @@ export const AddEditProductForm = ({
       {isAdmin && (
         <StyledFormField
           form={form}
-          label="Adhésion liée"
+          label={t("related_membership")}
           id="related_membership"
           input={(field) => (
             <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -464,7 +464,7 @@ export const AddEditProductForm = ({
                           className="mr-2"
                           onCheckedChange={field.onChange}
                         />
-                        Auto-réponse
+                        {t("selfResponse")}
                       </Button>
                     </FormControl>
                   </FormItem>
@@ -488,7 +488,7 @@ export const AddEditProductForm = ({
                   <div className="flex items-center gap-2 ml-auto">
                     {field.can_user_answer && (
                       <span className="text-sm text-green-600 whitespace-nowrap font-bold">
-                        L&apos;utilisateur peut répondre.
+                        {t("userCanAnswer")}
                       </span>
                     )}
 

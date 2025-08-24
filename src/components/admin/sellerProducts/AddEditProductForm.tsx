@@ -461,7 +461,6 @@ export const AddEditProductForm = ({
                       <label className="flex items-center space-x-2 cursor-pointer">
                         <Checkbox
                           checked={field.value}
-                          className="mr-2"
                           onCheckedChange={field.onChange}
                         />
                         <span>{t("selfResponse")}</span>

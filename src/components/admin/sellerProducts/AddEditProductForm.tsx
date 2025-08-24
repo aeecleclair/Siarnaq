@@ -458,14 +458,14 @@ export const AddEditProductForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Button variant="ghost" onClick={field.onChange}>
+                      <label className="flex items-center space-x-2 cursor-pointer">
                         <Checkbox
                           checked={field.value}
                           className="mr-2"
                           onCheckedChange={field.onChange}
                         />
-                        {t("selfResponse")}
-                      </Button>
+                        <span>{t("selfResponse")}</span>
+                      </label>
                     </FormControl>
                   </FormItem>
                 )}
@@ -484,14 +484,12 @@ export const AddEditProductForm = ({
               {(isEdit ? data : form.watch("data_fields")).map((field) => (
                 <div key={field.id} className="flex flex-row items-center">
                   <span className="whitespace-nowrap">{field.name}</span>
-
                   <div className="flex items-center gap-2 ml-auto">
                     {field.can_user_answer && (
                       <span className="text-sm text-green-600 whitespace-nowrap font-bold">
                         {t("userCanAnswer")}
                       </span>
                     )}
-
                     <LoadingButton
                       size="icon"
                       variant="destructive"

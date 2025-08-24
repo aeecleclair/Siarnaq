@@ -72,43 +72,89 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   };
 
   return (
-    <div className="grid gap-6 -mt-4">
-      <div className="justify-between flex flex-row">
-        <CardTitle>{t("summary")}</CardTitle>
-        {isAdmin && pathname.startsWith(`/${locale}/admin`) ? (
-          <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
-            {t("validateAll")}
-          </LoadingButton>
-        ) : null}
+    <div className="grid gap-10 -mt-4">
+      <div className="grid gap-6 -mt-4">
+        <div className="justify-between flex flex-row">
+          <CardTitle>{t("summary")}</CardTitle>
+          {isAdmin && pathname.startsWith(`/${locale}/admin`) ? (
+            <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
+              {t("validateAll")}
+            </LoadingButton>
+          ) : null}
+        </div>
+        <div className="space-y-2">
+          {purchases?.filter(
+            (purchase) => purchase.product.needs_validation === true,
+          )?.length > 0 ? (
+            <>
+              {purchases
+                ?.filter(
+                  (purchase) => purchase.product.needs_validation === true,
+                )
+                .map((purchase) => (
+                  <PurchaseItem
+                    key={purchase.product_variant_id}
+                    allProducts={allProducts}
+                    allConstraintIds={allConstraintIds}
+                    allPurchasesIds={purchases.map(
+                      (purchase) => purchase.product.id,
+                    )}
+                    purchase={purchase}
+                    userAssociationsMembershipsIds={
+                      userAssociationsMembershipsIds
+                    }
+                    user={user}
+                    isAdmin={isAdmin}
+                  />
+                ))}
+              <Separator className="my-2" />
+              <div className="flex flex-row w-full">
+                <span className="font-bold w-1/6">{t("total")}</span>
+                <span className="ml-auto font-semibold">
+                  {totalToPay && format.number(totalToPay, "euro")}
+                </span>
+              </div>
+            </>
+          ) : (
+            <div>{t("noProduct")}</div>
+          )}
+        </div>
       </div>
-      <div className="space-y-2">
-        {purchases?.length > 0 ? (
-          <>
-            {purchases.map((purchase) => (
-              <PurchaseItem
-                key={purchase.product_variant_id}
-                allProducts={allProducts}
-                allConstraintIds={allConstraintIds}
-                allPurchasesIds={purchases.map(
-                  (purchase) => purchase.product.id,
-                )}
-                purchase={purchase}
-                userAssociationsMembershipsIds={userAssociationsMembershipsIds}
-                user={user}
-                isAdmin={isAdmin}
-              />
-            ))}
-            <Separator className="my-2" />
-            <div className="flex flex-row w-full">
-              <span className="font-bold w-1/6">{t("total")}</span>
-              <span className="ml-auto font-semibold">
-                {totalToPay && format.number(totalToPay, "euro")}
-              </span>
-            </div>
-          </>
-        ) : (
-          <div>{t("noProduct")}</div>
-        )}
+      <div className="grid gap-6 -mt-4">
+        <div className="justify-between flex flex-row">
+          <CardTitle>{t("interestSummary")}</CardTitle>
+        </div>
+        <div className="space-y-2">
+          {purchases?.filter(
+            (purchase) => purchase.product.needs_validation === false,
+          )?.length > 0 ? (
+            <>
+              {purchases
+                ?.filter(
+                  (purchase) => purchase.product.needs_validation === false,
+                )
+                .map((purchase) => (
+                  <PurchaseItem
+                    key={purchase.product_variant_id}
+                    allProducts={allProducts}
+                    allConstraintIds={allConstraintIds}
+                    allPurchasesIds={purchases.map(
+                      (purchase) => purchase.product.id,
+                    )}
+                    purchase={purchase}
+                    userAssociationsMembershipsIds={
+                      userAssociationsMembershipsIds
+                    }
+                    user={user}
+                    isAdmin={isAdmin}
+                    isInterest={true}
+                  />
+                ))}
+            </>
+          ) : (
+            <div>{t("noProduct")}</div>
+          )}
+        </div>
       </div>
     </div>
   );

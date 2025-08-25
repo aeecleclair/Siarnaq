@@ -76,7 +76,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
       <div className="grid gap-6 -mt-4">
         <div className="justify-between flex flex-row">
           <CardTitle>{t("summary")}</CardTitle>
-          {isAdmin && pathname.startsWith("/admin") ? (
+          {isAdmin && pathname.startsWith(`/${locale}/admin`) ? (
             <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
               {t("validateAll")}
             </LoadingButton>
@@ -111,7 +111,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
               <div className="flex flex-row w-full">
                 <span className="font-bold w-1/6">{t("total")}</span>
                 <span className="ml-auto font-semibold">
-                  {totalToPay?.toFixed(2)} €
+                  {totalToPay && format.number(totalToPay, "euro")}
                 </span>
               </div>
             </>

@@ -332,7 +332,7 @@ export const VariantCard = ({
                   <span>
                     {isInterestProduct
                       ? selectTranslation(variant.name_en, variant.name_fr)
-                      : `${format.number(variant.price / 100, "euro")}`}
+                      : format.number(variant.price / 100, "euro")}
                   </span>
                 </div>
                 {showDescription && (

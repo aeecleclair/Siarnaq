@@ -92,11 +92,7 @@ export const AddingVariantCard = ({
       title={t("addingVariant")}
       description={
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit, (errors) => {
-              console.log("Validation errors", errors);
-            })}
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <AddEditVariantForm
               form={form}
               setIsOpened={setIsAddDialogOpened}

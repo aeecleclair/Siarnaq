@@ -22,6 +22,10 @@
     "src\\components\\custom\\CurrencyInput.tsx": ["€"],
     "src\\components\\custom\\MultiSelect.tsx": ["Enter"],
     "src\\components\\user\\AssociationPanel.tsx": ["·"],
-    "src\\app\\[locale]\\locale-dropdown.tsx": ["English", "Français"]
+    "src\\app\\[locale]\\locale-dropdown.tsx": ["English", "Français"],
+    "src\\components\\admin\\sellerProducts\\AddProductAccordionItem.tsx": [
+      "Interêt pour l'asso",
+      "Interest for the club"
+    ]
   }
 }

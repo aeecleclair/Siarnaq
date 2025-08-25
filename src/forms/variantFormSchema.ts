@@ -41,7 +41,7 @@ export default function variantFormSchema(
         ctx.addIssue({
           path: ["related_membership_added_duration"],
           code: z.ZodIssueCode.custom,
-          message: "Ce champ est requis pour un produit d'adhésion",
+          message: t("relatedMembershipRequired"),
         });
       }
     });

@@ -61,7 +61,7 @@
   "associationPanel": {
     "BDE": "Association des élèves (AE)",
     "BDS": "Union sportive des élèves (USE)",
-    "SDeC": "Polys de cours",
+    "SDeC": "Polys de cours (SDeC)",
     "WEI": "Week-End d'Intégration (WEI)",
     "associations": "Associations",
     "information": "Informations pratiques",
@@ -263,7 +263,11 @@
   },
   "productPanel": {
     "noProductFound": "Aucun produit disponible",
-    "noSellerFound": "Aucun vendeur trouvé"
+    "noSellerFound": "Aucun vendeur trouvé",
+    "BDE": "Association des élèves (AE)",
+    "BDS": "Union sportive des élèves (USE)",
+    "SDeC": "Polys de cours (SDeC)",
+    "WEI": "Week-End d'Intégration (WEI)"
   },
   "productPart": {
     "admin": "Admin",

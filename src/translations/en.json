@@ -62,7 +62,7 @@
   "associationPanel": {
     "BDE": "Student Association (AE)",
     "BDS": "Student sports union (USE)",
-    "SDeC": "Handouts of lessons",
+    "SDeC": "Handouts of lessons (SDeC)",
     "WEI": "Orientation weekend (WEI)",
     "associations": "Associations",
     "information": "Useful informations",
@@ -264,7 +264,11 @@
   },
   "productPanel": {
     "noProductFound": "No product available",
-    "noSellerFound": "No seller found"
+    "noSellerFound": "No seller found",
+    "BDE": "Student Association (AE)",
+    "BDS": "Student sports union (USE)",
+    "SDeC": "Handouts of lessons (SDeC)",
+    "WEI": "Orientation weekend (WEI)"
   },
   "productPart": {
     "admin": "Admin",
@@ -272,7 +276,6 @@
     "summary": "Summary",
     "interestSummary": "Summary of interests",
     "total": "Total",
-    "noProduct": "No product",
     "toastErrorDescription": "An error occurred while validating the purchase.",
     "unvalidated": "Some purchases are unvalidated",
     "validateAll": "Validate all purchases",

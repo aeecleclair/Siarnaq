@@ -156,10 +156,10 @@
   "introCarouselItem": {
     "begin": "Next",
     "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves): ",
-    "description": "This site allows you to join associations (student clubs), to pay the handouts of lessons and to take your ticket for the orientation weekend (WEI). This will save you precious time during the second part of the Chaîne de Rentrée which will take place in face-to-face. At the end of the process, you will be brought to pay online by credit card.",
+    "description": "This website allows you to join associations (student clubs), to pay the handouts of lessons and to take your ticket for the orientation weekend (WEI). This will save you precious time during the second part of the Chaîne de Rentrée which will take place in face-to-face. At the end of the process, you will be brought to pay online by credit card.",
     "selectCurriculum": "To start, please select your curriculum:",
     "validate": "Confirm",
-    "welcome": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. "
+    "welcome": "Welcome to Centrale Lyon's associative Chaîne De Rentrée. "
   },
   "introPanel": {
     "presentation": "Presentation"
@@ -167,7 +167,7 @@
   "login": {
     "alreadyHaveMyECLAccount": "Already have a MyECL account?",
     "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
-    "description": "Welcome to École Centrale de Lyon's associative Chaîne De Rentrée. This site, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services.",
+    "description": "Welcome to Centrale Lyon's associative Chaîne De Rentrée. This website, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services.",
     "or": "Or",
     "promotion": "School year {year}",
     "register": "Register",
@@ -305,7 +305,7 @@
   "statusAccordionItem": {
     "close": "Close",
     "closed": "Closed",
-    "onSiteButtonLabel": "On site",
+    "onSiteButtonLabel": "Onsite",
     "online": "Online",
     "onsite": "Onsite",
     "pending": "Pending",

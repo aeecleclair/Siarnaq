@@ -155,7 +155,7 @@
   "introCarouselItem": {
     "begin": "Suite",
     "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves : ",
-    "description": "Ce site vous permet d'adhérer aux associations, de payer les polycopiés de cours et de prendre votre place pour le Week-End d'Intégration (WEI). Cela vous fera gagner un temps précieux lors de la seconde partie de la chaîne de rentrée qui aura lieu en présentiel. À la fin du parcours, vous serez amenés à payer en ligne par carte bancaire.",
+    "description": "Ce site web vous permet d'adhérer aux associations, de payer les polycopiés de cours et de prendre votre place pour le Week-End d'Intégration (WEI). Cela vous fera gagner un temps précieux lors de la seconde partie de la chaîne de rentrée qui aura lieu en présentiel. À la fin du parcours, vous serez amenés à payer en ligne par carte bancaire.",
     "selectCurriculum": "Pour commencer, veuillez sélectionner votre cursus :",
     "validate": "Valider",
     "welcome": "Bienvenue à la chaîne de rentrée associative de Centrale Lyon."
@@ -166,7 +166,7 @@
   "login": {
     "alreadyHaveMyECLAccount": "Vous avez déjà un compte MyECL ?",
     "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves :",
-    "description": "Bienvenue dans la Chaîne De Rentrée associative de l'École Centrale de Lyon. Ce site, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra d'adhérer aux associations et souscrire aux services associatifs de l'école.",
+    "description": "Bienvenue dans la Chaîne De Rentrée associative de Centrale Lyon. Ce site web, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra d'adhérer aux associations et souscrire aux services associatifs de l'école.",
     "or": "Sinon",
     "promotion": "Promotion {year}",
     "register": "S'inscrire",

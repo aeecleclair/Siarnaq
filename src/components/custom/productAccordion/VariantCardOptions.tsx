@@ -80,6 +80,7 @@ export const VariantCardOptions = ({
       description_fr: variant?.description_fr || undefined,
       price: (variant.price / 100).toString(),
       unique: variant.unique ? "unique" : "multiple",
+      isMembershipProduct: isMembershipProduct,
       allowed_curriculum:
         variant.allowed_curriculum?.map((curriculum) => curriculum.id) || [],
     },

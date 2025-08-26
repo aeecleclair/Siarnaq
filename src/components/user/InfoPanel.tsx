@@ -2,6 +2,7 @@ import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
+import { Link } from "@/i18n/navigation";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
 import {
@@ -68,6 +69,23 @@ export const InfoPanel = () => {
           })}
         </div>
         <div>{t("cautionInstructions")}</div>
+        <div>
+          {t.rich("cautionInstructions2", {
+            link: () => (
+              <Link
+                href="https://v2.swik.link/1XxsMUZ"
+                className="font-bold text-sky-600 underline visited:text-purple-600"
+              >
+                https://v2.swik.link/1XxsMUZ
+              </Link>
+            ),
+          })}
+        </div>
+        <div>
+          {t.rich("cautionMandatory", {
+            mandatory: (c) => <span className="font-bold">{c}</span>,
+          })}
+        </div>
 
         {/* */}
         <h3 className="text-lg font-semibold flex flex-row items-center pt-5">

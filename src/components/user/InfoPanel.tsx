@@ -74,6 +74,7 @@ export const InfoPanel = () => {
             link: () => (
               <Link
                 href="https://v2.swik.link/1XxsMUZ"
+                target="_blank"
                 className="font-bold text-sky-600 underline visited:text-purple-600"
               >
                 https://v2.swik.link/1XxsMUZ

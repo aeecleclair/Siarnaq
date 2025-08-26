@@ -26,10 +26,13 @@
     "onsite": "Will only be available during the onsite Chaîne de Rentrée",
     "product_constraints": "Constraints",
     "question": "Question for users who take the product",
+    "related_membership": "Related membership",
+    "selfResponse": "Self-response",
     "ticket_expiration": "Expiration date",
     "ticket_max_use": "Maximum number of uses",
     "ticket_name": "Ticket name",
-    "tickets": "Tickets"
+    "tickets": "Tickets",
+    "userCanAnswer": "The user can answer."
   },
   "addEditVariantForm": {
     "add": "Add",
@@ -43,9 +46,11 @@
     "name_fr": "Name (French)",
     "price": "Price",
     "purchase": "Purchase",
+    "related_membership_added_duration": "Duration of membership added (format: 'AYBMCD' for A year(s), B month(s) and C day(s))",
     "unique": "Can only be bought once"
   },
   "addProductAccordionItem": {
+    "interest": "Take note of the interest",
     "newProduct": "New product"
   },
   "addUserWithCurriculum": {
@@ -336,6 +341,7 @@
     "allowedCurriculum": "Please enter the authorized curriculum",
     "nameFR": "Please enter the variant name",
     "price": "Please enter the price of the product",
+    "relatedMembershipRequired": "This field is required for a membership product",
     "unique": "Please enter the quantity of the product"
   },
   "warningDialog": {

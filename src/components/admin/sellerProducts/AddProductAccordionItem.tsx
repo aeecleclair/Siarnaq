@@ -77,7 +77,6 @@ export const AddProductAccordionItem = ({
     });
     if (error) {
       toast({
-        title: "Error",
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
@@ -105,7 +104,6 @@ export const AddProductAccordionItem = ({
         expiration: ticket.expiration.toISOString(),
       })),
     };
-    console.log(body);
     const { data, error } = await postCdrSellersSellerIdProducts({
       path: {
         seller_id: seller.id,
@@ -154,7 +152,7 @@ export const AddProductAccordionItem = ({
           onClick={onSubmitInterestProduct}
         >
           <HiPlus className="w-4 h-4 mr-6" />
-          <h3 className="text-lg font-semibold">Noter l&apos;intérêt</h3>
+          <h3 className="text-lg font-semibold">{t("interest")}</h3>
           <div className="flex grow"></div>
         </button>
       )}

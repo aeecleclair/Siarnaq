@@ -280,7 +280,7 @@ export const AddEditProductForm = ({
       {isAdmin && (
         <StyledFormField
           form={form}
-          label="Adhésion liée"
+          label={t("related_membership")}
           id="related_membership"
           input={(field) => (
             <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -463,7 +463,7 @@ export const AddEditProductForm = ({
                           checked={field.value}
                           onCheckedChange={field.onChange}
                         />
-                        <span>Auto-réponse</span>
+                        <span>{t("selfResponse")}</span>
                       </label>
                     </FormControl>
                   </FormItem>
@@ -483,14 +483,12 @@ export const AddEditProductForm = ({
               {(isEdit ? data : form.watch("data_fields")).map((field) => (
                 <div key={field.id} className="flex flex-row items-center">
                   <span className="whitespace-nowrap">{field.name}</span>
-
                   <div className="flex items-center gap-2 ml-auto">
                     {field.can_user_answer && (
                       <span className="text-sm text-green-600 whitespace-nowrap font-bold">
-                        L&apos;utilisateur peut répondre.
+                        {t("userCanAnswer")}
                       </span>
                     )}
-
                     <LoadingButton
                       size="icon"
                       variant="destructive"

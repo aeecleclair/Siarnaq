@@ -64,11 +64,24 @@ export const ProductPanel = () => {
       )?.length ?? 0 > 0,
   );
 
+  const customSellerNames = ["BDE", "BDS", "SDeC", "WEI"] as const;
+  function isInCustomSellerNames(
+    sellerName: string,
+  ): sellerName is (typeof customSellerNames)[number] {
+    return customSellerNames.includes(
+      sellerName as (typeof customSellerNames)[number],
+    );
+  }
+  const displaySellerName = (sellerName: string) =>
+    isInCustomSellerNames(sellerName) ? t(sellerName) : sellerName;
+
   return (
     <div className="grid gap-6">
       <Card>
         <CardHeader>
-          <CardTitle>{seller ? seller.name : t("noSellerFound")}</CardTitle>
+          <CardTitle>
+            {seller ? displaySellerName(seller.name) : t("noSellerFound")}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           {availableProducts.length > 0 ? (

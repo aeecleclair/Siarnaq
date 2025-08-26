@@ -66,7 +66,7 @@
   "associationPanel": {
     "BDE": "Association des élèves (AE)",
     "BDS": "Union sportive des élèves (USE)",
-    "SDeC": "Polys de cours",
+    "SDeC": "Polys de cours (SDeC)",
     "WEI": "Week-End d'Intégration (WEI)",
     "associations": "Associations",
     "information": "Informations pratiques",
@@ -136,8 +136,10 @@
   },
   "info": {
     "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration (WEI), prévoyez un chèque de caution de 100 € à l'ordre « <payable>AEECL - WEI</payable> ».",
-    "cautionInstructions": "Au dos, notez : \"Prénom Nom - WEI 2025\". Ce chèque ne sera encaissé qu'en cas de dégradations pendant le WEI.",
-    "cautionTitle": "Cautions pour le WEI",
+    "cautionInstructions": "Au dos, notez : \"Prénom Nom - WEI 2025\". Ce chèque ne sera encaissé qu'en cas de dégradations dans les bus du WEI.",
+    "cautionInstructions2": "Une seconde caution pour le site du WEI est à déposer  sur le site suivant : <link></link>. Il s’agit d’une caution par empreinte bancaire donc aucun montant ne sera débité sauf si des dégradations sont constatées. ",
+    "cautionMandatory": "Ces deux cautions sont <mandatory>obligatoires</mandatory> pour participer au WEI. ",
+    "cautionTitle": "Caution pour le WEI",
     "cdrOnsiteDescription": "Vous pourrez rencontrer les associations, manifester votre intérêt pour les activités proposées et poser toutes vos questions.",
     "cdrOnsiteMandatoryWarning": "En cas de contrainte majeure, prenez rapidement contact avec le Bureau Des Élèves pour trouver une alternative :",
     "cdrOnsiteSubtitle": "À la suite de cette chaîne de rentrée numérique, vous serez convoqués à la chaîne de rentrée en présentiel : <mandatory>votre présence est obligatoire</mandatory> pour valider vos achats.",
@@ -158,9 +160,9 @@
     "myECLTitle": "Application MyECL"
   },
   "introCarouselItem": {
-    "begin": "On commence ?",
+    "begin": "Suite",
     "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves : ",
-    "description": "Ce site vous permet d'adhérer aux associations, de payer les polycopiés de cours et de prendre votre place pour le Week-End d'Intégration (WEI). Cela vous fera gagner un temps précieux lors de la seconde partie de la chaîne de rentrée qui aura lieu en présentiel. À la fin du parcours, vous serez amenés à payer en ligne par carte bancaire.",
+    "description": "Ce site web vous permet d'adhérer aux associations, de payer les polycopiés de cours et de prendre votre place pour le Week-End d'Intégration (WEI). Cela vous fera gagner un temps précieux lors de la seconde partie de la chaîne de rentrée qui aura lieu en présentiel. À la fin du parcours, vous serez amenés à payer en ligne par carte bancaire.",
     "selectCurriculum": "Pour commencer, veuillez sélectionner votre cursus :",
     "validate": "Valider",
     "welcome": "Bienvenue à la chaîne de rentrée associative de Centrale Lyon."
@@ -171,7 +173,7 @@
   "login": {
     "alreadyHaveMyECLAccount": "Vous avez déjà un compte MyECL ?",
     "contact": "Au moindre problème, ou pour toute question, n'hésitez pas à contacter le Bureau Des Élèves :",
-    "description": "Bienvenue dans la Chaîne De Rentrée associative de l'École Centrale de Lyon. Ce site, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra d'adhérer aux associations et souscrire aux services associatifs de l'école.",
+    "description": "Bienvenue dans la Chaîne De Rentrée associative de Centrale Lyon. Ce site web, à destination des nouveaux admis, des élèves actuels ainsi que des élèves en césure, vous permettra d'adhérer aux associations et souscrire aux services associatifs de l'école.",
     "or": "Sinon",
     "promotion": "Promotion {year}",
     "register": "S'inscrire",
@@ -267,6 +269,10 @@
     "ticketMaxUsePositive": "Un ticket doit être utilisé au moins une fois"
   },
   "productPanel": {
+    "BDE": "Association des élèves (AE)",
+    "BDS": "Union sportive des élèves (USE)",
+    "SDeC": "Polys de cours (SDeC)",
+    "WEI": "Week-End d'Intégration (WEI)",
     "noProductFound": "Aucun produit disponible",
     "noSellerFound": "Aucun vendeur trouvé"
   },

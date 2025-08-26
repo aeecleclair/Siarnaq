@@ -54,8 +54,8 @@ export const PurchaseItem = ({
   );
   const isMembershipAlreadyTaken = userAssociationsMembershipsIds?.some(
     (membershipId) =>
-      purchase.product.related_membership?.id === membershipId ||
-      purchase.product.product_constraints?.some(
+      purchaseCompleteProduct?.related_membership?.id === membershipId ||
+      purchaseCompleteProduct?.product_constraints?.some(
         (constraint) => constraint?.related_membership?.id === membershipId,
       ),
   );

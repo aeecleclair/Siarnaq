@@ -51,7 +51,7 @@ export const IntroCarouselItems = ({
     <div key="intro" className="flex flex-col gap-2">
       <span>{t("welcome")}</span>
       <span className="text-justify">{t("description")}</span>
-      <span className="text-pretty">
+      <span>
         {t("contact")}
         <a href="mailto://bde@ec-lyon.fr" className="whitespace-pre">
           bde@ec-lyon.fr

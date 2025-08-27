@@ -55,6 +55,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
             ),
           ),
       );
+      refetch();
     } catch (error) {
       toast({
         description: t("toastErrorDescription"),

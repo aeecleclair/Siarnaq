@@ -41,17 +41,19 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     setIsLoading(true);
     try {
       await Promise.all(
-        purchases.map((purchase) =>
-          onValidate(
-            purchase.product_variant_id,
-            purchase.validated,
-            user.id,
-            setIsLoading,
-            refetch,
-            toast,
-            tOnValidate,
+        purchases
+          .filter((purchase) => !purchase.validated)
+          .map((purchase) =>
+            onValidate(
+              purchase.product_variant_id,
+              purchase.validated,
+              user.id,
+              setIsLoading,
+              refetch,
+              toast,
+              tOnValidate,
+            ),
           ),
-        ),
       );
     } catch (error) {
       toast({
@@ -63,8 +65,8 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
         title: purchases
           .map((purchase) => purchase.validated)
           .every((validated) => validated)
-          ? t("unvalidated")
-          : t("validated"),
+          ? t("validated")
+          : t("unvalidated"),
         variant: "default",
       });
       setIsLoading(false);

@@ -178,6 +178,7 @@
     "promotion": "Promotion {year}",
     "register": "S'inscrire",
     "selectPromotion": "Sélectionnez votre promo pour créer un compte MyECL :",
+    "usePersonalEmail": "Si votre adresse e-mail étudiante n'est pas encore activée, vous pouvez utiliser une adresse personnelle. Vous devrez effectuer un changement d'adresse dès que possible.",
     "title": "Chaîne de rentrée associative {year}"
   },
   "metadata": {

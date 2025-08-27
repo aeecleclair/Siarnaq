@@ -56,6 +56,9 @@ const Login = () => {
           </form>
           <TextSeparator text={t("or")} />
           <span className="m-auto">{t("selectPromotion")}</span>
+          <span className=" text-center text-sm text-orange-500">
+            {t("usePersonalEmail")}
+          </span>
           <div key="curriculum" className="h-full gap-4 flex flex-col">
             <Select
               value={selectedPromo?.toString()}

@@ -179,6 +179,7 @@
     "promotion": "School year {year}",
     "register": "Register",
     "selectPromotion": "Please select your school year to create a MyECL account:",
+    "usePersonalEmail": "If your student e-mail adress is not yet activated, you may use a personal one. You will have to change it as soon as possible.",
     "title": "Chaîne de rentrée {year}"
   },
   "metadata": {

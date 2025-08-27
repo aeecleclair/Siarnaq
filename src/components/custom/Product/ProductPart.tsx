@@ -65,8 +65,8 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
         title: purchases
           .map((purchase) => purchase.validated)
           .every((validated) => validated)
-          ? t("unvalidated")
-          : t("validated"),
+          ? t("validated")
+          : t("unvalidated"),
         variant: "default",
       });
       setIsLoading(false);

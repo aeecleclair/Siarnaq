@@ -78,7 +78,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
       <div className="grid gap-6 -mt-4">
         <div className="justify-between flex flex-row">
           <CardTitle>{t("summary")}</CardTitle>
-          {isAdmin && pathname.startsWith(`/${locale}/admin`) ? (
+          {isAdmin && pathname.startsWith(`/admin`) ? (
             <LoadingButton onClick={handleValidateAll} isLoading={isLoading}>
               {t("validateAll")}
             </LoadingButton>

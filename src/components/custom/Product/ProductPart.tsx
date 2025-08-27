@@ -61,14 +61,17 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
         variant: "destructive",
       });
     } finally {
-      toast({
-        title: purchases
-          .map((purchase) => purchase.validated)
-          .every((validated) => validated)
-          ? t("validated")
-          : t("unvalidated"),
-        variant: "default",
+      refetch().then(({ data }) => {
+        toast({
+          title: data?.data
+            ?.map((purchase) => purchase.validated)
+            .some((validated) => !validated)
+            ? t("unvalidated")
+            : t("validated"),
+          variant: "default",
+        });
       });
+
       setIsLoading(false);
     }
   };

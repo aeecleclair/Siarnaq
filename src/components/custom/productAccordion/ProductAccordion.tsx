@@ -86,7 +86,9 @@ export const ProductAccordion = ({
   const takenMembership = userMemberships?.find(
     (userMembership) =>
       product.related_membership?.id ===
-      userMembership.association_membership_id,
+        userMembership.association_membership_id &&
+      new Date(userMembership.end_date).getTime() - new Date().getTime() >
+        1000 * 60 * 60 * 24 * 30,
   );
   const takenMembershipName = memberships.find(
     (membership) =>

@@ -9,10 +9,10 @@ import { ProductAccordion } from "@/components/custom/productAccordion/ProductAc
 import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { TabsContent } from "@/components/ui/tabs";
-import { useToken } from "@/hooks/useToken";
+import { useToast } from "@/components/ui/use-toast";
+import { useYear } from "@/hooks/useYear";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
 import { useTokenStore } from "@/stores/token";
-import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -32,12 +32,14 @@ export const SellerTabContent = ({
   products,
   refetchProducts,
 }: SellerTabContentProps) => {
+  const { toast } = useToast();
   const t = useTranslations("sellerTabContent");
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
   const userId = searchParams.get("userId");
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
   const { token } = useTokenStore();
+  const { year } = useYear();
 
   useEffect(() => {
     if (
@@ -83,13 +85,17 @@ export const SellerTabContent = ({
 
       const link = document.createElement("a");
       link.href = url;
-      link.download = `results_${seller.name}.xlsx`;
+      link.download = `CdR_${year?.year}_${seller.name}.xlsx`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error(error);
+      toast({
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
+      return;
     }
   };
 

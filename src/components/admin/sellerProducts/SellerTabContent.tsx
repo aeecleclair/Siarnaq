@@ -7,8 +7,12 @@ import {
 } from "@/api";
 import { ProductAccordion } from "@/components/custom/productAccordion/ProductAccordion";
 import { Accordion } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { TabsContent } from "@/components/ui/tabs";
+import { useToast } from "@/components/ui/use-toast";
+import { useYear } from "@/hooks/useYear";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
+import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -28,11 +32,14 @@ export const SellerTabContent = ({
   products,
   refetchProducts,
 }: SellerTabContentProps) => {
+  const { toast } = useToast();
   const t = useTranslations("sellerTabContent");
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
   const userId = searchParams.get("userId");
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
+  const { token } = useTokenStore();
+  const { year } = useYear();
 
   useEffect(() => {
     if (
@@ -55,12 +62,55 @@ export const SellerTabContent = ({
     activeSellerId,
   ]);
 
+  const exportResult = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr"}/cdr/sellers/${seller.id}/results/`,
+        {
+          method: "GET",
+          headers: {
+            Accept:
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Error while downloading");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `CdR_${year?.year}_${seller.name}.xlsx`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      toast({
+        description: (error as { detail: String }).detail,
+        variant: "destructive",
+      });
+      return;
+    }
+  };
+
   return (
     <TabsContent value={seller.id} className="min-w-96 w-full">
-      <AddProductAccordionItem
-        seller={seller}
-        refreshProduct={refetchProducts}
-      />
+      <div className="flex border-b">
+        <AddProductAccordionItem
+          seller={seller}
+          refreshProduct={refetchProducts}
+        />
+        <Button className="w-[100px] m-4" onClick={exportResult}>
+          {t("export")}
+        </Button>
+      </div>
+
       {products.length > 0 ? (
         <Accordion
           type="multiple"

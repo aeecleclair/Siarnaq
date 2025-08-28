@@ -309,6 +309,7 @@
     "association": "Association"
   },
   "sellerTabContent": {
+    "export": "Export",
     "noProductFound": "No products found"
   },
   "statusAccordionItem": {

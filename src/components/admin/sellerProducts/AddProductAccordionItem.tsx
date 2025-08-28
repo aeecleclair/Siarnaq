@@ -145,7 +145,7 @@ export const AddProductAccordionItem = ({
   }
 
   return (
-    <div className="flex flex-1 flex-col py-4 font-medium border-b cursor-pointer ">
+    <div className="flex flex-1 flex-col py-4 font-medium cursor-pointer ">
       {!hasInterestProduct && (
         <button
           className="flex flex-1 items-center py-4 font-medium border-b cursor-pointer"

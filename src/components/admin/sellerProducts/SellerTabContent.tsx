@@ -4,6 +4,7 @@ import {
   SellerComplete,
   Status,
   app__modules__cdr__schemas_cdr__ProductComplete,
+  getCdrSellersSellerIdResults,
 } from "@/api";
 import { ProductAccordion } from "@/components/custom/productAccordion/ProductAccordion";
 import { Accordion } from "@/components/ui/accordion";
@@ -15,6 +16,8 @@ import { useEffect, useState } from "react";
 
 import { AddProductAccordionItem } from "./AddProductAccordionItem";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { useToken } from "@/hooks/useToken";
 
 interface SellerTabContentProps {
   status: Status;
@@ -55,6 +58,28 @@ export const SellerTabContent = ({
     products,
     activeSellerId,
   ]);
+  const { isTokenExpired } = useToken();
+
+  const exportResult = async () => {
+    const {data: data} = await getCdrSellersSellerIdResults({
+                path: {
+                  seller_id: seller.id,
+                },
+              });
+   
+
+    const blob: Blob = await (data as Response).blob();
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'rapport.xlsx'); // nom du fichier à sauvegarder
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url); // Nettoyage
+
+  }
 
   return (
     <TabsContent value={seller.id} className="min-w-96 w-full">
@@ -65,6 +90,7 @@ export const SellerTabContent = ({
         />
         <Button
           className="w-[100px] m-4"
+          onClick={exportResult}
         >
           Exporter
         </Button>

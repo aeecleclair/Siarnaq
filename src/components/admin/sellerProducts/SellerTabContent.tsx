@@ -107,7 +107,7 @@ export const SellerTabContent = ({
           refreshProduct={refetchProducts}
         />
         <Button className="w-[100px] m-4" onClick={exportResult}>
-          Exporter
+          {t("export")}
         </Button>
       </div>
 

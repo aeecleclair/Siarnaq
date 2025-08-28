@@ -73,7 +73,7 @@ export const AddEditProductForm = ({
   const format = useFormatter();
   const { toast } = useToast();
   const { products: constraint } = useProducts();
-  const { sellers: sellers } = useSellers();
+  const { sellers } = useSellers();
   const { data, refetch } = useSellerProductData(sellerId, productId ?? null);
   const [isAddingTicketLoading, setIsAddingTicketLoading] = useState(false);
   const [isDeletingTicketLoading, setIsDeletingTicketLoading] = useState(false);
@@ -402,13 +402,13 @@ export const AddEditProductForm = ({
                           constraint.needs_validation,
                       )
                       .map((constraint) => ({
-                        label:
-                          constraint.name_fr +
-                          " (" +
-                          sellers.find(
-                            (seller) => seller.id == constraint.seller_id,
-                          )?.name +
-                          ")",
+                        label: t("constraintName", {
+                          constraint: constraint.name_fr,
+                          seller:
+                            sellers.find(
+                              (seller) => seller.id == constraint.seller_id,
+                            )?.name ?? "",
+                        }),
                         value: constraint.id,
                       }))}
                     selected={field.value}

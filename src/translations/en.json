@@ -16,6 +16,7 @@
     "available_online": "Is available during the online Chaîne de Rentrée",
     "cancel": "Cancel",
     "conditions": "Conditions",
+    "constraintName": "{constraint} ({seller})",
     "description_en": "Description (English)",
     "description_fr": "Description (French)",
     "document_constraints": "Signatures",
@@ -179,8 +180,8 @@
     "promotion": "School year {year}",
     "register": "Register",
     "selectPromotion": "Please select your school year to create a MyECL account:",
-    "usePersonalEmail": "If your student e-mail adress is not yet activated, you may use a personal one. You will have to change it as soon as possible.",
-    "title": "Chaîne de rentrée {year}"
+    "title": "Chaîne de rentrée {year}",
+    "usePersonalEmail": "If your student e-mail adress is not yet activated, you may use a personal one. You will have to change it as soon as possible."
   },
   "metadata": {
     "description": "Centrale Lyon associative Back-to-School management platform",

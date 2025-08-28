@@ -4,20 +4,20 @@ import {
   SellerComplete,
   Status,
   app__modules__cdr__schemas_cdr__ProductComplete,
-  getCdrSellersSellerIdResults,
 } from "@/api";
 import { ProductAccordion } from "@/components/custom/productAccordion/ProductAccordion";
 import { Accordion } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { TabsContent } from "@/components/ui/tabs";
+import { useToken } from "@/hooks/useToken";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
+import { useTokenStore } from "@/stores/token";
+import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { AddProductAccordionItem } from "./AddProductAccordionItem";
-import { Button } from "@/components/ui/button";
-import { useQuery } from "@tanstack/react-query";
-import { useToken } from "@/hooks/useToken";
 
 interface SellerTabContentProps {
   status: Status;
@@ -37,6 +37,7 @@ export const SellerTabContent = ({
   const activeSellerId = searchParams.get("sellerId");
   const userId = searchParams.get("userId");
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
+  const { token } = useTokenStore();
 
   useEffect(() => {
     if (
@@ -58,44 +59,52 @@ export const SellerTabContent = ({
     products,
     activeSellerId,
   ]);
-  const { isTokenExpired } = useToken();
 
   const exportResult = async () => {
-    const {data: data} = await getCdrSellersSellerIdResults({
-                path: {
-                  seller_id: seller.id,
-                },
-              });
-   
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr"}/cdr/sellers/${seller.id}/results/`,
+        {
+          method: "GET",
+          headers: {
+            Accept:
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
-    const blob: Blob = await (data as Response).blob();
-    const url = window.URL.createObjectURL(blob);
+      if (!response.ok) {
+        throw new Error("Error while downloading");
+      }
 
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', 'rapport.xlsx'); // nom du fichier à sauvegarder
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.URL.revokeObjectURL(url); // Nettoyage
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
 
-  }
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `results_${seller.name}.xlsx`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <TabsContent value={seller.id} className="min-w-96 w-full">
       <div className="flex border-b">
         <AddProductAccordionItem
-        seller={seller}
-        refreshProduct={refetchProducts}
+          seller={seller}
+          refreshProduct={refetchProducts}
         />
-        <Button
-          className="w-[100px] m-4"
-          onClick={exportResult}
-        >
+        <Button className="w-[100px] m-4" onClick={exportResult}>
           Exporter
         </Button>
       </div>
-      
+
       {products.length > 0 ? (
         <Accordion
           type="multiple"

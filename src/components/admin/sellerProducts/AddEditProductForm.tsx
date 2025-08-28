@@ -45,6 +45,7 @@ import { useCoreUser } from "@/hooks/useCoreUser";
 import { useMemberships } from "@/hooks/useMemberships";
 import { useProducts } from "@/hooks/useProducts";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
+import { useSellers } from "@/hooks/useSellers";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { UseFormReturn } from "react-hook-form";
@@ -72,6 +73,7 @@ export const AddEditProductForm = ({
   const format = useFormatter();
   const { toast } = useToast();
   const { products: constraint } = useProducts();
+  const { sellers } = useSellers();
   const { data, refetch } = useSellerProductData(sellerId, productId ?? null);
   const [isAddingTicketLoading, setIsAddingTicketLoading] = useState(false);
   const [isDeletingTicketLoading, setIsDeletingTicketLoading] = useState(false);
@@ -395,10 +397,18 @@ export const AddEditProductForm = ({
                   <MultiSelect
                     options={constraint
                       .filter(
-                        (constraint) => constraint.id !== form.watch("id"),
+                        (constraint) =>
+                          constraint.id !== form.watch("id") &&
+                          constraint.needs_validation,
                       )
                       .map((constraint) => ({
-                        label: constraint.name_fr,
+                        label: t("constraintName", {
+                          constraint: constraint.name_fr,
+                          seller:
+                            sellers.find(
+                              (seller) => seller.id == constraint.seller_id,
+                            )?.name ?? "",
+                        }),
                         value: constraint.id,
                       }))}
                     selected={field.value}

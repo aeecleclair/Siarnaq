@@ -15,6 +15,7 @@
     "available_online": "Est disponible lors de la chaîne de rentrée en ligne",
     "cancel": "Annuler",
     "conditions": "Conditions",
+    "constraintName": "{constraint} ({seller})",
     "description_en": "Description (anglais)",
     "description_fr": "Description (français)",
     "document_constraints": "Signatures",
@@ -178,8 +179,8 @@
     "promotion": "Promotion {year}",
     "register": "S'inscrire",
     "selectPromotion": "Sélectionnez votre promo pour créer un compte MyECL :",
-    "usePersonalEmail": "Si votre adresse e-mail étudiante n'est pas encore activée, vous pouvez utiliser une adresse personnelle. Vous devrez effectuer un changement d'adresse dès que possible.",
-    "title": "Chaîne de rentrée associative {year}"
+    "title": "Chaîne de rentrée associative {year}",
+    "usePersonalEmail": "Si votre adresse e-mail étudiante n'est pas encore activée, vous pouvez utiliser une adresse personnelle. Vous devrez effectuer un changement d'adresse dès que possible."
   },
   "metadata": {
     "description": "Plateforme de gestion de la rentrée associative de Centrale Lyon",

@@ -14,6 +14,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { AddProductAccordionItem } from "./AddProductAccordionItem";
+import { Button } from "@/components/ui/button";
 
 interface SellerTabContentProps {
   status: Status;
@@ -57,10 +58,18 @@ export const SellerTabContent = ({
 
   return (
     <TabsContent value={seller.id} className="min-w-96 w-full">
-      <AddProductAccordionItem
+      <div className="flex border-b">
+        <AddProductAccordionItem
         seller={seller}
         refreshProduct={refetchProducts}
-      />
+        />
+        <Button
+          className="w-[100px] m-4"
+        >
+          Exporter
+        </Button>
+      </div>
+      
       {products.length > 0 ? (
         <Accordion
           type="multiple"

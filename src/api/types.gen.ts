@@ -3212,6 +3212,10 @@ export type GetCdrYearResponse = CdrYear;
 
 export type GetCdrYearError = unknown;
 
+export type PatchCdrYearData = {
+    body: CdrYear;
+};
+
 export type PatchCdrYearResponse = void;
 
 export type PatchCdrYearError = unknown;
@@ -7279,11 +7283,16 @@ export type $OpenApiTs = {
             };
         };
         patch: {
+            req: PatchCdrYearData;
             res: {
                 /**
                  * Successful Response
                  */
                 '204': void;
+                /**
+                 * Validation Error
+                 */
+                '422': HTTPValidationError;
             };
         };
     };

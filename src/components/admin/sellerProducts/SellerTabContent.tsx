@@ -5,6 +5,7 @@ import {
   Status,
   app__modules__cdr__schemas_cdr__ProductComplete,
 } from "@/api";
+import { CustomDialog } from "@/components/custom/CustomDialog";
 import { ProductAccordion } from "@/components/custom/productAccordion/ProductAccordion";
 import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -40,6 +41,12 @@ export const SellerTabContent = ({
   const { productExpansion, setExpandedProducts } = useProductExpansionStore();
   const { token } = useTokenStore();
   const { year } = useYear();
+  const [isOpened, setIsOpened] = useState(false);
+
+  function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();
+    setIsOpened(false);
+  }
 
   useEffect(() => {
     if (
@@ -95,18 +102,48 @@ export const SellerTabContent = ({
         description: (error as { detail: String }).detail,
         variant: "destructive",
       });
+      setIsOpened(false);
       return;
     }
+    setIsOpened(false);
   };
 
   return (
     <TabsContent value={seller.id} className="min-w-96 w-full">
+      <CustomDialog
+        isOpened={isOpened}
+        setIsOpened={setIsOpened}
+        title={t("exportData")}
+        description={
+          <div className="grid gap-6 mt-4">
+            <div className="grid gap-2 text-justify">
+              {t("exportDataExplanation")}
+            </div>
+            <div className="flex justify-end mt-2 space-x-4">
+              <Button
+                variant="outline"
+                onClick={closeDialog}
+                className="w-[100px]"
+              >
+                {t("cancel")}
+              </Button>
+              <Button
+                className="w-[100px]"
+                type="button"
+                onClick={exportResult}
+              >
+                {t("export")}
+              </Button>
+            </div>
+          </div>
+        }
+      />
       <div className="flex border-b">
         <AddProductAccordionItem
           seller={seller}
           refreshProduct={refetchProducts}
         />
-        <Button className="w-[100px] m-4" onClick={exportResult}>
+        <Button className="w-[100px] m-4" onClick={() => setIsOpened(true)}>
           {t("export")}
         </Button>
       </div>

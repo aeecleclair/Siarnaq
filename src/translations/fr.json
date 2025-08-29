@@ -308,7 +308,10 @@
     "association": "Association"
   },
   "sellerTabContent": {
+    "cancel": "Annuler",
     "export": "Exporter",
+    "exportData": "Exporter les données",
+    "exportDataExplanation": "En cliquant sur Exporter, vous êtes sur le point de télécharger l'ensemble des données liées à cette asso jusqu'à maintenant (ventes, personnes intéressées, ...) dans un document Excel. Merci de ne le faire que si c'est nécessaire.",
     "noProductFound": "Aucun produit trouvé"
   },
   "statusAccordionItem": {

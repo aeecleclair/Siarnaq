@@ -309,7 +309,10 @@
     "association": "Association"
   },
   "sellerTabContent": {
+    "cancel": "Cancel",
     "export": "Export",
+    "exportData": "Export All Data",
+    "exportDataExplanation": "By clicking on Export, you're about to download all CDR data concerning this club until now (sells, interested people, ...) in an Excel document. Please do it only if necessary.",
     "noProductFound": "No products found"
   },
   "statusAccordionItem": {

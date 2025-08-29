@@ -333,9 +333,9 @@
     "error": "Error"
   },
   "topbar": {
-    "admin": "Admin view",
+    "admin": "Seller view",
     "logout": "Log out",
-    "user": "User view"
+    "user": "Buyer view"
   },
   "variantCardOptions": {
     "activate": "Enable",

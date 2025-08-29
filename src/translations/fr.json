@@ -332,9 +332,9 @@
     "error": "Erreur"
   },
   "topbar": {
-    "admin": "Vue admin",
+    "admin": "Vue vendeur",
     "logout": "Se déconnecter",
-    "user": "Vue utilisateur"
+    "user": "Vue acheteur"
   },
   "variantCardOptions": {
     "activate": "Activer",

@@ -8,7 +8,6 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Suspense } from "react";
 
-import LocaleDropdown from "../../components/custom/locale-dropdown";
 import Provider from "./provider";
 import { QueryProvider } from "./queryProvider";
 import TopBar from "./topbar";

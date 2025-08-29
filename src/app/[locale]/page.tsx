@@ -5,6 +5,7 @@ import { AssociationPanel } from "@/components/user/AssociationPanel";
 import { CentralPanel } from "@/components/user/CentralPanel";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
+import { useYear } from "@/hooks/useYear";
 import { useRouter } from "@/i18n/navigation";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
@@ -19,6 +20,7 @@ export default function Home() {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
   const { onlineSellers } = useOnlineSellers();
+  const { year } = useYear();
   const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
   const t = useTranslations("page");
 
@@ -73,7 +75,7 @@ export default function Home() {
             </p>
             <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
               {t.rich("license", {
-                date: () => new Date().getFullYear(),
+                date: () => year,
                 eclair: (c) => (
                   <a
                     href="https://www.eclair.ec-lyon.fr/"

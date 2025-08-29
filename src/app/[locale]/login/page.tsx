@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useYear } from "@/hooks/useYear";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -26,7 +27,7 @@ import MyECLButton from "../../../components/login/MyECLButton";
 const Login = () => {
   const t = useTranslations("login");
   const router = useRouter();
-  const year = new Date().getFullYear();
+  const { year } = useYear();
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
     return (year - index).toString();
   });

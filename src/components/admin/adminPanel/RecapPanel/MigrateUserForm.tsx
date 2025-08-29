@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import _migrateUserFormSchema from "@/forms/migrateUserFormSchema";
+import { useYear } from "@/hooks/useYear";
 import { addYears } from "date-fns";
 import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
@@ -57,7 +58,7 @@ export const MigrateUserForm = ({
   setIsOpened,
   closeDialog,
 }: MigrateUserFormProps) => {
-  const year = new Date().getFullYear();
+  const { year } = useYear();
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
     return (year - index).toString();
   });

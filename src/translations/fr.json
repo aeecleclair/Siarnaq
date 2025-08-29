@@ -137,7 +137,7 @@
   },
   "info": {
     "cautionDescription": "Si vous prenez une place pour le Week-End d'Intégration (WEI), prévoyez un chèque de caution de 100 € à l'ordre « <payable>AEECL - WEI</payable> ».",
-    "cautionInstructions": "Au dos, notez : \"Prénom Nom - WEI 2025\". Ce chèque ne sera encaissé qu'en cas de dégradations dans les bus du WEI.",
+    "cautionInstructions": "Au dos, notez : \"Prénom Nom - WEI {year}\". Ce chèque ne sera encaissé qu'en cas de dégradations dans les bus du WEI.",
     "cautionInstructions2": "Une seconde caution pour le site du WEI est à déposer  sur le site suivant : <link></link>. Il s’agit d’une caution par empreinte bancaire donc aucun montant ne sera débité sauf si des dégradations sont constatées. ",
     "cautionMandatory": "Ces deux cautions sont <mandatory>obligatoires</mandatory> pour participer au WEI. ",
     "cautionTitle": "Caution pour le WEI",
@@ -153,9 +153,9 @@
     "elementStep3": "Entrez l'URL du serveur :",
     "elementStep4": "Vous pourrez alors vous connecter avec votre compte MyECL",
     "elementTitle": "Messagerie instantanée Element / Matrix",
-    "facebook": "Une grande partie de la communication sur le campus se fait via des groupes Facebook. Les nouveaux élèves peuvent rejoindre le groupe des Admis 2025 pour ne rater aucune information :",
+    "facebook": "Une grande partie de la communication sur le campus se fait via des groupes Facebook. Les nouveaux élèves peuvent rejoindre le groupe des Admis {year} pour ne rater aucune information :",
     "facebookTitle": "Groupe Facebook des admis",
-    "group": "Groupe des Admis 2025",
+    "group": "Groupe des Admis {year}",
     "information": "Informations pratiques",
     "myECL": "L'application MyECL est essentielle à la vie étudiante centralienne, elle est nécessaire pour payer lors de nombreux événements (notamment au bar) et vous permettra d'accéder à plein de services (calendrier des événements, planning du cinéma, réservations de salles, etc.).",
     "myECLTitle": "Application MyECL"
@@ -334,7 +334,9 @@
   "topbar": {
     "admin": "Vue vendeur·euse",
     "logout": "Se déconnecter",
-    "user": "Vue acheteur·euse"
+    "status": "Statut : {status, select, pending {en attente} online {en ligne} onsite {sur place} closed {fermé} other {}}",
+    "user": "Vue acheteur·euse",
+    "year": "Session : {year}"
   },
   "variantCardOptions": {
     "activate": "Activer",

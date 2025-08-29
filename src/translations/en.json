@@ -138,7 +138,7 @@
   },
   "info": {
     "cautionDescription": "If you are taking a place at the Integration Weekend (WEI), please provide a deposit cheque for €100 made out to « <payable>AEECL - WEI</payable> ».",
-    "cautionInstructions": "On the back, write \"First name Last name - WEI 2025\". This cheque will only be cashed in the event of damage to the WEI buses.",
+    "cautionInstructions": "On the back, write \"First name Last name - WEI {year}\". This cheque will only be cashed in the event of damage to the WEI buses.",
     "cautionInstructions2": "A second deposit for the WEI site is to be deposited on the following site: <link></link>. This is a deposit by bank imprint, so no amount will be debited unless damage is noted.",
     "cautionMandatory": "Both deposits are <mandatory>mandatory</mandatory> to participate in the WEI.",
     "cautionTitle": "Deposit for the WEI",
@@ -154,9 +154,9 @@
     "elementStep3": "Enter our server URL:",
     "elementStep4": "You can then log in with your MyECL account",
     "elementTitle": "Element / Matrix instant messaging",
-    "facebook": "The majority of the campus' communication takes place via Facebook groups. New students can join the group 'Admis 2025' to make sure they don't miss any information:",
+    "facebook": "The majority of the campus' communication takes place via Facebook groups. New students can join the group 'Admis {year}' to make sure they don't miss any information:",
     "facebookTitle": "Facebook group for new students",
-    "group": "Group for 2025 successful students",
+    "group": "Group for {year} successful students",
     "information": "Useful information",
     "myECL": "The MyECL application is essential to student life at Centrale, it is mandatory to pay during numerous events (especially at the bar) and it will allow you to access plenty of services (the events calendar, the schedule of the film club, room reservations, and so forth).",
     "myECLTitle": "MyECL Application"
@@ -335,7 +335,9 @@
   "topbar": {
     "admin": "Seller view",
     "logout": "Log out",
-    "user": "Buyer view"
+    "status": "Status: {status, select, pending {pending} online {online} onsite {onsite} closed {closed} other {}}",
+    "user": "Buyer view",
+    "year": "Session: {year}"
   },
   "variantCardOptions": {
     "activate": "Enable",

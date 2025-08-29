@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useSellers } from "@/hooks/useSellers";
+import { useStatus } from "@/hooks/useStatus";
+import { useYear } from "@/hooks/useYear";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { useLocaleStore } from "@/stores/locale";
@@ -29,13 +31,15 @@ export default function TopBar() {
   const router = useRouter();
   const { user, isAdmin } = useCoreUser();
   const { sellers } = useSellers();
+  const { year } = useYear();
+  const { status } = useStatus();
 
   const isInASellerGroup = user?.groups?.some((group) =>
     sellers.some((seller) => seller.group_id === group.id),
   );
 
   return (
-    <div className="p-6 bg-muted/40 flex flex-row gap-x-4">
+    <div className="p-6 bg-muted/40 flex flex-row flex-nowrap gap-x-4">
       <LocaleDropdown />
       {["/", "/admin"].includes(pathname) && (
         <Button
@@ -60,6 +64,14 @@ export default function TopBar() {
           <HiShoppingCart className="mr-2" />
           {t("user")}
         </Button>
+      )}
+      {pathname === "/admin" && (
+        <div className="flex flex-col text-sm text-nowrap">
+          <span>{t("year", { year: year.toString() })}</span>
+          {status?.status && (
+            <span>{t("status", { status: status?.status })}</span>
+          )}
+        </div>
       )}
     </div>
   );
@@ -94,7 +106,7 @@ function LocaleDropdown() {
           alt={localeName[locale]}
           width={30}
           height={30}
-          className="rounded-2xs border border-border mr-2"
+          className="rounded-2xs mr-2"
         />
         <span className="self-center">{localeName[locale]}</span>
         <CaretSortIcon className="ml-2 size-6 self-center" />

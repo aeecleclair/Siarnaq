@@ -335,7 +335,13 @@
   "topbar": {
     "admin": "Seller view",
     "logout": "Log out",
-    "user": "Buyer view"
+    "status": "Status: {status}",
+    "user": "Buyer view",
+    "year": "Session: {year}",
+    "closed": "closed",
+    "online": "online",
+    "onsite": "onsite",
+    "pending": "pending"
   },
   "variantCardOptions": {
     "activate": "Enable",

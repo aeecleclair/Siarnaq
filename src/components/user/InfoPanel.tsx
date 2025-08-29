@@ -2,6 +2,7 @@ import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
+import { useYear } from "@/hooks/useYear";
 import { Link } from "@/i18n/navigation";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
@@ -27,8 +28,9 @@ import {
 
 export const InfoPanel = () => {
   const t = useTranslations("info");
-
   const { onlineSellers } = useOnlineSellers();
+  const { year } = useYear();
+  const yearString = year.toString();
 
   return (
     <Card>
@@ -68,7 +70,7 @@ export const InfoPanel = () => {
             payable: (c) => <span className="italic">{c}</span>,
           })}
         </div>
-        <div>{t("cautionInstructions")}</div>
+        <div>{t("cautionInstructions", { year: yearString })}</div>
         <div>
           {t.rich("cautionInstructions2", {
             link: () => (
@@ -93,7 +95,7 @@ export const InfoPanel = () => {
           <HiOutlineNewspaper className="h-4 w-4 mr-2" />
           {t("facebookTitle")}
         </h3>
-        <div>{t("facebook")}</div>
+        <div>{t("facebook", { year: yearString })}</div>
         <div className="pl-10">
           {/* TODO: provide a clean link like https://www.facebook.com/groups/admis2024 */}
           <a
@@ -101,7 +103,7 @@ export const InfoPanel = () => {
             className="font-medium hover:underline underline-offset-4 flex flex-row items-center"
           >
             <HiOutlineLink className="h-4 w-4 mr-2" />
-            {t("group")}
+            {t("group", { year: yearString })}
           </a>
         </div>
         {/* */}

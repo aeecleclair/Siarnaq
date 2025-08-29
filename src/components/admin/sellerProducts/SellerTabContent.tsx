@@ -92,7 +92,7 @@ export const SellerTabContent = ({
 
       const link = document.createElement("a");
       link.href = url;
-      link.download = `CdR_${year?.year}_${seller.name}.xlsx`;
+      link.download = `CdR_${year}_${seller.name}.xlsx`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

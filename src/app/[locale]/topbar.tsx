@@ -16,7 +16,10 @@ export default function TopBar() {
   const { user, isAdmin } = useCoreUser();
   const { sellers } = useSellers();
 
-  console.log(pathname);
+  const isInASellerGroup = user?.groups?.some((group) =>
+    sellers.some((seller) => seller.group_id === group.id),
+  );
+
   return (
     <div className="p-6 bg-muted/40 flex flex-row gap-x-4">
       <LocaleDropdown />
@@ -30,13 +33,9 @@ export default function TopBar() {
           {t("logout")}
         </Button>
       )}
-      {pathname === "/" &&
-        (isAdmin ||
-          user?.groups?.some((group) =>
-            sellers.some((seller) => seller.group_id === group.id),
-          )) && (
-          <Button onClick={() => router.push("/admin")}>{t("admin")}</Button>
-        )}
+      {pathname === "/" && (isAdmin || isInASellerGroup) && (
+        <Button onClick={() => router.push("/admin")}>{t("admin")}</Button>
+      )}
       {pathname === "/admin" && (
         <Button onClick={() => router.push("/")}>{t("user")}</Button>
       )}

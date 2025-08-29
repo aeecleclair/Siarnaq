@@ -83,6 +83,8 @@ export const VariantCardOptions = ({
       isMembershipProduct: isMembershipProduct,
       allowed_curriculum:
         variant.allowed_curriculum?.map((curriculum) => curriculum.id) || [],
+      related_membership_added_duration:
+        variant.related_membership_added_duration?.substring(1),
     },
   });
 

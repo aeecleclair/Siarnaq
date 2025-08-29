@@ -5,7 +5,7 @@ export default function UserDisplayName({ user }: { user: CdrUser }) {
     <span className="font-bold">
       {user.nickname
         ? `${user.nickname} (${user.firstname} ${user.name})`
-        : `${user.firstname} ${user.name}"`}
+        : `${user.firstname} ${user.name}`}
     </span>
   );
 }

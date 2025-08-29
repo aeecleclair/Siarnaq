@@ -335,7 +335,7 @@
   "topbar": {
     "admin": "Seller view",
     "logout": "Log out",
-    "status": "Status: {status}",
+    "status": "Status: {status, select, pending {pending} online {online} onsite {onsite} closed {closed} other {}}",
     "user": "Buyer view",
     "year": "Session: {year}",
     "closed": "closed",

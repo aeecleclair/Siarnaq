@@ -331,6 +331,11 @@
   "toast": {
     "error": "Erreur"
   },
+  "topbar": {
+    "admin": "Vue vendeur·euse",
+    "logout": "Se déconnecter",
+    "user": "Vue acheteur·euse"
+  },
   "variantCardOptions": {
     "activate": "Activer",
     "areYouSure": "Êtes-vous sûr de vouloir supprimer cette variante ?",

@@ -332,6 +332,11 @@
   "toast": {
     "error": "Error"
   },
+  "topbar": {
+    "admin": "Admin view",
+    "logout": "Log out",
+    "user": "User view"
+  },
   "variantCardOptions": {
     "activate": "Enable",
     "areYouSure": "Are you sure you want to delete this variant?",

@@ -331,6 +331,11 @@
   "toast": {
     "error": "Erreur"
   },
+  "topbar": {
+    "admin": "Vue admin",
+    "logout": "Se déconnecter",
+    "user": "Vue utilisateur"
+  },
   "variantCardOptions": {
     "activate": "Activer",
     "areYouSure": "Êtes-vous sûr de vouloir supprimer cette variante ?",

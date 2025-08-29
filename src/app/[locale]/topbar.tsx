@@ -2,6 +2,8 @@
 
 import LocaleDropdown from "@/components/custom/locale-dropdown";
 import { Button } from "@/components/ui/button";
+import { useCoreUser } from "@/hooks/useCoreUser";
+import { useSellers } from "@/hooks/useSellers";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
@@ -11,6 +13,8 @@ export default function TopBar() {
   const { setToken, setRefreshToken } = useTokenStore();
   const pathname = usePathname();
   const router = useRouter();
+  const { user, isAdmin } = useCoreUser();
+  const { sellers } = useSellers();
 
   console.log(pathname);
   return (
@@ -26,9 +30,13 @@ export default function TopBar() {
           {t("logout")}
         </Button>
       )}
-      {pathname === "/" && (
-        <Button onClick={() => router.push("/admin")}>{t("admin")}</Button>
-      )}
+      {pathname === "/" &&
+        (isAdmin ||
+          user?.groups?.some((group) =>
+            sellers.some((seller) => seller.group_id === group.id),
+          )) && (
+          <Button onClick={() => router.push("/admin")}>{t("admin")}</Button>
+        )}
       {pathname === "/admin" && (
         <Button onClick={() => router.push("/")}>{t("user")}</Button>
       )}

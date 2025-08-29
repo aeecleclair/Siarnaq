@@ -10,7 +10,7 @@ export const useYear = () => {
   });
 
   return {
-    year: data?.data?.year ?? new Date().getFullYear(),
+    year: data?.data?.year ?? 1970,
     isLoading,
     refetch,
   };

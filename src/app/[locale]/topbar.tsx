@@ -14,11 +14,13 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { useLocaleStore } from "@/stores/locale";
 import { useTokenStore } from "@/stores/token";
-import { CaretSortIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, ExitIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 import { Locale, useLocale } from "next-intl";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import { HiOutlineLibrary } from "react-icons/hi";
+import { HiShoppingCart } from "react-icons/hi2";
 
 export default function TopBar() {
   const t = useTranslations("topbar");
@@ -37,19 +39,27 @@ export default function TopBar() {
       <LocaleDropdown />
       {["/", "/admin"].includes(pathname) && (
         <Button
+          variant="secondary"
           onClick={() => {
             setRefreshToken(null);
             setToken(null);
           }}
         >
+          <ExitIcon className="mr-2" />
           {t("logout")}
         </Button>
       )}
       {pathname === "/" && (isAdmin || isInASellerGroup) && (
-        <Button onClick={() => router.push("/admin")}>{t("admin")}</Button>
+        <Button variant="secondary" onClick={() => router.push("/admin")}>
+          <HiOutlineLibrary className="mr-2" />
+          {t("admin")}
+        </Button>
       )}
       {pathname === "/admin" && (
-        <Button onClick={() => router.push("/")}>{t("user")}</Button>
+        <Button variant="secondary" onClick={() => router.push("/")}>
+          <HiShoppingCart className="mr-2" />
+          {t("user")}
+        </Button>
       )}
     </div>
   );

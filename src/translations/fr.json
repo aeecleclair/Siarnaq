@@ -333,11 +333,7 @@
   },
   "topbar": {
     "admin": "Vue vendeur·euse",
-    "closed": "fermé",
     "logout": "Se déconnecter",
-    "online": "en ligne",
-    "onsite": "sur place",
-    "pending": "en attente",
     "status": "Statut : {status, select, pending {en attente} online {en ligne} onsite {sur place} closed {fermé} other {}}",
     "user": "Vue acheteur·euse",
     "year": "Session : {year}"

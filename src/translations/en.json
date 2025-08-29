@@ -337,11 +337,7 @@
     "logout": "Log out",
     "status": "Status: {status, select, pending {pending} online {online} onsite {onsite} closed {closed} other {}}",
     "user": "Buyer view",
-    "year": "Session: {year}",
-    "closed": "closed",
-    "online": "online",
-    "onsite": "onsite",
-    "pending": "pending"
+    "year": "Session: {year}"
   },
   "variantCardOptions": {
     "activate": "Enable",

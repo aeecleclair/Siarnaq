@@ -30,7 +30,7 @@ import { useUserPayments } from "@/hooks/useUserPayments";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFormatter, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlinePencil } from "react-icons/hi2";
 import z from "zod";
@@ -121,6 +121,17 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       promo: undefined,
     },
   });
+
+  useEffect(() => {
+    form.reset({
+      nickname: user.nickname ?? undefined,
+      email: user.email ?? undefined,
+      floor: user.floor ?? undefined,
+      birthday: undefined,
+      phone: undefined,
+      promo: undefined,
+    });
+  }, [user, form]);
 
   async function onSubmit(values: z.infer<typeof migrateUserFormSchema>) {
     setIsLoading(true);

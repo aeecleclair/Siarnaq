@@ -111,6 +111,8 @@ export const ProductAccordion = ({
     !isMembershipAlreadyTaken &&
     !isConstraintMembershipTaken;
 
+  console.log(variantToDisplay);
+
   return (
     (isAdmin || (variantToDisplay?.length ?? 0) > 0) && (
       <AccordionItem value={product.id}>

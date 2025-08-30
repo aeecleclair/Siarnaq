@@ -64,7 +64,7 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
       refetch().then(({ data }) => {
         toast({
           title: data?.data
-            ?.filter((purchase) => !purchase.validated)
+            ?.filter((purchase) => purchase.product.needs_validation)
             .map((purchase) => purchase.validated)
             .some((validated) => !validated)
             ? t("unvalidated")

@@ -70,22 +70,24 @@ export const VariantCardOptions = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const initialValues: z.infer<typeof variantFormSchema> = {
+    name_en: variant.name_en || undefined,
+    name_fr: variant.name_fr,
+    description_en: variant?.description_en || undefined,
+    description_fr: variant?.description_fr || undefined,
+    price: (variant.price / 100).toString(),
+    unique: variant.unique ? "unique" : "multiple",
+    isMembershipProduct: isMembershipProduct,
+    allowed_curriculum:
+      variant.allowed_curriculum?.map((curriculum) => curriculum.id) || [],
+    related_membership_added_duration:
+      variant.related_membership_added_duration?.substring(1),
+  };
+
   const form = useForm<z.infer<typeof variantFormSchema>>({
     resolver: zodResolver(variantFormSchema),
     mode: "onBlur",
-    defaultValues: {
-      name_en: variant.name_en || undefined,
-      name_fr: variant.name_fr,
-      description_en: variant?.description_en || undefined,
-      description_fr: variant?.description_fr || undefined,
-      price: (variant.price / 100).toString(),
-      unique: variant.unique ? "unique" : "multiple",
-      isMembershipProduct: isMembershipProduct,
-      allowed_curriculum:
-        variant.allowed_curriculum?.map((curriculum) => curriculum.id) || [],
-      related_membership_added_duration:
-        variant.related_membership_added_duration?.substring(1),
-    },
+    defaultValues: initialValues,
   });
 
   async function patchVariant(body: ProductVariantEdit) {
@@ -105,16 +107,49 @@ export const VariantCardOptions = ({
       });
       setIsLoading(false);
       setIsEditDialogOpened(false);
+      form.reset(initialValues);
       return;
     }
   }
 
+  function getModifiedFields<T extends Record<string, any>>(
+    original: T,
+    updated: T,
+  ): Partial<T> {
+    const result: Partial<T> = {};
+
+    for (const key in updated) {
+      const origValue = original[key];
+      const newValue = updated[key];
+
+      // Comparaison simple, à adapter pour les objets ou dates
+      if (Array.isArray(origValue) && Array.isArray(newValue)) {
+        if (JSON.stringify(origValue) !== JSON.stringify(newValue)) {
+          result[key] = newValue;
+        }
+      } else if (
+        (origValue as any) instanceof Date &&
+        (newValue as any) instanceof Date &&
+        (origValue as Date).getTime() !== (newValue as Date).getTime()
+      ) {
+        result[key] = newValue;
+      } else if (origValue !== newValue) {
+        result[key] = newValue;
+      }
+    }
+
+    return result;
+  }
+
   async function onSubmit(values: z.infer<typeof variantFormSchema>) {
     setIsLoading(true);
+
     const added_duration = values.related_membership_added_duration?.match(
       /^P?((\d+Y)?(\d+M)?(\d+D)?)$/,
     );
-    const body: ProductVariantEdit = {
+
+    // Valeurs transformées comme attendues par l'API
+    const resolvedValues: ProductVariantEdit = {
       ...values,
       price: Math.round(parseFloat(values.price) * 100),
       unique: values.unique === "unique",
@@ -123,11 +158,29 @@ export const VariantCardOptions = ({
         ? "P" + added_duration[1]
         : undefined,
     };
-    await patchVariant(body);
+
+    const resolvedInitial: ProductVariantEdit = {
+      ...initialValues,
+      price: Math.round(parseFloat(initialValues.price) * 100),
+      unique: initialValues.unique === "unique",
+      enabled: true,
+      related_membership_added_duration:
+        initialValues.related_membership_added_duration || undefined,
+    };
+
+    const diff = getModifiedFields(resolvedInitial, resolvedValues);
+
+    if (Object.keys(diff).length === 0) {
+      toast({ description: "Aucune modification détectée." });
+      setIsLoading(false);
+      setIsEditDialogOpened(false);
+      return;
+    }
+
+    await patchVariant(diff);
     refreshProduct();
     setIsEditDialogOpened(false);
     setIsLoading(false);
-    form.reset(values);
   }
 
   async function toggleEnabled() {

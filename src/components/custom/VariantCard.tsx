@@ -181,7 +181,7 @@ export const VariantCard = ({
                 selected
                   ? displayWarning
                     ? "border-destructive shadow-destructive/30 shadow-lg"
-                    : "shadow-lg border-border"
+                    : "shadow-lg border-selected"
                   : "shadow-lg",
                 !variant.enabled ? "text-muted-foreground" : "",
                 (isSelectable || (!isSelectable && selected)) &&

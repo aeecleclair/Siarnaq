@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --custom-vh: calc(100dvh - 80px);
+    --custom-vh: calc(100dvh - 88px);
 
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;

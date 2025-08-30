@@ -138,15 +138,11 @@ function LocaleDropdown() {
   );
 }
 
-function toggleNames(theme: string) {
-  return theme === "light" ? "dark" : "light";
-}
-
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   return (
     <button
-      onClick={() => setTheme(toggleNames(resolvedTheme!))}
+      onClick={() => setTheme(resolvedTheme! === "light" ? "dark" : "light")}
       className="inline-flex items-center justify-center text-foreground"
     >
       <Sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

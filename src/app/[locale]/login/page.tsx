@@ -37,7 +37,7 @@ const Login = () => {
   );
   return (
     <div className="flex [&>div]:w-full h-[--custom-vh] bg-muted/40">
-      <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
+      <Card className="rounded-xl border bg-card text-muted-foreground shadow max-w-[700px] m-auto">
         <CardHeader>
           <CardTitle>{t("title", { year: year.toString() })}</CardTitle>
           <CardDescription className="flex flex-col gap-2">

@@ -17,8 +17,10 @@ import { routing } from "@/i18n/routing";
 import { useLocaleStore } from "@/stores/locale";
 import { useTokenStore } from "@/stores/token";
 import { CaretSortIcon, ExitIcon } from "@radix-ui/react-icons";
+import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Locale, useLocale } from "next-intl";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { HiOutlineLibrary } from "react-icons/hi";
@@ -39,40 +41,43 @@ export default function TopBar() {
   );
 
   return (
-    <div className="p-6 bg-muted/40 flex flex-row flex-nowrap gap-x-4">
-      <LocaleDropdown />
-      {["/", "/admin"].includes(pathname) && (
-        <Button
-          variant="secondary"
-          onClick={() => {
-            setRefreshToken(null);
-            setToken(null);
-          }}
-        >
-          <ExitIcon className="mr-2" />
-          {t("logout")}
-        </Button>
-      )}
-      {pathname === "/" && (isAdmin || isInASellerGroup) && (
-        <Button variant="secondary" onClick={() => router.push("/admin")}>
-          <HiOutlineLibrary className="mr-2" />
-          {t("admin")}
-        </Button>
-      )}
-      {pathname === "/admin" && (
-        <Button variant="secondary" onClick={() => router.push("/")}>
-          <HiShoppingCart className="mr-2" />
-          {t("user")}
-        </Button>
-      )}
+    <div className="p-6 bg-muted/40 flex flex-row flex-nowrap gap-x-4 justify-between">
+      <div className="flex flex-row gap-x-4 shrink-0">
+        <LocaleDropdown />
+        <ThemeToggle />
+      </div>
       {pathname === "/admin" && (
         <div className="flex flex-col text-sm text-nowrap">
           <span>{t("year", { year: year.toString() })}</span>
-          {status?.status && (
-            <span>{t("status", { status: status?.status })}</span>
-          )}
+          <span>{t("status", { status: status?.status ?? "" })}</span>
         </div>
       )}
+      <div className="flex gap-x-4">
+        {pathname === "/" && (isAdmin || isInASellerGroup) && (
+          <Button variant="secondary" onClick={() => router.push("/admin")}>
+            <HiOutlineLibrary className="mr-2" />
+            {t("admin")}
+          </Button>
+        )}
+        {pathname === "/admin" && (
+          <Button variant="secondary" onClick={() => router.push("/")}>
+            <HiShoppingCart className="mr-2" />
+            {t("user")}
+          </Button>
+        )}
+        {["/", "/admin"].includes(pathname) && (
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setRefreshToken(null);
+              setToken(null);
+            }}
+          >
+            <ExitIcon className="mr-2" />
+            {t("logout")}
+          </Button>
+        )}
+      </div>
     </div>
   );
 }
@@ -128,5 +133,18 @@ function LocaleDropdown() {
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+}
+
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  return (
+    <button
+      onClick={() => setTheme(resolvedTheme! === "light" ? "dark" : "light")}
+      className="inline-flex items-center justify-center text-foreground"
+    >
+      <Sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+    </button>
   );
 }

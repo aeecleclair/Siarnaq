@@ -49,7 +49,7 @@ export const CustomFieldInput = ({
       <Label className="text-sm font-medium">{field.name}</Label>
       <Input
         type="text"
-        className="w-full p-2 border border-gray-200 rounded-md"
+        className="w-full p-2 border border-border rounded-md"
         value={answers[field.id]?.value ?? ""}
         onChange={(e) =>
           setAnswers((prev) => ({

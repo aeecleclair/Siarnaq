@@ -50,27 +50,31 @@ export const ProductAccordionOptions = ({
 
   const { memberships } = useMemberships();
 
+  const initialValues: z.infer<typeof productFormSchema> = {
+    id: product.id,
+    name_fr: product.name_fr,
+    name_en: product.name_en || undefined,
+    description_fr: product.description_fr || undefined,
+    description_en: product.description_en || undefined,
+    available_online: product.available_online ? "true" : "false",
+    product_constraints:
+      product.product_constraints?.map((constraint) => constraint.id) || [],
+    document_constraints:
+      product.document_constraints?.map((constraint) => constraint.id) || [],
+    tickets: product.tickets
+      ? product.tickets.map((ticket) => ({
+          ...ticket,
+          expiration: new Date(ticket.expiration),
+        }))
+      : [],
+    related_membership: product.related_membership?.id || undefined,
+    data_fields: [],
+  };
+
   const form = useForm<z.infer<typeof productFormSchema>>({
     resolver: zodResolver(productFormSchema),
     mode: "onBlur",
-    defaultValues: {
-      id: product.id,
-      name_fr: product.name_fr,
-      name_en: product.name_en || undefined,
-      description_fr: product.description_fr || undefined,
-      description_en: product.description_en || undefined,
-      available_online: product.available_online ? "true" : "false",
-      product_constraints:
-        product.product_constraints?.map((constraint) => constraint.id) || [],
-      document_constraints:
-        product.document_constraints?.map((constraint) => constraint.id) || [],
-      tickets: product.tickets?.map((ticket) => ({
-        ...ticket,
-        expiration: new Date(ticket.expiration),
-      })),
-      related_membership: product.related_membership?.id || undefined,
-      data_fields: [],
-    },
+    defaultValues: initialValues,
   });
 
   async function patchProduct(
@@ -90,24 +94,76 @@ export const ProductAccordionOptions = ({
       });
       setIsLoading(false);
       setIsEditDialogOpened(false);
+      form.reset(initialValues);
       return;
     }
   }
 
+  function getModifiedFields<T extends Record<string, any>>(
+    original: T,
+    updated: T,
+  ): Partial<T> {
+    const result: Partial<T> = {};
+
+    for (const key in updated) {
+      const origValue = original[key];
+      const newValue = updated[key];
+
+      // Comparaison simple, à adapter pour les objets ou dates
+      if (Array.isArray(origValue) && Array.isArray(newValue)) {
+        if (JSON.stringify(origValue) !== JSON.stringify(newValue)) {
+          result[key] = newValue;
+        }
+      } else if (
+        (origValue as any) instanceof Date &&
+        (newValue as any) instanceof Date &&
+        (origValue as Date).getTime() !== (newValue as Date).getTime()
+      ) {
+        result[key] = newValue;
+      } else if (origValue !== newValue) {
+        result[key] = newValue;
+      }
+    }
+
+    return result;
+  }
+
   async function onSubmit(values: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
-    const body: app__modules__cdr__schemas_cdr__ProductEdit = {
+
+    const resolvedValues: app__modules__cdr__schemas_cdr__ProductEdit = {
       ...values,
       related_membership: values.related_membership
         ? memberships.find((m) => m.id == values.related_membership)
         : undefined,
       available_online: values.available_online === "true",
     };
-    await patchProduct(body);
+
+    const resolvedInitial: typeof resolvedValues = {
+      ...initialValues,
+      related_membership: initialValues.related_membership
+        ? memberships.find((m) => m.id == initialValues.related_membership)
+        : undefined,
+      available_online: initialValues.available_online === "true",
+    };
+
+    console.log(resolvedValues, resolvedInitial);
+
+    const diff = getModifiedFields(resolvedInitial, resolvedValues);
+
+    if (Object.keys(diff).length === 0) {
+      toast({
+        description: "Aucune modification détectée.",
+      });
+      setIsLoading(false);
+      setIsEditDialogOpened(false);
+      return;
+    }
+
+    await patchProduct(diff);
     refreshProduct();
     setIsEditDialogOpened(false);
     setIsLoading(false);
-    form.reset(values);
   }
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {

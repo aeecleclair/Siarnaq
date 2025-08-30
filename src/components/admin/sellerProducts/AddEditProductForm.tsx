@@ -255,30 +255,32 @@ export const AddEditProductForm = ({
           input={(field) => <Textarea {...field} />}
         />
       </div>
-      <div className="grid gap-2">
-        <StyledFormField
-          form={form}
-          label={t("availability")}
-          id="available_online"
-          input={(field) => (
-            <RadioGroup
-              onValueChange={field.onChange}
-              defaultValue={field.value}
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="true" id="available_online" />
-                <Label htmlFor="available_online">
-                  {t("available_online")}
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="false" id="onsite" />
-                <Label htmlFor="onsite">{t("onsite")}</Label>
-              </div>
-            </RadioGroup>
-          )}
-        />
-      </div>
+      {isAdmin && (
+        <div className="grid gap-2">
+          <StyledFormField
+            form={form}
+            label={t("availability")}
+            id="available_online"
+            input={(field) => (
+              <RadioGroup
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="true" id="available_online" />
+                  <Label htmlFor="available_online">
+                    {t("available_online")}
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="false" id="onsite" />
+                  <Label htmlFor="onsite">{t("onsite")}</Label>
+                </div>
+              </RadioGroup>
+            )}
+          />
+        </div>
+      )}
       {isAdmin && (
         <StyledFormField
           form={form}

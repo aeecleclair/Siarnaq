@@ -156,14 +156,13 @@ function _toast({ ...props }: Toast) {
   dispatch({
     type: "ADD_TOAST",
     toast: {
-      ...props,
-      id,
-      className: "bg-muted",
-      open: true,
-      onOpenChange: (open) => {
-        if (!open) dismiss()
-      },
-    },
+  ...props,
+  id,
+  open: true,
+  onOpenChange: (open) => {
+    if (!open) dismiss()
+  },
+},
   })
 
   return {

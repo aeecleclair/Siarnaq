@@ -17,8 +17,10 @@ import { routing } from "@/i18n/routing";
 import { useLocaleStore } from "@/stores/locale";
 import { useTokenStore } from "@/stores/token";
 import { CaretSortIcon, ExitIcon } from "@radix-ui/react-icons";
+import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Locale, useLocale } from "next-intl";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { HiOutlineLibrary } from "react-icons/hi";
@@ -41,6 +43,7 @@ export default function TopBar() {
   return (
     <div className="p-6 bg-muted/40 flex flex-row flex-nowrap gap-x-4">
       <LocaleDropdown />
+      <ThemeToggle />
       {["/", "/admin"].includes(pathname) && (
         <Button
           variant="secondary"
@@ -128,5 +131,22 @@ function LocaleDropdown() {
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+}
+
+function toggleNames(theme: string) {
+  return theme === "light" ? "dark" : "light";
+}
+
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  return (
+    <button
+      onClick={() => setTheme(toggleNames(resolvedTheme!))}
+      className="inline-flex items-center justify-center text-foreground"
+    >
+      <Sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+    </button>
   );
 }

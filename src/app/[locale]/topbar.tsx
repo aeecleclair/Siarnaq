@@ -41,33 +41,11 @@ export default function TopBar() {
   );
 
   return (
-    <div className="p-6 bg-muted/40 flex flex-row flex-nowrap gap-x-4">
-      <LocaleDropdown />
-      <ThemeToggle />
-      {["/", "/admin"].includes(pathname) && (
-        <Button
-          variant="secondary"
-          onClick={() => {
-            setRefreshToken(null);
-            setToken(null);
-          }}
-        >
-          <ExitIcon className="mr-2" />
-          {t("logout")}
-        </Button>
-      )}
-      {pathname === "/" && (isAdmin || isInASellerGroup) && (
-        <Button variant="secondary" onClick={() => router.push("/admin")}>
-          <HiOutlineLibrary className="mr-2" />
-          {t("admin")}
-        </Button>
-      )}
-      {pathname === "/admin" && (
-        <Button variant="secondary" onClick={() => router.push("/")}>
-          <HiShoppingCart className="mr-2" />
-          {t("user")}
-        </Button>
-      )}
+    <div className="p-6 bg-muted/40 flex flex-row flex-nowrap gap-x-4 justify-between">
+      <div className="flex flex-row gap-x-4">
+        <LocaleDropdown />
+        <ThemeToggle />
+      </div>
       {pathname === "/admin" && (
         <div className="flex flex-col text-sm text-nowrap">
           <span>{t("year", { year: year.toString() })}</span>
@@ -76,6 +54,32 @@ export default function TopBar() {
           )}
         </div>
       )}
+      <div className="flex gap-x-4">
+        {pathname === "/" && (isAdmin || isInASellerGroup) && (
+          <Button variant="secondary" onClick={() => router.push("/admin")}>
+            <HiOutlineLibrary className="mr-2" />
+            {t("admin")}
+          </Button>
+        )}
+        {pathname === "/admin" && (
+          <Button variant="secondary" onClick={() => router.push("/")}>
+            <HiShoppingCart className="mr-2" />
+            {t("user")}
+          </Button>
+        )}
+        {["/", "/admin"].includes(pathname) && (
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setRefreshToken(null);
+              setToken(null);
+            }}
+          >
+            <ExitIcon className="mr-2" />
+            {t("logout")}
+          </Button>
+        )}
+      </div>
     </div>
   );
 }

@@ -259,7 +259,8 @@
     "delete": "Supprimer",
     "deleteProduct": "Supprimer le produit",
     "edit": "Modifier",
-    "editProduct": "Modifier le produit"
+    "editProduct": "Modifier le produit",
+    "noEdition": "Aucune modification détectée."
   },
   "productFormSchema": {
     "availableOnline": "Veuillez renseigner la disponibilité du produit",
@@ -347,7 +348,8 @@
     "deleteVariant": "Supprimer la variante",
     "edit": "Modifier",
     "editVariant": "Modifier la variante",
-    "information": "Information"
+    "information": "Information",
+    "noEdition": "Aucune modification détectée."
   },
   "variantFormSchema": {
     "allowedCurriculum": "Veuillez renseigner les cursus autorisés",

@@ -30,7 +30,7 @@ export const AddCurriculumButton = () => {
     const body: CurriculumBase = {
       ...values,
     };
-    const { data, error } = await postCdrCurriculums({
+    const { error } = await postCdrCurriculums({
       body: body,
     });
     if (error) {

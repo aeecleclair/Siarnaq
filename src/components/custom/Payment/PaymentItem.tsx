@@ -59,7 +59,7 @@ export const PaymentItem = ({
 
   async function onDelete() {
     setIsLoading(true);
-    const { data, error } = await deleteCdrUsersUserIdPaymentsPaymentId({
+    const { error } = await deleteCdrUsersUserIdPaymentsPaymentId({
       path: {
         user_id: payment.user_id,
         payment_id: payment.id,

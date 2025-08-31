@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,7 +12,7 @@ import { useProductExpansionStore } from "@/stores/productExpansionStore";
 import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { PageIndicator } from "../custom/PageIndicator";
 import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";

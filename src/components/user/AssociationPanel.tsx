@@ -1,5 +1,4 @@
-import { GetCdrOnlineSellersResponse, SellerComplete } from "@/api";
-import { useOnlineSellers } from "@/hooks/useOnlineSellers";
+import { SellerComplete } from "@/api";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { Link } from "@/i18n/navigation";
 import { useTokenStore } from "@/stores/token";

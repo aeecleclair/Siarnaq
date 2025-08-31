@@ -1,4 +1,3 @@
-import { CdrUser, SellerComplete } from "@/api";
 import { useSearchParams } from "next/navigation";
 
 import { InfoPanel } from "./InfoPanel";

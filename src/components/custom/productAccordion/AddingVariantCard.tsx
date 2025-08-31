@@ -63,14 +63,13 @@ export const AddingVariantCard = ({
         ? "P" + added_duration[1]
         : undefined,
     };
-    const { data, error } =
-      await postCdrSellersSellerIdProductsProductIdVariants({
-        path: {
-          seller_id: sellerId,
-          product_id: productId,
-        },
-        body: body,
-      });
+    const { error } = await postCdrSellersSellerIdProductsProductIdVariants({
+      path: {
+        seller_id: sellerId,
+        product_id: productId,
+      },
+      body: body,
+    });
     if (error) {
       toast({
         description: (error as { detail: String }).detail,

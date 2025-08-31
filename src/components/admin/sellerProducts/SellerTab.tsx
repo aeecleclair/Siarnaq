@@ -1,4 +1,4 @@
-import { SellerComplete, Status, getCdrSellers } from "@/api";
+import { Status } from "@/api";
 import { Tabs } from "@/components/ui/tabs";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useSellers } from "@/hooks/useSellers";

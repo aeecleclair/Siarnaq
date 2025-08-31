@@ -81,7 +81,7 @@ export const ProductAccordionOptions = ({
   async function patchProduct(
     body: app__modules__cdr__schemas_cdr__ProductEdit,
   ) {
-    const { data, error } = await patchCdrSellersSellerIdProductsProductId({
+    const { error } = await patchCdrSellersSellerIdProductsProductId({
       path: {
         product_id: product.id,
         seller_id: sellerId,
@@ -143,7 +143,7 @@ export const ProductAccordionOptions = ({
 
   async function removeProduct() {
     setIsLoading(true);
-    const { data, error } = await deleteCdrSellersSellerIdProductsProductId({
+    const { error } = await deleteCdrSellersSellerIdProductsProductId({
       path: {
         product_id: product.id,
         seller_id: sellerId,

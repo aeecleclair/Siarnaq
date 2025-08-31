@@ -41,16 +41,15 @@ export const AddUserWithCurriculum = () => {
       setIsLoading(false);
       return;
     }
-    var data, error;
+    var error;
 
-    const { data: patchData, error: patchError } =
+    const { error: patchError } =
       await postCdrUsersUserIdCurriculumsCurriculumId({
         path: {
           user_id: selectedUser.id,
           curriculum_id: selectedCurriculum,
         },
       });
-    data = patchData;
     error = patchError;
 
     if (error) {

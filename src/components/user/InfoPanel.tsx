@@ -1,20 +1,14 @@
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
-import { useUser } from "@/hooks/useUser";
-import { useUserPayments } from "@/hooks/useUserPayments";
-import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useYear } from "@/hooks/useYear";
 import { Link } from "@/i18n/navigation";
-import { useTokenStore } from "@/stores/token";
 import { useTranslations } from "next-intl";
 import {
-  HiEnvelope,
   HiOutlineBanknotes,
   HiOutlineCalendar,
   HiOutlineDevicePhoneMobile,
   HiOutlineEnvelope,
   HiOutlineLink,
   HiOutlineNewspaper,
-  HiOutlineUserGroup,
 } from "react-icons/hi2";
 
 import { PageIndicator } from "../custom/PageIndicator";

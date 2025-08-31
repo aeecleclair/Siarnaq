@@ -92,7 +92,7 @@ export const VariantCardOptions = ({
   });
 
   async function patchVariant(body: ProductVariantEdit) {
-    const { data, error } =
+    const { error } =
       await patchCdrSellersSellerIdProductsProductIdVariantsVariantId({
         path: {
           variant_id: variant.id,
@@ -172,7 +172,7 @@ export const VariantCardOptions = ({
 
   async function removeVariant() {
     setIsLoading(true);
-    const { data, error } =
+    const { error } =
       await deleteCdrSellersSellerIdProductsProductIdVariantsVariantId({
         path: {
           variant_id: variant.id,

@@ -29,7 +29,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 import {
   Table,
   TableBody,
@@ -81,7 +80,7 @@ export const AddEditProductForm = ({
   const [isDeletingLoading, setIsDeletingLoading] = useState(false);
   const { memberships } = useMemberships();
   const { isAdmin } = useCoreUser();
-  const [selectedMembership, setSelectedMembership] = useState<string>();
+  //const [selectedMembership, setSelectedMembership] = useState<string>();
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();

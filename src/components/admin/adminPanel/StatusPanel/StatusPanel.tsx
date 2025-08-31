@@ -25,7 +25,7 @@ export const StatusAccordionItem = ({ status }: SellerTabProps) => {
     const body: Status = {
       status: status,
     };
-    const { data, error } = await patchCdrStatus({
+    const { error } = await patchCdrStatus({
       body: body,
     });
     if (error) {

@@ -260,7 +260,8 @@
     "delete": "Delete",
     "deleteProduct": "Delete product",
     "edit": "Edit",
-    "editProduct": "Edit product"
+    "editProduct": "Edit product",
+    "noEdition": "No changes detected."
   },
   "productFormSchema": {
     "availableOnline": "Please enter the product availability",
@@ -348,7 +349,8 @@
     "deleteVariant": "Delete variant",
     "edit": "Edit",
     "editVariant": "Edit variant",
-    "information": "Information"
+    "information": "Information",
+    "noEdition": "No changes detected."
   },
   "variantFormSchema": {
     "allowedCurriculum": "Please enter the authorized curriculum",

@@ -14,6 +14,7 @@ import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import _productFormSchema from "@/forms/productFormSchema";
 import { useMemberships } from "@/hooks/useMemberships";
+import { getModifiedFields } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -50,27 +51,31 @@ export const ProductAccordionOptions = ({
 
   const { memberships } = useMemberships();
 
+  const initialValues: z.infer<typeof productFormSchema> = {
+    id: product.id,
+    name_fr: product.name_fr,
+    name_en: product.name_en || undefined,
+    description_fr: product.description_fr || undefined,
+    description_en: product.description_en || undefined,
+    available_online: product.available_online ? "true" : "false",
+    product_constraints:
+      product.product_constraints?.map((constraint) => constraint.id) || [],
+    document_constraints:
+      product.document_constraints?.map((constraint) => constraint.id) || [],
+    tickets: product.tickets
+      ? product.tickets.map((ticket) => ({
+          ...ticket,
+          expiration: new Date(ticket.expiration),
+        }))
+      : [],
+    related_membership: product.related_membership?.id || undefined,
+    data_fields: [],
+  };
+
   const form = useForm<z.infer<typeof productFormSchema>>({
     resolver: zodResolver(productFormSchema),
     mode: "onBlur",
-    defaultValues: {
-      id: product.id,
-      name_fr: product.name_fr,
-      name_en: product.name_en || undefined,
-      description_fr: product.description_fr || undefined,
-      description_en: product.description_en || undefined,
-      available_online: product.available_online ? "true" : "false",
-      product_constraints:
-        product.product_constraints?.map((constraint) => constraint.id) || [],
-      document_constraints:
-        product.document_constraints?.map((constraint) => constraint.id) || [],
-      tickets: product.tickets?.map((ticket) => ({
-        ...ticket,
-        expiration: new Date(ticket.expiration),
-      })),
-      related_membership: product.related_membership?.id || undefined,
-      data_fields: [],
-    },
+    defaultValues: initialValues,
   });
 
   async function patchProduct(
@@ -90,24 +95,45 @@ export const ProductAccordionOptions = ({
       });
       setIsLoading(false);
       setIsEditDialogOpened(false);
+      form.reset(initialValues);
       return;
     }
   }
 
   async function onSubmit(values: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
-    const body: app__modules__cdr__schemas_cdr__ProductEdit = {
+
+    const resolvedValues: app__modules__cdr__schemas_cdr__ProductEdit = {
       ...values,
       related_membership: values.related_membership
         ? memberships.find((m) => m.id == values.related_membership)
         : undefined,
       available_online: values.available_online === "true",
     };
-    await patchProduct(body);
+
+    const resolvedInitial: typeof resolvedValues = {
+      ...initialValues,
+      related_membership: initialValues.related_membership
+        ? memberships.find((m) => m.id == initialValues.related_membership)
+        : undefined,
+      available_online: initialValues.available_online === "true",
+    };
+
+    const diff = getModifiedFields(resolvedInitial, resolvedValues);
+
+    if (Object.keys(diff).length === 0) {
+      toast({
+        description: t("noEdition"),
+      });
+      setIsLoading(false);
+      setIsEditDialogOpened(false);
+      return;
+    }
+
+    await patchProduct(diff);
     refreshProduct();
     setIsEditDialogOpened(false);
     setIsLoading(false);
-    form.reset(values);
   }
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {

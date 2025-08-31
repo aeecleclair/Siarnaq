@@ -15,6 +15,7 @@ import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import _variantFormSchema from "@/forms/variantFormSchema";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
+import { getModifiedFields } from "@/lib/utils";
 import {
   PencilIcon,
   PlayIcon,
@@ -112,35 +113,6 @@ export const VariantCardOptions = ({
     }
   }
 
-  function getModifiedFields<T extends Record<string, any>>(
-    original: T,
-    updated: T,
-  ): Partial<T> {
-    const result: Partial<T> = {};
-
-    for (const key in updated) {
-      const origValue = original[key];
-      const newValue = updated[key];
-
-      // Comparaison simple, à adapter pour les objets ou dates
-      if (Array.isArray(origValue) && Array.isArray(newValue)) {
-        if (JSON.stringify(origValue) !== JSON.stringify(newValue)) {
-          result[key] = newValue;
-        }
-      } else if (
-        (origValue as any) instanceof Date &&
-        (newValue as any) instanceof Date &&
-        (origValue as Date).getTime() !== (newValue as Date).getTime()
-      ) {
-        result[key] = newValue;
-      } else if (origValue !== newValue) {
-        result[key] = newValue;
-      }
-    }
-
-    return result;
-  }
-
   async function onSubmit(values: z.infer<typeof variantFormSchema>) {
     setIsLoading(true);
 
@@ -171,7 +143,7 @@ export const VariantCardOptions = ({
     const diff = getModifiedFields(resolvedInitial, resolvedValues);
 
     if (Object.keys(diff).length === 0) {
-      toast({ description: "Aucune modification détectée." });
+      toast({ description: t("noEdition") });
       setIsLoading(false);
       setIsEditDialogOpened(false);
       return;

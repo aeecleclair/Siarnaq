@@ -42,7 +42,10 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     try {
       await Promise.all(
         purchases
-          .filter((purchase) => !purchase.validated)
+          .filter(
+            (purchase) =>
+              !purchase.validated && purchase.product.needs_validation,
+          )
           .map((purchase) =>
             onValidate(
               purchase.product_variant_id,

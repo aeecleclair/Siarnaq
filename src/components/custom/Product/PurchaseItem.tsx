@@ -49,22 +49,20 @@ export const PurchaseItem = ({
     purchaseCompleteProduct?.product_constraints?.filter((constraint) =>
       allConstraintIds?.includes(constraint.id),
     );
-  const notTakenConstraintProduct = missingConstraintProduct?.filter(
-    (product) => !allPurchasesIds?.includes(product.id),
-  );
-  const isMembershipAlreadyTaken = userAssociationsMembershipsIds?.some(
-    (membershipId) =>
-      purchaseCompleteProduct?.related_membership?.id === membershipId ||
-      purchaseCompleteProduct?.product_constraints?.some(
-        (constraint) => constraint?.related_membership?.id === membershipId,
-      ),
-  );
 
-  const displayWarning =
-    missingConstraintProduct &&
-    missingConstraintProduct.length > 0 &&
-    notTakenConstraintProduct?.length !== 0 &&
-    !isMembershipAlreadyTaken;
+  const blockingConstraints = missingConstraintProduct?.filter((constraint) => {
+    const isPurchased = allPurchasesIds?.includes(constraint.id);
+
+    const hasMembership =
+      constraint?.related_membership &&
+      userAssociationsMembershipsIds?.includes(
+        constraint.related_membership.id,
+      );
+
+    return !isPurchased && !hasMembership;
+  });
+
+  const displayWarning = blockingConstraints && blockingConstraints.length > 0;
 
   const variant = purchaseCompleteProduct?.variants?.find(
     (variant) => variant.id === purchase.product_variant_id,
@@ -136,7 +134,7 @@ export const PurchaseItem = ({
         <div className="mt-1">
           <span className="text-red-500 font-semibold">
             {t("missing", {
-              products: missingConstraintProduct
+              products: blockingConstraints
                 .map((product) =>
                   selectTranslation(product.name_en, product.name_fr),
                 )

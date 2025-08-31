@@ -1,5 +1,6 @@
 import {
   CdrUser,
+  GetCdrUsersUserIdPurchasesResponse,
   PurchaseReturn,
   app__modules__cdr__schemas_cdr__ProductComplete,
   patchCdrUsersUserIdPurchasesProductVariantIdValidated,
@@ -7,6 +8,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTranslation } from "@/translations/utils";
+import { QueryObserverResult } from "@tanstack/react-query";
 import { Messages, useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { HiCheck, HiOutlineExclamationCircle, HiXMark } from "react-icons/hi2";
@@ -152,7 +154,24 @@ export const onValidate = async (
   purchaseState: PurchaseReturn["validated"],
   userid: CdrUser["id"],
   setIsLoading: (loading: boolean) => void,
-  refetch: () => void,
+  refetch: () => Promise<
+    QueryObserverResult<
+      (
+        | {
+            data: undefined;
+            error: unknown;
+          }
+        | {
+            data: GetCdrUsersUserIdPurchasesResponse;
+            error: undefined;
+          }
+      ) & {
+        request: Request;
+        response: Response;
+      },
+      Error
+    >
+  >,
   toast: ReturnType<typeof useToast>["toast"],
   t: (arg: keyof Messages["onValidate"]) => string,
 ) => {
@@ -168,11 +187,16 @@ export const onValidate = async (
         validated: !purchaseState,
       },
     });
-    toast({
-      title: purchaseState ? t("unvalidated") : t("validated"),
-      variant: "default",
+    refetch().then(({ data }) => {
+      toast({
+        title: data?.data
+          ?.filter((purchase) => purchase.product_variant_id == purchaseid)
+          .every((purchase) => purchase.validated)
+          ? t("validated")
+          : t("unvalidated"),
+        variant: "default",
+      });
     });
-    refetch();
   } catch (error) {
     toast({
       description: t("toastErrorDescription"),

@@ -10,6 +10,7 @@ import { Suspense } from "react";
 
 import Provider from "./provider";
 import { QueryProvider } from "./queryProvider";
+import { ThemeProvider } from "./theme-provider";
 import TopBar from "./topbar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -56,11 +57,18 @@ export default async function RootLayout({
         <body className={inter.className}>
           <QueryProvider>
             <Provider>
-              <NextIntlClientProvider>
-                <TopBar />
-                {children}
-                <Toaster />
-              </NextIntlClientProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                enableColorScheme={true}
+              >
+                <NextIntlClientProvider>
+                  <TopBar />
+                  {children}
+                  <Toaster />
+                </NextIntlClientProvider>
+              </ThemeProvider>
             </Provider>
           </QueryProvider>
         </body>

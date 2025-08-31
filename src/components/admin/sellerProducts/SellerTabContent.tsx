@@ -171,7 +171,7 @@ export const SellerTabContent = ({
           ))}
         </Accordion>
       ) : (
-        <div className="p-4 border border-gray-200 rounded-md">
+        <div className="p-4 border border-border rounded-md">
           <h3 className="text-lg font-semibold">{t("noProductFound")}</h3>
         </div>
       )}

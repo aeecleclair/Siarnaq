@@ -55,10 +55,14 @@ export const PurchaseItem = ({
   const blockingConstraints = missingConstraintProduct?.filter((constraint) => {
     const isPurchased = allPurchasesIds?.includes(constraint.id);
 
+    const constraintCompleteProduct = allProducts.find(
+      (product) => product.id === constraint.id,
+    );
+
     const hasMembership =
-      constraint?.related_membership &&
+      constraintCompleteProduct?.related_membership &&
       userAssociationsMembershipsIds?.includes(
-        constraint.related_membership.id,
+        constraintCompleteProduct.related_membership.id,
       );
 
     return !isPurchased && !hasMembership;

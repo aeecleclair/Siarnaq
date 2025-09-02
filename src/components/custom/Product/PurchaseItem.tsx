@@ -107,9 +107,12 @@ export const PurchaseItem = ({
             {selectTranslation(variant?.name_en, variant?.name_fr)}
           </span>
         </div>
-        <span className="ml-auto w-24 text-right font-semibold">
-          {format.number((purchase.quantity * purchase.price) / 100, "euro")}
-        </span>
+        {!isInterest && (
+          <span className="ml-auto w-24 text-right font-semibold">
+            {format.number((purchase.quantity * purchase.price) / 100, "euro")}
+          </span>
+        )}
+
         {!isInterest && isAdmin && (
           <LoadingButton
             size="icon"

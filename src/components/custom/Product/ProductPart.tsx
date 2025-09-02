@@ -33,9 +33,13 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
     .map((product) => product?.product_constraints)
     .flat();
   const allConstraintIds = allConstraint?.map((constraint) => constraint?.id);
-  const userAssociationsMembershipsIds = memberships.map(
-    (membership) => membership.association_membership_id,
-  );
+  const userAssociationsMembershipsIds = memberships
+    .filter(
+      (membership) =>
+        new Date(membership.end_date).getTime() >
+        new Date(new Date().getFullYear(), 9, 30).getTime(),
+    )
+    .map((membership) => membership.association_membership_id);
 
   const handleValidateAll = async () => {
     setIsLoading(true);

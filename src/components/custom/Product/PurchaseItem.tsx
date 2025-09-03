@@ -55,10 +55,14 @@ export const PurchaseItem = ({
   const blockingConstraints = missingConstraintProduct?.filter((constraint) => {
     const isPurchased = allPurchasesIds?.includes(constraint.id);
 
+    const constraintCompleteProduct = allProducts.find(
+      (product) => product.id === constraint.id,
+    );
+
     const hasMembership =
-      constraint?.related_membership &&
+      constraintCompleteProduct?.related_membership &&
       userAssociationsMembershipsIds?.includes(
-        constraint.related_membership.id,
+        constraintCompleteProduct.related_membership.id,
       );
 
     return !isPurchased && !hasMembership;
@@ -103,9 +107,12 @@ export const PurchaseItem = ({
             {selectTranslation(variant?.name_en, variant?.name_fr)}
           </span>
         </div>
-        <span className="ml-auto w-24 text-right font-semibold">
-          {format.number((purchase.quantity * purchase.price) / 100, "euro")}
-        </span>
+        {!isInterest && (
+          <span className="ml-auto w-24 text-right font-semibold">
+            {format.number((purchase.quantity * purchase.price) / 100, "euro")}
+          </span>
+        )}
+
         {!isInterest && isAdmin && (
           <LoadingButton
             size="icon"

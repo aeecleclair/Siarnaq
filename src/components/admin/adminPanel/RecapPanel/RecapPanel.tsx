@@ -1,10 +1,8 @@
 import {
   CdrUser,
   CdrUserUpdate,
-  ProductBase,
   patchCdrUsersUserId,
   patchCdrUsersUserIdCurriculumsCurriculumId,
-  postCdrSellersSellerIdProducts,
   postCdrUsersUserIdCurriculumsCurriculumId,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
@@ -73,26 +71,24 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       setIsOpened(false);
       return;
     }
-    var data, error;
+    var error;
     if (hasUserCurriculum) {
-      const { data: patchData, error: patchError } =
+      const { error: patchError } =
         await patchCdrUsersUserIdCurriculumsCurriculumId({
           path: {
             user_id: user.id,
             curriculum_id: selectedCurriculum,
           },
         });
-      data = patchData;
       error = patchError;
     } else {
-      const { data: postData, error: postError } =
+      const { error: postError } =
         await postCdrUsersUserIdCurriculumsCurriculumId({
           path: {
             user_id: user.id,
             curriculum_id: selectedCurriculum,
           },
         });
-      data = postData;
       error = postError;
     }
     if (error) {
@@ -146,7 +142,7 @@ export const RecapPanel = ({ user, refetch }: RecapPanelProps) => {
       // birthday: values.birthday?.toISOString(),
       // phone: values.phone ? "+" + values.phone : null,
     };
-    const { data, error } = await patchCdrUsersUserId({
+    const { error } = await patchCdrUsersUserId({
       path: {
         user_id: user.id,
       },

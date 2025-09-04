@@ -84,7 +84,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
       ...values,
       total: Math.round(parseFloat(values.total) * 100),
     };
-    const { data, error } = await postCdrUsersUserIdPayments({
+    const { error } = await postCdrUsersUserIdPayments({
       path: {
         user_id: user.id,
       },

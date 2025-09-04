@@ -15,7 +15,7 @@ export const CurriculumItem = ({ curriculum }: CurriculumItemProps) => {
   const [isLoading, setIsLoading] = useState(false);
   async function deleteCurriculum(curriculumId: string) {
     setIsLoading(true);
-    const { data, error } = await deleteCdrCurriculumsCurriculumId({
+    const { error } = await deleteCdrCurriculumsCurriculumId({
       path: {
         curriculum_id: curriculumId,
       },

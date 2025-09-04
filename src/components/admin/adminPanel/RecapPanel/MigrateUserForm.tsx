@@ -1,6 +1,4 @@
-import { DatePicker } from "@/components/custom/DatePicker";
 import { LoadingButton } from "@/components/custom/LoadingButton";
-import { PhoneCustomInput } from "@/components/custom/PhoneCustomInput";
 import { StyledFormField } from "@/components/custom/StyledFormField";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,8 +10,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import _migrateUserFormSchema from "@/forms/migrateUserFormSchema";
-import { useYear } from "@/hooks/useYear";
-import { addYears } from "date-fns";
 import { useTranslations } from "next-intl";
 import { UseFormReturn } from "react-hook-form";
 import z from "zod";
@@ -58,10 +54,12 @@ export const MigrateUserForm = ({
   setIsOpened,
   closeDialog,
 }: MigrateUserFormProps) => {
+  /*
   const { year } = useYear();
   const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
     return (year - index).toString();
   });
+  */
   const t = useTranslations("migrateUserForm");
 
   return (

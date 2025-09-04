@@ -80,7 +80,7 @@ export const VariantCard = ({
     const body: PurchaseBase = {
       quantity: quantity,
     };
-    const { data, error } = await postCdrUsersUserIdPurchasesProductVariantId({
+    const { error } = await postCdrUsersUserIdPurchasesProductVariantId({
       path: {
         user_id: userId ?? "",
         product_variant_id: variant.id,
@@ -103,14 +103,12 @@ export const VariantCard = ({
 
   const cancelPurchase = async () => {
     setIsLoading(true);
-    const { data, error } = await deleteCdrUsersUserIdPurchasesProductVariantId(
-      {
-        path: {
-          user_id: userId ?? "",
-          product_variant_id: variant.id,
-        },
+    const { error } = await deleteCdrUsersUserIdPurchasesProductVariantId({
+      path: {
+        user_id: userId ?? "",
+        product_variant_id: variant.id,
       },
-    );
+    });
     if (error) {
       toast({
         description: (error as { detail: String }).detail,

@@ -38,9 +38,7 @@ export const AddProductAccordionItem = ({
   const searchParams = useSearchParams();
   const activeSellerId = searchParams.get("sellerId");
   const isSeller = !["cdradmin", "cdrrecap"].includes(activeSellerId ?? "");
-  const { products, refetch: refetchProducts } = useSellerProducts(
-    isSeller ? activeSellerId : null,
-  );
+  const { products } = useSellerProducts(isSeller ? activeSellerId : null);
   const hasInterestProduct = products.some(
     (product) => product.needs_validation === false,
   );
@@ -69,7 +67,7 @@ export const AddProductAccordionItem = ({
       product_constraints: [],
       document_constraints: [],
     };
-    const { data, error } = await postCdrSellersSellerIdProducts({
+    const { error } = await postCdrSellersSellerIdProducts({
       path: {
         seller_id: seller.id,
       },

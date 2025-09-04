@@ -6,7 +6,7 @@ import { useProducts } from "@/hooks/useProducts";
 import { useUserMemberships } from "@/hooks/useUserMemberships";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { usePathname } from "@/i18n/navigation";
-import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { LoadingButton } from "../LoadingButton";
@@ -22,7 +22,6 @@ export const ProductPart = ({ user, isAdmin }: ProductPartProps) => {
   const t = useTranslations("productPart");
   const format = useFormatter();
   const pathname = usePathname();
-  const locale = useLocale();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const { userMemberships: memberships } = useUserMemberships(user.id);

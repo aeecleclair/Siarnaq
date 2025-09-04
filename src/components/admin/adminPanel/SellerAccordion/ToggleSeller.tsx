@@ -30,7 +30,7 @@ export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
       name: group.name,
       order: sellers.length + 1,
     };
-    const { data, error } = await postCdrSellers({
+    const { error } = await postCdrSellers({
       body: body,
     });
     if (error) {
@@ -48,7 +48,7 @@ export const ToggleSeller = ({ group, sellers }: ToggleSellerProps) => {
 
   async function deleteSeller(groupId: string) {
     setIsLoading(true);
-    const { data, error } = await deleteCdrSellersSellerId({
+    const { error } = await deleteCdrSellersSellerId({
       path: { seller_id: groupId },
     });
     if (error) {

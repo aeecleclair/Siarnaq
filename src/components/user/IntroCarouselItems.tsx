@@ -83,7 +83,7 @@ export const IntroCarouselItems = ({
       setIsLoading(false);
       return;
     }
-    const { data, error } = await postCdrUsersUserIdCurriculumsCurriculumId({
+    const { error } = await postCdrUsersUserIdCurriculumsCurriculumId({
       path: {
         user_id: user!.id,
         curriculum_id: selectedCurriculum,

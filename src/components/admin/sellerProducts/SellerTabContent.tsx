@@ -1,5 +1,7 @@
 "use client";
 
+import { AddProductAccordionItem } from "./AddProductAccordionItem";
+
 import {
   SellerComplete,
   Status,
@@ -7,18 +9,18 @@ import {
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { ProductAccordion } from "@/components/custom/productAccordion/ProductAccordion";
-import { Accordion } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import { TabsContent } from "@/components/ui/tabs";
-import { useToast } from "@/components/ui/use-toast";
 import { useYear } from "@/hooks/useYear";
 import { useProductExpansionStore } from "@/stores/productExpansionStore";
 import { useTokenStore } from "@/stores/token";
+
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { AddProductAccordionItem } from "./AddProductAccordionItem";
+import { Accordion } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { TabsContent } from "@/components/ui/tabs";
+import { useToast } from "@/components/ui/use-toast";
 
 interface SellerTabContentProps {
   status: Status;

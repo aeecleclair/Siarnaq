@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocaleStore } from "@/stores/locale";
+
 import { usePathname } from "next/navigation";
 import { permanentRedirect } from "next/navigation";
 import { Suspense, useEffect } from "react";

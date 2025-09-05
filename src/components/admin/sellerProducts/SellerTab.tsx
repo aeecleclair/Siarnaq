@@ -1,13 +1,15 @@
+import { SellerTabContentList } from "./SellerTabContentList";
+import { SellerTabList } from "./SellerTabList";
+
 import { Status } from "@/api";
-import { Tabs } from "@/components/ui/tabs";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useSellers } from "@/hooks/useSellers";
 import { useRouter } from "@/i18n/navigation";
+
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-import { SellerTabContentList } from "./SellerTabContentList";
-import { SellerTabList } from "./SellerTabList";
+import { Tabs } from "@/components/ui/tabs";
 
 interface SellerTabProps {
   status: Status;

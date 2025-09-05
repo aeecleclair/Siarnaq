@@ -1,3 +1,17 @@
+import { PageIndicator } from "../custom/PageIndicator";
+import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
+
+import { useOnlineSellerProducts } from "@/hooks/useOnlineSellerProducts";
+import { useOnlineSellers } from "@/hooks/useOnlineSellers";
+import { useUser } from "@/hooks/useUser";
+import { useProductExpansionStore } from "@/stores/productExpansionStore";
+import { useTokenStore } from "@/stores/token";
+
+import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+
+import { Accordion } from "../ui/accordion";
 import {
   Card,
   CardContent,
@@ -5,18 +19,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useOnlineSellerProducts } from "@/hooks/useOnlineSellerProducts";
-import { useOnlineSellers } from "@/hooks/useOnlineSellers";
-import { useUser } from "@/hooks/useUser";
-import { useProductExpansionStore } from "@/stores/productExpansionStore";
-import { useTokenStore } from "@/stores/token";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-
-import { PageIndicator } from "../custom/PageIndicator";
-import { ProductAccordion } from "../custom/productAccordion/ProductAccordion";
-import { Accordion } from "../ui/accordion";
 
 export const ProductPanel = () => {
   const t = useTranslations("productPanel");

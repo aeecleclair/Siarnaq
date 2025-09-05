@@ -1,13 +1,15 @@
+import { AddCurriculumButton } from "./AddCurriculumButton";
+import { CurriculumItem } from "./CurriculumItem";
+
+import { useCurriculums } from "@/hooks/useCurriculums";
+
+import { useTranslations } from "next-intl";
+
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useCurriculums } from "@/hooks/useCurriculums";
-import { useTranslations } from "next-intl";
-
-import { AddCurriculumButton } from "./AddCurriculumButton";
-import { CurriculumItem } from "./CurriculumItem";
 
 export const CurriculumAccordionItem = () => {
   const t = useTranslations("curriculumAccordionItem");

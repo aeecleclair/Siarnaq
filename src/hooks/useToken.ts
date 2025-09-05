@@ -1,9 +1,11 @@
 import { useTokenStore } from "@/stores/token";
+
 import { useQuery } from "@tanstack/react-query";
 import { Locale } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
-import * as auth from "oauth4webapi";
 import { useState } from "react";
+
+import * as auth from "oauth4webapi";
 
 export const useToken = () => {
   const { locale } = useParams<{ locale: Locale }>();

@@ -1,7 +1,3 @@
-import { CustomDataFieldComplete } from "@/api";
-import { useTranslations } from "next-intl";
-import React, { useState } from "react";
-
 import { Button } from "../../ui/button";
 import {
   Dialog,
@@ -14,6 +10,11 @@ import {
 import { ScrollArea } from "../../ui/scroll-area";
 import { LoadingButton } from "../LoadingButton";
 import { Answer, CustomFieldInput } from "./CustomFieldInput";
+
+import { CustomDataFieldComplete } from "@/api";
+
+import { useTranslations } from "next-intl";
+import React, { useState } from "react";
 
 interface CustomFieldsDialogProps {
   isOpened: boolean;

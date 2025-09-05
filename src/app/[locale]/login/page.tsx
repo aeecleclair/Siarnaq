@@ -1,6 +1,14 @@
 "use client";
 
+import MyECLButton from "../../../components/login/MyECLButton";
+
 import { TextSeparator } from "@/components/custom/TextSeparator";
+import { useYear } from "@/hooks/useYear";
+import { useRouter } from "@/i18n/navigation";
+
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,12 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useYear } from "@/hooks/useYear";
-import { useRouter } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-
-import MyECLButton from "../../../components/login/MyECLButton";
 
 const Login = () => {
   const t = useTranslations("login");

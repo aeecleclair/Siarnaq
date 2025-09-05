@@ -1,11 +1,12 @@
-import { SellerComplete, Status } from "@/api";
-import { useSellerProducts } from "@/hooks/useSellerProducts";
-import { useUser } from "@/hooks/useUser";
-import { useSearchParams } from "next/navigation";
-
 import { AdminPanel } from "../adminPanel/AdminPanel";
 import { RecapPanel } from "../adminPanel/RecapPanel/RecapPanel";
 import { SellerTabContent } from "./SellerTabContent";
+
+import { SellerComplete, Status } from "@/api";
+import { useSellerProducts } from "@/hooks/useSellerProducts";
+import { useUser } from "@/hooks/useUser";
+
+import { useSearchParams } from "next/navigation";
 
 interface SellerTabContentListProps {
   status: Status;

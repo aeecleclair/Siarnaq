@@ -1,15 +1,12 @@
 "use client";
 
+import { DataTablePagination } from "./DataTablePagination";
+import { DataTableToolbar } from "./DataTableToolbar";
+import { fuzzyFilter } from "./searchFunction";
+
 import { CoreUserSimple } from "@/api";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { useRouter } from "@/i18n/navigation";
+
 import { RankingInfo } from "@tanstack/match-sorter-utils";
 import {
   ColumnDef,
@@ -31,9 +28,14 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
 
-import { DataTablePagination } from "./DataTablePagination";
-import { DataTableToolbar } from "./DataTableToolbar";
-import { fuzzyFilter } from "./searchFunction";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 // Extend the FilterFns and FilterMeta interfaces to include our custom filter function and meta
 declare module "@tanstack/react-table" {

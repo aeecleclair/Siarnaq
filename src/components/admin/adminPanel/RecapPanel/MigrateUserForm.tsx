@@ -1,5 +1,11 @@
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { StyledFormField } from "@/components/custom/StyledFormField";
+import _migrateUserFormSchema from "@/forms/migrateUserFormSchema";
+
+import { useTranslations } from "next-intl";
+import { UseFormReturn } from "react-hook-form";
+import z from "zod";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -9,10 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import _migrateUserFormSchema from "@/forms/migrateUserFormSchema";
-import { useTranslations } from "next-intl";
-import { UseFormReturn } from "react-hook-form";
-import z from "zod";
 
 interface MigrateUserFormProps {
   form: UseFormReturn<z.infer<ReturnType<typeof _migrateUserFormSchema>>>;

@@ -1,11 +1,3 @@
-import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -14,6 +6,15 @@ import {
 } from "@radix-ui/react-icons";
 import { Table } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
+
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;

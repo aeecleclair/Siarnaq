@@ -2,18 +2,20 @@
 
 import { SellerTab } from "@/components/admin/sellerProducts/SellerTab";
 import { UserSearch } from "@/components/admin/userSearch/UserSearch";
+import { useCoreUser } from "@/hooks/useCoreUser";
+import { useSellers } from "@/hooks/useSellers";
+import { useStatus } from "@/hooks/useStatus";
+import { useRouter } from "@/i18n/navigation";
+import { useSizeStore } from "@/stores/SizeStore";
+
+import { Suspense, useEffect } from "react";
+
 import { Card } from "@/components/ui/card";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { useCoreUser } from "@/hooks/useCoreUser";
-import { useSellers } from "@/hooks/useSellers";
-import { useStatus } from "@/hooks/useStatus";
-import { useRouter } from "@/i18n/navigation";
-import { useSizeStore } from "@/stores/SizeStore";
-import { Suspense, useEffect } from "react";
 
 const AdminPage = () => {
   const { setSize, size } = useSizeStore();

@@ -1,4 +1,5 @@
 import { Locale } from "next-intl";
+
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 

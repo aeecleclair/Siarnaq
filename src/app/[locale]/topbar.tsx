@@ -1,13 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useCoreUser } from "@/hooks/useCoreUser";
 import { useSellers } from "@/hooks/useSellers";
 import { useStatus } from "@/hooks/useStatus";
@@ -16,15 +8,26 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { useLocaleStore } from "@/stores/locale";
 import { useTokenStore } from "@/stores/token";
+
 import { CaretSortIcon, ExitIcon } from "@radix-ui/react-icons";
-import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Locale, useLocale } from "next-intl";
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { HiOutlineLibrary } from "react-icons/hi";
 import { HiShoppingCart } from "react-icons/hi2";
+
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function TopBar() {
   const t = useTranslations("topbar");

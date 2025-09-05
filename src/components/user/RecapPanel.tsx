@@ -1,15 +1,17 @@
+import { PageIndicator } from "../custom/PageIndicator";
+import { PaymentPart } from "../custom/Payment/PaymentPart";
+import { ProductPart } from "../custom/Product/ProductPart";
+import { PaymentButton } from "./PaymentButton";
+
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useUser } from "@/hooks/useUser";
 import { useUserPayments } from "@/hooks/useUserPayments";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useTokenStore } from "@/stores/token";
+
 import { useFormatter, useTranslations } from "next-intl";
 
-import { PageIndicator } from "../custom/PageIndicator";
-import { PaymentPart } from "../custom/Payment/PaymentPart";
-import { ProductPart } from "../custom/Product/ProductPart";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import { PaymentButton } from "./PaymentButton";
 
 export const RecapPanel = () => {
   const t = useTranslations("recap");

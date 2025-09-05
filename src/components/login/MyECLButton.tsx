@@ -1,14 +1,16 @@
 "use client";
 
+import { LoadingButton } from "../custom/LoadingButton";
+
 import { useRouter } from "@/i18n/navigation";
 import { useCodeVerifierStore } from "@/stores/codeVerifier";
 import { useTokenStore } from "@/stores/token";
+
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
-import * as auth from "oauth4webapi";
 import { useState } from "react";
 
-import { LoadingButton } from "../custom/LoadingButton";
+import * as auth from "oauth4webapi";
 
 const MyECLButton = () => {
   const t = useTranslations("MyECLButton");

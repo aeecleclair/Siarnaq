@@ -1,5 +1,10 @@
-import { Toaster } from "@/components/ui/toaster";
+import Provider from "./provider";
+import { QueryProvider } from "./queryProvider";
+import { ThemeProvider } from "./theme-provider";
+import TopBar from "./topbar";
+
 import { routing } from "@/i18n/routing";
+
 import type { Metadata } from "next";
 import { Locale, NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -8,10 +13,7 @@ import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Suspense } from "react";
 
-import Provider from "./provider";
-import { QueryProvider } from "./queryProvider";
-import { ThemeProvider } from "./theme-provider";
-import TopBar from "./topbar";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 

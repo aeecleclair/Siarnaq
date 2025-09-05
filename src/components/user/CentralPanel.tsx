@@ -1,9 +1,9 @@
-import { useSearchParams } from "next/navigation";
-
 import { InfoPanel } from "./InfoPanel";
 import { IntroPanel } from "./IntroPanel";
 import { ProductPanel } from "./ProductPanel";
 import { RecapPanel } from "./RecapPanel";
+
+import { useSearchParams } from "next/navigation";
 
 interface CentralPanelProps {
   showSellerFeatureFlag?: boolean;

@@ -1,3 +1,6 @@
+import { CustomDialog } from "../CustomDialog";
+import { LoadingButton } from "../LoadingButton";
+
 import {
   app__modules__cdr__schemas_cdr__ProductComplete,
   app__modules__cdr__schemas_cdr__ProductEdit,
@@ -5,6 +8,16 @@ import {
   patchCdrSellersSellerIdProductsProductId,
 } from "@/api";
 import { AddEditProductForm } from "@/components/admin/sellerProducts/AddEditProductForm";
+import _productFormSchema from "@/forms/productFormSchema";
+import { useMemberships } from "@/hooks/useMemberships";
+import { getModifiedFields } from "@/lib/utils";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import z from "zod";
+
 import { Button } from "@/components/ui/button";
 import {
   ContextMenuContent,
@@ -12,18 +25,8 @@ import {
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import _productFormSchema from "@/forms/productFormSchema";
-import { useMemberships } from "@/hooks/useMemberships";
-import { getModifiedFields } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { PencilIcon, TrashIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import z from "zod";
 
-import { CustomDialog } from "../CustomDialog";
-import { LoadingButton } from "../LoadingButton";
+import { PencilIcon, TrashIcon } from "lucide-react";
 
 interface ProductAccordionOptionsProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;

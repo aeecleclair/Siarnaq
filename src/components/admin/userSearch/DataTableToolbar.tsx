@@ -1,13 +1,15 @@
 "use client";
 
+import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
+import { DataTableViewOptions } from "./DataTableViewOptions";
+
 import { AddUserWithCurriculum } from "@/components/custom/User/AddUserWithCurriculum";
-import { Input } from "@/components/ui/input";
 import { useCurriculums } from "@/hooks/useCurriculums";
+
 import { Table } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 
-import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
-import { DataTableViewOptions } from "./DataTableViewOptions";
+import { Input } from "@/components/ui/input";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;

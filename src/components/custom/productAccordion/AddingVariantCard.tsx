@@ -1,10 +1,13 @@
+import { Card, CardContent } from "../../ui/card";
+import { CustomDialog } from "../CustomDialog";
+import { AddEditVariantForm } from "./AddEditVariantForm";
+
 import {
   ProductVariantBase,
   postCdrSellersSellerIdProductsProductIdVariants,
 } from "@/api";
-import { Form } from "@/components/ui/form";
-import { useToast } from "@/components/ui/use-toast";
 import _variantFormSchema from "@/forms/variantFormSchema";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -12,9 +15,8 @@ import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi2";
 import z from "zod";
 
-import { Card, CardContent } from "../../ui/card";
-import { CustomDialog } from "../CustomDialog";
-import { AddEditVariantForm } from "./AddEditVariantForm";
+import { Form } from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 
 interface AddingVariantCardProps {
   sellerId: string;

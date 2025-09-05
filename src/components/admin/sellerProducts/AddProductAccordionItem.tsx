@@ -1,3 +1,5 @@
+import { AddEditProductForm } from "./AddEditProductForm";
+
 import {
   ProductBase,
   SellerComplete,
@@ -5,11 +7,10 @@ import {
   postCdrSellersSellerIdProductsProductIdData,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
-import { Form } from "@/components/ui/form";
-import { useToast } from "@/components/ui/use-toast";
 import _productFormSchema from "@/forms/productFormSchema";
 import { useMemberships } from "@/hooks/useMemberships";
 import { useSellerProducts } from "@/hooks/useSellerProducts";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -18,7 +19,8 @@ import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi2";
 import z from "zod";
 
-import { AddEditProductForm } from "./AddEditProductForm";
+import { Form } from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 
 interface AddProductAccordionItemProps {
   seller: SellerComplete;

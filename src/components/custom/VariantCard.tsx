@@ -1,3 +1,7 @@
+import { LoadingButton } from "./LoadingButton";
+import { Answer } from "./customFieldDialog/CustomFieldInput";
+import { CustomFieldsDialog } from "./customFieldDialog/CustomFieldsDialog";
+
 import {
   deleteCdrUsersUserIdPurchasesProductVariantId,
   patchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId,
@@ -11,6 +15,7 @@ import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
 import { cn } from "@/lib/utils";
 import { useTokenStore } from "@/stores/token";
 import { useTranslation } from "@/translations/utils";
+
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useFormatter } from "next-intl";
 import { useEffect, useState } from "react";
@@ -26,9 +31,6 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { useToast } from "../ui/use-toast";
-import { LoadingButton } from "./LoadingButton";
-import { Answer } from "./customFieldDialog/CustomFieldInput";
-import { CustomFieldsDialog } from "./customFieldDialog/CustomFieldsDialog";
 
 interface VariantCardProps {
   variant: ProductVariantComplete;

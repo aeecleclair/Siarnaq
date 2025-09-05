@@ -5,6 +5,12 @@ import {
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { useCurriculums } from "@/hooks/useCurriculums";
+
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { HiOutlinePlusCircle } from "react-icons/hi2";
+
 import { Button } from "@/components/ui/button";
 import { Command, CommandItem } from "@/components/ui/command";
 import { Input } from "@/components/ui/input";
@@ -18,10 +24,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
-import { useCurriculums } from "@/hooks/useCurriculums";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { HiOutlinePlusCircle } from "react-icons/hi2";
 
 function getDisplayName(user: CoreUserSimple) {
   if (!user.nickname) {

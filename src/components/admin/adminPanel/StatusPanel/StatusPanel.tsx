@@ -1,14 +1,16 @@
 import { CdrStatus, Status, patchCdrStatus } from "@/api";
 import { LoadingButton } from "@/components/custom/LoadingButton";
+import { useStatus } from "@/hooks/useStatus";
+
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useToast } from "@/components/ui/use-toast";
-import { useStatus } from "@/hooks/useStatus";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
 
 interface SellerTabProps {
   status: Status;

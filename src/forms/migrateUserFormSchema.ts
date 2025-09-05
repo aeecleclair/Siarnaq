@@ -1,7 +1,9 @@
 import { possibleFloors } from "@/components/admin/adminPanel/RecapPanel/MigrateUserForm";
-import { isValidPhoneNumber } from "libphonenumber-js";
+
 import { Messages } from "next-intl";
 import z from "zod";
+
+import { isValidPhoneNumber } from "libphonenumber-js";
 
 // const validEmailRegex = /^[\w\-.]*@etu(-enise)?\.ec-lyon\.fr$/;
 

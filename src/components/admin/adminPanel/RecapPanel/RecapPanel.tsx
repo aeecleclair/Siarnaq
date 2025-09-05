@@ -1,3 +1,7 @@
+import { PaymentPart } from "../../../custom/Payment/PaymentPart";
+import { ProductPart } from "../../../custom/Product/ProductPart";
+import { MigrateUserForm } from "./MigrateUserForm";
+
 import {
   CdrUser,
   CdrUserUpdate,
@@ -9,6 +13,18 @@ import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { TextSeparator } from "@/components/custom/TextSeparator";
 import UserDisplayName from "@/components/custom/displayName";
+import _migrateUserFormSchema from "@/forms/migrateUserFormSchema";
+import { useCurriculums } from "@/hooks/useCurriculums";
+import { useUserPayments } from "@/hooks/useUserPayments";
+import { useUserPurchases } from "@/hooks/useUserPurchases";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useFormatter, useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { HiOutlinePencil } from "react-icons/hi2";
+import z from "zod";
+
 import { Button } from "@/components/ui/button";
 import { CardTitle } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
@@ -22,20 +38,6 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
-import _migrateUserFormSchema from "@/forms/migrateUserFormSchema";
-import { useCurriculums } from "@/hooks/useCurriculums";
-import { useUserPayments } from "@/hooks/useUserPayments";
-import { useUserPurchases } from "@/hooks/useUserPurchases";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useFormatter, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { HiOutlinePencil } from "react-icons/hi2";
-import z from "zod";
-
-import { PaymentPart } from "../../../custom/Payment/PaymentPart";
-import { ProductPart } from "../../../custom/Product/ProductPart";
-import { MigrateUserForm } from "./MigrateUserForm";
 
 interface RecapPanelProps {
   user: CdrUser;

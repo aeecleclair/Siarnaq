@@ -1,13 +1,15 @@
+import { ToggleSeller } from "./ToggleSeller";
+
 import { SellerComplete } from "@/api";
+import { useGroups } from "@/hooks/useGroups";
+
+import { useTranslations } from "next-intl";
+
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useGroups } from "@/hooks/useGroups";
-import { useTranslations } from "next-intl";
-
-import { ToggleSeller } from "./ToggleSeller";
 
 interface SellerAccordionItemProps {
   sellers: SellerComplete[];

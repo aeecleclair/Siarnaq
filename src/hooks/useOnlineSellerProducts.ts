@@ -1,7 +1,8 @@
-import { getCdrOnlineSellersSellerIdProducts } from "@/api";
-import { useQuery } from "@tanstack/react-query";
-
 import { useToken } from "./useToken";
+
+import { getCdrOnlineSellersSellerIdProducts } from "@/api";
+
+import { useQuery } from "@tanstack/react-query";
 
 export const useOnlineSellerProducts = (sellerId: string | null) => {
   const { isTokenExpired } = useToken();

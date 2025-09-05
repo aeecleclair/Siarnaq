@@ -1,11 +1,13 @@
 "use client";
 
-import { CdrUserPreview, CurriculumComplete } from "@/api";
-import { Badge } from "@/components/ui/badge";
-import { ColumnDef } from "@tanstack/react-table";
-
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { fuzzySort } from "./searchFunction";
+
+import { CdrUserPreview, CurriculumComplete } from "@/api";
+
+import { ColumnDef } from "@tanstack/react-table";
+
+import { Badge } from "@/components/ui/badge";
 
 export const columns: ColumnDef<CdrUserPreview>[] = [
   // {

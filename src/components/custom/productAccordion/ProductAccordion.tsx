@@ -1,17 +1,3 @@
-import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
-import { Badge } from "@/components/ui/badge";
-import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
-import { useMemberships } from "@/hooks/useMemberships";
-import { useUser } from "@/hooks/useUser";
-import { useUserMemberships } from "@/hooks/useUserMemberships";
-import { useUserPurchases } from "@/hooks/useUserPurchases";
-import { useSizeStore } from "@/stores/SizeStore";
-import { useTranslation } from "@/translations/utils";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
-import { useTranslations } from "next-intl";
-import { HiOutlineCheckBadge } from "react-icons/hi2";
-
 import {
   AccordionContent,
   AccordionItem,
@@ -20,6 +6,23 @@ import {
 import { AddingVariantCard } from "./AddingVariantCard";
 import { ProductAccordionOptions } from "./ProductAccordionOptions";
 import { VariantCardWithOptions } from "./VariantCardWithOptions";
+
+import { app__modules__cdr__schemas_cdr__ProductComplete } from "@/api";
+import { useMemberships } from "@/hooks/useMemberships";
+import { useUser } from "@/hooks/useUser";
+import { useUserMemberships } from "@/hooks/useUserMemberships";
+import { useUserPurchases } from "@/hooks/useUserPurchases";
+import { useSizeStore } from "@/stores/SizeStore";
+import { useTranslation } from "@/translations/utils";
+
+import { useTranslations } from "next-intl";
+import { HiOutlineCheckBadge } from "react-icons/hi2";
+
+import { Badge } from "@/components/ui/badge";
+import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
+
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 
 interface ProductAccordionProps {
   product: app__modules__cdr__schemas_cdr__ProductComplete;

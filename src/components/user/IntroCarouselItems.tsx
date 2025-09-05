@@ -1,12 +1,13 @@
+import { LoadingButton } from "../custom/LoadingButton";
+
 import { CdrUser, postCdrUsersUserIdCurriculumsCurriculumId } from "@/api";
 import { useCurriculums } from "@/hooks/useCurriculums";
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useRouter } from "@/i18n/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import { LoadingButton } from "../custom/LoadingButton";
 import { Badge } from "../ui/badge";
 import { CarouselContent, CarouselItem, useCarousel } from "../ui/carousel";
 import {
@@ -18,6 +19,8 @@ import {
   SelectValue,
 } from "../ui/select";
 import { useToast } from "../ui/use-toast";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 interface IntroCarouselItemsProps {
   user: CdrUser;

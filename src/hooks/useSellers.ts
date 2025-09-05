@@ -1,7 +1,8 @@
-import { getCdrUsersMeSellers } from "@/api";
-import { useQuery } from "@tanstack/react-query";
-
 import { useToken } from "./useToken";
+
+import { getCdrUsersMeSellers } from "@/api";
+
+import { useQuery } from "@tanstack/react-query";
 
 export const useSellers = () => {
   const { isTokenExpired } = useToken();

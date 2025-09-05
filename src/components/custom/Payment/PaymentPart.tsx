@@ -1,3 +1,6 @@
+import { CurrencyInput } from "../CurrencyInput";
+import { PaymentItem } from "./PaymentItem";
+
 import {
   CdrUser,
   PaymentBase,
@@ -7,20 +10,9 @@ import {
 import { CustomDialog } from "@/components/custom/CustomDialog";
 import { LoadingButton } from "@/components/custom/LoadingButton";
 import { StyledFormField } from "@/components/custom/StyledFormField";
-import { Button } from "@/components/ui/button";
-import { CardTitle } from "@/components/ui/card";
-import { Form } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { useToast } from "@/components/ui/use-toast";
 import _paymentFormSchema from "@/forms/paymentFormSchema";
 import { useUserPayments } from "@/hooks/useUserPayments";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
@@ -33,8 +25,18 @@ import {
 import { HiOutlineBanknotes, HiOutlinePencilSquare } from "react-icons/hi2";
 import z from "zod";
 
-import { CurrencyInput } from "../CurrencyInput";
-import { PaymentItem } from "./PaymentItem";
+import { Button } from "@/components/ui/button";
+import { CardTitle } from "@/components/ui/card";
+import { Form } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/components/ui/use-toast";
 
 interface PaymentPartProps {
   user: CdrUser;

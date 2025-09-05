@@ -1,3 +1,9 @@
+import { CustomDialog } from "../CustomDialog";
+import { LoadingButton } from "../LoadingButton";
+import { Answer } from "../customFieldDialog/CustomFieldInput";
+import { CustomFieldsDialog } from "../customFieldDialog/CustomFieldsDialog";
+import { AddEditVariantForm } from "./AddEditVariantForm";
+
 import {
   ProductVariantComplete,
   ProductVariantEdit,
@@ -6,6 +12,16 @@ import {
   patchCdrSellersSellerIdProductsProductIdVariantsVariantId,
   postCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId,
 } from "@/api";
+import _variantFormSchema from "@/forms/variantFormSchema";
+import { useSellerProductData } from "@/hooks/useSellerProductData";
+import { getModifiedFields } from "@/lib/utils";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import z from "zod";
+
 import { Button } from "@/components/ui/button";
 import {
   ContextMenuContent,
@@ -13,26 +29,13 @@ import {
 } from "@/components/ui/context-menu";
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
-import _variantFormSchema from "@/forms/variantFormSchema";
-import { useSellerProductData } from "@/hooks/useSellerProductData";
-import { getModifiedFields } from "@/lib/utils";
+
 import {
   PencilIcon,
   PlayIcon,
   StopIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import z from "zod";
-
-import { CustomDialog } from "../CustomDialog";
-import { LoadingButton } from "../LoadingButton";
-import { Answer } from "../customFieldDialog/CustomFieldInput";
-import { CustomFieldsDialog } from "../customFieldDialog/CustomFieldsDialog";
-import { AddEditVariantForm } from "./AddEditVariantForm";
 
 interface VariantCardOptionsProps {
   variant: ProductVariantComplete;

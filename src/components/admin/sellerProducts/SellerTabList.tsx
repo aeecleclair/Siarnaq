@@ -1,8 +1,10 @@
 import { SellerComplete, Status } from "@/api";
-import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRouter } from "@/i18n/navigation";
+
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
+
+import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface SellerTabListProps {
   status: Status;

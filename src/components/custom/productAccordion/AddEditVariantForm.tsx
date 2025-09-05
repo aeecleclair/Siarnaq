@@ -1,18 +1,20 @@
+import { CurrencyInput } from "../CurrencyInput";
+import { LoadingButton } from "../LoadingButton";
+import { MultiSelect } from "../MultiSelect";
+import { StyledFormField } from "../StyledFormField";
+
+import _variantFormSchema from "@/forms/variantFormSchema";
+import { useCurriculums } from "@/hooks/useCurriculums";
+
+import { useTranslations } from "next-intl";
+import { UseFormReturn } from "react-hook-form";
+import z from "zod";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import _variantFormSchema from "@/forms/variantFormSchema";
-import { useCurriculums } from "@/hooks/useCurriculums";
-import { useTranslations } from "next-intl";
-import { UseFormReturn } from "react-hook-form";
-import z from "zod";
-
-import { CurrencyInput } from "../CurrencyInput";
-import { LoadingButton } from "../LoadingButton";
-import { MultiSelect } from "../MultiSelect";
-import { StyledFormField } from "../StyledFormField";
 
 interface AddEditVariantFormProps {
   form: UseFormReturn<z.infer<ReturnType<typeof _variantFormSchema>>>;

@@ -1,6 +1,9 @@
+import { PageIndicator } from "../custom/PageIndicator";
+
 import { useOnlineSellers } from "@/hooks/useOnlineSellers";
 import { useYear } from "@/hooks/useYear";
 import { Link } from "@/i18n/navigation";
+
 import { useTranslations } from "next-intl";
 import {
   HiOutlineBanknotes,
@@ -11,7 +14,6 @@ import {
   HiOutlineNewspaper,
 } from "react-icons/hi2";
 
-import { PageIndicator } from "../custom/PageIndicator";
 import {
   Card,
   CardContent,

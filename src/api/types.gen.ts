@@ -3084,7 +3084,9 @@ export type PostCompetitionEditionsEditionIdActivateResponse = void;
 export type PostCompetitionEditionsEditionIdActivateError = unknown;
 
 export type PostCompetitionEditionsEditionIdInscriptionData = {
-    body: boolean;
+  body: {
+    enable: boolean;
+    };
     path: {
         edition_id: string;
     };

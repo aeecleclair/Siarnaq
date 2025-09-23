@@ -1,8 +1,8 @@
 import { AddEditProductForm } from "./AddEditProductForm";
 
 import {
-  ProductBase,
   SellerComplete,
+  app__modules__cdr__schemas_cdr__ProductBase,
   postCdrSellersSellerIdProducts,
   postCdrSellersSellerIdProductsProductIdData,
 } from "@/api";
@@ -61,7 +61,7 @@ export const AddProductAccordionItem = ({
 
   async function onSubmitInterestProduct() {
     setIsLoading(true);
-    const body: ProductBase = {
+    const body: app__modules__cdr__schemas_cdr__ProductBase = {
       name_fr: "Interêt pour l'asso",
       name_en: "Interest for the club",
       available_online: false,
@@ -92,7 +92,7 @@ export const AddProductAccordionItem = ({
 
   async function onSubmit(values: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
-    const body: ProductBase = {
+    const body: app__modules__cdr__schemas_cdr__ProductBase = {
       ...values,
       available_online: values.available_online === "true",
       needs_validation: true,

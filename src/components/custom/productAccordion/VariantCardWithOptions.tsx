@@ -2,14 +2,14 @@ import { VariantCard } from "../VariantCard";
 import { VariantCardOptions } from "./VariantCardOptions";
 
 import {
-  ProductVariantComplete,
   app__modules__cdr__schemas_cdr__ProductComplete,
+  app__modules__cdr__schemas_cdr__ProductVariantComplete,
 } from "@/api";
 
 import { ContextMenu, ContextMenuTrigger } from "@/components/ui/context-menu";
 
 interface VariantCardWithOptionsProps {
-  variant: ProductVariantComplete;
+  variant: app__modules__cdr__schemas_cdr__ProductVariantComplete;
   canEdit?: boolean;
   canRemove?: boolean;
   canDisable?: boolean;

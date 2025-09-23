@@ -3,7 +3,7 @@ import { CustomDialog } from "../CustomDialog";
 import { AddEditVariantForm } from "./AddEditVariantForm";
 
 import {
-  ProductVariantBase,
+  app__modules__cdr__schemas_cdr__ProductVariantBase,
   postCdrSellersSellerIdProductsProductIdVariants,
 } from "@/api";
 import _variantFormSchema from "@/forms/variantFormSchema";
@@ -56,7 +56,7 @@ export const AddingVariantCard = ({
     const added_duration = values.related_membership_added_duration?.match(
       /^P?((\d+Y)?(\d+M)?(\d+D)?)$/,
     );
-    const body: ProductVariantBase = {
+    const body: app__modules__cdr__schemas_cdr__ProductVariantBase = {
       ...values,
       price: isInterestProduct ? 0 : Math.round(parseFloat(values.price) * 100),
       unique: values.unique === "unique",

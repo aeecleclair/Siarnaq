@@ -2,8 +2,8 @@ import UserDisplayName from "../displayName";
 
 import {
   CdrUser,
-  PaymentComplete,
   PaymentType,
+  app__modules__cdr__schemas_cdr__PaymentComplete,
   deleteCdrUsersUserIdPaymentsPaymentId,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
@@ -23,7 +23,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 
 interface PaymentItemProps {
-  payment: PaymentComplete;
+  payment: app__modules__cdr__schemas_cdr__PaymentComplete;
   refetch: () => void;
   user: CdrUser;
   isAdmin?: boolean;

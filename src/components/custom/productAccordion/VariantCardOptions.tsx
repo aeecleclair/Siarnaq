@@ -5,8 +5,8 @@ import { CustomFieldsDialog } from "../customFieldDialog/CustomFieldsDialog";
 import { AddEditVariantForm } from "./AddEditVariantForm";
 
 import {
-  ProductVariantComplete,
-  ProductVariantEdit,
+  app__modules__cdr__schemas_cdr__ProductVariantComplete,
+  app__modules__cdr__schemas_cdr__ProductVariantEdit,
   deleteCdrSellersSellerIdProductsProductIdVariantsVariantId,
   patchCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId,
   patchCdrSellersSellerIdProductsProductIdVariantsVariantId,
@@ -38,7 +38,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 interface VariantCardOptionsProps {
-  variant: ProductVariantComplete;
+  variant: app__modules__cdr__schemas_cdr__ProductVariantComplete;
   canEdit?: boolean;
   canRemove?: boolean;
   canDisable?: boolean;
@@ -94,7 +94,9 @@ export const VariantCardOptions = ({
     defaultValues: initialValues,
   });
 
-  async function patchVariant(body: ProductVariantEdit) {
+  async function patchVariant(
+    body: app__modules__cdr__schemas_cdr__ProductVariantEdit,
+  ) {
     const { error } =
       await patchCdrSellersSellerIdProductsProductIdVariantsVariantId({
         path: {
@@ -124,7 +126,7 @@ export const VariantCardOptions = ({
     );
 
     // Valeurs transformées comme attendues par l'API
-    const resolvedValues: ProductVariantEdit = {
+    const resolvedValues: app__modules__cdr__schemas_cdr__ProductVariantEdit = {
       ...values,
       price: Math.round(parseFloat(values.price) * 100),
       unique: values.unique === "unique",
@@ -134,14 +136,15 @@ export const VariantCardOptions = ({
         : undefined,
     };
 
-    const resolvedInitial: ProductVariantEdit = {
-      ...initialValues,
-      price: Math.round(parseFloat(initialValues.price) * 100),
-      unique: initialValues.unique === "unique",
-      enabled: true,
-      related_membership_added_duration:
-        initialValues.related_membership_added_duration || undefined,
-    };
+    const resolvedInitial: app__modules__cdr__schemas_cdr__ProductVariantEdit =
+      {
+        ...initialValues,
+        price: Math.round(parseFloat(initialValues.price) * 100),
+        unique: initialValues.unique === "unique",
+        enabled: true,
+        related_membership_added_duration:
+          initialValues.related_membership_added_duration || undefined,
+      };
 
     const diff = getModifiedFields(resolvedInitial, resolvedValues);
 
@@ -160,7 +163,7 @@ export const VariantCardOptions = ({
 
   async function toggleEnabled() {
     setIsLoading(true);
-    const body: ProductVariantEdit = {
+    const body: app__modules__cdr__schemas_cdr__ProductVariantEdit = {
       enabled: !variant.enabled,
     };
     await patchVariant(body);

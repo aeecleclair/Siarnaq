@@ -47,7 +47,12 @@ export function DataTableViewOptions<TData>({
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
                 {t(
-                  column.id as "name" | "firstname" | "nickname" | "curriculum",
+                  column.id as
+                    | "name"
+                    | "firstname"
+                    | "nickname"
+                    | "curriculum"
+                    | "promo",
                 )}
               </DropdownMenuCheckboxItem>
             );

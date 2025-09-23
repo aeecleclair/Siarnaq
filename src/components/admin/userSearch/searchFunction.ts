@@ -1,8 +1,10 @@
+import { CdrUserPreview } from "@/api";
+
 import { compareItems, rankItem } from "@tanstack/match-sorter-utils";
 import { FilterFn, SortingFn, sortingFns } from "@tanstack/react-table";
 
 // Define a custom fuzzy sort function that will sort by rank if the row has ranking information
-export const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
+export const fuzzySort: SortingFn<CdrUserPreview> = (rowA, rowB, columnId) => {
   let dir = 0;
 
   // Only sort by rank if the column has ranking information
@@ -18,7 +20,12 @@ export const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
 };
 
 // Define a custom fuzzy filter function that will apply ranking info to rows (using match-sorter utils)
-export const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
+export const fuzzyFilter: FilterFn<CdrUserPreview> = (
+  row,
+  columnId,
+  value,
+  addMeta,
+) => {
   // Rank the item
   const itemRank = rankItem(row.getValue(columnId), value);
 

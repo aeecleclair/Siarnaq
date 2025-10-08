@@ -3,8 +3,8 @@ import { PaymentItem } from "./PaymentItem";
 
 import {
   CdrUser,
-  PaymentBase,
   PaymentType,
+  app__modules__cdr__schemas_cdr__PaymentBase,
   postCdrUsersUserIdPayments,
 } from "@/api";
 import { CustomDialog } from "@/components/custom/CustomDialog";
@@ -82,7 +82,7 @@ export const PaymentPart = ({ user, isAdmin }: PaymentPartProps) => {
 
   async function onSubmit(values: z.infer<typeof paymentFormSchema>) {
     setIsLoading(true);
-    const body: PaymentBase = {
+    const body: app__modules__cdr__schemas_cdr__PaymentBase = {
       ...values,
       total: Math.round(parseFloat(values.total) * 100),
     };

@@ -438,6 +438,30 @@ export const $AssociationGroupsEdit = {
     title: 'AssociationGroupsEdit'
 } as const;
 
+export const $BatchPurchase = {
+    properties: {
+        user_emails: {
+            items: {
+                type: 'string'
+            },
+            type: 'array',
+            title: 'User Emails'
+        },
+        product_variant_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Product Variant Id'
+        },
+        quantity: {
+            type: 'integer',
+            title: 'Quantity'
+        }
+    },
+    type: 'object',
+    required: ['user_emails', 'product_variant_id', 'quantity'],
+    title: 'BatchPurchase'
+} as const;
+
 export const $BatchResult = {
     properties: {
         failed: {
@@ -452,6 +476,30 @@ export const $BatchResult = {
     required: ['failed'],
     title: 'BatchResult',
     description: 'Return a dictionary of {key: error message} indicating which element of failed.'
+} as const;
+
+export const $BatchValidation = {
+    properties: {
+        user_emails: {
+            items: {
+                type: 'string'
+            },
+            type: 'array',
+            title: 'User Emails'
+        },
+        product_variant_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Product Variant Id'
+        },
+        validated: {
+            type: 'boolean',
+            title: 'Validated'
+        }
+    },
+    type: 'object',
+    required: ['user_emails', 'product_variant_id', 'validated'],
+    title: 'BatchValidation'
 } as const;
 
 export const $Body_authorize_validation_auth_authorization_flow_authorize_validation_post = {
@@ -949,6 +997,19 @@ export const $Body_upload_document_raid_document__document_type__post = {
     type: 'object',
     required: ['file'],
     title: 'Body_upload_document_raid_document__document_type__post'
+} as const;
+
+export const $Body_upload_participant_certificate_competition_participants_sports__sport_id__certificate_post = {
+    properties: {
+        certificate: {
+            type: 'string',
+            format: 'binary',
+            title: 'Certificate'
+        }
+    },
+    type: 'object',
+    required: ['certificate'],
+    title: 'Body_upload_participant_certificate_competition_participants_sports__sport_id__certificate_post'
 } as const;
 
 export const $BookingBase = {
@@ -1550,6 +1611,17 @@ export const $CdrUserPreview = {
                     type: 'null'
                 }
             ]
+        },
+        promo: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Promo'
         }
     },
     type: 'object',
@@ -1832,6 +1904,377 @@ export const $CineSessionUpdate = {
     },
     type: 'object',
     title: 'CineSessionUpdate'
+} as const;
+
+export const $CompetitionEdition = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        year: {
+            type: 'integer',
+            title: 'Year'
+        },
+        start_date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Start Date'
+        },
+        end_date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'End Date'
+        },
+        active: {
+            type: 'boolean',
+            title: 'Active',
+            default: true
+        },
+        inscription_enabled: {
+            type: 'boolean',
+            title: 'Inscription Enabled',
+            default: false
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'year', 'start_date', 'end_date', 'id'],
+    title: 'CompetitionEdition'
+} as const;
+
+export const $CompetitionEditionBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        year: {
+            type: 'integer',
+            title: 'Year'
+        },
+        start_date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Start Date'
+        },
+        end_date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'End Date'
+        },
+        active: {
+            type: 'boolean',
+            title: 'Active',
+            default: true
+        },
+        inscription_enabled: {
+            type: 'boolean',
+            title: 'Inscription Enabled',
+            default: false
+        }
+    },
+    type: 'object',
+    required: ['name', 'year', 'start_date', 'end_date'],
+    title: 'CompetitionEditionBase'
+} as const;
+
+export const $CompetitionEditionEdit = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        year: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    exclusiveMinimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Year'
+        },
+        start_date: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Start Date'
+        },
+        end_date: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'End Date'
+        }
+    },
+    type: 'object',
+    title: 'CompetitionEditionEdit'
+} as const;
+
+export const $CompetitionGroupType = {
+    type: 'string',
+    enum: ['sport_manager', 'schools_bds'],
+    title: 'CompetitionGroupType'
+} as const;
+
+export const $CompetitionUser = {
+    properties: {
+        sport_category: {
+            '$ref': '#/components/schemas/SportCategory'
+        },
+        is_pompom: {
+            type: 'boolean',
+            title: 'Is Pompom',
+            default: false
+        },
+        is_fanfare: {
+            type: 'boolean',
+            title: 'Is Fanfare',
+            default: false
+        },
+        is_cameraman: {
+            type: 'boolean',
+            title: 'Is Cameraman',
+            default: false
+        },
+        is_athlete: {
+            type: 'boolean',
+            title: 'Is Athlete',
+            default: false
+        },
+        is_volunteer: {
+            type: 'boolean',
+            title: 'Is Volunteer',
+            default: false
+        },
+        user_id: {
+            type: 'string',
+            title: 'User Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        created_at: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Created At'
+        },
+        validated: {
+            type: 'boolean',
+            title: 'Validated',
+            default: false
+        },
+        user: {
+            '$ref': '#/components/schemas/CoreUser'
+        }
+    },
+    type: 'object',
+    required: ['sport_category', 'user_id', 'edition_id', 'created_at', 'user'],
+    title: 'CompetitionUser',
+    description: `A user with additional fields for competition purposes.
+This is used to represent a user in the context of a competition.`
+} as const;
+
+export const $CompetitionUserBase = {
+    properties: {
+        sport_category: {
+            '$ref': '#/components/schemas/SportCategory'
+        },
+        is_pompom: {
+            type: 'boolean',
+            title: 'Is Pompom',
+            default: false
+        },
+        is_fanfare: {
+            type: 'boolean',
+            title: 'Is Fanfare',
+            default: false
+        },
+        is_cameraman: {
+            type: 'boolean',
+            title: 'Is Cameraman',
+            default: false
+        },
+        is_athlete: {
+            type: 'boolean',
+            title: 'Is Athlete',
+            default: false
+        },
+        is_volunteer: {
+            type: 'boolean',
+            title: 'Is Volunteer',
+            default: false
+        }
+    },
+    type: 'object',
+    required: ['sport_category'],
+    title: 'CompetitionUserBase'
+} as const;
+
+export const $CompetitionUserEdit = {
+    properties: {
+        sport_category: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/SportCategory'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        validated: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Validated'
+        },
+        is_pompom: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Is Pompom'
+        },
+        is_fanfare: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Is Fanfare'
+        },
+        is_cameraman: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Is Cameraman'
+        },
+        is_athlete: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Is Athlete'
+        },
+        is_volunteer: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Is Volunteer'
+        }
+    },
+    type: 'object',
+    title: 'CompetitionUserEdit'
+} as const;
+
+export const $CompetitionUserSimple = {
+    properties: {
+        sport_category: {
+            '$ref': '#/components/schemas/SportCategory'
+        },
+        is_pompom: {
+            type: 'boolean',
+            title: 'Is Pompom',
+            default: false
+        },
+        is_fanfare: {
+            type: 'boolean',
+            title: 'Is Fanfare',
+            default: false
+        },
+        is_cameraman: {
+            type: 'boolean',
+            title: 'Is Cameraman',
+            default: false
+        },
+        is_athlete: {
+            type: 'boolean',
+            title: 'Is Athlete',
+            default: false
+        },
+        is_volunteer: {
+            type: 'boolean',
+            title: 'Is Volunteer',
+            default: false
+        },
+        user_id: {
+            type: 'string',
+            title: 'User Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        created_at: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Created At'
+        },
+        validated: {
+            type: 'boolean',
+            title: 'Validated',
+            default: false
+        }
+    },
+    type: 'object',
+    required: ['sport_category', 'user_id', 'edition_id', 'created_at'],
+    title: 'CompetitionUserSimple'
 } as const;
 
 export const $CoreBatchDeleteMembership = {
@@ -4381,6 +4824,264 @@ export const $LoanerUpdate = {
     title: 'LoanerUpdate'
 } as const;
 
+export const $Location = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        address: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Address'
+        },
+        latitude: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Latitude'
+        },
+        longitude: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Longitude'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'id', 'edition_id'],
+    title: 'Location'
+} as const;
+
+export const $LocationBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        address: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Address'
+        },
+        latitude: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Latitude'
+        },
+        longitude: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Longitude'
+        }
+    },
+    type: 'object',
+    required: ['name'],
+    title: 'LocationBase'
+} as const;
+
+export const $LocationComplete = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        address: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Address'
+        },
+        latitude: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Latitude'
+        },
+        longitude: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Longitude'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        matches: {
+            items: {
+                '$ref': '#/components/schemas/MatchComplete'
+            },
+            type: 'array',
+            title: 'Matches',
+            default: []
+        }
+    },
+    type: 'object',
+    required: ['name', 'id', 'edition_id'],
+    title: 'LocationComplete'
+} as const;
+
+export const $LocationEdit = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        address: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Address'
+        },
+        latitude: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Latitude'
+        },
+        longitude: {
+            anyOf: [
+                {
+                    type: 'number'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Longitude'
+        }
+    },
+    type: 'object',
+    title: 'LocationEdit'
+} as const;
+
 export const $MailMigrationRequest = {
     properties: {
         new_email: {
@@ -4456,6 +5157,355 @@ export const $ManagerUpdate = {
     },
     type: 'object',
     title: 'ManagerUpdate'
+} as const;
+
+export const $Match = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        team1_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team1 Id'
+        },
+        team2_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team2 Id'
+        },
+        location_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Location Id'
+        },
+        date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Date'
+        },
+        score_team1: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Score Team1'
+        },
+        score_team2: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Score Team2'
+        },
+        winner_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Winner Id'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'team1_id', 'team2_id', 'location_id', 'date', 'id', 'sport_id', 'edition_id'],
+    title: 'Match'
+} as const;
+
+export const $MatchBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        team1_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team1 Id'
+        },
+        team2_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team2 Id'
+        },
+        location_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Location Id'
+        },
+        date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Date'
+        },
+        score_team1: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Score Team1'
+        },
+        score_team2: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Score Team2'
+        },
+        winner_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Winner Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'team1_id', 'team2_id', 'location_id', 'date'],
+    title: 'MatchBase'
+} as const;
+
+export const $MatchComplete = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        team1_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team1 Id'
+        },
+        team2_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team2 Id'
+        },
+        location_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Location Id'
+        },
+        date: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Date'
+        },
+        score_team1: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Score Team1'
+        },
+        score_team2: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Score Team2'
+        },
+        winner_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Winner Id'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        team1: {
+            '$ref': '#/components/schemas/Team'
+        },
+        team2: {
+            '$ref': '#/components/schemas/Team'
+        },
+        location: {
+            '$ref': '#/components/schemas/Location'
+        }
+    },
+    type: 'object',
+    required: ['name', 'team1_id', 'team2_id', 'location_id', 'date', 'id', 'sport_id', 'edition_id', 'team1', 'team2', 'location'],
+    title: 'MatchComplete'
+} as const;
+
+export const $MatchEdit = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        sport_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Sport Id'
+        },
+        team1_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Team1 Id'
+        },
+        team2_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Team2 Id'
+        },
+        date: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date-time'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Date'
+        },
+        location_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Location Id'
+        },
+        score_team1: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Score Team1'
+        },
+        score_team2: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Score Team2'
+        },
+        winner_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Winner Id'
+        }
+    },
+    type: 'object',
+    title: 'MatchEdit'
 } as const;
 
 export const $MeetingPlace = {
@@ -4998,569 +6048,168 @@ export const $PaperUpdate = {
 
 export const $Participant = {
     properties: {
-        name: {
-            type: 'string',
-            title: 'Name'
-        },
-        firstname: {
-            type: 'string',
-            title: 'Firstname'
-        },
-        birthday: {
-            type: 'string',
-            format: 'date',
-            title: 'Birthday'
-        },
-        phone: {
-            type: 'string',
-            title: 'Phone'
-        },
-        email: {
-            type: 'string',
-            title: 'Email'
-        },
-        id: {
-            type: 'string',
-            title: 'Id'
-        },
-        bike_size: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Size'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        t_shirt_size: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Size'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        situation: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Situation'
-        },
-        validation_progress: {
-            type: 'number',
-            title: 'Validation Progress'
-        },
-        payment: {
-            type: 'boolean',
-            title: 'Payment'
-        },
-        t_shirt_payment: {
-            type: 'boolean',
-            title: 'T Shirt Payment'
-        },
-        number_of_document: {
-            type: 'integer',
-            title: 'Number Of Document'
-        },
-        number_of_validated_document: {
-            type: 'integer',
-            title: 'Number Of Validated Document'
-        },
-        address: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Address'
-        },
-        other_school: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Other School'
-        },
-        company: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Company'
-        },
-        diet: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Diet'
-        },
-        id_card: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Document'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        medical_certificate: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Document'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        security_file: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/SecurityFile'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        student_card: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Document'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        raid_rules: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Document'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        parent_authorization: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Document'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        attestation_on_honour: {
-            type: 'boolean',
-            title: 'Attestation On Honour'
-        },
-        is_minor: {
-            type: 'boolean',
-            title: 'Is Minor'
-        }
-    },
-    type: 'object',
-    required: ['name', 'firstname', 'birthday', 'phone', 'email', 'id', 'bike_size', 't_shirt_size', 'situation', 'validation_progress', 'payment', 't_shirt_payment', 'number_of_document', 'number_of_validated_document', 'address', 'id_card', 'medical_certificate', 'security_file', 'attestation_on_honour', 'is_minor'],
-    title: 'Participant'
-} as const;
-
-export const $ParticipantBase = {
-    properties: {
-        name: {
-            type: 'string',
-            title: 'Name'
-        },
-        firstname: {
-            type: 'string',
-            title: 'Firstname'
-        },
-        birthday: {
-            type: 'string',
-            format: 'date',
-            title: 'Birthday'
-        },
-        phone: {
-            type: 'string',
-            title: 'Phone'
-        },
-        email: {
-            type: 'string',
-            title: 'Email'
-        }
-    },
-    type: 'object',
-    required: ['name', 'firstname', 'birthday', 'phone', 'email'],
-    title: 'ParticipantBase'
-} as const;
-
-export const $ParticipantPreview = {
-    properties: {
-        name: {
-            type: 'string',
-            title: 'Name'
-        },
-        firstname: {
-            type: 'string',
-            title: 'Firstname'
-        },
-        birthday: {
-            type: 'string',
-            format: 'date',
-            title: 'Birthday'
-        },
-        phone: {
-            type: 'string',
-            title: 'Phone'
-        },
-        email: {
-            type: 'string',
-            title: 'Email'
-        },
-        id: {
-            type: 'string',
-            title: 'Id'
-        },
-        bike_size: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Size'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        t_shirt_size: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Size'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        situation: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Situation'
-        },
-        validation_progress: {
-            type: 'number',
-            title: 'Validation Progress'
-        },
-        payment: {
-            type: 'boolean',
-            title: 'Payment'
-        },
-        t_shirt_payment: {
-            type: 'boolean',
-            title: 'T Shirt Payment'
-        },
-        number_of_document: {
-            type: 'integer',
-            title: 'Number Of Document'
-        },
-        number_of_validated_document: {
-            type: 'integer',
-            title: 'Number Of Validated Document'
-        }
-    },
-    type: 'object',
-    required: ['name', 'firstname', 'birthday', 'phone', 'email', 'id', 'bike_size', 't_shirt_size', 'situation', 'validation_progress', 'payment', 't_shirt_payment', 'number_of_document', 'number_of_validated_document'],
-    title: 'ParticipantPreview'
-} as const;
-
-export const $ParticipantUpdate = {
-    properties: {
-        name: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Name'
-        },
-        firstname: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Firstname'
-        },
-        birthday: {
-            anyOf: [
-                {
-                    type: 'string',
-                    format: 'date'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Birthday'
-        },
-        address: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Address'
-        },
-        phone: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Phone'
-        },
-        email: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Email'
-        },
-        bike_size: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Size'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        t_shirt_size: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Size'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        situation: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Situation'
-        },
-        other_school: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Other School'
-        },
-        company: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Company'
-        },
-        diet: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Diet'
-        },
-        attestation_on_honour: {
-            anyOf: [
-                {
-                    type: 'boolean'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Attestation On Honour'
-        },
-        id_card_id: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Id Card Id'
-        },
-        medical_certificate_id: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Medical Certificate Id'
-        },
-        security_file_id: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Security File Id'
-        },
-        student_card_id: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Student Card Id'
-        },
-        raid_rules_id: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Raid Rules Id'
-        },
-        parent_authorization_id: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Parent Authorization Id'
-        }
-    },
-    type: 'object',
-    title: 'ParticipantUpdate'
-} as const;
-
-export const $PaymentBase = {
-    properties: {
-        total: {
-            type: 'integer',
-            title: 'Total'
-        },
-        payment_type: {
-            '$ref': '#/components/schemas/PaymentType'
-        }
-    },
-    type: 'object',
-    required: ['total', 'payment_type'],
-    title: 'PaymentBase'
-} as const;
-
-export const $PaymentComplete = {
-    properties: {
-        total: {
-            type: 'integer',
-            title: 'Total'
-        },
-        payment_type: {
-            '$ref': '#/components/schemas/PaymentType'
-        },
-        id: {
-            type: 'string',
-            format: 'uuid',
-            title: 'Id'
-        },
         user_id: {
             type: 'string',
             title: 'User Id'
         },
-        year: {
-            type: 'integer',
-            title: 'Year'
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        license: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'License'
+        },
+        certificate_file_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Certificate File Id'
+        },
+        is_license_valid: {
+            type: 'boolean',
+            title: 'Is License Valid'
+        },
+        substitute: {
+            type: 'boolean',
+            title: 'Substitute',
+            default: false
+        },
+        team_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team Id'
         }
     },
     type: 'object',
-    required: ['total', 'payment_type', 'id', 'user_id', 'year'],
-    title: 'PaymentComplete'
+    required: ['user_id', 'sport_id', 'edition_id', 'school_id', 'is_license_valid', 'team_id'],
+    title: 'Participant'
+} as const;
+
+export const $ParticipantComplete = {
+    properties: {
+        user_id: {
+            type: 'string',
+            title: 'User Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        license: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'License'
+        },
+        certificate_file_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Certificate File Id'
+        },
+        is_license_valid: {
+            type: 'boolean',
+            title: 'Is License Valid'
+        },
+        substitute: {
+            type: 'boolean',
+            title: 'Substitute',
+            default: false
+        },
+        team_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team Id'
+        },
+        user: {
+            '$ref': '#/components/schemas/CompetitionUser'
+        }
+    },
+    type: 'object',
+    required: ['user_id', 'sport_id', 'edition_id', 'school_id', 'is_license_valid', 'team_id', 'user'],
+    title: 'ParticipantComplete'
+} as const;
+
+export const $ParticipantInfo = {
+    properties: {
+        license: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'License'
+        },
+        substitute: {
+            type: 'boolean',
+            title: 'Substitute',
+            default: false
+        },
+        team_id: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'uuid'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Team Id'
+        }
+    },
+    type: 'object',
+    title: 'ParticipantInfo'
 } as const;
 
 export const $PaymentType = {
@@ -5992,92 +6641,42 @@ export const $PrizeSimple = {
     title: 'PrizeSimple'
 } as const;
 
-export const $ProductBase = {
+export const $Product = {
     properties: {
-        name_fr: {
+        name: {
             type: 'string',
-            title: 'Name Fr'
+            title: 'Name'
         },
-        name_en: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Name En'
-        },
-        description_fr: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Description Fr'
-        },
-        description_en: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Description En'
-        },
-        available_online: {
+        required: {
             type: 'boolean',
-            title: 'Available Online'
+            title: 'Required',
+            default: false
         },
-        needs_validation: {
-            type: 'boolean',
-            title: 'Needs Validation',
-            default: true
-        },
-        related_membership: {
+        description: {
             anyOf: [
                 {
-                    '$ref': '#/components/schemas/MembershipSimple'
+                    type: 'string'
                 },
                 {
                     type: 'null'
                 }
-            ]
+            ],
+            title: 'Description'
         },
-        tickets: {
-            items: {
-                '$ref': '#/components/schemas/GenerateTicketBase'
-            },
-            type: 'array',
-            title: 'Tickets',
-            default: []
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
         },
-        product_constraints: {
-            items: {
-                type: 'string',
-                format: 'uuid'
-            },
-            type: 'array',
-            title: 'Product Constraints'
-        },
-        document_constraints: {
-            items: {
-                type: 'string',
-                format: 'uuid'
-            },
-            type: 'array',
-            title: 'Document Constraints'
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
         }
     },
     type: 'object',
-    required: ['name_fr', 'available_online', 'product_constraints', 'document_constraints'],
-    title: 'ProductBase'
+    required: ['name', 'id', 'edition_id'],
+    title: 'Product'
 } as const;
 
 export const $ProductCompleteNoConstraint = {
@@ -6143,7 +6742,7 @@ export const $ProductCompleteNoConstraint = {
         },
         variants: {
             items: {
-                '$ref': '#/components/schemas/ProductVariantComplete'
+                '$ref': '#/components/schemas/app__modules__cdr__schemas_cdr__ProductVariantComplete'
             },
             type: 'array',
             title: 'Variants',
@@ -6172,6 +6771,12 @@ export const $ProductCompleteNoConstraint = {
     title: 'ProductCompleteNoConstraint'
 } as const;
 
+export const $ProductPublicType = {
+    type: 'string',
+    enum: ['pompom', 'fanfare', 'cameraman', 'athlete', 'volunteer'],
+    title: 'ProductPublicType'
+} as const;
+
 export const $ProductQuantity = {
     properties: {
         quantity: {
@@ -6185,6 +6790,12 @@ export const $ProductQuantity = {
     type: 'object',
     required: ['quantity', 'product'],
     title: 'ProductQuantity'
+} as const;
+
+export const $ProductSchoolType = {
+    type: 'string',
+    enum: ['centrale', 'from_lyon', 'others'],
+    title: 'ProductSchoolType'
 } as const;
 
 export const $ProductSimple = {
@@ -6207,104 +6818,18 @@ export const $ProductSimple = {
     title: 'ProductSimple'
 } as const;
 
-export const $ProductVariantBase = {
+export const $ProductVariant = {
     properties: {
-        name_fr: {
-            type: 'string',
-            title: 'Name Fr'
-        },
-        name_en: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Name En'
-        },
-        description_fr: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Description Fr'
-        },
-        description_en: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Description En'
-        },
-        price: {
-            type: 'integer',
-            title: 'Price'
-        },
-        enabled: {
-            type: 'boolean',
-            title: 'Enabled'
-        },
-        unique: {
-            type: 'boolean',
-            title: 'Unique'
-        },
-        allowed_curriculum: {
-            items: {
-                type: 'string',
-                format: 'uuid'
-            },
-            type: 'array',
-            title: 'Allowed Curriculum'
-        },
-        related_membership_added_duration: {
-            anyOf: [
-                {
-                    type: 'string',
-                    format: 'duration'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Related Membership Added Duration'
-        }
-    },
-    type: 'object',
-    required: ['name_fr', 'price', 'enabled', 'unique', 'allowed_curriculum'],
-    title: 'ProductVariantBase'
-} as const;
-
-export const $ProductVariantComplete = {
-    properties: {
-        id: {
-            type: 'string',
-            format: 'uuid',
-            title: 'Id'
-        },
-        year: {
-            type: 'integer',
-            title: 'Year'
-        },
         product_id: {
             type: 'string',
             format: 'uuid',
             title: 'Product Id'
         },
-        name_fr: {
+        name: {
             type: 'string',
-            title: 'Name Fr'
+            title: 'Name'
         },
-        name_en: {
+        description: {
             anyOf: [
                 {
                     type: 'string'
@@ -6313,29 +6838,7 @@ export const $ProductVariantComplete = {
                     type: 'null'
                 }
             ],
-            title: 'Name En'
-        },
-        description_fr: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Description Fr'
-        },
-        description_en: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Description En'
+            title: 'Description'
         },
         price: {
             type: 'integer',
@@ -6343,147 +6846,40 @@ export const $ProductVariantComplete = {
         },
         enabled: {
             type: 'boolean',
-            title: 'Enabled'
+            title: 'Enabled',
+            default: true
         },
         unique: {
             type: 'boolean',
             title: 'Unique'
         },
-        allowed_curriculum: {
-            items: {
-                '$ref': '#/components/schemas/CurriculumComplete'
-            },
-            type: 'array',
-            title: 'Allowed Curriculum',
-            default: []
+        school_type: {
+            '$ref': '#/components/schemas/ProductSchoolType'
         },
-        related_membership_added_duration: {
+        public_type: {
             anyOf: [
                 {
-                    type: 'string',
-                    format: 'duration'
+                    '$ref': '#/components/schemas/ProductPublicType'
                 },
                 {
                     type: 'null'
                 }
-            ],
-            title: 'Related Membership Added Duration'
+            ]
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
         }
     },
     type: 'object',
-    required: ['id', 'year', 'product_id', 'name_fr', 'price', 'enabled', 'unique'],
-    title: 'ProductVariantComplete'
-} as const;
-
-export const $ProductVariantEdit = {
-    properties: {
-        name_fr: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Name Fr'
-        },
-        name_en: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Name En'
-        },
-        description_fr: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Description Fr'
-        },
-        description_en: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Description En'
-        },
-        price: {
-            anyOf: [
-                {
-                    type: 'integer'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Price'
-        },
-        enabled: {
-            anyOf: [
-                {
-                    type: 'boolean'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Enabled'
-        },
-        unique: {
-            anyOf: [
-                {
-                    type: 'boolean'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Unique'
-        },
-        allowed_curriculum: {
-            anyOf: [
-                {
-                    items: {
-                        type: 'string',
-                        format: 'uuid'
-                    },
-                    type: 'array'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Allowed Curriculum'
-        },
-        related_membership_added_duration: {
-            anyOf: [
-                {
-                    type: 'string',
-                    format: 'duration'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Related Membership Added Duration'
-        }
-    },
-    type: 'object',
-    title: 'ProductVariantEdit'
+    required: ['product_id', 'name', 'price', 'unique', 'school_type', 'edition_id', 'id'],
+    title: 'ProductVariant'
 } as const;
 
 export const $PropagationMethod = {
@@ -6492,16 +6888,39 @@ export const $PropagationMethod = {
     title: 'PropagationMethod'
 } as const;
 
-export const $PurchaseBase = {
+export const $Purchase = {
     properties: {
+        product_variant_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Product Variant Id'
+        },
         quantity: {
             type: 'integer',
             title: 'Quantity'
+        },
+        user_id: {
+            type: 'string',
+            title: 'User Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        validated: {
+            type: 'boolean',
+            title: 'Validated'
+        },
+        purchased_on: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Purchased On'
         }
     },
     type: 'object',
-    required: ['quantity'],
-    title: 'PurchaseBase'
+    required: ['product_variant_id', 'quantity', 'user_id', 'edition_id', 'validated', 'purchased_on'],
+    title: 'Purchase'
 } as const;
 
 export const $PurchaseComplete = {
@@ -6843,6 +7262,530 @@ export const $RaidInformation = {
     title: 'RaidInformation'
 } as const;
 
+export const $RaidParticipant = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        firstname: {
+            type: 'string',
+            title: 'Firstname'
+        },
+        birthday: {
+            type: 'string',
+            format: 'date',
+            title: 'Birthday'
+        },
+        phone: {
+            type: 'string',
+            title: 'Phone'
+        },
+        email: {
+            type: 'string',
+            title: 'Email'
+        },
+        id: {
+            type: 'string',
+            title: 'Id'
+        },
+        bike_size: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Size'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        t_shirt_size: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Size'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        situation: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Situation'
+        },
+        validation_progress: {
+            type: 'number',
+            title: 'Validation Progress'
+        },
+        payment: {
+            type: 'boolean',
+            title: 'Payment'
+        },
+        t_shirt_payment: {
+            type: 'boolean',
+            title: 'T Shirt Payment'
+        },
+        number_of_document: {
+            type: 'integer',
+            title: 'Number Of Document'
+        },
+        number_of_validated_document: {
+            type: 'integer',
+            title: 'Number Of Validated Document'
+        },
+        address: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Address'
+        },
+        other_school: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Other School'
+        },
+        company: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Company'
+        },
+        diet: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Diet'
+        },
+        id_card: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Document'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        medical_certificate: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Document'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        security_file: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/SecurityFile'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        student_card: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Document'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        raid_rules: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Document'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        parent_authorization: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Document'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        attestation_on_honour: {
+            type: 'boolean',
+            title: 'Attestation On Honour'
+        },
+        is_minor: {
+            type: 'boolean',
+            title: 'Is Minor'
+        }
+    },
+    type: 'object',
+    required: ['name', 'firstname', 'birthday', 'phone', 'email', 'id', 'bike_size', 't_shirt_size', 'situation', 'validation_progress', 'payment', 't_shirt_payment', 'number_of_document', 'number_of_validated_document', 'address', 'id_card', 'medical_certificate', 'security_file', 'attestation_on_honour', 'is_minor'],
+    title: 'RaidParticipant'
+} as const;
+
+export const $RaidParticipantBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        firstname: {
+            type: 'string',
+            title: 'Firstname'
+        },
+        birthday: {
+            type: 'string',
+            format: 'date',
+            title: 'Birthday'
+        },
+        phone: {
+            type: 'string',
+            title: 'Phone'
+        },
+        email: {
+            type: 'string',
+            title: 'Email'
+        }
+    },
+    type: 'object',
+    required: ['name', 'firstname', 'birthday', 'phone', 'email'],
+    title: 'RaidParticipantBase'
+} as const;
+
+export const $RaidParticipantPreview = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        firstname: {
+            type: 'string',
+            title: 'Firstname'
+        },
+        birthday: {
+            type: 'string',
+            format: 'date',
+            title: 'Birthday'
+        },
+        phone: {
+            type: 'string',
+            title: 'Phone'
+        },
+        email: {
+            type: 'string',
+            title: 'Email'
+        },
+        id: {
+            type: 'string',
+            title: 'Id'
+        },
+        bike_size: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Size'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        t_shirt_size: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Size'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        situation: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Situation'
+        },
+        validation_progress: {
+            type: 'number',
+            title: 'Validation Progress'
+        },
+        payment: {
+            type: 'boolean',
+            title: 'Payment'
+        },
+        t_shirt_payment: {
+            type: 'boolean',
+            title: 'T Shirt Payment'
+        },
+        number_of_document: {
+            type: 'integer',
+            title: 'Number Of Document'
+        },
+        number_of_validated_document: {
+            type: 'integer',
+            title: 'Number Of Validated Document'
+        }
+    },
+    type: 'object',
+    required: ['name', 'firstname', 'birthday', 'phone', 'email', 'id', 'bike_size', 't_shirt_size', 'situation', 'validation_progress', 'payment', 't_shirt_payment', 'number_of_document', 'number_of_validated_document'],
+    title: 'RaidParticipantPreview'
+} as const;
+
+export const $RaidParticipantUpdate = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        firstname: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Firstname'
+        },
+        birthday: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'date'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Birthday'
+        },
+        address: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Address'
+        },
+        phone: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Phone'
+        },
+        email: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Email'
+        },
+        bike_size: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Size'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        t_shirt_size: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Size'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        situation: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Situation'
+        },
+        other_school: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Other School'
+        },
+        company: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Company'
+        },
+        diet: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Diet'
+        },
+        attestation_on_honour: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Attestation On Honour'
+        },
+        id_card_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Id Card Id'
+        },
+        medical_certificate_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Medical Certificate Id'
+        },
+        security_file_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Security File Id'
+        },
+        student_card_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Student Card Id'
+        },
+        raid_rules_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Raid Rules Id'
+        },
+        parent_authorization_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Parent Authorization Id'
+        }
+    },
+    type: 'object',
+    title: 'RaidParticipantUpdate'
+} as const;
+
 export const $RaidPrice = {
     properties: {
         student_price: {
@@ -6892,6 +7835,206 @@ export const $RaidPrice = {
     },
     type: 'object',
     title: 'RaidPrice'
+} as const;
+
+export const $RaidTeam = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        id: {
+            type: 'string',
+            title: 'Id'
+        },
+        number: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Number'
+        },
+        captain: {
+            '$ref': '#/components/schemas/RaidParticipant'
+        },
+        second: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/RaidParticipant'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        difficulty: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Difficulty'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        meeting_place: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/MeetingPlace'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        validation_progress: {
+            type: 'number',
+            title: 'Validation Progress'
+        },
+        file_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'File Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'id', 'number', 'captain', 'second', 'difficulty', 'meeting_place', 'validation_progress', 'file_id'],
+    title: 'RaidTeam'
+} as const;
+
+export const $RaidTeamBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        }
+    },
+    type: 'object',
+    required: ['name'],
+    title: 'RaidTeamBase'
+} as const;
+
+export const $RaidTeamPreview = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        id: {
+            type: 'string',
+            title: 'Id'
+        },
+        number: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Number'
+        },
+        captain: {
+            '$ref': '#/components/schemas/RaidParticipantPreview'
+        },
+        second: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/RaidParticipantPreview'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        difficulty: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Difficulty'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        meeting_place: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/MeetingPlace'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        validation_progress: {
+            type: 'number',
+            title: 'Validation Progress'
+        }
+    },
+    type: 'object',
+    required: ['name', 'id', 'number', 'captain', 'second', 'difficulty', 'meeting_place', 'validation_progress'],
+    title: 'RaidTeamPreview'
+} as const;
+
+export const $RaidTeamUpdate = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        number: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Number'
+        },
+        difficulty: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/Difficulty'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        meeting_place: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/MeetingPlace'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        }
+    },
+    type: 'object',
+    title: 'RaidTeamUpdate'
 } as const;
 
 export const $Recommendation = {
@@ -7193,6 +8336,556 @@ export const $ScanInfo = {
     type: 'object',
     required: ['id', 'tot', 'iat', 'key', 'store', 'signature'],
     title: 'ScanInfo'
+} as const;
+
+export const $SchoolExtension = {
+    properties: {
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        from_lyon: {
+            type: 'boolean',
+            title: 'From Lyon'
+        },
+        ffsu_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ffsu Id'
+        },
+        active: {
+            type: 'boolean',
+            title: 'Active',
+            default: true
+        },
+        inscription_enabled: {
+            type: 'boolean',
+            title: 'Inscription Enabled',
+            default: false
+        },
+        school: {
+            '$ref': '#/components/schemas/CoreSchool'
+        }
+    },
+    type: 'object',
+    required: ['school_id', 'from_lyon', 'school'],
+    title: 'SchoolExtension'
+} as const;
+
+export const $SchoolExtensionBase = {
+    properties: {
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        from_lyon: {
+            type: 'boolean',
+            title: 'From Lyon'
+        },
+        ffsu_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ffsu Id'
+        },
+        active: {
+            type: 'boolean',
+            title: 'Active',
+            default: true
+        },
+        inscription_enabled: {
+            type: 'boolean',
+            title: 'Inscription Enabled',
+            default: false
+        }
+    },
+    type: 'object',
+    required: ['school_id', 'from_lyon'],
+    title: 'SchoolExtensionBase'
+} as const;
+
+export const $SchoolExtensionEdit = {
+    properties: {
+        from_lyon: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'From Lyon'
+        },
+        ffsu_id: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Ffsu Id'
+        },
+        active: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Active'
+        },
+        inscription_enabled: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Inscription Enabled'
+        }
+    },
+    type: 'object',
+    title: 'SchoolExtensionEdit'
+} as const;
+
+export const $SchoolGeneralQuota = {
+    properties: {
+        athlete_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Athlete Quota'
+        },
+        cameraman_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Cameraman Quota'
+        },
+        pompom_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Pompom Quota'
+        },
+        fanfare_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Fanfare Quota'
+        },
+        athlete_cameraman_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Athlete Cameraman Quota'
+        },
+        athlete_pompom_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Athlete Pompom Quota'
+        },
+        athlete_fanfare_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Athlete Fanfare Quota'
+        },
+        non_athlete_cameraman_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Non Athlete Cameraman Quota'
+        },
+        non_athlete_pompom_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Non Athlete Pompom Quota'
+        },
+        non_athlete_fanfare_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Non Athlete Fanfare Quota'
+        },
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        }
+    },
+    type: 'object',
+    required: ['school_id', 'edition_id'],
+    title: 'SchoolGeneralQuota'
+} as const;
+
+export const $SchoolGeneralQuotaBase = {
+    properties: {
+        athlete_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Athlete Quota'
+        },
+        cameraman_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Cameraman Quota'
+        },
+        pompom_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Pompom Quota'
+        },
+        fanfare_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Fanfare Quota'
+        },
+        athlete_cameraman_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Athlete Cameraman Quota'
+        },
+        athlete_pompom_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Athlete Pompom Quota'
+        },
+        athlete_fanfare_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Athlete Fanfare Quota'
+        },
+        non_athlete_cameraman_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Non Athlete Cameraman Quota'
+        },
+        non_athlete_pompom_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Non Athlete Pompom Quota'
+        },
+        non_athlete_fanfare_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Non Athlete Fanfare Quota'
+        }
+    },
+    type: 'object',
+    title: 'SchoolGeneralQuotaBase'
+} as const;
+
+export const $SchoolProductQuota = {
+    properties: {
+        product_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Product Id'
+        },
+        quota: {
+            type: 'integer',
+            minimum: 0,
+            title: 'Quota'
+        },
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        }
+    },
+    type: 'object',
+    required: ['product_id', 'quota', 'school_id', 'edition_id'],
+    title: 'SchoolProductQuota'
+} as const;
+
+export const $SchoolProductQuotaBase = {
+    properties: {
+        product_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Product Id'
+        },
+        quota: {
+            type: 'integer',
+            minimum: 0,
+            title: 'Quota'
+        }
+    },
+    type: 'object',
+    required: ['product_id', 'quota'],
+    title: 'SchoolProductQuotaBase'
+} as const;
+
+export const $SchoolProductQuotaEdit = {
+    properties: {
+        quota: {
+            type: 'integer',
+            minimum: 0,
+            title: 'Quota'
+        }
+    },
+    type: 'object',
+    required: ['quota'],
+    title: 'SchoolProductQuotaEdit'
+} as const;
+
+export const $SchoolResult = {
+    properties: {
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        total_points: {
+            type: 'integer',
+            minimum: 0,
+            title: 'Total Points'
+        }
+    },
+    type: 'object',
+    required: ['school_id', 'total_points'],
+    title: 'SchoolResult'
+} as const;
+
+export const $SchoolSportQuota = {
+    properties: {
+        participant_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Participant Quota'
+        },
+        team_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Team Quota'
+        },
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        }
+    },
+    type: 'object',
+    required: ['school_id', 'sport_id', 'edition_id'],
+    title: 'SchoolSportQuota'
+} as const;
+
+export const $SchoolSportQuotaEdit = {
+    properties: {
+        participant_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Participant Quota'
+        },
+        team_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Team Quota'
+        }
+    },
+    type: 'object',
+    title: 'SchoolSportQuotaEdit'
 } as const;
 
 export const $SectionBase = {
@@ -8128,6 +9821,214 @@ export const $SpeciesTypesReturn = {
     title: 'SpeciesTypesReturn'
 } as const;
 
+export const $Sport = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        team_size: {
+            type: 'integer',
+            exclusiveMinimum: 0,
+            title: 'Team Size'
+        },
+        substitute_max: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Substitute Max'
+        },
+        sport_category: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/SportCategory'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        active: {
+            type: 'boolean',
+            title: 'Active',
+            default: true
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'team_size', 'id'],
+    title: 'Sport'
+} as const;
+
+export const $SportBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        team_size: {
+            type: 'integer',
+            exclusiveMinimum: 0,
+            title: 'Team Size'
+        },
+        substitute_max: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Substitute Max'
+        },
+        sport_category: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/SportCategory'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        active: {
+            type: 'boolean',
+            title: 'Active',
+            default: true
+        }
+    },
+    type: 'object',
+    required: ['name', 'team_size'],
+    title: 'SportBase'
+} as const;
+
+export const $SportCategory = {
+    type: 'string',
+    enum: ['masculine', 'feminine'],
+    title: 'SportCategory'
+} as const;
+
+export const $SportEdit = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        team_size: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    exclusiveMinimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Team Size'
+        },
+        substitute_max: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Substitute Max'
+        },
+        sport_category: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/SportCategory'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        active: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Active'
+        }
+    },
+    type: 'object',
+    title: 'SportEdit'
+} as const;
+
+export const $SportPodiumRankings = {
+    properties: {
+        rankings: {
+            items: {
+                '$ref': '#/components/schemas/TeamSportResultBase'
+            },
+            type: 'array',
+            title: 'Rankings'
+        }
+    },
+    type: 'object',
+    required: ['rankings'],
+    title: 'SportPodiumRankings'
+} as const;
+
+export const $SportQuotaInfo = {
+    properties: {
+        participant_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Participant Quota'
+        },
+        team_quota: {
+            anyOf: [
+                {
+                    type: 'integer',
+                    minimum: 0
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Team Quota'
+        }
+    },
+    type: 'object',
+    title: 'SportQuotaInfo'
+} as const;
+
 export const $Status = {
     properties: {
         status: {
@@ -8374,152 +10275,90 @@ export const $Team = {
             type: 'string',
             title: 'Name'
         },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        captain_id: {
+            type: 'string',
+            title: 'Captain Id'
+        },
         id: {
             type: 'string',
+            format: 'uuid',
             title: 'Id'
         },
-        number: {
-            anyOf: [
-                {
-                    type: 'integer'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Number'
-        },
-        captain: {
-            '$ref': '#/components/schemas/Participant'
-        },
-        second: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Participant'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        difficulty: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Difficulty'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        meeting_place: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/MeetingPlace'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        validation_progress: {
-            type: 'number',
-            title: 'Validation Progress'
-        },
-        file_id: {
-            anyOf: [
-                {
-                    type: 'string'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'File Id'
+        created_at: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Created At'
         }
     },
     type: 'object',
-    required: ['name', 'id', 'number', 'captain', 'second', 'difficulty', 'meeting_place', 'validation_progress', 'file_id'],
+    required: ['name', 'edition_id', 'school_id', 'sport_id', 'captain_id', 'id', 'created_at'],
     title: 'Team'
 } as const;
 
-export const $TeamBase = {
+export const $TeamComplete = {
     properties: {
         name: {
             type: 'string',
             title: 'Name'
-        }
-    },
-    type: 'object',
-    required: ['name'],
-    title: 'TeamBase'
-} as const;
-
-export const $TeamPreview = {
-    properties: {
-        name: {
+        },
+        edition_id: {
             type: 'string',
-            title: 'Name'
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        captain_id: {
+            type: 'string',
+            title: 'Captain Id'
         },
         id: {
             type: 'string',
+            format: 'uuid',
             title: 'Id'
         },
-        number: {
-            anyOf: [
-                {
-                    type: 'integer'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Number'
+        created_at: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Created At'
         },
-        captain: {
-            '$ref': '#/components/schemas/ParticipantPreview'
-        },
-        second: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/ParticipantPreview'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        difficulty: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Difficulty'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        meeting_place: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/MeetingPlace'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        validation_progress: {
-            type: 'number',
-            title: 'Validation Progress'
+        participants: {
+            items: {
+                '$ref': '#/components/schemas/ParticipantComplete'
+            },
+            type: 'array',
+            title: 'Participants'
         }
     },
     type: 'object',
-    required: ['name', 'id', 'number', 'captain', 'second', 'difficulty', 'meeting_place', 'validation_progress'],
-    title: 'TeamPreview'
+    required: ['name', 'edition_id', 'school_id', 'sport_id', 'captain_id', 'id', 'created_at', 'participants'],
+    title: 'TeamComplete'
 } as const;
 
-export const $TeamUpdate = {
+export const $TeamEdit = {
     properties: {
         name: {
             anyOf: [
@@ -8532,40 +10371,153 @@ export const $TeamUpdate = {
             ],
             title: 'Name'
         },
-        number: {
+        captain_id: {
             anyOf: [
                 {
-                    type: 'integer'
+                    type: 'string'
                 },
                 {
                     type: 'null'
                 }
             ],
-            title: 'Number'
-        },
-        difficulty: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/Difficulty'
-                },
-                {
-                    type: 'null'
-                }
-            ]
-        },
-        meeting_place: {
-            anyOf: [
-                {
-                    '$ref': '#/components/schemas/MeetingPlace'
-                },
-                {
-                    type: 'null'
-                }
-            ]
+            title: 'Captain Id'
         }
     },
     type: 'object',
-    title: 'TeamUpdate'
+    title: 'TeamEdit'
+} as const;
+
+export const $TeamInfo = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        captain_id: {
+            type: 'string',
+            title: 'Captain Id'
+        }
+    },
+    type: 'object',
+    required: ['name', 'school_id', 'sport_id', 'captain_id'],
+    title: 'TeamInfo'
+} as const;
+
+export const $TeamSportResult = {
+    properties: {
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        team_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team Id'
+        },
+        points: {
+            type: 'integer',
+            minimum: 0,
+            title: 'Points'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        rank: {
+            type: 'integer',
+            exclusiveMinimum: 0,
+            title: 'Rank'
+        }
+    },
+    type: 'object',
+    required: ['school_id', 'sport_id', 'team_id', 'points', 'edition_id', 'rank'],
+    title: 'TeamSportResult'
+} as const;
+
+export const $TeamSportResultBase = {
+    properties: {
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        team_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team Id'
+        },
+        points: {
+            type: 'integer',
+            minimum: 0,
+            title: 'Points'
+        }
+    },
+    type: 'object',
+    required: ['school_id', 'sport_id', 'team_id', 'points'],
+    title: 'TeamSportResultBase'
+} as const;
+
+export const $TeamSportResultComplete = {
+    properties: {
+        school_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'School Id'
+        },
+        sport_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Sport Id'
+        },
+        team_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Team Id'
+        },
+        points: {
+            type: 'integer',
+            minimum: 0,
+            title: 'Points'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        rank: {
+            type: 'integer',
+            exclusiveMinimum: 0,
+            title: 'Rank'
+        },
+        team: {
+            '$ref': '#/components/schemas/Team'
+        }
+    },
+    type: 'object',
+    required: ['school_id', 'sport_id', 'team_id', 'points', 'edition_id', 'rank', 'team'],
+    title: 'TeamSportResultComplete'
 } as const;
 
 export const $TheMovieDB = {
@@ -8621,7 +10573,7 @@ export const $Ticket = {
             title: 'Id'
         },
         product_variant: {
-            '$ref': '#/components/schemas/ProductVariantComplete'
+            '$ref': '#/components/schemas/app__modules__cdr__schemas_cdr__ProductVariantComplete'
         },
         user: {
             '$ref': '#/components/schemas/UserTicket'
@@ -8980,6 +10932,49 @@ export const $TransferType = {
     enum: ['hello_asso'],
     const: 'hello_asso',
     title: 'TransferType'
+} as const;
+
+export const $UserGroupMembership = {
+    properties: {
+        user_id: {
+            type: 'string',
+            title: 'User Id'
+        },
+        group: {
+            '$ref': '#/components/schemas/CompetitionGroupType'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        }
+    },
+    type: 'object',
+    required: ['user_id', 'group', 'edition_id'],
+    title: 'UserGroupMembership'
+} as const;
+
+export const $UserGroupMembershipComplete = {
+    properties: {
+        user_id: {
+            type: 'string',
+            title: 'User Id'
+        },
+        group: {
+            '$ref': '#/components/schemas/CompetitionGroupType'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        user: {
+            '$ref': '#/components/schemas/CoreUser'
+        }
+    },
+    type: 'object',
+    required: ['user_id', 'group', 'edition_id', 'user'],
+    title: 'UserGroupMembershipComplete'
 } as const;
 
 export const $UserMembershipBase = {
@@ -9487,6 +11482,137 @@ export const $app__modules__campaign__schemas_campaign__Result = {
     title: 'Result'
 } as const;
 
+export const $app__modules__cdr__schemas_cdr__PaymentBase = {
+    properties: {
+        total: {
+            type: 'integer',
+            title: 'Total'
+        },
+        payment_type: {
+            '$ref': '#/components/schemas/PaymentType'
+        }
+    },
+    type: 'object',
+    required: ['total', 'payment_type'],
+    title: 'PaymentBase'
+} as const;
+
+export const $app__modules__cdr__schemas_cdr__PaymentComplete = {
+    properties: {
+        total: {
+            type: 'integer',
+            title: 'Total'
+        },
+        payment_type: {
+            '$ref': '#/components/schemas/PaymentType'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        user_id: {
+            type: 'string',
+            title: 'User Id'
+        },
+        year: {
+            type: 'integer',
+            title: 'Year'
+        }
+    },
+    type: 'object',
+    required: ['total', 'payment_type', 'id', 'user_id', 'year'],
+    title: 'PaymentComplete'
+} as const;
+
+export const $app__modules__cdr__schemas_cdr__ProductBase = {
+    properties: {
+        name_fr: {
+            type: 'string',
+            title: 'Name Fr'
+        },
+        name_en: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name En'
+        },
+        description_fr: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description Fr'
+        },
+        description_en: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description En'
+        },
+        available_online: {
+            type: 'boolean',
+            title: 'Available Online'
+        },
+        needs_validation: {
+            type: 'boolean',
+            title: 'Needs Validation',
+            default: true
+        },
+        related_membership: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/MembershipSimple'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        tickets: {
+            items: {
+                '$ref': '#/components/schemas/GenerateTicketBase'
+            },
+            type: 'array',
+            title: 'Tickets',
+            default: []
+        },
+        product_constraints: {
+            items: {
+                type: 'string',
+                format: 'uuid'
+            },
+            type: 'array',
+            title: 'Product Constraints'
+        },
+        document_constraints: {
+            items: {
+                type: 'string',
+                format: 'uuid'
+            },
+            type: 'array',
+            title: 'Document Constraints'
+        }
+    },
+    type: 'object',
+    required: ['name_fr', 'available_online', 'product_constraints', 'document_constraints'],
+    title: 'ProductBase'
+} as const;
+
 export const $app__modules__cdr__schemas_cdr__ProductComplete = {
     properties: {
         name_fr: {
@@ -9550,7 +11676,7 @@ export const $app__modules__cdr__schemas_cdr__ProductComplete = {
         },
         variants: {
             items: {
-                '$ref': '#/components/schemas/ProductVariantComplete'
+                '$ref': '#/components/schemas/app__modules__cdr__schemas_cdr__ProductVariantComplete'
             },
             type: 'array',
             title: 'Variants',
@@ -9709,6 +11835,297 @@ export const $app__modules__cdr__schemas_cdr__ProductEdit = {
     title: 'ProductEdit'
 } as const;
 
+export const $app__modules__cdr__schemas_cdr__ProductVariantBase = {
+    properties: {
+        name_fr: {
+            type: 'string',
+            title: 'Name Fr'
+        },
+        name_en: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name En'
+        },
+        description_fr: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description Fr'
+        },
+        description_en: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description En'
+        },
+        price: {
+            type: 'integer',
+            title: 'Price'
+        },
+        enabled: {
+            type: 'boolean',
+            title: 'Enabled'
+        },
+        unique: {
+            type: 'boolean',
+            title: 'Unique'
+        },
+        allowed_curriculum: {
+            items: {
+                type: 'string',
+                format: 'uuid'
+            },
+            type: 'array',
+            title: 'Allowed Curriculum'
+        },
+        related_membership_added_duration: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'duration'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Related Membership Added Duration'
+        }
+    },
+    type: 'object',
+    required: ['name_fr', 'price', 'enabled', 'unique', 'allowed_curriculum'],
+    title: 'ProductVariantBase'
+} as const;
+
+export const $app__modules__cdr__schemas_cdr__ProductVariantComplete = {
+    properties: {
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        year: {
+            type: 'integer',
+            title: 'Year'
+        },
+        product_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Product Id'
+        },
+        name_fr: {
+            type: 'string',
+            title: 'Name Fr'
+        },
+        name_en: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name En'
+        },
+        description_fr: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description Fr'
+        },
+        description_en: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description En'
+        },
+        price: {
+            type: 'integer',
+            title: 'Price'
+        },
+        enabled: {
+            type: 'boolean',
+            title: 'Enabled'
+        },
+        unique: {
+            type: 'boolean',
+            title: 'Unique'
+        },
+        allowed_curriculum: {
+            items: {
+                '$ref': '#/components/schemas/CurriculumComplete'
+            },
+            type: 'array',
+            title: 'Allowed Curriculum',
+            default: []
+        },
+        related_membership_added_duration: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'duration'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Related Membership Added Duration'
+        }
+    },
+    type: 'object',
+    required: ['id', 'year', 'product_id', 'name_fr', 'price', 'enabled', 'unique'],
+    title: 'ProductVariantComplete'
+} as const;
+
+export const $app__modules__cdr__schemas_cdr__ProductVariantEdit = {
+    properties: {
+        name_fr: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name Fr'
+        },
+        name_en: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name En'
+        },
+        description_fr: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description Fr'
+        },
+        description_en: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description En'
+        },
+        price: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Price'
+        },
+        enabled: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Enabled'
+        },
+        unique: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Unique'
+        },
+        allowed_curriculum: {
+            anyOf: [
+                {
+                    items: {
+                        type: 'string',
+                        format: 'uuid'
+                    },
+                    type: 'array'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Allowed Curriculum'
+        },
+        related_membership_added_duration: {
+            anyOf: [
+                {
+                    type: 'string',
+                    format: 'duration'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Related Membership Added Duration'
+        }
+    },
+    type: 'object',
+    title: 'ProductVariantEdit'
+} as const;
+
+export const $app__modules__cdr__schemas_cdr__PurchaseBase = {
+    properties: {
+        quantity: {
+            type: 'integer',
+            title: 'Quantity'
+        }
+    },
+    type: 'object',
+    required: ['quantity'],
+    title: 'PurchaseBase'
+} as const;
+
 export const $app__modules__phonebook__schemas_phonebook__MembershipBase = {
     properties: {
         user_id: {
@@ -9746,6 +12163,380 @@ export const $app__modules__phonebook__schemas_phonebook__MembershipBase = {
     type: 'object',
     required: ['user_id', 'association_id', 'mandate_year', 'role_name', 'member_order'],
     title: 'MembershipBase'
+} as const;
+
+export const $app__modules__sport_competition__schemas_sport_competition__PaymentBase = {
+    properties: {
+        total: {
+            type: 'integer',
+            minimum: 0,
+            title: 'Total'
+        }
+    },
+    type: 'object',
+    required: ['total'],
+    title: 'PaymentBase'
+} as const;
+
+export const $app__modules__sport_competition__schemas_sport_competition__PaymentComplete = {
+    properties: {
+        total: {
+            type: 'integer',
+            minimum: 0,
+            title: 'Total'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        user_id: {
+            type: 'string',
+            title: 'User Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        }
+    },
+    type: 'object',
+    required: ['total', 'id', 'user_id', 'edition_id'],
+    title: 'PaymentComplete'
+} as const;
+
+export const $app__modules__sport_competition__schemas_sport_competition__ProductBase = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        required: {
+            type: 'boolean',
+            title: 'Required',
+            default: false
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        }
+    },
+    type: 'object',
+    required: ['name'],
+    title: 'ProductBase'
+} as const;
+
+export const $app__modules__sport_competition__schemas_sport_competition__ProductComplete = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        required: {
+            type: 'boolean',
+            title: 'Required',
+            default: false
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        variants: {
+            items: {
+                '$ref': '#/components/schemas/ProductVariant'
+            },
+            type: 'array',
+            title: 'Variants',
+            default: []
+        }
+    },
+    type: 'object',
+    required: ['name', 'id', 'edition_id'],
+    title: 'ProductComplete'
+} as const;
+
+export const $app__modules__sport_competition__schemas_sport_competition__ProductEdit = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        required: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Required'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        }
+    },
+    type: 'object',
+    title: 'ProductEdit'
+} as const;
+
+export const $app__modules__sport_competition__schemas_sport_competition__ProductVariantBase = {
+    properties: {
+        product_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Product Id'
+        },
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        price: {
+            type: 'integer',
+            title: 'Price'
+        },
+        enabled: {
+            type: 'boolean',
+            title: 'Enabled',
+            default: true
+        },
+        unique: {
+            type: 'boolean',
+            title: 'Unique'
+        },
+        school_type: {
+            '$ref': '#/components/schemas/ProductSchoolType'
+        },
+        public_type: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/ProductPublicType'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        }
+    },
+    type: 'object',
+    required: ['product_id', 'name', 'price', 'unique', 'school_type'],
+    title: 'ProductVariantBase'
+} as const;
+
+export const $app__modules__sport_competition__schemas_sport_competition__ProductVariantComplete = {
+    properties: {
+        product_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Product Id'
+        },
+        name: {
+            type: 'string',
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        price: {
+            type: 'integer',
+            title: 'Price'
+        },
+        enabled: {
+            type: 'boolean',
+            title: 'Enabled',
+            default: true
+        },
+        unique: {
+            type: 'boolean',
+            title: 'Unique'
+        },
+        school_type: {
+            '$ref': '#/components/schemas/ProductSchoolType'
+        },
+        public_type: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/ProductPublicType'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        edition_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Edition Id'
+        },
+        id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Id'
+        },
+        product: {
+            '$ref': '#/components/schemas/Product'
+        }
+    },
+    type: 'object',
+    required: ['product_id', 'name', 'price', 'unique', 'school_type', 'edition_id', 'id', 'product'],
+    title: 'ProductVariantComplete'
+} as const;
+
+export const $app__modules__sport_competition__schemas_sport_competition__ProductVariantEdit = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name'
+        },
+        description: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Description'
+        },
+        price: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Price'
+        },
+        enabled: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Enabled'
+        },
+        unique: {
+            anyOf: [
+                {
+                    type: 'boolean'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Unique'
+        },
+        school_type: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/ProductSchoolType'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        },
+        public_type: {
+            anyOf: [
+                {
+                    '$ref': '#/components/schemas/ProductPublicType'
+                },
+                {
+                    type: 'null'
+                }
+            ]
+        }
+    },
+    type: 'object',
+    title: 'ProductVariantEdit'
+} as const;
+
+export const $app__modules__sport_competition__schemas_sport_competition__PurchaseBase = {
+    properties: {
+        product_variant_id: {
+            type: 'string',
+            format: 'uuid',
+            title: 'Product Variant Id'
+        },
+        quantity: {
+            type: 'integer',
+            title: 'Quantity'
+        }
+    },
+    type: 'object',
+    required: ['product_variant_id', 'quantity'],
+    title: 'PurchaseBase'
 } as const;
 
 export const $app__types__standard_responses__Result = {

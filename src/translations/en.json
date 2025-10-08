@@ -97,7 +97,8 @@
     "hide": "Hide",
     "name": "Name",
     "nickname": "Nickname",
-    "noCurriculum": "No curriculum"
+    "noCurriculum": "No curriculum",
+    "promo": "Promotion"
   },
   "dataTableFacetedFilter": {
     "deleteFilters": "Delete filters",
@@ -131,7 +132,8 @@
     "curriculum": "Curriculum",
     "firstname": "Firstname",
     "name": "Name",
-    "nickname": "Nickname"
+    "nickname": "Nickname",
+    "promo": "Promotion"
   },
   "datePicker": {
     "select": "Select a date"

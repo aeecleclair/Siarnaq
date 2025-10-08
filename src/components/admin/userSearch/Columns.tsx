@@ -84,6 +84,13 @@ export const columns: ColumnDef<CdrUserPreview>[] = [
       return value.includes((row.getValue(id) as CurriculumComplete).id);
     },
   },
+  {
+    accessorKey: "promo",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="promo" />
+    ),
+    cell: ({ row }) => <div>{row.getValue("promo")}</div>,
+  },
   // {
   //   id: "actions",
   //   cell: ({ row }) => <DataTableRowActions row={row} />,

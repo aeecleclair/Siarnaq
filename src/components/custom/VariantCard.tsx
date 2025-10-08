@@ -8,7 +8,10 @@ import {
   postCdrSellersSellerIdProductsProductIdUsersUserIdDataFieldId,
   postCdrUsersUserIdPurchasesProductVariantId,
 } from "@/api";
-import { ProductVariantComplete, PurchaseBase } from "@/api/types.gen";
+import {
+  app__modules__cdr__schemas_cdr__ProductVariantComplete,
+  app__modules__cdr__schemas_cdr__PurchaseBase,
+} from "@/api/types.gen";
 import { useSellerProductData } from "@/hooks/useSellerProductData";
 import { useUserPurchases } from "@/hooks/useUserPurchases";
 import { useUserSellerPurchases } from "@/hooks/useUserSellerPurchases";
@@ -33,7 +36,7 @@ import {
 import { useToast } from "../ui/use-toast";
 
 interface VariantCardProps {
-  variant: ProductVariantComplete;
+  variant: app__modules__cdr__schemas_cdr__ProductVariantComplete;
   sellerId: string;
   userId: string;
   showDescription: boolean;
@@ -79,7 +82,7 @@ export const VariantCard = ({
 
   const purchaseVariant = async (quantity: number) => {
     setIsLoading(true);
-    const body: PurchaseBase = {
+    const body: app__modules__cdr__schemas_cdr__PurchaseBase = {
       quantity: quantity,
     };
     const { error } = await postCdrUsersUserIdPurchasesProductVariantId({

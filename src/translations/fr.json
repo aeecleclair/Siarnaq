@@ -96,7 +96,8 @@
     "hide": "Cacher",
     "name": "Nom",
     "nickname": "Surnom",
-    "noCurriculum": "Aucun cursus"
+    "noCurriculum": "Aucun cursus",
+    "promo": "Promotion"
   },
   "dataTableFacetedFilter": {
     "deleteFilters": "Supprimer les filtres",
@@ -130,7 +131,8 @@
     "curriculum": "Cursus",
     "firstname": "Prénom",
     "name": "Nom",
-    "nickname": "Surnom"
+    "nickname": "Surnom",
+    "promo": "Promotion"
   },
   "datePicker": {
     "select": "Sélectionner une date"

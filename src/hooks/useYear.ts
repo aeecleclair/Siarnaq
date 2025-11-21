@@ -11,7 +11,7 @@ export const useYear = () => {
   });
 
   return {
-    year: data?.data?.year ?? 1970,
+    year: data?.data?.year?.toString() ?? "",
     isLoading,
     refetch,
   };

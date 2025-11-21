@@ -178,10 +178,12 @@
     "alreadyHaveMyECLAccount": "Already have a MyECL account?",
     "contact": "If you have any problems or questions, please do not hesitate to contact the Student Council (Bureau Des Élèves):",
     "description": "Welcome to Centrale Lyon's associative Chaîne De Rentrée. This website, designed for new, current and gap-year students, will allow you to join associations and subscribe to the school's associative services.",
+    "external": "I don't yet have an email address that ends in ec-lyon.fr",
     "or": "Or",
     "promotion": "School year {year}",
     "register": "Register",
-    "selectPromotion": "Please select your school year to create a MyECL account:",
+    "selectAccountType": "Do you have an email address that ends in ec-lyon.fr?",
+    "student": "I have an email address that ends in ec-lyon.fr",
     "title": "Chaîne de rentrée {year}",
     "usePersonalEmail": "If your student e-mail adress is not yet activated, you may use a personal one. You will have to change it as soon as possible."
   },

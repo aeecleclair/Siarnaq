@@ -56,12 +56,6 @@ export const MigrateUserForm = ({
   setIsOpened,
   closeDialog,
 }: MigrateUserFormProps) => {
-  /*
-  const { year } = useYear();
-  const possiblePromos = Array.from({ length: 5 }).map((_, index) => {
-    return (year - index).toString();
-  });
-  */
   const t = useTranslations("migrateUserForm");
 
   return (

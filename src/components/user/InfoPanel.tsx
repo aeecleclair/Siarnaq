@@ -26,7 +26,6 @@ export const InfoPanel = () => {
   const t = useTranslations("info");
   const { onlineSellers } = useOnlineSellers();
   const { year } = useYear();
-  const yearString = year.toString();
 
   return (
     <Card>
@@ -66,7 +65,7 @@ export const InfoPanel = () => {
             payable: (c) => <span className="italic">{c}</span>,
           })}
         </div>
-        <div>{t("cautionInstructions", { year: yearString })}</div>
+        <div>{t("cautionInstructions", { year })}</div>
         <div>
           {t.rich("cautionInstructions2", {
             link: () => (
@@ -91,7 +90,7 @@ export const InfoPanel = () => {
           <HiOutlineNewspaper className="h-4 w-4 mr-2" />
           {t("facebookTitle")}
         </h3>
-        <div>{t("facebook", { year: yearString })}</div>
+        <div>{t("facebook", { year })}</div>
         <div className="pl-10">
           {/* TODO: provide a clean link like https://www.facebook.com/groups/admis2024 */}
           <a
@@ -99,7 +98,7 @@ export const InfoPanel = () => {
             className="font-medium hover:underline underline-offset-4 flex flex-row items-center"
           >
             <HiOutlineLink className="h-4 w-4 mr-2" />
-            {t("group", { year: yearString })}
+            {t("group", { year })}
           </a>
         </div>
         {/* */}

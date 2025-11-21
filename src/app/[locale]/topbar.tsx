@@ -51,7 +51,7 @@ export default function TopBar() {
       </div>
       {pathname === "/admin" && (
         <div className="flex flex-col text-sm text-nowrap">
-          <span>{t("year", { year: year.toString() })}</span>
+          <span>{t("year", { year })}</span>
           <span>{t("status", { status: status?.status ?? "" })}</span>
         </div>
       )}
